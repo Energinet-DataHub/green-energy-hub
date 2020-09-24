@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <!-- Ensure breaking rules will fail build -->
+        <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+        <!-- Specify rules that configure the behaviour of StyleCop (see also https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md) -->
+        <CodeAnalysisRuleSet>..\GreenEnergyHub.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- 
+        Additional settings for specific rules (e.g. SA1200 specify namespaces must be placed correctly, the json file then defines what "correctly" means) 
+        See also https://github.com/[stylecop.json](/.attachments/stylecop-7bcfd8c3-0d51-4c58-8a4e-5a765bd414b4.json)[stylecop.json](/.attachments/stylecop-e24d6a9d-974b-47c7-9958-859f8fa6200e.json)DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md
+        -->
+        <AdditionalFiles Include="..\stylecop.json">
+            <Link>stylecop.json</Link>
+        </AdditionalFiles>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GreenEnergyHub.MasterData.Application\GreenEnergyHub.MasterData.Application.csproj" />
+      <ProjectReference Include="..\GreenEnergyHub.MasterData.Domain\GreenEnergyHub.MasterData.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.7.54" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
+    </ItemGroup>
+</Project>

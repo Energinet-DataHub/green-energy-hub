@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Streaming.Domain", "source\GreenEnergyHub.Streaming.Domain\GreenEnergyHub.Streaming.Domain.csproj", "{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Streaming.Application", "source\GreenEnergyHub.Streaming.Application\GreenEnergyHub.Streaming.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Streaming.Infrastructure", "source\GreenEnergyHub.Streaming.Infrastructure\GreenEnergyHub.Streaming.Infrastructure.csproj", "{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Streaming.Tests", "source\GreenEnergyHub.Streaming.Tests\GreenEnergyHub.Streaming.Tests.csproj", "{68412EBF-701D-467D-8716-74269E171F41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{832447E5-7A46-4381-817C-5D73A20510C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Streaming.HelloWorldFunction", "source\GreenEnergyHub.Streaming.HelloWorldFunction\GreenEnergyHub.Streaming.HelloWorldFunction.csproj", "{ED49F012-1BE7-43CB-9F64-8B0E456E98C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED49F012-1BE7-43CB-9F64-8B0E456E98C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED49F012-1BE7-43CB-9F64-8B0E456E98C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED49F012-1BE7-43CB-9F64-8B0E456E98C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED49F012-1BE7-43CB-9F64-8B0E456E98C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{68412EBF-701D-467D-8716-74269E171F41} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
+		{ED49F012-1BE7-43CB-9F64-8B0E456E98C7} = {832447E5-7A46-4381-817C-5D73A20510C2}
+	EndGlobalSection
+EndGlobal
