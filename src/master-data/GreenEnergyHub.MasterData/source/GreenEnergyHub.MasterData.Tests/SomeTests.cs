@@ -5,12 +5,12 @@ namespace GreenEnergyHub.MasterData.Tests
     public class SomeTests
     {
         [Fact]
-        public void First_failing_test()
+        public void DummySuccessfulTest()
         {
             // Write clever tests (not this one) to include in the template
-            var sut = nameof(First_failing_test);
+            var sut = nameof(DummySuccessfulTest);
 
-            Assert.Equal("Successful test", sut);
+            Assert.Equal("DummySuccessfulTest", sut);
         }
     }
 }

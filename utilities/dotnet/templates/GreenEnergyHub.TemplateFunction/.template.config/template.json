@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "GreenEnergyHub",
+    "classifications": [ "GreenEnergyHub", "Project" ],
+    "identity": "GreenEnergyHub.Function",
+    "name": "GreenEnergyHub Azure Function Project",
+    "shortName": "gehfunc",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "primaryOutputs": [
+        {
+            "path": "TemplateFunction/TemplateFunction.csproj"
+        }
+    ],
+    "symbols": {
+        "RulesetAndStyleCopDemoPathFixer":{
+            "type": "generated",
+            "generator": "constant",
+            "parameters": {
+              "value": "..\\"
+            },
+            "replaces": "..\\..\\GreenEnergyHub.TemplateSolution\\source\\"
+        },
+        "sln":{
+            "type": "parameter",
+            "isRequired": true,
+            "datatype": "text",
+            "replaces": "TemplateSolution",
+            "fileRename": "TemplateSolution"
+        }
+    },
+    "sourceName": "TemplateFunction",
+    "sources": [
+        {
+            "exclude": [
+                "**/[Bb]in/**",
+                "**/[Oo]bj/**",
+                ".template.config/**/*",
+                "**/*.filelist",
+                "**/*.user",
+                "**/*.lock.json",
+                "GreenEnergyHub.ruleset",
+                "stylecop.json"
+            ],
+            "target": "./source/"
+        }
+    ],
+    "postActions": [{
+        "manualInstructions": [
+            {
+                "text": "Link project to solution"
+            }
+        ],
+        "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+        "primaryOutputIndexes": "0"
+      },
+      {
+        "condition": "(!skipRestore)",
+        "description": "Restore NuGet packages required by this project.",
+        "manualInstructions": [
+          {
+            "text": "Run 'dotnet restore'"
+          }
+        ],
+        "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+        "continueOnError": true
+      }]
+}

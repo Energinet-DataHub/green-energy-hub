@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace GreenEnergyHub.Streaming.Tests
+namespace GreenEnergyHub.TemplateSolution.Tests
 {
     public class SomeTests
     {
