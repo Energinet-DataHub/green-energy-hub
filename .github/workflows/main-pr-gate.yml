@@ -1,0 +1,74 @@
+name: Master PR Gate
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+env:
+  TEMP_OUTPUT_PATH: './outputs'
+
+jobs:
+  build-master-data-serverless:
+    name: Buld Master Data Serverless
+    runs-on: ubuntu-latest
+
+    env:
+      SLN_PATH: './src/master-data/GreenEnergyHub.MasterData'
+
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+  
+    - name: Build
+      run: dotnet build --configuration Debug $SLN_PATH/GreenEnergyHub.MasterData.sln
+    
+    - name: Test
+      run: |
+        dotnet tool install --tool-path ./temp/reportgenerator dotnet-reportgenerator-globaltool ;
+        dotnet test --configuration Debug --collect "XPlat Code Coverage" $SLN_PATH/GreenEnergyHub.MasterData.sln &&
+        ./temp/reportgenerator/reportgenerator -reports:$SLN_PATH/**/coverage.cobertura.xml -targetDir:$TEMP_OUTPUT_PATH/code-coverage -reporttypes:"Cobertura;TextSummary;Html" &&
+        cat $TEMP_OUTPUT_PATH/code-coverage/Summary.txt
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-master-data-serverless_artifacts
+        path: ${{ env.TEMP_OUTPUT_PATH }}
+
+  build-streaming-serverless:
+    name: Build Streaming Serverless
+    runs-on: ubuntu-latest
+
+    env:
+      SLN_PATH: './src/streaming/GreenEnergyHub.Streaming'
+
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+  
+    - name: Build
+      run: dotnet build --configuration Debug $SLN_PATH/GreenEnergyHub.Streaming.sln
+    
+    - name: Test
+      run: |
+        dotnet tool install --tool-path ./temp/reportgenerator dotnet-reportgenerator-globaltool ;
+        dotnet test --configuration Debug --collect "XPlat Code Coverage" $SLN_PATH/GreenEnergyHub.Streaming.sln &&
+        ./temp/reportgenerator/reportgenerator -reports:$SLN_PATH/**/coverage.cobertura.xml -targetDir:$TEMP_OUTPUT_PATH/code-coverage -reporttypes:"Cobertura;TextSummary;Html" &&
+        cat $TEMP_OUTPUT_PATH/code-coverage/Summary.txt
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-streaming-serverless_artifacts
+        path: ${{ env.TEMP_OUTPUT_PATH }}
