@@ -1,7 +1,7 @@
 ---
 name: 🚀 Feature Request
 about: Use this template for adding new feature requests.
-labels: enchancement
+labels: enhancement
 ---
 
 ### Is your feature request related to a problem? Please describe.?
