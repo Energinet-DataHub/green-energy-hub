@@ -1,39 +1,70 @@
-name: MarkdownCheck
+name: Markdown Check
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
     - '**.md'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
     - '**.md'
+  workflow_dispatch: {}
 
 jobs:
-  # https://github.com/marketplace/actions/markdown-link-check
-  md-link-check:
+  md-check:
+    name: Markdown Check
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Copy configuration files
+      run: |
+        cp ${GITHUB_WORKSPACE}/.github/md-spell-check/spellcheck.yml ${GITHUB_WORKSPACE}/spellcheck.yml
+        cp ${GITHUB_WORKSPACE}/.github/md-spell-check/wordlist.txt ${GITHUB_WORKSPACE}/wordlist.txt
+        cp ${GITHUB_WORKSPACE}/.github/md-lint-check/.mdl.rb ${GITHUB_WORKSPACE}/.mdl.rb
+        cp ${GITHUB_WORKSPACE}/.github/md-lint-check/.mdlrc ${GITHUB_WORKSPACE}/.mdlrc
+
+  # https://github.com/marketplace/actions/markdown-link-check
+    - name: Markdown links check
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
+      continue-on-error: true
+      id: md-link-check
+
   # https://github.com/marketplace/actions/github-spellcheck-action
-  md-spell-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - run: cp ${GITHUB_WORKSPACE}/.github/md-spell-check/spellcheck.yml ${GITHUB_WORKSPACE}/spellcheck.yml
-    - run: cp ${GITHUB_WORKSPACE}/.github/md-spell-check/wordlist.txt ${GITHUB_WORKSPACE}/wordlist.txt
-    - uses: rojopolis/spellcheck-github-actions@0.5.0
-      name: Spellcheck
+    - name: Markdown spell check
+      uses: rojopolis/spellcheck-github-actions@0.5.0
+      continue-on-error: true
+      id: md-spell-check
+
   # https://github.com/marketplace/actions/markdownlint-mdl-action
-  md-lint-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - run: cp ${GITHUB_WORKSPACE}/.github/md-lint-check/.mdl.rb ${GITHUB_WORKSPACE}/.mdl.rb
-    - run: cp ${GITHUB_WORKSPACE}/.github/md-lint-check/.mdlrc ${GITHUB_WORKSPACE}/.mdlrc
-    - uses: actionshub/markdownlint@master
+    - name: Markdown lint check
+      uses: actionshub/markdownlint@master
+      continue-on-error: true
+      id: md-lint-check
+
+    - name: Summarize
+      run: |
+        echo "Markdown check results: "
+        if [[ "${{steps.md-link-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-link-check.outcome}}" == "failure" ]]; then
+        echo -e "- Markdown links check:   \e[31mFailure"
+        else
+        echo -e "- Markdown links check:   \e[32mSuccess"
+        fi
+        if [[ "${{steps.md-spell-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-spell-check.outcome}}" == "failure" ]]; then
+        echo -e "- Markdown spell check:   \e[31mFailure"
+        else
+        echo -e "- Markdown spell check:   \e[32mSuccess"
+        fi
+        if [[ "${{steps.md-lint-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-lint-check.outcome}}" == "failure" ]]; then
+        echo -e "- Markdown lint check:    \e[31mFailure"
+        else
+        echo -e "- Markdown lint check:    \e[32mSuccess"
+        fi
+        if [[ "${{steps.md-link-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-link-check.outcome}}" == "failure" ]] || [[ "${{steps.md-spell-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-spell-check.outcome}}" == "failure" ]] || [[ "${{steps.md-lint-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-lint-check.outcome}}" == "failure" ]]; then
+        exit 1
+        fi
