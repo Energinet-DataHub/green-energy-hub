@@ -3,12 +3,8 @@ name: Markdown Check
 on:
   push:
     branches: [ main ]
-    paths:
-    - '**.md'
   pull_request:
     branches: [ main ]
-    paths:
-    - '**.md'
   workflow_dispatch: {}
 
 jobs:
@@ -16,18 +12,31 @@ jobs:
     name: Markdown Check
     runs-on: ubuntu-latest
     steps:
+
+    # https://github.com/marketplace/actions/skip-duplicate-actions
+    - name: Skip check
+      id: skip_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["**.md"]'
+
+    # https://github.com/actions/checkout
     - name: Checkout code
+      if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
       uses: actions/checkout@v2
     
     - name: Copy configuration files
+      if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
       run: |
         cp ${GITHUB_WORKSPACE}/.github/md-spell-check/spellcheck.yml ${GITHUB_WORKSPACE}/spellcheck.yml
         cp ${GITHUB_WORKSPACE}/.github/md-spell-check/wordlist.txt ${GITHUB_WORKSPACE}/wordlist.txt
         cp ${GITHUB_WORKSPACE}/.github/md-lint-check/.mdl.rb ${GITHUB_WORKSPACE}/.mdl.rb
         cp ${GITHUB_WORKSPACE}/.github/md-lint-check/.mdlrc ${GITHUB_WORKSPACE}/.mdlrc
 
-  # https://github.com/marketplace/actions/markdown-link-check
+    # https://github.com/marketplace/actions/markdown-link-check
     - name: Markdown links check
+      if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
       uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
         use-quiet-mode: 'yes'
@@ -35,19 +44,22 @@ jobs:
       continue-on-error: true
       id: md-link-check
 
-  # https://github.com/marketplace/actions/github-spellcheck-action
+    # https://github.com/marketplace/actions/github-spellcheck-action
     - name: Markdown spell check
+      if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
       uses: rojopolis/spellcheck-github-actions@0.5.0
       continue-on-error: true
       id: md-spell-check
 
-  # https://github.com/marketplace/actions/markdownlint-mdl-action
+    # https://github.com/marketplace/actions/markdownlint-mdl-action
     - name: Markdown lint check
-      uses: actionshub/markdownlint@master
+      if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
+      uses: actionshub/markdownlint@1.2.2
       continue-on-error: true
       id: md-lint-check
 
     - name: Summarize
+      if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
       run: |
         echo "Markdown check results: "
         if [[ "${{steps.md-link-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-link-check.outcome}}" == "failure" ]]; then
