@@ -10,6 +10,9 @@ labels: bug
 ### Expected behavior
 <!--- A clear and concise description of what you expected to happen. --->
 
+### How to reproduce
+<!--- Please insert the steps required to reproduce the issue --->
+
 ### Logs
 <!--- Please insert code example, stacktrace or other. If to long, please put in a gist and link it here. --->
 
