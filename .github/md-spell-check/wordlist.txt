@@ -25,3 +25,6 @@ TemplateSolution
 TODO
 txt
 xml
+firsttimersonly
+github
+Github

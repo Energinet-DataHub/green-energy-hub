@@ -5,4 +5,4 @@ labels: question
 ---
 
 ### Question
-<!--- A clear and concise description of the question --->
+<!--- A clear and concise description of the question. --->

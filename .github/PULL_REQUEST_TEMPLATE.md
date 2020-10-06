@@ -6,6 +6,6 @@
 
 ## References
 
-<!--- Is there any issues, pull requests or similar that should be linked here? --->
+<!--- Are there any issues, pull requests or similar that should be linked here? --->
 
 * #0000

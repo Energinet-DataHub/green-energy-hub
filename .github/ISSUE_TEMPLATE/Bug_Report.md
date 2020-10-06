@@ -14,13 +14,13 @@ labels: bug
 <!--- Please insert the steps required to reproduce the issue --->
 
 ### Logs
-<!--- Please insert code example, stacktrace or other. If to long, please put in a gist and link it here. --->
+<!--- Please insert code example, stacktrace or other. If too long, please put in a gist and link it here. --->
 
 ### Environment
-<!--- Please describe the current environment this error happened in --->
+<!--- Please describe the current environment this error happened in. --->
 
 ### Possible Solution
-<!--- Only if you have suggestions on a fix for the bug -->
+<!--- Only if you have suggestions on a fix for the bug. -->
 
 ### Additional context/screenshots
 <!--- Add any other context about the problem here. If applicable, add screenshots to help explain. -->
