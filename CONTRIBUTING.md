@@ -48,7 +48,7 @@ After feedback, if there is no response in 2 weeks, we may close the pull reques
 
 ## Community
 
-We have a public [Teams channel](). // TODO: Link
+We have a public Teams channel. // TODO: Link
 
 We will hold public office hours once a month, with times to be decided (maybe two sets, one for Europe, one for US).
 Meeting recordings should be linked in the repository at `docs/meetings/{year}/{month}/{day}`.
