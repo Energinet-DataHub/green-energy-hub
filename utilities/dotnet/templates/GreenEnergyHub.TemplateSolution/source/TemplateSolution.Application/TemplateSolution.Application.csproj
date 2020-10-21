@@ -1,18 +1,33 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<!--
+Copyright 2020 Energinet DataHub A/S
+
+Licensed under the Apache License, Version 2.0 (the "License2");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <Nullable>enable</Nullable>
-        <IsPackable>false</IsPackable>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
     
     <PropertyGroup>
         <!-- Ensure breaking rules will fail build -->
         <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
         <!-- Specify rules that configure the behaviour of StyleCop (see also https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md) -->
-        <CodeAnalysisRuleSet>..\GreenEnergyHub.test.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>..\GreenEnergyHub.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
@@ -26,19 +41,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GreenEnergyHub.TemplateSolution.Application\GreenEnergyHub.TemplateSolution.Application.csproj" />
-      <ProjectReference Include="..\GreenEnergyHub.TemplateSolution.Domain\GreenEnergyHub.TemplateSolution.Domain.csproj" />
-      <ProjectReference Include="..\GreenEnergyHub.TemplateSolution.Infrastructure\GreenEnergyHub.TemplateSolution.Infrastructure.csproj" />
+      <ProjectReference Include="..\TemplateSolution.Domain\TemplateSolution.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.7.54" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
-        <PackageReference Include="xunit" Version="2.4.1" />
-        <PackageReference Include="FluentAssertions" Version="5.10.3" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-        <PackageReference Include="NSubstitute" Version="4.2.2" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
-        <PackageReference Include="coverlet.collector" Version="1.2.0" />
     </ItemGroup>
 </Project>

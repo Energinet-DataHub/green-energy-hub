@@ -21,7 +21,7 @@
             "parameters": {
               "value": "..\\"
             },
-            "replaces": "..\\..\\GreenEnergyHub.TemplateSolution\\source\\"
+            "replaces": "..\\..\\TemplateSolution\\source\\"
         },
         "sln":{
             "type": "parameter",

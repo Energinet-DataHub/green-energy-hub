@@ -19,7 +19,7 @@ Right know you can install it from your local machine.
 - Check if the template is installed correctly by checking the list of templates `dotnet new --list`.
 - In your Terminal, navigate to the path you want to create the solution in.
 - Create the solution folder, example: `GreenEnergyHub.ExampleSolution/`.
-- To generate a new solution run this command: `dotnet new gehsln -n ExampleSolution`.
+- To generate a new solution run this command: `dotnet new gehsln -n GreenEnergyHub.ExampleSolution`.
 
 ### Architecture
 
@@ -59,7 +59,7 @@ Right know you can install it from your local machine.
 - Use the following command  `dotnet new -i GreenEnergyHub.TemplateFunction/`. For more help, follow [this](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates#installing-a-template) link.
 - Check if the template is installed correctly by checking the list of templates `dotnet new --list`.
 - In your Terminal, navigate to the path of the solution in which you want to create the project in.
-- To generate a new project in this solution run this command: `dotnet new gehfunc --sln ExampleSolution -n ExampleProject`
+- To generate a new project in this solution run this command: `dotnet new gehfunc --sln GreenEnergyHub.ExampleSolution -n ExampleProject`
 - At the moment there's a manual step, from the IDE you'll have to add existing project and select the newly created project, see [known issues](#known-issues).
 - To add the project use the following command: `dotnet sln GreenEnergyHub.ExampleSolution.sln add -s Hosts source/GreenEnergyHub.ExampleSolution.ExampleProject/`.
 
