@@ -64,3 +64,11 @@ integrations
 paas
 PaaS
 deployable
+decarbonized
+relocations
+TSO's
+TSO
+user's
+eg
+GDPR
+energy
