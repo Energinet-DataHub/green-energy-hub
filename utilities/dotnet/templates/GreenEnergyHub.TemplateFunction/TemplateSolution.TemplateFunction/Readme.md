@@ -1,3 +1,0 @@
-# Read.ME
-
-Insert documentation.

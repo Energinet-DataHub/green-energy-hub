@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using TemplateSolution.TemplateFunction;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using TemplateSolution.TemplateFunction;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 

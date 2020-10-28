@@ -11,7 +11,7 @@ To create a new solution in the GreenEnergyHub, you must use this template.
 
 ### Installation of GreenEnergyHub.TemplateSolution
 
-Right know you can install it from your local machine.
+Right now you can install it from your local machine.
 
 - Open your Terminal.
 - Navigate to the `GreenEnergyHub/Utilities/dotnet/Templates` folder.
@@ -23,7 +23,7 @@ Right know you can install it from your local machine.
 
 ### Architecture
 
-This solution will create the following folders.
+This solution will create the following folders:
 
 #### Hosts (Solution folder, created by TemplateFunction)
 

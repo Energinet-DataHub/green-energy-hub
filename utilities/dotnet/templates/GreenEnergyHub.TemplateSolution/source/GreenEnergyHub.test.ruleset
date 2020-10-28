@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Rules for test projects" Description="Inherit rules with minor tweaks specific for test projects" ToolsVersion="16.0">
-  <Include Path="GreenEnergyHub.ruleset" Action="Default" />
-  <Rules AnalyzerId="Microsoft.VisualStudio.Threading.Analyzers" RuleNamespace="Microsoft.VisualStudio.Threading.Analyzers">
-    <Rule Id="VSTHRD200" Action="None" />
-  </Rules>
-</RuleSet>
