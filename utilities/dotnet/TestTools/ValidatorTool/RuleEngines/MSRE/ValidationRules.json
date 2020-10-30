@@ -1,0 +1,25 @@
+[
+    {
+        "WorkflowName": "Basic",
+        "Rules": [
+            {
+                "RuleName": "Meter value is positive",
+                "SuccessEvent": "0",
+                "ErrorMessage": "Meter value was negative.",
+                "ErrorType": "Error",
+                "RuleExpressionType": "LambdaExpression",
+                "Rules": [
+                    {
+                        "RuleName": "Our first 5 customers suck",
+                        "SuccessEvent": "0",
+                        "ErrorMessage": "Meter value was negative.",
+                        "ErrorType": "Error",
+                        "RuleExpressionType": "LambdaExpression",
+                        "Expression": "customerId < 5"
+                    }
+                ],
+                "Expression": "meterValue >= 0"
+            }
+        ]
+    }
+]

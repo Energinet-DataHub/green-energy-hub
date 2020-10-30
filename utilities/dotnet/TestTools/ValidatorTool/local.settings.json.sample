@@ -1,0 +1,16 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "<storage connection string or UseDevelopmentStorage=true>",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "InputConnectionString": "",
+    "OutputConnectionString": "",
+    "AZURE_STORAGE_CONNECTION_STRING": "",
+    "RulesContainerName": "",
+    "RulesBlobName": "",
+    "RuleEngineType": "<nrules, rulesengine, OR fluent>",
+    "InputEventHubName": "input",
+    "OutputEventHubName": "output",
+    "RegionName": ""
+  }
+}

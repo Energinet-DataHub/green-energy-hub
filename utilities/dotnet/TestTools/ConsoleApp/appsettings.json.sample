@@ -1,0 +1,14 @@
+{
+  "EventHub": {
+    "InputConnectionString": "",
+    "OutputConnectionString": ""
+  },
+  "Storage": {
+    "OutputConnectionString": "",
+    "EventProcessorContainerName": "",
+    "RulesContainerName": "",
+    "RulesBlobName": ""
+  },
+  "MessageCount": 1,
+  "RegionName": ""
+}
