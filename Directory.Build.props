@@ -1,9 +1,4 @@
 <Project>
-    <!-- Define $(RepositoryRoot) as the top-level folder this file resides in -->
-    <PropertyGroup>
-        <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
-    </PropertyGroup>
- 
     <!--
     Add stylecop for all projects (so long as they don't override Directory.Build.props) with a common ruleset.
     See also: https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2019#search-scope
