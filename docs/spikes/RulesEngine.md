@@ -51,7 +51,7 @@ Evaluating it against the criteria defined above:
 
 More details:
 
-1. Rules execute in the order provided in the schema. The [default](https://github.com/microsoft/RulesEngine/wiki/Getting-Started#successfailure) success/failure behavior of RulesEngine is slightly nonintuitive - it returns success for the first rule encountered in execution order, and failure only if all rules fail (not, as we might want, failure if even one rule fails). One option around this would be for us to write our own methods to parse the output [`RuleResultTree`](https://github.com/microsoft/RulesEngine/blob/master/src/RulesEngine/RulesEngine/Models/RuleResultTree.cs) and customize success/failure behavior (see [default implementation](https://github.com/microsoft/RulesEngine/blob/c0488f111310578ec5cecb9f0246b8fd5dcb0947/src/RulesEngine/RulesEngine/Extensions/ListofRuleResultTreeExtension.cs) as a potential starting point).
+1. Rules execute in the order provided in the schema. The [default](https://github.com/microsoft/RulesEngine/wiki/Getting-Started#successfailure) success/failure behavior of RulesEngine is slightly nonintuitive - it returns success for the first rule encountered in execution order, and failure only if all rules fail (not, as we might want, failure if even one rule fails). One option around this would be for us to write our own methods to parse the output [`RuleResultTree`](https://github.com/microsoft/RulesEngine/blob/master/src/RulesEngine/Models/RuleResultTree.cs) and customize success/failure behavior (see [default implementation](https://github.com/microsoft/RulesEngine/blob/c0488f111310578ec5cecb9f0246b8fd5dcb0947/src/RulesEngine/RulesEngine/Extensions/ListofRuleResultTreeExtension.cs) as a potential starting point).
 
 2. Rule nesting is natively supported - here, it seems to allow for several rules to exist on the same level and evaluated together based on a logical operator (see [here](https://github.com/microsoft/RulesEngine/blob/af53705ab527f3b9502205cbdb9703f65c2980b5/demo/DemoApp/Workflows/Discount.json#L37-L87) for a sample rules schema, though this behavior isn't thoroughly documented).
 
@@ -65,7 +65,7 @@ More details:
 
 5. There is a high degree of flexibility in where rules are stored, since the engine only requires that a valid list of rules conforming to the schema is passed in - our sample code currently reads a .json file from Azure Blob Storage, but is extensible.
 
-6. As discussed in (1) above, each call to evaluate a provided input against the provided set of rules results in a [`RuleResultTree`](https://github.com/microsoft/RulesEngine/blob/master/src/RulesEngine/RulesEngine/Models/RuleResultTree.cs).
+6. As discussed in (1) above, each call to evaluate a provided input against the provided set of rules results in a [`RuleResultTree`](https://github.com/microsoft/RulesEngine/blob/master/src/RulesEngine/Models/RuleResultTree.cs).
 
 ### NRules
 
