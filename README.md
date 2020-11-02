@@ -1,5 +1,7 @@
 # Green Energy Hub
 
+![Logo](Logo_small.png)
+
 Welcome to the Green Energy Hub, a project developed to support the change toward decarbonized economies.
 
 - [General Info](#general-info)
