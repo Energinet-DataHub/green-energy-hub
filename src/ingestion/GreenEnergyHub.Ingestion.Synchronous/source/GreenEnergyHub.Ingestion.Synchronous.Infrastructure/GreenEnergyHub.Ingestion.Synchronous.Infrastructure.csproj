@@ -26,7 +26,6 @@ limitations under the License.
 
     <ItemGroup>
       <ProjectReference Include="..\GreenEnergyHub.Ingestion.Synchronous.Application\GreenEnergyHub.Ingestion.Synchronous.Application.csproj" />
-      <ProjectReference Include="..\GreenEnergyHub.Ingestion.Synchronous.Domain\GreenEnergyHub.Ingestion.Synchronous.Domain.csproj" />
     </ItemGroup>
 
 </Project>

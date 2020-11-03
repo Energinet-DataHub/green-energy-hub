@@ -24,8 +24,4 @@ limitations under the License.
         <RootNamespace>GreenEnergyHub.Ingestion.Synchronous.Application</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\GreenEnergyHub.Ingestion.Synchronous.Domain\GreenEnergyHub.Ingestion.Synchronous.Domain.csproj" />
-    </ItemGroup>
-
 </Project>
