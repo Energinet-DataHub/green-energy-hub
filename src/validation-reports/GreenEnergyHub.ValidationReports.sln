@@ -1,18 +1,18 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # 
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationResults.Domain", "source\GreenEnergyHub.ValidationResults.Domain\GreenEnergyHub.ValidationResults.Domain.csproj", "{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationReports.Domain", "source\GreenEnergyHub.ValidationReports.Domain\GreenEnergyHub.ValidationReports.Domain.csproj", "{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationResults.Application", "source\GreenEnergyHub.ValidationResults.Application\GreenEnergyHub.ValidationResults.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationReports.Application", "source\GreenEnergyHub.ValidationReports.Application\GreenEnergyHub.ValidationReports.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationResults.Infrastructure", "source\GreenEnergyHub.ValidationResults.Infrastructure\GreenEnergyHub.ValidationResults.Infrastructure.csproj", "{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationReports.Infrastructure", "source\GreenEnergyHub.ValidationReports.Infrastructure\GreenEnergyHub.ValidationReports.Infrastructure.csproj", "{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationResults.Tests", "source\GreenEnergyHub.ValidationResults.Tests\GreenEnergyHub.ValidationResults.Tests.csproj", "{68412EBF-701D-467D-8716-74269E171F41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationReports.Tests", "source\GreenEnergyHub.ValidationReports.Tests\GreenEnergyHub.ValidationReports.Tests.csproj", "{68412EBF-701D-467D-8716-74269E171F41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{832447E5-7A46-4381-817C-5D73A20510C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationResults.ValidationResultPersister", "source\GreenEnergyHub.ValidationResults.ValidationResultPersister\GreenEnergyHub.ValidationResults.ValidationResultPersister.csproj", "{FE6D9434-7314-4EE0-9006-843BB324A80F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationReports.ValidationReportsPersister", "source\GreenEnergyHub.ValidationReports.ValidationReportsPersister\GreenEnergyHub.ValidationReports.ValidationReportsPersister.csproj", "{1A75A626-86D9-4F99-BD3B-1CBC5818BA51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,13 +36,13 @@ Global
 		{68412EBF-701D-467D-8716-74269E171F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68412EBF-701D-467D-8716-74269E171F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68412EBF-701D-467D-8716-74269E171F41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE6D9434-7314-4EE0-9006-843BB324A80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE6D9434-7314-4EE0-9006-843BB324A80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE6D9434-7314-4EE0-9006-843BB324A80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE6D9434-7314-4EE0-9006-843BB324A80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A75A626-86D9-4F99-BD3B-1CBC5818BA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A75A626-86D9-4F99-BD3B-1CBC5818BA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A75A626-86D9-4F99-BD3B-1CBC5818BA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A75A626-86D9-4F99-BD3B-1CBC5818BA51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{68412EBF-701D-467D-8716-74269E171F41} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
-		{FE6D9434-7314-4EE0-9006-843BB324A80F} = {832447E5-7A46-4381-817C-5D73A20510C2}
+		{1A75A626-86D9-4F99-BD3B-1CBC5818BA51} = {832447E5-7A46-4381-817C-5D73A20510C2}
 	EndGlobalSection
 EndGlobal

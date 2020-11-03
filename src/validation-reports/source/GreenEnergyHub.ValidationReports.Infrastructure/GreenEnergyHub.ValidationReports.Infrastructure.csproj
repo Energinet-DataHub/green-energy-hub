@@ -24,7 +24,8 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GreenEnergyHub.ValidationResults.Domain\GreenEnergyHub.ValidationResults.Domain.csproj" />
+      <ProjectReference Include="..\GreenEnergyHub.ValidationReports.Application\GreenEnergyHub.ValidationReports.Application.csproj" />
+      <ProjectReference Include="..\GreenEnergyHub.ValidationReports.Domain\GreenEnergyHub.ValidationReports.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using GreenEnergyHub.ValidationResults.ValidationResultPersister;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using GreenEnergyHub.ValidationReports.ValidationReportsPersister;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
-namespace GreenEnergyHub.ValidationResults.ValidationResultPersister
+namespace GreenEnergyHub.ValidationReports.ValidationReportsPersister
 {
     internal class Startup : FunctionsStartup
     {

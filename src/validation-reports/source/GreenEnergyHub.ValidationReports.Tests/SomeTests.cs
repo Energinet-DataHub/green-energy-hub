@@ -13,7 +13,7 @@
 // limitations under the License.
 using Xunit;
 
-namespace GreenEnergyHub.ValidationResults.Tests
+namespace GreenEnergyHub.ValidationReports.Tests
 {
     public class SomeTests
     {
