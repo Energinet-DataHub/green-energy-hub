@@ -8,28 +8,12 @@ Some settings like indention has overlaps with settings in EditorConfig and must
 
 StyleCop's behaviour is configured by two files:
 
-- ***.ruleset**; the code analysis rules set file determines which rules are enabled/disabled and their severity level when enabled.
+- **.editorconfig**; the code analysis rules set file determines which rules are enabled/disabled and their severity level when enabled.
 - **stylecop.json**; this file is used to fine/tune the behaviour of certain rules.
 
 We only specify settings in the stylecop.json file when they are different from their default values. For more information see [Getting Started with stylecop.json](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md#getting-started-with-stylecopjson).
 
-To enable StyleCop correctly on new VS projects add the StyleCop.Analyzers NuGet package and add the following to the *.csproj file.
-
-```xml
-  <PropertyGroup>
-    <!-- Ensure breaking rules will fail build -->
-    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
-    <!-- Specify rules that configure the behaviour of StyleCop -->
-    <CodeAnalysisRuleSet>..\ddp.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <!--  Additional settings for specific rules (e.g. SA1200 specify namespaces must be placed correctly, the json file then defines what "correctly" means)  -->
-    <AdditionalFiles Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
-  </ItemGroup>
-```
+We enable StyleCop via the .editorconfig and Directory.Build.props files in the root of the project.
 
 Relevant links:
 

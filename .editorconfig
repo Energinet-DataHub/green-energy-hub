@@ -147,6 +147,14 @@ dotnet_naming_symbols.constant_fields.applicable_accessibilities  = *
 dotnet_naming_symbols.constant_fields.required_modifiers          = const
 
 ##############################################################
+# C# Test Conventions                                        #
+##############################################################
+
+[*.test.cs]
+
+dotnet_diagnostic.VSTHRD200.severity = none
+
+##############################################################
 # C# Conventions                                             #
 ##############################################################
 
@@ -430,7 +438,7 @@ dotnet_diagnostic.SA1407.severity = error
 dotnet_diagnostic.SA1408.severity = error
 dotnet_diagnostic.SA1410.severity = error
 dotnet_diagnostic.SA1411.severity = error
-dotnet_diagnostic.SA1412.severity = suggestion
+dotnet_diagnostic.SA1412.severity = error
 dotnet_diagnostic.SA1413.severity = error
 dotnet_diagnostic.SA1500.severity = error
 dotnet_diagnostic.SA1501.severity = none

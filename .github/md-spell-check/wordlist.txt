@@ -26,6 +26,7 @@ dotnet
 DotNet
 DWH
 EditorConfig
+editorconfig
 eg
 energy
 enqueue

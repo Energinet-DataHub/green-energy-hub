@@ -15,14 +15,6 @@
         }
     ],
     "symbols": {
-        "RulesetAndStyleCopDemoPathFixer":{
-            "type": "generated",
-            "generator": "constant",
-            "parameters": {
-              "value": "..\\"
-            },
-            "replaces": "..\\..\\TemplateSolution\\source\\"
-        },
         "sln":{
             "type": "parameter",
             "isRequired": true,
@@ -40,9 +32,7 @@
                 ".template.config/**/*",
                 "**/*.filelist",
                 "**/*.user",
-                "**/*.lock.json",
-                "GreenEnergyHub.ruleset",
-                "stylecop.json"
+                "**/*.lock.json"
             ],
             "target": "./source/"
         }

@@ -7,13 +7,6 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     </PropertyGroup>
-    
-    <PropertyGroup>
-        <!-- Ensure breaking rules will fail build -->
-        <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
-        <!-- Specify rules that configure the behaviour of StyleCop (see also https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md) -->
-        <CodeAnalysisRuleSet>..\GreenEnergyHub.test.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\GreenEnergyHub.Streaming.Application\GreenEnergyHub.Streaming.Application.csproj" />
