@@ -128,3 +128,13 @@ WebJobs
 workspaces
 www
 xml
+eg
+GDPR
+energy
+README
+npm
+ajv
+CIM
+jsonschema
+js
+schemas

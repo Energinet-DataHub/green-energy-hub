@@ -1,0 +1,20 @@
+{
+    "$id": "https://github.com/green-energy-hub/schemas/confirm-change-of-supplier",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Confirm change of supplier",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "MarketEvaluationPoint": {
+            "title": "Meteringpoint",
+            "description": "The meteringpoint that is changed to another supplier",
+            "$ref": "https://github.com/green-energy-hub/schemas#/definitions/marketEvaluationPoint" },
+        "OriginalTransaction": { "$ref": "https://github.com/green-energy-hub/schemas#/definitions/referenceId" },
+        "Status": {
+            "type": "string",
+            "enum": ["Val_001", "Val_002"]
+        },
+        "Transaction": { "$ref": "https://github.com/green-energy-hub/schemas#/definitions/referenceId" }
+    },
+    "required": [ "MarketEvaluationPoint", "OriginalTransaction", "Status", "Transaction"]
+}

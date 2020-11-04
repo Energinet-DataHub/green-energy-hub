@@ -1,0 +1,51 @@
+{
+    "$id": "https://github.com/green-energy-hub/schemas",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CIM object definitions",
+    "description": "The common models for Green Energy Hub is defined within this file",
+    "type": "object",
+    "definitions": {
+        "mRID": {
+            "title": "mRID - identification",
+            "description": "Represents a generic identification",
+            "type": "string"
+        },
+        "mRID_qualifier": {
+            "type": "object",
+            "title": "Extended mRID",
+            "properties": {
+                "value": {"title": "value of identification", "type": "string"},
+                "qualifier": { "type": "string"}
+            },
+            "required": [ "value", "qualifier" ]
+        },
+        "utc_date": {
+            "type": "string",
+            "title": "Date and time",
+            "format": "date-time"
+        },
+        "marketParticipant": {
+            "type": "object",
+            "properties": {
+                "mRID": { "$ref": "#/definitions/mRID_qualifier" },
+                "name": { "type": "string" }
+            },
+            "required": [ "mRID" ]
+        },
+        "marketEvaluationPoint": {
+            "type": "object",
+            "properties": {
+                "mRID": { "$ref": "#/definitions/mRID" }
+            },
+            "required": [ "mRID" ]
+        },
+        "referenceId": {
+            "type": "object",
+            "title": "Business reference",
+            "properties": { 
+                "mRID": { "$ref": "#/definitions/mRID" }
+            }, 
+            "required": [ "mRID" ]
+        }
+    }
+}
