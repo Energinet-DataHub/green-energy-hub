@@ -9,7 +9,6 @@ import time
 import urllib.parse
 
 import configargparse
-
 from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.types import StructType, TimestampType, StringType, DoubleType
@@ -79,26 +78,10 @@ csv_read_config = {
     "header": "True",
     "nullValues": "NULL"
 }
-master_data_schema = StructType() \
-    .add("MarketEvaluationPoint_mRID", StringType(), False) \
-    .add("ValidFrom", TimestampType(), False) \
-    .add("ValidTo", TimestampType(), True) \
-    .add("MeterReadingPeriodicity", StringType(), False) \
-    .add("MeterReadingPeriodicity2", StringType(), False) \
-    .add("MeteringMethod", StringType(), False) \
-    .add("MeteringGridArea_Domain_mRID", StringType(), True) \
-    .add("ConnectionState", StringType(), True) \
-    .add("EnergySupplier_MarketParticipant_mRID", StringType(), False) \
-    .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), False) \
-    .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
-    .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
-    .add("Parent_Domain", StringType(), False) \
-    .add("SupplierAssociationId", StringType(), False) \
-    .add("ServiceCategoryKind", StringType(), False) \
-    .add("MarketEvaluationPointType", StringType(), False) \
-    .add("SettlementMethod", StringType(), False) \
-    .add("UnitName", StringType(), False) \
-    .add("Product", StringType(), False)
+
+from streaming_utils import SchemaFactory, SchemaNames
+
+master_data_schema = SchemaFactory.get_instance(SchemaNames.Master)
 
 master_data = spark \
     .read \
@@ -147,62 +130,29 @@ raw_data.printSchema()
 
 # %%
 
-message_schema: StructType = StructType() \
-    .add("MarketEvaluationPoint_mRID", StringType(), False) \
-    .add("ObservationTime", TimestampType(), False) \
-    .add("Quantity", DoubleType(), True) \
-    .add("CorrelationId", StringType(), True) \
-    .add("MessageReference", StringType(), True) \
-    .add("HeaderEnergyDocument_mRID", StringType(), True) \
-    .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
-    .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
-    .add("EnergyBusinessProcess", StringType(), True) \
-    .add("EnergyBusinessProcessRole", StringType(), True) \
-    .add("TimeSeriesmRID", StringType(), True) \
-    .add("MktActivityRecord_Status", StringType(), True) \
-    .add("Product", StringType(), True) \
-    .add("UnitName", StringType(), True) \
-    .add("MarketEvaluationPointType", StringType(), True) \
-    .add("Quality", StringType(), True)
+from streaming_utils import EventHubParser, SchemaFactory, SchemaNames
 
-parsed_data = raw_data \
-    .select(
-        col("enqueuedTime"),
-        from_json(col("body").cast("string"), message_schema).alias("message")
-    ) \
-    .select(col("message.*"), col("enqueuedTime").alias("EventHubEnqueueTime"))
+message_schema: StructType = SchemaFactory.get_instance(SchemaNames.MessageBody)
+
+# Event hub message parser function
+parsed_data = EventHubParser.parse(raw_data, message_schema)
 
 print("Parsed stream schema:")
 parsed_data.printSchema()
 
 # %%
-# TODO: remove column repetitions (after validation?)
-enriched_data = parsed_data.alias("pd") \
-    .join(master_data.alias("md"),
-          (col("pd.MarketEvaluationPoint_mRID") == col("md.MarketEvaluationPoint_mRID")) &
-          col("ObservationTime").between(
-              col("md.ValidFrom"), col("md.ValidTo")),
-          how="left"
-          ) \
-    .drop(master_data["MarketEvaluationPoint_mRID"]) \
-    .drop(master_data["ValidFrom"]).drop(master_data["ValidTo"])
+from streaming_utils import Enricher
 
+# TODO: remove column repetitions (after validation?)
+enriched_data = Enricher.enrich(parsed_data, master_data)
 
 print("Enriched stream schema:")
 enriched_data.printSchema()
 
 # %%
-validated_data = enriched_data \
-    .withColumn("IsValid",
-                # Streamed market evaluation point type must match master data
-                (col("md.MarketEvaluationPointType").isNotNull()
-                 & (col("pd.MarketEvaluationPointType") == col("md.MarketEvaluationPointType")))
-                # Quantity must be null or non-negative
-                & (col("Quantity").isNull() | (col("Quantity") >= 0))
-    ) \
-    .drop(parsed_data["UnitName"]).drop(parsed_data["Product"]) \
-    .drop(parsed_data["MarketEvaluationPointType"])
-    
+from validation import Validator
+
+validated_data = Validator.validate(enriched_data)
 print("Validated stream schema:")
 validated_data.printSchema()
 
@@ -253,3 +203,5 @@ out_stream = validated_data \
 while True:
     execution = out_stream.start()
     time.sleep(4.5 * 60)
+
+# %%
