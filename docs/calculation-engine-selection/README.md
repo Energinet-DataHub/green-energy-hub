@@ -54,7 +54,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
         <li>(+) Managed Spark with decoupled cluster that is easy to use.
         <li>(+) Vast Spark ecosystem of libraries, data connectors etc to reuse.
         <li>(+) Feature-rich solution with Enterprise optimization, support and SLA.
-        <li>(-) Limited implementation-lock because of unique DataBricks primitives like notebooks, jobs, widgets etc and limited access to original Spark API.
+        <li>(-) Limited implementation-lock because of unique Databricks primitives like notebooks, jobs, widgets etc and limited access to original Spark API.
     </td>
     <td>
         <li>(+) Dedicated real-time streaming engine with **high performance target**.
@@ -90,7 +90,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
     <td>Data in transit</td>
     <td>
         <li>(+) Meets requirement: ingestion/processing rate scales semi-linearly with cluster size (autoscaling)
-        <li>(+) DataBricks Spark is additionally optimized compared to OSS version.
+        <li>(+) Databricks Spark is additionally optimized compared to OSS version.
         <li>(!) Deeper investigation is required to find the right processing parameter values. Periodic reevaluation is required to accommodate growth.
         <li>(!) Micro-batch streaming processing may add latency and limit scalability.
     </td>
@@ -118,7 +118,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
     <td>Data at rest</td>
     <td>
         <li>(+) Meets requirement: ingestion/processing rate scales semi-linearly with cluster size (autoscaling).
-        <li>(+) DataBricks Spark is an additionally optimized compared to OSS version.
+        <li>(+) Databricks Spark is an additionally optimized compared to OSS version.
         <li>(+) As execution strategy for micro-batch streaming and batch processing are the same, code can be reused for up to 90%.
     </td>
     <td>
@@ -230,7 +230,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
 <tr>
     <td>DevOps</td>
     <td>
-        <li>(+) DataBricks terraform provider is available.
+        <li>(+) Databricks terraform provider is available.
         <li>(+) Git integration for Notebooks
         <li>(-) Notebooks complicates unit and integration testing compared to ordinary Spark jars.
         <li>(!) No access to default Spark endpoints and management that requires use of vendor-specific tooling.
@@ -257,7 +257,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
         <li>(+) Expressive fluent API adds flexibility: full access to scala/python language features and libraries.
         <li>(+) Cluster decoupling significantly simplifies Spark management.
         <li>(+) Same engine as OSS Spark so that the main code is fully transferrable.
-        <li>(+) DataBricks is available on both Azure and Amazon.
+        <li>(+) Databricks is available on both Azure and Amazon.
         <li>(-) Packaging format (notebooks), parametrization through widgets, DevOps tooling, cluster decoupling are unique features that will require full overwrite to adapt to other options.
         <li>(-) Notebooks complicates unit and integration testing compared to ordinary Spark jars.
     </td>
@@ -282,7 +282,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
     <td>
         <li>(+) Vast ecosystem of spark drivers and libraries is available.
         <li>(+) Access to full scala/python language features (functions, classes, modules) allows to implement an arbitrary modular design.
-        <li>(+) Spark as an OSS solution has a vast community (libraries, StackOverflow, GitHub issues). DataBricks community is smaller but it is only relevant to unique features.
+        <li>(+) Spark as an OSS solution has a vast community (libraries, StackOverflow, GitHub issues). Databricks community is smaller but it is only relevant to unique features.
         <li>(+) Spark is a feature-proof and has wide adoption.
         <li>(-) Limited access to Spark ecosystem solutions: DevOps, security, RBAC, logging.
     </td>
@@ -311,7 +311,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
     <td>Observability</td>
     <td>
         <li>(+) Notebooks (including Jobs) allows to visualize issues and show stack traces next to the failing code.
-        <li>(!) Low-level cluster, storage etc logs can be sent to storage or Azure Log Analytics. Functionality is optimized for DataBricks, but limited in extensibility compared to OSS ecosystem.
+        <li>(!) Low-level cluster, storage etc logs can be sent to storage or Azure Log Analytics. Functionality is optimized for Databricks, but limited in extensibility compared to OSS ecosystem.
     </td>
     <td>
         <li>(+) Flink exports basic metrics and logs about usage, jobs status and etc, that can be consumed by systems and represented with Grafana.
@@ -347,7 +347,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
     <td>Documentation</td>
     <td>
         <li>(+) Spark documentation is extensive, but hard to search.
-        <li>(!) DataBricks documentation covers main scenarios but lacks details.
+        <li>(!) Databricks documentation covers main scenarios but lacks details.
     </td>
     <td>
         <li>(+) Good documentation and books are available, covering core concepts.

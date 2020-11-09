@@ -238,3 +238,7 @@ prtandrup
 renetnielsen
 sondergaard
 Energinet
+protobot
+yml
+dependabot
+msftbot
