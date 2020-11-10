@@ -29,8 +29,13 @@ jobs:
     - name: Copy configuration files
       if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
       run: |
-        cp ${GITHUB_WORKSPACE}/.github/md-spell-check/spellcheck.yml ${GITHUB_WORKSPACE}/spellcheck.yml
-        cp ${GITHUB_WORKSPACE}/.github/md-spell-check/wordlist.txt ${GITHUB_WORKSPACE}/wordlist.txt
+        cp ${GITHUB_WORKSPACE}/utilities/md-spellcheck/wordlist.txt ${GITHUB_WORKSPACE}/wordlist.txt
+        cp ${GITHUB_WORKSPACE}/utilities/md-spellcheck/spellcheck.yml ${GITHUB_WORKSPACE}/spellcheck.yml
+
+    - name: Replace path in Spell Check config
+      if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
+      run: |
+        sed -i -e 's/..\/..\///g' ${GITHUB_WORKSPACE}/spellcheck.yml
 
     # https://github.com/marketplace/actions/markdown-link-check
     - name: Markdown links check
@@ -39,6 +44,7 @@ jobs:
       with:
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
+        config-file: './utilities/md-linkcheck/mlc_config.json'
       continue-on-error: true
       id: md-link-check
 

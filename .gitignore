@@ -372,3 +372,6 @@ appsettings.*.json
 
 # Patch files
 *.orig
+
+# MD Spell Check
+/utilities/md-spellcheck/dictionary.dic
