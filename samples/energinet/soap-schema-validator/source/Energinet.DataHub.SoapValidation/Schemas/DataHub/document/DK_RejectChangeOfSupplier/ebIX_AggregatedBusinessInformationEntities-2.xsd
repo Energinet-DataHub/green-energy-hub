@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== Aggregated Business Information Entities XML Schema Module            ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bie="un:unece:260:data:EEM-DK_RejectChangeOfSupplier:v3" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM-DK_RejectChangeOfSupplier:v3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusions                                                            ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusion of Business Data Types                                      ==== -->
+  <!-- =============================================================================== -->
+  <xsd:include schemaLocation="ebIX_BusinessDataType-2.xsd" />
+  <!-- =============================================================================== -->
+  <!-- ==== Aggregated Business Information Entities Definitions                  ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyParty Type                                                      ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyParty">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:PartyIdentifierType_000112" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SenderEnergyParty" type="bie:EnergyParty" />
+  <xsd:element name="RecipientEnergyParty" type="bie:EnergyParty" />
+  <!-- =============================================================================== -->
+  <!-- ==== DomainLocation Type                                                   ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="DomainLocation">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:DomainIdentifierType_000122" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="MeteringPointDomainLocation" type="bie:DomainLocation" />
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyDocument Type                                                   ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyDocument">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="DocumentType" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:DocumentNameCodeType_000098">
+              <xsd:enumeration value="414" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Creation" type="bie:DateTimeType_000111" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:SenderEnergyParty" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:RecipientEnergyParty" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyContext Type                                                    ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyContext">
+    <xsd:sequence>
+      <xsd:element name="EnergyBusinessProcess" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:BusinessReasonCodeType_000115">
+              <xsd:enumeration value="D29" />
+              <xsd:enumeration value="D56" />
+              <xsd:enumeration value="D55" />
+              <xsd:enumeration value="D57" />
+              <xsd:enumeration value="D59" />
+              <xsd:enumeration value="D51" />
+              <xsd:enumeration value="E56" />
+              <xsd:enumeration value="D58" />
+              <xsd:enumeration value="D49" />
+              <xsd:enumeration value="D30" />
+              <xsd:enumeration value="D52" />
+              <xsd:enumeration value="D50" />
+              <xsd:enumeration value="D21" />
+              <xsd:enumeration value="D46" />
+              <xsd:enumeration value="D60" />
+              <xsd:enumeration value="D54" />
+              <xsd:enumeration value="D48" />
+              <xsd:enumeration value="D47" />
+              <xsd:enumeration value="E03" />
+              <xsd:enumeration value="E65" />
+              <xsd:enumeration value="D53" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnergyBusinessProcessRole" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:BusinessRoleCodeType_000113">
+              <xsd:enumeration value="DDQ" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnergyIndustryClassification" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:SectorAreaIdentificationCodeType_000116">
+              <xsd:enumeration value="23" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== ResponseEvent Type                                                    ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="ResponseEvent">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="StatusType" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:ResponseConditionCodeType_000130">
+              <xsd:enumeration value="41" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ResponseReasonType" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:ResponseReasonDescriptionCodeType_000129">
+              <xsd:enumeration value="D88" />
+              <xsd:enumeration value="D31" />
+              <xsd:enumeration value="D16" />
+              <xsd:enumeration value="D32" />
+              <xsd:enumeration value="E11" />
+              <xsd:enumeration value="D06" />
+              <xsd:enumeration value="E81" />
+              <xsd:enumeration value="D30" />
+              <xsd:enumeration value="D07" />
+              <xsd:enumeration value="E47" />
+              <xsd:enumeration value="D21" />
+              <xsd:enumeration value="E59" />
+              <xsd:enumeration value="E73" />
+              <xsd:enumeration value="E98" />
+              <xsd:enumeration value="D84" />
+              <xsd:enumeration value="E87" />
+              <xsd:enumeration value="D27" />
+              <xsd:enumeration value="D82" />
+              <xsd:enumeration value="D19" />
+              <xsd:enumeration value="D39" />
+              <xsd:enumeration value="D03" />
+              <xsd:enumeration value="D83" />
+              <xsd:enumeration value="D64" />
+              <xsd:enumeration value="E16" />
+              <xsd:enumeration value="D09" />
+              <xsd:enumeration value="D76" />
+              <xsd:enumeration value="D40" />
+              <xsd:enumeration value="D53" />
+              <xsd:enumeration value="E0I" />
+              <xsd:enumeration value="E97" />
+              <xsd:enumeration value="D81" />
+              <xsd:enumeration value="D54" />
+              <xsd:enumeration value="D18" />
+              <xsd:enumeration value="D89" />
+              <xsd:enumeration value="E29" />
+              <xsd:enumeration value="D69" />
+              <xsd:enumeration value="D29" />
+              <xsd:enumeration value="D35" />
+              <xsd:enumeration value="D49" />
+              <xsd:enumeration value="D26" />
+              <xsd:enumeration value="D14" />
+              <xsd:enumeration value="D68" />
+              <xsd:enumeration value="D87" />
+              <xsd:enumeration value="D43" />
+              <xsd:enumeration value="D55" />
+              <xsd:enumeration value="D24" />
+              <xsd:enumeration value="D65" />
+              <xsd:enumeration value="D58" />
+              <xsd:enumeration value="D62" />
+              <xsd:enumeration value="E55" />
+              <xsd:enumeration value="E50" />
+              <xsd:enumeration value="E14" />
+              <xsd:enumeration value="D57" />
+              <xsd:enumeration value="D28" />
+              <xsd:enumeration value="E17" />
+              <xsd:enumeration value="D78" />
+              <xsd:enumeration value="D01" />
+              <xsd:enumeration value="E86" />
+              <xsd:enumeration value="D77" />
+              <xsd:enumeration value="D56" />
+              <xsd:enumeration value="D37" />
+              <xsd:enumeration value="E90" />
+              <xsd:enumeration value="D73" />
+              <xsd:enumeration value="D17" />
+              <xsd:enumeration value="D48" />
+              <xsd:enumeration value="D25" />
+              <xsd:enumeration value="D75" />
+              <xsd:enumeration value="D45" />
+              <xsd:enumeration value="D67" />
+              <xsd:enumeration value="E18" />
+              <xsd:enumeration value="E51" />
+              <xsd:enumeration value="D23" />
+              <xsd:enumeration value="D90" />
+              <xsd:enumeration value="E61" />
+              <xsd:enumeration value="D02" />
+              <xsd:enumeration value="D59" />
+              <xsd:enumeration value="E09" />
+              <xsd:enumeration value="D42" />
+              <xsd:enumeration value="D38" />
+              <xsd:enumeration value="D66" />
+              <xsd:enumeration value="D47" />
+              <xsd:enumeration value="E0H" />
+              <xsd:enumeration value="D08" />
+              <xsd:enumeration value="D15" />
+              <xsd:enumeration value="D36" />
+              <xsd:enumeration value="E22" />
+              <xsd:enumeration value="D11" />
+              <xsd:enumeration value="D61" />
+              <xsd:enumeration value="D79" />
+              <xsd:enumeration value="D74" />
+              <xsd:enumeration value="D33" />
+              <xsd:enumeration value="D63" />
+              <xsd:enumeration value="D80" />
+              <xsd:enumeration value="D50" />
+              <xsd:enumeration value="D04" />
+              <xsd:enumeration value="D13" />
+              <xsd:enumeration value="D12" />
+              <xsd:enumeration value="D72" />
+              <xsd:enumeration value="D70" />
+              <xsd:enumeration value="D41" />
+              <xsd:enumeration value="D85" />
+              <xsd:enumeration value="E10" />
+              <xsd:enumeration value="E19" />
+              <xsd:enumeration value="D05" />
+              <xsd:enumeration value="D71" />
+              <xsd:enumeration value="D46" />
+              <xsd:enumeration value="D44" />
+              <xsd:enumeration value="D52" />
+              <xsd:enumeration value="D22" />
+              <xsd:enumeration value="E91" />
+              <xsd:enumeration value="D86" />
+              <xsd:enumeration value="D60" />
+              <xsd:enumeration value="D34" />
+              <xsd:enumeration value="D20" />
+              <xsd:enumeration value="D51" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element ref="bie:MeteringPointDomainLocation" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="OriginalBusinessDocument" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

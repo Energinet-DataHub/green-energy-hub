@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== Aggregated Business Information Entities XML Schema Module            ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bie="un:unece:260:data:EEM-DK_ConfirmChangeOfSupplier:v3" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM-DK_ConfirmChangeOfSupplier:v3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusions                                                            ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusion of Business Data Types                                      ==== -->
+  <!-- =============================================================================== -->
+  <xsd:include schemaLocation="ebIX_BusinessDataType-2.xsd" />
+  <!-- =============================================================================== -->
+  <!-- ==== Aggregated Business Information Entities Definitions                  ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyParty Type                                                      ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyParty">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:PartyIdentifierType_000112" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SenderEnergyParty" type="bie:EnergyParty" />
+  <xsd:element name="RecipientEnergyParty" type="bie:EnergyParty" />
+  <!-- =============================================================================== -->
+  <!-- ==== DomainLocation Type                                                   ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="DomainLocation">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:DomainIdentifierType_000122" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="MeteringPointDomainLocation" type="bie:DomainLocation" />
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyDocument Type                                                   ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyDocument">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="DocumentType" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:DocumentNameCodeType_000098">
+              <xsd:enumeration value="414" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Creation" type="bie:DateTimeType_000111" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:SenderEnergyParty" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:RecipientEnergyParty" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyContext Type                                                    ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyContext">
+    <xsd:sequence>
+      <xsd:element name="EnergyBusinessProcess" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:BusinessReasonCodeType_000115">
+              <xsd:enumeration value="E65" />
+              <xsd:enumeration value="D53" />
+              <xsd:enumeration value="D49" />
+              <xsd:enumeration value="D54" />
+              <xsd:enumeration value="D48" />
+              <xsd:enumeration value="D51" />
+              <xsd:enumeration value="D58" />
+              <xsd:enumeration value="D60" />
+              <xsd:enumeration value="D52" />
+              <xsd:enumeration value="D50" />
+              <xsd:enumeration value="D29" />
+              <xsd:enumeration value="D47" />
+              <xsd:enumeration value="D21" />
+              <xsd:enumeration value="D56" />
+              <xsd:enumeration value="E56" />
+              <xsd:enumeration value="D30" />
+              <xsd:enumeration value="D59" />
+              <xsd:enumeration value="D55" />
+              <xsd:enumeration value="D57" />
+              <xsd:enumeration value="E03" />
+              <xsd:enumeration value="D46" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnergyBusinessProcessRole" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:BusinessRoleCodeType_000113">
+              <xsd:enumeration value="DDQ" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnergyIndustryClassification" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:SectorAreaIdentificationCodeType_000116">
+              <xsd:enumeration value="23" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== ResponseEvent Type                                                    ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="ResponseEvent">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="StatusType" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:ResponseConditionCodeType_000130">
+              <xsd:enumeration value="39" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element ref="bie:MeteringPointDomainLocation" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="OriginalBusinessDocument" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

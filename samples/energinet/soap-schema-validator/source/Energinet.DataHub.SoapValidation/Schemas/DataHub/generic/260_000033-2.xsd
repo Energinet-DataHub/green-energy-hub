@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== SubsetCountryIdentifier - Code List Schema Module                     ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Code list name:    CountryIdentifier
+Code list agency:  ebix 
+Code list version: 0.1.A
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bcl260_000033_01A="un:unece:260:data:EEM" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root element for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:element name="SubsetCountryIdentifier" type="bcl260_000033_01A:SubsetCountryIdentifierContentType" />
+  <!-- =============================================================================== -->
+  <!-- ==== Content type for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="SubsetCountryIdentifierContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="AL">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>AL</ccts:Name>
+            <ccts:Description>Albania</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="AT">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>AT</ccts:Name>
+            <ccts:Description>Austria</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="BA">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>BA</ccts:Name>
+            <ccts:Description>Bosnia</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="BE">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>BE</ccts:Name>
+            <ccts:Description>Belgium</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CH">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>CH</ccts:Name>
+            <ccts:Description>Switzerland</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CY">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>CY</ccts:Name>
+            <ccts:Description>Cyprus</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CZ">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>CZ</ccts:Name>
+            <ccts:Description>Czeck republic</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DE">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>DE</ccts:Name>
+            <ccts:Description>Germany</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DK">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>DK</ccts:Name>
+            <ccts:Description>Denmark</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="EE">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>EE</ccts:Name>
+            <ccts:Description>Estonia</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ES">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>ES</ccts:Name>
+            <ccts:Description>Spain</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="FI">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>FI</ccts:Name>
+            <ccts:Description>Finland</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="FR">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>FR</ccts:Name>
+            <ccts:Description>France</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="GB">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>GB</ccts:Name>
+            <ccts:Description>United Kingdom</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="GR">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>GR</ccts:Name>
+            <ccts:Description>Greece</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="HU">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>HU</ccts:Name>
+            <ccts:Description>Hungary</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="HR">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>HR</ccts:Name>
+            <ccts:Description>Croatia</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="IT">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>IT</ccts:Name>
+            <ccts:Description>Italy</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LT">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>LT</ccts:Name>
+            <ccts:Description>Lithuania</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LV">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>LV</ccts:Name>
+            <ccts:Description>Latvia</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MT">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>MT</ccts:Name>
+            <ccts:Description>Malta</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NL">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>NL</ccts:Name>
+            <ccts:Description>The Netherlands</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NO">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>NO</ccts:Name>
+            <ccts:Description>Norway</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="PL">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>PL</ccts:Name>
+            <ccts:Description>Poland</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="PT">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>PT</ccts:Name>
+            <ccts:Description>Portugal</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="RO">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>RO</ccts:Name>
+            <ccts:Description>Romania</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="SE">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>SE</ccts:Name>
+            <ccts:Description>Sweden</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="SI">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>SI</ccts:Name>
+            <ccts:Description>Slovenia</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

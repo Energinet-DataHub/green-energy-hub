@@ -1,0 +1,14 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Body xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<SendMessageRequest xmlns="urn:www:datahub:dk:b2b:v01">
+			<MessageContainer>
+				<MessageReference>MessageID-0003</MessageReference>
+				<DocumentType>MeteredDataTimeSeries</DocumentType>
+				<MessageType>XML</MessageType>
+				<Payload>
+			        <DK_MeteredDataTimeSeries xmlns="un:unece:260:data:EEM-DK_MeteredDataTimeSeries:v3">
+						<HeaderEnergyDocument>
+							<Identification>Identification-0003</Identification>
+							<DocumentType listAgencyIdentifier="260">E66</DocumentType>
+						</HeaderEnergyDocument>
+		

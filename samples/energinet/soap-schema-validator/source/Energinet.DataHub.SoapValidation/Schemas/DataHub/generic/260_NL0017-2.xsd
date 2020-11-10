@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== OriginalNL_ResponseReasonDescriptionCode - Code List Schema Module    ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Code list name:    ResponseReasonDescriptionCode
+Code list agency:  ebix 
+Code list version: 0.1.A
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bcl260_NL0017_01A="un:unece:260:data:EEM" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root element for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:element name="OriginalNL_ResponseReasonDescriptionCode" type="bcl260_NL0017_01A:OriginalNL_ResponseReasonDescriptionCodeContentType" />
+  <!-- =============================================================================== -->
+  <!-- ==== Content type for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="OriginalNL_ResponseReasonDescriptionCodeContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="E46">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E46</ccts:Name>
+            <ccts:Description>Meter stand and metering date do not correspond</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E76">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E76</ccts:Name>
+            <ccts:Description>MP ID and additional information do not correspond</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="M03">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>M03</ccts:Name>
+            <ccts:Description>more than 1 TCR for Metering Point</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N01">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N01</ccts:Name>
+            <ccts:Description>Reference to unknown request</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N02">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N02</ccts:Name>
+            <ccts:Description>Invalid identification</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N03">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N03</ccts:Name>
+            <ccts:Description>Invalid activation period</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N04">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N04</ccts:Name>
+            <ccts:Description>Invalid activation time</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N05">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N05</ccts:Name>
+            <ccts:Description>Invalid ramp rate</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N06">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N06</ccts:Name>
+            <ccts:Description>Invalid capacity</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N07">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N07</ccts:Name>
+            <ccts:Description>Price out of range</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N08">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N08</ccts:Name>
+            <ccts:Description>Received after gate closure</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N09">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N09</ccts:Name>
+            <ccts:Description>Price has been corrected</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N10">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N10</ccts:Name>
+            <ccts:Description>Updates are not allowed</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N11">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N11</ccts:Name>
+            <ccts:Description>Invalid reference</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N12">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N12</ccts:Name>
+            <ccts:Description>Data not in line with contract</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N13">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N13</ccts:Name>
+            <ccts:Description>Date of operation cannot be in the past</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N14">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N14</ccts:Name>
+            <ccts:Description>Date of operation is too far in the future</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N15">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N15</ccts:Name>
+            <ccts:Description>Received after start of date of operation</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N16">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N16</ccts:Name>
+            <ccts:Description>Capacity cannot vary within an offer</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N17">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N17</ccts:Name>
+            <ccts:Description>Changes in the past are not allowed</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N18">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N18</ccts:Name>
+            <ccts:Description>Price must be zero</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N19">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N19</ccts:Name>
+            <ccts:Description>Party connected to the Grid has to be the same</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N20">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N20</ccts:Name>
+            <ccts:Description>Balance Responsible has to be the same</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N21">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N21</ccts:Name>
+            <ccts:Description>Date of operation has to be the same</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N22">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N22</ccts:Name>
+            <ccts:Description>Request number has to be the same</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N23">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N23</ccts:Name>
+            <ccts:Description>Invalid reference to request</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N24">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N24</ccts:Name>
+            <ccts:Description>Unauthorised party for regulating power</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N25">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N25</ccts:Name>
+            <ccts:Description>Invalid order of PTU's</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N26">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>N26</ccts:Name>
+            <ccts:Description>Unknown relation between Offering Party and Party connected to the Grid</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

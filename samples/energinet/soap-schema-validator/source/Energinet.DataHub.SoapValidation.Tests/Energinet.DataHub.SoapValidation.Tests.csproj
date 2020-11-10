@@ -1,40 +1,47 @@
-<!--
-Copyright 2020 Energinet DataHub A/S
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-Licensed under the Apache License, Version 2.0 (the "License2");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<Nullable>enable</Nullable>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+  </PropertyGroup>
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+	  <EmbeddedResource Include="TestFiles\Rsm009\RSM009_valid.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ExtraElement.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ExtraElementInDataHubB2B.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ExtraElementInSOAP.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\IncompleteXML.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\InvalidBundledMessageWithExtraElement.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\InvalidXML.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\MissingMandatoryBusinessProcessRole.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\NotXML.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\OldSchemaVersion.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\SOAPAndB2BButNotEbiX.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\SOAPAndEbixButNoB2B.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\SOAPButNotB2B.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ValidBundledMessage.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ValidHourly.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ValidHourlyButNoSOAP.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ValidQuarterOfHour.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm012\ValidSchemaButWrongRoot.xml" />
+	</ItemGroup>
 
-    <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Nullable>enable</Nullable>
-        <IsPackable>false</IsPackable>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-    </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Energinet.DataHub.SoapValidation.Application\Energinet.DataHub.SoapValidation.Application.csproj" />
-      <ProjectReference Include="..\Energinet.DataHub.SoapValidation.Domain\Energinet.DataHub.SoapValidation.Domain.csproj" />
-      <ProjectReference Include="..\Energinet.DataHub.SoapValidation.Infrastructure\Energinet.DataHub.SoapValidation.Infrastructure.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Energinet.DataHub.SoapValidation\Energinet.DataHub.SoapValidation.csproj" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="xunit" Version="2.4.1" />
-        <PackageReference Include="FluentAssertions" Version="5.10.3" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-        <PackageReference Include="NSubstitute" Version="4.2.2" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
-        <PackageReference Include="coverlet.collector" Version="1.2.0" />
-    </ItemGroup>
 </Project>

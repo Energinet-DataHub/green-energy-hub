@@ -150,7 +150,7 @@ dotnet_naming_symbols.constant_fields.required_modifiers          = const
 # C# Test Conventions                                        #
 ##############################################################
 
-[*.test.cs]
+[*{.test,Tests}.cs]
 
 dotnet_diagnostic.VSTHRD200.severity = none
 
@@ -170,18 +170,6 @@ dotnet_diagnostic.VSTHRD200.severity = none
 csharp_style_var_for_built_in_types = true:suggestion
 csharp_style_var_when_type_is_apparent = true:error
 csharp_style_var_elsewhere = true:suggestion
-
-# Expression-bodied members
-# Prefer method-like constructs to have a block body
-csharp_style_expression_bodied_methods = false:error
-csharp_style_expression_bodied_constructors = false:error
-csharp_style_expression_bodied_operators = false:error
-csharp_style_expression_bodied_local_functions = false:error
-# Prefer property-like constructs to have an expression-body
-csharp_style_expression_bodied_properties = when_on_single_line:error
-csharp_style_expression_bodied_indexers = when_on_single_line:error
-csharp_style_expression_bodied_accessors = when_on_single_line:error
-csharp_style_expression_bodied_lambdas = when_on_single_line:suggestion
 
 # Pattern matching preferences
 csharp_style_pattern_matching_over_is_with_cast_check = true:error

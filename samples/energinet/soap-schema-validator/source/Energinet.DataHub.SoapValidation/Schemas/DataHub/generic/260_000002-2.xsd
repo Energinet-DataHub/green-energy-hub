@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== OriginalEnergyProductIdentificationCode - Code List Schema Module     ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Code list name:    EnergyProductIdentificationCode
+Code list agency:  ebix 
+Code list version: 0.1.A
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bcl260_000002_01A="un:unece:260:data:EEM" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root element for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:element name="OriginalEnergyProductIdentificationCode" type="bcl260_000002_01A:OriginalEnergyProductIdentificationCodeContentType" />
+  <!-- =============================================================================== -->
+  <!-- ==== Content type for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="OriginalEnergyProductIdentificationCodeContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="5410000100016">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>5410000100016</ccts:Name>
+            <ccts:Description>NaturalGas</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000016">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000016</ccts:Name>
+            <ccts:Description>Power active</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000023">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000023</ccts:Name>
+            <ccts:Description>Power reactive</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000030">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000030</ccts:Name>
+            <ccts:Description>Energy active</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000047">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000047</ccts:Name>
+            <ccts:Description>Energy reactive</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000054">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000054</ccts:Name>
+            <ccts:Description>Connection capacity</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000061">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000061</ccts:Name>
+            <ccts:Description>Connection use</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000078">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000078</ccts:Name>
+            <ccts:Description>Transport capacity</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000085">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000085</ccts:Name>
+            <ccts:Description>Transport use</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000139">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000139</ccts:Name>
+            <ccts:Description>Energy reactive capacitive</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8716867000146">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>8716867000146</ccts:Name>
+            <ccts:Description>Energy reactive inductive</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5790001330606">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>5790001330606</ccts:Name>
+            <ccts:Description>Fuel quantity</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5790001330590">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>5790001330590</ccts:Name>
+            <ccts:Description>Tariff</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

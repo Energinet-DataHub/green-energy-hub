@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:b2b="urn:www:datahub:dk:b2b:v01" targetNamespace="urn:www:datahub:dk:b2b:v01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <!--                                                               | changed urn  |                             | changed urn  | -->
+	<xs:complexType name="DequeueMessageRequest_Type">
+		<xs:sequence>
+			<xs:element name="MessageId" type="b2b:MessageId_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DequeueMessageResponse_Type"/>
+	<xs:complexType name="GetMessageIdsRequest_Type">
+		<xs:sequence>
+		  <!-- Changed parameter names to more closely follow the regulation. -->
+			<xs:element name="From" type="b2b:DateTime_Type"/>
+			<xs:element name="To" type="b2b:DateTime_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetMessageIdsResponse_Type">
+		<xs:sequence>
+			<xs:element name="MessageIdList" type="b2b:MessageIdList_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetMessageRequest_Type">
+		<xs:sequence>
+			<xs:element name="MessageId" type="b2b:MessageId_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetMessageResponse_Type">
+		<xs:sequence>
+			<xs:element name="MessageContainer" type="b2b:MessageContainer_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MessageContainer_Type">
+		<xs:sequence>
+			<xs:element name="MessageReference" type="b2b:MessageReference_Type"/>
+			<xs:element name="DocumentType" type="b2b:DocumentType_Type"/>
+			<xs:element name="MessageType" type="b2b:MessageType_Type"/>
+			<xs:element name="Payload" type="b2b:Payload_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MessageIdList_Type">
+		<xs:sequence>
+			<xs:element name="MessageId" type="b2b:MessageId_Type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Payload_Type">
+		<xs:sequence>
+			<xs:any minOccurs="0" maxOccurs="unbounded" processContents="strict" namespace="##any"/>
+			<!-- This is 1..1 in the accompanying schema, and I don't see a need for one to many relation. -->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PeekMessageRequest_Type"/>
+	<xs:complexType name="PeekMessageResponse_Type">
+		<xs:sequence>
+			<xs:element name="MessageContainer" type="b2b:MessageContainer_Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryDataRequest_Type">
+		<xs:sequence>
+			<xs:any minOccurs="0" maxOccurs="unbounded" processContents="strict" namespace="##any"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryDataResponse_Type">
+		<xs:sequence>
+			<xs:any minOccurs="0" maxOccurs="unbounded" processContents="strict" namespace="##any"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SendMessageRequest_Type">
+		<xs:sequence>
+			<xs:element name="MessageContainer" type="b2b:MessageContainer_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SendMessageResponse_Type">
+		<xs:sequence>
+			<xs:element name="MessageId" type="b2b:MessageId_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DequeueMessageRequest" type="b2b:DequeueMessageRequest_Type"/>
+	<xs:element name="DequeueMessageResponse" type="b2b:DequeueMessageResponse_Type"/>
+	<xs:element name="GetMessageIdsRequest" type="b2b:GetMessageIdsRequest_Type"/>
+	<xs:element name="GetMessageIdsResponse" type="b2b:GetMessageIdsResponse_Type"/>
+	<xs:element name="GetMessageRequest" type="b2b:GetMessageRequest_Type"/>
+	<xs:element name="GetMessageResponse" type="b2b:GetMessageResponse_Type"/>
+	<xs:element name="PeekMessageRequest" type="b2b:PeekMessageRequest_Type"/>
+	<xs:element name="PeekMessageResponse" type="b2b:PeekMessageResponse_Type"/>
+	<xs:element name="QueryDataRequest" type="b2b:QueryDataRequest_Type"/>
+	<xs:element name="QueryDataResponse" type="b2b:QueryDataResponse_Type"/>
+	<xs:element name="SendMessageRequest" type="b2b:SendMessageRequest_Type"/>
+	<xs:element name="SendMessageResponse" type="b2b:SendMessageResponse_Type"/>
+	<xs:simpleType name="DateTime_Type">
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="DocumentType_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageId_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageReference_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="XML"/>
+			<xs:enumeration value="EDIFACT"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

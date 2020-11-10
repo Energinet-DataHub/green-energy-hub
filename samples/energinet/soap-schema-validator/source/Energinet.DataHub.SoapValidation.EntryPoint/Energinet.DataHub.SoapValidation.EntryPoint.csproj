@@ -40,4 +40,7 @@ limitations under the License.
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Energinet.DataHub.SoapValidation\Energinet.DataHub.SoapValidation.csproj" />
+  </ItemGroup>
 </Project>

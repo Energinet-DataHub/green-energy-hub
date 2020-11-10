@@ -1,0 +1,39 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body>
+      <ns0:PeekMessageResponse xmlns:ns0="urn:www:datahub:dk:b2b:v01">
+         <ns0:MessageContainer>
+            <ns0:MessageReference>a779902348c44822859875408f4d480f</ns0:MessageReference>
+            <ns0:DocumentType>Acknowledgement</ns0:DocumentType>
+            <ns0:MessageType>XML</ns0:MessageType>
+            <ns0:Payload>
+               <ns0:DK_Acknowledgement xmlns:ns0="un:unece:260:data:EEM-DK_Acknowledgement:v3">
+                  <ns0:HeaderEnergyDocument>
+                     <ns0:Identification>764189</ns0:Identification>
+                     <ns0:DocumentType listAgencyIdentifier="260">294</ns0:DocumentType>
+                     <ns0:Creation>2020-10-27T12:33:24Z</ns0:Creation>
+                     <ns0:SenderEnergyParty>
+                        <ns0:Identification schemeAgencyIdentifier="9">5790001330552</ns0:Identification>
+                     </ns0:SenderEnergyParty>
+                     <ns0:RecipientEnergyParty>
+                        <ns0:Identification schemeAgencyIdentifier="9">8100000000030</ns0:Identification>
+                     </ns0:RecipientEnergyParty>
+                  </ns0:HeaderEnergyDocument>
+                  <ns0:ProcessEnergyContext>
+                     <ns0:EnergyBusinessProcess listAgencyIdentifier="260" listIdentifier="DK">D42</ns0:EnergyBusinessProcess>
+                     <ns0:EnergyBusinessProcessRole listAgencyIdentifier="260">MDR</ns0:EnergyBusinessProcessRole>
+                     <ns0:EnergyIndustryClassification listAgencyIdentifier="6">23</ns0:EnergyIndustryClassification>
+                     <ns0:OriginalBusinessMessage>Rev__00125</ns0:OriginalBusinessMessage>
+                  </ns0:ProcessEnergyContext>
+                  <ns0:PayloadResponseEvent>
+                     <ns0:Identification>4811255_47228</ns0:Identification>
+                     <ns0:StatusType listAgencyIdentifier="6">41</ns0:StatusType>
+                     <ns0:ResponseReasonType listAgencyIdentifier="260">E87</ns0:ResponseReasonType>
+                     <ns0:ReasonText>Antallet af værdier i tidsserien 2020-10-22 22:00,2020-10-22 22:00 stemmer ikke overens oplæsning PT1H for målepunktID 578030100000089663 / The number of values for meter data time series 2020-10-22 22:00,2020-10-22 22:00 doesn't match the meter reading occurrence PT1H for metering point 578030100000089663</ns0:ReasonText>
+                     <ns0:OriginalBusinessDocument>Rev__00125</ns0:OriginalBusinessDocument>
+                  </ns0:PayloadResponseEvent>
+               </ns0:DK_Acknowledgement>
+            </ns0:Payload>
+         </ns0:MessageContainer>
+      </ns0:PeekMessageResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

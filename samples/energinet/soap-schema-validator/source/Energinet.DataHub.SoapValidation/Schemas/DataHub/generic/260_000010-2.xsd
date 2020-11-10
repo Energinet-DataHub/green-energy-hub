@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== OriginalDocumentNameCode - Code List Schema Module                    ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Code list name:    DocumentNameCode
+Code list agency:  ebix 
+Code list version: 0.1.A
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bcl260_000010_01A="un:unece:260:data:EEM" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root element for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:element name="OriginalDocumentNameCode" type="bcl260_000010_01A:OriginalDocumentNameCodeContentType" />
+  <!-- =============================================================================== -->
+  <!-- ==== Content type for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="OriginalDocumentNameCodeContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="E01">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E01</ccts:Name>
+            <ccts:Description>Start of supply </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E02">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E02</ccts:Name>
+            <ccts:Description>Cancellation of supply</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E03">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E03</ccts:Name>
+            <ccts:Description>Notice of master data change</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E04">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E04</ccts:Name>
+            <ccts:Description>Overview of lost locations</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E05">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E05</ccts:Name>
+            <ccts:Description>Overview of new locations</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E06">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E06</ccts:Name>
+            <ccts:Description>Overview of active locations</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E07">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E07</ccts:Name>
+            <ccts:Description>Master data, metering point</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E08">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E08</ccts:Name>
+            <ccts:Description>Master data, meter</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E09">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E09</ccts:Name>
+            <ccts:Description>Master data, balance responsibility </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E10">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E10</ccts:Name>
+            <ccts:Description>Request for Master data, Metering point</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E11">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E11</ccts:Name>
+            <ccts:Description>Validated Metered Data from Grid Company to Balance supplier</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E12">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E12</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E13">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E13</ccts:Name>
+            <ccts:Description>Validated Metered data (time series), quantity per period</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E14">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E14</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E15">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E15</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E16">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E16</ccts:Name>
+            <ccts:Description>Request for metered data</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E17">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E17</ccts:Name>
+            <ccts:Description>Schedule</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E18">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E18</ccts:Name>
+            <ccts:Description>Response to schedule</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E19">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E19</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E20">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E20</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E21">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E21</ccts:Name>
+            <ccts:Description>Master data, Consumer</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E22">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E22</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E23">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E23</ccts:Name>
+            <ccts:Description>Metered data for profiling</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E24">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E24</ccts:Name>
+            <ccts:Description>Aggregated metered data for profiled metering points to Balance responsible party</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E25">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E25</ccts:Name>
+            <ccts:Description>Aggregated metered data for reconciliation for profiled metering points to the Reconciliation responsible party</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E26">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E26</ccts:Name>
+            <ccts:Description>Reconciliation volumes</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E27">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E27</ccts:Name>
+            <ccts:Description>Request according to German market rules</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E28">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E28</ccts:Name>
+            <ccts:Description>Exchange of correction factor for profiled plans</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E29">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E29</ccts:Name>
+            <ccts:Description>Aggregated metered data for verification of reconciliation</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E30">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E30</ccts:Name>
+            <ccts:Description>Collected data, from Metered data collector </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E31">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E31</ccts:Name>
+            <ccts:Description>Aggregate metered data from the Metered data aggregator, local</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E32">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E32</ccts:Name>
+            <ccts:Description>Aggregated metered data to Balance supplier</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E33">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E33</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E34">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E34</ccts:Name>
+            <ccts:Description>Start of a contract according to German market rules</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E35">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E35</ccts:Name>
+            <ccts:Description>End of a contract according to German market rules</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E36">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E36</ccts:Name>
+            <ccts:Description>Master data, transport responsibility </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E37">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E37</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E38">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E38</ccts:Name>
+            <ccts:Description>Request master data, Meter</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E39">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E39</ccts:Name>
+            <ccts:Description>Request metered data</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E40">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E40</ccts:Name>
+            <ccts:Description>List of MP allocated to Balance Responsible</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E41">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E41</ccts:Name>
+            <ccts:Description>Request to Meter administrator (MA) for change in Meter-db</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E42">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E42</ccts:Name>
+            <ccts:Description>Response from Meter administrator (MA) for change in Meter-db</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E43">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E43</ccts:Name>
+            <ccts:Description>Notification from Meter administrator to concerned parties</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E44">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E44</ccts:Name>
+            <ccts:Description>Notification from the Metering point administrator</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E45">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E45</ccts:Name>
+            <ccts:Description>Request to Grid access provider for changes in Grid access contract-db</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E46">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E46</ccts:Name>
+            <ccts:Description>Response from Grid access provider for changes in Grid access contract-db</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E47">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E47</ccts:Name>
+            <ccts:Description>Notification from Grid access provider to concerned parties for changes in Grid access contract-db</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E48">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E48</ccts:Name>
+            <ccts:Description>Start of providing a supply in the name of the new balance supplier</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E49">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E49</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E50">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E50</ccts:Name>
+            <ccts:Description>End of providing a supply in the name of the new balance supplier</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E51">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E51</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E52">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E52</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E53">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E53</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E54">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E54</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E55">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E55</ccts:Name>
+            <ccts:Description>
+            </ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ERR">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>ERR</ccts:Name>
+            <ccts:Description>Processability Error Report</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E56">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E56</ccts:Name>
+            <ccts:Description>Request regarding planned quantities</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E57">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E57</ccts:Name>
+            <ccts:Description>Response regarding planned quantities (Confirmation/Rejection)</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E58">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E58</ccts:Name>
+            <ccts:Description>Request to change metering point attributes</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E59">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E59</ccts:Name>
+            <ccts:Description>Confirmation/rejection of change metering point attributes</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E60">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E60</ccts:Name>
+            <ccts:Description>Change request Meter Attribute</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E61">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E61</ccts:Name>
+            <ccts:Description>Confirmation/rejection of change meter attributes</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E62">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E62</ccts:Name>
+            <ccts:Description>Change request Field bus attributes</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E63">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E63</ccts:Name>
+            <ccts:Description>Confirmation/rejection of change Field bus attributes</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E64">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E64</ccts:Name>
+            <ccts:Description>Master data Field bus</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E65">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E65</ccts:Name>
+            <ccts:Description>Validated metered data, meter stand</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E66">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E66</ccts:Name>
+            <ccts:Description>Validated metered data, time series</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E67">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E67</ccts:Name>
+            <ccts:Description>Request regarding Cancellation</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E68">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E68</ccts:Name>
+            <ccts:Description>Response regarding Cancellation (Confirmation/Rejection)</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E69">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E69</ccts:Name>
+            <ccts:Description>Price Information</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E70">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E70</ccts:Name>
+            <ccts:Description>Information for Billing</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E71">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E71</ccts:Name>
+            <ccts:Description>Master Data Metering Grid Area</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E72">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E72</ccts:Name>
+            <ccts:Description>Request for Collected Data</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E73">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E73</ccts:Name>
+            <ccts:Description>Request for Validated Metered Data</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E74">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E74</ccts:Name>
+            <ccts:Description>Request for Aggregated Metered Data</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

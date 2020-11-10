@@ -36,6 +36,7 @@ namespace Energinet.DataHub.SoapValidation.EntryPoint
             builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
 
             // Register services
+            builder.Services.AddSingleton<IXmlSchemaValidator, XmlSchemaValidator>();
         }
     }
 }

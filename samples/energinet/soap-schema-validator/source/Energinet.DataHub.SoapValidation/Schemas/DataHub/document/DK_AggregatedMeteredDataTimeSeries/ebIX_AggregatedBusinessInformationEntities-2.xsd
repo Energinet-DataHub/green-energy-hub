@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== Aggregated Business Information Entities XML Schema Module            ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bie="un:unece:260:data:EEM-DK_AggregatedMeteredDataTimeSeries:v3" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM-DK_AggregatedMeteredDataTimeSeries:v3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusions                                                            ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusion of Business Data Types                                      ==== -->
+  <!-- =============================================================================== -->
+  <xsd:include schemaLocation="ebIX_BusinessDataType-2.xsd" />
+  <!-- =============================================================================== -->
+  <!-- ==== Aggregated Business Information Entities Definitions                  ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== TimeSeriesPeriod Type                                                 ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="TimeSeriesPeriod">
+    <xsd:sequence>
+      <xsd:element name="ResolutionDuration" type="bie:TimeDuration_000111" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="Start" type="bie:DateTimeType_000111" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="End" type="bie:DateTimeType_000111" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ObservationTimeSeriesPeriod" type="bie:TimeSeriesPeriod" />
+  <!-- =============================================================================== -->
+  <!-- ==== ProductCharacteristic Type                                            ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="ProductCharacteristic">
+    <xsd:sequence>
+      <xsd:element name="Identification" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:EnergyProductIdentificationCodeType_000120">
+              <xsd:enumeration value="8716867000023" />
+              <xsd:enumeration value="8716867000030" />
+              <xsd:enumeration value="5790001330606" />
+              <xsd:enumeration value="8716867000016" />
+              <xsd:enumeration value="8716867000047" />
+              <xsd:enumeration value="5790001330590" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UnitType" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:MeasurementUnitCommonCodeType_000121">
+              <xsd:enumeration value="Z14" />
+              <xsd:enumeration value="K3" />
+              <xsd:enumeration value="Z03" />
+              <xsd:enumeration value="TNE" />
+              <xsd:enumeration value="MWH" />
+              <xsd:enumeration value="KWH" />
+              <xsd:enumeration value="KWT" />
+              <xsd:enumeration value="H87" />
+              <xsd:enumeration value="MAW" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="MeasureUnitPriceType" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:MeasurementUnitCommonCodeType_000121">
+              <xsd:enumeration value="MWH" />
+              <xsd:enumeration value="Z03" />
+              <xsd:enumeration value="K3" />
+              <xsd:enumeration value="Z03" />
+              <xsd:enumeration value="KWT" />
+              <xsd:enumeration value="MAW" />
+              <xsd:enumeration value="TNE" />
+              <xsd:enumeration value="KWH" />
+              <xsd:enumeration value="H87" />
+              <xsd:enumeration value="Z14" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="IncludedProductCharacteristic" type="bie:ProductCharacteristic" />
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyParty Type                                                      ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyParty">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:PartyIdentifierType_000112" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="BalanceResponsibleEnergyParty" type="bie:EnergyParty" />
+  <xsd:element name="BalanceSupplierEnergyParty" type="bie:EnergyParty" />
+  <xsd:element name="ChargeTypeOwnerEnergyParty" type="bie:EnergyParty" />
+  <xsd:element name="SenderEnergyParty" type="bie:EnergyParty" />
+  <xsd:element name="RecipientEnergyParty" type="bie:EnergyParty" />
+  <!-- =============================================================================== -->
+  <!-- ==== DomainLocation Type                                                   ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="DomainLocation">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:DomainIdentifierType_000122" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="MeteringGridAreaUsedDomainLocation" type="bie:DomainLocation" />
+  <xsd:element name="MarketBalanceAreaUsedDomainLocation" type="bie:DomainLocation" />
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyTimeSeries Type                                                 ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyTimeSeries">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="Function" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:DocumentFunctionCodeType_000118">
+              <xsd:enumeration value="9" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Currency" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:CurrencyIdentificationCodeType_000117">
+              <xsd:enumeration value="DKK" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element ref="bie:ObservationTimeSeriesPeriod" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:BalanceResponsibleEnergyParty" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="bie:BalanceSupplierEnergyParty" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="bie:IncludedProductCharacteristic" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:DetailMeasurementMeteringPointCharacteristic" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="bie:MeteringGridAreaUsedDomainLocation" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="bie:IntervalEnergyObservation" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element ref="bie:MarketBalanceAreaUsedDomainLocation" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="ChargeType" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:ChargeTypeCodeType_000134">
+              <xsd:enumeration value="D03" />
+              <xsd:enumeration value="D01" />
+              <xsd:enumeration value="D02" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PartyChargeTypeID" type="bie:IdentifierType_000110" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="OriginalBusinessDocument" type="bie:IdentifierType_000110" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="bie:ChargeTypeOwnerEnergyParty" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="Version" type="bie:TextType_000114" minOccurs="0" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyObservation Type                                                ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyObservation">
+    <xsd:sequence>
+      <xsd:element name="Position" type="bie:OrdinalType_000123" minOccurs="1" maxOccurs="1" />
+      <xsd:choice minOccurs="0">
+        <xsd:element name="EnergyQuantity" type="bie:DecimalQuantityType_000119" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="QuantityMissing" type="bie:IndicatorType_000099" fixed="true" minOccurs="0" maxOccurs="1" />
+      </xsd:choice>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="EnergyPrice" type="bie:AmountType_000124" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="PriceMissing" type="bie:IndicatorType_000099" fixed="true" minOccurs="0" maxOccurs="1" />
+      </xsd:choice>
+      <xsd:element name="QuantityQuality" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:QuantityQualityCodeType_000125">
+              <xsd:enumeration value="36" />
+              <xsd:enumeration value="D01" />
+              <xsd:enumeration value="E01" />
+              <xsd:enumeration value="56" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnergySum" type="bie:AmountType_000124" minOccurs="0" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="IntervalEnergyObservation" type="bie:EnergyObservation" />
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyDocument Type                                                   ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyDocument">
+    <xsd:sequence>
+      <xsd:element name="Identification" type="bie:IdentifierType_000110" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="DocumentType" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:DocumentNameCodeType_000098">
+              <xsd:enumeration value="E31" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Creation" type="bie:DateTimeType_000111" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:SenderEnergyParty" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="bie:RecipientEnergyParty" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== EnergyContext Type                                                    ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EnergyContext">
+    <xsd:sequence>
+      <xsd:element name="EnergyBusinessProcess" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:BusinessReasonCodeType_000115">
+              <xsd:enumeration value="D03" />
+              <xsd:enumeration value="D05" />
+              <xsd:enumeration value="D32" />
+              <xsd:enumeration value="D04" />
+              <xsd:enumeration value="D09" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnergyBusinessProcessRole" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:BusinessRoleCodeType_000113">
+              <xsd:enumeration value="MDR" />
+              <xsd:enumeration value="EZ" />
+              <xsd:enumeration value="DDK" />
+              <xsd:enumeration value="DDM" />
+              <xsd:enumeration value="DDX" />
+              <xsd:enumeration value="DDQ" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnergyIndustryClassification" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:SectorAreaIdentificationCodeType_000116">
+              <xsd:enumeration value="23" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ProcessVariant" type="bie:ProcessVariantCodeType_DK0005" minOccurs="0" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== MeasurementMeteringPointCharacteristic Type                           ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="MeasurementMeteringPointCharacteristic">
+    <xsd:sequence>
+      <xsd:element name="TypeOfMeteringPoint" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:MeteringPointTypeCodeType_000138">
+              <xsd:enumeration value="D18" />
+              <xsd:enumeration value="D09" />
+              <xsd:enumeration value="D14" />
+              <xsd:enumeration value="D04" />
+              <xsd:enumeration value="D05" />
+              <xsd:enumeration value="D15" />
+              <xsd:enumeration value="D28" />
+              <xsd:enumeration value="D08" />
+              <xsd:enumeration value="D20" />
+              <xsd:enumeration value="D17" />
+              <xsd:enumeration value="D23" />
+              <xsd:enumeration value="E20" />
+              <xsd:enumeration value="D11" />
+              <xsd:enumeration value="D13" />
+              <xsd:enumeration value="D06" />
+              <xsd:enumeration value="E17" />
+              <xsd:enumeration value="D26" />
+              <xsd:enumeration value="D21" />
+              <xsd:enumeration value="E18" />
+              <xsd:enumeration value="D01" />
+              <xsd:enumeration value="D12" />
+              <xsd:enumeration value="D24" />
+              <xsd:enumeration value="D16" />
+              <xsd:enumeration value="D02" />
+              <xsd:enumeration value="D30" />
+              <xsd:enumeration value="D22" />
+              <xsd:enumeration value="D03" />
+              <xsd:enumeration value="D99" />
+              <xsd:enumeration value="D19" />
+              <xsd:enumeration value="D27" />
+              <xsd:enumeration value="D10" />
+              <xsd:enumeration value="D07" />
+              <xsd:enumeration value="D25" />
+              <xsd:enumeration value="D29" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SettlementMethod" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:restriction base="bie:SettlementMethodCodeType_000145">
+              <xsd:enumeration value="D01" />
+              <xsd:enumeration value="E02" />
+              <xsd:enumeration value="E01" />
+            </xsd:restriction>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DetailMeasurementMeteringPointCharacteristic" type="bie:MeasurementMeteringPointCharacteristic" />
+</xsd:schema>

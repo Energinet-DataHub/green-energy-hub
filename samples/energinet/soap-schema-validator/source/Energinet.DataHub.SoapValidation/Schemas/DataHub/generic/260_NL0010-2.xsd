@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== OriginalNL_GeneratorFuelCode - Code List Schema Module                ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Code list name:    GeneratorFuelCode
+Code list agency:  ebix 
+Code list version: 0.1.A
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bcl260_NL0010_01A="un:unece:260:data:EEM" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root element for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:element name="OriginalNL_GeneratorFuelCode" type="bcl260_NL0010_01A:OriginalNL_GeneratorFuelCodeContentType" />
+  <!-- =============================================================================== -->
+  <!-- ==== Content type for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="OriginalNL_GeneratorFuelCodeContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="E01">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E01</ccts:Name>
+            <ccts:Description>Sun</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E02">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E02</ccts:Name>
+            <ccts:Description>Wind</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E03">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E03</ccts:Name>
+            <ccts:Description>Water</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E04">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E04</ccts:Name>
+            <ccts:Description>Biomass</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E05">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E05</ccts:Name>
+            <ccts:Description>Coal</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E06">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E06</ccts:Name>
+            <ccts:Description>Gas</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E07">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E07</ccts:Name>
+            <ccts:Description>Oil</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E08">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E08</ccts:Name>
+            <ccts:Description>Nuclear</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E09">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>E09</ccts:Name>
+            <ccts:Description>Other</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== Business Data Type XML Schema Module                                  ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bdt="un:unece:260:data:EEM" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM-DK_ResponseMasterDataConsumer:v3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Import of Code Lists                                                  ==== -->
+  <!-- =============================================================================== -->
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000019-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000023-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000028-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000028-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000028-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000028-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000028-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000028-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000029-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000029-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000029-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000029-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000029-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000029-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000029-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000041-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_000080-2.xsd" />
+  <xsd:import namespace="un:unece:260:data:EEM" schemaLocation="../../generic/260_201308142031-2.xsd" />
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusions                                                            ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusion of Code Lists                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Business Data Type Definitions                                        ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== BusinessReasonCodeType Type                                           ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="BusinessReasonCodeType_000115">
+    <xsd:simpleContent>
+      <xsd:extension base="bdt:AssembledBusinessReasonCodeContentType">
+        <xsd:attribute name="listIdentifier" use="optional">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListIdentificationCodeContentType">
+              <xsd:enumeration value="DK" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listAgencyIdentifier" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListResponsibleAgencyCodeContentType">
+              <xsd:enumeration value="260" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== BusinessRoleCodeType Type                                             ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="BusinessRoleCodeType_000113">
+    <xsd:simpleContent>
+      <xsd:extension base="bdt:AssembledBusinessRoleCodeContentType">
+        <xsd:attribute name="listIdentifier" use="optional">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListIdentificationCodeContentType">
+              <xsd:enumeration value="DK" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listAgencyIdentifier" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListResponsibleAgencyCodeContentType">
+              <xsd:enumeration value="260" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== DocumentNameCodeType Type                                             ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="DocumentNameCodeType_000098">
+    <xsd:simpleContent>
+      <xsd:extension base="bdt:AssembledDocumentNameCodeContentType">
+        <xsd:attribute name="listIdentifier" use="optional">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListIdentificationCodeContentType">
+              <xsd:enumeration value="DK" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listAgencyIdentifier" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListResponsibleAgencyCodeContentType">
+              <xsd:enumeration value="6" />
+              <xsd:enumeration value="260" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== SectorAreaIdentificationCodeType Type                                 ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="SectorAreaIdentificationCodeType_000116">
+    <xsd:simpleContent>
+      <xsd:extension base="bdt:AssembledSectorAreaIdentificationCodeContentType">
+        <xsd:attribute name="listAgencyIdentifier" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListResponsibleAgencyCodeContentType">
+              <xsd:enumeration value="6" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== DomainIdentifierType Type                                             ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="DomainIdentifierType_000122">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="schemeIdentifier" use="optional">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListIdentificationCodeContentType">
+              <xsd:enumeration value="DK" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="schemeAgencyIdentifier" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListResponsibleAgencyCodeContentType">
+              <xsd:enumeration value="9" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== PartyIdentifierType Type                                              ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="PartyIdentifierType_000112">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="schemeIdentifier" use="optional">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListIdentificationCodeContentType">
+              <xsd:enumeration value="DK" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="schemeAgencyIdentifier" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListResponsibleAgencyCodeContentType">
+              <xsd:enumeration value="9" />
+              <xsd:enumeration value="305" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== DateTimeType Type                                                     ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="DateTimeType_000111">
+    <xsd:restriction base="xsd:dateTime" />
+  </xsd:simpleType>
+  <!-- =============================================================================== -->
+  <!-- ==== IndicatorType Type                                                    ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="IndicatorType_000099">
+    <xsd:restriction base="xsd:boolean" />
+  </xsd:simpleType>
+  <!-- =============================================================================== -->
+  <!-- ==== IdentifierType Type                                                   ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="IdentifierType_000110">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="35" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- =============================================================================== -->
+  <!-- ==== TextType Type                                                         ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="TextType_000114">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="132" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- =============================================================================== -->
+  <!-- ==== MPRelationTypeCodeType Type                                           ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="MPRelationTypeCodeType_DK2013071606">
+    <xsd:simpleContent>
+      <xsd:extension base="bdt:AssembledMPRelationTypeCodeContentType">
+        <xsd:attribute name="listIdentifier" use="optional">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListIdentificationCodeContentType">
+              <xsd:enumeration value="DK" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listAgencyIdentifier" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="bdt:AssembledCodeListResponsibleAgencyCodeContentType">
+              <xsd:enumeration value="260" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <!-- ==== UUIDType Type                                                         ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="UUIDType_20190104-12">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="36" />
+      <xsd:pattern value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

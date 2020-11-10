@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== XML Schema Module for the DataHub project                             ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:rsm="un:unece:260:data:EEM-DK_QueryMasterData:v3" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM-DK_QueryMasterData:v3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusions                                                            ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusion of Aggregated Business Information Entities                 ==== -->
+  <!-- =============================================================================== -->
+  <xsd:include schemaLocation="ebIX_AggregatedBusinessInformationEntities-2.xsd" />
+  <!-- =============================================================================== -->
+  <!-- ==== Inclusion of Business Data Types                                      ==== -->
+  <!-- =============================================================================== -->
+  <xsd:include schemaLocation="ebIX_BusinessDataType-2.xsd" />
+  <!-- =============================================================================== -->
+  <!-- ==== Element Declarations                                                  ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root Element Declarations                                             ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== DK_QueryMasterData                                                    ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root Element                                                          ==== -->
+  <!-- =============================================================================== -->
+  <xsd:element name="DK_QueryMasterData" type="rsm:DK_QueryMasterDataType" />
+  <!-- =============================================================================== -->
+  <!-- ==== Complex Element                                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="DK_QueryMasterDataType">
+    <xsd:sequence>
+      <xsd:element ref="rsm:HeaderEnergyDocument" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="rsm:ProcessEnergyContext" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="rsm:PayloadMeterEvent" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- =============================================================================== -->
+  <xsd:element name="HeaderEnergyDocument" type="rsm:EnergyDocument" />
+  <xsd:element name="ProcessEnergyContext" type="rsm:EnergyContext" />
+  <xsd:element name="PayloadMeterEvent" type="rsm:MeterEvent" />
+</xsd:schema>

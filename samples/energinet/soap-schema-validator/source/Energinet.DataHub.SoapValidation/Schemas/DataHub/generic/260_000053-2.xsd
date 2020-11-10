@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================== -->
+<!-- ==== SubsetMeasurementUnitCommonCode - Code List Schema Module             ==== -->
+<!-- =============================================================================== -->
+<!--
+Schema agency:     Energinet.dk
+Schema version:    0.1.A
+Schema date:       April 9, 2019
+
+Code list name:    MeasurementUnitCommonCode
+Code list agency:  ebix 
+Code list version: 0.1.A
+
+Copyright (C) ebIX (2010). All Rights Reserved.
+Copyright (C) Energinet (2011-2019). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others,
+and derivative works that comment on or otherwise explain it or assist in
+its implementation may be prepared, copied, published and distributed, in
+whole or in part, without restriction of any kind, provided that the above
+copyright notice and this paragraph are included on all such copies and
+derivative works. However, this document itself may not be modified in any
+way, such as by removing the copyright notice or references to ebIX, except
+as needed for the purpose of developing ebIX specifications, in which case
+the procedures for copyrights defined in the UN/CEFACT Intellectual Property
+Rights document must be followed, or as required to translate it into
+languages other than English.
+The limited permissions granted above are perpetual and will not be revoked
+by ebIX or its successors or assigns.
+This document and the information contained herein is provided on an "AS IS"
+basis and ebIX DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
+INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS
+FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bcl260_000053_01A="un:unece:260:data:EEM" xmlns:ccts="urn:un:unece:uncefact:documentation:common:3:standard:CoreComponentsTechnicalSpecification:3" xmlns:xbt="urn:un:unece:uncefact:data:common:1:draft" targetNamespace="un:unece:260:data:EEM" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1.A">
+  <!-- =============================================================================== -->
+  <!-- ==== Imports                                                               ==== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==== Root element for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:element name="SubsetMeasurementUnitCommonCode" type="bcl260_000053_01A:SubsetMeasurementUnitCommonCodeContentType" />
+  <!-- =============================================================================== -->
+  <!-- ==== Content type for this code list                                       ==== -->
+  <!-- =============================================================================== -->
+  <xsd:simpleType name="SubsetMeasurementUnitCommonCodeContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="KWH">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>KWH</ccts:Name>
+            <ccts:Description>Kilowatt-hour</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MAW">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>MAW</ccts:Name>
+            <ccts:Description> MegaWatt</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="KWT">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>KWT</ccts:Name>
+            <ccts:Description>Kilowatt</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="K3">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>K3</ccts:Name>
+            <ccts:Description>kVArh (kVA reactive-hour)</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MTQ">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>MTQ</ccts:Name>
+            <ccts:Description>Cubic Meter</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MQH">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>MQH</ccts:Name>
+            <ccts:Description>Cubic Meter per Hour</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="D90">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>D90</ccts:Name>
+            <ccts:Description>Cubic meter (net)</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="HUR">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>HUR</ccts:Name>
+            <ccts:Description>Hour</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MIN">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>MIN</ccts:Name>
+            <ccts:Description>Minute</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DAY">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>DAY</ccts:Name>
+            <ccts:Description>Day</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MON">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>MON</ccts:Name>
+            <ccts:Description>Month</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ANN">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>ANN</ccts:Name>
+            <ccts:Description>Year</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MWH">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>MWH</ccts:Name>
+            <ccts:Description>Megawatt-hour(MWh)</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TNE">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>TNE</ccts:Name>
+            <ccts:Description>Tonne</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Z03">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Z03</ccts:Name>
+            <ccts:Description>MVAr (Mega Volt Ampere Reactive)</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Z14">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Z14</ccts:Name>
+            <ccts:Description>Danish tariff code</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="AMP">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>AMP</ccts:Name>
+            <ccts:Description>Ampere</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="H87">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>H87</ccts:Name>
+            <ccts:Description>Piece. A unit of count defining the number of pieces</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>
