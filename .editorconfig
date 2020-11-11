@@ -32,7 +32,7 @@ indent_style = space
 [*.{cs,csx,vb,vbx}]
 indent_size = 4
 insert_final_newline = true
-charset = utf-8
+charset = utf-8-bom
 # Currently does not work in VS 2019, but works in VS Code.
 trim_trailing_whitespace = true
 
