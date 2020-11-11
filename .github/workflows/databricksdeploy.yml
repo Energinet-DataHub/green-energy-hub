@@ -1,0 +1,151 @@
+name: Databricks Deploy
+# Run this workflow on demand
+on:
+  workflow_dispatch:
+    inputs:
+      resource_group_name:
+        description: 'Resource Group Name'     
+        required: true
+        default: 'energinettf' 
+      eventhub_namespace_name:
+        description: 'EventHub Namespace name'     
+        required: true
+        default: 'energinet-ehn-poc'
+      input_eventhub_name:
+        description: 'Input EventHub name'     
+        required: true
+        default: 'energinet-eh-poc-input'
+      output_eventhub_name:
+        description: 'Output EventHub name'     
+        required: true
+        default: 'energinet-eh-poc-output'
+      storage_account_name:
+        description: 'Storage Account name'     
+        required: true
+        default: 'energinetstrgpoc' 
+      container_name:
+        description: 'Storage Container name'     
+        required: true
+        default: 'messagedata' 
+      app_name:
+        description: 'Application name'     
+        required: true
+        default: 'energinetpoc'    
+
+jobs:
+
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  databricks_infra_deploy:
+    # Name the Job
+    name: Deploy databricks cluster and create job
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+    env:
+      TF_VAR_client_secret: ${{ secrets.CLIENT_SECRET }}
+      ARM_CLIENT_ID:  ${{ secrets.CLIENT_ID }}
+      ARM_TENANT_ID:  ${{ secrets.TENANT_ID}}
+      ARM_SUBSCRIPTION_ID:  ${{ secrets.SUBSCRIPTION_ID}}   
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}      
+
+    steps:
+        - uses: hashicorp/setup-terraform@v1.2.1
+          with:
+            terraform_wrapper: false
+        
+        # Checks out a copy of your repository on the ubuntu-latest machine
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        # Run only if workflow started on demand
+        - name: Set env
+          run: |
+            echo "TF_VAR_resource_group_name=${{ github.event.inputs.resource_group_name }} >> $GITHUB_ENV
+            echo "TF_VAR_eventhub_namespace_name=${{ github.event.inputs.eventhub_namespace_name }} >> $GITHUB_ENV
+            echo "TF_VAR_input_eventhub_name=${{ github.event.inputs.input_eventhub_name }} >> $GITHUB_ENV
+            echo "TF_VAR_output_eventhub_name=${{ github.event.inputs.output_eventhub_name }} >> $GITHUB_ENV
+            echo "TF_VAR_storage_account_name=${{ github.event.inputs.storage_account_name }} >> $GITHUB_ENV
+            echo "TF_VAR_container_name=${{ github.event.inputs.container_name }} >> $GITHUB_ENV
+            echo "TF_VAR_app_name=${{ github.event.inputs.app_name }} >> $GITHUB_ENV
+          if:  github.event.inputs.app_name
+          
+        - uses: actions/setup-python@v2
+          with:
+            python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+            architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+        - name: Install Databricks CLI
+          id: install_databricks_cli
+          run: pip install --upgrade databricks-cli
+
+        - name: Terraform Infra Init
+          working-directory: ./build/terraform/infra
+          id: init_infra
+          run: terraform init
+          
+        - name: Terraform Infra Apply
+          working-directory: ./build/terraform/infra
+          id: apply_infra
+          run: terraform apply -no-color -auto-approve
+          continue-on-error: false           
+          
+        - name: Set env Infra
+          working-directory: ./build/terraform/infra
+          run: |
+            echo "TF_VAR_databricks_id=$(terraform output databricks_id)" >> $GITHUB_ENV
+            echo "TF_VAR_databricks_workspace_id=$(terraform output databricks_workspace_id)" >> $GITHUB_ENV
+            echo ::add-mask::$(terraform output input_eh_listen_connection_string)
+            echo "TF_VAR_input_eh_listen_connection_string=$(terraform output input_eh_listen_connection_string)" >> $GITHUB_ENV
+            echo "databricks_url=$(terraform output databricks_workspace_url)" >> $GITHUB_ENV
+            echo ::add-mask::$(terraform output output_eh_send_connection_string)
+            echo "TF_VAR_output_eh_send_connection_string=$(terraform output output_eh_send_connection_string)" >> $GITHUB_ENV  
+            echo ::add-mask::$(terraform output storage_key)       
+            echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV 
+            echo "TF_VAR_storage_name=$(terraform output storage_name)" >> $GITHUB_ENV
+            echo "TF_VAR_container_name=$(terraform output container_name)" >> $GITHUB_ENV
+            echo "TF_VAR_python_main_file=dbfs:/streaming/processing/main.py" >> $GITHUB_ENV
+            
+        # resource id in curl request is fixed Azure Databricks resource id, Azure wide
+        - name: Obtain AAD Token for Databricks CLI
+          id: curl
+          run: |
+            curl_result=$(curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&client_id=${{env.ARM_CLIENT_ID}}&resource=2ff814a6-3304-4ab8-85cb-cd0e6f879c1d&client_secret=${{ secrets.CLIENT_SECRET }}' https://login.microsoftonline.com/${{env.ARM_TENANT_ID}}/oauth2/token) 
+            token=$(echo $curl_result | python3 -c "import sys, json; print(json.load(sys.stdin)['access_token'])")
+            echo ::add-mask::$token
+            echo "DATABRICKS_AAD_TOKEN=$token" >> $GITHUB_ENV
+        
+        - name: Copy files to DBFS
+          id: copy_files_todbfs
+          run: |    
+            databricks configure --host "https://${{env.databricks_url}}" --aad-token
+            dbfs cp --overwrite ./src/streaming/processing/main.py dbfs:/streaming/processing/main.py
+            dbfs cp -r --overwrite ./src/streaming/processing/streaming_utils dbfs:/streaming/processing/streaming_utils
+            dbfs cp -r --overwrite ./src/streaming/processing/validation dbfs:/streaming/processing/validation
+        
+        # create streaming job
+        - name: Terraform Databricks Init
+          working-directory: ./build/terraform/databricks
+          id: init_databricks
+          run: terraform init
+                    
+        - name: Terraform Databricks Apply
+          working-directory: ./build/terraform/databricks
+          id: apply_databricks
+          run: terraform apply -no-color -auto-approve
+          continue-on-error: false
+          
+        - name: Set env Databricks
+          working-directory: ./build/terraform/databricks
+          run: |
+            echo "databricks_job_id=$(terraform output databricks_job_id)" >> $GITHUB_ENV
+        
+        #resource in command must match with resource name in main.tf
+        - name: Force recreation of databricks job on next run
+          working-directory: ./build/terraform/databricks
+          run: |
+            terraform taint databricks_job.streaming_job
+                            
+        - name: Databricks CLI configure host and run the job
+          run: |
+            databricks configure --host "https://${{env.databricks_url}}" --aad-token
+            databricks jobs run-now --job-id ${{env.databricks_job_id}}
