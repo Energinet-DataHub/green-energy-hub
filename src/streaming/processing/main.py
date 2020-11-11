@@ -150,7 +150,7 @@ print("Enriched stream schema:")
 enriched_data.printSchema()
 
 # %%
-from validation import Validator
+from .validation import Validator
 
 validated_data = Validator.validate(enriched_data)
 print("Validated stream schema:")
@@ -170,9 +170,40 @@ output_eh_conf = {
 def __store_data_frame(batch_df: DataFrame, _: int):
     batch_df.persist()
 
+    # Make valid time series points available to BRS-023 aggregations (by storing in Delta lake)
+    # TODO BJM: #169 Fix IsValid column when splitting valid and invalid messages into different Kafka topics
     batch_df \
         .filter(col("IsValid") == lit(True)) \
-        .select(col("*"),
+        .select(col("MarketEvaluationPoint_mRID"),
+                col("ObservationTime"),
+                col("Quantity"),
+                col("CorrelationId"),
+                col("MessageReference"),
+                col("HeaderEnergyDocument_mRID"),
+                col("HeaderEnergyDocumentCreation"),
+                col("HeaderEnergyDocumentSenderIdentification"),
+                col("EnergyBusinessProcess"),
+                col("EnergyBusinessProcessRole"),
+                col("TimeSeriesmRID"),
+                col("MktActivityRecord_Status"),
+                col("MarketEvaluationPointType"),
+                col("Quality"),
+                col("MeterReadingPeriodicity"),
+                col("MeterReadingPeriodicity2"),
+                col("MeteringMethod"),
+                col("MeteringGridArea_Domain_mRID"),
+                col("ConnectionState"),
+                col("EnergySupplier_MarketParticipant_mRID"),
+                col("BalanceResponsibleParty_MarketParticipant_mRID"),
+                col("InMeteringGridArea_Domain_mRID"),
+                col("OutMeteringGridArea_Domain_mRID"),
+                col("Parent_Domain"),
+                col("SupplierAssociationId"),
+                col("ServiceCategoryKind"),
+                col("SettlementMethod"),
+                col("UnitName"),
+                col("Product"),
+
                 year("ObservationTime").alias("year"),
                 month("ObservationTime").alias("month"),
                 dayofmonth("ObservationTime").alias("day")) \
@@ -183,6 +214,7 @@ def __store_data_frame(batch_df: DataFrame, _: int):
         .mode("append") \
         .save(output_delta_lake_path)
 
+    # Forward all time series points to message shipping (by sending to Kafka topic)
     batch_df \
         .select(to_json(struct(col("*"))).cast("string").alias("body")) \
         .write \

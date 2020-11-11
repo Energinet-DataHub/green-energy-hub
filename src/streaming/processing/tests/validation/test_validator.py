@@ -97,7 +97,11 @@ def expected_validate_schema():
         .add(StructField("SettlementMethod", StringType(), True)) \
         .add(StructField("UnitName", StringType(), True)) \
         .add(StructField("Product", StringType(), True)) \
-        .add(StructField("IsValid", BooleanType(), True))
+        .add(StructField("VR-245-1-Is-Valid", BooleanType(), True)) \
+        .add(StructField("VR-250-Is-Valid", BooleanType(), True)) \
+        .add(StructField("VR-251-Is-Valid", BooleanType(), True)) \
+        .add(StructField("VR-611-Is-Valid", BooleanType(), True)) \
+        .add(StructField("VR-612-Is-Valid", BooleanType(), True))
 
 # Mock parsed, master dataframes
 @pytest.fixture(scope="module")
@@ -155,28 +159,6 @@ def validated_data_df(spark, parsed_data_pandas_df, master_data_pandas_df, parse
     master_data = spark.createDataFrame(master_data_pandas_df, schema=master_data_schema)
     enriched_data = mock_enrich(parsed_data, master_data)
     return Validator.validate(enriched_data)
-
-# Test 1: All valid criteria -> isValid = true
-def test_validate_all_valid_criteria_returns_true_isValid(validated_data_df):
-    assert validated_data_df.toPandas()["IsValid"][0] == True
-
-# Test 2: md.MarketEvaluationPointType is null -> isValid = false
-def test_validate_null_md_MarketEvaluationPointType_returns_false_isValid(validated_data_df):
-    """
-    Because the second parsed data row has a different "MarketEvaluationPoint_mRID" as the master data
-    when we left join the parsed data against the master data, all of the master data columns will be 
-    null and thus md.MarketEvaluationPointType will be null
-    """
-    assert validated_data_df.toPandas()["IsValid"][1] == False
-
-# Test 3: (col("pd.MarketEvaluationPointType") != col("md.MarketEvaluationPointType")) -> isValid = false
-def test_validate_unequal_MarketEvaluationPointTypes_returns_false_isValid(validated_data_df):
-    assert validated_data_df.toPandas()["IsValid"][2] == False
-
-# # Test 4: col("Quantity") < 0 -> isValid = false
-# enriched_data = spark.createDataFrame(enriched_data_pandas_df[3:4], schema=enriched_data_schema)
-def test_validate_negative_Quantity_returns_false_isValid(validated_data_df):
-    assert validated_data_df.toPandas()["IsValid"][3] == False
 
 # Test 5: check to see if validate function returns DataFrame with correct schema
 def test_validate_returns_proper_schema(validated_data_df, expected_validate_schema):

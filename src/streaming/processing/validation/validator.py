@@ -1,16 +1,14 @@
 from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.functions import col
+from .rules import rules
 
 class Validator:
 
     @staticmethod
     def validate(enriched_data: DataFrame):
-        validated_data = enriched_data \
-            .withColumn("IsValid", \
-                # Streamed market evaluation point type must match master data
-                (col("md.MarketEvaluationPointType").isNotNull() \
-                & (col("pd.MarketEvaluationPointType") == col("md.MarketEvaluationPointType"))) \
-                # Quantity must be null or non-negative
-                & (col("Quantity").isNull() | (col("Quantity") >= 0)))
+        validated_data = enriched_data
+
+        for rule in rules:
+            validated_data = rule(validated_data)
 
         return validated_data
+
