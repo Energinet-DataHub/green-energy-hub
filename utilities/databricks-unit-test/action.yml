@@ -1,0 +1,5 @@
+name: 'PySpark execution'
+description: 'This action allows you to execute code, written for Spark, Databricks or other similar engines.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

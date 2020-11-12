@@ -2,11 +2,12 @@ import pytest
 from processing.codelists import MarketEvaluationPointType, SettlementMethod
 from processing.validation.rules.vr_612 import validate_vr_612
 
+
 @pytest.mark.parametrize(
     "quantity,market_evaluation_point_type,settlement_method,expected",
     [
         pytest.param(
-            1E6-1,
+            1E6 - 1,
             MarketEvaluationPointType.consumption.value,
             SettlementMethod.flex_settled.value,
             True,
@@ -29,8 +30,8 @@ from processing.validation.rules.vr_612 import validate_vr_612
     ],
 )
 def test_vr_612(quantity, market_evaluation_point_type, settlement_method, expected, enriched_data_factory):
-    data = enriched_data_factory(quantity = quantity,
-                                market_evaluation_point_type = market_evaluation_point_type,
-                                settlement_method = settlement_method)
+    data = enriched_data_factory(quantity=quantity,
+                                 market_evaluation_point_type=market_evaluation_point_type,
+                                 settlement_method=settlement_method)
     validated_data = validate_vr_612(data)
     assert validated_data.first()["VR-612-Is-Valid"] == expected

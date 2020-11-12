@@ -1,3 +1,3 @@
 from .validator import Validator
 
-__all__ = [ "Validator" ]
+__all__ = ["Validator"]

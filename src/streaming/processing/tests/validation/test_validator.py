@@ -12,6 +12,7 @@ from pyspark.sql.functions import col, lit
 time_now = time.time()
 timestamp_now = pd.Timestamp(time_now, unit='s')
 
+
 # Schemas for master and parsed data that becomes the enriched data via join
 @pytest.fixture(scope="module")
 def parsed_data_schema():
@@ -35,8 +36,9 @@ def parsed_data_schema():
         .add("Quality", StringType(), True) \
         .add("EventHubEnqueueTime", TimestampType(), False)
 
+
 @pytest.fixture(scope="module")
-def master_data_schema(): 
+def master_data_schema():
     return StructType() \
         .add("MarketEvaluationPoint_mRID", StringType(), False) \
         .add("MeterReadingPeriodicity", StringType(), False) \
@@ -56,11 +58,10 @@ def master_data_schema():
         .add("UnitName", StringType(), False) \
         .add("Product", StringType(), False)
 
+
 # Expected schema of the resulting Dataframe from the validate function
-"""
-To get the expected schema, we cannot combine the above schemas in code because the join
-makes fields nullable and columns are also dropped.
-"""
+# To get the expected schema, we cannot combine the above schemas in code because the join
+# makes fields nullable and columns are also dropped.
 @pytest.fixture(scope="module")
 def expected_validate_schema():
     return StructType() \
@@ -103,55 +104,59 @@ def expected_validate_schema():
         .add(StructField("VR-611-Is-Valid", BooleanType(), True)) \
         .add(StructField("VR-612-Is-Valid", BooleanType(), True))
 
+
 # Mock parsed, master dataframes
 @pytest.fixture(scope="module")
 def parsed_data_pandas_df():
-    return pd.DataFrame({ 
-        "MarketEvaluationPoint_mRID": ["1","2","1","1"], 
-        "ObservationTime": [timestamp_now, timestamp_now, timestamp_now, timestamp_now], 
-        "Quantity": [1.0, 2.0, 3.0, -4.0], 
-        "CorrelationId": ["a","a", "a", "a"],
-        "MessageReference": ["b","b","b", "b"], 
-        "HeaderEnergyDocument_mRID": ["c","c","c", "c"], 
-        "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now, timestamp_now], 
-        "HeaderEnergyDocumentSenderIdentification": ["d","d","d", "d"], 
-        "EnergyBusinessProcess": ["e","e","e", "e"], 
-        "EnergyBusinessProcessRole": ["f","f","f", "f"], 
-        "TimeSeriesmRID": ["g","g","g", "g"], 
-        "MktActivityRecord_Status": ["h","h","h", "h"], 
-        "Product": ["i","i","i", "i"], 
-        "UnitName": ["j","j","j", "j"], 
-        "MarketEvaluationPointType": ["EPTypeA","EPTypeA","EPTypeB", "EPTypeA"], 
-        "Quality": ["l","l","l", "l"], 
+    return pd.DataFrame({
+        "MarketEvaluationPoint_mRID": ["1", "2", "1", "1"],
+        "ObservationTime": [timestamp_now, timestamp_now, timestamp_now, timestamp_now],
+        "Quantity": [1.0, 2.0, 3.0, -4.0],
+        "CorrelationId": ["a", "a", "a", "a"],
+        "MessageReference": ["b", "b", "b", "b"],
+        "HeaderEnergyDocument_mRID": ["c", "c", "c", "c"],
+        "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now, timestamp_now],
+        "HeaderEnergyDocumentSenderIdentification": ["d", "d", "d", "d"],
+        "EnergyBusinessProcess": ["e", "e", "e", "e"],
+        "EnergyBusinessProcessRole": ["f", "f", "f", "f"],
+        "TimeSeriesmRID": ["g", "g", "g", "g"],
+        "MktActivityRecord_Status": ["h", "h", "h", "h"],
+        "Product": ["i", "i", "i", "i"],
+        "UnitName": ["j", "j", "j", "j"],
+        "MarketEvaluationPointType": ["EPTypeA", "EPTypeA", "EPTypeB", "EPTypeA"],
+        "Quality": ["l", "l", "l", "l"],
         "EventHubEnqueueTime": [timestamp_now, timestamp_now, timestamp_now, timestamp_now]})
+
 
 @pytest.fixture(scope="module")
 def master_data_pandas_df():
-    return pd.DataFrame({ 
-        "MarketEvaluationPoint_mRID": ["1"], 
-        "MeterReadingPeriodicity": ["a"], 
-        "MeteringMethod": ["b"], 
-        "MeterReadingPeriodicity2": ["c"], 
-        "MeteringGridArea_Domain_mRID": ["d"], 
-        "ConnectionState": ["e"], 
-        "EnergySupplier_MarketParticipant_mRID": ["f"], 
-        "BalanceResponsibleParty_MarketParticipant_mRID": ["g"], 
-        "InMeteringGridArea_Domain_mRID": ["h"], 
-        "OutMeteringGridArea_Domain_mRID": ["i"], 
-        "Parent_Domain": ["j"], 
-        "SupplierAssociationId": ["k"], 
-        "ServiceCategoryKind": ["l"], 
-        "MarketEvaluationPointType": ["EPTypeA"], 
-        "SettlementMethod": ["n"], 
-        "UnitName": ["o"], 
-        "Product": ["p"]} )
+    return pd.DataFrame({
+        "MarketEvaluationPoint_mRID": ["1"],
+        "MeterReadingPeriodicity": ["a"],
+        "MeteringMethod": ["b"],
+        "MeterReadingPeriodicity2": ["c"],
+        "MeteringGridArea_Domain_mRID": ["d"],
+        "ConnectionState": ["e"],
+        "EnergySupplier_MarketParticipant_mRID": ["f"],
+        "BalanceResponsibleParty_MarketParticipant_mRID": ["g"],
+        "InMeteringGridArea_Domain_mRID": ["h"],
+        "OutMeteringGridArea_Domain_mRID": ["i"],
+        "Parent_Domain": ["j"],
+        "SupplierAssociationId": ["k"],
+        "ServiceCategoryKind": ["l"],
+        "MarketEvaluationPointType": ["EPTypeA"],
+        "SettlementMethod": ["n"],
+        "UnitName": ["o"],
+        "Product": ["p"]})
+
 
 # "Enriches" data by joining parsed and master dataframes - necessary to get proper column aliasing
 def mock_enrich(parsed_data, master_data):
     return parsed_data.alias("pd") \
-        .join(master_data.alias("md"), \
-            (col("pd.MarketEvaluationPoint_mRID") == col("md.MarketEvaluationPoint_mRID")), how="left") \
+        .join(master_data.alias("md"),
+              (col("pd.MarketEvaluationPoint_mRID") == col("md.MarketEvaluationPoint_mRID")), how="left") \
         .drop(master_data["MarketEvaluationPoint_mRID"])
+
 
 @pytest.fixture(scope="module")
 def validated_data_df(spark, parsed_data_pandas_df, master_data_pandas_df, parsed_data_schema, master_data_schema):
@@ -159,6 +164,7 @@ def validated_data_df(spark, parsed_data_pandas_df, master_data_pandas_df, parse
     master_data = spark.createDataFrame(master_data_pandas_df, schema=master_data_schema)
     enriched_data = mock_enrich(parsed_data, master_data)
     return Validator.validate(enriched_data)
+
 
 # Test 5: check to see if validate function returns DataFrame with correct schema
 def test_validate_returns_proper_schema(validated_data_df, expected_validate_schema):

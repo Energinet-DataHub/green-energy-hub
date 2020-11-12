@@ -17,29 +17,28 @@ from pyspark.sql.functions import year, month, dayofmonth, to_json, \
 
 # %%
 p = configargparse.ArgParser(prog='main.py', description='Green Energy Hub Streaming',
-    default_config_files=['run_args.conf'],
-    formatter_class=configargparse.ArgumentDefaultsHelpFormatter
-)
+                             default_config_files=['run_args.conf'],
+                             formatter_class=configargparse.ArgumentDefaultsHelpFormatter)
 p.add('--storage-account-name', type=str, required=True,
-    help='Azure Storage account name (used for data output and checkpointing)')
+      help='Azure Storage account name (used for data output and checkpointing)')
 p.add('--storage-account-key', type=str, required=True,
-    help='Azure Storage key', env_var='GEH_STREAMING_STORAGE_KEY')
+      help='Azure Storage key', env_var='GEH_STREAMING_STORAGE_KEY')
 p.add('--storage-container-name', type=str, required=False, default='data',
-    help='Azure Storage container name')
+      help='Azure Storage container name')
 p.add('--master-data-path', type=str, required=False, default="master-data/MasterData.csv",
-    help='Path to master data storage location (csv) relative to container''s root')
+      help='Path to master data storage location (csv) relative to container''s root')
 p.add('--output-path', type=str, required=False, default="delta/meter-data/",
-    help='Path to stream output storage location (deltalake) relative to container''s root')
+      help='Path to stream output storage location (deltalake) relative to container''s root')
 p.add('--input-eh-connection-string', type=str, required=True,
-    help='Input Event Hub connection string', env_var='GEH_STREAMING_INPUT_EH_CONNECTION_STRING')
+      help='Input Event Hub connection string', env_var='GEH_STREAMING_INPUT_EH_CONNECTION_STRING')
 p.add('--max-events-per-trigger', type=int, required=False, default=10000,
-    help='Metering points to read per trrigger interval')
+      help='Metering points to read per trrigger interval')
 p.add('--trigger-interval', type=str, required=False, default='1 second',
-    help='Trigger interval to generate streaming batches (format: N seconds)')
+      help='Trigger interval to generate streaming batches (format: N seconds)')
 p.add('--streaming-checkpoint-path', type=str, required=False, default="checkpoints/streaming",
-    help='Path to checkpoint folder for streaming')
+      help='Path to checkpoint folder for streaming')
 p.add('--output-eh-connection-string', type=str, required=True,
-    help='Output Event Hub connection string', env_var='GEH_STREAMING_OUTPUT_EH_CONNECTION_STRING')
+      help='Output Event Hub connection string', env_var='GEH_STREAMING_OUTPUT_EH_CONNECTION_STRING')
 
 args, unknown_args = p.parse_known_args()
 
@@ -50,7 +49,7 @@ if unknown_args:
 # %%
 spark_conf = SparkConf(loadDefaults=True) \
     .set('fs.azure.account.key.{0}.blob.core.windows.net'.format(args.storage_account_name),
-            args.storage_account_key)
+         args.storage_account_key)
 
 spark = SparkSession\
     .builder\
@@ -109,7 +108,7 @@ input_eh_connection_string = args.input_eh_connection_string
 input_eh_conf = {
     # Version 2.3.15 and up requires encryption
     'eventhubs.connectionString': \
-        sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(input_eh_connection_string),
+    sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(input_eh_connection_string),
     'eventhubs.startingPosition': json.dumps(input_eh_starting_position),
     'eventhubs.prefetchCount': 5000,
     'eventhubs.maxEventsPerTrigger': args.max_events_per_trigger,
@@ -162,8 +161,8 @@ output_delta_lake_path = BASE_STORAGE_PATH + args.output_path
 checkpoint_path = BASE_STORAGE_PATH + args.streaming_checkpoint_path
 
 output_eh_conf = {
-    'eventhubs.connectionString': \
-        sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(output_eh_connection_string),
+    'eventhubs.connectionString':
+    sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(output_eh_connection_string),
 }
 
 

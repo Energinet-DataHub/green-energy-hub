@@ -34,3 +34,19 @@ A Transmission System Operator (TSO) is an entity entrusted with transporting en
 ### Technical Stack Diagram
 
 ![Technical Stack Diagram](./docs/images/TechStack.png)
+
+## Prepare dev environment
+
+As a tool for local development you can use [Visual Studio Code](https://code.visualstudio.com/)
+
+### DataBricks development
+
+There is a CI gate for DataBricks code that runs unit tests and lint checks. Follow this articles to configure IDE to check and validate your code before pull request:
+
+- [Configure VS Code to show lint issue](./docs/local-development/python-static-check-vscode.md)
+
+### Markdown development
+
+There is CI gate for Markdown that runs spell, lint and links check. The following articles will help you to check your markdown before pull request:
+
+- [Run spellcheck across your code](./docs/local-development/markdown-spellcheck.md)

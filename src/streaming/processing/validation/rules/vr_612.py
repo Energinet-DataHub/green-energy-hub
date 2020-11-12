@@ -1,6 +1,7 @@
 from pyspark.sql.functions import col
 from processing.codelists import SettlementMethod, MarketEvaluationPointType
 
+
 # VR.612
 #
 # The energy quantity for a E17 (consumption metering point) must be
@@ -8,15 +9,14 @@ from processing.codelists import SettlementMethod, MarketEvaluationPointType
 #
 # It is not necessary to check that the resolution is hourly because it is given when settlement method is flex.
 def validate_vr_612(df):
-    consumptionLimit = 1E6 # 1.000.000 kWh
+    consumptionLimit = 1E6  # 1.000.000 kWh
 
     return df \
         .withColumn("VR-612-Is-Valid",
                     ~
-                        (
-                            col("pd.Quantity").isNotNull()
-                            & (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.consumption.value)
-                            & (col("md.SettlementMethod") == SettlementMethod.flex_settled.value)
-                            & (col("pd.Quantity") >= consumptionLimit)
-                        )
-                    )
+                    (
+                        col("pd.Quantity").isNotNull()
+                        & (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.consumption.value)
+                        & (col("md.SettlementMethod") == SettlementMethod.flex_settled.value)
+                        & (col("pd.Quantity") >= consumptionLimit)
+                    ))

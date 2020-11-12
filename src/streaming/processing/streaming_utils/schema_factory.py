@@ -44,7 +44,7 @@ class SchemaFactory:
         .add("SettlementMethod", StringType(), False) \
         .add("UnitName", StringType(), False) \
         .add("Product", StringType(), False)
-    
+
     parsed_schema = copy.deepcopy(message_body_schema).add("EventHubEnqueueTime", TimestampType(), False)
 
     # For right now, this is the simplest solution for getting master/parsed data
@@ -59,8 +59,3 @@ class SchemaFactory:
             return SchemaFactory.message_body_schema
         else:
             return None
-    
-
-        
-
-        

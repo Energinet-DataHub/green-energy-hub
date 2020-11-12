@@ -4,6 +4,7 @@ Analytics
 andor
 apache
 Apache
+Args
 ArgumentException
 AspNet
 asq
@@ -101,6 +102,7 @@ Jørgensen
 js
 json
 jsonschema
+jupyter
 kariws
 Katya
 katyamust
@@ -111,6 +113,9 @@ kristianschneider
 Kubernetes
 Lachance
 Lani
+Linter
+linter
+linters
 lookups
 Lysemose
 madsbloendandersen
@@ -172,6 +177,8 @@ ProcessData
 protobot
 prtandrup
 py
+pyspark
+PySpark
 pyspelling
 Ravnborg
 RBAC
@@ -253,4 +260,3 @@ XSD
 yml
 Zach
 zmmille
-

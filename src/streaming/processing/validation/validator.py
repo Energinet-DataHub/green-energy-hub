@@ -1,6 +1,7 @@
 from pyspark.sql import DataFrame, SparkSession
 from .rules import rules
 
+
 class Validator:
 
     @staticmethod
@@ -11,4 +12,3 @@ class Validator:
             validated_data = rule(validated_data)
 
         return validated_data
-

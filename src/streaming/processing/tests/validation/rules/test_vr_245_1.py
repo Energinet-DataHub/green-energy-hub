@@ -2,6 +2,7 @@ import pytest
 from processing.codelists import MarketEvaluationPointType
 from processing.validation.rules.vr_245_1 import validate_vr_245_1
 
+
 @pytest.mark.parametrize(
     "quantity,market_evaluation_point_type,expected",
     [
@@ -17,7 +18,7 @@ from processing.validation.rules.vr_245_1 import validate_vr_245_1
     ],
 )
 def test_vr_245_1(quantity, market_evaluation_point_type, expected, enriched_data_factory):
-  data = enriched_data_factory(quantity = quantity,
-                               market_evaluation_point_type = market_evaluation_point_type)
-  validated_data = validate_vr_245_1(data)
-  assert validated_data.first()["VR-245-1-Is-Valid"] == expected
+    data = enriched_data_factory(quantity=quantity,
+                                 market_evaluation_point_type=market_evaluation_point_type)
+    validated_data = validate_vr_245_1(data)
+    assert validated_data.first()["VR-245-1-Is-Valid"] == expected
