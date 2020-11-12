@@ -27,6 +27,7 @@ limitations under the License.
       <ProjectReference Include="..\GreenEnergyHub.JSONSchemaValidator.Application\GreenEnergyHub.JSONSchemaValidator.Application.csproj" />
       <ProjectReference Include="..\GreenEnergyHub.JSONSchemaValidator.Domain\GreenEnergyHub.JSONSchemaValidator.Domain.csproj" />
       <ProjectReference Include="..\GreenEnergyHub.JSONSchemaValidator.Infrastructure\GreenEnergyHub.JSONSchemaValidator.Infrastructure.csproj" />
+      <ProjectReference Include="..\GreenEnergyHub.JSONSchemaValidator.Validate\GreenEnergyHub.JSONSchemaValidator.Validate.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -36,5 +37,17 @@ limitations under the License.
         <PackageReference Include="NSubstitute" Version="4.2.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
         <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TestData\ChangeOfSupplierMissingEnergySupplierMridQualifier.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\ChangeOfSupplierInvalidDate.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\ChangeOfSupplierValid.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

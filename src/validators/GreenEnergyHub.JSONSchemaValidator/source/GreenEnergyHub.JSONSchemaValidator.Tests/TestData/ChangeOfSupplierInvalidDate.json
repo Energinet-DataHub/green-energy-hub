@@ -1,0 +1,28 @@
+﻿{
+  "BalanceResponsibleParty": {
+    "mRID": {
+      "value": "12345678",
+      "qualifier": "VA"
+    }
+  },
+  "EnergySupplier": {
+    "mRID": {
+      "value": "12345678",
+      "qualifier": "VA"
+    }
+  },
+  "Consumer": {
+    "mRID": {
+      "value": "1234567890",
+      "qualifier": "ARR"
+    },
+    "name": "Hans Hansen"
+  },
+  "MarketEvaluationPoint": {
+    "mRID": "123456789123456789"
+  },
+  "StartDate": "2020-10-10 20:00:00.000Z",
+  "Transaction": {
+    "mRID": "a01dbf8b-ea99-4798-9bd4-ed85ecf79897"
+  }
+}

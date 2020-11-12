@@ -1,4 +1,4 @@
-// Copyright 2020 Energinet DataHub A/S
+﻿// Copyright 2020 Energinet DataHub A/S
 //
 // Licensed under the Apache License, Version 2.0 (the "License2");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 
 using System;
 using GreenEnergyHub.JSONSchemaValidator.Validate;
+using Json.Schema;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +30,8 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
         {
             // Register Serilog
             var telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-            telemetryConfiguration.InstrumentationKey = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
+            telemetryConfiguration.InstrumentationKey = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY") ?? string.Empty;
+
             var logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces)
@@ -37,6 +39,11 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
             builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
 
             // Register services
+            var hubSchemas = JsonSchema.FromFile("schemas/cim-definitions.schema.json");
+            SchemaRegistry.Global.Register(new Uri("https://github.com/green-energy-hub/schemas"), hubSchemas);
+
+            builder.Services.AddTransient(_ => new ValidationOptions { OutputFormat = OutputFormat.Basic, ValidateFormat = true, ValidateAs = Draft.Draft7 });
+            builder.Services.AddSingleton<ValidateService>();
         }
     }
 }
