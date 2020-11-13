@@ -6,7 +6,8 @@ from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType
 from pyspark.sql.functions import col, lit
 from processing.codelists import MarketEvaluationPointType, Quality
-from processing.streaming_utils import Enricher, SchemaNames, SchemaFactory
+from processing.streaming_utils import Enricher
+from processing.schemas import SchemaNames, SchemaFactory
 
 # Create timestamps used in DataFrames
 time_now = time.time()

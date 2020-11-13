@@ -2,7 +2,8 @@ import copy
 import pytest
 import pandas as pd
 import time
-from processing.streaming_utils import EventHubParser, SchemaNames, SchemaFactory
+from processing.streaming_utils import EventHubParser
+from processing.schemas import SchemaNames, SchemaFactory
 from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.types import BinaryType, BooleanType, DoubleType, LongType, StringType, StructField, StructType, TimestampType

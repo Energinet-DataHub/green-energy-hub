@@ -1,7 +1,8 @@
 import pytest
 import pandas as pd
 import time
-from processing.streaming_utils import Enricher, SchemaNames, SchemaFactory
+from processing.streaming_utils import Enricher
+from processing.schemas import SchemaNames, SchemaFactory
 from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType

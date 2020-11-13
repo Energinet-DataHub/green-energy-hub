@@ -14,10 +14,14 @@ from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.types import StructType, TimestampType, StringType, DoubleType
 from pyspark.sql.functions import year, month, dayofmonth, to_json, \
     struct, col, from_json, coalesce, lit
+# %%
+
+from aggregation.utils import MeteringPointTypeFilter
 
 # %%
-p = configargparse.ArgParser(prog='main.py', description='Green Energy Hub Streaming',
-                             default_config_files=['run_args.conf'],
+p = configargparse.ArgParser(prog='enrichment_and_validation.py',
+                             description='Green Energy Hub Streaming',
+                             default_config_files=['configuration/run_args_enrichment_and_validation.conf'],
                              formatter_class=configargparse.ArgumentDefaultsHelpFormatter)
 p.add('--storage-account-name', type=str, required=True,
       help='Azure Storage account name (used for data output and checkpointing)')
@@ -78,7 +82,7 @@ csv_read_config = {
     "nullValues": "NULL"
 }
 
-from streaming_utils import SchemaFactory, SchemaNames
+from schemas import SchemaFactory, SchemaNames
 
 master_data_schema = SchemaFactory.get_instance(SchemaNames.Master)
 
@@ -129,7 +133,8 @@ raw_data.printSchema()
 
 # %%
 
-from streaming_utils import EventHubParser, SchemaFactory, SchemaNames
+from streaming_utils import EventHubParser
+from schemas import SchemaFactory, SchemaNames
 
 message_schema: StructType = SchemaFactory.get_instance(SchemaNames.MessageBody)
 

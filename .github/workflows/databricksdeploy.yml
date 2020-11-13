@@ -103,7 +103,7 @@ jobs:
             echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV 
             echo "TF_VAR_storage_name=$(terraform output storage_name)" >> $GITHUB_ENV
             echo "TF_VAR_container_name=$(terraform output container_name)" >> $GITHUB_ENV
-            echo "TF_VAR_python_main_file=dbfs:/streaming/processing/main.py" >> $GITHUB_ENV
+            echo "TF_VAR_python_main_file=dbfs:/streaming/processing/enrichment_and_validation.py" >> $GITHUB_ENV
             
         # resource id in curl request is fixed Azure Databricks resource id, Azure wide
         - name: Obtain AAD Token for Databricks CLI
@@ -118,9 +118,10 @@ jobs:
           id: copy_files_todbfs
           run: |    
             databricks configure --host "https://${{env.databricks_url}}" --aad-token
-            dbfs cp --overwrite ./src/streaming/processing/main.py dbfs:/streaming/processing/main.py
+            dbfs cp --overwrite ./src/streaming/processing/enrichment_and_validation.py dbfs:/streaming/processing/enrichment_and_validation.py
             dbfs cp -r --overwrite ./src/streaming/processing/streaming_utils dbfs:/streaming/processing/streaming_utils
             dbfs cp -r --overwrite ./src/streaming/processing/validation dbfs:/streaming/processing/validation
+            dbfs cp -r --overwrite ./src/streaming/processing/schemas dbfs:/streaming/processing/schemas
         
         # create streaming job
         - name: Terraform Databricks Init
