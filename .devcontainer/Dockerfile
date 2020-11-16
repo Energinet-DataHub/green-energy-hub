@@ -15,4 +15,6 @@ USER root
 
 RUN apt-get update
 RUN apt-get install aspell aspell-en
+# Add Git autocomplete in bash terminal
+RUN apt-get install -y git bash-completion
 RUN pip install pyspelling
