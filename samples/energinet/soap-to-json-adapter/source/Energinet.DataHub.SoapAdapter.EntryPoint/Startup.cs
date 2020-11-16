@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using Energinet.DataHub.SoapAdapter.EntryPoint;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Energinet.DataHub.SoapAdapter.EntryPoint;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 

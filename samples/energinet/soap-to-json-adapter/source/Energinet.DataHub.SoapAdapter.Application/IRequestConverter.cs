@@ -11,19 +11,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using Xunit;
 
-namespace Energinet.DataHub.SoapAdapter.Tests
+using System.IO;
+using System.Threading.Tasks;
+
+namespace Energinet.DataHub.SoapAdapter.Application
 {
-    public class SomeTests
+    /// <summary>
+    /// Convert from one format to another
+    /// </summary>
+    public interface IRequestConverter
     {
-        [Fact]
-        public void DummySuccessfulTest()
-        {
-            // Write clever tests (not this one) to include in the template
-            var sut = nameof(DummySuccessfulTest);
-
-            Assert.Equal("DummySuccessfulTest", sut);
-        }
+        /// <summary>
+        /// Convert the input to another format
+        /// </summary>
+        /// <param name="input">A <see cref="Stream"/> that should be converted</param>
+        /// <param name="output">A <see cref="Stream"/> that the converted data should be written to</param>
+        ValueTask ConvertAsync(Stream input, Stream output);
     }
 }
