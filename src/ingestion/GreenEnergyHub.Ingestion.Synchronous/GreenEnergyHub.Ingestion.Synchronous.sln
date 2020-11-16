@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{832447E5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Ingestion.Synchronous.Function", "source\GreenEnergyHub.Ingestion.Synchronous.Function\GreenEnergyHub.Ingestion.Synchronous.Function.csproj", "{3A9D94F5-6FB2-4B4F-867B-E95A7CBD6B7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Ingestion.Synchronous.AzFunction", "source\GreenEnergyHub.Ingestion.Synchronous.AzFunction\GreenEnergyHub.Ingestion.Synchronous.AzFunction.csproj", "{3A9D94F5-6FB2-4B4F-867B-E95A7CBD6B7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

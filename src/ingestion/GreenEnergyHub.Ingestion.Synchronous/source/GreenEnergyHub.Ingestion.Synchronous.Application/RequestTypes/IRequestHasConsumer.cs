@@ -11,19 +11,19 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using Xunit;
 
-namespace GreenEnergyHub.Ingestion.Synchronous.Tests
+using GreenEnergyHub.Ingestion.Synchronous.Infrastructure.RequestTypes.Common;
+
+namespace GreenEnergyHub.Ingestion.Synchronous.Infrastructure.RequestTypes
 {
-    public class SomeTests
+    /// <summary>
+    /// An interface representing an object which has a Consumer field.
+    /// </summary>
+    public interface IRequestHasConsumer
     {
-        [Fact]
-        public void DummySuccessfulTest()
-        {
-            // Write clever tests (not this one) to include in the template
-            var sut = nameof(DummySuccessfulTest);
-
-            Assert.Equal("DummySuccessfulTest", sut);
-        }
+        /// <summary>
+        /// The consumer field.
+        /// </summary>
+        MarketParticipant Consumer { get; set; }
     }
 }

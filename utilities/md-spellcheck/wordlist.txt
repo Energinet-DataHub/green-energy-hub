@@ -21,6 +21,7 @@ CIM
 CLI
 cmgrd
 codebase
+composable
 config
 ConsoleApp
 cron
@@ -232,7 +233,6 @@ terraform
 Thomsen
 TODO
 Toft
-transferrable
 TSI
 TSO
 TSO's

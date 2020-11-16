@@ -24,4 +24,9 @@ limitations under the License.
         <RootNamespace>GreenEnergyHub.Ingestion.Synchronous.Application</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="9.0.0" />
+        <PackageReference Include="NRules" Version="0.9.0" />
+    </ItemGroup>
+
 </Project>

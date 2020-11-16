@@ -256,7 +256,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
     <td>
         <li>(+) Expressive fluent API adds flexibility: full access to scala/python language features and libraries.
         <li>(+) Cluster decoupling significantly simplifies Spark management.
-        <li>(+) Same engine as OSS Spark so that the main code is fully transferrable.
+        <li>(+) Same engine as OSS Spark so that the main code is fully transferable.
         <li>(+) Databricks is available on both Azure and Amazon.
         <li>(-) Packaging format (notebooks), parametrization through widgets, DevOps tooling, cluster decoupling are unique features that will require full overwrite to adapt to other options.
         <li>(-) Notebooks complicates unit and integration testing compared to ordinary Spark jars.
@@ -268,7 +268,7 @@ Selection criteria described in detail in [this document](selection-criteria.md)
     </td>
     <td>
         <li>(+) Cluster decoupling significantly simplifies Spark management.
-        <li>(+) Same engine as OSS Spark so that the code is fully transferrable.
+        <li>(+) Same engine as OSS Spark so that the code is fully transferable.
         <li>(-) Synapse Workspace available only on Azure
     </td>
     <td>
