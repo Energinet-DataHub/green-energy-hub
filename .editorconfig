@@ -25,7 +25,7 @@ root = true
 
 # All files
 [*]
-end_of_line = crlf
+end_of_line = lf
 indent_style = space
 
 # Code files

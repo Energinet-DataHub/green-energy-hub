@@ -18,27 +18,28 @@ jobs:
 
     # https://github.com/marketplace/actions/skip-duplicate-actions
     - name: Master data serverless skip check
-      id: master_data_serverless_skip_check
+      id: master_data_serverless_check
       uses: fkirc/skip-duplicate-actions@v1.4.0
       with:
         github_token: ${{ github.token }}
-        paths: '["src/master-data/**", ".github/workflows/main-pr-gate.yml"]'
+        paths: '["src/master-data/**", ".github/workflows/main-pr-gate.yml",
+          ".editorconfig"]'
 
     - name: Setup .NET Core
-      if: ${{ steps.master_data_serverless_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.master_data_serverless_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
   
     - name: Build and test
-      if: ${{ steps.master_data_serverless_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.master_data_serverless_check.outputs.should_skip != 'true' }}
       uses: ./.github/actions/dotnet-build-and-test
       with:
         SLN_NAME: 'GreenEnergyHub.MasterData.sln'
         SLN_PATH: './src/master-data/GreenEnergyHub.MasterData'
 
     - name: Upload build artifacts
-      if: ${{ steps.master_data_serverless_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.master_data_serverless_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-master-data-serverless_artifacts
@@ -52,27 +53,28 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Streaming skip check
-      id: streaming_skip_check
+      id: streaming_check
       uses: fkirc/skip-duplicate-actions@v1.4.0
       with:
         github_token: ${{ github.token }}
-        paths: '["./src/streaming/**", "./.github/workflows/main-pr-gate.yml"]'
+        paths: '["src/streaming/**", ".github/workflows/main-pr-gate.yml",
+          ".editorconfig"]'
 
     - name: Setup .NET Core
-      if: ${{ steps.streaming_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.streaming_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
 
     - name: Build and test
-      if: ${{ steps.streaming_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.streaming_check.outputs.should_skip != 'true' }}
       uses: ./.github/actions/dotnet-build-and-test
       with:
         SLN_NAME: 'GreenEnergyHub.Streaming.sln'
         SLN_PATH: './src/streaming/GreenEnergyHub.Streaming'
 
     - name: Upload build artifacts
-      if: ${{ steps.streaming_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.streaming_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-streaming-serverless_artifacts
@@ -86,27 +88,28 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Ingestion skip check
-      id: ingestion_skip_check
+      id: ingestion_check
       uses: fkirc/skip-duplicate-actions@v1.4.0
       with:
         github_token: ${{ github.token }}
-        paths: '["./src/ingestion/**", "./.github/workflows/main-pr-gate.yml"]'
+        paths: '["src/ingestion/**", ".github/workflows/main-pr-gate.yml",
+          ".editorconfig"]'
 
     - name: Setup .NET Core
-      if: ${{ steps.ingestion_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.402
 
     - name: Build and test
-      if: ${{ steps.ingestion_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_check.outputs.should_skip != 'true' }}
       uses: ./.github/actions/dotnet-build-and-test
       with:
         SLN_NAME: 'GreenEnergyHub.Ingestion.sln'
         SLN_PATH: './src/ingestion/GreenEnergyHub.Ingestion'
 
     - name: Upload build artifacts
-      if: ${{ steps.ingestion_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-ingestion-artifacts
@@ -120,28 +123,28 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Ingestion Asynchronous skip check
-      id: ingestion_asynchronous_skip_check
+      id: ingestion_asynchronous_check
       uses: fkirc/skip-duplicate-actions@v1.4.0
       with:
         github_token: ${{ github.token }}
-        paths: '["./src/ingestion/GreenEnergyHub.Ingestion.Asynchronous",
-          "./.github/workflows/main-pr-gate.yml"]'
+        paths: '["src/ingestion/GreenEnergyHub.Ingestion.Asynchronous",
+          ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
 
     - name: Setup .NET Core
-      if: ${{ steps.ingestion_asynchronous_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_asynchronous_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.402
 
     - name: Build and test
-      if: ${{ steps.ingestion_asynchronous_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_asynchronous_check.outputs.should_skip != 'true' }}
       uses: ./.github/actions/dotnet-build-and-test
       with:
         SLN_NAME: 'GreenEnergyHub.Ingestion.Asynchronous.sln'
         SLN_PATH: './src/ingestion/GreenEnergyHub.Ingestion.Asynchronous'
 
     - name: Upload build artifacts
-      if: ${{ steps.ingestion_asynchronous_skip_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_asynchronous_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-ingestion-asynchronous_artifacts
