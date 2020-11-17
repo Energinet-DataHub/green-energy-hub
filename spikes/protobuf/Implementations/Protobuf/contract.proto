@@ -1,0 +1,43 @@
+syntax = "proto3";
+package greenenergyhub.timeseries;
+
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "SpikeProtobuf.Implementations.Protobuf";
+
+
+message Timeseries {
+    string TransactionId = 1;
+    string Function = 2;
+    Period ObservationPeriod = 3;
+    ProductType Product = 4;
+    DetailMeasurementMeteringPointCharacteristic MeteringPointCharacteristic = 5;
+    string MeteringPointDomainLocation = 6;
+    repeated Observation Observations = 7;
+
+    message Period {
+        string Resolution = 1;
+        google.protobuf.Timestamp Start = 2;
+        google.protobuf.Timestamp End = 3;
+    }
+
+    message ProductType {
+        string Identification = 1;
+        string UnitType = 2;
+    }
+
+    message DetailMeasurementMeteringPointCharacteristic {
+        string TypeOfMeteringPoint = 1;
+        string SettlementMethod = 2;
+    }
+
+    message Observation {
+        int32 Position = 1;
+        double Quantity = 2;
+        bool Missing = 3;
+        string Quality = 4;
+    }
+}
+
+message TimeseriesCollection {
+    repeated Timeseries Items = 1;
+}

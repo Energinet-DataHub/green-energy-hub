@@ -39,6 +39,7 @@ decarbonized
 denormalized
 dependabot
 deployable
+Deserialization
 deserialize
 dev
 DevOps
@@ -81,6 +82,7 @@ Grafana
 GreenEnergyHub
 Grigorenko
 GUID
+Gzip
 HDInsight
 Heino
 Henriksen
@@ -176,11 +178,13 @@ prebuilt
 preconfigured
 ProcessData
 protobot
+Protobuf
 prtandrup
 py
 pyspark
 PySpark
 pyspelling
+RatioSD
 Ravnborg
 RBAC
 README
@@ -221,6 +225,7 @@ Sørensen
 spoplavskiy
 StackOverflow
 stateful
+StdDev
 stewartadam
 stylecop
 StyleCop
@@ -233,6 +238,7 @@ terraform
 Thomsen
 TODO
 Toft
+transferrable
 TSI
 TSO
 TSO's
