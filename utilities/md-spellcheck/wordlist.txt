@@ -16,6 +16,7 @@ Bjarke
 bjarkemeier
 Carsten
 carstenrickers
+ChangeOfSupplier
 Checkpointing
 CIM
 CLI
@@ -90,6 +91,7 @@ hoc
 hsvig
 http
 https
+ingestor
 integrations
 io
 IsSuccess
@@ -140,6 +142,8 @@ mogensjuul
 Mølgaard
 Møller
 Morten
+MoveIn
+MoveOut
 mrdach
 msftbot
 MSRC
@@ -171,6 +175,7 @@ Pedersen
 perlysemose
 perthenriksen
 pluggable
+png
 POCO
 Poplavskyi
 Powershell
@@ -214,6 +219,7 @@ Scrummaster
 SDK
 SDKs
 Sehested
+SendTimeSeries
 Sergiy
 serverless
 SLA
@@ -231,7 +237,9 @@ stylecop
 StyleCop
 StyleCop's
 subfolder
+SynchronousIngestor
 Tandrup
+TechStack
 TemplateFunction
 TemplateSolution
 terraform
