@@ -1,0 +1,47 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Body>
+        <SendMessageRequest xmlns="urn:www:datahub:dk:b2b:v01">
+            <MessageContainer>
+                <MessageReference>MOD_164422</MessageReference>
+                <DocumentType>RequestChangeOfSupplier</DocumentType>
+                <MessageType>XML</MessageType>
+                <Payload>
+                    <DK_RequestChangeOfSupplier xmlns="un:unece:260:data:EEM-DK_RequestChangeOfSupplier:v3">
+                        <HeaderEnergyDocument>
+                            <Identification>629031</Identification>
+                            <DocumentType listAgencyIdentifier="6">392</DocumentType>
+                            <Creation>2020-01-14T11:18:00Z</Creation>
+                            <SenderEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790001686758</Identification>
+                            </SenderEnergyParty>
+                            <RecipientEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790001330552</Identification>
+                            </RecipientEnergyParty>
+                        </HeaderEnergyDocument>
+                        <ProcessEnergyContext>
+                            <EnergyBusinessProcess listAgencyIdentifier="260">E03</EnergyBusinessProcess>
+                            <EnergyBusinessProcessRole listAgencyIdentifier="260">DDQ</EnergyBusinessProcessRole>
+                            <EnergyIndustryClassification listAgencyIdentifier="6">23</EnergyIndustryClassification>
+                        </ProcessEnergyContext>
+                        <PayloadMPEvent>
+                            <Identification>6311125</Identification>
+                            <StartOfOccurrence>2020-01-31T23:00:00Z</StartOfOccurrence>
+                            <MeteringPointDomainLocation>
+                                <Identification schemeAgencyIdentifier="9">571313180400050167</Identification>
+                            </MeteringPointDomainLocation>
+                            <BalanceSupplierEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790001686758</Identification>
+                            </BalanceSupplierEnergyParty>
+                            <BalanceResponsiblePartyEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">8100000000207</Identification>
+                            </BalanceResponsiblePartyEnergyParty>
+                            <ConsumerConsumerParty>
+                                <CVR>11111111</CVR>
+                            </ConsumerConsumerParty>
+                        </PayloadMPEvent>
+                    </DK_RequestChangeOfSupplier>
+                </Payload>
+            </MessageContainer>
+        </SendMessageRequest>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -43,12 +43,17 @@ namespace Energinet.DataHub.SoapValidation.Schemas
                 "un:unece:260:data:EEM-DK_MeteredDataTimeSeries:v3",
                 "ebIX_DK_MeteredDataTimeSeries-2.xsd",
                 "DK_MeteredDataTimeSeries");
+            var requestChangeOfSupplierDefinition = CreateDefinition(
+                "DK_RequestChangeOfSupplier",
+                "un:unece:260:data:EEM-DK_RequestChangeOfSupplier:v3",
+                "ebIX_DK_RequestChangeOfSupplier-2.xsd",
+                "DK_RequestChangeOfSupplier");
             return CreateDefinition(
                 "SendMessageRequest",
                 "urn:www:datahub:dk:b2b:v01",
                 "DataHUBB2B-manual.xsd",
                 "DataHub",
-                new List<SchemaDefinition> { meteredDataTimeSeriesDefinition });
+                new List<SchemaDefinition> { meteredDataTimeSeriesDefinition, requestChangeOfSupplierDefinition });
         }
 
         private static SchemaDefinition CreateDefinition(string rootElement, string targetNamespace, string xsdFile, string schemaSetFolder, IEnumerable<SchemaDefinition> allowedSubSchema)

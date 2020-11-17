@@ -10,10 +10,14 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
     public class DataHubSchemaValidatorTest
     {
         private const string TestFileFolder = "Energinet.DataHub.SoapValidation.Tests.TestFiles";
+        private const string RSM001Folder = "Rsm001";
         private const string RSM009Folder = "Rsm009";
         private const string RSM012Folder = "Rsm012";
 
         [Theory]
+        [InlineData("RSM001_CPR.xml", RSM001Folder, true, RejectionReason.None)]
+        [InlineData("RSM001_CVR.xml", RSM001Folder, true, RejectionReason.None)]
+        [InlineData("RSM001_Both.xml", RSM001Folder, true, RejectionReason.None)]
         [InlineData("ValidHourly.xml", RSM012Folder, true, RejectionReason.None)]
         [InlineData("ValidQuarterOfHour.xml", RSM012Folder, true, RejectionReason.None)]
         [InlineData("ValidBundledMessage.xml", RSM012Folder, true, RejectionReason.None)]

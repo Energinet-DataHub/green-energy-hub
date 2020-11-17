@@ -1,0 +1,63 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Body>
+        <ns0:SendMessageRequest xmlns:ns0="urn:www:datahub:dk:b2b:v01">
+            <ns0:MessageContainer>
+                <ns0:MessageReference>MsgRef-0.71882400-1582196206</ns0:MessageReference>
+                <ns0:DocumentType>RequestChangeOfSupplier</ns0:DocumentType>
+                <ns0:MessageType>XML</ns0:MessageType>
+                <Payload xmlns="urn:www:datahub:dk:b2b:v01">
+                    <DK_RequestChangeOfSupplier xmlns="un:unece:260:data:EEM-DK_RequestChangeOfSupplier:v3">
+                        <HeaderEnergyDocument>
+                            <Identification>MsgId-0.58755000-1582196206</Identification>
+                            <DocumentType listAgencyIdentifier="6">392</DocumentType>
+                            <Creation>2020-02-20T10:56:46.00Z</Creation>
+                            <SenderEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790002263057</Identification>
+                            </SenderEnergyParty>
+                            <RecipientEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790001330552</Identification>
+                            </RecipientEnergyParty>
+                        </HeaderEnergyDocument>
+                        <ProcessEnergyContext>
+                            <EnergyBusinessProcess listAgencyIdentifier="260">E03</EnergyBusinessProcess>
+                            <EnergyBusinessProcessRole listAgencyIdentifier="260">DDQ</EnergyBusinessProcessRole>
+                            <EnergyIndustryClassification listAgencyIdentifier="6">23</EnergyIndustryClassification>
+                        </ProcessEnergyContext>
+                        <PayloadMPEvent>
+                            <Identification>SessId-0.58783300-1582196206</Identification>
+                            <StartOfOccurrence>2020-03-05T23:00:00.00Z</StartOfOccurrence>
+                            <MeteringPointDomainLocation>
+                                <Identification schemeAgencyIdentifier="9">571313180400153356</Identification>
+                            </MeteringPointDomainLocation>
+                            <BalanceSupplierEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790002263057</Identification>
+                            </BalanceSupplierEnergyParty>
+                            <BalanceResponsiblePartyEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">8100000000207</Identification>
+                            </BalanceResponsiblePartyEnergyParty>
+                            <ConsumerConsumerParty>
+                                <CPR>*****************</CPR>
+                            </ConsumerConsumerParty>
+                        </PayloadMPEvent>
+                        <PayloadMPEvent>
+                            <Identification>6311125</Identification>
+                            <StartOfOccurrence>2020-01-31T23:00:00Z</StartOfOccurrence>
+                            <MeteringPointDomainLocation>
+                                <Identification schemeAgencyIdentifier="9">571313180400050167</Identification>
+                            </MeteringPointDomainLocation>
+                            <BalanceSupplierEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790001686758</Identification>
+                            </BalanceSupplierEnergyParty>
+                            <BalanceResponsiblePartyEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">8100000000207</Identification>
+                            </BalanceResponsiblePartyEnergyParty>
+                            <ConsumerConsumerParty>
+                                <CVR>11111111</CVR>
+                            </ConsumerConsumerParty>
+                        </PayloadMPEvent>
+                    </DK_RequestChangeOfSupplier>
+                </Payload>
+            </ns0:MessageContainer>
+        </ns0:SendMessageRequest>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

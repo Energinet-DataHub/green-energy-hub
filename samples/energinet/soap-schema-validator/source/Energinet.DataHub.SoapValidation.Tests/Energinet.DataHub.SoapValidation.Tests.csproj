@@ -16,6 +16,9 @@
   </ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="TestFiles\Rsm001\RSM001_Both.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm001\RSM001_CPR.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm001\RSM001_CVR.xml" />
 	  <EmbeddedResource Include="TestFiles\Rsm009\RSM009_valid.xml" />
 	  <EmbeddedResource Include="TestFiles\Rsm012\ExtraElement.xml" />
 	  <EmbeddedResource Include="TestFiles\Rsm012\ExtraElementInDataHubB2B.xml" />
