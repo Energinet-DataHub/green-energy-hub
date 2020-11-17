@@ -1,0 +1,34 @@
+# NOTE:
+# This should be able to handle setup, linting, building, testing, and
+# reporting, but today actions cannot call other actions. This is being worked
+# on, and once the issue below is resolved, this file should be updated to
+# include those steps.
+#
+# https://github.com/actions/runner/pull/612
+# https://github.com/actions/runner/issues/646
+
+name: 'Common steps for dotnet projects'
+description: 'Builds and tests dotnet projects.'
+inputs:
+  sln_name:
+    description: 'Name of the solution file.'
+    required: true
+  sln_path:
+    description: 'Path to the solution file.'
+    required: true
+  report_path:
+    description: 'Path to store the reports.'
+    required: false
+    default: './outputs'
+
+runs:
+  using: composite
+  steps:
+    - run: dotnet build --configuration Debug ${{ inputs.sln_path }}/${{ inputs.sln_name }}
+      shell: bash
+    - run: |
+        dotnet tool install --tool-path ./temp/reportgenerator dotnet-reportgenerator-globaltool ;
+        dotnet test --configuration Debug --collect "XPlat Code Coverage" ${{ inputs.sln_path }}/${{ inputs.sln_name }} &&
+        ./temp/reportgenerator/reportgenerator -reports:${{ inputs.sln_path }}/**/coverage.cobertura.xml -targetDir:${{ inputs.report_path }}/code-coverage -reporttypes:"Cobertura;TextSummary;Html" &&
+        cat ${{ inputs.report_path }}/code-coverage/Summary.txt
+      shell: bash

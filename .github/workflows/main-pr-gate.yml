@@ -1,4 +1,4 @@
-name: Master PR Gate
+name: Main PR Gate
 
 on:
   pull_request:
@@ -6,69 +6,143 @@ on:
   workflow_dispatch: {}
 
 env:
-  TEMP_OUTPUT_PATH: './outputs'
+  REPORT_PATH: './outputs'
 
 jobs:
   build-master-data-serverless:
-    name: Buld Master Data Serverless
+    name: Build Master Data Serverless
     runs-on: ubuntu-latest
-
-    env:
-      SLN_PATH: './src/master-data/GreenEnergyHub.MasterData'
-
 
     steps:
     - uses: actions/checkout@v2
 
+    # https://github.com/marketplace/actions/skip-duplicate-actions
+    - name: Master data serverless skip check
+      id: master_data_serverless_skip_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["src/master-data/**", ".github/workflows/main-pr-gate.yml"]'
+
     - name: Setup .NET Core
+      if: ${{ steps.master_data_serverless_skip_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
   
-    - name: Build
-      run: dotnet build --configuration Debug $SLN_PATH/GreenEnergyHub.MasterData.sln
-    
-    - name: Test
-      run: |
-        dotnet tool install --tool-path ./temp/reportgenerator dotnet-reportgenerator-globaltool ;
-        dotnet test --configuration Debug --collect "XPlat Code Coverage" $SLN_PATH/GreenEnergyHub.MasterData.sln &&
-        ./temp/reportgenerator/reportgenerator -reports:$SLN_PATH/**/coverage.cobertura.xml -targetDir:$TEMP_OUTPUT_PATH/code-coverage -reporttypes:"Cobertura;TextSummary;Html" &&
-        cat $TEMP_OUTPUT_PATH/code-coverage/Summary.txt
+    - name: Build and test
+      if: ${{ steps.master_data_serverless_skip_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'GreenEnergyHub.MasterData.sln'
+        SLN_PATH: './src/master-data/GreenEnergyHub.MasterData'
 
     - name: Upload build artifacts
+      if: ${{ steps.master_data_serverless_skip_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-master-data-serverless_artifacts
-        path: ${{ env.TEMP_OUTPUT_PATH }}
+        path: ${{ env.REPORT_PATH }}
 
   build-streaming-serverless:
     name: Build Streaming Serverless
     runs-on: ubuntu-latest
 
-    env:
-      SLN_PATH: './src/streaming/GreenEnergyHub.Streaming'
+    steps:
+    - uses: actions/checkout@v2
 
+    - name: Streaming skip check
+      id: streaming_skip_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["./src/streaming/**", "./.github/workflows/main-pr-gate.yml"]'
+
+    - name: Setup .NET Core
+      if: ${{ steps.streaming_skip_check.outputs.should_skip != 'true' }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Build and test
+      if: ${{ steps.streaming_skip_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'GreenEnergyHub.Streaming.sln'
+        SLN_PATH: './src/streaming/GreenEnergyHub.Streaming'
+
+    - name: Upload build artifacts
+      if: ${{ steps.streaming_skip_check.outputs.should_skip != 'true' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-streaming-serverless_artifacts
+        path: ${{ env.REPORT_PATH }}
+
+  ingestion:
+    name: Build Ingestion
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
+    - name: Ingestion skip check
+      id: ingestion_skip_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["./src/ingestion/**", "./.github/workflows/main-pr-gate.yml"]'
+
     - name: Setup .NET Core
+      if: ${{ steps.ingestion_skip_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
-  
-    - name: Build
-      run: dotnet build --configuration Debug $SLN_PATH/GreenEnergyHub.Streaming.sln
-    
-    - name: Test
-      run: |
-        dotnet tool install --tool-path ./temp/reportgenerator dotnet-reportgenerator-globaltool ;
-        dotnet test --configuration Debug --collect "XPlat Code Coverage" $SLN_PATH/GreenEnergyHub.Streaming.sln &&
-        ./temp/reportgenerator/reportgenerator -reports:$SLN_PATH/**/coverage.cobertura.xml -targetDir:$TEMP_OUTPUT_PATH/code-coverage -reporttypes:"Cobertura;TextSummary;Html" &&
-        cat $TEMP_OUTPUT_PATH/code-coverage/Summary.txt
+        dotnet-version: 3.1.402
+
+    - name: Build and test
+      if: ${{ steps.ingestion_skip_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'GreenEnergyHub.Ingestion.sln'
+        SLN_PATH: './src/ingestion/GreenEnergyHub.Ingestion'
 
     - name: Upload build artifacts
+      if: ${{ steps.ingestion_skip_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
-        name: build-streaming-serverless_artifacts
-        path: ${{ env.TEMP_OUTPUT_PATH }}
+        name: build-ingestion-artifacts
+        path: ${{ env.REPORT_PATH }}
+
+  ingestion-asychronous:
+    name: Build Ingestion Asynchronous
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Ingestion Asynchronous skip check
+      id: ingestion_asynchronous_skip_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["./src/ingestion/GreenEnergyHub.Ingestion.Asynchronous",
+          "./.github/workflows/main-pr-gate.yml"]'
+
+    - name: Setup .NET Core
+      if: ${{ steps.ingestion_asynchronous_skip_check.outputs.should_skip != 'true' }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.402
+
+    - name: Build and test
+      if: ${{ steps.ingestion_asynchronous_skip_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'GreenEnergyHub.Ingestion.Asynchronous.sln'
+        SLN_PATH: './src/ingestion/GreenEnergyHub.Ingestion.Asynchronous'
+
+    - name: Upload build artifacts
+      if: ${{ steps.ingestion_asynchronous_skip_check.outputs.should_skip != 'true' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-ingestion-asynchronous_artifacts
+        path: ${{ env.REPORT_PATH }}
