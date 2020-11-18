@@ -56,8 +56,7 @@ resource "azurerm_storage_account" "storage" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
-  is_hns_enabled           = "true"
-  
+  is_hns_enabled           = "true"  
 }
 
 resource "azurerm_storage_container" "stor_cont" {
@@ -66,4 +65,10 @@ resource "azurerm_storage_container" "stor_cont" {
   container_access_type = "private"
 }
 
+resource "azurerm_application_insights" "appinsight" {
+  name                  = "appi${var.appname}${var.environment}"
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  application_type      = "other"
+}
 

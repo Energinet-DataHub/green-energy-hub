@@ -6,3 +6,5 @@ master-data-path=master-data/dump.csv
 
 input-eh-connection-string=Endpoint=sb://myeventhub.servicebus.windows.net/;SharedAccessKeyName=Listen;SharedAccessKey=<key>;EntityPath=input;
 output-eh-connection-string=Endpoint=sb://myeventhub.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=<key>;EntityPath=output;
+
+telemetry-instrumentation-key=<application insights instrumentation key, GUID format>

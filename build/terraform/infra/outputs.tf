@@ -33,3 +33,8 @@ output "container_name" {
   value = azurerm_storage_container.stor_cont.name
 }
 
+output "telemetry_instrumentation_key" {
+  value = azurerm_application_insights.appinsight.instrumentation_key
+  sensitive = true
+}
+

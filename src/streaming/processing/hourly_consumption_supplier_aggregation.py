@@ -36,6 +36,8 @@ p.add('--beginning-date-time', type=str, required=True,
       help='The timezone aware date-time representing the beginning of the time period of aggregation (ex: 2020-01-03T00:00:00+0100)')
 p.add('--end-date-time', type=str, required=True,
       help='The timezone aware date-time representing the end of the time period of aggregation (ex: 2020-01-03T00:00:00-0100)')
+p.add('--telemetry-instrumentation-key', type=str, required=True,
+      help='Instrumentation key used for telemetry')
 
 args, unknown_args = p.parse_known_args()
 

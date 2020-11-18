@@ -32,6 +32,12 @@ resource "databricks_job" "streaming_job" {
     }
   }
 
+  library {
+    pypi {
+      package = "applicationinsights==0.11.9"
+    }
+  }  
+
   spark_python_task {
     python_file = var.python_main_file
     parameters  = [
@@ -44,7 +50,8 @@ resource "databricks_job" "streaming_job" {
       "--max-events-per-trigger=1000",
       "--trigger-interval=1 second",
       "--streaming-checkpoint-path=checkpoints/streaming",
-      "--output-eh-connection-string=${var.output_eh_send_connection_string}"
+      "--output-eh-connection-string=${var.output_eh_send_connection_string}",
+      "--telemetry-instrumentation-key=${var.telemetry_instrumentation_key}"
     ]
   }
 

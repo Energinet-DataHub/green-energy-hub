@@ -4,33 +4,37 @@ on:
   workflow_dispatch:
     inputs:
       resource_group_name:
-        description: 'Resource Group Name'     
+        description: 'Resource Group Name'
         required: true
-        default: 'energinettf' 
+        default: 'energinettf'
       eventhub_namespace_name:
-        description: 'EventHub Namespace name'     
+        description: 'EventHub Namespace name'
         required: true
         default: 'energinet-ehn-poc'
       input_eventhub_name:
-        description: 'Input EventHub name'     
+        description: 'Input EventHub name'
         required: true
         default: 'energinet-eh-poc-input'
       output_eventhub_name:
-        description: 'Output EventHub name'     
+        description: 'Output EventHub name'
         required: true
         default: 'energinet-eh-poc-output'
       storage_account_name:
-        description: 'Storage Account name'     
+        description: 'Storage Account name'
         required: true
-        default: 'energinetstrgpoc' 
+        default: 'energinetstrgpoc'
       container_name:
-        description: 'Storage Container name'     
+        description: 'Storage Container name'
         required: true
-        default: 'messagedata' 
+        default: 'messagedata'
       app_name:
-        description: 'Application name'     
+        description: 'Application name'
         required: true
-        default: 'energinetpoc'    
+        default: 'energinetpoc'
+      telemetry_instrumentation_key:
+        description: 'Application insights instrumentation key for telemetry data'
+        required: true
+        default: '00000000-0000-0000-0000-000000000000'
 
 jobs:
 
@@ -60,13 +64,14 @@ jobs:
         # Run only if workflow started on demand
         - name: Set env
           run: |
-            echo "TF_VAR_resource_group_name=${{ github.event.inputs.resource_group_name }} >> $GITHUB_ENV
-            echo "TF_VAR_eventhub_namespace_name=${{ github.event.inputs.eventhub_namespace_name }} >> $GITHUB_ENV
-            echo "TF_VAR_input_eventhub_name=${{ github.event.inputs.input_eventhub_name }} >> $GITHUB_ENV
-            echo "TF_VAR_output_eventhub_name=${{ github.event.inputs.output_eventhub_name }} >> $GITHUB_ENV
-            echo "TF_VAR_storage_account_name=${{ github.event.inputs.storage_account_name }} >> $GITHUB_ENV
-            echo "TF_VAR_container_name=${{ github.event.inputs.container_name }} >> $GITHUB_ENV
-            echo "TF_VAR_app_name=${{ github.event.inputs.app_name }} >> $GITHUB_ENV
+            echo "TF_VAR_resource_group_name=${{ github.event.inputs.resource_group_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_eventhub_namespace_name=${{ github.event.inputs.eventhub_namespace_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_input_eventhub_name=${{ github.event.inputs.input_eventhub_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_output_eventhub_name=${{ github.event.inputs.output_eventhub_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_storage_account_name=${{ github.event.inputs.storage_account_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_container_name=${{ github.event.inputs.container_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_app_name=${{ github.event.inputs.app_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_telemetry_instrumentation_key=${{ github.event.inputs.telemetry_instrumentation_key }}" >> $GITHUB_ENV
           if:  github.event.inputs.app_name
           
         - uses: actions/setup-python@v2
@@ -98,12 +103,14 @@ jobs:
             echo "TF_VAR_input_eh_listen_connection_string=$(terraform output input_eh_listen_connection_string)" >> $GITHUB_ENV
             echo "databricks_url=$(terraform output databricks_workspace_url)" >> $GITHUB_ENV
             echo ::add-mask::$(terraform output output_eh_send_connection_string)
-            echo "TF_VAR_output_eh_send_connection_string=$(terraform output output_eh_send_connection_string)" >> $GITHUB_ENV  
-            echo ::add-mask::$(terraform output storage_key)       
-            echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV 
+            echo "TF_VAR_output_eh_send_connection_string=$(terraform output output_eh_send_connection_string)" >> $GITHUB_ENV
+            echo ::add-mask::$(terraform output storage_key)
+            echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV
             echo "TF_VAR_storage_name=$(terraform output storage_name)" >> $GITHUB_ENV
             echo "TF_VAR_container_name=$(terraform output container_name)" >> $GITHUB_ENV
             echo "TF_VAR_python_main_file=dbfs:/streaming/processing/enrichment_and_validation.py" >> $GITHUB_ENV
+            echo ::add-mask::$(terraform output telemetry_instrumentation_key)
+            echo "TF_VAR_telemetry_instrumentation_key=$(terraform output telemetry_instrumentation_key)" >> $GITHUB_ENV
             
         # resource id in curl request is fixed Azure Databricks resource id, Azure wide
         - name: Obtain AAD Token for Databricks CLI
@@ -119,6 +126,7 @@ jobs:
           run: |    
             databricks configure --host "https://${{env.databricks_url}}" --aad-token
             dbfs cp --overwrite ./src/streaming/processing/enrichment_and_validation.py dbfs:/streaming/processing/enrichment_and_validation.py
+            dbfs cp -r --overwrite ./src/streaming/processing/monitoring dbfs:/streaming/processing/monitoring
             dbfs cp -r --overwrite ./src/streaming/processing/streaming_utils dbfs:/streaming/processing/streaming_utils
             dbfs cp -r --overwrite ./src/streaming/processing/validation dbfs:/streaming/processing/validation
             dbfs cp -r --overwrite ./src/streaming/processing/schemas dbfs:/streaming/processing/schemas

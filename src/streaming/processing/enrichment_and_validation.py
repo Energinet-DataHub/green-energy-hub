@@ -43,6 +43,8 @@ p.add('--streaming-checkpoint-path', type=str, required=False, default="checkpoi
       help='Path to checkpoint folder for streaming')
 p.add('--output-eh-connection-string', type=str, required=True,
       help='Output Event Hub connection string', env_var='GEH_STREAMING_OUTPUT_EH_CONNECTION_STRING')
+p.add('--telemetry-instrumentation-key', type=str, required=True,
+      help='Instrumentation key used for telemetry')
 
 args, unknown_args = p.parse_known_args()
 

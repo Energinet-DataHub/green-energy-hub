@@ -26,6 +26,9 @@ variable "python_main_file" {
   type = string
 }
 
+variable "telemetry_instrumentation_key" {
+  type = string
+}
 
 
 
