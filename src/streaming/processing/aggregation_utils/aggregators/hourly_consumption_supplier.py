@@ -11,10 +11,10 @@ class HourlyConsumptionSupplierAggregator:
             .filter(col("MarketEvaluationPointType") == MarketEvaluationPointType.consumption.value) \
             .filter(col("SettlementMethod") == SettlementMethod.non_profiled.value) \
             .groupBy("MeteringGridArea_Domain_mRID",
-                     "EnergySupplier_MarketParticipant_mRID",
-                     "BalanceResponsibleParty_MarketParticipant_mRID") \
+                     "BalanceResponsibleParty_MarketParticipant_mRID",
+                     "EnergySupplier_MarketParticipant_mRID") \
             .sum("Quantity") \
             .withColumnRenamed("sum(Quantity)", "sum_quantity") \
             .orderBy("MeteringGridArea_Domain_mRID",
-                     "EnergySupplier_MarketParticipant_mRID",
-                     "BalanceResponsibleParty_MarketParticipant_mRID")
+                     "BalanceResponsibleParty_MarketParticipant_mRID",
+                     "EnergySupplier_MarketParticipant_mRID")
