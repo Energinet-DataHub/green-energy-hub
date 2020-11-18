@@ -72,21 +72,26 @@ jobs:
       if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
       run: |
         echo "Markdown check results: "
+        fail=0
         if [[ "${{steps.md-link-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-link-check.outcome}}" == "failure" ]]; then
-        echo -e "- Markdown links check:   \e[31mFailure"
+          fail=1
+          echo -e "- Markdown links check:   \e[31mFailure"
         else
-        echo -e "- Markdown links check:   \e[32mSuccess"
+          echo -e "- Markdown links check:   \e[32mSuccess"
         fi
         if [[ "${{steps.md-spell-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-spell-check.outcome}}" == "failure" ]]; then
-        echo -e "- Markdown spell check:   \e[31mFailure"
+          fail=1
+          echo -e "- Markdown spell check:   \e[31mFailure"
         else
-        echo -e "- Markdown spell check:   \e[32mSuccess"
+          echo -e "- Markdown spell check:   \e[32mSuccess"
         fi
         if [[ "${{steps.md-lint-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-lint-check.outcome}}" == "failure" ]]; then
-        echo -e "- Markdown lint check:    \e[31mFailure"
+          fail=1
+          echo -e "- Markdown lint check:    \e[31mFailure"
         else
-        echo -e "- Markdown lint check:    \e[32mSuccess"
+          echo -e "- Markdown lint check:    \e[32mSuccess"
         fi
-        if [[ "${{steps.md-link-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-link-check.outcome}}" == "failure" ]] || [[ "${{steps.md-spell-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-spell-check.outcome}}" == "failure" ]] || [[ "${{steps.md-lint-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-lint-check.outcome}}" == "failure" ]]; then
-        exit 1
+        if [[ $fail -eq 1 ]]; then
+          echo -e "Expand individual steps above to view specific errors."
+          exit 1
         fi
