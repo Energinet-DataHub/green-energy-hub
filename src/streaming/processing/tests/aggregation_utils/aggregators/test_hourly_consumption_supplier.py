@@ -1,15 +1,27 @@
 from decimal import Decimal
-import pandas as pd
+from datetime import datetime
 from processing.aggregation_utils.aggregators import HourlyConsumptionSupplierAggregator
 from processing.codelists import MarketEvaluationPointType, SettlementMethod
 from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.types import StructType, StringType, DecimalType
+from pyspark.sql.types import StructType, StringType, DecimalType, TimestampType
 import pytest
+import pandas as pd
 
 e_17 = MarketEvaluationPointType.consumption.value
 e_18 = MarketEvaluationPointType.production.value
 e_01 = SettlementMethod.profiled.value
 e_02 = SettlementMethod.non_profiled.value
+
+# Default time series data point values
+default_point_type = e_17
+default_settlement_method = e_02
+default_domain = "D1"
+default_responsible = "R1"
+default_supplier = "S1"
+default_quantity = Decimal(1)
+
+date_time_formatting_string = "%Y-%m-%dT%H:%M:%S%z"
+default_obs_time = datetime.strptime("2020-01-01T00:00:00+0000", date_time_formatting_string)
 
 
 @pytest.fixture(scope="module")
@@ -23,7 +35,8 @@ def time_series_schema():
         .add("MeteringGridArea_Domain_mRID", StringType(), False) \
         .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType()) \
         .add("EnergySupplier_MarketParticipant_mRID", StringType()) \
-        .add("Quantity", DecimalType())
+        .add("Quantity", DecimalType()) \
+        .add("ObservationTime", TimestampType())
 
 
 @pytest.fixture(scope="module")
@@ -40,103 +53,123 @@ def expected_schema():
         .add("MeteringGridArea_Domain_mRID", StringType(), False) \
         .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType()) \
         .add("EnergySupplier_MarketParticipant_mRID", StringType()) \
+        .add("time_window",
+             StructType()
+             .add("start", TimestampType())
+             .add("end", TimestampType()),
+             False) \
         .add("sum_quantity", DecimalType(20))
 
 
 @pytest.fixture(scope="module")
-def time_series_data_frame(spark, time_series_schema):
+def time_series_row_factory(spark, time_series_schema):
     """
-    Sample Time Series DataFrame
-    Here we create 2 quantity values for each "grid domain area"-"balance responsible"-"supplier" grouping (16 total)
-    We create 2 of each grouping to test whether the summation in the aggregation occurs.
-    This also gives us an opportunity to have a non "E17" MarketEvaluationPointType in one or both of the
-    time series rows (rows with non "E17" should get filtered out in the aggregation).
-    We refer to the grouping as D#-R#-S# groupings where D=Domain, R=Responsible, S=Supplier
+    Factory to generate a single row of time series data, with default parameters as specified above.
     """
-    # Create empty pandas df
-    pandas_df = pd.DataFrame({
-        'MarketEvaluationPointType': [],
-        'SettlementMethod': [],
-        "MeteringGridArea_Domain_mRID": [],
-        "BalanceResponsibleParty_MarketParticipant_mRID": [],
-        "EnergySupplier_MarketParticipant_mRID": [],
-        "Quantity": []
-    })
-    # Add sample data row by row to the data frame
-    # D1-R1-S1 (both rows will be filtered away because MeteringPointType="E18")
-    pandas_df = add_row_of_data(pandas_df, e_18, e_02, "D1", "R1", "S1", Decimal(1))
-    pandas_df = add_row_of_data(pandas_df, e_18, e_02, "D1", "R1", "S1", Decimal(9))
-    # D1-R1-S2 (the second row will be filtered away because SettlementMethod="E01")
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D1", "R1", "S2", Decimal(3))
-    pandas_df = add_row_of_data(pandas_df, e_17, e_01, "D1", "R1", "S2", Decimal(11))
-    # D1-R2-S1 (the second row will be filtered away because MeteringPointType="E18")
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D1", "R2", "S1", Decimal(2))
-    pandas_df = add_row_of_data(pandas_df, e_18, e_02, "D1", "R2", "S1", Decimal(10))
-    # D1-R2-S2
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D1", "R2", "S2", Decimal(4))
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D1", "R2", "S2", Decimal(12))
-    # D2-R1-S1
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R1", "S1", Decimal(5))
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R1", "S1", Decimal(13))
-    # D2-R1-S2
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R1", "S2", Decimal(7))
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R1", "S2", Decimal(15))
-    # D2-R2-S1
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R2", "S1", Decimal(6))
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R2", "S1", Decimal(14))
-    # D2-R2-S2
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R2", "S2", Decimal(8))
-    pandas_df = add_row_of_data(pandas_df, e_17, e_02, "D2", "R2", "S2", Decimal(16))
-    return spark.createDataFrame(pandas_df, schema=time_series_schema)
+    def factory(point_type=default_point_type,
+                settlement_method=default_settlement_method,
+                domain=default_domain,
+                responsible=default_responsible,
+                supplier=default_supplier,
+                quantity=default_quantity,
+                obs_time=default_obs_time):
+        pandas_df = pd.DataFrame({
+            "MarketEvaluationPointType": [point_type],
+            "SettlementMethod": [settlement_method],
+            "MeteringGridArea_Domain_mRID": [domain],
+            "BalanceResponsibleParty_MarketParticipant_mRID": [responsible],
+            "EnergySupplier_MarketParticipant_mRID": [supplier],
+            "Quantity": [quantity],
+            "ObservationTime": [obs_time]})
+        return spark.createDataFrame(pandas_df, schema=time_series_schema)
+    return factory
 
 
-def add_row_of_data(pandas_df: pd.DataFrame, point_type, settlement_method, domain, responsible, supplier, quantity):
+def check_aggregation_row(df: DataFrame, row: int, grid: str, responsible: str, supplier: str, sum: Decimal, start: datetime, end: datetime):
     """
-    Helper method to create a new row in the dataframe to improve readability and maintainability
+    Helper function that checks column values for the given row.
+    Note that start and end datetimes are timezone-naive - we set the Spark session timezone to UTC in the
+    conftest.py, since:
+        From https://stackoverflow.com/questions/48746376/timestamptype-in-pyspark-with-datetime-tzaware-objects:
+        "TimestampType in pyspark is not tz aware like in Pandas rather it passes long ints
+        and displays them according to your machine's local time zone (by default)"
     """
-    new_row = {
-        "MarketEvaluationPointType": point_type,
-        "SettlementMethod": settlement_method,
-        "MeteringGridArea_Domain_mRID": domain,
-        "BalanceResponsibleParty_MarketParticipant_mRID": responsible,
-        "EnergySupplier_MarketParticipant_mRID": supplier,
-        "Quantity": quantity
-    }
-    return pandas_df.append(new_row, ignore_index=True)
-
-
-@pytest.fixture(scope="module")
-def aggregated_data_frame(time_series_data_frame):
-    """Perform aggregation"""
-    return HourlyConsumptionSupplierAggregator.aggregate(time_series_data_frame)
-
-
-def test_hourly_consumption_supplier_aggregator_returns_correct_row_count(aggregated_data_frame):
-    """ Check aggregation row count"""
-    assert aggregated_data_frame.count() == 7
-
-
-def test_hourly_consumption_supplier_aggregator_returns_correct_schema(aggregated_data_frame, expected_schema):
-    """Check aggregation schema"""
-    assert aggregated_data_frame.schema == expected_schema
-
-
-def test_hourly_consumption_supplier_aggregator_returns_correct_aggregations(aggregated_data_frame):
-    """Check accuracy of aggregation"""
-    # Check all 8 rows of the resultant table using helper function
-    check_aggregation_row(aggregated_data_frame, 0, "D1", "R1", "S2", Decimal(3))
-    check_aggregation_row(aggregated_data_frame, 1, "D1", "R2", "S1", Decimal(2))
-    check_aggregation_row(aggregated_data_frame, 2, "D1", "R2", "S2", Decimal(16))
-    check_aggregation_row(aggregated_data_frame, 3, "D2", "R1", "S1", Decimal(18))
-    check_aggregation_row(aggregated_data_frame, 4, "D2", "R1", "S2", Decimal(22))
-    check_aggregation_row(aggregated_data_frame, 5, "D2", "R2", "S1", Decimal(20))
-    check_aggregation_row(aggregated_data_frame, 6, "D2", "R2", "S2", Decimal(24))
-
-
-def check_aggregation_row(df: DataFrame, row: int, grid: str, responsible: str, supplier: str, sum: Decimal):
-    """Helper function that checks column values for the given row"""
     pandas_df = df.toPandas()
     assert pandas_df["MeteringGridArea_Domain_mRID"][row] == grid
     assert pandas_df["BalanceResponsibleParty_MarketParticipant_mRID"][row] == responsible
     assert pandas_df["EnergySupplier_MarketParticipant_mRID"][row] == supplier
     assert pandas_df["sum_quantity"][row] == sum
+    assert pandas_df["time_window"][row].start == start
+    assert pandas_df["time_window"][row].end == end
+
+
+def test_hourly_consumption_supplier_aggregator_filters_out_incorrect_point_type(time_series_row_factory):
+    """
+    Aggregator should filter out all non "E17" MarketEvaluationPointType rows
+    """
+    df = time_series_row_factory(point_type=e_18)
+    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    assert aggregated_df.count() == 0
+
+
+def test_hourly_consumption_supplier_aggregator_filters_out_incorrect_settlement_method(time_series_row_factory):
+    """
+    Aggregator should filter out all non "E02" SettlementMethod rows
+    """
+    df = time_series_row_factory(settlement_method=e_01)
+    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    assert aggregated_df.count() == 0
+
+
+def test_hourly_consumption_supplier_aggregator_aggregates_observations_in_same_hour(time_series_row_factory):
+    """
+    Aggregator should can calculate the correct sum of a "domain"-"responsible"-"supplier" grouping within the
+    same 1hr time window
+    """
+    row1_df = time_series_row_factory(quantity=Decimal(1))
+    row2_df = time_series_row_factory(quantity=Decimal(2))
+    df = row1_df.union(row2_df)
+    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+
+    # Create the start/end datetimes representing the start and end of the 1 hr time period
+    # These should be datetime naive in order to compare to the Spark Dataframe
+    start_time = datetime(2020, 1, 1, 0, 0, 0)
+    end_time = datetime(2020, 1, 1, 1, 0, 0)
+
+    assert aggregated_df.count() == 1
+    check_aggregation_row(aggregated_df, 0, default_domain, default_responsible, default_supplier, Decimal(3), start_time, end_time)
+
+
+def test_hourly_consumption_supplier_aggregator_returns_distinct_rows_for_observations_in_different_hours(time_series_row_factory):
+    """
+    Aggregator should can calculate the correct sum of a "domain"-"responsible"-"supplier" grouping within the
+    2 different 1hr time windows
+    """
+    diff_obs_time = datetime.strptime("2020-01-01T01:00:00+0000", date_time_formatting_string)
+
+    row1_df = time_series_row_factory()
+    row2_df = time_series_row_factory(obs_time=diff_obs_time)
+    df = row1_df.union(row2_df)
+    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+
+    assert aggregated_df.count() == 2
+
+    # Create the start/end datetimes representing the start and end of the 1 hr time period for each row's ObservationTime
+    # These should be datetime naive in order to compare to the Spark Dataframe
+    start_time_row1 = datetime(2020, 1, 1, 0, 0, 0)
+    end_time_row1 = datetime(2020, 1, 1, 1, 0, 0)
+    check_aggregation_row(aggregated_df, 0, default_domain, default_responsible, default_supplier, default_quantity, start_time_row1, end_time_row1)
+
+    start_time_row2 = datetime(2020, 1, 1, 1, 0, 0)
+    end_time_row2 = datetime(2020, 1, 1, 2, 0, 0)
+    check_aggregation_row(aggregated_df, 1, default_domain, default_responsible, default_supplier, default_quantity, start_time_row2, end_time_row2)
+
+
+def test_hourly_consumption_supplier_aggregator_returns_correct_schema(time_series_row_factory, expected_schema):
+    """
+    Aggregator should return the correct schema, including the proper fields for the aggregated quantity values
+    and time window (from the single-hour resolution specified in the aggregator).
+    """
+    df = time_series_row_factory()
+    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    assert aggregated_df.schema == expected_schema
