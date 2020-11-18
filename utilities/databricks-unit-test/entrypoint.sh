@@ -1,4 +1,5 @@
 #!/bin/sh -l
 
-cd ./src/streaming/processing/tests
-pytest
+cd ./src/streaming
+python setup.py install
+pytest tests

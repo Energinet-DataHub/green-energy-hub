@@ -378,3 +378,9 @@ run_args*.conf
 
 # MD Spell Check
 /utilities/md-spellcheck/dictionary.dic
+
+# python package binaries
+src/streaming/dist/
+src/streaming/build/
+src/streaming/.pytest_cache
+src/streaming/geh_stream.egg-info/
