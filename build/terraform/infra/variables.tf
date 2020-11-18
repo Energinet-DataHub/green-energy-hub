@@ -28,9 +28,14 @@ variable "input_eventhub_name" {
   default = "input_poc"
 }
 
-variable "output_eventhub_name" {
+variable "valid_output_eventhub_name" {
   type = string
-  default = "output_poc"
+  default = "valid_output_poc"
+}
+
+variable "invalid_output_eventhub_name" {
+  type = string
+  default = "invalid_output_poc"
 }
 
 variable "storage_account_name" {

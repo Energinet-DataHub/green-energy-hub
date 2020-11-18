@@ -29,6 +29,14 @@ resource "azurerm_eventhub" "output_eventhub" {
   message_retention   = 1
 }
 
+resource "azurerm_eventhub" "output_invalid_eventhub" {
+  name                = var.output_invalid_eventhub_name
+  namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
+  resource_group_name = var.resource_group_name
+  partition_count     = 32
+  message_retention   = 1
+}
+
 resource "azurerm_eventhub_authorization_rule" "listen" {
   name                = "listen"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name

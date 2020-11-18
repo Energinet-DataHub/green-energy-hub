@@ -15,8 +15,13 @@ output "input_eh_listen_connection_string" {
   sensitive = true
 }
 
-output "output_eh_send_connection_string" {
-  value     = azurerm_eventhub_authorization_rule.send.primary_connection_string
+output "valid_output_eh_send_connection_string" {
+  value     = azurerm_eventhub_authorization_rule.send.valid_output_primary_connection_string
+  sensitive = true
+}
+
+output "invalid_output_eh_send_connection_string" {
+  value     = azurerm_eventhub_authorization_rule.send.invalid_output_primary_connection_string
   sensitive = true
 }
 

@@ -6,7 +6,11 @@ variable "input_eh_listen_connection_string" {
   type = string
 }
 
-variable "output_eh_send_connection_string" {
+variable "valid_output_eh_send_connection_string" {
+  type = string
+}
+
+variable "invalid_output_eh_send_connection_string" {
   type = string
 }
 

@@ -27,7 +27,7 @@ def parsed_data_schema():
         .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
         .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
         .add("EnergyBusinessProcess", StringType(), True) \
-        .add("EnergyBusinessProcessRole", StringType(), True) \
+        .add("SenderMarketParticipantMarketRoleType", StringType(), True) \
         .add("TimeSeriesmRID", StringType(), True) \
         .add("MktActivityRecord_Status", StringType(), True) \
         .add("Product", StringType(), True) \
@@ -42,7 +42,6 @@ def master_data_schema():
     return StructType() \
         .add("MarketEvaluationPoint_mRID", StringType(), False) \
         .add("MeterReadingPeriodicity", StringType(), False) \
-        .add("MeterReadingPeriodicity2", StringType(), False) \
         .add("MeteringMethod", StringType(), False) \
         .add("MeteringGridArea_Domain_mRID", StringType(), True) \
         .add("ConnectionState", StringType(), True) \
@@ -51,7 +50,6 @@ def master_data_schema():
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("Parent_Domain", StringType(), False) \
-        .add("SupplierAssociationId", StringType(), False) \
         .add("ServiceCategoryKind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), False) \
@@ -74,16 +72,12 @@ def expected_validate_schema():
         .add(StructField("HeaderEnergyDocumentCreation", TimestampType(), True)) \
         .add(StructField("HeaderEnergyDocumentSenderIdentification", StringType(), True)) \
         .add(StructField("EnergyBusinessProcess", StringType(), True)) \
-        .add(StructField("EnergyBusinessProcessRole", StringType(), True)) \
+        .add(StructField("SenderMarketParticipantMarketRoleType", StringType(), True)) \
         .add(StructField("TimeSeriesmRID", StringType(), True)) \
         .add(StructField("MktActivityRecord_Status", StringType(), True)) \
-        .add(StructField("Product", StringType(), True)) \
-        .add(StructField("UnitName", StringType(), True)) \
-        .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("Quality", StringType(), True)) \
         .add(StructField("EventHubEnqueueTime", TimestampType(), False)) \
         .add(StructField("MeterReadingPeriodicity", StringType(), True)) \
-        .add(StructField("MeterReadingPeriodicity2", StringType(), True)) \
         .add(StructField("MeteringMethod", StringType(), True)) \
         .add(StructField("MeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("ConnectionState", StringType(), True)) \
@@ -92,7 +86,6 @@ def expected_validate_schema():
         .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("Parent_Domain", StringType(), True)) \
-        .add(StructField("SupplierAssociationId", StringType(), True)) \
         .add(StructField("ServiceCategoryKind", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("SettlementMethod", StringType(), True)) \
@@ -102,7 +95,8 @@ def expected_validate_schema():
         .add(StructField("VR-250-Is-Valid", BooleanType(), True)) \
         .add(StructField("VR-251-Is-Valid", BooleanType(), True)) \
         .add(StructField("VR-611-Is-Valid", BooleanType(), True)) \
-        .add(StructField("VR-612-Is-Valid", BooleanType(), True))
+        .add(StructField("VR-612-Is-Valid", BooleanType(), True)) \
+        .add(StructField("IsValid", BooleanType(), True))
 
 
 # Mock parsed, master dataframes
@@ -118,7 +112,7 @@ def parsed_data_pandas_df():
         "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now, timestamp_now],
         "HeaderEnergyDocumentSenderIdentification": ["d", "d", "d", "d"],
         "EnergyBusinessProcess": ["e", "e", "e", "e"],
-        "EnergyBusinessProcessRole": ["f", "f", "f", "f"],
+        "SenderMarketParticipantMarketRoleType": ["f", "f", "f", "f"],
         "TimeSeriesmRID": ["g", "g", "g", "g"],
         "MktActivityRecord_Status": ["h", "h", "h", "h"],
         "Product": ["i", "i", "i", "i"],
@@ -134,7 +128,6 @@ def master_data_pandas_df():
         "MarketEvaluationPoint_mRID": ["1"],
         "MeterReadingPeriodicity": ["a"],
         "MeteringMethod": ["b"],
-        "MeterReadingPeriodicity2": ["c"],
         "MeteringGridArea_Domain_mRID": ["d"],
         "ConnectionState": ["e"],
         "EnergySupplier_MarketParticipant_mRID": ["f"],
@@ -142,7 +135,6 @@ def master_data_pandas_df():
         "InMeteringGridArea_Domain_mRID": ["h"],
         "OutMeteringGridArea_Domain_mRID": ["i"],
         "Parent_Domain": ["j"],
-        "SupplierAssociationId": ["k"],
         "ServiceCategoryKind": ["l"],
         "MarketEvaluationPointType": ["EPTypeA"],
         "SettlementMethod": ["n"],

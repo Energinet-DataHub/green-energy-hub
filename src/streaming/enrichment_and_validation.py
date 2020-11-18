@@ -3,19 +3,10 @@ Data ingestion stream
 """
 
 # TODO: consider using pyspark-stubs=3.0.0 and mypy
-# %%
-import json
-import time
-import urllib.parse
 
+# %%
 import configargparse
-from pyspark import SparkConf
-from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.types import StructType, TimestampType, StringType, DoubleType
-from pyspark.sql.functions import year, month, dayofmonth, to_json, \
-    struct, col, from_json, coalesce, lit
 
-# %%
 p = configargparse.ArgParser(prog='enrichment_and_validation.py',
                              description='Green Energy Hub Streaming',
                              default_config_files=['configuration/run_args_enrichment_and_validation.conf'],
@@ -38,8 +29,10 @@ p.add('--trigger-interval', type=str, required=False, default='1 second',
       help='Trigger interval to generate streaming batches (format: N seconds)')
 p.add('--streaming-checkpoint-path', type=str, required=False, default="checkpoints/streaming",
       help='Path to checkpoint folder for streaming')
-p.add('--output-eh-connection-string', type=str, required=True,
-      help='Output Event Hub connection string', env_var='GEH_STREAMING_OUTPUT_EH_CONNECTION_STRING')
+p.add('--valid-output-eh-connection-string', type=str, required=True,
+      help='Output Event Hub connection string for valid time series points', env_var='GEH_STREAMING_VALID_OUTPUT_EH_CONNECTION_STRING')
+p.add('--invalid-output-eh-connection-string', type=str, required=True,
+      help='Output Event Hub connection string for invalid time series points', env_var='GEH_STREAMING_INVALID_OUTPUT_EH_CONNECTION_STRING')
 p.add('--telemetry-instrumentation-key', type=str, required=True,
       help='Instrumentation key used for telemetry')
 
@@ -50,6 +43,9 @@ if unknown_args:
     _ = [print(arg) for arg in unknown_args]
 
 # %%
+from pyspark import SparkConf
+from pyspark.sql import SparkSession
+
 spark_conf = SparkConf(loadDefaults=True) \
     .set('fs.azure.account.key.{0}.blob.core.windows.net'.format(args.storage_account_name),
          args.storage_account_key)
@@ -72,6 +68,9 @@ print("Base storage url:", BASE_STORAGE_PATH)
 
 # %%
 
+from geh_stream.schemas import SchemaFactory, SchemaNames
+from pyspark.sql.functions import coalesce, lit, col
+
 master_data_storage_path = BASE_STORAGE_PATH + args.master_data_path
 
 csv_read_config = {
@@ -80,8 +79,6 @@ csv_read_config = {
     "header": "True",
     "nullValues": "NULL"
 }
-
-from geh_stream.schemas import SchemaFactory, SchemaNames
 
 master_data_schema = SchemaFactory.get_instance(SchemaNames.Master)
 
@@ -100,6 +97,7 @@ master_data.printSchema()
 master_data.show()
 
 # %%
+import json
 
 input_eh_starting_position = {
     "offset": "-1",         # starting from beginning of stream
@@ -131,6 +129,7 @@ print("Input stream schema:")
 raw_data.printSchema()
 
 # %%
+from pyspark.sql.types import StructType
 
 from geh_stream.streaming_utils import EventHubParser
 from geh_stream.schemas import SchemaFactory, SchemaNames
@@ -146,7 +145,6 @@ parsed_data.printSchema()
 # %%
 from geh_stream.streaming_utils import Enricher
 
-# TODO: remove column repetitions (after validation?)
 enriched_data = Enricher.enrich(parsed_data, master_data)
 
 print("Enriched stream schema:")
@@ -160,70 +158,40 @@ print("Validated stream schema:")
 validated_data.printSchema()
 
 # %%
-output_eh_connection_string = args.output_eh_connection_string
+from pyspark.sql import DataFrame
+
+import geh_stream.batch_operations as batch_operations
+
+valid_output_eh_connection_string = args.valid_output_eh_connection_string
+invalid_output_eh_connection_string = args.invalid_output_eh_connection_string
 output_delta_lake_path = BASE_STORAGE_PATH + args.output_path
 checkpoint_path = BASE_STORAGE_PATH + args.streaming_checkpoint_path
 
-output_eh_conf = {
+# Event Hub for valid times series points
+valid_output_eh_conf = {
     'eventhubs.connectionString':
-    sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(output_eh_connection_string),
+    sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(valid_output_eh_connection_string),
+}
+
+# Event Hub for invalid time series points
+invalid_output_eh_conf = {
+    'eventhubs.connectionString':
+    sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(invalid_output_eh_connection_string),
 }
 
 
 def __store_data_frame(batch_df: DataFrame, _: int):
     batch_df.persist()
 
-    # Make valid time series points available to BRS-023 aggregations (by storing in Delta lake)
-    # TODO BJM: #169 Fix IsValid column when splitting valid and invalid messages into different Kafka topics
-    batch_df \
-        .filter(col("IsValid") == lit(True)) \
-        .select(col("MarketEvaluationPoint_mRID"),
-                col("ObservationTime"),
-                col("Quantity"),
-                col("CorrelationId"),
-                col("MessageReference"),
-                col("HeaderEnergyDocument_mRID"),
-                col("HeaderEnergyDocumentCreation"),
-                col("HeaderEnergyDocumentSenderIdentification"),
-                col("EnergyBusinessProcess"),
-                col("EnergyBusinessProcessRole"),
-                col("TimeSeriesmRID"),
-                col("MktActivityRecord_Status"),
-                col("MarketEvaluationPointType"),
-                col("Quality"),
-                col("MeterReadingPeriodicity"),
-                col("MeterReadingPeriodicity2"),
-                col("MeteringMethod"),
-                col("MeteringGridArea_Domain_mRID"),
-                col("ConnectionState"),
-                col("EnergySupplier_MarketParticipant_mRID"),
-                col("BalanceResponsibleParty_MarketParticipant_mRID"),
-                col("InMeteringGridArea_Domain_mRID"),
-                col("OutMeteringGridArea_Domain_mRID"),
-                col("Parent_Domain"),
-                col("SupplierAssociationId"),
-                col("ServiceCategoryKind"),
-                col("SettlementMethod"),
-                col("UnitName"),
-                col("Product"),
+    # Make valid time series points available to aggregations (by storing in Delta lake)
+    batch_operations.store_valid_data(batch_df, output_delta_lake_path)
 
-                year("ObservationTime").alias("year"),
-                month("ObservationTime").alias("month"),
-                dayofmonth("ObservationTime").alias("day")) \
-        .repartition("year", "month", "day") \
-        .write \
-        .partitionBy("year", "month", "day") \
-        .format("delta") \
-        .mode("append") \
-        .save(output_delta_lake_path)
+    # Forward all valid time series points to message shipping (by sending to Kafka topic)
+    batch_operations.send_valid_data(batch_df, valid_output_eh_conf)
 
-    # Forward all time series points to message shipping (by sending to Kafka topic)
-    batch_df \
-        .select(to_json(struct(col("*"))).cast("string").alias("body")) \
-        .write \
-        .format("eventhubs") \
-        .options(**output_eh_conf) \
-        .save()
+    # Forward all invalid time series points to further processing like sending
+    # a negative acknowledgement to the sending market actor.
+    batch_operations.send_invalid_data(batch_df, invalid_output_eh_conf)
 
     batch_df.unpersist()
 
@@ -235,8 +203,8 @@ out_stream = validated_data \
     .foreachBatch(__store_data_frame)
 
 # %%
+import time
+
 while True:
     execution = out_stream.start()
     time.sleep(4.5 * 60)
-
-# %%

@@ -38,7 +38,6 @@ def master_data(spark, master_schema):
         "ValidFrom": [timestamp_past],
         "ValidTo": [timestamp_future],
         "MeterReadingPeriodicity": ["a"],
-        "MeterReadingPeriodicity2": ["c"],
         "MeteringMethod": ["b"],
         "MeteringGridArea_Domain_mRID": ["d"],
         "ConnectionState": ["e"],
@@ -47,7 +46,6 @@ def master_data(spark, master_schema):
         "InMeteringGridArea_Domain_mRID": ["h"],
         "OutMeteringGridArea_Domain_mRID": ["i"],
         "Parent_Domain": ["j"],
-        "SupplierAssociationId": ["k"],
         "ServiceCategoryKind": ["l"],
         "MarketEvaluationPointType": ["m"],
         "SettlementMethod": ["n"],
@@ -68,7 +66,7 @@ def parsed_data(spark, parsed_schema):
         "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now],
         "HeaderEnergyDocumentSenderIdentification": ["d", "d", "d"],
         "EnergyBusinessProcess": ["e", "e", "e"],
-        "EnergyBusinessProcessRole": ["f", "f", "f"],
+        "SenderMarketParticipantMarketRoleType": ["f", "f", "f"],
         "TimeSeriesmRID": ["g", "g", "g"],
         "MktActivityRecord_Status": ["h", "h", "h"],
         "Product": ["i", "i", "i"],
@@ -100,7 +98,7 @@ def expected_schema():
         .add(StructField("HeaderEnergyDocumentCreation", TimestampType(), True)) \
         .add(StructField("HeaderEnergyDocumentSenderIdentification", StringType(), True)) \
         .add(StructField("EnergyBusinessProcess", StringType(), True)) \
-        .add(StructField("EnergyBusinessProcessRole", StringType(), True)) \
+        .add(StructField("SenderMarketParticipantMarketRoleType", StringType(), True)) \
         .add(StructField("TimeSeriesmRID", StringType(), True)) \
         .add(StructField("MktActivityRecord_Status", StringType(), True)) \
         .add(StructField("Product", StringType(), True)) \
@@ -109,7 +107,6 @@ def expected_schema():
         .add(StructField("Quality", StringType(), True)) \
         .add(StructField("EventHubEnqueueTime", TimestampType(), False)) \
         .add(StructField("MeterReadingPeriodicity", StringType(), True)) \
-        .add(StructField("MeterReadingPeriodicity2", StringType(), True)) \
         .add(StructField("MeteringMethod", StringType(), True)) \
         .add(StructField("MeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("ConnectionState", StringType(), True)) \
@@ -118,7 +115,6 @@ def expected_schema():
         .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("Parent_Domain", StringType(), True)) \
-        .add(StructField("SupplierAssociationId", StringType(), True)) \
         .add(StructField("ServiceCategoryKind", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("SettlementMethod", StringType(), True)) \

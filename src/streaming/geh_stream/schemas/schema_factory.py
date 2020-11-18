@@ -16,7 +16,7 @@ class SchemaFactory:
         .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
         .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
         .add("EnergyBusinessProcess", StringType(), True) \
-        .add("EnergyBusinessProcessRole", StringType(), True) \
+        .add("SenderMarketParticipantMarketRoleType", StringType(), True) \
         .add("TimeSeriesmRID", StringType(), True) \
         .add("MktActivityRecord_Status", StringType(), True) \
         .add("Product", StringType(), True) \
@@ -29,7 +29,6 @@ class SchemaFactory:
         .add("ValidFrom", TimestampType(), False) \
         .add("ValidTo", TimestampType(), True) \
         .add("MeterReadingPeriodicity", StringType(), False) \
-        .add("MeterReadingPeriodicity2", StringType(), False) \
         .add("MeteringMethod", StringType(), False) \
         .add("MeteringGridArea_Domain_mRID", StringType(), True) \
         .add("ConnectionState", StringType(), True) \
@@ -38,7 +37,6 @@ class SchemaFactory:
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("Parent_Domain", StringType(), False) \
-        .add("SupplierAssociationId", StringType(), False) \
         .add("ServiceCategoryKind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), False) \
@@ -55,9 +53,9 @@ class SchemaFactory:
         .add("SenderMarketParticipant_mRID", StringType(), False) \
         .add("ProcessType", StringType(), False) \
         .add("SenderMarketParticipantMarketRoleType", StringType(), False) \
-        .add("MarketServiceCategoryKind", StringType(), False) \
+        .add("MarketServiceCategory_Kind", StringType(), False) \
         .add("TimeSeries_mRID", StringType(), False) \
-        .add("MktActivityRecordStatus", StringType(), False) \
+        .add("MktActivityRecord_Status", StringType(), False) \
         .add("Product", StringType(), False) \
         .add("UnitName", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \

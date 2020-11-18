@@ -15,10 +15,14 @@ on:
         description: 'Input EventHub name'
         required: true
         default: 'energinet-eh-poc-input'
-      output_eventhub_name:
-        description: 'Output EventHub name'
+      valid_output_eventhub_name:
+        description: 'Valid Output EventHub name'     
         required: true
-        default: 'energinet-eh-poc-output'
+        default: 'energinet-eh-poc-valid-output'
+      invalid_output_eventhub_name:
+        description: 'Invalid Output EventHub name'     
+        required: true
+        default: 'energinet-eh-poc-invalid-output'
       storage_account_name:
         description: 'Storage Account name'
         required: true
@@ -67,7 +71,8 @@ jobs:
             echo "TF_VAR_resource_group_name=${{ github.event.inputs.resource_group_name }}" >> $GITHUB_ENV
             echo "TF_VAR_eventhub_namespace_name=${{ github.event.inputs.eventhub_namespace_name }}" >> $GITHUB_ENV
             echo "TF_VAR_input_eventhub_name=${{ github.event.inputs.input_eventhub_name }}" >> $GITHUB_ENV
-            echo "TF_VAR_output_eventhub_name=${{ github.event.inputs.output_eventhub_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_valid_output_eventhub_name=${{ github.event.inputs.valid_output_eventhub_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_invalid_output_eventhub_name=${{ github.event.inputs.invalid_output_eventhub_name }}" >> $GITHUB_ENV
             echo "TF_VAR_storage_account_name=${{ github.event.inputs.storage_account_name }}" >> $GITHUB_ENV
             echo "TF_VAR_container_name=${{ github.event.inputs.container_name }}" >> $GITHUB_ENV
             echo "TF_VAR_app_name=${{ github.event.inputs.app_name }}" >> $GITHUB_ENV
@@ -102,10 +107,12 @@ jobs:
             echo ::add-mask::$(terraform output input_eh_listen_connection_string)
             echo "TF_VAR_input_eh_listen_connection_string=$(terraform output input_eh_listen_connection_string)" >> $GITHUB_ENV
             echo "databricks_url=$(terraform output databricks_workspace_url)" >> $GITHUB_ENV
-            echo ::add-mask::$(terraform output output_eh_send_connection_string)
-            echo "TF_VAR_output_eh_send_connection_string=$(terraform output output_eh_send_connection_string)" >> $GITHUB_ENV
-            echo ::add-mask::$(terraform output storage_key)
-            echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV
+            echo ::add-mask::$(terraform output valid_output_eh_send_connection_string)
+            echo "TF_VAR_valid_output_eh_send_connection_string=$(terraform output valid_output_eh_send_connection_string)" >> $GITHUB_ENV  
+            echo ::add-mask::$(terraform output invalid_output_eh_send_connection_string)
+            echo "TF_VAR_invalid_output_eh_send_connection_string=$(terraform output invalid_output_eh_send_connection_string)" >> $GITHUB_ENV  
+            echo ::add-mask::$(terraform output storage_key)       
+            echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV 
             echo "TF_VAR_storage_name=$(terraform output storage_name)" >> $GITHUB_ENV
             echo "TF_VAR_container_name=$(terraform output container_name)" >> $GITHUB_ENV
             echo "TF_VAR_python_main_file=dbfs:/streaming/processing/enrichment_and_validation.py" >> $GITHUB_ENV

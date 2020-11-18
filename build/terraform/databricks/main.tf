@@ -50,7 +50,8 @@ resource "databricks_job" "streaming_job" {
       "--max-events-per-trigger=1000",
       "--trigger-interval=1 second",
       "--streaming-checkpoint-path=checkpoints/streaming",
-      "--output-eh-connection-string=${var.output_eh_send_connection_string}",
+      "--valid-output-eh-connection-string=${var.valid_output_eh_send_connection_string}",
+      "--invalid-output-eh-connection-string=${var.invalid_output_eh_send_connection_string}",
       "--telemetry-instrumentation-key=${var.telemetry_instrumentation_key}"
     ]
   }
