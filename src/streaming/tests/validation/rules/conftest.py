@@ -67,7 +67,7 @@ def parsed_data_factory(spark, parsed_schema):
             "HeaderEnergyDocument_mRID": ["c"],
             "HeaderEnergyDocumentCreation": [timestamp_now],
             "HeaderEnergyDocumentSenderIdentification": ["d"],
-            "EnergyBusinessProcess": ["e"],
+            "ProcessType": ["e"],
             "SenderMarketParticipantMarketRoleType": ["f"],
             "TimeSeriesmRID": ["g"],
             "MktActivityRecord_Status": ["h"],

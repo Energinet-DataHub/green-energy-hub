@@ -26,7 +26,7 @@ def parsed_data_schema():
         .add("HeaderEnergyDocument_mRID", StringType(), True) \
         .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
         .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
-        .add("EnergyBusinessProcess", StringType(), True) \
+        .add("ProcessType", StringType(), True) \
         .add("SenderMarketParticipantMarketRoleType", StringType(), True) \
         .add("TimeSeriesmRID", StringType(), True) \
         .add("MktActivityRecord_Status", StringType(), True) \
@@ -71,7 +71,7 @@ def expected_validate_schema():
         .add(StructField("HeaderEnergyDocument_mRID", StringType(), True)) \
         .add(StructField("HeaderEnergyDocumentCreation", TimestampType(), True)) \
         .add(StructField("HeaderEnergyDocumentSenderIdentification", StringType(), True)) \
-        .add(StructField("EnergyBusinessProcess", StringType(), True)) \
+        .add(StructField("ProcessType", StringType(), True)) \
         .add(StructField("SenderMarketParticipantMarketRoleType", StringType(), True)) \
         .add(StructField("TimeSeriesmRID", StringType(), True)) \
         .add(StructField("MktActivityRecord_Status", StringType(), True)) \
@@ -111,7 +111,7 @@ def parsed_data_pandas_df():
         "HeaderEnergyDocument_mRID": ["c", "c", "c", "c"],
         "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now, timestamp_now],
         "HeaderEnergyDocumentSenderIdentification": ["d", "d", "d", "d"],
-        "EnergyBusinessProcess": ["e", "e", "e", "e"],
+        "ProcessType": ["e", "e", "e", "e"],
         "SenderMarketParticipantMarketRoleType": ["f", "f", "f", "f"],
         "TimeSeriesmRID": ["g", "g", "g", "g"],
         "MktActivityRecord_Status": ["h", "h", "h", "h"],

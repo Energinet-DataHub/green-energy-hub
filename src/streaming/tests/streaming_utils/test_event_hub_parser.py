@@ -47,7 +47,7 @@ def expected_parsed_data_schema():
         .add("HeaderEnergyDocument_mRID", StringType(), True) \
         .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
         .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
-        .add("EnergyBusinessProcess", StringType(), True) \
+        .add("ProcessType", StringType(), True) \
         .add("SenderMarketParticipantMarketRoleType", StringType(), True) \
         .add("TimeSeriesmRID", StringType(), True) \
         .add("MktActivityRecord_Status", StringType(), True) \

@@ -65,7 +65,7 @@ def parsed_data(spark, parsed_schema):
         "HeaderEnergyDocument_mRID": ["c", "c", "c"],
         "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now],
         "HeaderEnergyDocumentSenderIdentification": ["d", "d", "d"],
-        "EnergyBusinessProcess": ["e", "e", "e"],
+        "ProcessType": ["e", "e", "e"],
         "SenderMarketParticipantMarketRoleType": ["f", "f", "f"],
         "TimeSeriesmRID": ["g", "g", "g"],
         "MktActivityRecord_Status": ["h", "h", "h"],
@@ -97,7 +97,7 @@ def expected_schema():
         .add(StructField("HeaderEnergyDocument_mRID", StringType(), True)) \
         .add(StructField("HeaderEnergyDocumentCreation", TimestampType(), True)) \
         .add(StructField("HeaderEnergyDocumentSenderIdentification", StringType(), True)) \
-        .add(StructField("EnergyBusinessProcess", StringType(), True)) \
+        .add(StructField("ProcessType", StringType(), True)) \
         .add(StructField("SenderMarketParticipantMarketRoleType", StringType(), True)) \
         .add(StructField("TimeSeriesmRID", StringType(), True)) \
         .add(StructField("MktActivityRecord_Status", StringType(), True)) \
