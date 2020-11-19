@@ -20,7 +20,7 @@ variable "environment" {
 
 variable "eventhub_namespace_name" {
   type = string
-  default = "energinet-eh-ns"
+  default = "energinet-ehn"
 }
 
 variable "input_eventhub_name" {

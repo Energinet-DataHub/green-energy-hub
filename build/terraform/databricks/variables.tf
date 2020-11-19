@@ -30,6 +30,10 @@ variable "python_main_file" {
   type = string
 }
 
+variable "wheel_file" {
+  type = string
+}
+
 variable "telemetry_instrumentation_key" {
   type = string
 }

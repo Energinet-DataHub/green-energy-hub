@@ -11,7 +11,7 @@
 
 resource "databricks_job" "streaming_job" {
   name = "StreamProcessing"
-  max_retries = -1
+  max_retries = 3
   max_concurrent_runs = 1
 
   new_cluster { 
@@ -36,7 +36,11 @@ resource "databricks_job" "streaming_job" {
     pypi {
       package = "applicationinsights==0.11.9"
     }
-  }  
+  } 
+
+  library {
+    whl = var.wheel_file
+  } 
 
   spark_python_task {
     python_file = var.python_main_file

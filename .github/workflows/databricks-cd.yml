@@ -57,11 +57,21 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}      
 
     steps:
-        - uses: hashicorp/setup-terraform@v1.2.1
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1.2.1
           with:
             terraform_wrapper: false
         
-        # Checks out a copy of your repository on the ubuntu-latest machine
+        - name: Setup Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+            architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+        - name: Install Databricks CLI
+          id: install_databricks_cli
+          run: pip install --upgrade databricks-cli
+        
         - name: Checkout code
           uses: actions/checkout@v2
 
@@ -78,15 +88,6 @@ jobs:
             echo "TF_VAR_app_name=${{ github.event.inputs.app_name }}" >> $GITHUB_ENV
             echo "TF_VAR_telemetry_instrumentation_key=${{ github.event.inputs.telemetry_instrumentation_key }}" >> $GITHUB_ENV
           if:  github.event.inputs.app_name
-          
-        - uses: actions/setup-python@v2
-          with:
-            python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-            architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-
-        - name: Install Databricks CLI
-          id: install_databricks_cli
-          run: pip install --upgrade databricks-cli
 
         - name: Terraform Infra Init
           working-directory: ./build/terraform/infra
@@ -115,13 +116,19 @@ jobs:
             echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV 
             echo "TF_VAR_storage_name=$(terraform output storage_name)" >> $GITHUB_ENV
             echo "TF_VAR_container_name=$(terraform output container_name)" >> $GITHUB_ENV
-            echo "TF_VAR_python_main_file=dbfs:/streaming/processing/enrichment_and_validation.py" >> $GITHUB_ENV
+            echo "TF_VAR_python_main_file=dbfs:/streaming/enrichment_and_validation.py" >> $GITHUB_ENV
+            echo "TF_VAR_wheel_file=dbfs:/streaming/geh_stream-1.0-py3-none-any.whl" >> $GITHUB_ENV
             echo ::add-mask::$(terraform output telemetry_instrumentation_key)
             echo "TF_VAR_telemetry_instrumentation_key=$(terraform output telemetry_instrumentation_key)" >> $GITHUB_ENV
-            
+
+        - name: Create Python Wheel for streaming job
+          working-directory: ./src/streaming
+          run: |
+            pip install wheel
+            python setup.py sdist bdist_wheel
+
         # resource id in curl request is fixed Azure Databricks resource id, Azure wide
         - name: Obtain AAD Token for Databricks CLI
-          id: curl
           run: |
             curl_result=$(curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&client_id=${{env.ARM_CLIENT_ID}}&resource=2ff814a6-3304-4ab8-85cb-cd0e6f879c1d&client_secret=${{ secrets.CLIENT_SECRET }}' https://login.microsoftonline.com/${{env.ARM_TENANT_ID}}/oauth2/token) 
             token=$(echo $curl_result | python3 -c "import sys, json; print(json.load(sys.stdin)['access_token'])")
@@ -132,13 +139,10 @@ jobs:
           id: copy_files_todbfs
           run: |    
             databricks configure --host "https://${{env.databricks_url}}" --aad-token
-            dbfs cp --overwrite ./src/streaming/processing/enrichment_and_validation.py dbfs:/streaming/processing/enrichment_and_validation.py
-            dbfs cp -r --overwrite ./src/streaming/processing/monitoring dbfs:/streaming/processing/monitoring
-            dbfs cp -r --overwrite ./src/streaming/processing/streaming_utils dbfs:/streaming/processing/streaming_utils
-            dbfs cp -r --overwrite ./src/streaming/processing/validation dbfs:/streaming/processing/validation
-            dbfs cp -r --overwrite ./src/streaming/processing/schemas dbfs:/streaming/processing/schemas
+            dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py dbfs:/streaming/enrichment_and_validation.py
+            dbfs cp -r --overwrite ./src/streaming/dist/geh_stream-1.0-py3-none-any.whl dbfs:/streaming/geh_stream-1.0-py3-none-any.whl
         
-        # create streaming job
+        # Create streaming job
         - name: Terraform Databricks Init
           working-directory: ./build/terraform/databricks
           id: init_databricks
@@ -155,13 +159,24 @@ jobs:
           run: |
             echo "databricks_job_id=$(terraform output databricks_job_id)" >> $GITHUB_ENV
         
-        #resource in command must match with resource name in main.tf
+        # resource in command must match with resource name in main.tf
+        # after feature: https://github.com/databrickslabs/terraform-provider-databricks/issues/389 
+        # is available this should be changed and job should not be recreated on each run
         - name: Force recreation of databricks job on next run
           working-directory: ./build/terraform/databricks
           run: |
             terraform taint databricks_job.streaming_job
-                            
-        - name: Databricks CLI configure host and run the job
+         
+        - name: Databricks CLI run the job
+          id: run_job
           run: |
-            databricks configure --host "https://${{env.databricks_url}}" --aad-token
-            databricks jobs run-now --job-id ${{env.databricks_job_id}}
+            res=$(databricks jobs run-now --job-id ${{env.databricks_job_id}})
+            run_id=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)['run_id'])")
+            echo "::set-output name=run_id::$run_id"
+            
+        - name: Check Job Status
+          working-directory: ./build
+          run: |
+            pip install configargparse
+            pip install requests
+            python job_status_check.py --job-run-ids  ${{steps.run_job.outputs.run_id}} --retries 2 --databricks-url 'https://${{env.databricks_url}}' --token ${{env.DATABRICKS_AAD_TOKEN}}

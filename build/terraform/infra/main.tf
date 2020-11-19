@@ -21,16 +21,16 @@ resource "azurerm_eventhub" "input_eventhub" {
   message_retention   = 1
 }
 
-resource "azurerm_eventhub" "output_eventhub" {
-  name                = var.output_eventhub_name
+resource "azurerm_eventhub" "valid_output_eventhub" {
+  name                = var.valid_output_eventhub_name
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   resource_group_name = var.resource_group_name
   partition_count     = 32
   message_retention   = 1
 }
 
-resource "azurerm_eventhub" "output_invalid_eventhub" {
-  name                = var.output_invalid_eventhub_name
+resource "azurerm_eventhub" "invalid_output_eventhub" {
+  name                = var.invalid_output_eventhub_name
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   resource_group_name = var.resource_group_name
   partition_count     = 32
@@ -50,7 +50,27 @@ resource "azurerm_eventhub_authorization_rule" "listen" {
 resource "azurerm_eventhub_authorization_rule" "send" {
   name                = "send"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
-  eventhub_name       = azurerm_eventhub.output_eventhub.name
+  eventhub_name       = azurerm_eventhub.input_eventhub.name
+  resource_group_name = var.resource_group_name
+  listen              = false
+  send                = true
+  manage              = false
+}
+
+resource "azurerm_eventhub_authorization_rule" "valid_send" {
+  name                = "send"
+  namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
+  eventhub_name       = azurerm_eventhub.valid_output_eventhub.name
+  resource_group_name = var.resource_group_name
+  listen              = false
+  send                = true
+  manage              = false
+}
+
+resource "azurerm_eventhub_authorization_rule" "invalid_send" {
+  name                = "send"
+  namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
+  eventhub_name       = azurerm_eventhub.invalid_output_eventhub.name
   resource_group_name = var.resource_group_name
   listen              = false
   send                = true
