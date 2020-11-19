@@ -45,41 +45,6 @@ jobs:
         name: build-master-data-serverless_artifacts
         path: ${{ env.REPORT_PATH }}
 
-  build-streaming-serverless:
-    name: Build Streaming Serverless
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Streaming skip check
-      id: streaming_check
-      uses: fkirc/skip-duplicate-actions@v1.4.0
-      with:
-        github_token: ${{ github.token }}
-        paths: '["src/streaming/**", ".github/workflows/main-pr-gate.yml",
-          ".editorconfig"]'
-
-    - name: Setup .NET Core
-      if: ${{ steps.streaming_check.outputs.should_skip != 'true' }}
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.301
-
-    - name: Build and test
-      if: ${{ steps.streaming_check.outputs.should_skip != 'true' }}
-      uses: ./.github/actions/dotnet-build-and-test
-      with:
-        SLN_NAME: 'GreenEnergyHub.Streaming.sln'
-        SLN_PATH: './src/streaming/GreenEnergyHub.Streaming'
-
-    - name: Upload build artifacts
-      if: ${{ steps.streaming_check.outputs.should_skip != 'true' }}
-      uses: actions/upload-artifact@v2
-      with:
-        name: build-streaming-serverless_artifacts
-        path: ${{ env.REPORT_PATH }}
-
   ingestion:
     name: Build Ingestion
     runs-on: ubuntu-latest
