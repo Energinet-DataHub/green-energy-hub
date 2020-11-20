@@ -14,29 +14,21 @@
 
 using System;
 using System.Collections.Generic;
-using Energinet.DataHub.Ingestion.Synchronous.Application.Requests;
-using GreenEnergyHub.Messaging;
-using GreenEnergyHub.Messaging.Rules;
 
-namespace Energinet.DataHub.Ingestion.Synchronous.Application.RuleSets
+namespace GreenEnergyHub.Messaging
 {
     /// <summary>
-    /// Class which holds the ChangeOfSupplierRuleSet.
+    /// An IEnumerable of rules which apply to the parameterized request type.
     /// </summary>
-    public class ChangeOfSupplierRuleSet : IHubRuleSet<ChangeOfSupplierRequest>
+    /// <typeparam name="TRequest">The request type which this ruleset applies
+    /// to.</typeparam>
+    public interface IHubRuleSet<out TRequest>
+        where TRequest : IHubRequest
     {
         /// <summary>
-        /// The list of the rules which apply to ChangeOfSupplierRequests.
+        /// The IEnumerable of rules.
         /// </summary>
-        private static readonly IEnumerable<Type> RulesUnion = new List<Type>
-        {
-            typeof(NonNegativeCustomerIdRule<>),
-            typeof(EffectiveDateNotInPastRule<>),
-        };
-
-        /// <summary>
-        /// The rules.
-        /// </summary>
-        public IEnumerable<Type> Rules => RulesUnion;
+        /// <value>The rules.</value>
+        IEnumerable<Type> Rules { get; }
     }
 }

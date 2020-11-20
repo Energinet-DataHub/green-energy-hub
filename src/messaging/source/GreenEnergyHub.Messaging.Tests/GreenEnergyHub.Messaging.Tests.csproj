@@ -24,23 +24,20 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.Application\Energinet.DataHub.Ingestion.Synchronous.Application.csproj" />
-      <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.AzureFunction\Energinet.DataHub.Ingestion.Synchronous.AzureFunction.csproj" />
-      <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.Infrastructure\Energinet.DataHub.Ingestion.Synchronous.Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
+        <PackageReference Include="AutoFixture" Version="4.14.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+        <PackageReference Include="Moq.AutoMock" Version="2.1.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
         <PackageReference Include="NSubstitute" Version="4.2.2" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
-        <PackageReference Include="coverlet.collector" Version="1.2.0" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+        <PackageReference Include="coverlet.collector" Version="1.3.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Assets\ChangeSupplier.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      <ProjectReference Include="..\GreenEnergyHub.Messaging.Integration.ServiceCollection\GreenEnergyHub.Messaging.Integration.ServiceCollection.csproj" />
+      <ProjectReference Include="..\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj" />
     </ItemGroup>
 </Project>

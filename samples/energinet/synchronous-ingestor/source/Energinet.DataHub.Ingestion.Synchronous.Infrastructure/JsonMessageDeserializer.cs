@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using GreenEnergyHub.Ingestion;
+using GreenEnergyHub.Messaging;
 using Microsoft.Extensions.Logging;
 
 namespace Energinet.DataHub.Ingestion.Synchronous.Infrastructure
@@ -17,12 +17,12 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Infrastructure
             _logger = logger;
         }
 
-        public async Task<IHubActionRequest?> RehydrateAsync(Stream message, Type messageType)
+        public async Task<IHubRequest?> RehydrateAsync(Stream message, Type messageType)
         {
             try
             {
                 var request = await JsonSerializer.DeserializeAsync(message, messageType).ConfigureAwait(false);
-                return request as IHubActionRequest;
+                return request as IHubRequest;
             }
             #pragma warning disable CA1031
             catch (Exception e)

@@ -25,7 +25,6 @@ limitations under the License.
 
     <ItemGroup>
       <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.Application\Energinet.DataHub.Ingestion.Synchronous.Application.csproj" />
-      <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.Domain\Energinet.DataHub.Ingestion.Synchronous.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

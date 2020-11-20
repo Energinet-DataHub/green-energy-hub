@@ -14,9 +14,9 @@
 
 using System;
 using System.Threading.Tasks;
-using GreenEnergyHub.Ingestion;
-using GreenEnergyHub.Ingestion.RequestRouting;
-using MediatR;
+using GreenEnergyHub.Messaging;
+using GreenEnergyHub.Messaging.Dispatching;
+using GreenEnergyHub.Messaging.RequestRouting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -33,7 +33,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
     {
         private readonly IHubRequestTypeMap _resolver;
         private readonly IHubRehydrate _rehydrate;
-        private readonly IMediator _mediator;
+        private readonly IHubRequestDispatcher _dispatcher;
 
         /// <summary>
         /// Creates an instance of a RequestRouter using a given resolver.
@@ -41,12 +41,12 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
         /// <param name="resolver">The IEndpointResolver to use to figure out
         /// where to send what requests.</param>
         /// <param name="rehydrate">Rehydrate a message to a request type</param>
-        /// <param name="mediator">Mediator to route the request</param>
-        public RequestRouter(IHubRequestTypeMap resolver, IHubRehydrate rehydrate, IMediator mediator)
+        /// <param name="dispatcher">Mediator to route the request</param>
+        public RequestRouter(IHubRequestTypeMap resolver, IHubRehydrate rehydrate, IHubRequestDispatcher dispatcher)
         {
             _resolver = resolver;
             _rehydrate = rehydrate;
-            _mediator = mediator;
+            _dispatcher = dispatcher;
         }
 
         /// <summary>
@@ -55,21 +55,21 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
         /// <returns>The HTTP result of running this function.</returns>
         [FunctionName("Router")]
         public async Task<IActionResult> RunAsync(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "{category:alpha}")] HttpRequest req,
-            ILogger log,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "{category:alpha}")] HttpRequest httpRequest,
+            ILogger logger,
             string category)
         {
-            if (req is null)
+            if (httpRequest is null)
             {
-                throw new ArgumentNullException(nameof(req));
+                throw new ArgumentNullException(nameof(httpRequest));
             }
 
-            if (log is null)
+            if (logger is null)
             {
-                throw new ArgumentNullException(nameof(log));
+                throw new ArgumentNullException(nameof(logger));
             }
 
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var requestType = _resolver.GetTypeByCategory(category);
             if (requestType == null)
@@ -77,13 +77,13 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
                 return new NotFoundResult();
             }
 
-            var request = await _rehydrate.RehydrateAsync(req.Body, requestType).ConfigureAwait(false);
-            if (request == null)
+            var hubRequest = await _rehydrate.RehydrateAsync(httpRequest.Body, requestType).ConfigureAwait(false);
+            if (hubRequest == null)
             {
                 return new BadRequestObjectResult(requestType);
             }
 
-            var response = await _mediator.Send(request).ConfigureAwait(false);
+            var response = await _dispatcher.DispatchAsync(hubRequest).ConfigureAwait(false);
             if (response.IsSuccessful)
             {
                 return new OkObjectResult("request accepted and will be processed");

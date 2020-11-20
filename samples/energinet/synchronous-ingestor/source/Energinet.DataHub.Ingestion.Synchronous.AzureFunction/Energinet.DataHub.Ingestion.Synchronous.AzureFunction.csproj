@@ -42,8 +42,7 @@ limitations under the License.
         </None>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\..\src\ingestion\GreenEnergyHub.Ingestion\source\GreenEnergyHub.Ingestion.Integration.ServiceCollection\GreenEnergyHub.Ingestion.Integration.ServiceCollection.csproj" />
-        <ProjectReference Include="..\..\..\..\..\src\ingestion\GreenEnergyHub.Ingestion\source\GreenEnergyHub.Ingestion\GreenEnergyHub.Ingestion.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Integration.ServiceCollection\GreenEnergyHub.Messaging.Integration.ServiceCollection.csproj" />
         <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.Application\Energinet.DataHub.Ingestion.Synchronous.Application.csproj" />
         <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.Infrastructure\Energinet.DataHub.Ingestion.Synchronous.Infrastructure.csproj" />
     </ItemGroup>

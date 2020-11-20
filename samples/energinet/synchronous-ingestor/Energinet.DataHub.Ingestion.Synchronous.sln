@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreenEnergyHub", "GreenEnergyHub", "{C76FB4A4-036E-4D0F-A1BB-75E985766670}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Ingestion", "..\..\..\src\ingestion\GreenEnergyHub.Ingestion\source\GreenEnergyHub.Ingestion\GreenEnergyHub.Ingestion.csproj", "{A3F7CB99-33BF-4F53-B82E-C127C22EDBDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj", "{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Ingestion.Integration.ServiceCollection", "..\..\..\src\ingestion\GreenEnergyHub.Ingestion\source\GreenEnergyHub.Ingestion.Integration.ServiceCollection\GreenEnergyHub.Ingestion.Integration.ServiceCollection.csproj", "{F67348DE-0215-4662-9104-0ED1DF0D11D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging.Integration.ServiceCollection", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Integration.ServiceCollection\GreenEnergyHub.Messaging.Integration.ServiceCollection.csproj", "{1D28CC3F-18C4-423F-A176-76CBF10920C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging.Tests", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Tests\GreenEnergyHub.Messaging.Tests.csproj", "{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,19 +41,24 @@ Global
 		{CFF3CA5B-275C-4A0F-8CBA-8423B45A76CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFF3CA5B-275C-4A0F-8CBA-8423B45A76CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFF3CA5B-275C-4A0F-8CBA-8423B45A76CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3F7CB99-33BF-4F53-B82E-C127C22EDBDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3F7CB99-33BF-4F53-B82E-C127C22EDBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3F7CB99-33BF-4F53-B82E-C127C22EDBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3F7CB99-33BF-4F53-B82E-C127C22EDBDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F67348DE-0215-4662-9104-0ED1DF0D11D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F67348DE-0215-4662-9104-0ED1DF0D11D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F67348DE-0215-4662-9104-0ED1DF0D11D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F67348DE-0215-4662-9104-0ED1DF0D11D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D28CC3F-18C4-423F-A176-76CBF10920C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D28CC3F-18C4-423F-A176-76CBF10920C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D28CC3F-18C4-423F-A176-76CBF10920C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D28CC3F-18C4-423F-A176-76CBF10920C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{68412EBF-701D-467D-8716-74269E171F41} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
 		{CFF3CA5B-275C-4A0F-8CBA-8423B45A76CB} = {832447E5-7A46-4381-817C-5D73A20510C2}
-		{A3F7CB99-33BF-4F53-B82E-C127C22EDBDB} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
-		{F67348DE-0215-4662-9104-0ED1DF0D11D4} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
+		{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
+		{1D28CC3F-18C4-423F-A176-76CBF10920C0} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
+		{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 	EndGlobalSection
 EndGlobal

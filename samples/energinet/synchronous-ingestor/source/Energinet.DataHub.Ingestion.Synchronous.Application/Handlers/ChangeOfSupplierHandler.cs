@@ -13,16 +13,18 @@
 // limitations under the License.
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Synchronous.Application.Requests;
-using GreenEnergyHub.Ingestion;
+using GreenEnergyHub.Messaging;
+using GreenEnergyHub.Messaging.Dispatching;
 
 namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
 {
     /// <summary>
     /// Class which defines how to handle ChangeOfSupplierRequests.
     /// </summary>
-    public class ChangeOfSupplierHandler : HubActionHandler<ChangeOfSupplierRequest>
+    public class ChangeOfSupplierHandler : HubRequestHandler<ChangeOfSupplierRequest>
     {
         private readonly IRuleEngine<ChangeOfSupplierRequest> _rulesEngine;
 
@@ -41,8 +43,9 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
         /// Validates a given ChangeOfSupplierRequest.
         /// </summary>
         /// <param name="actionData">The ChangeOfSupplierRequest.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>True if it is valid.</returns>
-        public override async Task<bool> ValidateAsync(ChangeOfSupplierRequest actionData)
+        protected override async Task<bool> ValidateAsync(ChangeOfSupplierRequest actionData, CancellationToken cancellationToken)
         {
             return await _rulesEngine.ValidateAsync(actionData).ConfigureAwait(false);
         }
@@ -51,8 +54,9 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
         /// Accepts a ChangeOfSupplierRequest.
         /// </summary>
         /// <param name="actionData">The ChangeOfSupplierRequest.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>True if the request was successfully accepted.</returns>
-        public override Task<bool> AcceptAsync(ChangeOfSupplierRequest actionData)
+        protected override Task<bool> AcceptAsync(ChangeOfSupplierRequest actionData, CancellationToken cancellationToken)
         {
             Console.WriteLine("Writing Service Start Request to DB!");
             return Task.FromResult(true);
@@ -62,10 +66,11 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
         /// Creates a response for the ChangeOfSupplierRequest.
         /// </summary>
         /// <param name="actionData">The ChangeOfSupplierRequest.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>A response.</returns>
-        public override Task<IHubActionResponse> RespondAsync(ChangeOfSupplierRequest actionData)
+        protected override Task<IHubResponse> RespondAsync(ChangeOfSupplierRequest actionData, CancellationToken cancellationToken)
         {
-            return Task.FromResult<IHubActionResponse>(new HubActionResponse());
+            return Task.FromResult<IHubResponse>(new HubResponse());
         }
     }
 }

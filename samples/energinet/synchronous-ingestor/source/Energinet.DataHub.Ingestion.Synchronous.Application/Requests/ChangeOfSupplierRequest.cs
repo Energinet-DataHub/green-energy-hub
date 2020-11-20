@@ -13,9 +13,9 @@
 // limitations under the License.
 
 using System;
-using GreenEnergyHub.Ingestion;
-using GreenEnergyHub.Ingestion.RequestTypes;
-using GreenEnergyHub.Ingestion.RequestTypes.Common;
+using GreenEnergyHub.Messaging;
+using GreenEnergyHub.Messaging.RequestTypes;
+using GreenEnergyHub.Messaging.RequestTypes.Common;
 
 namespace Energinet.DataHub.Ingestion.Synchronous.Application.Requests
 {
@@ -23,7 +23,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Requests
     /// POCO for a ChangeOfSupplierRequest.
     /// </summary>
     [HubRequest("ChangeSupplier")]
-    public class ChangeOfSupplierRequest : IHubActionRequest, IRequestHasConsumer, IRequestHasEnergySupplier, IRequestHasBalanceResponsibleParty, IRequestHasStartDate
+    public class ChangeOfSupplierRequest : IHubRequest, IRequestHasConsumer, IRequestHasEnergySupplier, IRequestHasBalanceResponsibleParty, IRequestHasStartDate
     {
         /// <summary>
         /// The id of the ChangeOfSupplierRequest message. Should be unique.

@@ -21,10 +21,12 @@ limitations under the License.
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <RootNamespace>GreenEnergyHub.Messaging</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj" />
+        <PackageReference Include="MediatR" Version="9.0.0" />
+        <PackageReference Include="NRules" Version="0.9.0" />
     </ItemGroup>
 
 </Project>
