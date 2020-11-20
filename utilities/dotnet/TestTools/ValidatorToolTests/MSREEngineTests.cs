@@ -1,11 +1,10 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using RulesEngine.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ValidatorTool;
 using ValidatorTool.RuleEngines;
 using ValidatorTool.RuleEngines.MSRE;
 
@@ -25,7 +24,7 @@ namespace ValidatorTool.Tests
         {
             _mockBlobWorkflowRulesStorage = new Mock<IWorkflowRulesStorage>();
 
-            var jsonString ="[{ \"WorkflowName\": \"Basic\", \"Rules\": [{ \"RuleName\": \"Non-NegativeID\", \"SuccessEvent\": \"0\", \"ErrorMessage\": \"One of the IDs was negative.\", \"ErrorType\": \"Error\", \"RuleExpressionType\": \"LambdaExpression\", \"Expression\": \"customerId >= 0 AND meterId >= 0\" }] }]";
+            var jsonString = "[{ \"WorkflowName\": \"Basic\", \"Rules\": [{ \"RuleName\": \"Non-NegativeID\", \"SuccessEvent\": \"0\", \"ErrorMessage\": \"One of the IDs was negative.\", \"ErrorType\": \"Error\", \"RuleExpressionType\": \"LambdaExpression\", \"Expression\": \"customerId >= 0 AND meterId >= 0\" }] }]";
             var workflowRules = JsonConvert.DeserializeObject<List<WorkflowRules>>(jsonString);
 
             _mockBlobWorkflowRulesStorage.Setup(storage => storage.GetRulesAsync()).ReturnsAsync(workflowRules);

@@ -1,26 +1,29 @@
-using Azure.Storage.Blobs;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Storage.Blobs;
+using Newtonsoft.Json;
 using RulesEngine.Models;
 
-namespace ValidatorTool.RuleEngines.MSRE {
+namespace ValidatorTool.RuleEngines.MSRE
+{
     /// <summary>
     /// Support class to facilitate reading MSRE WorkflowRules from blob storage
     /// </summary>
-    public class BlobWorkflowRulesStorage : IWorkflowRulesStorage {
-
-        private BlobClient blobClient;
+    public class BlobWorkflowRulesStorage : IWorkflowRulesStorage
+    {
         private static List<WorkflowRules> _rules = null;
 
-        public BlobWorkflowRulesStorage(string connectionString, string containerName, string blobName) {
+        private readonly BlobClient _blobClient;
+
+        public BlobWorkflowRulesStorage(string connectionString, string containerName, string blobName)
+        {
             // Create necessary clients
-            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-            blobClient = containerClient.GetBlobClient(blobName);
+            var blobServiceClient = new BlobServiceClient(connectionString);
+            var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+            _blobClient = containerClient.GetBlobClient(blobName);
         }
 
         public async Task<List<WorkflowRules>> GetRulesAsync()
@@ -33,15 +36,15 @@ namespace ValidatorTool.RuleEngines.MSRE {
 
             try
             {
-                using (MemoryStream s = new MemoryStream())
+                using (var s = new MemoryStream())
                 {
-                    await blobClient.DownloadToAsync(s);
+                    await _blobClient.DownloadToAsync(s);
                     s.Seek(0, SeekOrigin.Begin);
-                    using (StreamReader sr = new StreamReader(s, Encoding.UTF8))
+                    using (var sr = new StreamReader(s, Encoding.UTF8))
                     {
                         using (JsonReader reader = new JsonTextReader(sr))
                         {
-                            JsonSerializer serializer = new JsonSerializer();
+                            var serializer = new JsonSerializer();
                             _rules = serializer.Deserialize<List<WorkflowRules>>(reader);
                             return _rules;
                         }
@@ -50,7 +53,7 @@ namespace ValidatorTool.RuleEngines.MSRE {
             }
             catch (Exception ex)
             {
-                throw(ex);
+                throw ex;
             }
         }
     }

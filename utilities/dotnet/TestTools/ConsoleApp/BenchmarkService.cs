@@ -1,12 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure.Messaging.EventHubs;
-using Azure.Messaging.EventHubs.Producer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ValidatorTool;
@@ -17,98 +13,106 @@ using ValidatorTool.RuleEngines.NRules;
 
 internal class BenchmarkService : IHostedService
 {
-    private ILogger<BenchmarkService> _logger { get; }
-    private IHostApplicationLifetime _appLifetime  { get; }
-    private IConfiguration _config { get; }
+    private static readonly int _BenchmarkSize = 10000;
 
-    private IRuleEngine _msre;
-    private IRuleEngine _nrules;
-    private IRuleEngine _fluent;
+    private readonly ILogger<BenchmarkService> _logger;
+    private readonly IHostApplicationLifetime _appLifetime;
+    private readonly IRuleEngine _msre;
+    private readonly IRuleEngine _nrules;
+    private readonly IRuleEngine _fluent;
 
-    private static readonly int BENCHMARK_SIZE = 100000;
-
-    public BenchmarkService(ILogger<BenchmarkService> logger, IHostApplicationLifetime appLifetime, IConfiguration config)
+    public BenchmarkService(ILogger<BenchmarkService> logger, IHostApplicationLifetime appLifetime, IWorkflowRulesStorage blobStorage)
     {
         _logger = logger;
         _appLifetime = appLifetime;
-        _config = config;
 
-        var storage = _config.GetSection("Storage");
-        var blobStorage = new BlobWorkflowRulesStorage(storage.GetValue<string>("OutputConnectionString"), storage.GetValue<string>("RulesContainerName"), storage.GetValue<string>("RulesBlobName"));
         _msre = new MSREEngine(blobStorage);
         _nrules = new NRulesEngine();
         _fluent = new FluentValidationEngine();
     }
 
-    public async Task DoWork()
+    public async Task DoWorkAsync()
     {
-        Stopwatch sw = new Stopwatch();
+        var sw = new Stopwatch();
         sw.Start();
         _logger.LogInformation("Generating messages...");
         // Generate in-memory list of meter messages
-        var messages = new List<MeterMessage>(BENCHMARK_SIZE);
+        var messages = new List<MeterMessage>(_BenchmarkSize);
         var random = new Random();
-        for (int i=0; i < BENCHMARK_SIZE; i++) {
+        for (var i = 0; i < _BenchmarkSize; i++)
+        {
             var customerId = random.Next(-5, 15);
             var meterId = random.Next(-5, 15);
             var meterValue = random.Next(-5, 15);
             var meterReadDate = DateTime.UtcNow;
             messages.Add(new MeterMessage(meterValue, meterId, meterReadDate, customerId));
         }
+
         sw.Stop();
         _logger.LogInformation("Messages generated in {0}ms", sw.Elapsed.TotalMilliseconds);
         sw.Reset();
 
-        // Run the benchmarks
+        /*
+         * Batch run benchmarks
+         */
         _logger.LogInformation("*** BATCH");
+
+        // NRules
         sw.Start();
-        _nrules.ValidateBatchAsync(messages);
+        await _nrules.ValidateBatchAsync(messages);
         sw.Stop();
         _logger.LogInformation("NRules ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-
         sw.Reset();
 
-
+        // Fluent
         sw.Start();
-        _fluent.ValidateBatchAsync(messages);
+        await _fluent.ValidateBatchAsync(messages);
         sw.Stop();
         _logger.LogInformation("Fluent ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-
         sw.Reset();
+
+        // MSRE
         sw.Start();
-        //_msre.ValidateBatchAsync(messages);
+        await _msre.ValidateBatchAsync(messages);
         sw.Stop();
         _logger.LogInformation("MSRE ran in {0}ms", sw.Elapsed.TotalMilliseconds);
 
-
+        /*
+         * Sequential Benchmarks
+         */
         _logger.LogInformation("*** SEQUENTIAL");
+
+        // NRules
         sw.Start();
-        foreach(var message in messages)
+        foreach (var message in messages)
         {
-            _nrules.ValidateAsync(message);
+            await _nrules.ValidateAsync(message);
         }
+
         sw.Stop();
         _logger.LogInformation("NRules ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-
         sw.Reset();
 
+        // Fluent
         sw.Start();
-        foreach(var message in messages)
+        foreach (var message in messages)
         {
-            _msre.ValidateAsync(message);
+            await _fluent.ValidateAsync(message);
         }
-        sw.Stop();
-        _logger.LogInformation("MSRE ran in {0}ms", sw.Elapsed.TotalMilliseconds);
 
-        sw.Start();
-        foreach(var message in messages)
-        {
-            _fluent.ValidateAsync(message);
-        }
         sw.Stop();
         _logger.LogInformation("Fluent ran in {0}ms", sw.Elapsed.TotalMilliseconds);
 
+        // MSRE
+        sw.Start();
+        foreach (var message in messages)
+        {
+            await _msre.ValidateAsync(message);
+        }
 
+        sw.Stop();
+        _logger.LogInformation("MSRE ran in {0}ms", sw.Elapsed.TotalMilliseconds);
+        sw.Reset();
 
         await Task.Delay(1000);
     }
@@ -132,7 +136,7 @@ internal class BenchmarkService : IHostedService
     {
         _logger.LogInformation("OnStarted has been called.");
 
-        Task.Run(DoWork).Wait(); // fixme deadlocks possible
+        Task.Run(DoWorkAsync).Wait();
 
         _appLifetime.StopApplication();
     }

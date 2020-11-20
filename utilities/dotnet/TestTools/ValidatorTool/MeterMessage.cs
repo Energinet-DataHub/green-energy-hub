@@ -1,10 +1,25 @@
-using System;
+﻿using System;
 using System.Text.Json.Serialization;
 
 namespace ValidatorTool
 {
     public class MeterMessage
     {
+        public MeterMessage()
+        {
+        }
+
+        public MeterMessage(int meterValue, int meterId, DateTime dateTime, int customerId)
+        {
+            MeterValue = meterValue;
+            MeterId = meterId;
+            MeterDateTime = dateTime;
+            CustomerId = customerId;
+        }
+
+        [JsonPropertyName("transactionId")]
+        public string TransactionId { get; set; } = Guid.NewGuid().ToString();
+
         [JsonPropertyName("meterValue")]
         public int MeterValue { get; set; }
 
@@ -16,14 +31,5 @@ namespace ValidatorTool
 
         [JsonPropertyName("customerId")]
         public int CustomerId { get; set; }
-
-        public MeterMessage() {
-        }
-        public MeterMessage(int meterValue, int meterId, DateTime dateTime, int customerId) {
-            MeterValue = meterValue;
-            MeterId = meterId;
-            MeterDateTime = dateTime;
-            CustomerId = customerId;
-        }
     }
 }

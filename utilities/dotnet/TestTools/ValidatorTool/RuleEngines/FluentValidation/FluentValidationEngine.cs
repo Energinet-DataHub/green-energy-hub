@@ -14,6 +14,7 @@ namespace ValidatorTool.RuleEngines.FluentValidation
         {
             _validator = new MeterMessageValidator();
         }
+
         public async Task<bool> ValidateAsync(MeterMessage message)
         {
             var result = await _validator.ValidateAsync(message);

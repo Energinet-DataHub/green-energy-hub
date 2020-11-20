@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,19 +31,18 @@ namespace ValidatorTool
         [FunctionName("ValidatorTool")]
         public async Task Run(
             [EventHubTrigger("%InputEventHubName%", Connection = "InputConnectionString")] EventData[] events,
-            [EventHub("%OutputEventHubName%", Connection = "OutputConnectionString")]IAsyncCollector<string> outputEvents,
-            ILogger log
-        )
+            [EventHub("%OutputEventHubName%", Connection = "OutputConnectionString")] IAsyncCollector<string> outputEvents,
+            ILogger log)
         {
             var exceptions = new List<Exception>();
 
-            foreach (EventData eventData in events)
+            foreach (var eventData in events)
             {
                 try
                 {
-                    string messageBody = Encoding.UTF8.GetString(eventData.Body.Array, eventData.Body.Offset, eventData.Body.Count);
+                    var messageBody = Encoding.UTF8.GetString(eventData.Body.Array, eventData.Body.Offset, eventData.Body.Count);
                     // send to rule validator
-                    MeterMessage message = JsonSerializer.Deserialize<MeterMessage>(messageBody);
+                    var message = JsonSerializer.Deserialize<MeterMessage>(messageBody);
                     var result = await _ruleEngine.ValidateAsync(message);
                     var outputObject = $"{{\"validationResult\": {result}, \"message\": \"{messageBody}\"}}";
                     log.LogInformation($"C# Event Hub trigger function processed a message: {messageBody}");
@@ -60,15 +59,15 @@ namespace ValidatorTool
             }
 
             // Once processing of the batch is complete, if any messages in the batch failed processing throw an exception so that there is a record of the failure.
-
-            if (exceptions.Count > 1) {
+            if (exceptions.Count > 1)
+            {
                 throw new AggregateException(exceptions);
             }
 
-            if (exceptions.Count == 1) {
+            if (exceptions.Count == 1)
+            {
                 throw exceptions.Single();
             }
         }
-
     }
 }

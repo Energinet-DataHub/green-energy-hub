@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ValidatorTool.RuleEngines
@@ -11,6 +11,7 @@ namespace ValidatorTool.RuleEngines
     public interface IRuleEngine
     {
         Task<bool> ValidateAsync(MeterMessage message);
+
         Task<bool> ValidateBatchAsync(IEnumerable<MeterMessage> messages);
     }
 }

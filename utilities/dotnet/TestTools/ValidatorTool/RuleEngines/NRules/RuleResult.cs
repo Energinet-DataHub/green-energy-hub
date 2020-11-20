@@ -1,4 +1,4 @@
-namespace ValidatorTool.RuleEngines.NRules
+﻿namespace ValidatorTool.RuleEngines.NRules
 {
     /// <summary>
     /// Used to track the execution result of each validation rule. Instances of
@@ -9,14 +9,20 @@ namespace ValidatorTool.RuleEngines.NRules
     /// </summary>
     public class RuleResult
     {
-        public string RuleName { get; }
-        public bool IsSuccessful { get; }
-        public string Message { get; }
-
-        public RuleResult(string rule, bool isSuccessful, string message = null) {
+        public RuleResult(string rule, string transactionId, bool isSuccessful, string message = null)
+        {
             RuleName = rule;
+            TransactionId = transactionId;
             IsSuccessful = isSuccessful;
             Message = message;
         }
+
+        public string RuleName { get; }
+
+        public string TransactionId { get; }
+
+        public bool IsSuccessful { get; }
+
+        public string Message { get; }
     }
 }

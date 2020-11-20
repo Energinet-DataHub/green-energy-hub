@@ -1,15 +1,16 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
+using Azure.Messaging.EventHubs.Producer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ValidatorTool.RuleEngines.MSRE;
 
 namespace ConsoleApp
 {
-    class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             if (args.Length == 0)
             {
@@ -38,6 +39,16 @@ namespace ConsoleApp
                     {
                         services.AddHostedService<BenchmarkService>();
                     }
+
+                    // Create a rules storage client
+                    var storage = hostContext.Configuration.GetSection("Storage");
+                    var blobStorage = new BlobWorkflowRulesStorage(storage.GetValue<string>("OutputConnectionString"), storage.GetValue<string>("RulesContainerName"), storage.GetValue<string>("RulesBlobName"));
+                    services.AddSingleton<IWorkflowRulesStorage>(blobStorage);
+
+                    // Create a producer client that you can use to send events to an event hub
+                    var eventHubConnectionString = hostContext.Configuration.GetSection("EventHub").GetValue<string>("InputConnectionString");
+                    var producerClient = new EventHubProducerClient(eventHubConnectionString);
+                    services.AddSingleton(producerClient);
                 });
         }
     }

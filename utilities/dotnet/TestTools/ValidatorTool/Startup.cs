@@ -3,8 +3,8 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using ValidatorTool.RuleEngines;
 using ValidatorTool.RuleEngines.FluentValidation;
-using ValidatorTool.RuleEngines.NRules;
 using ValidatorTool.RuleEngines.MSRE;
+using ValidatorTool.RuleEngines.NRules;
 
 [assembly: FunctionsStartup(typeof(ValidatorTool.Startup))]
 
@@ -16,22 +16,23 @@ namespace ValidatorTool
     /// </summary>
     public class Startup : FunctionsStartup
     {
-        const string ruleEngineTypeAppSetting = "RuleEngineType";
-        const string azureStorageConnectionSetting = "AZURE_STORAGE_CONNECTION_STRING";
-        const string containerNameSetting = "RulesContainerName";
-        const string blobNameSetting = "RulesBlobName";
+        private const string RuleEngineTypeAppSetting = "RuleEngineType";
+        private const string AzureStorageConnectionSetting = "AZURE_STORAGE_CONNECTION_STRING";
+        private const string ContainerNameSetting = "RulesContainerName";
+        private const string BlobNameSetting = "RulesBlobName";
 
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            var connectionString = Environment.GetEnvironmentVariable(azureStorageConnectionSetting);
-            var containerName = Environment.GetEnvironmentVariable(containerNameSetting);
-            var blobName = Environment.GetEnvironmentVariable(blobNameSetting);
+            var connectionString = Environment.GetEnvironmentVariable(AzureStorageConnectionSetting);
+            var containerName = Environment.GetEnvironmentVariable(ContainerNameSetting);
+            var blobName = Environment.GetEnvironmentVariable(BlobNameSetting);
 
             var blobStorage = new BlobWorkflowRulesStorage(connectionString, containerName, blobName);
             builder.Services.AddSingleton<IWorkflowRulesStorage>(blobStorage);
 
-            var ruleEngineType = Environment.GetEnvironmentVariable(ruleEngineTypeAppSetting);
-            builder.Services.AddSingleton<IRuleEngine>((s) => {
+            var ruleEngineType = Environment.GetEnvironmentVariable(RuleEngineTypeAppSetting);
+            builder.Services.AddSingleton<IRuleEngine>((s) =>
+            {
                 switch (ruleEngineType.ToLower())
                 {
                     case "nrules":
@@ -44,6 +45,6 @@ namespace ValidatorTool
                         throw new InvalidOperationException($"Invalid engine type {ruleEngineType} specified");
                 }
             });
-          }
+        }
     }
 }

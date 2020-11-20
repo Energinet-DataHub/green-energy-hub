@@ -1,6 +1,5 @@
-using NRules.Fluent.Dsl;
+﻿using NRules.Fluent.Dsl;
 using NRules.RuleModel;
-using System;
 
 namespace ValidatorTool.RuleEngines.NRules.Rules
 {
@@ -20,16 +19,19 @@ namespace ValidatorTool.RuleEngines.NRules.Rules
             MeterMessage message = null;
 
             When()
-                .Match<MeterMessage>(()=>message);
+                .Match<MeterMessage>(() => message);
             Then()
                 .Yield(_ => DoValidation(message));
         }
-        private RuleResult DoValidation(MeterMessage message) {
+
+        private RuleResult DoValidation(MeterMessage message)
+        {
             if (message.MeterValue < 0)
             {
-                return new RuleResult(this.GetType().Name, false, "Meter value was negative");
+                return new RuleResult(GetType().Name, message.TransactionId, false, "Meter value was negative");
             }
-            return new RuleResult(this.GetType().Name, true);
+
+            return new RuleResult(GetType().Name, message.TransactionId, true);
         }
     }
 }
