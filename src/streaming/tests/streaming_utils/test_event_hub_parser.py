@@ -44,15 +44,15 @@ def expected_parsed_data_schema():
         .add("Quantity", DoubleType(), True) \
         .add("CorrelationId", StringType(), True) \
         .add("MessageReference", StringType(), True) \
-        .add("HeaderEnergyDocument_mRID", StringType(), True) \
-        .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
-        .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
+        .add("MarketDocument_mRID", StringType(), True) \
+        .add("CreatedDateTime", TimestampType(), True) \
+        .add("SenderMarketParticipant_mRID", StringType(), True) \
         .add("ProcessType", StringType(), True) \
-        .add("SenderMarketParticipantMarketRoleType", StringType(), True) \
-        .add("TimeSeriesmRID", StringType(), True) \
+        .add("SenderMarketParticipantMarketRole_Type", StringType(), True) \
+        .add("TimeSeries_mRID", StringType(), True) \
         .add("MktActivityRecord_Status", StringType(), True) \
         .add("Product", StringType(), True) \
-        .add("UnitName", StringType(), True) \
+        .add("QuantityMeasurementUnit_Name", StringType(), True) \
         .add("MarketEvaluationPointType", StringType(), True) \
         .add("Quality", StringType(), True) \
         .add("EventHubEnqueueTime", StringType(), False)

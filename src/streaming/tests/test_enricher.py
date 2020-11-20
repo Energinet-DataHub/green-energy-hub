@@ -46,11 +46,12 @@ def master_data(spark, master_schema):
         "InMeteringGridArea_Domain_mRID": ["h"],
         "OutMeteringGridArea_Domain_mRID": ["i"],
         "Parent_Domain": ["j"],
-        "ServiceCategoryKind": ["l"],
+        "ServiceCategory_Kind": ["l"],
         "MarketEvaluationPointType": ["m"],
         "SettlementMethod": ["n"],
-        "UnitName": ["o"],
-        "Product": ["p"]})
+        "QuantityMeasurementUnit_Name": ["o"],
+        "Product": ["p"],
+        "Technology": ["t"]})
     return spark.createDataFrame(pandas_df, schema=master_schema)
 
 
@@ -62,15 +63,15 @@ def parsed_data(spark, parsed_schema):
         "Quantity": [1.0, 2.0, 3.0],
         "CorrelationId": ["a", "aa", "aaa"],
         "MessageReference": ["b", "b", "b"],
-        "HeaderEnergyDocument_mRID": ["c", "c", "c"],
-        "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now],
-        "HeaderEnergyDocumentSenderIdentification": ["d", "d", "d"],
+        "MarketDocument_mRID": ["c", "c", "c"],
+        "CreatedDateTime": [timestamp_now, timestamp_now, timestamp_now],
+        "SenderMarketParticipant_mRID": ["d", "d", "d"],
         "ProcessType": ["e", "e", "e"],
-        "SenderMarketParticipantMarketRoleType": ["f", "f", "f"],
-        "TimeSeriesmRID": ["g", "g", "g"],
+        "SenderMarketParticipantMarketRole_Type": ["f", "f", "f"],
+        "TimeSeries_mRID": ["g", "g", "g"],
         "MktActivityRecord_Status": ["h", "h", "h"],
         "Product": ["i", "i", "i"],
-        "UnitName": ["j", "j", "j"],
+        "QuantityMeasurementUnit_Name": ["j", "j", "j"],
         "MarketEvaluationPointType": ["k", "k", "k"],
         "Quality": ["l", "l", "l"],
         "EventHubEnqueueTime": [timestamp_now, timestamp_now, timestamp_now]})
@@ -94,15 +95,15 @@ def expected_schema():
         .add(StructField("Quantity", DoubleType(), True)) \
         .add(StructField("CorrelationId", StringType(), True)) \
         .add(StructField("MessageReference", StringType(), True)) \
-        .add(StructField("HeaderEnergyDocument_mRID", StringType(), True)) \
-        .add(StructField("HeaderEnergyDocumentCreation", TimestampType(), True)) \
-        .add(StructField("HeaderEnergyDocumentSenderIdentification", StringType(), True)) \
+        .add(StructField("MarketDocument_mRID", StringType(), True)) \
+        .add(StructField("CreatedDateTime", TimestampType(), True)) \
+        .add(StructField("SenderMarketParticipant_mRID", StringType(), True)) \
         .add(StructField("ProcessType", StringType(), True)) \
-        .add(StructField("SenderMarketParticipantMarketRoleType", StringType(), True)) \
-        .add(StructField("TimeSeriesmRID", StringType(), True)) \
+        .add(StructField("SenderMarketParticipantMarketRole_Type", StringType(), True)) \
+        .add(StructField("TimeSeries_mRID", StringType(), True)) \
         .add(StructField("MktActivityRecord_Status", StringType(), True)) \
         .add(StructField("Product", StringType(), True)) \
-        .add(StructField("UnitName", StringType(), True)) \
+        .add(StructField("QuantityMeasurementUnit_Name", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("Quality", StringType(), True)) \
         .add(StructField("EventHubEnqueueTime", TimestampType(), False)) \
@@ -115,11 +116,12 @@ def expected_schema():
         .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("Parent_Domain", StringType(), True)) \
-        .add(StructField("ServiceCategoryKind", StringType(), True)) \
+        .add(StructField("ServiceCategory_Kind", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("SettlementMethod", StringType(), True)) \
-        .add(StructField("UnitName", StringType(), True)) \
-        .add(StructField("Product", StringType(), True))
+        .add(StructField("QuantityMeasurementUnit_Name", StringType(), True)) \
+        .add(StructField("Product", StringType(), True)) \
+        .add(StructField("Technology", StringType(), True))
 
 
 # Is the row count maintained

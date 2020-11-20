@@ -23,15 +23,15 @@ def parsed_data_schema():
         .add("Quantity", DoubleType(), True) \
         .add("CorrelationId", StringType(), True) \
         .add("MessageReference", StringType(), True) \
-        .add("HeaderEnergyDocument_mRID", StringType(), True) \
-        .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
-        .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
+        .add("MarketDocument_mRID", StringType(), True) \
+        .add("CreatedDateTime", TimestampType(), True) \
+        .add("SenderMarketParticipant_mRID", StringType(), True) \
         .add("ProcessType", StringType(), True) \
-        .add("SenderMarketParticipantMarketRoleType", StringType(), True) \
-        .add("TimeSeriesmRID", StringType(), True) \
+        .add("SenderMarketParticipantMarketRole_Type", StringType(), True) \
+        .add("TimeSeries_mRID", StringType(), True) \
         .add("MktActivityRecord_Status", StringType(), True) \
         .add("Product", StringType(), True) \
-        .add("UnitName", StringType(), True) \
+        .add("QuantityMeasurementUnit_Name", StringType(), True) \
         .add("MarketEvaluationPointType", StringType(), True) \
         .add("Quality", StringType(), True) \
         .add("EventHubEnqueueTime", TimestampType(), False)
@@ -50,10 +50,10 @@ def master_data_schema():
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("Parent_Domain", StringType(), False) \
-        .add("ServiceCategoryKind", StringType(), False) \
+        .add("ServiceCategory_Kind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), False) \
-        .add("UnitName", StringType(), False) \
+        .add("QuantityMeasurementUnit_Name", StringType(), False) \
         .add("Product", StringType(), False)
 
 
@@ -68,12 +68,12 @@ def expected_validate_schema():
         .add(StructField("Quantity", DoubleType(), True)) \
         .add(StructField("CorrelationId", StringType(), True)) \
         .add(StructField("MessageReference", StringType(), True)) \
-        .add(StructField("HeaderEnergyDocument_mRID", StringType(), True)) \
-        .add(StructField("HeaderEnergyDocumentCreation", TimestampType(), True)) \
-        .add(StructField("HeaderEnergyDocumentSenderIdentification", StringType(), True)) \
+        .add(StructField("MarketDocument_mRID", StringType(), True)) \
+        .add(StructField("CreatedDateTime", TimestampType(), True)) \
+        .add(StructField("SenderMarketParticipant_mRID", StringType(), True)) \
         .add(StructField("ProcessType", StringType(), True)) \
-        .add(StructField("SenderMarketParticipantMarketRoleType", StringType(), True)) \
-        .add(StructField("TimeSeriesmRID", StringType(), True)) \
+        .add(StructField("SenderMarketParticipantMarketRole_Type", StringType(), True)) \
+        .add(StructField("TimeSeries_mRID", StringType(), True)) \
         .add(StructField("MktActivityRecord_Status", StringType(), True)) \
         .add(StructField("Quality", StringType(), True)) \
         .add(StructField("EventHubEnqueueTime", TimestampType(), False)) \
@@ -86,10 +86,10 @@ def expected_validate_schema():
         .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("Parent_Domain", StringType(), True)) \
-        .add(StructField("ServiceCategoryKind", StringType(), True)) \
+        .add(StructField("ServiceCategory_Kind", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("SettlementMethod", StringType(), True)) \
-        .add(StructField("UnitName", StringType(), True)) \
+        .add(StructField("QuantityMeasurementUnit_Name", StringType(), True)) \
         .add(StructField("Product", StringType(), True)) \
         .add(StructField("VR-245-1-Is-Valid", BooleanType(), True)) \
         .add(StructField("VR-250-Is-Valid", BooleanType(), True)) \
@@ -108,15 +108,15 @@ def parsed_data_pandas_df():
         "Quantity": [1.0, 2.0, 3.0, -4.0],
         "CorrelationId": ["a", "a", "a", "a"],
         "MessageReference": ["b", "b", "b", "b"],
-        "HeaderEnergyDocument_mRID": ["c", "c", "c", "c"],
-        "HeaderEnergyDocumentCreation": [timestamp_now, timestamp_now, timestamp_now, timestamp_now],
-        "HeaderEnergyDocumentSenderIdentification": ["d", "d", "d", "d"],
+        "MarketDocument_mRID": ["c", "c", "c", "c"],
+        "CreatedDateTime": [timestamp_now, timestamp_now, timestamp_now, timestamp_now],
+        "SenderMarketParticipant_mRID": ["d", "d", "d", "d"],
         "ProcessType": ["e", "e", "e", "e"],
-        "SenderMarketParticipantMarketRoleType": ["f", "f", "f", "f"],
-        "TimeSeriesmRID": ["g", "g", "g", "g"],
+        "SenderMarketParticipantMarketRole_Type": ["f", "f", "f", "f"],
+        "TimeSeries_mRID": ["g", "g", "g", "g"],
         "MktActivityRecord_Status": ["h", "h", "h", "h"],
         "Product": ["i", "i", "i", "i"],
-        "UnitName": ["j", "j", "j", "j"],
+        "QuantityMeasurementUnit_Name": ["j", "j", "j", "j"],
         "MarketEvaluationPointType": ["EPTypeA", "EPTypeA", "EPTypeB", "EPTypeA"],
         "Quality": ["l", "l", "l", "l"],
         "EventHubEnqueueTime": [timestamp_now, timestamp_now, timestamp_now, timestamp_now]})
@@ -135,10 +135,10 @@ def master_data_pandas_df():
         "InMeteringGridArea_Domain_mRID": ["h"],
         "OutMeteringGridArea_Domain_mRID": ["i"],
         "Parent_Domain": ["j"],
-        "ServiceCategoryKind": ["l"],
+        "ServiceCategory_Kind": ["l"],
         "MarketEvaluationPointType": ["EPTypeA"],
         "SettlementMethod": ["n"],
-        "UnitName": ["o"],
+        "QuantityMeasurementUnit_Name": ["o"],
         "Product": ["p"]})
 
 

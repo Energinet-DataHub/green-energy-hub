@@ -46,11 +46,12 @@ def master_data_factory(spark, master_schema):
             "InMeteringGridArea_Domain_mRID": ["h"],
             "OutMeteringGridArea_Domain_mRID": ["i"],
             "Parent_Domain": ["j"],
-            "ServiceCategoryKind": ["l"],
+            "ServiceCategory_Kind": ["l"],
             "MarketEvaluationPointType": [market_evaluation_point_type],
             "SettlementMethod": [settlement_method],
-            "UnitName": ["o"],
-            "Product": ["p"]})
+            "QuantityMeasurementUnit_Name": ["o"],
+            "Product": ["p"],
+            "Technology": ["t"]})
         return spark.createDataFrame(pandas_df, schema=master_schema)
     return factory
 
@@ -64,15 +65,15 @@ def parsed_data_factory(spark, parsed_schema):
             "Quantity": [quantity],
             "CorrelationId": ["a"],
             "MessageReference": ["b"],
-            "HeaderEnergyDocument_mRID": ["c"],
-            "HeaderEnergyDocumentCreation": [timestamp_now],
-            "HeaderEnergyDocumentSenderIdentification": ["d"],
+            "MarketDocument_mRID": ["c"],
+            "CreatedDateTime": [timestamp_now],
+            "SenderMarketParticipant_mRID": ["d"],
             "ProcessType": ["e"],
-            "SenderMarketParticipantMarketRoleType": ["f"],
-            "TimeSeriesmRID": ["g"],
+            "SenderMarketParticipantMarketRole_Type": ["f"],
+            "TimeSeries_mRID": ["g"],
             "MktActivityRecord_Status": ["h"],
             "Product": ["i"],
-            "UnitName": ["j"],
+            "QuantityMeasurementUnit_Name": ["j"],
             "MarketEvaluationPointType": [MarketEvaluationPointType.consumption.value],
             "Quality": [Quality.as_read.value],
             "EventHubEnqueueTime": [timestamp_now]})

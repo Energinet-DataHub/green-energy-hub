@@ -12,18 +12,19 @@ class SchemaFactory:
         .add("Quantity", DoubleType(), True) \
         .add("CorrelationId", StringType(), True) \
         .add("MessageReference", StringType(), True) \
-        .add("HeaderEnergyDocument_mRID", StringType(), True) \
-        .add("HeaderEnergyDocumentCreation", TimestampType(), True) \
-        .add("HeaderEnergyDocumentSenderIdentification", StringType(), True) \
+        .add("MarketDocument_mRID", StringType(), True) \
+        .add("CreatedDateTime", TimestampType(), True) \
+        .add("SenderMarketParticipant_mRID", StringType(), True) \
         .add("ProcessType", StringType(), True) \
-        .add("SenderMarketParticipantMarketRoleType", StringType(), True) \
-        .add("TimeSeriesmRID", StringType(), True) \
+        .add("SenderMarketParticipantMarketRole_Type", StringType(), True) \
+        .add("TimeSeries_mRID", StringType(), True) \
         .add("MktActivityRecord_Status", StringType(), True) \
         .add("Product", StringType(), True) \
-        .add("UnitName", StringType(), True) \
+        .add("QuantityMeasurementUnit_Name", StringType(), True) \
         .add("MarketEvaluationPointType", StringType(), True) \
         .add("Quality", StringType(), True)
 
+    # ValidFrom and ValidTo are not to be included in outputs from the time series point streaming process
     master_schema: StructType = StructType() \
         .add("MarketEvaluationPoint_mRID", StringType(), False) \
         .add("ValidFrom", TimestampType(), False) \
@@ -37,11 +38,12 @@ class SchemaFactory:
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("Parent_Domain", StringType(), False) \
-        .add("ServiceCategoryKind", StringType(), False) \
+        .add("ServiceCategory_Kind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), False) \
-        .add("UnitName", StringType(), False) \
-        .add("Product", StringType(), False)
+        .add("QuantityMeasurementUnit_Name", StringType(), False) \
+        .add("Product", StringType(), False) \
+        .add("Technology", StringType(), True)
 
     parsed_schema = copy.deepcopy(message_body_schema).add("EventHubEnqueueTime", TimestampType(), False)
 
@@ -52,12 +54,12 @@ class SchemaFactory:
         .add("CreatedDateTime", TimestampType(), False) \
         .add("SenderMarketParticipant_mRID", StringType(), False) \
         .add("ProcessType", StringType(), False) \
-        .add("SenderMarketParticipantMarketRoleType", StringType(), False) \
+        .add("SenderMarketParticipantMarketRole_Type", StringType(), False) \
         .add("MarketServiceCategory_Kind", StringType(), False) \
         .add("TimeSeries_mRID", StringType(), False) \
         .add("MktActivityRecord_Status", StringType(), False) \
         .add("Product", StringType(), False) \
-        .add("UnitName", StringType(), False) \
+        .add("QuantityMeasurementUnit_Name", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), True) \
         .add("MarketEvaluationPoint_mRID", StringType(), False) \
@@ -73,7 +75,7 @@ class SchemaFactory:
         .add("InMeteringGridArea_Domain_mRID", StringType(), True) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), True) \
         .add("Parent_Domain", StringType(), True) \
-        .add("ServiceCategoryKind", StringType(), True) \
+        .add("ServiceCategory_Kind", StringType(), True) \
         .add("Technology", StringType(), True)
 
     # For right now, this is the simplest solution for getting master/parsed data
