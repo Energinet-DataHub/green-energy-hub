@@ -45,7 +45,7 @@ def master_data(spark, master_schema):
         "BalanceResponsibleParty_MarketParticipant_mRID": ["g"],
         "InMeteringGridArea_Domain_mRID": ["h"],
         "OutMeteringGridArea_Domain_mRID": ["i"],
-        "Parent_Domain": ["j"],
+        "Parent_Domain_mRID": ["j"],
         "ServiceCategory_Kind": ["l"],
         "MarketEvaluationPointType": ["m"],
         "SettlementMethod": ["n"],
@@ -115,7 +115,7 @@ def expected_schema():
         .add(StructField("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True)) \
         .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
-        .add(StructField("Parent_Domain", StringType(), True)) \
+        .add(StructField("Parent_Domain_mRID", StringType(), True)) \
         .add(StructField("ServiceCategory_Kind", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("SettlementMethod", StringType(), True)) \

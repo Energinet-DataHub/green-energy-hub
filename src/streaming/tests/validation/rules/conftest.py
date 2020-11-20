@@ -45,7 +45,7 @@ def master_data_factory(spark, master_schema):
             "BalanceResponsibleParty_MarketParticipant_mRID": ["g"],
             "InMeteringGridArea_Domain_mRID": ["h"],
             "OutMeteringGridArea_Domain_mRID": ["i"],
-            "Parent_Domain": ["j"],
+            "Parent_Domain_mRID": ["j"],
             "ServiceCategory_Kind": ["l"],
             "MarketEvaluationPointType": [market_evaluation_point_type],
             "SettlementMethod": [settlement_method],

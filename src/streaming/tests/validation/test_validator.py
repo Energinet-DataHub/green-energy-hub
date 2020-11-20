@@ -49,7 +49,7 @@ def master_data_schema():
         .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), False) \
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
-        .add("Parent_Domain", StringType(), False) \
+        .add("Parent_Domain_mRID", StringType(), False) \
         .add("ServiceCategory_Kind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), False) \
@@ -85,7 +85,7 @@ def expected_validate_schema():
         .add(StructField("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True)) \
         .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
         .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
-        .add(StructField("Parent_Domain", StringType(), True)) \
+        .add(StructField("Parent_Domain_mRID", StringType(), True)) \
         .add(StructField("ServiceCategory_Kind", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("SettlementMethod", StringType(), True)) \
@@ -134,7 +134,7 @@ def master_data_pandas_df():
         "BalanceResponsibleParty_MarketParticipant_mRID": ["g"],
         "InMeteringGridArea_Domain_mRID": ["h"],
         "OutMeteringGridArea_Domain_mRID": ["i"],
-        "Parent_Domain": ["j"],
+        "Parent_Domain_mRID": ["j"],
         "ServiceCategory_Kind": ["l"],
         "MarketEvaluationPointType": ["EPTypeA"],
         "SettlementMethod": ["n"],

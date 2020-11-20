@@ -37,7 +37,7 @@ class SchemaFactory:
         .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), False) \
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
-        .add("Parent_Domain", StringType(), False) \
+        .add("Parent_Domain_mRID", StringType(), False) \
         .add("ServiceCategory_Kind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), False) \
@@ -74,7 +74,7 @@ class SchemaFactory:
         .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True) \
         .add("InMeteringGridArea_Domain_mRID", StringType(), True) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), True) \
-        .add("Parent_Domain", StringType(), True) \
+        .add("Parent_Domain_mRID", StringType(), True) \
         .add("ServiceCategory_Kind", StringType(), True) \
         .add("Technology", StringType(), True)
 
