@@ -9,6 +9,16 @@ env:
   REPORT_PATH: './outputs'
 
 jobs:
+  check-license-lines:
+    name: Check License Lines
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check License Lines
+      uses: kt3k/license_checker@v1.0.3
+
   build-master-data-serverless:
     name: Build Master Data Serverless
     runs-on: ubuntu-latest

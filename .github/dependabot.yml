@@ -8,16 +8,6 @@ updates:
     directory: "/samples/energinet/synchronous-ingestor/"
     schedule:
       interval: "weekly"
-      ignore:
-        # .NET 5 dependency: no Azure Functions support yet
-        # https://github.com/Azure/azure-functions-host/issues/6674
-        - dependency-name: "Microsoft.Extensions.DependencyInjection"
-          versions: ["5.x"]
-
-  - package-ecosystem: "nuget"
-    directory: "/src/ingestion/GreenEnergyHub.Ingestion/"
-    schedule:
-      interval: "weekly"
     ignore:
       # .NET 5 dependency: no Azure Functions support yet
       # https://github.com/Azure/azure-functions-host/issues/6674
@@ -25,9 +15,14 @@ updates:
         versions: ["5.x"]
 
   - package-ecosystem: "nuget"
-    directory: "/src/ingestion/GreenEnergyHub.Ingestion.Asynchronous/"
+    directory: "/src/messaging/"
     schedule:
       interval: "weekly"
+    ignore:
+      # .NET 5 dependency: no Azure Functions support yet
+      # https://github.com/Azure/azure-functions-host/issues/6674
+      - dependency-name: "Microsoft.Extensions.DependencyInjection"
+        versions: ["5.x"]
 
   - package-ecosystem: "nuget"
     directory: "/src/master-data/GreenEnergyHub.MasterData/"

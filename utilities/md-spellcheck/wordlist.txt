@@ -37,6 +37,7 @@ DataHUBB
 DataStream
 ddp
 decarbonized
+deno
 denormalized
 dependabot
 deployable
