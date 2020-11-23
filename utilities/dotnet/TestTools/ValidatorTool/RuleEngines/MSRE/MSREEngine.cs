@@ -12,10 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RulesEngine.Models;
 using static RulesEngine.Extensions.ListofRuleResultTreeExtension;
 
 namespace ValidatorTool.RuleEngines.MSRE

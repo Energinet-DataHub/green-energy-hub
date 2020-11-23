@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-﻿namespace ValidatorTool.RuleEngines.NRules
+namespace ValidatorTool.RuleEngines.NRules
 {
     /// <summary>
     /// Used to track the execution result of each validation rule. Instances of
