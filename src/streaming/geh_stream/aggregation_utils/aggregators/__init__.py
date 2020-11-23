@@ -12,5 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from .hourly_consumption_supplier import HourlyConsumptionSupplierAggregator
+from .hourly_production import HourlyProductionAggregator
 
-__all__ = ["HourlyConsumptionSupplierAggregator"]
+__all__ = ["HourlyConsumptionSupplierAggregator", "HourlyProductionAggregator"]

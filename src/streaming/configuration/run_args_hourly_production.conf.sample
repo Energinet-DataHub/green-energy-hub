@@ -1,0 +1,12 @@
+
+input-storage-account-name=<account name holding time series data>
+input-storage-account-key=<account key for input storage>
+input-storage-container-name=<container name for input storage>
+input-path=<path to time series data relative to container root> 
+output-storage-account-name=<account name to store aggregated data>
+output-storage-account-key=<account key for output storage>
+output-storage-container-name=<container name for output storage>
+output-path=<path to aggregated data relative to container root>
+beginning-date-time=<date-time (timezone aware) representing the beginning of the time period of aggregation (ex: 2020-01-03T00:00:00-0100)>
+end-date-time=<date-time (timezone aware) representing the end of the time period of aggregation (ex: 2020-01-03T00:00:00+0100)>
+telemetry-instrumentation-key=<application insights instrumentation key, GUID format>
