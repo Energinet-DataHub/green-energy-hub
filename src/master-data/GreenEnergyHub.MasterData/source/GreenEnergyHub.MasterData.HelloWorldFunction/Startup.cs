@@ -22,8 +22,10 @@ using Serilog;
 
 namespace GreenEnergyHub.MasterData.HelloWorldFunction
 {
+    #pragma warning disable CA1812
     internal class Startup : FunctionsStartup
     {
+        #pragma warning disable CA2000 // TODO (stad): investigate this, dispose may be necessary
         public override void Configure(IFunctionsHostBuilder builder)
         {
             // Register Serilog
@@ -37,5 +39,7 @@ namespace GreenEnergyHub.MasterData.HelloWorldFunction
 
             // Register services
         }
+        #pragma warning restore CA2000
     }
+    #pragma warning restore CA1812
 }

@@ -39,7 +39,7 @@
                 throw new Exception(); // TODO: better exception needed
             }
 
-            await _mediator.Send(instance);
+            await _mediator.Send(instance).ConfigureAwait(false);
         }
     }
 }

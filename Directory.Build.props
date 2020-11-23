@@ -6,6 +6,8 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.7.54" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" />
 
         <!--
         Additional settings for specific rules (e.g. SA1200 specify namespaces must be placed correctly, the json file then defines what "correctly" means)

@@ -12,23 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
- using System;
- using System.Threading;
- using System.Threading.Tasks;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
- namespace GreenEnergyHub.Messaging.Dispatching
+namespace GreenEnergyHub.Messaging.Dispatching
 {
     public class HubCommandHandler<TRequest> : BaseCommandHandler<TRequest>
         where TRequest : IHubRequest
     {
         protected HubCommandHandler() { }
 
-        protected virtual Task<bool> ValidateAsync(TRequest actionData, CancellationToken cancellationToken) => Task.FromResult<bool>(true);
+        protected virtual Task<bool> ValidateAsync(TRequest actionData, CancellationToken cancellationToken) =>
+            Task.FromResult<bool>(true);
 
         protected virtual Task AcceptAsync(TRequest actionData, CancellationToken cancellationToken) =>
             Task.CompletedTask;
 
-        protected virtual Task RejectAsync(TRequest actionData, CancellationToken cancellationToken) => Task.CompletedTask;
+        protected virtual Task RejectAsync(TRequest actionData, CancellationToken cancellationToken) =>
+            Task.CompletedTask;
 
         /// <summary>
         /// Called when the handle method experiences an unexpected exception.
@@ -54,10 +56,12 @@
                     await RejectAsync(request, cancellationToken).ConfigureAwait(false);
                 }
             }
+#pragma warning disable CA1031
             catch (Exception e)
             {
                 await OnErrorAsync(e).ConfigureAwait(false);
             }
+#pragma warning restore CA1031
         }
     }
 }

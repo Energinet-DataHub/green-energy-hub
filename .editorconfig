@@ -163,6 +163,7 @@ dotnet_naming_style.instance_field_style.required_prefix = _
 [*{.test,Tests}.cs]
 
 dotnet_diagnostic.VSTHRD200.severity = none
+dotnet_diagnostic.CA1707.severity = none
 
 ##############################################################
 # C# Conventions                                             #
@@ -269,6 +270,8 @@ csharp_preserve_single_line_statements = false
 csharp_preserve_single_line_blocks = true
 
 # Analyzers/StyleCop rules
+dotnet_diagnostic.CA1303.severity = suggestion
+dotnet_diagnostic.CA1715.severity = error
 dotnet_diagnostic.CA1001.severity = warning
 dotnet_diagnostic.CA1009.severity = warning
 dotnet_diagnostic.CA1016.severity = warning

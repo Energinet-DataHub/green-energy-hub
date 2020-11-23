@@ -77,22 +77,24 @@ namespace GreenEnergyHub.Messaging.Dispatching
         {
             try
             {
-                if (!await ValidateAsync(request, cancellationToken))
+                if (!await ValidateAsync(request, cancellationToken).ConfigureAwait(false))
                 {
                     return new HubResponse(false, new string[] { "validation failed" });
                 }
 
-                if (!await AcceptAsync(request, cancellationToken))
+                if (!await AcceptAsync(request, cancellationToken).ConfigureAwait(false))
                 {
                     return new HubResponse(false, new string[] { "accept failed" });
                 }
 
-                return await RespondAsync(request, cancellationToken);
+                return await RespondAsync(request, cancellationToken).ConfigureAwait(false);
             }
+#pragma warning disable CA1031
             catch (Exception e)
             {
                 return await OnErrorAsync(e).ConfigureAwait(false);
             }
+#pragma warning restore CA1031
         }
     }
 }

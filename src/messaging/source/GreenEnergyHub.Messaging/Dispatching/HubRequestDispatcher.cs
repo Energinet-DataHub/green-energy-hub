@@ -40,7 +40,7 @@ namespace GreenEnergyHub.Messaging.Dispatching
                 throw new Exception(); // TODO: More descriptive exception
             }
 
-            var response = await _mediator.Send(instance);
+            var response = await _mediator.Send(instance).ConfigureAwait(false);
             if (response == null)
             {
                 throw new Exception(); // TODO: More descriptive exception

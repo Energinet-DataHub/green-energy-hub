@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,8 +28,15 @@ namespace GreenEnergyHub.MasterData.HelloWorldFunction
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
             HttpRequest req, ILogger log)
         {
+            if (req is null)
+            {
+                throw new ArgumentNullException(nameof(req));
+            }
+
+            var foo = req.Body; // do something with request here
+
             log.LogInformation("C# HTTP trigger function processed a request.");
-            return await Task.FromResult(new OkObjectResult("Hello World"));
+            return await Task.FromResult(new OkObjectResult("Hello World")).ConfigureAwait(false);
         }
     }
 }

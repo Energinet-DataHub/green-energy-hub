@@ -26,10 +26,12 @@ namespace GreenEnergyHub.Messaging.Dispatching
         where TRequest : IHubRequest
         where TResponse : IHubResponse
     {
+#pragma warning disable CA1033
         async Task<TResponse> IRequestHandler<HubRequestWrapper<TRequest, TResponse>, TResponse>.Handle(HubRequestWrapper<TRequest, TResponse> hubRequest, CancellationToken cancellationToken)
         {
-            return await HandleAsync(hubRequest.Request, cancellationToken);
+            return await HandleAsync(hubRequest.Request, cancellationToken).ConfigureAwait(false);
         }
+#pragma warning restore CA1033
 
         private protected abstract Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
     }
