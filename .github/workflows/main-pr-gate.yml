@@ -12,12 +12,118 @@ jobs:
   check-license-lines:
     name: Check License Lines
     runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check License Lines
+      uses: kt3k/license_checker@v1.0.3
+
+  # soap-validation:
+  #   name: Build Soap Validation
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - uses: actions/checkout@v2
+
+  #   # https://github.com/marketplace/actions/skip-duplicate-actions
+  #   - name: Soap validation skip check
+  #     id: soap_validation_check
+  #     uses: fkirc/skip-duplicate-actions@v1.4.0
+  #     with:
+  #       github_token: ${{ github.token }}
+  #       paths: '["samples/energinet/soap-schema-validator/**",
+  #       ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+
+  #   - name: Setup .NET Core
+  #     if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
+  #     uses: actions/setup-dotnet@v1
+  #     with:
+  #       dotnet-version: 3.1.301
+
+  #   - name: Build and test
+  #     if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
+  #     uses: ./.github/actions/dotnet-build-and-test
+  #     with:
+  #       SLN_NAME: 'Energinet.DataHub.SoapValidation.sln'
+  #       SLN_PATH: './samples/energinet/soap-schema-validator'
+
+  #   - name: Upload build artifacts
+  #     if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: build-soap-validation_artifacts
+  #       path: ${{ env.REPORT_PATH }}
+
+  soap-adapter:
+    name: Build Soap Adapter
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Check License Lines
-      uses: kt3k/license_checker@v1.0.3
+    # https://github.com/marketplace/actions/skip-duplicate-actions
+    - name: Soap adapter skip check
+      id: soap_adapter_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["samples/energinet/soap-to-json-adapter/**",
+        ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+
+    - name: Setup .NET Core
+      if: ${{ steps.soap_adapter_check.outputs.should_skip != 'true' }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Build and test
+      if: ${{ steps.soap_adapter_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'Energinet.DataHub.SoapAdapter.sln'
+        SLN_PATH: './samples/energinet/soap-to-json-adapter'
+
+    - name: Upload build artifacts
+      if: ${{ steps.soap_adapter_check.outputs.should_skip != 'true' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-soap-adapter_artifacts
+        path: ${{ env.REPORT_PATH }}
+
+  ingestion-synchronous:
+    name: Build Ingestion Synchronous
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # https://github.com/marketplace/actions/skip-duplicate-actions
+    - name: Ingestion synchronous skip check
+      id: ingestion_synchronous_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["samples/energinet/synchronous-ingestor/**",
+        ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+
+    - name: Setup .NET Core
+      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Build and test
+      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'Energinet.DataHub.Ingestion.Synchronous.sln'
+        SLN_PATH: './samples/energinet/synchronous-ingestor'
+
+    - name: Upload build artifacts
+      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-ingestion-synchronous_artifacts
+        path: ${{ env.REPORT_PATH }}
 
   build-master-data-serverless:
     name: Build Master Data Serverless
@@ -90,37 +196,74 @@ jobs:
         name: build-messaging-artifacts
         path: ${{ env.REPORT_PATH }}
 
-  ingestion-synchronous:
-    name: Build Ingestion Synchronous
+  validation-reports:
+    name: Build Validation Reports
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Ingestion Synchronous skip check
-      id: ingestion_synchronous_check
+    # https://github.com/marketplace/actions/skip-duplicate-actions
+    - name: Validation reports skip check
+      id: validation_reports_check
       uses: fkirc/skip-duplicate-actions@v1.4.0
       with:
         github_token: ${{ github.token }}
-        paths: '["samples/energinet/synchronous-ingestor",
-          ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+        paths: '["src/validation-reports/**",
+        ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
 
     - name: Setup .NET Core
-      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.validation_reports_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.402
+        dotnet-version: 3.1.301
 
     - name: Build and test
-      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.validation_reports_check.outputs.should_skip != 'true' }}
       uses: ./.github/actions/dotnet-build-and-test
       with:
-        SLN_NAME: 'Energinet.DataHub.Ingestion.Synchronous.sln'
-        SLN_PATH: './samples/energinet/synchronous-ingestor'
+        SLN_NAME: 'GreenEnergyHub.ValidationReports.sln'
+        SLN_PATH: './src/validation-reports/'
 
     - name: Upload build artifacts
-      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.validation_reports_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
-        name: build-ingestion-synchronous_artifacts
+        name: build-validation-reports_artifacts
         path: ${{ env.REPORT_PATH }}
+
+  json-schema-validator:
+    name: Build JSON Schema Validator
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # https://github.com/marketplace/actions/skip-duplicate-actions
+      - name: JSON schema validator skip check
+        id: json_schema_validator_check
+        uses: fkirc/skip-duplicate-actions@v1.4.0
+        with:
+          github_token: ${{ github.token }}
+          paths: '["src/validators/GreenEnergyHub.JSONSchemaValidator/**",
+       ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+
+      - name: Setup .NET Core
+        if: ${{ steps.json_schema_validator_check.outputs.should_skip != 'true' }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+
+      - name: Build and test
+        if: ${{ steps.json_schema_validator_check.outputs.should_skip != 'true' }}
+        uses: ./.github/actions/dotnet-build-and-test
+        with:
+          SLN_NAME: 'GreenEnergyHub.JSONSchemaValidator.sln'
+          SLN_PATH: './src/validators/GreenEnergyHub.JSONSchemaValidator/'
+
+      - name: Upload build artifacts
+        if: ${{ steps.json_schema_validator_check.outputs.should_skip != 'true' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-json-schema-validator_artifacts
+          path: ${{ env.REPORT_PATH }}

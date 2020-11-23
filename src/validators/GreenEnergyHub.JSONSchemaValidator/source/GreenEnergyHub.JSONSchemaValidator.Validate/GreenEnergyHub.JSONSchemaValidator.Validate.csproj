@@ -40,11 +40,15 @@ limitations under the License.
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
-    <None Update="schemas\ChangeOfSupplier.schema.json">
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Schemas\cim-definitions.schema.json" />
+    <EmbeddedResource Include="Schemas\cim-definitions.schema.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="schemas\cim-definitions.schema.json">
+    </EmbeddedResource>
+    <None Remove="Schemas\ChangeOfSupplier.schema.json" />
+    <EmbeddedResource Include="Schemas\ChangeOfSupplier.schema.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -26,8 +26,7 @@ namespace GreenEnergyHub.JSONSchemaValidator.Tests
 
         public ValidateTests()
         {
-            var hubSchemas = JsonSchema.FromFile("schemas/cim-definitions.schema.json");
-            SchemaRegistry.Global.Register(new Uri("https://github.com/green-energy-hub/schemas"), hubSchemas);
+            SchemaRegistry.Global.Register(new Uri("https://github.com/green-energy-hub/schemas"), SchemaHelper.CimDefinitions);
 
             var options = new ValidationOptions
             {

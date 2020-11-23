@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.IO;
 using GreenEnergyHub.JSONSchemaValidator.Validate;
 using Json.Schema;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -39,7 +40,8 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
             builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
 
             // Register services
-            var hubSchemas = JsonSchema.FromFile("schemas/cim-definitions.schema.json");
+            string solutionDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            var hubSchemas = JsonSchema.FromFile($"{solutionDir}/GreenEnergyHub.JSONSchemaValidator.Validate/Schemas/cim-definitions.schema.json");
             SchemaRegistry.Global.Register(new Uri("https://github.com/green-energy-hub/schemas"), hubSchemas);
 
             builder.Services.AddTransient(_ => new ValidationOptions { OutputFormat = OutputFormat.Basic, ValidateFormat = true, ValidateAs = Draft.Draft7 });

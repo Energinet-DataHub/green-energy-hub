@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System.ComponentModel.DataAnnotations;
+using System;
 using System.Text.Json;
 using Json.Schema;
 
@@ -40,7 +40,12 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
         /// <param name="json">The document to be validated</param>
         public ValidationResults ValidateDocument(SchemaType type, JsonDocument json)
         {
-            var schema = JsonSchema.FromFile($"schemas/{type}.schema.json");
+            var schema = SchemaHelper.GetSchema(type);
+
+            if (schema == null)
+            {
+                throw new ArgumentException("Unsupported schema type", nameof(type));
+            }
 
             return schema.Validate(json.RootElement, _options);
         }
