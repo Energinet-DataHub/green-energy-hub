@@ -1,0 +1,3 @@
+storage-account-name=<mystorageaccount>
+storage-account-key=<account-key>
+storage-container-name=deltalakepoc
