@@ -168,7 +168,7 @@ def validated_data_df(spark, parsed_data_pandas_df, master_data_pandas_df, parse
     parsed_data = spark.createDataFrame(parsed_data_pandas_df, schema=parsed_data_schema)
     master_data = spark.createDataFrame(master_data_pandas_df, schema=master_data_schema)
     enriched_data = mock_enrich(parsed_data, master_data)
-    return Validator.validate(enriched_data)
+    return Validator.add_validation_status_column(enriched_data)
 
 
 # Test 5: check to see if validate function returns DataFrame with correct schema

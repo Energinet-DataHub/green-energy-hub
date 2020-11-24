@@ -19,7 +19,7 @@ from .rules import rules
 class Validator:
 
     @staticmethod
-    def validate(enriched_data: DataFrame):
+    def add_validation_status_column(enriched_data: DataFrame):
         validated_data = enriched_data
 
         for rule in rules:

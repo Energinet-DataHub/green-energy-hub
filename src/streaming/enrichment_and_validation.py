@@ -166,7 +166,7 @@ enriched_data.printSchema()
 # %%
 from geh_stream.validation import Validator
 
-validated_data = Validator.validate(enriched_data)
+validated_data = Validator.add_validation_status_column(enriched_data)
 print("Validated stream schema:")
 validated_data.printSchema()
 
@@ -200,6 +200,7 @@ def __store_data_frame(batch_df: DataFrame, _: int):
         watch = MonitoredStopwatch.start_timer(telemetry_client, "StoreDataFrame")
 
         persist_timer = watch.start_sub_timer("persist")
+        # Cache the batch in order to avoid the risk of recalculation in each write operation
         batch_df.persist()
         persist_timer.stop_timer()
 
@@ -231,6 +232,10 @@ def __store_data_frame(batch_df: DataFrame, _: int):
         raise err
 
 
+# checkpointLocation is used to support failure (or intentional shut-down)
+# recovery with a exactly-once semantic. See more on
+# https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#fault-tolerance-semantics.
+# The trigger determines how often a batch is created and processed.
 out_stream = validated_data \
     .writeStream \
     .option("checkpointLocation", checkpoint_path) \
@@ -240,6 +245,11 @@ out_stream = validated_data \
 # %%
 import time
 
+# Purpose of this construction is to ensure that the master data used to enrich the streaming data
+# is no older than 5 minutes.
+# The alternative of restarting the job every 5ish minutes was considered too expensive.
+# The assumption here is that reading of master data and restart of the streaming
+# can be done in less than 30 seconds.
 while True:
     execution = out_stream.start()
     time.sleep(4.5 * 60)
