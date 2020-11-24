@@ -88,7 +88,7 @@ master_data_storage_path = BASE_STORAGE_PATH + args.master_data_path
 
 csv_read_config = {
     "inferSchema": "True",
-    "delimiter": ",",
+    "delimiter": ";",
     "header": "True",
     "nullValues": "NULL"
 }
@@ -251,5 +251,6 @@ import time
 # The assumption here is that reading of master data and restart of the streaming
 # can be done in less than 30 seconds.
 while True:
+    print("(Re)start streaming with fresh master data.")
     execution = out_stream.start()
     time.sleep(4.5 * 60)

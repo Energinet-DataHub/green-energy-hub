@@ -2,7 +2,7 @@ storage-account-name=mystorageacoount
 storage-account-key=<account-key>
 storage-container-name=data
 
-master-data-path=master-data/dump.csv
+master-data-path=master-data/master-data.csv
 
 input-eh-connection-string=Endpoint=sb://myeventhub.servicebus.windows.net/;SharedAccessKeyName=Listen;SharedAccessKey=<key>;EntityPath=input;
 valid-output-eh-connection-string=Endpoint=sb://myeventhub.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=<key>;EntityPath=valid-output;
