@@ -172,8 +172,10 @@ validated_data.printSchema()
 
 # %%
 from pyspark.sql import DataFrame
-
+from geh_stream.monitoring import Telemetry, MonitoredStopwatch
 import geh_stream.batch_operations as batch_operations
+
+telemetry_client = Telemetry.create_telemetry_client(args.telemetry_instrumentation_key)
 
 valid_output_eh_connection_string = args.valid_output_eh_connection_string
 invalid_output_eh_connection_string = args.invalid_output_eh_connection_string
@@ -194,19 +196,39 @@ invalid_output_eh_conf = {
 
 
 def __store_data_frame(batch_df: DataFrame, _: int):
-    batch_df.persist()
+    try:
+        watch = MonitoredStopwatch.start_timer(telemetry_client, "StoreDataFrame")
 
-    # Make valid time series points available to aggregations (by storing in Delta lake)
-    batch_operations.store_valid_data(batch_df, output_delta_lake_path)
+        persist_timer = watch.start_sub_timer("persist")
+        batch_df.persist()
+        persist_timer.stop_timer()
 
-    # Forward all valid time series points to message shipping (by sending to Kafka topic)
-    batch_operations.send_valid_data(batch_df, valid_output_eh_conf)
+        correlation_ids = batch_operations.get_involved_correlation_ids(batch_df, watch)
+        batch_count = batch_operations.get_rows_in_batch(batch_df, watch)
 
-    # Forward all invalid time series points to further processing like sending
-    # a negative acknowledgement to the sending market actor.
-    batch_operations.send_invalid_data(batch_df, invalid_output_eh_conf)
+        # Make valid time series points available to aggregations (by storing in Delta lake)
+        batch_operations.store_valid_data(batch_df, output_delta_lake_path, watch)
 
-    batch_df.unpersist()
+        # Forward all valid time series points to message shipping (by sending to Kafka topic)
+        batch_operations.send_valid_data(batch_df, valid_output_eh_conf, watch)
+
+        # Forward all invalid time series points to further processing like sending
+        # a negative acknowledgement to the sending market actor.
+        batch_operations.send_invalid_data(batch_df, invalid_output_eh_conf, watch)
+
+        unpersist_timer = watch.start_sub_timer("unpersist")
+        batch_df.unpersist()
+        unpersist_timer.stop_timer()
+
+        watch.stop_timer(batch_count)
+
+        batch_operations.track_batch_back_to_original_correlation_requests(correlation_ids, batch_count, telemetry_client, watch)
+
+    except Exception as err:
+        telemetry_client.context.operation.parent_id = None
+        telemetry_client.track_exception()
+        telemetry_client.flush()
+        raise err
 
 
 out_stream = validated_data \

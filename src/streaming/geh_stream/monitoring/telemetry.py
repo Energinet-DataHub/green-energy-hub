@@ -27,5 +27,5 @@ class Telemetry:
         tc.context.application.ver = "1.0.0"
         tc.context.device.id = "spark"
         tc.context.operation.id = operationId
-        tc.context.operation.parentId = parentOperationId
+        tc.context.operation.parent_id = parentOperationId
         return tc

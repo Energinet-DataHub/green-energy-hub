@@ -11,13 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import inspect
 from pyspark.sql import DataFrame
 from pyspark.sql.types import StructType, TimestampType, StringType, DoubleType
 from pyspark.sql.functions import year, month, dayofmonth, to_json, \
     struct, col, from_json, coalesce, lit
 
 
-def send_valid_data(batch_df: DataFrame, output_eh_conf):
+def send_valid_data(batch_df: DataFrame, output_eh_conf, watch):
+    timer = watch.start_sub_timer(inspect.currentframe().f_code.co_name)
     batch_df \
         .filter(col("IsValid") == lit(True)) \
         .select(col("MarketEvaluationPoint_mRID"),
@@ -53,9 +55,11 @@ def send_valid_data(batch_df: DataFrame, output_eh_conf):
         .format("eventhubs") \
         .options(**output_eh_conf) \
         .save()
+    timer.stop_timer()
 
 
-def send_invalid_data(batch_df: DataFrame, output_invalid_eh_conf):
+def send_invalid_data(batch_df: DataFrame, output_invalid_eh_conf, watch):
+    timer = watch.start_sub_timer(inspect.currentframe().f_code.co_name)
     batch_df \
         .filter(col("IsValid") == lit(False)) \
         .select(col("ProcessType"),
@@ -73,9 +77,11 @@ def send_invalid_data(batch_df: DataFrame, output_invalid_eh_conf):
         .format("eventhubs") \
         .options(**output_invalid_eh_conf) \
         .save()
+    timer.stop_timer()
 
 
-def store_valid_data(batch_df: DataFrame, output_delta_lake_path):
+def store_valid_data(batch_df: DataFrame, output_delta_lake_path, watch):
+    timer = watch.start_sub_timer(inspect.currentframe().f_code.co_name)
     batch_df \
         .filter(col("IsValid") == lit(True)) \
         .select(col("MarketEvaluationPoint_mRID"),
@@ -115,3 +121,4 @@ def store_valid_data(batch_df: DataFrame, output_delta_lake_path):
         .format("delta") \
         .mode("append") \
         .save(output_delta_lake_path)
+    timer.stop_timer()

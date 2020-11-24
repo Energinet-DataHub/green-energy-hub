@@ -12,5 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from .telemetry import Telemetry
+from .monitored_stopwatch import MonitoredStopwatch
 
-__all__ = ["Telemetry"]
+__all__ = ["Telemetry", "MonitoredStopwatch"]
