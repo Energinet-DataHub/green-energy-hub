@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Aggregate hourly consumption supplier
+Aggregate hourly consumption
 """
 
 # %%
@@ -26,8 +26,8 @@ from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
 
 # %%
-p = configargparse.ArgParser(prog='hourly_consumption_supplier_aggregation.py', description='Green Energy Hub Hourly Consumption Supplier Aggregation',
-                             default_config_files=['configuration/run_args_hourly_consumption_supplier.conf'],
+p = configargparse.ArgParser(prog='hourly_consumption_aggregation.py', description='Green Energy Hub Hourly Consumption Aggregation',
+                             default_config_files=['configuration/run_args_hourly_consumption.conf'],
                              formatter_class=configargparse.ArgumentDefaultsHelpFormatter)
 p.add('--input-storage-account-name', type=str, required=True,
       help='Azure Storage account name holding time series data')
@@ -43,7 +43,7 @@ p.add('--output-storage-account-key', type=str, required=True,
       help='Azure Storage key for output storage', env_var='GEH_OUTPUT_STORAGE_KEY')
 p.add('--output-storage-container-name', type=str, required=False, default='aggregations',
       help='Azure Storage container name for output storage')
-p.add('--output-path', type=str, required=False, default="delta/hourly-consumption-supplier/",
+p.add('--output-path', type=str, required=False, default="delta/hourly-consumption/",
       help='Path to aggregation storage location (deltalake) relative to root container')
 p.add('--beginning-date-time', type=str, required=True,
       help='The timezone aware date-time representing the beginning of the time period of aggregation (ex: 2020-01-03T00:00:00+0100)')
@@ -112,10 +112,10 @@ from geh_stream.aggregation_utils.filters import TimePeriodFilter
 valid_time_period_df = TimePeriodFilter.filter(timeseries_df, beginning_date_time, end_date_time)
 
 # %%
-from geh_stream.aggregation_utils.aggregators import HourlyConsumptionSupplierAggregator
+from geh_stream.aggregation_utils.aggregators import HourlyConsumptionAggregator
 
 # Perform aggregation calculation
-aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(valid_time_period_df)
+aggregated_df = HourlyConsumptionAggregator.aggregate(valid_time_period_df)
 
 # %%
 

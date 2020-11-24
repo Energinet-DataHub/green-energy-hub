@@ -13,7 +13,7 @@
 # limitations under the License.
 from decimal import Decimal
 from datetime import datetime
-from geh_stream.aggregation_utils.aggregators import HourlyConsumptionSupplierAggregator
+from geh_stream.aggregation_utils.aggregators import HourlyConsumptionAggregator
 from geh_stream.codelists import MarketEvaluationPointType, SettlementMethod
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.types import StructType, StringType, DecimalType, TimestampType
@@ -121,7 +121,7 @@ def test_hourly_consumption_supplier_aggregator_filters_out_incorrect_point_type
     Aggregator should filter out all non "E17" MarketEvaluationPointType rows
     """
     df = time_series_row_factory(point_type=e_18)
-    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    aggregated_df = HourlyConsumptionAggregator.aggregate(df)
     assert aggregated_df.count() == 0
 
 
@@ -130,7 +130,7 @@ def test_hourly_consumption_supplier_aggregator_filters_out_incorrect_settlement
     Aggregator should filter out all non "E02" SettlementMethod rows
     """
     df = time_series_row_factory(settlement_method=e_01)
-    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    aggregated_df = HourlyConsumptionAggregator.aggregate(df)
     assert aggregated_df.count() == 0
 
 
@@ -142,7 +142,7 @@ def test_hourly_consumption_supplier_aggregator_aggregates_observations_in_same_
     row1_df = time_series_row_factory(quantity=Decimal(1))
     row2_df = time_series_row_factory(quantity=Decimal(2))
     df = row1_df.union(row2_df)
-    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    aggregated_df = HourlyConsumptionAggregator.aggregate(df)
 
     # Create the start/end datetimes representing the start and end of the 1 hr time period
     # These should be datetime naive in order to compare to the Spark Dataframe
@@ -163,7 +163,7 @@ def test_hourly_consumption_supplier_aggregator_returns_distinct_rows_for_observ
     row1_df = time_series_row_factory()
     row2_df = time_series_row_factory(obs_time=diff_obs_time)
     df = row1_df.union(row2_df)
-    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    aggregated_df = HourlyConsumptionAggregator.aggregate(df)
 
     assert aggregated_df.count() == 2
 
@@ -184,5 +184,5 @@ def test_hourly_consumption_supplier_aggregator_returns_correct_schema(time_seri
     and time window (from the single-hour resolution specified in the aggregator).
     """
     df = time_series_row_factory()
-    aggregated_df = HourlyConsumptionSupplierAggregator.aggregate(df)
+    aggregated_df = HourlyConsumptionAggregator.aggregate(df)
     assert aggregated_df.schema == expected_schema

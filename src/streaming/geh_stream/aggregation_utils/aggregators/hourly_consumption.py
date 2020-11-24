@@ -16,7 +16,7 @@ from pyspark.sql.functions import col, window
 from geh_stream.codelists import MarketEvaluationPointType, SettlementMethod
 
 
-class HourlyConsumptionSupplierAggregator:
+class HourlyConsumptionAggregator:
 
     @staticmethod
     def aggregate(df: DataFrame):

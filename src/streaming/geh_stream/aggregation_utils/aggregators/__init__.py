@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .hourly_consumption_supplier import HourlyConsumptionSupplierAggregator
+from .hourly_consumption import HourlyConsumptionAggregator
 from .hourly_production import HourlyProductionAggregator
 from .net_exchange_grid_area_aggregator import NetExchangeGridAreaAggregator
 
-__all__ = ["HourlyConsumptionSupplierAggregator", "NetExchangeGridAreaAggregator", "HourlyProductionAggregator"]
+__all__ = ["HourlyConsumptionAggregator", "NetExchangeGridAreaAggregator", "HourlyProductionAggregator"]
