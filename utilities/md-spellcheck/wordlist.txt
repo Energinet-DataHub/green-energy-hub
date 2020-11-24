@@ -105,6 +105,7 @@ johevemi
 johnddonnelly
 jonasdmoeller
 Jørgensen
+jpg
 js
 json
 jsonschema

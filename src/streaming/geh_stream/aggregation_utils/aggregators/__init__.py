@@ -13,5 +13,6 @@
 # limitations under the License.
 from .hourly_consumption_supplier import HourlyConsumptionSupplierAggregator
 from .hourly_production import HourlyProductionAggregator
+from .net_exchange_grid_area_aggregator import NetExchangeGridAreaAggregator
 
-__all__ = ["HourlyConsumptionSupplierAggregator", "HourlyProductionAggregator"]
+__all__ = ["HourlyConsumptionSupplierAggregator", "NetExchangeGridAreaAggregator", "HourlyProductionAggregator"]
