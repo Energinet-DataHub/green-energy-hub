@@ -22,6 +22,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Requests
     /// <summary>
     /// POCO for a ChangeOfSupplierRequest.
     /// </summary>
+    [HubRequestQueue("RequestQueue")]
     [HubRequest("ChangeSupplier")]
     public class ChangeOfSupplierRequest : IHubRequest, IRequestHasConsumer, IRequestHasEnergySupplier, IRequestHasBalanceResponsibleParty, IRequestHasStartDate
     {

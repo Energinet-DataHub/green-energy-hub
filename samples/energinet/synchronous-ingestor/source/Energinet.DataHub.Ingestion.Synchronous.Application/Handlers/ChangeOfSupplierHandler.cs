@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Synchronous.Application.Requests;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
+using GreenEnergyHub.Messaging.RequestQueue;
 
 namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
 {
@@ -27,6 +28,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
     public class ChangeOfSupplierHandler : HubRequestHandler<ChangeOfSupplierRequest>
     {
         private readonly IRuleEngine<ChangeOfSupplierRequest> _rulesEngine;
+        private readonly IHubRequestQueueDispatcher _requestDispatcher;
 
         /// <summary>
         /// Builds a ChangeOfSupplierHandler which validates messages using a
@@ -34,9 +36,13 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
         /// </summary>
         /// <param name="rulesEngine">The IRuleEngine to validate messages with.
         /// </param>
-        public ChangeOfSupplierHandler(IRuleEngine<ChangeOfSupplierRequest> rulesEngine)
+        /// <param name="requestQueueDispatcher">Queue dispatcher to use when request is successfully validated.</param>
+        public ChangeOfSupplierHandler(
+            IRuleEngine<ChangeOfSupplierRequest> rulesEngine,
+            IHubRequestQueueDispatcher requestQueueDispatcher)
         {
             _rulesEngine = rulesEngine;
+            _requestDispatcher = requestQueueDispatcher;
         }
 
         /// <summary>
@@ -56,10 +62,10 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
         /// <param name="actionData">The ChangeOfSupplierRequest.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>True if the request was successfully accepted.</returns>
-        protected override Task<bool> AcceptAsync(ChangeOfSupplierRequest actionData, CancellationToken cancellationToken)
+        protected override async Task<bool> AcceptAsync(ChangeOfSupplierRequest actionData, CancellationToken cancellationToken)
         {
-            Console.WriteLine("Writing Service Start Request to DB!");
-            return Task.FromResult(true);
+            await _requestDispatcher.DispatchAsync(actionData).ConfigureAwait(false);
+            return true;
         }
 
         /// <summary>

@@ -15,6 +15,7 @@
 using System;
 using Energinet.DataHub.Ingestion.Synchronous.Application.Requests;
 using Energinet.DataHub.Ingestion.Synchronous.AzureFunction;
+using Energinet.DataHub.Ingestion.Synchronous.AzureFunction.Configuration;
 using Energinet.DataHub.Ingestion.Synchronous.Infrastructure;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
@@ -45,6 +46,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
             // Register services
             builder.Services.AddScoped<IHubRehydrate, JsonMessageDeserializer>();
             builder.Services.AddGreenEnergyHub(typeof(ChangeOfSupplierRequest).Assembly);
+            builder.Services.AddRequestQueue();
         }
         #pragma warning restore CA2000
     }
