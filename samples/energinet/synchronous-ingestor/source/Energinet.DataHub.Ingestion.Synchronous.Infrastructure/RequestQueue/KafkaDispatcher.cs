@@ -101,7 +101,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Infrastructure.RequestQueue
             var payload = Serialize(inboundQueueMessage);
             return new Message<Null, string>()
             {
-                Value = payload
+                Value = payload,
             };
         }
 

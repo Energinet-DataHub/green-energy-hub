@@ -31,7 +31,8 @@ jobs:
   #     with:
   #       github_token: ${{ github.token }}
   #       paths: '["samples/energinet/soap-schema-validator/**",
-  #       ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+  #         ".github/workflows/main-pr-gate.yml", ".editorconfig",
+  #         "Directory.Build.props"]'
 
   #   - name: Setup .NET Core
   #     if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
@@ -67,7 +68,8 @@ jobs:
       with:
         github_token: ${{ github.token }}
         paths: '["samples/energinet/soap-to-json-adapter/**",
-        ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+          ".github/workflows/main-pr-gate.yml", ".editorconfig",
+          "Directory.Build.props"]'
 
     - name: Setup .NET Core
       if: ${{ steps.soap_adapter_check.outputs.should_skip != 'true' }}
@@ -103,7 +105,8 @@ jobs:
       with:
         github_token: ${{ github.token }}
         paths: '["samples/energinet/synchronous-ingestor/**",
-        ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+          ".github/workflows/main-pr-gate.yml", ".editorconfig",
+          "Directory.Build.props"]'
 
     - name: Setup .NET Core
       if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
@@ -139,7 +142,7 @@ jobs:
       with:
         github_token: ${{ github.token }}
         paths: '["src/master-data/**", ".github/workflows/main-pr-gate.yml",
-          ".editorconfig"]'
+          ".editorconfig", "Directory.Build.props"]'
 
     - name: Setup .NET Core
       if: ${{ steps.master_data_serverless_check.outputs.should_skip != 'true' }}
@@ -174,8 +177,9 @@ jobs:
       uses: fkirc/skip-duplicate-actions@v1.4.0
       with:
         github_token: ${{ github.token }}
-        paths: '["utilities/dotnet/TimeSeriesGenerator/**", ".github/workflows/main-pr-gate.yml",
-          ".editorconfig"]'
+        paths: '["utilities/dotnet/TimeSeriesGenerator/**",
+          ".github/workflows/main-pr-gate.yml", ".editorconfig",
+          "Directory.Build.props"]'
 
     - name: Setup .NET Core
       if: ${{ steps.time_series_generator_check.outputs.should_skip != 'true' }}
@@ -211,7 +215,7 @@ jobs:
       with:
         github_token: ${{ github.token }}
         paths: '["src/messaging/**", ".github/workflows/main-pr-gate.yml",
-          ".editorconfig"]'
+          ".editorconfig", "Directory.Build.props"]'
 
     - name: Setup .NET Core
       if: ${{ steps.messaging_check.outputs.should_skip != 'true' }}
@@ -247,7 +251,8 @@ jobs:
       with:
         github_token: ${{ github.token }}
         paths: '["src/validation-reports/**",
-        ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+          ".github/workflows/main-pr-gate.yml", ".editorconfig",
+          "Directory.Build.props"]'
 
     - name: Setup .NET Core
       if: ${{ steps.validation_reports_check.outputs.should_skip != 'true' }}
@@ -283,7 +288,8 @@ jobs:
         with:
           github_token: ${{ github.token }}
           paths: '["src/validators/GreenEnergyHub.JSONSchemaValidator/**",
-       ".github/workflows/main-pr-gate.yml", ".editorconfig"]'
+            ".github/workflows/main-pr-gate.yml", ".editorconfig",
+            "Directory.Build.props"]'
 
       - name: Setup .NET Core
         if: ${{ steps.json_schema_validator_check.outputs.should_skip != 'true' }}

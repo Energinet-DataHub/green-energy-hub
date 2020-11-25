@@ -18,14 +18,14 @@ using NRules.RuleModel;
 
 namespace GreenEnergyHub.Messaging.Rules
 {
-  /// <summary>
-  /// Verify if a customerId is non-negative. Note that the non-negative
-  /// verification is part of the action body, not the match condition.
-  ///
-  /// Moving the verification to match condition would not result in a
-  /// RuleResult upon validation rule failure.
-  /// </summary>
-  [Repeatability(RuleRepeatability.NonRepeatable)]
+    /// <summary>
+    /// Verify if a customerId is non-negative. Note that the non-negative
+    /// verification is part of the action body, not the match condition.
+    ///
+    /// Moving the verification to match condition would not result in a
+    /// RuleResult upon validation rule failure.
+    /// </summary>
+    [Repeatability(RuleRepeatability.NonRepeatable)]
     public class NonNegativeCustomerIdRule<TRequest> : Rule
         where TRequest : IHubRequest, IRequestHasConsumer
     {
@@ -44,7 +44,7 @@ namespace GreenEnergyHub.Messaging.Rules
 
         private RuleResult DoValidation(TRequest actionRequest)
         {
-            if (int.TryParse(actionRequest.Consumer.MRid.Value, out var mRid) && mRid < 0)
+            if (int.TryParse(actionRequest.Consumer.MRid.Value, out var mrid) && mrid < 0)
             {
                 return new RuleResult(GetType().Name, actionRequest.Transaction.MRid, false, "CustomerId was negative");
             }

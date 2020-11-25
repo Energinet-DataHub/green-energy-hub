@@ -30,7 +30,7 @@ namespace GreenEnergyHub.JSONSchemaValidator.Tests
 
             var options = new ValidationOptions
             {
-                OutputFormat = OutputFormat.Verbose, ValidateAs = Draft.Draft7, ValidateFormat = true
+                OutputFormat = OutputFormat.Verbose, ValidateAs = Draft.Draft7, ValidateFormat = true,
             };
             _validateService = new ValidateService(options);
         }

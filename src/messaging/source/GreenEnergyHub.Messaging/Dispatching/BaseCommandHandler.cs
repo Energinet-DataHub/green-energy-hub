@@ -16,7 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
- namespace GreenEnergyHub.Messaging.Dispatching
+namespace GreenEnergyHub.Messaging.Dispatching
 {
     public abstract class BaseCommandHandler<TRequest> : AsyncRequestHandler<HubCommandWrapper<TRequest>>
         where TRequest : IHubRequest

@@ -42,7 +42,7 @@ namespace Energinet.DataHub.SoapAdapter.Tests
                 SenderIdentification = "5790002263057",
                 EnergyBusinessProcess = "E03",
                 EnergyIndustryClassification = "23",
-                EnergyBusinessProcessRole = "DDQ"
+                EnergyBusinessProcessRole = "DDQ",
             };
 
             Assert.Equal(expected, actual.RsmHeader);

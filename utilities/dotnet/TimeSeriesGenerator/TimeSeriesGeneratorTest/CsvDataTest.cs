@@ -55,12 +55,12 @@ namespace TimeSeriesGeneratorTest
         [InlineData("344", "E17", "E02", 5933)]
         [InlineData("131", "E17", "D01", 396450)]
         [InlineData("131", "E17", "E02", 7770)]
-        public void TestGridArea1(string gridId, string mPType, string sMethod, int expected)
+        public void TestGridArea1(string gridId, string mptype, string smethod, int expected)
         {
             var filter = _timeSeriesPoints.AsParallel().Where(t =>
                 t.MeteringGridArea_Domain_mRID == gridId
-                && t.MarketEvaluationPointType == mPType
-                && t.SettlementMethod == sMethod);
+                && t.MarketEvaluationPointType == mptype
+                && t.SettlementMethod == smethod);
             var count = filter.Count();
             Assert.Equal(_generatedTimeSpanSetCount * expected, count);
         }
@@ -74,11 +74,11 @@ namespace TimeSeriesGeneratorTest
         [InlineData("344", "E20", 208)]
         [InlineData("131", "E18", 20710)]
         [InlineData("131", "E20", 306)]
-        public void TestGridArea2(string gridId, string mPType, int expected)
+        public void TestGridArea2(string gridId, string mptype, int expected)
         {
             var filter = _timeSeriesPoints.AsParallel().Where(t =>
                 t.MeteringGridArea_Domain_mRID == gridId
-                && t.MarketEvaluationPointType == mPType);
+                && t.MarketEvaluationPointType == mptype);
             var count = filter.Count();
             Assert.Equal(_generatedTimeSpanSetCount * expected, count);
         }

@@ -23,9 +23,9 @@ namespace GreenEnergyHub.Messaging.RequestTypes.Common
         {
         }
 
-        public Transaction(string mRid)
+        public Transaction(string mrid)
         {
-            MRid = mRid;
+            MRid = mrid;
         }
 
         [JsonPropertyName(name: "mRID")]

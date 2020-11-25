@@ -36,7 +36,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction.Configuration
                     SecurityProtocol = configuration.GetValue<string>("SecurityProtocol"),
                     SslCaLocation = configuration.GetValue<string>("SslCaLocation"),
                     MessageTimeoutMs = configuration.GetValue<int>("MessageTimeoutMs"),
-                    MessageSendMaxRetries = configuration.GetValue<int>("MessageSendMaxRetries")
+                    MessageSendMaxRetries = configuration.GetValue<int>("MessageSendMaxRetries"),
                 };
             });
             services.AddSingleton<IKafkaProducerFactory, KafkaProducerFactory>();

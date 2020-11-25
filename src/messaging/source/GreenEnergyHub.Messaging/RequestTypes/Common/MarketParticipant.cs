@@ -25,9 +25,9 @@ namespace GreenEnergyHub.Messaging.RequestTypes.Common
             : this(new MRid(mrid), null)
         { }
 
-        public MarketParticipant(MRid mRid, string? name)
+        public MarketParticipant(MRid mrid, string? name)
         {
-            MRid = mRid;
+            MRid = mrid;
             Name = name;
         }
 
