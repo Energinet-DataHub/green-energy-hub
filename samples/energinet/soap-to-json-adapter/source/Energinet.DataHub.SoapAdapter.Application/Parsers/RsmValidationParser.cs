@@ -65,16 +65,16 @@ namespace Energinet.DataHub.SoapAdapter.Application.Parsers
             throw new XmlException("Missing xml exception");
         }
 
-        private static bool RootElementNotFound(XmlReader reader, string payloadRootElement, string payloadNamespace)
+        private static bool IsRootElementFound(XmlReader reader, string payloadRootElement, string payloadNamespace)
         {
-            return reader.NodeType != XmlNodeType.Element
+            return !(reader.NodeType != XmlNodeType.Element
                    && payloadRootElement.Length == 0
-                   && payloadNamespace.Length == 0;
+                   && payloadNamespace.Length == 0);
         }
 
-        private static bool IfRootElementIsNotAssigned(string payloadRootElement, string payloadNamespace)
+        private static bool IsRootElementAssigned(string payloadRootElement, string payloadNamespace)
         {
-            return payloadRootElement.Length == 0 && payloadNamespace.Length == 0;
+            return !(payloadRootElement.Length == 0 && payloadNamespace.Length == 0);
         }
 
         private static async ValueTask ReadHeaderEnergyDocumentAsync(XmlReader reader, Context context, string ns)
@@ -159,12 +159,12 @@ namespace Energinet.DataHub.SoapAdapter.Application.Parsers
 
             while (await reader.ReadAsync().ConfigureAwait(false))
             {
-                if (RootElementNotFound(reader, rootElement, ns))
+                if (!IsRootElementFound(reader, rootElement, ns))
                 {
                     continue;
                 }
 
-                if (IfRootElementIsNotAssigned(rootElement, ns))
+                if (!IsRootElementAssigned(rootElement, ns))
                 {
                     rootElement = reader.LocalName;
                     ns = reader.NamespaceURI;
