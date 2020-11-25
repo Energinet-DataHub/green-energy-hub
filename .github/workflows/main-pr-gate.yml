@@ -161,6 +161,43 @@ jobs:
         name: build-master-data-serverless_artifacts
         path: ${{ env.REPORT_PATH }}
 
+  build-time-series-generator:
+    name: Build Time Series Generator
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # https://github.com/marketplace/actions/skip-duplicate-actions
+    - name: Time Series Generator skip check
+      id: time_series_generator_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["utilities/dotnet/TimeSeriesGenerator/**", ".github/workflows/main-pr-gate.yml",
+          ".editorconfig"]'
+
+    - name: Setup .NET Core
+      if: ${{ steps.time_series_generator_check.outputs.should_skip != 'true' }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+  
+    - name: Build and test
+      if: ${{ steps.time_series_generator_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'TimeSeriesGenerator.sln'
+        SLN_PATH: './utilities/dotnet/TimeSeriesGenerator/'
+
+    - name: Upload build artifacts
+      if: ${{ steps.time_series_generator_check.outputs.should_skip != 'true' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-time-series-generator_artifacts
+        path: ${{ env.REPORT_PATH }}
+
+
   messaging:
     name: Build Messaging
     runs-on: ubuntu-latest

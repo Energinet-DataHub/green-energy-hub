@@ -1,0 +1,19 @@
+{
+    "EventHub": {
+        "InputConnectionString": ""
+    },
+    "MeteringPointsPerGridArea": 70000,
+    "NumberOfGridAreas": 50,
+    "ConcurrentSenders": 2,
+    "MinutesPerTimeSeriesPoint": 15,
+    "DistributionOfMeteringPointsCsvFileName": "DistributionOfDanishMps.csv",
+    "StartDate": "2020-10-20",
+    "EndDate": "2020-10-21"
+}## Appsettings
+
+* Eventhub.InputConnectionString : The connectionstring for the eventhub for ingestion
+* MeteringPointsPerGridArea : How many metering points should we generate per grid area (when not running from a csv file)?
+* NumberOfGridAreas : Number of grid areas to generate (when not running from a csv file)
+* ConcurrentSenders : When sending to the eventhub adjust this to match the number of cores on the machine running the app. Also the TU in the eventhub NS should match this number
+* Resolution : The time series resolution we will generate data for. 15 will generate a time series point for each 15 minutes in the time span defined in the code.
+* DistributionOfMeteringPointsCsvFileName : When this is set the app will try and read the csv file and use it as basis for generating the time series. An example for the Danish grid areas are included in the solution (DistributionOfDanishMps.csv).
