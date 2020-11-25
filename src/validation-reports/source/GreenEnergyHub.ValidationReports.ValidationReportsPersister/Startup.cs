@@ -22,20 +22,22 @@ using Serilog;
 
 namespace GreenEnergyHub.ValidationReports.ValidationReportsPersister
 {
-    internal class Startup : FunctionsStartup
+    public class Startup : FunctionsStartup
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             // Register Serilog
-            var telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-            telemetryConfiguration.InstrumentationKey = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
             var logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                .WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces)
+                .WriteTo.ApplicationInsights(TelemetryConverter.Traces)
                 .CreateLogger();
-            builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
 
-            // Register services
+            builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
         }
     }
 }

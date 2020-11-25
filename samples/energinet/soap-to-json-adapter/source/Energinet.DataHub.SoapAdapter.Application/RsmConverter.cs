@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -27,52 +28,72 @@ namespace Energinet.DataHub.SoapAdapter.Application
 
         public async ValueTask ConvertAsync(Stream input, Stream output)
         {
-            using var reader = XmlReader.Create(input, new XmlReaderSettings { Async = true });
-            var header = new RsmHeader();
-            var writer = new Utf8JsonWriter(output);
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
-            reader.ReadToFollowing("Payload", B2BNamespace);
+            if (output == null)
+            {
+                throw new ArgumentNullException(nameof(output));
+            }
 
-            await ParseRsmHeaderAsync(reader, header);
+            using (var reader = XmlReader.Create(input, new XmlReaderSettings { Async = true }))
+            {
+                var header = new RsmHeader();
+                var writer = new Utf8JsonWriter(output);
 
-            await ConvertPayloadAsync(reader, header, writer);
+                try
+                {
+                    reader.ReadToFollowing("Payload", B2BNamespace);
 
-            await writer.FlushAsync();
+                    await ParseRsmHeaderAsync(reader, header).ConfigureAwait(false);
+
+                    await ConvertPayloadAsync(reader, header, writer).ConfigureAwait(false);
+
+                    await writer.FlushAsync().ConfigureAwait(false);
+                }
+                finally
+                {
+                    await writer.DisposeAsync().ConfigureAwait(false);
+                }
+            }
         }
 
         protected abstract ValueTask ConvertPayloadAsync(XmlReader reader, RsmHeader header, Utf8JsonWriter writer);
 
         private static bool RootElementNotFound(XmlReader reader, string payloadRootElement, string payloadNamespace)
         {
-            return reader.NodeType != XmlNodeType.Element && payloadRootElement == string.Empty &&
-                   payloadNamespace == string.Empty;
+            return reader.NodeType != XmlNodeType.Element
+                   && payloadRootElement.Length == 0
+                   && payloadNamespace.Length == 0;
         }
 
         private static bool IfRootElementIsNotAssigned(string payloadRootElement, string payloadNamespace)
         {
-            return payloadRootElement == string.Empty && payloadNamespace == string.Empty;
+            return payloadRootElement.Length == 0 && payloadNamespace.Length == 0;
         }
 
         private static async ValueTask<string> ReadIdentificationAsync(XmlReader reader, string ns)
         {
-            while (await reader.ReadAsync())
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (reader.LocalName == "Identification" && reader.NamespaceURI == ns &&
                     reader.NodeType == XmlNodeType.Element)
                 {
-                    return await reader.ReadElementContentAsStringAsync();
+                    return await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                 }
             }
 
             throw new XmlException("Missing xml exception");
         }
 
-        private async ValueTask ParseRsmHeaderAsync(XmlReader reader, RsmHeader header)
+        private static async ValueTask ParseRsmHeaderAsync(XmlReader reader, RsmHeader header)
         {
             string rootElement = string.Empty;
             string ns = string.Empty;
 
-            while (await reader.ReadAsync())
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (RootElementNotFound(reader, rootElement, ns))
                 {
@@ -86,11 +107,11 @@ namespace Energinet.DataHub.SoapAdapter.Application
                 }
                 else if (reader.Is("HeaderEnergyDocument", ns))
                 {
-                    await ReadHeaderEnergyDocumentAsync(reader, header, ns);
+                    await ReadHeaderEnergyDocumentAsync(reader, header, ns).ConfigureAwait(false);
                 }
                 else if (reader.Is("ProcessEnergyContext", ns))
                 {
-                    await ReadProcessEnergyContextAsync(reader, header, ns);
+                    await ReadProcessEnergyContextAsync(reader, header, ns).ConfigureAwait(false);
                 }
 
                 if (reader.Is("ProcessEnergyContext", ns, XmlNodeType.EndElement))
@@ -100,9 +121,9 @@ namespace Energinet.DataHub.SoapAdapter.Application
             }
         }
 
-        private async ValueTask ReadHeaderEnergyDocumentAsync(XmlReader reader, RsmHeader rsmHeader, string ns)
+        private static async ValueTask ReadHeaderEnergyDocumentAsync(XmlReader reader, RsmHeader rsmHeader, string ns)
         {
-            while (await reader.ReadAsync())
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (reader.LocalName == "HeaderEnergyDocument" && reader.NodeType == XmlNodeType.EndElement)
                 {
@@ -110,12 +131,12 @@ namespace Energinet.DataHub.SoapAdapter.Application
                 }
                 else if (reader.Is("Identification", ns))
                 {
-                    var content = await reader.ReadElementContentAsStringAsync();
+                    var content = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                     rsmHeader.Identification = content;
                 }
                 else if (reader.Is("DocumentType", ns))
                 {
-                    rsmHeader.DocumentType = await reader.ReadElementContentAsStringAsync();
+                    rsmHeader.DocumentType = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                 }
                 else if (reader.Is("Creation", ns))
                 {
@@ -123,18 +144,18 @@ namespace Energinet.DataHub.SoapAdapter.Application
                 }
                 else if (reader.Is("SenderEnergyParty", ns))
                 {
-                    rsmHeader.SenderIdentification = await ReadIdentificationAsync(reader, ns);
+                    rsmHeader.SenderIdentification = await ReadIdentificationAsync(reader, ns).ConfigureAwait(false);
                 }
                 else if (reader.Is("RecipientEnergyParty", ns))
                 {
-                    rsmHeader.RecipientIdentification = await ReadIdentificationAsync(reader, ns);
+                    rsmHeader.RecipientIdentification = await ReadIdentificationAsync(reader, ns).ConfigureAwait(false);
                 }
             }
         }
 
-        private async ValueTask ReadProcessEnergyContextAsync(XmlReader reader, RsmHeader rsmHeader, string ns)
+        private static async ValueTask ReadProcessEnergyContextAsync(XmlReader reader, RsmHeader rsmHeader, string ns)
         {
-            while (await reader.ReadAsync())
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (reader.Is("ProcessEnergyContext", ns, XmlNodeType.EndElement))
                 {
@@ -143,15 +164,15 @@ namespace Energinet.DataHub.SoapAdapter.Application
 
                 if (reader.Is("EnergyBusinessProcess", ns))
                 {
-                    rsmHeader.EnergyBusinessProcess = await reader.ReadElementContentAsStringAsync();
+                    rsmHeader.EnergyBusinessProcess = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                 }
                 else if (reader.Is("EnergyBusinessProcessRole", ns))
                 {
-                    rsmHeader.EnergyBusinessProcessRole = await reader.ReadElementContentAsStringAsync();
+                    rsmHeader.EnergyBusinessProcessRole = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                 }
                 else if (reader.Is("EnergyIndustryClassification", ns))
                 {
-                   rsmHeader.EnergyIndustryClassification = await reader.ReadElementContentAsStringAsync();
+                   rsmHeader.EnergyIndustryClassification = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                 }
             }
         }

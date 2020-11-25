@@ -13,12 +13,13 @@
 // limitations under the License.
 
 using System;
+using System.Threading.Tasks;
 using ValidatorTool;
 using ValidatorTool.RuleEngines;
 using ValidatorTool.RuleEngines.NRules;
 using Xunit;
 
-namespace NRulesMeterRulesTests
+namespace ValidatorToolTests
 {
     /// <summary>
     /// Tests of the NRules implementation, using the xUnit framework
@@ -33,31 +34,31 @@ namespace NRulesMeterRulesTests
         }
 
         [Fact]
-        public async void NonNegativeValueAndValidCustomerId_ReturnsTrue()
+        public async Task NonNegativeValueAndValidCustomerId_ReturnsTrue()
         {
             var m = new MeterMessage(1, 1, DateTime.UtcNow.ToUniversalTime(), 1);
-            Assert.True(await _ruleEngine.ValidateAsync(m));
+            Assert.True(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
 
         [Fact]
-        public async void NonNegativeValueAndInvalidCustomerId_ReturnsFalse()
+        public async Task NonNegativeValueAndInvalidCustomerId_ReturnsFalse()
         {
             var m = new MeterMessage(1, 1, DateTime.UtcNow.ToUniversalTime(), 6);
-            Assert.False(await _ruleEngine.ValidateAsync(m));
+            Assert.False(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
 
         [Fact]
-        public async void NegativeValueAndValidCustomerId_ReturnsFalse()
+        public async Task NegativeValueAndValidCustomerId_ReturnsFalse()
         {
             var m = new MeterMessage(-1, 1, DateTime.UtcNow.ToUniversalTime(), 3);
-            Assert.False(await _ruleEngine.ValidateAsync(m));
+            Assert.False(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
 
         [Fact]
-        public async void NegativeValueAndInvalidCustomerId_ReturnsFalse()
+        public async Task NegativeValueAndInvalidCustomerId_ReturnsFalse()
         {
             var m = new MeterMessage(-1, 1, DateTime.UtcNow.ToUniversalTime(), 6);
-            Assert.False(await _ruleEngine.ValidateAsync(m));
+            Assert.False(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
     }
 }

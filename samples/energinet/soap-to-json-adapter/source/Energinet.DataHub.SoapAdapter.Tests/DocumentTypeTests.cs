@@ -12,17 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Linq;
 using System.Reflection;
 using Energinet.DataHub.SoapAdapter.Domain;
 using Energinet.DataHub.SoapAdapter.Tests.Fixtures;
-using NSubstitute;
 using Xunit;
 
+// ReSharper disable CA1707
 namespace Energinet.DataHub.SoapAdapter.Tests
 {
-    public class DocumentTypeTest
+    public class DocumentTypeTests
     {
         [Fact]
         public void All_known_document_types_should_be_valid()

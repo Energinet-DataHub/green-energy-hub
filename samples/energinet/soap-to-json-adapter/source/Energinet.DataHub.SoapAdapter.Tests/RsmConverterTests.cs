@@ -38,11 +38,11 @@ namespace Energinet.DataHub.SoapAdapter.Tests
 
             var rsm001 = new ChangeSupplierConverter();
 
-            await rsm001.ConvertAsync(fs, ms);
+            await rsm001.ConvertAsync(fs, ms).ConfigureAwait(false);
 
             ms.Position = 0;
             using var sr = new StreamReader(ms);
-            var json = await sr.ReadToEndAsync();
+            var json = await sr.ReadToEndAsync().ConfigureAwait(false);
 
             Assert.True(json.Contains("SessId-0.58783300-1582196206", StringComparison.OrdinalIgnoreCase));
             Assert.True(json.Contains("*****************", StringComparison.OrdinalIgnoreCase));

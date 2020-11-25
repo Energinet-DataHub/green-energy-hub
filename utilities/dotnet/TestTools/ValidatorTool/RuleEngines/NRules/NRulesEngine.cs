@@ -56,7 +56,7 @@ namespace ValidatorTool.RuleEngines.NRules
             return Task.FromResult(valid);
         }
 
-        public async Task<bool> ValidateBatchAsync(IEnumerable<MeterMessage> messages)
+        public Task<bool> ValidateBatchAsync(IEnumerable<MeterMessage> messages)
         {
             _session.InsertAll(messages);
 
@@ -68,7 +68,7 @@ namespace ValidatorTool.RuleEngines.NRules
             var valid = results.All(r => r.IsSuccessful); // Must get result before retracting message because will remove linked facts
 
             _session.RetractAll(messages);
-            return valid;
+            return Task.FromResult(valid);
         }
     }
 }

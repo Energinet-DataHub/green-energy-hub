@@ -13,6 +13,7 @@
 // limitations under the License.
 using System;
 using System.Text.Json;
+using JetBrains.Annotations;
 using Json.Schema;
 
 namespace GreenEnergyHub.JSONSchemaValidator.Validate
@@ -38,8 +39,13 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
         /// </summary>
         /// <param name="type">The type of schema that's about to be validated</param>
         /// <param name="json">The document to be validated</param>
-        public ValidationResults ValidateDocument(SchemaType type, JsonDocument json)
+        public ValidationResults ValidateDocument(SchemaType type, [NotNull] JsonDocument json)
         {
+            if (json == null)
+            {
+                throw new ArgumentNullException(nameof(json));
+            }
+
             var schema = SchemaHelper.GetSchema(type);
 
             if (schema == null)

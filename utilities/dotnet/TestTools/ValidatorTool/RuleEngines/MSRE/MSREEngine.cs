@@ -24,7 +24,7 @@ namespace ValidatorTool.RuleEngines.MSRE
     public class MSREEngine : IRuleEngine
     {
         private readonly IWorkflowRulesStorage _storage;
-        private RulesEngine.RulesEngine _rulesEng = null;
+        private RulesEngine.RulesEngine _rulesEng;
 
         public MSREEngine(IWorkflowRulesStorage storage)
         {
@@ -35,7 +35,7 @@ namespace ValidatorTool.RuleEngines.MSRE
         {
             if (_rulesEng == null)
             {
-                var workflowRules = await _storage.GetRulesAsync();
+                var workflowRules = await _storage.GetRulesAsync().ConfigureAwait(false);
                 _rulesEng = new RulesEngine.RulesEngine(workflowRules.ToArray(), null);
             }
 

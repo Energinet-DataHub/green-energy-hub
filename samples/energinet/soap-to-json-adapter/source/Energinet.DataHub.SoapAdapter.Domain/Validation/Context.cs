@@ -52,6 +52,6 @@ namespace Energinet.DataHub.SoapAdapter.Domain.Validation
         /// <summary>
         /// Transaction ids for all payloads
         /// </summary>
-        public List<string> TransactionIds { get; set; } = new List<string>();
+        public List<string> TransactionIds { get; } = new List<string>();
     }
 }

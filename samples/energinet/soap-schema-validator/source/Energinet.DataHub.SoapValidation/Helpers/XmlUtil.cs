@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
@@ -28,6 +30,11 @@ namespace Energinet.DataHub.SoapValidation.Helpers
         /// <exception cref="XmlException">If no definition if found due to invalid xml</exception>
         public static async Task<DocumentDefinition> GetDocumentIdentificationAsync(Stream xmlStream)
         {
+            if (xmlStream == null)
+            {
+                throw new ArgumentNullException(nameof(xmlStream));
+            }
+
             var position = xmlStream.Position;
 
             var settings = new XmlReaderSettings
@@ -39,7 +46,7 @@ namespace Energinet.DataHub.SoapValidation.Helpers
             {
                 using var reader = XmlReader.Create(xmlStream, settings);
 
-                while (await reader.ReadAsync())
+                while (await reader.ReadAsync().ConfigureAwait(false))
                 {
                     if (reader.NodeType == XmlNodeType.Element)
                     {

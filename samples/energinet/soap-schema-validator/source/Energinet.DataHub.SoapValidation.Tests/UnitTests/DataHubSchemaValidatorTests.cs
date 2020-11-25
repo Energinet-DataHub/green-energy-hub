@@ -57,7 +57,7 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
                 var sut = new XmlSchemaValidator();
 
                 // Act
-                var result = await sut.ValidateStreamAsync(stream);
+                var result = await sut.ValidateStreamAsync(stream).ConfigureAwait(false);
 
                 // Assert
                 Assert.Equal(expectSuccess, result.IsSuccess);
@@ -66,7 +66,7 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
             }
         }
 
-        private Stream GetInputStream(string fileName, string messageTypeFolder)
+        private static Stream GetInputStream(string fileName, string messageTypeFolder)
         {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = $"{TestFileFolder}.{messageTypeFolder}.{fileName}";

@@ -17,7 +17,7 @@ using Xunit;
 
 namespace Energinet.DataHub.SoapValidation.Tests.UnitTests.Resolvers
 {
-    public class WsdlEmbeddedResourceLocatorStrategyTest
+    public class WsdlEmbeddedResourceLocatorStrategyTests
     {
         private const string SchemaSetFolder = "DataHub";
         private const string XsdFile = "SomeFile.xsd";
@@ -52,7 +52,7 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests.Resolvers
             Assert.True(string.IsNullOrWhiteSpace(result));
         }
 
-        private Uri GetUri()
+        private static Uri GetUri()
         {
             return new Uri($"{AbsoluteUriPrefix}\\{XsdFile}");
         }

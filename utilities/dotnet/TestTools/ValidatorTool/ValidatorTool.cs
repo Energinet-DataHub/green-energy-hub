@@ -43,31 +43,49 @@ namespace ValidatorTool
         }
 
         [FunctionName("ValidatorTool")]
-        public async Task Run(
+        public async Task RunAsync(
             [EventHubTrigger("%InputEventHubName%", Connection = "InputConnectionString")] EventData[] events,
             [EventHub("%OutputEventHubName%", Connection = "OutputConnectionString")] IAsyncCollector<string> outputEvents,
             ILogger log)
         {
+            if (events == null)
+            {
+                throw new ArgumentNullException(nameof(events));
+            }
+
+            if (outputEvents == null)
+            {
+                throw new ArgumentNullException(nameof(outputEvents));
+            }
+
             var exceptions = new List<Exception>();
 
             foreach (var eventData in events)
             {
                 try
                 {
-                    var messageBody = Encoding.UTF8.GetString(eventData.Body.Array, eventData.Body.Offset, eventData.Body.Count);
+                    var messageBody = Encoding.UTF8.GetString(
+                        eventData.Body.Array,
+                        eventData.Body.Offset,
+                        eventData.Body.Count);
+
                     // send to rule validator
                     var message = JsonSerializer.Deserialize<MeterMessage>(messageBody);
-                    var result = await _ruleEngine.ValidateAsync(message);
+                    var result = await _ruleEngine.ValidateAsync(message).ConfigureAwait(false);
                     var outputObject = $"{{\"validationResult\": {result}, \"message\": \"{messageBody}\"}}";
                     log.LogInformation($"C# Event Hub trigger function processed a message: {messageBody}");
                     // Send to other event hub
-                    await outputEvents.AddAsync(outputObject);
+                    await outputEvents.AddAsync(outputObject).ConfigureAwait(false);
                     await Task.Yield();
                 }
-                catch (Exception e)
+                catch (ArgumentNullException e)
                 {
                     // We need to keep processing the rest of the batch - capture this exception and continue.
                     // Also, consider capturing details of the message that failed processing so it can be processed again later.
+                    exceptions.Add(e);
+                }
+                catch (JsonException e)
+                {
                     exceptions.Add(e);
                 }
             }

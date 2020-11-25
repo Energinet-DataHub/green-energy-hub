@@ -18,34 +18,29 @@ namespace Energinet.DataHub.SoapAdapter.Domain
 
     public class DocumentType
     {
-        private static readonly HashSet<string> ValidDocumentTypes = new HashSet<string>();
-
-        static DocumentType()
+        private static readonly HashSet<string> _validDocumentTypes = new HashSet<string>(new[]
         {
-            ValidDocumentTypes = new HashSet<string>(new[]
-            {
-                DocumentTypes.RequestChangeOfSupplier,
-                DocumentTypes.RequestCancelChangeOfSupplier,
-                DocumentTypes.RequestEndOfSupply,
-                DocumentTypes.RequestMpCharacteristics,
-                DocumentTypes.NotifyMpCharacteristics,
-                DocumentTypes.Acknowledgement,
-                DocumentTypes.MeteredDataProfiled,
-                DocumentTypes.MeteredDataTimeSeries,
-                DocumentTypes.RequestMeteredDataAggregated,
-                DocumentTypes.RequestMeteredDataValidated,
-                DocumentTypes.ConfirmChangeOfSupplier,
-                DocumentTypes.RejectChangeOfSupplier,
-                DocumentTypes.ConfirmCancelChangeOfSupplier,
-                DocumentTypes.RejectCancelChangeOfSupplier,
-                DocumentTypes.NotifyChangeOfSupplier,
-                DocumentTypes.ConfirmEndOfSupply,
-                DocumentTypes.RejectEndOfSupply,
-                DocumentTypes.LoadProfileShareMeteredDataTimeSeries,
-                DocumentTypes.AggregatedMeteredDataTimeSeries,
-                DocumentTypes.RejectRequestMeteredData,
-            });
-        }
+            DocumentTypes.RequestChangeOfSupplier,
+            DocumentTypes.RequestCancelChangeOfSupplier,
+            DocumentTypes.RequestEndOfSupply,
+            DocumentTypes.RequestMpCharacteristics,
+            DocumentTypes.NotifyMpCharacteristics,
+            DocumentTypes.Acknowledgement,
+            DocumentTypes.MeteredDataProfiled,
+            DocumentTypes.MeteredDataTimeSeries,
+            DocumentTypes.RequestMeteredDataAggregated,
+            DocumentTypes.RequestMeteredDataValidated,
+            DocumentTypes.ConfirmChangeOfSupplier,
+            DocumentTypes.RejectChangeOfSupplier,
+            DocumentTypes.ConfirmCancelChangeOfSupplier,
+            DocumentTypes.RejectCancelChangeOfSupplier,
+            DocumentTypes.NotifyChangeOfSupplier,
+            DocumentTypes.ConfirmEndOfSupply,
+            DocumentTypes.RejectEndOfSupply,
+            DocumentTypes.LoadProfileShareMeteredDataTimeSeries,
+            DocumentTypes.AggregatedMeteredDataTimeSeries,
+            DocumentTypes.RejectRequestMeteredData,
+        });
 
         public DocumentType(string documentType)
         {
@@ -58,7 +53,7 @@ namespace Energinet.DataHub.SoapAdapter.Domain
 
         public static bool IsValid(string documentType)
         {
-            return ValidDocumentTypes.Contains(documentType);
+            return _validDocumentTypes.Contains(documentType);
         }
 
         public bool IsValid()

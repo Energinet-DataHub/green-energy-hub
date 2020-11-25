@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Energinet.DataHub.SoapValidation.Tests.UnitTests.Helpers
 {
-    public class ValidationControllerTest
+    public class ValidationControllerTests
     {
         private const int ProblemLineNumber = 1;
         private const int ProblemPositionNumber = 1;
@@ -133,12 +133,12 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests.Helpers
             Assert.Single(sut.GetProblems());
         }
 
-        private ValidationProblem GetValidationProblem(int lineNumber = ProblemLineNumber, int positionNumber = ProblemPositionNumber)
+        private static ValidationProblem GetValidationProblem(int lineNumber = ProblemLineNumber, int positionNumber = ProblemPositionNumber)
         {
             return new ValidationProblem(string.Empty, System.Xml.Schema.XmlSeverityType.Error, lineNumber, positionNumber);
         }
 
-        private XmlReaderSettings GetSettings()
+        private static XmlReaderSettings GetSettings()
         {
             return new XmlReaderSettings();
         }

@@ -25,143 +25,149 @@ using ValidatorTool.RuleEngines.FluentValidation;
 using ValidatorTool.RuleEngines.MSRE;
 using ValidatorTool.RuleEngines.NRules;
 
-internal class BenchmarkService : IHostedService
+namespace ConsoleApp
 {
-    private static readonly int _BenchmarkSize = 10000;
-
-    private readonly ILogger<BenchmarkService> _logger;
-    private readonly IHostApplicationLifetime _appLifetime;
-    private readonly IRuleEngine _msre;
-    private readonly IRuleEngine _nrules;
-    private readonly IRuleEngine _fluent;
-
-    public BenchmarkService(ILogger<BenchmarkService> logger, IHostApplicationLifetime appLifetime, IWorkflowRulesStorage blobStorage)
+#pragma warning disable CA1812
+    internal class BenchmarkService : IHostedService
+#pragma warning restore
     {
-        _logger = logger;
-        _appLifetime = appLifetime;
+        private const int BenchmarkSize = 10000;
 
-        _msre = new MSREEngine(blobStorage);
-        _nrules = new NRulesEngine();
-        _fluent = new FluentValidationEngine();
-    }
+        private readonly ILogger<BenchmarkService> _logger;
+        private readonly IHostApplicationLifetime _appLifetime;
+        private readonly IRuleEngine _msre;
+        private readonly IRuleEngine _nrules;
+        private readonly IRuleEngine _fluent;
 
-    public async Task DoWorkAsync()
-    {
-        var sw = new Stopwatch();
-        sw.Start();
-        _logger.LogInformation("Generating messages...");
-        // Generate in-memory list of meter messages
-        var messages = new List<MeterMessage>(_BenchmarkSize);
-        var random = new Random();
-        for (var i = 0; i < _BenchmarkSize; i++)
+        public BenchmarkService(ILogger<BenchmarkService> logger, IHostApplicationLifetime appLifetime, IWorkflowRulesStorage blobStorage)
         {
-            var customerId = random.Next(-5, 15);
-            var meterId = random.Next(-5, 15);
-            var meterValue = random.Next(-5, 15);
-            var meterReadDate = DateTime.UtcNow;
-            messages.Add(new MeterMessage(meterValue, meterId, meterReadDate, customerId));
+            _logger = logger;
+            _appLifetime = appLifetime;
+
+            _msre = new MSREEngine(blobStorage);
+            _nrules = new NRulesEngine();
+            _fluent = new FluentValidationEngine();
         }
 
-        sw.Stop();
-        _logger.LogInformation("Messages generated in {0}ms", sw.Elapsed.TotalMilliseconds);
-        sw.Reset();
-
-        /*
-         * Batch run benchmarks
-         */
-        _logger.LogInformation("*** BATCH");
-
-        // NRules
-        sw.Start();
-        await _nrules.ValidateBatchAsync(messages);
-        sw.Stop();
-        _logger.LogInformation("NRules ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-        sw.Reset();
-
-        // Fluent
-        sw.Start();
-        await _fluent.ValidateBatchAsync(messages);
-        sw.Stop();
-        _logger.LogInformation("Fluent ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-        sw.Reset();
-
-        // MSRE
-        sw.Start();
-        await _msre.ValidateBatchAsync(messages);
-        sw.Stop();
-        _logger.LogInformation("MSRE ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-
-        /*
-         * Sequential Benchmarks
-         */
-        _logger.LogInformation("*** SEQUENTIAL");
-
-        // NRules
-        sw.Start();
-        foreach (var message in messages)
+        public async Task DoWorkAsync()
         {
-            await _nrules.ValidateAsync(message);
+            var sw = new Stopwatch();
+            sw.Start();
+            _logger.LogInformation("Generating messages...");
+            // Generate in-memory list of meter messages
+            var messages = new List<MeterMessage>(BenchmarkSize);
+            var random = new Random();
+            for (var i = 0; i < BenchmarkSize; i++)
+            {
+                var customerId = random.Next(-5, 15);
+                var meterId = random.Next(-5, 15);
+                var meterValue = random.Next(-5, 15);
+                var meterReadDate = DateTime.UtcNow;
+                messages.Add(new MeterMessage(meterValue, meterId, meterReadDate, customerId));
+            }
+
+            sw.Stop();
+            _logger.LogInformation("Messages generated in {0}ms", sw.Elapsed.TotalMilliseconds);
+            sw.Reset();
+
+            /**
+             * Batch run benchmarks
+             */
+            _logger.LogInformation("*** BATCH");
+
+            // NRules
+            sw.Start();
+            await _nrules.ValidateBatchAsync(messages).ConfigureAwait(false);
+            sw.Stop();
+            _logger.LogInformation("NRules ran in {0}ms", sw.Elapsed.TotalMilliseconds);
+            sw.Reset();
+
+            // Fluent
+            sw.Start();
+            await _fluent.ValidateBatchAsync(messages).ConfigureAwait(false);
+            sw.Stop();
+            _logger.LogInformation("Fluent ran in {0}ms", sw.Elapsed.TotalMilliseconds);
+            sw.Reset();
+
+            // MSRE
+            sw.Start();
+            await _msre.ValidateBatchAsync(messages).ConfigureAwait(false);
+            sw.Stop();
+            _logger.LogInformation("MSRE ran in {0}ms", sw.Elapsed.TotalMilliseconds);
+
+            /**
+             * Sequential Benchmarks
+             */
+            _logger.LogInformation("*** SEQUENTIAL");
+
+            // NRules
+            sw.Start();
+            foreach (var message in messages)
+            {
+                await _nrules.ValidateAsync(message).ConfigureAwait(false);
+            }
+
+            sw.Stop();
+            _logger.LogInformation("NRules ran in {0}ms", sw.Elapsed.TotalMilliseconds);
+            sw.Reset();
+
+            // Fluent
+            sw.Start();
+            foreach (var message in messages)
+            {
+                await _fluent.ValidateAsync(message).ConfigureAwait(false);
+            }
+
+            sw.Stop();
+            _logger.LogInformation("Fluent ran in {0}ms", sw.Elapsed.TotalMilliseconds);
+
+            // MSRE
+            sw.Start();
+            foreach (var message in messages)
+            {
+                await _msre.ValidateAsync(message).ConfigureAwait(false);
+            }
+
+            sw.Stop();
+            _logger.LogInformation("MSRE ran in {0}ms", sw.Elapsed.TotalMilliseconds);
+            sw.Reset();
+
+            await Task.Delay(1000).ConfigureAwait(false);
         }
 
-        sw.Stop();
-        _logger.LogInformation("NRules ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-        sw.Reset();
-
-        // Fluent
-        sw.Start();
-        foreach (var message in messages)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            await _fluent.ValidateAsync(message);
+            // Register hooks
+            _appLifetime.ApplicationStarted.Register(OnStarted);
+            _appLifetime.ApplicationStopping.Register(OnStopping);
+            _appLifetime.ApplicationStopped.Register(OnStopped);
+
+            return Task.CompletedTask;
         }
 
-        sw.Stop();
-        _logger.LogInformation("Fluent ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-
-        // MSRE
-        sw.Start();
-        foreach (var message in messages)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            await _msre.ValidateAsync(message);
+            return Task.CompletedTask;
         }
 
-        sw.Stop();
-        _logger.LogInformation("MSRE ran in {0}ms", sw.Elapsed.TotalMilliseconds);
-        sw.Reset();
+        private void OnStarted()
+        {
+            _logger.LogInformation("OnStarted has been called.");
+#pragma warning disable VSTHRD002
+            Task.Run(DoWorkAsync).Wait();
+#pragma warning restore
 
-        await Task.Delay(1000);
-    }
+            _appLifetime.StopApplication();
+        }
 
-    public Task StartAsync(CancellationToken cancellationToken)
-    {
-        // Register hooks
-        _appLifetime.ApplicationStarted.Register(OnStarted);
-        _appLifetime.ApplicationStopping.Register(OnStopping);
-        _appLifetime.ApplicationStopped.Register(OnStopped);
+        private void OnStopping()
+        {
+            _logger.LogInformation("OnStopping called.");
+        }
 
-        return Task.CompletedTask;
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
-
-    private void OnStarted()
-    {
-        _logger.LogInformation("OnStarted has been called.");
-
-        Task.Run(DoWorkAsync).Wait();
-
-        _appLifetime.StopApplication();
-    }
-
-    private void OnStopping()
-    {
-        _logger.LogInformation("OnStopping called.");
-    }
-
-    private void OnStopped()
-    {
-        _logger.LogInformation("OnStopped called.");
+        private void OnStopped()
+        {
+            _logger.LogInformation("OnStopped called.");
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace GreenEnergyHub.ValidationReport.Domain.Models
     /// <summary>
     /// The main Model used for persisting a single transactions ValidationResults.
     /// </summary>
-    public class ValidationReport
+    public class ValidationResultContainer
     {
         /// <summary>
         /// The internal CorrelationId used throughout the system

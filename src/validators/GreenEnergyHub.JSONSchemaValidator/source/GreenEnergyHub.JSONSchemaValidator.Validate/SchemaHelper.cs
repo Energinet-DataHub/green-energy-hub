@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -22,19 +23,13 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
 {
     public static class SchemaHelper
     {
-        private static readonly Assembly _asm;
-
-        static SchemaHelper()
-        {
-            _asm = typeof(SchemaHelper).Assembly;
-            Schemas = _asm.GetManifestResourceNames().Where(resourceName =>
-                resourceName.EndsWith("schema.json", StringComparison.OrdinalIgnoreCase)).ToArray();
-        }
+        private static readonly Assembly _asm = typeof(SchemaHelper).Assembly;
 
         /// <summary>
         /// An array of found schemas
         /// </summary>
-        public static string[] Schemas { get; }
+        public static IEnumerable<string> Schemas { get; } = _asm.GetManifestResourceNames().Where(resourceName =>
+            resourceName.EndsWith("schema.json", StringComparison.OrdinalIgnoreCase));
 
         /// <summary>
         /// CIM definitions
@@ -76,7 +71,7 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
 
             if (string.IsNullOrEmpty(schema))
             {
-                throw new ArgumentException(nameof(schema));
+                throw new ArgumentException("Schema is null or empty");
             }
 
             try

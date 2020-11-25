@@ -28,7 +28,7 @@ namespace ValidatorTool.RuleEngines.MSRE
     /// </summary>
     public class BlobWorkflowRulesStorage : IWorkflowRulesStorage
     {
-        private static List<WorkflowRules> _rules = null;
+        private static List<WorkflowRules> _rules;
 
         private readonly BlobClient _blobClient;
 
@@ -48,26 +48,19 @@ namespace ValidatorTool.RuleEngines.MSRE
                 return _rules;
             }
 
-            try
+            using (var s = new MemoryStream())
             {
-                using (var s = new MemoryStream())
+                await _blobClient.DownloadToAsync(s).ConfigureAwait(false);
+                s.Seek(0, SeekOrigin.Begin);
+                using (var sr = new StreamReader(s, Encoding.UTF8))
                 {
-                    await _blobClient.DownloadToAsync(s);
-                    s.Seek(0, SeekOrigin.Begin);
-                    using (var sr = new StreamReader(s, Encoding.UTF8))
+                    using (JsonReader reader = new JsonTextReader(sr))
                     {
-                        using (JsonReader reader = new JsonTextReader(sr))
-                        {
-                            var serializer = new JsonSerializer();
-                            _rules = serializer.Deserialize<List<WorkflowRules>>(reader);
-                            return _rules;
-                        }
+                        var serializer = new JsonSerializer();
+                        _rules = serializer.Deserialize<List<WorkflowRules>>(reader);
+                        return _rules;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
         }
     }

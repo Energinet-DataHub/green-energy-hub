@@ -43,12 +43,17 @@ namespace Energinet.DataHub.SoapValidation
         /// <exception cref="InvalidOperationException">No document definition or none/multiple schemas matched the definition</exception>
         public async Task<ValidationResult> ValidateStreamAsync(Stream stream, bool traverseSubDefinitions)
         {
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             var position = stream.Position;
             var controller = new ValidationController();
 
             try
             {
-                var definition = await XmlUtil.GetDocumentIdentificationAsync(stream);
+                var definition = await XmlUtil.GetDocumentIdentificationAsync(stream).ConfigureAwait(false);
 
                 var schemaDefinition = SchemaCollection.Find(traverseSubDefinitions, definition).Single();
 
@@ -58,7 +63,7 @@ namespace Energinet.DataHub.SoapValidation
 
                 try
                 {
-                    await ReadDocumentAsync(xmlReader, schemaDefinition, controller);
+                    await ReadDocumentAsync(xmlReader, schemaDefinition, controller).ConfigureAwait(false);
 
                     var problems = controller.GetProblems();
                     return problems.Any()
@@ -73,7 +78,9 @@ namespace Energinet.DataHub.SoapValidation
                 {
                     return new ValidationResult(false, RejectionReason.InvalidXml, controller.GetProblems());
                 }
+#pragma warning disable CA1031
                 catch
+#pragma warning restore
                 {
                     return new ValidationResult(false, RejectionReason.UnableToValidate, controller.GetProblems());
                 }
@@ -124,11 +131,11 @@ namespace Energinet.DataHub.SoapValidation
 
         private async Task ReadDocumentAsync(XmlReader xmlReader, SchemaDefinition schemaDefinition, ValidationController context)
         {
-            while (await xmlReader.ReadAsync())
+            while (await xmlReader.ReadAsync().ConfigureAwait(false))
             {
                 if (ShouldSwitchToSubReader(xmlReader, schemaDefinition))
                 {
-                    await ReadSubTreeAsync(xmlReader, schemaDefinition, context);
+                    await ReadSubTreeAsync(xmlReader, schemaDefinition, context).ConfigureAwait(false);
                 }
             }
         }
@@ -141,9 +148,11 @@ namespace Energinet.DataHub.SoapValidation
             IXmlLineInfo info = (IXmlLineInfo)xmlReader;
             controller.RemoveProblemsCausedOnSameLineAndPosition(info.LineNumber, info.LinePosition);
 
-            using var subTreeReader = XmlReader.Create(xmlReader.ReadSubtree(), settings);
-            using var context = controller.GetValidationContext(settings);
-            await ReadDocumentAsync(subTreeReader, subSchemaDefinition, controller);
+            using (var subTreeReader = XmlReader.Create(xmlReader.ReadSubtree(), settings))
+            using (var context = controller.GetValidationContext(settings))
+            {
+                await ReadDocumentAsync(subTreeReader, subSchemaDefinition, controller).ConfigureAwait(false);
+            }
         }
     }
 }

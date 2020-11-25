@@ -31,7 +31,7 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
             await using var stream = GetInputStream("ValidHourly.xml", Rsm012Folder); // valid with soap
             var sut = new XmlSchemaValidator();
 
-            var result = await sut.ValidateStreamAsync(stream);
+            var result = await sut.ValidateStreamAsync(stream).ConfigureAwait(false);
 
             Assert.NotNull(result);
             Assert.True(result.IsSuccess);
@@ -42,7 +42,7 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
         {
             await using var stream = GetInputStream("ValidHourlyButNoSOAP.xml", Rsm012Folder);
             var sut = new XmlSchemaValidator();
-            var result = await sut.ValidateStreamAsync(stream);
+            var result = await sut.ValidateStreamAsync(stream).ConfigureAwait(false);
 
             Assert.NotNull(result);
             Assert.False(result.IsSuccess);
@@ -58,13 +58,13 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
             await using var stream = GetInputStream(filename, Rsm012Folder);
             var sut = new XmlSchemaValidator();
 
-            var result = await sut.ValidateStreamAsync(stream, traverse);
+            var result = await sut.ValidateStreamAsync(stream, traverse).ConfigureAwait(false);
 
             Assert.NotNull(result);
             Assert.Equal(reason, result.RejectionReason);
         }
 
-        private Stream GetInputStream(string fileName, string messageTypeFolder)
+        private static Stream GetInputStream(string fileName, string messageTypeFolder)
         {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = $"{TestFileFolder}.{messageTypeFolder}.{fileName}";

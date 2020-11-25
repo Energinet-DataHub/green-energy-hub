@@ -25,21 +25,17 @@ namespace TemplateSolution.TemplateFunction
     #pragma warning disable CA1812
     internal class Startup : FunctionsStartup
     {
-        #pragma warning disable CA2000 // TODO (stad): investigate this, dispose may be necessary
         public override void Configure(IFunctionsHostBuilder builder)
         {
             // Register Serilog
-            var telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-            telemetryConfiguration.InstrumentationKey = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
             var logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                .WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces)
+                .WriteTo.ApplicationInsights(TelemetryConverter.Traces)
                 .CreateLogger();
             builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
 
             // Register services
         }
-        #pragma warning restore CA2000
     }
     #pragma warning restore CA1812
 }

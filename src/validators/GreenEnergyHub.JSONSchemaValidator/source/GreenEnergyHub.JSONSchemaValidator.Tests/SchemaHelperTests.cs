@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using System.Linq;
 using GreenEnergyHub.JSONSchemaValidator.Validate;
 using Xunit;
 
@@ -22,7 +23,7 @@ namespace GreenEnergyHub.JSONSchemaValidator.Tests
         [Fact]
         public void SchemaHelper_should_contain_schemas()
         {
-            string[] schemas = SchemaHelper.Schemas;
+            string[] schemas = SchemaHelper.Schemas.ToArray();
 
             Assert.NotEmpty(schemas);
         }
@@ -30,7 +31,7 @@ namespace GreenEnergyHub.JSONSchemaValidator.Tests
         [Fact]
         public void SchemaHelper_should_resolve_schema()
         {
-            string[] schemas = SchemaHelper.Schemas;
+            string[] schemas = SchemaHelper.Schemas.ToArray();
 
             var jsonSchema = SchemaHelper.GetSchema(schemas[0]);
 

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -23,21 +24,31 @@ namespace Energinet.DataHub.SoapAdapter.Application.Parsers
         public static async Task<bool> MoveToNextElementByNameAsync(
             this XmlReader reader,
             string elementName,
-            string namespaceUri)
+            string xmlNamespace)
         {
             bool Predicate(XmlReader internalReader)
             {
                 return internalReader.LocalName == elementName
                        && internalReader.NodeType == XmlNodeType.Element
-                       && internalReader.NamespaceURI == namespaceUri;
+                       && internalReader.NamespaceURI == xmlNamespace;
             }
 
-            return await reader.MoveToNextAsync(Predicate);
+            return await reader.MoveToNextAsync(Predicate).ConfigureAwait(false);
         }
 
         public static async Task<bool> MoveToNextAsync(this XmlReader reader, Func<XmlReader, bool> predicate)
         {
-            while (await reader.ReadAsync())
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (predicate(reader))
                 {
@@ -49,11 +60,44 @@ namespace Energinet.DataHub.SoapAdapter.Application.Parsers
         }
 
         public static bool Is(this XmlReader reader, string localName, string ns, XmlNodeType xmlNodeType = XmlNodeType.Element)
-            => reader.LocalName.Equals(localName) && reader.NamespaceURI.Equals(ns) && reader.NodeType == xmlNodeType;
+        {
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+
+            if (localName == null)
+            {
+                throw new ArgumentNullException(nameof(localName));
+            }
+
+            if (ns == null)
+            {
+                throw new ArgumentNullException(nameof(ns));
+            }
+
+            return reader.LocalName.Equals(localName) && reader.NamespaceURI.Equals(ns) &&
+                   reader.NodeType == xmlNodeType;
+        }
 
         public static async ValueTask<XmlReader> AdvanceToAsync(this XmlReader reader, string localName, string ns)
         {
-            while (await reader.ReadAsync())
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+
+            if (localName == null)
+            {
+                throw new ArgumentNullException(nameof(localName));
+            }
+
+            if (ns == null)
+            {
+                throw new ArgumentNullException(nameof(ns));
+            }
+
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (reader.LocalName == localName && reader.NamespaceURI == ns &&
                     reader.NodeType == XmlNodeType.Element)
@@ -67,7 +111,17 @@ namespace Energinet.DataHub.SoapAdapter.Application.Parsers
 
         public static async ValueTask AdvanceToAsync(this XmlReader reader, XmlNodeType nodeType)
         {
-            while (await reader.ReadAsync())
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+
+            if (!Enum.IsDefined(typeof(XmlNodeType), nodeType))
+            {
+                throw new InvalidEnumArgumentException(nameof(nodeType), (int)nodeType, typeof(XmlNodeType));
+            }
+
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (reader.NodeType != nodeType)
                 {

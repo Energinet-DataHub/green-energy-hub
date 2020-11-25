@@ -27,9 +27,24 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
 
         protected override async ValueTask ConvertPayloadAsync(XmlReader reader, RsmHeader header, Utf8JsonWriter writer)
         {
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+
+            if (header == null)
+            {
+                throw new ArgumentNullException(nameof(header));
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
             writer.WriteStartArray();
 
-            while (await reader.ReadAsync())
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (reader.Is("DK_RequestChangeOfSupplier", B2BNamespace, XmlNodeType.EndElement))
                 {
@@ -37,7 +52,7 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
                 }
                 else if (reader.Is("PayloadMPEvent", B2BNamespace))
                 {
-                    await ProcessPayloadMpEventAsync(reader, header, writer);
+                    await ProcessPayloadMpEventAsync(reader, header, writer).ConfigureAwait(false);
                 }
             }
 
@@ -48,7 +63,7 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
         {
             if (reader.ReadToFollowing("Identification", B2BNamespace))
             {
-                return await reader.ReadElementContentAsStringAsync();
+                return await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
             }
 
             return string.Empty;
@@ -59,12 +74,27 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
             RsmHeader header,
             Utf8JsonWriter writer)
         {
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+
+            if (header == null)
+            {
+                throw new ArgumentNullException(nameof(header));
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
             string? cpr = null;
             string? cvr = null;
             string? qualifier = null;
             string? name = null;
 
-            while (await reader.ReadAsync())
+            while (await reader.ReadAsync().ConfigureAwait(false))
             {
                 if (reader.Is("ConsumerConsumerParty", B2BNamespace, XmlNodeType.EndElement))
                 {
@@ -73,17 +103,17 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
 
                 if (reader.Is("CPR", B2BNamespace) && cpr == null)
                 {
-                    cpr = await reader.ReadElementContentAsStringAsync();
+                    cpr = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                     qualifier = "AAR";
                 }
                 else if (reader.Is("CVR", B2BNamespace) && cvr == null)
                 {
-                    cvr = await reader.ReadElementContentAsStringAsync();
+                    cvr = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                     qualifier = "VA";
                 }
                 else if (reader.Is("Name", B2BNamespace))
                 {
-                    name = await reader.ReadElementContentAsStringAsync();
+                    name = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
                 }
             }
 
@@ -106,7 +136,7 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
             writer.WriteEndObject();
         }
 
-        private async ValueTask ProcessPayloadMpEventAsync(XmlReader reader, RsmHeader header, Utf8JsonWriter writer)
+        private static async ValueTask ProcessPayloadMpEventAsync(XmlReader reader, RsmHeader header, Utf8JsonWriter writer)
         {
             do
             {
@@ -126,12 +156,12 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
                 else if (reader.Is("Identification", B2BNamespace))
                 {
                     writer.WriteStartObject("Transaction");
-                    writer.WriteString("mRID", await reader.ReadElementContentAsStringAsync());
+                    writer.WriteString("mRID", await reader.ReadElementContentAsStringAsync().ConfigureAwait(false));
                     writer.WriteEndObject();
                 }
                 else if (reader.Is("StartOfOccurrence", B2BNamespace))
                 {
-                    if (DateTimeOffset.TryParse(await reader.ReadElementContentAsStringAsync(), out var startDate))
+                    if (DateTimeOffset.TryParse(await reader.ReadElementContentAsStringAsync().ConfigureAwait(false), out var startDate))
                     {
                         writer.WriteString("StartDate", startDate);
                     }
@@ -139,27 +169,27 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
                 else if (reader.Is("MeteringPointDomainLocation", B2BNamespace))
                 {
                     writer.WriteStartObject("MarketEvaluationPoint");
-                    writer.WriteString("mRID", await GetChildIdentificationAsync(reader));
+                    writer.WriteString("mRID", await GetChildIdentificationAsync(reader).ConfigureAwait(false));
                     writer.WriteEndObject();
                 }
                 else if (reader.Is("BalanceSupplierEnergyParty", B2BNamespace))
                 {
                     writer.WriteStartObject("EnergySupplier");
-                    writer.WriteString("mRID", await GetChildIdentificationAsync(reader));
+                    writer.WriteString("mRID", await GetChildIdentificationAsync(reader).ConfigureAwait(false));
                     writer.WriteEndObject();
                 }
                 else if (reader.Is("BalanceResponsiblePartyEnergyParty", B2BNamespace))
                 {
                     writer.WriteStartObject("BalanceResponsibleParty");
-                    writer.WriteString("mRID", await GetChildIdentificationAsync(reader));
+                    writer.WriteString("mRID", await GetChildIdentificationAsync(reader).ConfigureAwait(false));
                     writer.WriteEndObject();
                 }
                 else if (reader.Is("ConsumerConsumerParty", B2BNamespace))
                 {
-                    await ProcessConsumerPartyAsync(reader, header, writer);
+                    await ProcessConsumerPartyAsync(reader, header, writer).ConfigureAwait(false);
                 }
             }
-            while (await reader.ReadAsync());
+            while (await reader.ReadAsync().ConfigureAwait(false));
         }
     }
 }

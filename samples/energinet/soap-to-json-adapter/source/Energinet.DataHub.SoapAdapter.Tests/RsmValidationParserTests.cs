@@ -29,7 +29,7 @@ namespace Energinet.DataHub.SoapAdapter.Tests
             await using var fs = File.OpenRead("Assets/Rsm001CPR.xml");
 
             var sut = new RsmValidationParser();
-            Context actual = await sut.ParseAsync(fs);
+            Context actual = await sut.ParseAsync(fs).ConfigureAwait(false);
 
             Assert.NotNull(actual);
 

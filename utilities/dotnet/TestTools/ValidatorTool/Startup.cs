@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using System.Globalization;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using ValidatorTool.RuleEngines;
@@ -36,6 +37,11 @@ namespace ValidatorTool
 
         public override void Configure(IFunctionsHostBuilder builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             var connectionString = Environment.GetEnvironmentVariable(AzureStorageConnectionSetting);
             var containerName = Environment.GetEnvironmentVariable(ContainerNameSetting);
             var blobName = Environment.GetEnvironmentVariable(BlobNameSetting);
@@ -46,13 +52,13 @@ namespace ValidatorTool
             var ruleEngineType = Environment.GetEnvironmentVariable(RuleEngineTypeAppSetting);
             builder.Services.AddSingleton<IRuleEngine>((s) =>
             {
-                switch (ruleEngineType.ToLower())
+                switch (ruleEngineType.ToUpperInvariant())
                 {
-                    case "nrules":
+                    case "NRULES":
                         return new NRulesEngine();
-                    case "rulesengine":
+                    case "RULESENGINE":
                         return new MSREEngine(blobStorage);
-                    case "fluent":
+                    case "FLUENT":
                         return new FluentValidationEngine();
                     default:
                         throw new InvalidOperationException($"Invalid engine type {ruleEngineType} specified");

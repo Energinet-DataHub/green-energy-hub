@@ -14,6 +14,7 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -25,15 +26,15 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
     /// <summary>
     /// Class used for validation
     /// </summary>
-    public class Validate
+    public class ValidatorFunction
     {
         private readonly ValidateService _validateService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Validate"/> class.
+        /// Initializes a new instance of the <see cref="ValidatorFunction"/> class.
         /// </summary>
         /// <param name="validateService">The service that handles the actual validation</param>
-        public Validate(ValidateService validateService)
+        public ValidatorFunction(ValidateService validateService)
         {
             _validateService = validateService;
         }
@@ -47,10 +48,16 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
         /// <returns>Validation output</returns>
         [FunctionName("SchemaValidator")]
         public async Task<IActionResult> RunAsync (
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "{type:alpha}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "{type:alpha}")] [NotNull]
+            HttpRequest req,
             ILogger log,
             string type)
         {
+            if (req == null)
+            {
+                throw new ArgumentNullException(nameof(req));
+            }
+
             if (!Enum.TryParse<SchemaType>(type, out var schemaType))
             {
                 return new NotFoundObjectResult("Schema not found");
@@ -58,7 +65,7 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
 
             log.LogInformation($"Validating request against schema {schemaType}.", type);
 
-            var json = await JsonDocument.ParseAsync(req.Body);
+            var json = await JsonDocument.ParseAsync(req.Body).ConfigureAwait(false);
 
             var validationResult = _validateService.ValidateDocument(schemaType, json);
 

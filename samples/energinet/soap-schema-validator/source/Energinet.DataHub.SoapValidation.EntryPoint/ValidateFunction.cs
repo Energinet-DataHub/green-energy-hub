@@ -11,6 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -38,10 +41,20 @@ namespace Energinet.DataHub.SoapValidation.EntryPoint
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest httpRequest,
             ILogger logger)
         {
+            if (httpRequest == null)
+            {
+                throw new ArgumentNullException(nameof(httpRequest));
+            }
+
+            if (logger == null)
+            {
+                throw new ArgumentNullException(nameof(logger));
+            }
+
             logger.LogInformation("Adapting message");
 
             var requestId = httpRequest.Headers["RequestId"].SingleOrDefault();
-            var result = await _xmlSchemaValidator.ValidateStreamAsync(httpRequest.Body);
+            var result = await _xmlSchemaValidator.ValidateStreamAsync(httpRequest.Body).ConfigureAwait(false);
 
             if (result.IsSuccess)
             {
@@ -51,7 +64,7 @@ namespace Energinet.DataHub.SoapValidation.EntryPoint
             {
                 return new ContentResult
                 {
-                    Content = string.Format(FaultString, "B2B-005:" + requestId),
+                    Content = string.Format(CultureInfo.InvariantCulture, FaultString, "B2B-005:" + requestId),
                     ContentType = "application/xml",
                     StatusCode = StatusCodes.Status400BadRequest,
                 };

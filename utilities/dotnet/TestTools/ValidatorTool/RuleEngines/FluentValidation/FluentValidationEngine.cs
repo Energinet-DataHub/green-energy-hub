@@ -30,7 +30,7 @@ namespace ValidatorTool.RuleEngines.FluentValidation
 
         public async Task<bool> ValidateAsync(MeterMessage message)
         {
-            var result = await _validator.ValidateAsync(message);
+            var result = await _validator.ValidateAsync(message).ConfigureAwait(false);
 
             return result.IsValid;
         }
@@ -38,7 +38,7 @@ namespace ValidatorTool.RuleEngines.FluentValidation
         public async Task<bool> ValidateBatchAsync(IEnumerable<MeterMessage> messages)
         {
             var results = messages.Select(m => _validator.ValidateAsync(m)).ToArray();
-            await Task.WhenAll(results);
+            await Task.WhenAll(results).ConfigureAwait(false);
 
             return results.All(r => r.Result.IsValid);
         }

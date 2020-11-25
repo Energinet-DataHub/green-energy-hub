@@ -23,10 +23,15 @@ using ValidatorTool.RuleEngines.MSRE;
 
 namespace ConsoleApp
 {
-    public class Program
+    public static class Program
     {
         public static async Task Main(string[] args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
             if (args.Length == 0)
             {
                 Console.WriteLine("Usage: Program.cs operation_mode");
@@ -34,7 +39,7 @@ namespace ConsoleApp
                 Environment.Exit(1);
             }
 
-            await CreateHostBuilder(args).Build().RunAsync();
+            await CreateHostBuilder(args).Build().RunAsync().ConfigureAwait(false);
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)
