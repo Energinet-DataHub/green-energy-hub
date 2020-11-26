@@ -12,10 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 using TemplateSolution.TemplateFunction;
 
 [assembly: FunctionsStartup(typeof(Startup))]
@@ -27,13 +25,6 @@ namespace TemplateSolution.TemplateFunction
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            // Register Serilog
-            var logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.ApplicationInsights(TelemetryConverter.Traces)
-                .CreateLogger();
-            builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
-
             // Register services
         }
     }

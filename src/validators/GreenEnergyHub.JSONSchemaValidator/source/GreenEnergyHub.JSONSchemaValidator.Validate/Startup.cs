@@ -17,10 +17,8 @@ using System.IO;
 using GreenEnergyHub.JSONSchemaValidator.Validate;
 using JetBrains.Annotations;
 using Json.Schema;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
@@ -39,12 +37,6 @@ namespace GreenEnergyHub.JSONSchemaValidator.Validate
             SchemaRegistry.Global.Register(new Uri("https://github.com/green-energy-hub/schemas"), SchemaHelper.CimDefinitions);
             builder.Services.AddTransient(_ => new ValidationOptions { OutputFormat = OutputFormat.Basic, ValidateFormat = true, ValidateAs = Draft.Draft7 });
             builder.Services.AddSingleton<ValidateService>();
-
-            var logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.ApplicationInsights(TelemetryConverter.Traces)
-                .CreateLogger();
-            builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
         }
     }
 }

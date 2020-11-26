@@ -13,10 +13,8 @@
 // limitations under the License.
 using System;
 using Energinet.DataHub.SoapValidation.EntryPoint;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
@@ -30,13 +28,6 @@ namespace Energinet.DataHub.SoapValidation.EntryPoint
             {
                 throw new ArgumentNullException(nameof(builder));
             }
-
-            // Register Serilog
-            var logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.ApplicationInsights(TelemetryConverter.Traces)
-                .CreateLogger();
-            builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
 
             // Register services
             builder.Services.AddSingleton<IXmlSchemaValidator, XmlSchemaValidator>();

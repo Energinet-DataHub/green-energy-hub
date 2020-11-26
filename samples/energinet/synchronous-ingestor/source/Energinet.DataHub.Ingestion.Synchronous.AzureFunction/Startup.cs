@@ -19,10 +19,8 @@ using Energinet.DataHub.Ingestion.Synchronous.AzureFunction.Configuration;
 using Energinet.DataHub.Ingestion.Synchronous.Infrastructure;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
@@ -31,24 +29,13 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
     #pragma warning disable CA1812
     internal class Startup : FunctionsStartup
     {
-        #pragma warning disable CA2000 // TODO (stad): investigate this, dispose may be necessary
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            // Register Serilog
-            var telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-            telemetryConfiguration.InstrumentationKey = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY") ?? Guid.Empty.ToString();
-            var logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces)
-                .CreateLogger();
-            builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
-
             // Register services
             builder.Services.AddScoped<IHubRehydrate, JsonMessageDeserializer>();
             builder.Services.AddGreenEnergyHub(typeof(ChangeOfSupplierRequest).Assembly);
             builder.Services.AddRequestQueue();
         }
-        #pragma warning restore CA2000
     }
     #pragma warning restore CA1812
 }
