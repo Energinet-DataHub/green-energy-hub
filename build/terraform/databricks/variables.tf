@@ -22,7 +22,7 @@ variable "storage_name" {
   type = string
 }
 
-variable "container_name" {
+variable "streaming_container_name" {
   type = string
 }
 

@@ -47,8 +47,8 @@ resource "databricks_job" "streaming_job" {
     parameters  = [
       "--storage-account-name=${var.storage_name}",
       "--storage-account-key=${var.storage_key}",
-      "--storage-container-name=${var.container_name}",
-      "--master-data-path=master-data/MasterData.csv",
+      "--storage-container-name=${var.streaming_container_name}",
+      "--master-data-path=master-data/master-data.csv",
       "--output-path=delta/meter-data/",
       "--input-eh-connection-string=${var.input_eh_listen_connection_string}",
       "--max-events-per-trigger=1000",

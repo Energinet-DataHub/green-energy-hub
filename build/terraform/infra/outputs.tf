@@ -11,7 +11,7 @@ output "databricks_workspace_url" {
 }
 
 output "input_eh_listen_connection_string" {
-  value     = azurerm_eventhub_authorization_rule.listen.primary_connection_string
+  value     = azurerm_eventhub_authorization_rule.input_listen.primary_connection_string
   sensitive = true
 }
 
@@ -34,8 +34,8 @@ output "storage_name" {
   value = var.storage_account_name
 }
 
-output "container_name" {
-  value = azurerm_storage_container.stor_cont.name
+output "streaming_container_name" {
+  value = azurerm_storage_container.streaming_stor_cont.name
 }
 
 output "telemetry_instrumentation_key" {

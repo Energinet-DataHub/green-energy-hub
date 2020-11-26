@@ -1,0 +1,146 @@
+name: Databricks Aggregator Job Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource_group_name:
+        description: 'Resource Group Name'
+        required: true
+        default: 'energinettf'
+      storage_account_name:
+        description: 'Storage Account Name'
+        required: true
+        default: 'energinetstrg1'
+      beginning_date_time:
+        description: 'Aggregation Beginning Date Time'
+        required: true
+        default: '2020-10-02T00:00:00+0100'
+      end_date_time:
+        description: 'Aggregation End Date Time'
+        required: true
+        default: '2020-10-03T00:00:00+0100'
+      telemetry_instrumentation_key:
+        description: 'Application insights instrumentation key for telemetry data'
+        required: true
+        default: '00000000-0000-0000-0000-000000000000'
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  databricks_aggregation_job_deploy:
+    # Name the Job
+    name: Create Databricks Aggregation Job
+    # Set the type of machine to run on
+    # Resource Group set for automated trigger purposes, if ran manually it is overriden
+    runs-on: ubuntu-latest
+    env:
+      RESOURCE_GROUP: "rg-GreenEnergyHub_Sandbox-S"
+      ARM_CLIENT_ID:  ${{ secrets.CLIENT_ID }}
+      ARM_TENANT_ID:  ${{ secrets.TENANT_ID}}
+      ARM_SUBSCRIPTION_ID:  ${{ secrets.SUBSCRIPTION_ID}}
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      TF_VAR_client_secret: ${{ secrets.CLIENT_SECRET }}
+      TF_VAR_client_id: ${{ secrets.CLIENT_SECRET }}
+      TF_VAR_tenant_id: ${{ secrets.CLIENT_SECRET }}
+      TF_VAR_python_main_file: "dbfs:/streaming/hourly_consumption_aggregation.py"
+      TF_VAR_wheel_file: "dbfs:/streaming/geh_stream-1.0-py3-none-any.whl"
+
+    steps:
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1.2.1
+          with:
+            terraform_wrapper: false
+        
+        - name: Setup Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+            architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+        - name: Install Databricks CLI
+          run: pip install --upgrade databricks-cli
+
+        - name: Install Azure CLI
+          run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+        - name: Azure CLI Login
+          run: az login --service-principal --username ${{ secrets.CLIENT_ID }} --password ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID}}
+
+        # Run only if workflow started on demand (manually triggered)
+        - name: Set env
+          run: |
+            echo "TF_VAR_resource_group_name=${{ github.event.inputs.resource_group_name }}" >> $GITHUB_ENV
+            echo "RESOURCE_GROUP=${{ github.event.inputs.resource_group_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_storage_account_name=${{ github.event.inputs.storage_account_name }}" >> $GITHUB_ENV            
+            echo "TF_VAR_telemetry_instrumentation_key=${{ github.event.inputs.telemetry_instrumentation_key }}" >> $GITHUB_ENV
+            echo "TF_VAR_beginning_date_time=${{ github.event.inputs.beginning_date_time }}" >> $GITHUB_ENV
+            echo "TF_VAR_end_date_time=${{ github.event.inputs.end_date_time }}" >> $GITHUB_ENV
+            echo ::add-mask::${{ github.event.inputs.telemetry_instrumentation_key }}
+            echo "TF_VAR_telemetry_instrumentation_key=${{ github.event.inputs.telemetry_instrumentation_key }}" >> $GITHUB_ENV
+          if:  github.event.inputs.resource_group_name
+
+        # This step expects only 1 Databricks Workspace to be in the Resource Group, if otherwise, step needs to be adapted
+        - name: Obtain Databricks ID 
+          run: |
+            az config set extension.use_dynamic_install=yes_without_prompt 
+            res=$(az databricks workspace list -g ${{ env.RESOURCE_GROUP }})
+            databricksId=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
+            workspaceUrl=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)[0]['workspaceUrl'])")
+            echo "TF_VAR_databricks_id=$databricksId" >> $GITHUB_ENV
+            echo "databricks_url=$workspaceUrl" >> $GITHUB_ENV
+        
+        # This step expects only 1 Keyvault instance to be in the Resource Group, if otherwise, step needs to be adapted
+        - name: Obtain Keyvault ID 
+          run: | 
+            keyvaultId=$(az keyvault list -g ${{ env.RESOURCE_GROUP }} | python -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
+            echo "TF_VAR_keyvault_id=$keyvaultId" >> $GITHUB_ENV
+               
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        # resource id in curl request is fixed Azure Databricks resource id, Azure wide
+        - name: Obtain AAD Token for Databricks CLI
+          run: |
+            curl_result=$(curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&client_id=${{env.ARM_CLIENT_ID}}&resource=2ff814a6-3304-4ab8-85cb-cd0e6f879c1d&client_secret=${{ secrets.CLIENT_SECRET }}' https://login.microsoftonline.com/${{env.ARM_TENANT_ID}}/oauth2/token) 
+            token=$(echo $curl_result | python3 -c "import sys, json; print(json.load(sys.stdin)['access_token'])")
+            echo ::add-mask::$token
+            echo "DATABRICKS_AAD_TOKEN=$token" >> $GITHUB_ENV
+        
+        # Wheel file name hardcoded now
+        - name: Copy files to DBFS
+          id: copy_files_todbfs
+          run: |    
+            databricks configure --host "https://${{env.databricks_url}}" --aad-token
+            dbfs cp --overwrite ./src/streaming/hourly_consumption_aggregation.py dbfs:/streaming/hourly_consumption_aggregation.py
+        
+        # Create aggregation job
+        - name: Terraform Databricks Init
+          working-directory: ./build/terraform/databricks_aggregation_job
+          id: init_databricks
+          run: terraform init
+                    
+        - name: Terraform Databricks Apply
+          working-directory: ./build/terraform/databricks_aggregation_job
+          id: apply_databricks
+          run: terraform apply -no-color -auto-approve
+          continue-on-error: false
+          
+        - name: Set env Databricks
+          working-directory: ./build/terraform/databricks_aggregation_job
+          run: |
+            echo "databricks_job_id=$(terraform output databricks_job_id)" >> $GITHUB_ENV
+         
+        - name: Databricks CLI run the job
+          id: run_job
+          run: |
+            res=$(databricks jobs run-now --job-id ${{env.databricks_job_id}})
+            run_id=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)['run_id'])")
+            echo "::set-output name=run_id::$run_id"
+        
+        #Keep retries parameter set to one for jobs which might run in parallel
+        - name: Check Job Status
+          working-directory: ./build
+          run: |
+            pip install configargparse
+            pip install requests
+            python -u job_status_check.py --job-run-ids  ${{steps.run_job.outputs.run_id}} --retries 1 --databricks-url 'https://${{env.databricks_url}}' --token ${{env.DATABRICKS_AAD_TOKEN}}

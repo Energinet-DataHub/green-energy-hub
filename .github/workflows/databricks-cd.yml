@@ -7,38 +7,34 @@ on:
         description: 'Resource Group Name'
         required: true
         default: 'energinettf'
+      keyvault_name:
+        description: 'Key Vault Name'
+        required: true
+        default: 'energinetkv'
       eventhub_namespace_name:
-        description: 'EventHub Namespace name'
+        description: 'EventHub Namespace Name'
         required: true
-        default: 'energinet-ehn-poc'
+        default: 'energinet-ehn'
       input_eventhub_name:
-        description: 'Input EventHub name'
+        description: 'Input EventHub Name'
         required: true
-        default: 'energinet-eh-poc-input'
+        default: 'input'
       valid_output_eventhub_name:
-        description: 'Valid Output EventHub name'     
+        description: 'Valid Output EventHub Name'
         required: true
-        default: 'energinet-eh-poc-valid-output'
+        default: 'valid-output'
       invalid_output_eventhub_name:
-        description: 'Invalid Output EventHub name'     
+        description: 'Invalid Output EventHub Name'
         required: true
-        default: 'energinet-eh-poc-invalid-output'
+        default: 'invalid-output'
       storage_account_name:
-        description: 'Storage Account name'
+        description: 'Storage Account Name'
         required: true
-        default: 'energinetstrgpoc'
-      container_name:
-        description: 'Storage Container name'
-        required: true
-        default: 'messagedata'
+        default: 'energinetstrg1'
       app_name:
-        description: 'Application name'
+        description: 'Application Name'
         required: true
-        default: 'energinetpoc'
-      telemetry_instrumentation_key:
-        description: 'Application insights instrumentation key for telemetry data'
-        required: true
-        default: '00000000-0000-0000-0000-000000000000'
+        default: 'datahub'
 
 jobs:
 
@@ -50,11 +46,14 @@ jobs:
     # Set the type of machine to run on
     runs-on: ubuntu-latest
     env:
-      TF_VAR_client_secret: ${{ secrets.CLIENT_SECRET }}
       ARM_CLIENT_ID:  ${{ secrets.CLIENT_ID }}
       ARM_TENANT_ID:  ${{ secrets.TENANT_ID}}
-      ARM_SUBSCRIPTION_ID:  ${{ secrets.SUBSCRIPTION_ID}}   
-      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}      
+      ARM_SUBSCRIPTION_ID:  ${{ secrets.SUBSCRIPTION_ID}}
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      TF_VAR_client_secret: ${{ secrets.CLIENT_SECRET }}
+      TF_VAR_client_id: ${{ secrets.CLIENT_ID }}
+      TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
+      TF_VAR_object_id: ${{ secrets.OBJECT_ID }}
 
     steps:
         - name: Setup Terraform
@@ -69,24 +68,22 @@ jobs:
             architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
         - name: Install Databricks CLI
-          id: install_databricks_cli
           run: pip install --upgrade databricks-cli
         
         - name: Checkout code
           uses: actions/checkout@v2
 
-        # Run only if workflow started on demand
+        # Run only if workflow started on demand (manually triggered)
         - name: Set env
           run: |
             echo "TF_VAR_resource_group_name=${{ github.event.inputs.resource_group_name }}" >> $GITHUB_ENV
+            echo "TF_VAR_keyvault_name=${{ github.event.inputs.keyvault_name }}" >> $GITHUB_ENV
             echo "TF_VAR_eventhub_namespace_name=${{ github.event.inputs.eventhub_namespace_name }}" >> $GITHUB_ENV
             echo "TF_VAR_input_eventhub_name=${{ github.event.inputs.input_eventhub_name }}" >> $GITHUB_ENV
             echo "TF_VAR_valid_output_eventhub_name=${{ github.event.inputs.valid_output_eventhub_name }}" >> $GITHUB_ENV
             echo "TF_VAR_invalid_output_eventhub_name=${{ github.event.inputs.invalid_output_eventhub_name }}" >> $GITHUB_ENV
             echo "TF_VAR_storage_account_name=${{ github.event.inputs.storage_account_name }}" >> $GITHUB_ENV
-            echo "TF_VAR_container_name=${{ github.event.inputs.container_name }}" >> $GITHUB_ENV
             echo "TF_VAR_app_name=${{ github.event.inputs.app_name }}" >> $GITHUB_ENV
-            echo "TF_VAR_telemetry_instrumentation_key=${{ github.event.inputs.telemetry_instrumentation_key }}" >> $GITHUB_ENV
           if:  github.event.inputs.app_name
 
         - name: Terraform Infra Init
@@ -109,17 +106,23 @@ jobs:
             echo "TF_VAR_input_eh_listen_connection_string=$(terraform output input_eh_listen_connection_string)" >> $GITHUB_ENV
             echo "databricks_url=$(terraform output databricks_workspace_url)" >> $GITHUB_ENV
             echo ::add-mask::$(terraform output valid_output_eh_send_connection_string)
-            echo "TF_VAR_valid_output_eh_send_connection_string=$(terraform output valid_output_eh_send_connection_string)" >> $GITHUB_ENV  
+            echo "TF_VAR_valid_output_eh_send_connection_string=$(terraform output valid_output_eh_send_connection_string)" >> $GITHUB_ENV
             echo ::add-mask::$(terraform output invalid_output_eh_send_connection_string)
-            echo "TF_VAR_invalid_output_eh_send_connection_string=$(terraform output invalid_output_eh_send_connection_string)" >> $GITHUB_ENV  
-            echo ::add-mask::$(terraform output storage_key)       
+            echo "TF_VAR_invalid_output_eh_send_connection_string=$(terraform output invalid_output_eh_send_connection_string)" >> $GITHUB_ENV
+            echo ::add-mask::$(terraform output storage_key)
             echo "TF_VAR_storage_key=$(terraform output storage_key)" >> $GITHUB_ENV 
             echo "TF_VAR_storage_name=$(terraform output storage_name)" >> $GITHUB_ENV
-            echo "TF_VAR_container_name=$(terraform output container_name)" >> $GITHUB_ENV
+            echo "TF_VAR_streaming_container_name=$(terraform output streaming_container_name)" >> $GITHUB_ENV
             echo "TF_VAR_python_main_file=dbfs:/streaming/enrichment_and_validation.py" >> $GITHUB_ENV
             echo "TF_VAR_wheel_file=dbfs:/streaming/geh_stream-1.0-py3-none-any.whl" >> $GITHUB_ENV
             echo ::add-mask::$(terraform output telemetry_instrumentation_key)
             echo "TF_VAR_telemetry_instrumentation_key=$(terraform output telemetry_instrumentation_key)" >> $GITHUB_ENV
+
+         #Override for Dev Purposes only, to be deleted later
+         #- name: Override App Insights Settings
+         #  working-directory: ./build/terraform/infra
+         #  run: |
+         #    echo "TF_VAR_telemetry_instrumentation_key=<Instrumentation_Key>" >> $GITHUB_ENV   
 
         - name: Create Python Wheel for streaming job
           working-directory: ./src/streaming
@@ -135,6 +138,7 @@ jobs:
             echo ::add-mask::$token
             echo "DATABRICKS_AAD_TOKEN=$token" >> $GITHUB_ENV
         
+        # Wheel file name hardcoded now
         - name: Copy files to DBFS
           id: copy_files_todbfs
           run: |    
@@ -179,4 +183,4 @@ jobs:
           run: |
             pip install configargparse
             pip install requests
-            python job_status_check.py --job-run-ids  ${{steps.run_job.outputs.run_id}} --retries 2 --databricks-url 'https://${{env.databricks_url}}' --token ${{env.DATABRICKS_AAD_TOKEN}}
+            python -u job_status_check.py --job-run-ids  ${{steps.run_job.outputs.run_id}} --retries 2 --databricks-url 'https://${{env.databricks_url}}' --token ${{env.DATABRICKS_AAD_TOKEN}}

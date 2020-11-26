@@ -43,45 +43,52 @@ def databricks_request(path):
 
 failed_jobs = []
 
-for job_run_id in args.job_run_ids:
+for job_run_id in args.job_run_ids :
     
     attempts = 0
     run_id = job_run_id
 
-    while attempts < retries:
+    while attempts <= retries :
         response = databricks_request(f'jobs/runs/get?run_id={run_id}')
         job_id = response.json()['job_id']
-        logging.info(f'Checking status for job run: {run_id} with job id: {job_id }')
+        print(f'Checking status for job run: {run_id} with job id: {job_id }')
  
-        while not ('result_state' in response.json()['state'] or response.json()['state']['life_cycle_state'] == 'RUNNING'):
-            logging.info(f'Checking status for job run: {run_id} with job id: {job_id }')
+        while not ('result_state' in response.json()['state'] or response.json()['state']['life_cycle_state'] in ['RUNNING','SKIPPED']) :
+            print(f'Checking status for job run: {run_id} with job id: {job_id }')
             time.sleep(15)
             response = databricks_request(f'jobs/runs/get?run_id={run_id}')
         
-        #Wait 30 second to see if did not fail
-        if response.json()['state']['life_cycle_state'] == 'RUNNING':
-            time.sleep(30)
+        #Wait 60 second to see if did not fail
+        if response.json()['state']['life_cycle_state'] == 'RUNNING' :
+            print("Waiting to check if job stays in RUNNING state")
+            time.sleep(60)
             #check again. If still running we mark job as sucesfully started
             response = databricks_request(f'jobs/runs/get?run_id={run_id}')
             if response.json()['state']['life_cycle_state'] == 'RUNNING':
+                print("Job RUNNING after 60 Seconds")
                 break
 
-        if response.json()['state']['result_state'] == 'SUCCESS':
+        if response.json()['state']['life_cycle_state'] == 'SKIPPED' :
+            failed_jobs.append(job_id)
+            break
+        
+        if response.json()['state']['result_state'] == 'SUCCESS' :
             break
         else:
             attempts += 1
-            logging.info(f'Job run {run_id} with job id: {job_id} failed. Retrying...')
+            print(f'Job run {run_id} with job id: {job_id} failed. Retrying...')
             # Get new run id for particular job
             run_list_response = databricks_request(f'jobs/runs/list?job_id={job_id}&active_only=true&limit=1')
             run_id = run_list_response.json()['runs'][0]['run_id']
     
-    if attempts == retries:
+    if attempts > retries :
+        print(f'Job {job_id} failed.')
         failed_jobs.append(job_id)
 
 if any(failed_jobs) :
-    logging.info('Failed Job Ids: ' + ' '.join(map(str,failed_jobs)))   
+    print('Failed Job Ids: ' + ' '.join(map(str,failed_jobs)))   
     sys.exit(1)
 else :
-    logging.info('All jobs started sucesfully')
+    print('All jobs started sucesfully')
     sys.exit(0)
-
+    

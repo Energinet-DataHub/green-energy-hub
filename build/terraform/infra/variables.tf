@@ -8,6 +8,11 @@ variable "resource_group_name" {
   default = "rg-GreenEnergyHub_Sandbox-S"
 }
 
+variable "keyvault_name" {
+  type = string
+  default = "kvenerginet"
+}
+
 variable "location" {
   type = string
   default = "North Europe"
@@ -25,17 +30,17 @@ variable "eventhub_namespace_name" {
 
 variable "input_eventhub_name" {
   type = string
-  default = "input_poc"
+  default = "input"
 }
 
 variable "valid_output_eventhub_name" {
   type = string
-  default = "valid_output_poc"
+  default = "valid-output"
 }
 
 variable "invalid_output_eventhub_name" {
   type = string
-  default = "invalid_output_poc"
+  default = "invalid-output"
 }
 
 variable "storage_account_name" {
@@ -43,7 +48,20 @@ variable "storage_account_name" {
   default = "energinetstrg1"
 }
 
-variable "container_name" {
+variable "streaming_container_name" {
   type = string
   default = "messagedata"
+}
+
+variable "aggregation_container_name"{
+  type = string
+  default = "aggregations"
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "object_id" {
+  type = string
 }
