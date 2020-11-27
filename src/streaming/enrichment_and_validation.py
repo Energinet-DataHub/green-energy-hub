@@ -60,7 +60,7 @@ from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
 spark_conf = SparkConf(loadDefaults=True) \
-    .set('fs.azure.account.key.{0}.blob.core.windows.net'.format(args.storage_account_name),
+    .set('fs.azure.account.key.{0}.dfs.core.windows.net'.format(args.storage_account_name),
          args.storage_account_key)
 
 spark = SparkSession\
@@ -73,7 +73,7 @@ print("Spark Configuration:")
 _ = [print(k + '=' + v) for k, v in sc.getConf().getAll()]
 
 # %%
-BASE_STORAGE_PATH = "wasbs://{0}@{1}.blob.core.windows.net/".format(
+BASE_STORAGE_PATH = "abfss://{0}@{1}.dfs.core.windows.net/".format(
     args.storage_container_name, args.storage_account_name
 )
 

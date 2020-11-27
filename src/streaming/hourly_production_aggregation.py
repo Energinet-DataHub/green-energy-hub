@@ -67,9 +67,9 @@ if unknown_args:
 
 # Set spark config with storage account names/keys and the session timezone so that datetimes are displayed consistently (in UTC)
 spark_conf = SparkConf(loadDefaults=True) \
-    .set('fs.azure.account.key.{0}.blob.core.windows.net'.format(args.input_storage_account_name),
+    .set('fs.azure.account.key.{0}.dfs.core.windows.net'.format(args.input_storage_account_name),
          args.input_storage_account_key) \
-    .set('fs.azure.account.key.{0}.blob.core.windows.net'.format(args.output_storage_account_name),
+    .set('fs.azure.account.key.{0}.dfs.core.windows.net'.format(args.output_storage_account_name),
          args.output_storage_account_key) \
     .set("spark.sql.session.timeZone", "UTC")
 
@@ -85,13 +85,13 @@ _ = [print(k + '=' + v) for k, v in sc.getConf().getAll()]
 # %%
 # Create input and output storage paths
 
-INPUT_STORAGE_PATH = "wasbs://{0}@{1}.blob.core.windows.net/{2}".format(
+INPUT_STORAGE_PATH = "abfss://{0}@{1}.dfs.core.windows.net/{2}".format(
     args.input_storage_container_name, args.input_storage_account_name, args.input_path
 )
 
 print("Input storage url:", INPUT_STORAGE_PATH)
 
-OUTPUT_STORAGE_PATH = "wasbs://{0}@{1}.blob.core.windows.net/{2}".format(
+OUTPUT_STORAGE_PATH = "abfss://{0}@{1}.dfs.core.windows.net/{2}".format(
     args.output_storage_container_name, args.output_storage_account_name, args.output_path
 )
 

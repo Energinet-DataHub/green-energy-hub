@@ -3,10 +3,11 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			// "spark_version": "3.0.1",
-			// "hadoop_version": "2.7",
-			// "spark_checksum": "F4A10BAEC5B8FF1841F10651CAC2C4AA39C162D3029CA180A9749149E6060805B5B5DDF9287B4AA321434810172F8CC0534943AC005531BB48B6622FBE228DDC",
 			// "openjdk_version": "8",
+			// "spark_version": "3.0.1",
+			// "spark_checksum": "F4A10BAEC5B8FF1841F10651CAC2C4AA39C162D3029CA180A9749149E6060805B5B5DDF9287B4AA321434810172F8CC0534943AC005531BB48B6622FBE228DDC",
+			// "hadoop_version": "3.3.0",
+			// "hadoop_checksum": "9ac5a5a8d29de4d2edfb5e554c178b04863375c5644d6fea1f6464ab4a7e22a50a6c43253ea348edbd114fc534dcde5bdd2826007e24b2a6b0ce0d704c5b4f5b"
 			// "py4j_version": "0.10.9"
 		}
 	},

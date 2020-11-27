@@ -68,9 +68,9 @@ if unknown_args:
 # %%
 
 spark_conf = SparkConf(loadDefaults=True) \
-    .set('fs.azure.account.key.{0}.blob.core.windows.net'.format(args.input_storage_account_name),
+    .set('fs.azure.account.key.{0}.dfs.core.windows.net'.format(args.input_storage_account_name),
          args.input_storage_account_key) \
-    .set('fs.azure.account.key.{0}.blob.core.windows.net'.format(args.output_storage_account_name),
+    .set('fs.azure.account.key.{0}.dfs.core.windows.net'.format(args.output_storage_account_name),
          args.output_storage_account_key)
 
 spark = SparkSession\
@@ -84,13 +84,13 @@ _ = [print(k + '=' + v) for k, v in sc.getConf().getAll()]
 
 # %%
 
-INPUT_STORAGE_PATH = "wasbs://{0}@{1}.blob.core.windows.net/messages".format(
+INPUT_STORAGE_PATH = "abfss://{0}@{1}.dfs.core.windows.net/messages".format(
     args.input_storage_container_name, args.input_storage_account_name
 )
 
 print("Input storage url:", INPUT_STORAGE_PATH)
 
-OUTPUT_STORAGE_PATH = "wasbs://{0}@{1}.blob.core.windows.net/".format(
+OUTPUT_STORAGE_PATH = "abfss://{0}@{1}.dfs.core.windows.net/".format(
     args.output_storage_container_name, args.output_storage_account_name
 )
 
