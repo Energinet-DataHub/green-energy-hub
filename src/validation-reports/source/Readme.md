@@ -1,4 +1,6 @@
 # Read.ME
 
-Created from template.
-TODO: expand this README
+## Validation persister
+
+- Picks validation reports off the `ValidationReport` event hub
+- Stores the `ValidatiionReportBlob` in the Azure Table Storage named `ValidationReports`  

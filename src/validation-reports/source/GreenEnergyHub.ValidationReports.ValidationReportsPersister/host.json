@@ -4,5 +4,15 @@
     "applicationInsights": {
       "samplingExcludedTypes": "Request;Trace"
     }
+  },
+  "extensions": {
+    "serviceBus": {
+      "messageHandlerOptions": {
+        "autoComplete": false
+      },
+      "sessionHandlerOptions": {
+        "autoComplete": false
+      }
+    }
   }
 }

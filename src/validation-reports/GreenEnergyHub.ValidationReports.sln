@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# 
+#
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationReports.Domain", "source\GreenEnergyHub.ValidationReports.Domain\GreenEnergyHub.ValidationReports.Domain.csproj", "{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.ValidationReports.Application", "source\GreenEnergyHub.ValidationReports.Application\GreenEnergyHub.ValidationReports.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"

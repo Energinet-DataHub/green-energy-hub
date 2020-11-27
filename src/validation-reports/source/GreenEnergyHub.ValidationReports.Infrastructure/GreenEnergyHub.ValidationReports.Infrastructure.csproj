@@ -28,4 +28,8 @@ limitations under the License.
       <ProjectReference Include="..\GreenEnergyHub.ValidationReports.Domain\GreenEnergyHub.ValidationReports.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+    </ItemGroup>
+
 </Project>

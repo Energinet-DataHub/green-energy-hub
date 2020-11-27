@@ -11,10 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
+using System.Text.Json;
 using GreenEnergyHub.ValidationReports.ValidationReportsPersister;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using NodaTime.Serialization.SystemTextJson;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
@@ -28,6 +31,11 @@ namespace GreenEnergyHub.ValidationReports.ValidationReportsPersister
             {
                 throw new ArgumentNullException(nameof(builder));
             }
+
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(NodaConverters.InstantConverter);
+
+            builder.Services.AddSingleton(options);
         }
     }
 }

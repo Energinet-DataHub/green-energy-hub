@@ -1,7 +1,10 @@
-{
+﻿{
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+    "ValidationReportEventHubConnectionString": "[Connection-string-here]",
+    "ValidationReportStorageConnectionString": "[Connection-string-here]",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "APPINSIGHTS_INSTRUMENTATIONKEY": "<An instrumentation key for Application Insights>"
   }
