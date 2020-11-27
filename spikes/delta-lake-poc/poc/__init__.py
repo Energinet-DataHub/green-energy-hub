@@ -17,4 +17,3 @@ Init file
 from .delta_lake_poc import DeltaLakePOC
 
 __all__ = ["DeltaLakePOC"]
-
