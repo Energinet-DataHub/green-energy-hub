@@ -12,8 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using Energinet.DataHub.MarketData.Application.ChangeSupplier;
 using Energinet.DataHub.MarketData.EntryPoint;
+using Energinet.DataHub.MarketData.Infrastructure;
+using GreenEnergyHub.Messaging;
+using GreenEnergyHub.Messaging.Integration.ServiceCollection;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
@@ -23,7 +29,13 @@ namespace Energinet.DataHub.MarketData.EntryPoint
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            // Register services
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.Services.AddGreenEnergyHub(typeof(InitiateChangeOfSupplier).Assembly);
+            builder.Services.AddScoped<IHubRehydrate, JsonMessageDeserializer>();
         }
     }
 }

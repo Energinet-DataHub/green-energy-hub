@@ -18,6 +18,6 @@ namespace Energinet.DataHub.MarketData.EntryPoint
     {
         public string? RequestType { get; set; }
 
-        public object? Request { get; set; }
+        public string? Request { get; set; }
     }
 }
