@@ -12,18 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Energinet.DataHub.MarketData.EntryPoint;
-using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-
-[assembly: FunctionsStartup(typeof(Startup))]
-
 namespace Energinet.DataHub.MarketData.EntryPoint
 {
-    public class Startup : FunctionsStartup
+    public class QueueMessage
     {
-        public override void Configure(IFunctionsHostBuilder builder)
-        {
-            // Register services
-        }
+        public string? RequestType { get; set; }
+
+        public object? Request { get; set; }
     }
 }

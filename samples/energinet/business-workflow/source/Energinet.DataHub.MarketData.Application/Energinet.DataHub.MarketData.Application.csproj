@@ -24,6 +24,7 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.MarketData.Domain\Energinet.DataHub.MarketData.Domain.csproj" />
     </ItemGroup>
 

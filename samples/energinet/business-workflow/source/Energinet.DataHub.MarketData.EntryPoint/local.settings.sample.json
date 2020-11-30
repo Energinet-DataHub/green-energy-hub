@@ -3,6 +3,8 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "queueName": "market-data",
+    "AzureWebJobsServiceBus": "<Queue connection string>",
     "APPINSIGHTS_INSTRUMENTATIONKEY": "<An instrumentation key for Application Insights>"
   }
 }
