@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -37,14 +38,33 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Infrastructure
                 var request = await JsonSerializer.DeserializeAsync(message, messageType).ConfigureAwait(false);
                 return request as IHubRequest;
             }
-            #pragma warning disable CA1031
-            catch (Exception e)
+            catch (JsonException e)
             {
-                _logger.LogError(e, "Unable to rehydrate message");
+                LogException(e);
             }
-            #pragma warning restore CA1031
 
             return null;
+        }
+
+        public async Task<IEnumerable<IHubRequest>?> RehydrateCollectionAsync(Stream message, Type messageType)
+        {
+            try
+            {
+                var genericType = typeof(IEnumerable<>).MakeGenericType(messageType);
+                var requests = await JsonSerializer.DeserializeAsync(message, genericType).ConfigureAwait(false);
+                return new List<IHubRequest>((IEnumerable<IHubRequest>)requests);
+            }
+            catch (JsonException e)
+            {
+                LogException(e);
+            }
+
+            return null;
+        }
+
+        private void LogException(Exception exception)
+        {
+            _logger.LogError(exception, "Unable to rehydrate message");
         }
     }
 }

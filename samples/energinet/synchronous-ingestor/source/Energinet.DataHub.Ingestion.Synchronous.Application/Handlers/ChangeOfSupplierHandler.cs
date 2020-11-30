@@ -51,9 +51,11 @@ namespace Energinet.DataHub.Ingestion.Synchronous.Application.Handlers
         /// <param name="actionData">The ChangeOfSupplierRequest.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>True if it is valid.</returns>
-        protected override async Task<bool> ValidateAsync(ChangeOfSupplierRequest actionData, CancellationToken cancellationToken)
+        protected override Task<bool> ValidateAsync(ChangeOfSupplierRequest actionData, CancellationToken cancellationToken)
         {
-            return await _rulesEngine.ValidateAsync(actionData).ConfigureAwait(false);
+            // TODO: Enable validation when we are settled on a validation engine/methodology
+            // return await _rulesEngine.ValidateAsync(actionData).ConfigureAwait(false);
+            return Task.FromResult(true);
         }
 
         /// <summary>

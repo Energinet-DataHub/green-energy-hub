@@ -13,11 +13,13 @@
 // limitations under the License.
 
 using System;
+using Energinet.DataHub.Ingestion.Synchronous.Application;
 using Energinet.DataHub.Ingestion.Synchronous.Application.Requests;
 using Energinet.DataHub.Ingestion.Synchronous.AzureFunction;
 using Energinet.DataHub.Ingestion.Synchronous.AzureFunction.Configuration;
 using Energinet.DataHub.Ingestion.Synchronous.Infrastructure;
 using GreenEnergyHub.Messaging;
+using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,16 +28,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
 {
-    #pragma warning disable CA1812
-    internal class Startup : FunctionsStartup
+    public class Startup : FunctionsStartup
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
+            if (builder is null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             // Register services
             builder.Services.AddScoped<IHubRehydrate, JsonMessageDeserializer>();
             builder.Services.AddGreenEnergyHub(typeof(ChangeOfSupplierRequest).Assembly);
             builder.Services.AddRequestQueue();
+            builder.Services.AddScoped<IHubRequestBulkDispatcher, HubRequestBulkDispatcher>();
         }
     }
-    #pragma warning restore CA1812
 }

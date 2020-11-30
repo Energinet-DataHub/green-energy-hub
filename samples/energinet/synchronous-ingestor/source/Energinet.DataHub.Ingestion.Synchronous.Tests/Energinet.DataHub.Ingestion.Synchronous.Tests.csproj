@@ -39,6 +39,9 @@ limitations under the License.
     </ItemGroup>
 
     <ItemGroup>
+      <None Update="Assets\ChangeSupplierRequestArray.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Update="Assets\ChangeSupplier.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -29,5 +30,13 @@ namespace GreenEnergyHub.Messaging
         /// <param name="messageType">Message type to rehydrate</param>
         /// <returns>If the message type is known and the message content valid a <see cref="IHubRequest"/> else null</returns>
         Task<IHubRequest?> RehydrateAsync(Stream message, Type messageType);
+
+        /// <summary>
+        /// Rehydrates a collection of hub requests
+        /// </summary>
+        /// <param name="message"><see cref="Stream"/> containing the message</param>
+        /// <param name="messageType">Message type to rehydrate</param>
+        /// <returns>A collection of <see cref="IHubRequest"/></returns>
+        Task<IEnumerable<IHubRequest>?> RehydrateCollectionAsync(Stream message, Type messageType);
     }
 }

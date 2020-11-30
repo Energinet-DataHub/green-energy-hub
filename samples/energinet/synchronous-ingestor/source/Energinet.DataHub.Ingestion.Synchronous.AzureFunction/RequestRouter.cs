@@ -13,7 +13,10 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Energinet.DataHub.Ingestion.Synchronous.Application;
+using Energinet.DataHub.Ingestion.Synchronous.Infrastructure;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.RequestRouting;
@@ -33,7 +36,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
     {
         private readonly IHubRequestTypeMap _resolver;
         private readonly IHubRehydrate _rehydrate;
-        private readonly IHubRequestDispatcher _dispatcher;
+        private readonly IHubRequestBulkDispatcher _bulkDispatcher;
 
         /// <summary>
         /// Creates an instance of a RequestRouter using a given resolver.
@@ -41,12 +44,15 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
         /// <param name="resolver">The IEndpointResolver to use to figure out
         /// where to send what requests.</param>
         /// <param name="rehydrate">Rehydrate a message to a request type</param>
-        /// <param name="dispatcher">Mediator to route the request</param>
-        public RequestRouter(IHubRequestTypeMap resolver, IHubRehydrate rehydrate, IHubRequestDispatcher dispatcher)
+        /// <param name="bulkDispatcher">Service for dispatching collection of requests.</param>
+        public RequestRouter(
+            IHubRequestTypeMap resolver,
+            IHubRehydrate rehydrate,
+            IHubRequestBulkDispatcher bulkDispatcher)
         {
             _resolver = resolver;
             _rehydrate = rehydrate;
-            _dispatcher = dispatcher;
+            _bulkDispatcher = bulkDispatcher;
         }
 
         /// <summary>
@@ -77,19 +83,19 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
                 return new NotFoundResult();
             }
 
-            var hubRequest = await _rehydrate.RehydrateAsync(httpRequest.Body, requestType).ConfigureAwait(false);
-            if (hubRequest == null)
+            var hubRequests = await _rehydrate.RehydrateCollectionAsync(httpRequest.Body, requestType).ConfigureAwait(false);
+            if (hubRequests == null)
             {
-                return new BadRequestObjectResult(requestType);
+                return new BadRequestObjectResult("Invalid request message.");
             }
 
-            var response = await _dispatcher.DispatchAsync(hubRequest).ConfigureAwait(false);
-            if (response.IsSuccessful)
+            // TODO: Downcasting to CustomHubResponse should not occur.
+            // In fact, CustomHubResponse should not exist at all; either IHubResponse or HubResponse should define/implement ValidationResults
+            var response = await _bulkDispatcher.DispatchAsync(hubRequests).ConfigureAwait(false) as CustomHubResponse;
+            return new OkObjectResult(response?.ValidationResults)
             {
-                return new OkObjectResult("request accepted and will be processed");
-            }
-
-            return new BadRequestObjectResult(response.Errors);
+                StatusCode = StatusCodes.Status202Accepted,
+            };
         }
     }
 }
