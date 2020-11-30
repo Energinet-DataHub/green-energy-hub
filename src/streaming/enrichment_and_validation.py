@@ -226,9 +226,12 @@ def __store_data_frame(batch_df: DataFrame, _: int):
         batch_operations.track_batch_back_to_original_correlation_requests(correlation_ids, batch_count, telemetry_client, watch)
 
     except Exception as err:
+        # Make sure the exception is not accidently tracked on the last used parent
         telemetry_client.context.operation.parent_id = None
+        # We need to track and flush the exception so it is not lost in case the exception will stop execution
         telemetry_client.track_exception()
         telemetry_client.flush()
+        # The exception needs to continue its journey as to not cause data loss
         raise err
 
 
