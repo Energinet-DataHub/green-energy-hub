@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# 
+#
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.SoapAdapter.Domain", "source\Energinet.DataHub.SoapAdapter.Domain\Energinet.DataHub.SoapAdapter.Domain.csproj", "{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.SoapAdapter.Application", "source\Energinet.DataHub.SoapAdapter.Application\Energinet.DataHub.SoapAdapter.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"
@@ -26,6 +26,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.SoapAdapter.EntryPoint", "source\Energinet.DataHub.SoapAdapter.EntryPoint\Energinet.DataHub.SoapAdapter.EntryPoint.csproj", "{28EB9E94-92AD-4F33-B6BA-B13988DBAA83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreenEnergyHub", "GreenEnergyHub", "{40C08507-45C4-44DD-ACF7-9D632D4C7943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj", "{6D9B4A8D-AE28-4DAD-BA3C-451F3B8A480B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,9 +57,14 @@ Global
 		{28EB9E94-92AD-4F33-B6BA-B13988DBAA83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28EB9E94-92AD-4F33-B6BA-B13988DBAA83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28EB9E94-92AD-4F33-B6BA-B13988DBAA83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9B4A8D-AE28-4DAD-BA3C-451F3B8A480B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9B4A8D-AE28-4DAD-BA3C-451F3B8A480B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9B4A8D-AE28-4DAD-BA3C-451F3B8A480B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9B4A8D-AE28-4DAD-BA3C-451F3B8A480B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{68412EBF-701D-467D-8716-74269E171F41} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
 		{28EB9E94-92AD-4F33-B6BA-B13988DBAA83} = {832447E5-7A46-4381-817C-5D73A20510C2}
+		{6D9B4A8D-AE28-4DAD-BA3C-451F3B8A480B} = {40C08507-45C4-44DD-ACF7-9D632D4C7943}
 	EndGlobalSection
 EndGlobal

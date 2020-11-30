@@ -17,19 +17,11 @@ using System.IO;
 using System.Threading.Tasks;
 using Energinet.DataHub.SoapAdapter.Application.Converters;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Energinet.DataHub.SoapAdapter.Tests
 {
     public class RsmConverterTests
     {
-        private readonly ITestOutputHelper _output;
-
-        public RsmConverterTests(ITestOutputHelper output)
-        {
-            _output = output;
-        }
-
         [Fact]
         public async Task Validate_converted_output()
         {

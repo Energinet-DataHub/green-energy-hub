@@ -13,20 +13,19 @@
 // limitations under the License.
 
 using System.IO;
-using System.Threading.Tasks;
 
-namespace Energinet.DataHub.SoapAdapter.Application
+namespace Energinet.DataHub.SoapAdapter.Application.Dtos
 {
-    /// <summary>
-    /// Convert from one format to another
-    /// </summary>
-    public interface IRequestConverter
+    public class Request
     {
-        /// <summary>
-        /// Convert the input to another format
-        /// </summary>
-        /// <param name="input">A <see cref="Stream"/> that should be converted</param>
-        /// <param name="output">A <see cref="Stream"/> that the converted data should be written to</param>
-        ValueTask ConvertAsync(Stream input, Stream output);
+        public Request(string correlationId, Stream content)
+        {
+            CorrelationId = correlationId;
+            Content = content;
+        }
+
+        public string CorrelationId { get; }
+
+        public Stream Content { get; }
     }
 }

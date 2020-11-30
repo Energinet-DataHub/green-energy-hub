@@ -20,7 +20,7 @@ using System.Xml;
 using Energinet.DataHub.SoapAdapter.Application.Parsers;
 using Energinet.DataHub.SoapAdapter.Domain.Validation;
 
-namespace Energinet.DataHub.SoapAdapter.Application
+namespace Energinet.DataHub.SoapAdapter.Application.Converters
 {
     public abstract class RsmConverter : IRequestConverter
     {
@@ -55,6 +55,7 @@ namespace Energinet.DataHub.SoapAdapter.Application
                 }
                 finally
                 {
+                    output.Position = 0;
                     await writer.DisposeAsync().ConfigureAwait(false);
                 }
             }

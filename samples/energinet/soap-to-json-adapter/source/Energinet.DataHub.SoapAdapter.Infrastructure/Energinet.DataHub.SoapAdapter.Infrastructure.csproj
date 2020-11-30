@@ -28,4 +28,8 @@ limitations under the License.
       <ProjectReference Include="..\Energinet.DataHub.SoapAdapter.Domain\Energinet.DataHub.SoapAdapter.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.10" />
+    </ItemGroup>
+
 </Project>

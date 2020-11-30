@@ -3,6 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "APPINSIGHTS_INSTRUMENTATIONKEY": "<An instrumentation key for Application Insights>"
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "<An instrumentation key for Application Insights>",
+    "IngestionServiceEndpoint":"http://localhost:3003"
   }
 }

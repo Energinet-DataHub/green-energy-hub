@@ -12,8 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using Energinet.DataHub.SoapAdapter.Application;
+using Energinet.DataHub.SoapAdapter.Application.Converters;
+using Energinet.DataHub.SoapAdapter.Application.Infrastructure;
+using Energinet.DataHub.SoapAdapter.Application.Parsers;
 using Energinet.DataHub.SoapAdapter.EntryPoint;
+using Energinet.DataHub.SoapAdapter.Infrastructure;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: FunctionsStartup(typeof(Startup))]
@@ -30,6 +36,20 @@ namespace Energinet.DataHub.SoapAdapter.EntryPoint
             }
 
             // Register services
+            builder.Services.AddHttpClient();
+            builder.Services.AddScoped<ISendMessageService, SendMessageService>();
+            builder.Services.AddScoped<RsmValidationParser>();
+            builder.Services.AddScoped<IIngestionClient, IngestionClient>();
+            builder.Services.AddSingleton<IRequestConverterFactory, RequestConverterFactory>();
+            builder.Services.AddSingleton<IResponseConverterFactory, ResponseConverterFactory>();
+            builder.Services.AddSingleton<IErrorResponseFactory, ErrorResponseFactory>();
+
+            builder.Services.AddSingleton(
+                serviceProvider =>
+                {
+                    var configuration = serviceProvider.GetService<IConfiguration>();
+                    return new IngestionClientSettings(configuration.GetValue<string>("IngestionServiceEndpoint"));
+                });
         }
     }
 }
