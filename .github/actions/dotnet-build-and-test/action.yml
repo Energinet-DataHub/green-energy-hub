@@ -24,6 +24,8 @@ inputs:
 runs:
   using: composite
   steps:
+    - run: mv .editorconfig.ci .editorconfig
+      shell: bash
     - run: dotnet build --configuration Debug ${{ inputs.sln_path }}/${{ inputs.sln_name }}
       shell: bash
     - run: |

@@ -4,12 +4,17 @@
 
 Welcome to the Green Energy Hub, a project developed to support the change toward decarbonized economies.
 
-- [General Info](#general-info)
-    - [What is Green Energy Hub](#what-is-green-energy-hub)
-    - [What does Green Energy Hub do](#what-does-green-energy-hub-do)
-    - [What is a TSO](#what-is-a-tso)
-- [Architecture](#architecture)
-    - [Technical Stack Diagram](#technical-stack-diagram)
+- [Green Energy Hub](#green-energy-hub)
+    - [General Info](#general-info)
+        - [What is Green Energy Hub](#what-is-green-energy-hub)
+        - [What does Green Energy Hub do](#what-does-green-energy-hub-do)
+        - [What is a TSO](#what-is-a-tso)
+    - [Architecture](#architecture)
+        - [Technical Stack Diagram](#technical-stack-diagram)
+    - [Prepare dev environment](#prepare-dev-environment)
+        - [Configuring .editorconfig for local development](#configuring-editorconfig-for-local-development)
+        - [DataBricks development](#databricks-development)
+        - [Markdown development](#markdown-development)
 
 ## General Info
 
@@ -38,6 +43,10 @@ A Transmission System Operator (TSO) is an entity entrusted with transporting en
 ## Prepare dev environment
 
 As a tool for local development you can use [Visual Studio Code](https://code.visualstudio.com/)
+
+### Configuring .editorconfig for local development
+
+Follow [these steps](./docs/local-development/local-development-editorconfig.md) to set up a local `.editorconfig` file.
 
 ### DataBricks development
 
