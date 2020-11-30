@@ -21,7 +21,7 @@ namespace GreenEnergyHub.MasterData.Tests
         public void DummySuccessfulTest()
         {
             // Write clever tests (not this one) to include in the template
-            var sut = nameof(DummySuccessfulTest);
+            var sut = nameof(this.DummySuccessfulTest);
 
             Assert.Equal("DummySuccessfulTest", sut);
         }

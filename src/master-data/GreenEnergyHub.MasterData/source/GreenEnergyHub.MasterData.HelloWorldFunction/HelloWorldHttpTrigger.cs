@@ -21,8 +21,17 @@ using Microsoft.Extensions.Logging;
 
 namespace GreenEnergyHub.MasterData.HelloWorldFunction
 {
+    /// <summary>
+    /// Sample Azure Function class
+    /// </summary>
     public static class HelloWorldHttpTrigger
     {
+        /// <summary>
+        /// Sample Azure Function run method
+        /// </summary>
+        /// <param name="req">The HTTPRewquest received.</param>
+        /// <param name="log">A logger instance.</param>
+        /// <returns>A 200 OK result.</returns>
         [FunctionName("HelloWorldHttpTrigger")]
         public static async Task<OkObjectResult> RunAsync(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
