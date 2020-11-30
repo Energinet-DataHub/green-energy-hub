@@ -1,0 +1,84 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Copyright 2020 Energinet DataHub A/S
+#
+# Licensed under the Apache License, Version 2.0 (the "License2");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.MarketData.Domain", "source\Energinet.DataHub.MarketData.Domain\Energinet.DataHub.MarketData.Domain.csproj", "{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.MarketData.Application", "source\Energinet.DataHub.MarketData.Application\Energinet.DataHub.MarketData.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.MarketData.Infrastructure", "source\Energinet.DataHub.MarketData.Infrastructure\Energinet.DataHub.MarketData.Infrastructure.csproj", "{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.MarketData.Tests", "source\Energinet.DataHub.MarketData.Tests\Energinet.DataHub.MarketData.Tests.csproj", "{68412EBF-701D-467D-8716-74269E171F41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{832447E5-7A46-4381-817C-5D73A20510C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.MarketData.EntryPoint", "source\Energinet.DataHub.MarketData.EntryPoint\Energinet.DataHub.MarketData.EntryPoint.csproj", "{0E03325B-26A2-41A9-A782-3351EC988656}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreenEnergyHub", "GreenEnergyHub", "{938244C7-0C83-430D-A17B-60CF906B1C6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj", "{E45F3D17-DB2E-42DE-B7BC-E60B7D873763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging.Integration.ServiceCollection", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Integration.ServiceCollection\GreenEnergyHub.Messaging.Integration.ServiceCollection.csproj", "{0D89BE07-DADE-4842-9469-D0D5BD9056B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging.Tests", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Tests\GreenEnergyHub.Messaging.Tests.csproj", "{C62FB121-1BDD-45FE-B1A7-B27267FF1365}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D6B689-482A-4964-9B3C-1BF9DA9496E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68412EBF-701D-467D-8716-74269E171F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E03325B-26A2-41A9-A782-3351EC988656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E03325B-26A2-41A9-A782-3351EC988656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E03325B-26A2-41A9-A782-3351EC988656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E03325B-26A2-41A9-A782-3351EC988656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E45F3D17-DB2E-42DE-B7BC-E60B7D873763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E45F3D17-DB2E-42DE-B7BC-E60B7D873763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E45F3D17-DB2E-42DE-B7BC-E60B7D873763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E45F3D17-DB2E-42DE-B7BC-E60B7D873763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D89BE07-DADE-4842-9469-D0D5BD9056B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D89BE07-DADE-4842-9469-D0D5BD9056B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D89BE07-DADE-4842-9469-D0D5BD9056B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D89BE07-DADE-4842-9469-D0D5BD9056B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62FB121-1BDD-45FE-B1A7-B27267FF1365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62FB121-1BDD-45FE-B1A7-B27267FF1365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62FB121-1BDD-45FE-B1A7-B27267FF1365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62FB121-1BDD-45FE-B1A7-B27267FF1365}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{68412EBF-701D-467D-8716-74269E171F41} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
+		{0E03325B-26A2-41A9-A782-3351EC988656} = {832447E5-7A46-4381-817C-5D73A20510C2}
+		{E45F3D17-DB2E-42DE-B7BC-E60B7D873763} = {938244C7-0C83-430D-A17B-60CF906B1C6A}
+		{0D89BE07-DADE-4842-9469-D0D5BD9056B2} = {938244C7-0C83-430D-A17B-60CF906B1C6A}
+		{C62FB121-1BDD-45FE-B1A7-B27267FF1365} = {938244C7-0C83-430D-A17B-60CF906B1C6A}
+	EndGlobalSection
+EndGlobal

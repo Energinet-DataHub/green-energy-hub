@@ -310,3 +310,40 @@ jobs:
         with:
           name: build-json-schema-validator_artifacts
           path: ${{ env.REPORT_PATH }}
+
+  market-data:
+    name: Build market data
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # https://github.com/marketplace/actions/skip-duplicate-actions
+      - name: market data skip check
+        id: market_data_check
+        uses: fkirc/skip-duplicate-actions@v1.4.0
+        with:
+          github_token: ${{ github.token }}
+          paths: '["samples/energinet/business-workflow/**",
+            ".github/workflows/main-pr-gate.yml", ".editorconfig",
+            "Directory.Build.props"]'
+
+      - name: Setup .NET Core
+        if: ${{ steps.market_data_check.outputs.should_skip != 'true' }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+
+      - name: Build and test
+        if: ${{ steps.market_data_check.outputs.should_skip != 'true' }}
+        uses: ./.github/actions/dotnet-build-and-test
+        with:
+          SLN_NAME: 'Energinet.DataHub.MarketData.sln'
+          SLN_PATH: './samples/energinet/business-workflow/'
+
+      - name: Upload build artifacts
+        if: ${{ steps.market_data_check.outputs.should_skip != 'true' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-market-data_artifacts
+          path: ${{ env.REPORT_PATH }}
