@@ -9,7 +9,7 @@ In private repository:
 
 ```yaml
 - name: Unit tests
-  uses: ./utilities/databricks-unit-test
+  uses: ./.github/actions/databricks-unit-test
 ```
 
 ## Script

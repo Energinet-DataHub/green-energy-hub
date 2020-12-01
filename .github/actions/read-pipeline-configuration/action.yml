@@ -1,0 +1,24 @@
+name: 'Read Pipeline Configuration File'
+description: 'Reads pipeline configuration file based on last section of branch name and sets environemnt variables. Note: expects Python to be installed on a runner.'
+runs:
+  using: "composite"
+  steps: 
+    - run: |
+        IFS='/' read -ra ADDR <<< "${GITHUB_REF#refs/heads/}"
+        if test -f "./build/configurations/${ADDR[-1]}.json"; then filename="${ADDR[-1]}.json"; else filename="main.json"; fi
+        file_content=$(cat "./build/configurations/${filename}")
+        env_name=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['env_name'])")
+        resource_group_name=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['resource_group_name'])")
+        subscription_id=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['subscription_id'])")
+        tenant_id=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['tenant_id'])")
+        client_id=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['client_id'])")
+        object_id=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['object_id'])")
+        
+        echo "RESOURCE_GROUP_NAME=${resource_group_name}" >> $GITHUB_ENV
+        echo "ENV_NAME=${env_name}" >> $GITHUB_ENV
+        echo "UPPERCASE_ENV_NAME=${env_name^^}" >> $GITHUB_ENV
+        echo "ARM_SUBSCRIPTION_ID=${subscription_id}" >> $GITHUB_ENV
+        echo "ARM_TENANT_ID=${tenant_id}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_ID=${client_id}" >> $GITHUB_ENV
+        echo "ARM_OBJECT_ID=${object_id}" >> $GITHUB_ENV
+      shell: bash

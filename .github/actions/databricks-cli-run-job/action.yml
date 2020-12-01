@@ -1,0 +1,19 @@
+name: 'Run Databricks Job'
+description: 'Invokes run of Databricks Job. Note: expects Databricks CLI and Python to be installed on a runner.'
+inputs:
+  job-id:
+    description: 'databricks job id to run'
+    required: true
+outputs:
+  job-run-id: 
+    description: "Job Run Id"
+    value: ${{ steps.run-job.outputs.job-run-id }}
+runs:
+  using: "composite"
+  steps:
+    - id: run-job
+      run: |
+        res=$(databricks jobs run-now --job-id ${{ inputs.job-id }})
+        run_id=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)['run_id'])")
+        echo "::set-output name=job-run-id::$run_id"
+      shell: bash

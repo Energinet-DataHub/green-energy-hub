@@ -1,0 +1,20 @@
+name: 'Install Databricks CLI and Connect to Cluster'
+description: 'Configures Databricks CLI to connecto to workspace. Note: expects Python to be installed on a runner.'
+inputs:
+  workspace-url: 
+    description: 'databricks workspace url'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: pip install --upgrade databricks-cli
+      shell: bash
+    # resource id in curl request is fixed Azure Databricks resource id, Azure wide
+    - run: |
+        curl_result=$(curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&client_id=${{ env.ARM_CLIENT_ID }}&resource=2ff814a6-3304-4ab8-85cb-cd0e6f879c1d&client_secret=${{ env.ARM_CLIENT_SECRET }}' https://login.microsoftonline.com/${{env.ARM_TENANT_ID}}/oauth2/token) 
+        token=$(echo $curl_result | python3 -c "import sys, json; print(json.load(sys.stdin)['access_token'])")
+        echo ::add-mask::$token
+        echo "DATABRICKS_AAD_TOKEN=$token" >> $GITHUB_ENV
+      shell: bash
+    - run: databricks configure --host "https://${{ inputs.workspace-url }}" --aad-token
+      shell: bash  

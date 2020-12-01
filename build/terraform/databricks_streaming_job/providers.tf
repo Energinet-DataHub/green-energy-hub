@@ -14,3 +14,7 @@ provider "databricks" {
   azure_workspace_resource_id = var.databricks_id
 }
 
+provider "azurerm" {
+  features {}
+}
+

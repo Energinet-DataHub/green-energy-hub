@@ -12,4 +12,4 @@ USER root
 
 RUN sudo ln -s `(realpath /spark-defaults.conf)` $SPARK_HOME/conf/spark-defaults.conf
 
-ENTRYPOINT ["/github/workspace/utilities/databricks-unit-test/entrypoint.sh"]
+ENTRYPOINT ["/github/workspace/.github/actions/databricks-unit-test/entrypoint.sh"]

@@ -1,26 +1,18 @@
-variable "appname" {
+variable "databricks_name" {
   type = string
-  default = "energinetdh"
 }
 
 variable "resource_group_name" {
   type = string
-  default = "rg-GreenEnergyHub_Sandbox-S"
 }
 
 variable "keyvault_name" {
   type = string
-  default = "kvenerginet"
 }
 
 variable "location" {
   type = string
   default = "North Europe"
-}
-
-variable "environment" {
-  type = string
-  default = "test"
 }
 
 variable "eventhub_namespace_name" {
@@ -45,7 +37,6 @@ variable "invalid_output_eventhub_name" {
 
 variable "storage_account_name" {
   type = string
-  default = "energinetstrg1"
 }
 
 variable "streaming_container_name" {
@@ -63,5 +54,9 @@ variable "tenant_id" {
 }
 
 variable "object_id" {
+  type = string
+}
+
+variable "appinsights_name" {
   type = string
 }

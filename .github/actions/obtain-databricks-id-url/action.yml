@@ -1,0 +1,21 @@
+name: 'Obtain Databricks Workspace ID and Url'
+description: 'Obtains Databricks Workspace ID and Url and provides those as output. Note: expects Azure CLI and Python to be installed on a runner.'
+outputs:
+  workspace-id: 
+    description: "Databricks Workspace Id"
+    value: ${{ steps.obtain-db-id-url.outputs.databricks-id }}
+  workspace-url: 
+    description: "Databricks Workspace Url"
+    value: ${{ steps.obtain-db-id-url.outputs.workspace-url }}
+runs:
+  using: "composite"
+  steps: 
+    - id: obtain-db-id-url
+      run: |
+        az config set extension.use_dynamic_install=yes_without_prompt 
+        res=$(az databricks workspace show -g ${{ env.RESOURCE_GROUP_NAME }} -n "energinetdbricks-${{ env.ENV_NAME }}")
+        DATABRICKS_ID=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)['id'])")
+        WORKSPACE_URL=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)['workspaceUrl'])")
+        echo "::set-output name=databricks-id::$(echo $DATABRICKS_ID)"
+        echo "::set-output name=workspace-url::$(echo $WORKSPACE_URL)"
+      shell: bash

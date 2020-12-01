@@ -20,7 +20,7 @@ resource "azurerm_key_vault" "key_vault" {
 }
 
 resource "azurerm_databricks_workspace" "databricks" {
-  name                = "dbricks${var.appname}${var.environment}"
+  name                = var.databricks_name
   resource_group_name = var.resource_group_name
   location            = var.location
   sku                 = "standard"
@@ -151,7 +151,7 @@ resource "azurerm_storage_container" "aggregation_stor_cont" {
 }
 
 resource "azurerm_application_insights" "appinsight" {
-  name                  = "appi${var.appname}${var.environment}"
+  name                  = var.appinsights_name
   resource_group_name   = var.resource_group_name
   location              = var.location
   application_type      = "other"

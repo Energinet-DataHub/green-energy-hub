@@ -44,10 +44,10 @@ resource "databricks_job" "aggregation_job" {
   spark_python_task {
     python_file = var.python_main_file
     parameters  = [
-      "--input-storage-account-name=${var.storage_name}",
+      "--input-storage-account-name=${var.storage_account_name}",
       "--input-storage-account-key=${data.azurerm_key_vault_secret.storage_account_key.value}",
       "--input-storage-container-name=${var.streaming_container_name}",
-      "--output-storage-account-name=${var.storage_name}",
+      "--output-storage-account-name=${var.storage_account_name}",
       "--output-storage-account-key=${data.azurerm_key_vault_secret.storage_account_key.value}",
       "--output-storage-container-name=${var.aggregation_container_name}",
       "--output-path=delta/hourly-consumption/",

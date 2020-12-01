@@ -1,0 +1,9 @@
+name: 'Azure CLI Install and Login'
+description: 'Installs Azure CLI and logs into Azure Account'
+runs:
+  using: "composite"
+  steps: 
+    - run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      shell: bash
+    - run: az login --service-principal --username ${{ env.ARM_CLIENT_ID }} --password ${{ env.ARM_CLIENT_SECRET }} --tenant ${{ env.ARM_TENANT_ID}}
+      shell: bash

@@ -33,4 +33,4 @@ jobs:
 
       - name: Unit tests
         if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
-        uses: ./utilities/databricks-unit-test
+        uses: ./.github/actions/databricks-unit-test
