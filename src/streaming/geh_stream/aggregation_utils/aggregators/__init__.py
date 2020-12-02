@@ -15,5 +15,6 @@ from .hourly_consumption import HourlyConsumptionAggregator
 from .hourly_production import HourlyProductionAggregator
 from .net_exchange_grid_area_aggregator import NetExchangeGridAreaAggregator
 from .flex_consumption import FlexConsumptionAggregator
+from .grid_loss_calculator import GridLossCalculator
 
-__all__ = ["HourlyConsumptionAggregator", "NetExchangeGridAreaAggregator", "HourlyProductionAggregator", "FlexConsumptionAggregator"]
+__all__ = ["HourlyConsumptionAggregator", "NetExchangeGridAreaAggregator", "HourlyProductionAggregator", "FlexConsumptionAggregator", "GridLossCalculator"]
