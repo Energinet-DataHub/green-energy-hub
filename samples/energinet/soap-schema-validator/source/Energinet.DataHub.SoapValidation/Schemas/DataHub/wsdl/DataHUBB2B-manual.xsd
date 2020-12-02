@@ -1,3 +1,5 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
 <!--
 Copyright 2020 Energinet DataHub A/S
 
@@ -13,7 +15,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:b2b="urn:www:datahub:dk:b2b:v01" targetNamespace="urn:www:datahub:dk:b2b:v01" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <!--                                                               | changed urn  |                             | changed urn  | -->
 	<xs:complexType name="DequeueMessageRequest_Type">

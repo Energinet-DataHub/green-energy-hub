@@ -17,42 +17,42 @@ jobs:
     - name: Check License Lines
       uses: kt3k/license_checker@v1.0.3
 
-  # soap-validation:
-  #   name: Build Soap Validation
-  #   runs-on: ubuntu-latest
+  soap-validation:
+    name: Build Soap Validation
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #   - uses: actions/checkout@v2
+    steps:
+    - uses: actions/checkout@v2
 
-  #   # https://github.com/marketplace/actions/skip-duplicate-actions
-  #   - name: Soap validation skip check
-  #     id: soap_validation_check
-  #     uses: fkirc/skip-duplicate-actions@v1.4.0
-  #     with:
-  #       github_token: ${{ github.token }}
-  #       paths: '["samples/energinet/soap-schema-validator/**",
-  #         ".github/workflows/main-pr-gate.yml", ".editorconfig",
-  #         "Directory.Build.props"]'
+    # https://github.com/marketplace/actions/skip-duplicate-actions
+    - name: Soap validation skip check
+      id: soap_validation_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["samples/energinet/soap-schema-validator/**",
+          ".github/workflows/main-pr-gate.yml", ".editorconfig",
+          "Directory.Build.props"]'
 
-  #   - name: Setup .NET Core
-  #     if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
-  #     uses: actions/setup-dotnet@v1
-  #     with:
-  #       dotnet-version: 3.1.301
+    - name: Setup .NET Core
+      if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
 
-  #   - name: Build and test
-  #     if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
-  #     uses: ./.github/actions/dotnet-build-and-test
-  #     with:
-  #       SLN_NAME: 'Energinet.DataHub.SoapValidation.sln'
-  #       SLN_PATH: './samples/energinet/soap-schema-validator'
+    - name: Build and test
+      if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'Energinet.DataHub.SoapValidation.sln'
+        SLN_PATH: './samples/energinet/soap-schema-validator'        
 
-  #   - name: Upload build artifacts
-  #     if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
-  #     uses: actions/upload-artifact@v2
-  #     with:
-  #       name: build-soap-validation_artifacts
-  #       path: ${{ env.REPORT_PATH }}
+    - name: Upload build artifacts
+      if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-soap-validation_artifacts
+        path: ${{ env.REPORT_PATH }}
 
   soap-adapter:
     name: Build Soap Adapter
