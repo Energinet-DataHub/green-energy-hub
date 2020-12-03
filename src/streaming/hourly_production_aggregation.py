@@ -124,6 +124,7 @@ aggregated_df = HourlyProductionAggregator.aggregate(valid_time_period_df)
 aggregated_df \
     .write \
     .format("delta") \
+    .mode("append") \
     .save(OUTPUT_STORAGE_PATH)
 
 # %%

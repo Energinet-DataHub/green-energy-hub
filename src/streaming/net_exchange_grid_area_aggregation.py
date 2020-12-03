@@ -118,6 +118,7 @@ aggregation_result_df = NetExchangeGridAreaAggregator.aggregate(valid_time_perio
 aggregation_result_df \
     .write \
     .format("delta") \
+    .mode("append") \
     .save(OUTPUT_STORAGE_PATH)
 
 # %%

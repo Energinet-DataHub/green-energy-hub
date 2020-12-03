@@ -119,4 +119,5 @@ grid_loss = GridLossCalculator.calculate(
 grid_loss \
     .write \
     .format("delta") \
+    .mode("append") \
     .save(OUTPUT_STORAGE_PATH)
