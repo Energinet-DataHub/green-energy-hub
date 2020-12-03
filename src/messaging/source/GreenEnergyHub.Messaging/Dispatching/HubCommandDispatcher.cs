@@ -32,7 +32,7 @@
         {
             var targetType = typeof(HubCommandWrapper<>);
 
-            var instance = Activator.CreateInstance(targetType.MakeGenericType(typeof(TRequest)), request);
+            var instance = Activator.CreateInstance(targetType.MakeGenericType(request.GetType()), request);
 
             if (instance == null)
             {

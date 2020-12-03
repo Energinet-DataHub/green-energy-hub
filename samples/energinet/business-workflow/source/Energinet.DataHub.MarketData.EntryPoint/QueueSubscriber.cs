@@ -26,12 +26,12 @@ namespace Energinet.DataHub.MarketData.EntryPoint
     {
         private readonly IHubRequestTypeMap _resolver;
         private readonly IHubRehydrate _rehydrate;
-        private readonly IHubRequestDispatcher _dispatcher;
+        private readonly IHubCommandDispatcher _dispatcher;
 
         public QueueSubscriber(
             IHubRequestTypeMap resolver,
             IHubRehydrate rehydrate,
-            IHubRequestDispatcher dispatcher)
+            IHubCommandDispatcher dispatcher)
         {
             _resolver = resolver;
             _rehydrate = rehydrate;
