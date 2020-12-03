@@ -29,9 +29,9 @@ namespace GreenEnergyHub.ValidationReports.ValidationReportsPersister
         }
 
         [FunctionName("ReportPersister")]
-        [return: Table("ValidationReportTable", Connection = "ValidationReportStorageConnectionString")]
+        [return: Table("astvalreports", Connection = "VALIDATION_REPORTS_STORAGE_ACCOUNT")]
         public ValidationResultContainerBlob Run(
-            [EventHubTrigger("evh-validation-reports-sandbox", Connection = "ValidationReportEventHubConnectionString")]
+            [EventHubTrigger("evh-validation-reports-sandbox", Connection = "VALIDATION_REPORTS_QUEUE")]
             string queueItem)
         {
             var report = JsonSerializer.Deserialize<ValidationResultContainer>(queueItem, _options);
