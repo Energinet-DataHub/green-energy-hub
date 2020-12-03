@@ -16,8 +16,8 @@ namespace Energinet.DataHub.MarketData.EntryPoint
 {
     public class QueueMessage
     {
-        public string? RequestType { get; set; }
+        public string? MessageType { get; set; }
 
-        public string? Request { get; set; }
+        public string? Message { get; set; }
     }
 }

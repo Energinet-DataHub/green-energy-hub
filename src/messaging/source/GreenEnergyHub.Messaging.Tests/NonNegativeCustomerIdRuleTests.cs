@@ -15,7 +15,7 @@
 using System;
 using System.Linq;
 using AutoFixture;
-using GreenEnergyHub.Messaging.RequestTypes.Common;
+using GreenEnergyHub.Messaging.MessageTypes.Common;
 using GreenEnergyHub.Messaging.Rules;
 using GreenEnergyHub.Messaging.Tests.TestHelpers;
 using NRules;

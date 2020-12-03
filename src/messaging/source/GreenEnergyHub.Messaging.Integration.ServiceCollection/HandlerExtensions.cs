@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GreenEnergyHub.Messaging.Dispatching;
-using GreenEnergyHub.Messaging.RequestRouting;
+using GreenEnergyHub.Messaging.MessageRouting;
 using GreenEnergyHub.Messaging.RulesEngine;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,9 +32,9 @@ namespace GreenEnergyHub.Messaging.Integration.ServiceCollection
     {
         /// <summary>
         /// Searches the provided assemblies, as well as the common assemblies,
-        /// to find the IHubActionHandlers, IHubRequests, IHubRuleSets,
+        /// to find the IHubActionHandlers, IHubMessages, IHubRuleSets,
         /// IEndpoints, IRuleEngines, the rules (represented as a list of
-        /// Types), the IEndpointResolver, and the IHubRequestTypeMap, and to
+        /// Types), the IEndpointResolver, and the IHubMessageTypeMap, and to
         /// automatically register and provide this instances on function
         /// startup.
         /// </summary>
@@ -45,37 +45,45 @@ namespace GreenEnergyHub.Messaging.Integration.ServiceCollection
         public static void AddGreenEnergyHub(this IServiceCollection services, params System.Reflection.Assembly[] customerAssemblies)
         {
             // Register framework-provided classes last
-            var assemblies = customerAssemblies.Append(typeof(IHubRequest).Assembly).ToArray();
+            var assemblies = customerAssemblies.Append(typeof(IHubMessage).Assembly).ToArray();
 
             services.AddMediatR(assemblies);
 
-            // Collection of IHubRequest types to discover related classes for
-            var actionRequestsToRegister = new List<Type>();
+            // Collection of IHubMessage types to discover related classes for
+            var messageTypesToRegister = new List<Type>();
 
-            // Walk assemblies in order passed, discovering unique (by name) declared request types
+            // Walk assemblies in order passed, discovering unique (by name)
+            // declared message types
             foreach (var assembly in assemblies)
             {
                 var assemblyTypes = assembly.GetTypes();
 
-                // Discover action requests but omit any already pending registration by same name from another assembly
-                var actionRequests = assemblyTypes.Where(type => type.GetInterfaces().Contains(typeof(IHubRequest)));
-                var newRequestTypes = actionRequests.Where(existingRequestType => actionRequestsToRegister.All(requestType => requestType.Name != existingRequestType.Name));
-                actionRequestsToRegister.AddRange(newRequestTypes);
+                // Discover message types but omit any already pending
+                // registration by same name from another assembly
+                var messageTypes = assemblyTypes
+                    .Where(type =>
+                        type.GetInterfaces().Contains(typeof(IHubMessage)));
+                var newMessageTypes = messageTypes
+                    .Where(existingMessageType => messageTypesToRegister
+                        .All(messageType => messageType.Name != existingMessageType.Name));
+                messageTypesToRegister.AddRange(newMessageTypes);
             }
 
             // Collection of IRuleSet types to discover related classes for
             var ruleSetsToRegister = new List<Type>();
 
-            // With the set of unique action requests determined, discover rulesets based on assembly ordering
-            foreach (var actionRequest in actionRequestsToRegister)
+            // With the set of unique message types determined, discover
+            // rulesets based on assembly ordering
+            foreach (var messageType in messageTypesToRegister)
             {
                 foreach (var assembly in assemblies)
                 {
                     var assemblyTypes = assembly.GetTypes();
+                    var genericType = typeof(IHubRuleSet<>).MakeGenericType(messageType);
 
                     // Discover rule sets but omit any already pending registration by same name from another assembly
                     var ruleSet = assemblyTypes
-                        .Where(type => type.GetInterfaces().Contains(typeof(IHubRuleSet<>).MakeGenericType(actionRequest)))
+                        .Where(type => type.GetInterfaces().Contains(genericType))
                         .Where(existingRuleSet => ruleSetsToRegister.All(ruleSetType => ruleSetType.Name != existingRuleSet.Name))
                         .FirstOrDefault();
 
@@ -85,25 +93,24 @@ namespace GreenEnergyHub.Messaging.Integration.ServiceCollection
                         ruleSetsToRegister.Add(ruleSet);
 
                         // Register the discovered ruleset
-                        services.AddScoped(typeof(IHubRuleSet<>).MakeGenericType(actionRequest), ruleSet);
+                        services.AddScoped(genericType, ruleSet);
                     }
                 }
             }
 
-            foreach (var actionRequest in actionRequestsToRegister)
+            foreach (var messageType in messageTypesToRegister)
             {
-                // Register with mapping class for the request type
-                services.AddTransient(_ => new RequestRegistration(actionRequest));
+                // Register with mapping class for the message type
+                services.AddTransient(_ => new MessageRegistration(messageType));
 
                 // Register supporting classes
-                // services.AddScoped(typeof(IEndpoint<>).MakeGenericType(actionRequest), endpointType.MakeGenericType(actionRequest));
-                services.AddScoped(typeof(IRuleEngine<>).MakeGenericType(actionRequest), typeof(NRulesEngine<>).MakeGenericType(actionRequest));
+                services.AddScoped(typeof(IRuleEngine<>).MakeGenericType(messageType), typeof(NRulesEngine<>).MakeGenericType(messageType));
             }
 
-            services.AddSingleton<IHubRequestDispatcher, HubRequestDispatcher>();
-            services.AddSingleton<IHubCommandDispatcher, HubCommandDispatcher>();
+            services.AddSingleton<IHubRequestMediator, HubRequestMediator>();
+            services.AddSingleton<IHubCommandMediator, HubCommandMediator>();
 
-            services.AddSingleton<IHubRequestTypeMap, HubRequestTypeMap>();
+            services.AddSingleton<IHubMessageTypeMap, HubMessageTypeMap>();
         }
     }
 }

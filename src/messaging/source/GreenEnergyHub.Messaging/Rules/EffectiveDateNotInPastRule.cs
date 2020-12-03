@@ -13,7 +13,7 @@
 // limitations under the License.
 #nullable disable
 using System;
-using GreenEnergyHub.Messaging.RequestTypes;
+using GreenEnergyHub.Messaging.MessageTypes;
 using NRules.Fluent.Dsl;
 using NRules.RuleModel;
 
@@ -23,30 +23,30 @@ namespace GreenEnergyHub.Messaging.Rules
     /// Verify if the date effective on a request is not in the past.
     /// </summary>
     [Repeatability(RuleRepeatability.NonRepeatable)]
-    public class EffectiveDateNotInPastRule<TRequest> : Rule
-        where TRequest : IHubRequest, IRequestHasStartDate
+    public class EffectiveDateNotInPastRule<TMessage> : Rule
+        where TMessage : IHubMessage, IHubMessageHasStartDate
     {
         /// <summary>
         /// Definition of the NRule.
         /// </summary>
         public override void Define()
         {
-            TRequest actionRequest = default;
+            TMessage message = default;
 
             When()
-                .Match<TRequest>(() => actionRequest);
+                .Match<TMessage>(() => message);
             Then()
-                .Yield(_ => DoValidation(actionRequest));
+                .Yield(_ => DoValidation(message));
         }
 
-        private RuleResult DoValidation(TRequest actionRequest)
+        private RuleResult DoValidation(TMessage message)
         {
-            if (actionRequest.StartDate < DateTime.UtcNow)
+            if (message.StartDate < DateTime.UtcNow)
             {
-                return new RuleResult(GetType().Name, actionRequest.Transaction.MRid, false, "Effective date was in the past");
+                return new RuleResult(GetType().Name, message.Transaction.MRid, false, "Effective date was in the past");
             }
 
-            return new RuleResult(GetType().Name, actionRequest.Transaction.MRid, true);
+            return new RuleResult(GetType().Name, message.Transaction.MRid, true);
         }
     }
 }

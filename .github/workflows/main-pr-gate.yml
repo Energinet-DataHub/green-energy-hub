@@ -91,41 +91,41 @@ jobs:
         name: build-soap-adapter_artifacts
         path: ${{ env.REPORT_PATH }}
 
-  ingestion-synchronous:
-    name: Build Ingestion Synchronous
+  ingestion:
+    name: Build Ingestion
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
     # https://github.com/marketplace/actions/skip-duplicate-actions
-    - name: Ingestion synchronous skip check
-      id: ingestion_synchronous_check
+    - name: Ingestion skip check
+      id: ingestion_check
       uses: fkirc/skip-duplicate-actions@v1.4.0
       with:
         github_token: ${{ github.token }}
-        paths: '["samples/energinet/synchronous-ingestor/**",
+        paths: '["samples/energinet/ingestion/**",
           ".github/workflows/main-pr-gate.yml", ".editorconfig",
           "Directory.Build.props"]'
 
     - name: Setup .NET Core
-      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_check.outputs.should_skip != 'true' }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
 
     - name: Build and test
-      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_check.outputs.should_skip != 'true' }}
       uses: ./.github/actions/dotnet-build-and-test
       with:
-        SLN_NAME: 'Energinet.DataHub.Ingestion.Synchronous.sln'
-        SLN_PATH: './samples/energinet/synchronous-ingestor'
+        SLN_NAME: 'Energinet.DataHub.Ingestion.sln'
+        SLN_PATH: './samples/energinet/ingestion'
 
     - name: Upload build artifacts
-      if: ${{ steps.ingestion_synchronous_check.outputs.should_skip != 'true' }}
+      if: ${{ steps.ingestion_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
-        name: build-ingestion-synchronous_artifacts
+        name: build-ingestion-artifacts
         path: ${{ env.REPORT_PATH }}
 
   build-master-data-serverless:

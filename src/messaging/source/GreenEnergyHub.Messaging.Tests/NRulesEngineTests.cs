@@ -33,27 +33,27 @@ namespace GreenEnergyHub.Messaging.Tests
         [Fact]
         public async Task ValidateAsync_SuccessfulRules_ReturnTrueAsync()
         {
-            var ruleEngine = new NRulesEngine<StubActionRequest>(new AlwaysTrueRuleSet());
-            var request = _fixture.Create<StubActionRequest>();
-            bool isValid = await ruleEngine.ValidateAsync(request).ConfigureAwait(false);
+            var ruleEngine = new NRulesEngine<StubMessage>(new AlwaysTrueRuleSet());
+            var message = _fixture.Create<StubMessage>();
+            bool isValid = await ruleEngine.ValidateAsync(message).ConfigureAwait(false);
             Assert.True(isValid);
         }
 
         [Fact]
         public async Task ValidateAsync_UnsuccessfulRules_ReturnFalseAsync()
         {
-            var ruleEngine = new NRulesEngine<StubActionRequest>(new AlwaysFalseRuleSet());
-            var request = _fixture.Create<StubActionRequest>();
-            bool isValid = await ruleEngine.ValidateAsync(request).ConfigureAwait(false);
+            var ruleEngine = new NRulesEngine<StubMessage>(new AlwaysFalseRuleSet());
+            var message = _fixture.Create<StubMessage>();
+            bool isValid = await ruleEngine.ValidateAsync(message).ConfigureAwait(false);
             Assert.False(isValid);
         }
 
         [Fact]
         public async Task ValidateAsync_MixedSuccessfulRules_ReturnFalseAsync()
         {
-            var ruleEngine = new NRulesEngine<StubActionRequest>(new MixedResultRuleSet());
-            var request = _fixture.Create<StubActionRequest>();
-            bool isValid = await ruleEngine.ValidateAsync(request).ConfigureAwait(false);
+            var ruleEngine = new NRulesEngine<StubMessage>(new MixedResultRuleSet());
+            var message = _fixture.Create<StubMessage>();
+            bool isValid = await ruleEngine.ValidateAsync(message).ConfigureAwait(false);
             Assert.False(isValid);
         }
     }

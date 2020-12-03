@@ -18,18 +18,18 @@ using System.Threading.Tasks;
 
 namespace GreenEnergyHub.Messaging.Dispatching
 {
-    public class HubCommandHandler<TRequest> : BaseCommandHandler<TRequest>
-        where TRequest : IHubRequest
+    public class HubCommandHandler<TCommand> : BaseCommandHandler<TCommand>
+        where TCommand : IHubMessage
     {
         protected HubCommandHandler() { }
 
-        protected virtual Task<bool> ValidateAsync(TRequest actionData, CancellationToken cancellationToken) =>
+        protected virtual Task<bool> ValidateAsync(TCommand actionData, CancellationToken cancellationToken) =>
             Task.FromResult<bool>(true);
 
-        protected virtual Task AcceptAsync(TRequest actionData, CancellationToken cancellationToken) =>
+        protected virtual Task AcceptAsync(TCommand actionData, CancellationToken cancellationToken) =>
             Task.CompletedTask;
 
-        protected virtual Task RejectAsync(TRequest actionData, CancellationToken cancellationToken) =>
+        protected virtual Task RejectAsync(TCommand actionData, CancellationToken cancellationToken) =>
             Task.CompletedTask;
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace GreenEnergyHub.Messaging.Dispatching
             throw innerException;
         }
 
-        private protected override async Task HandleAsync(TRequest request, CancellationToken cancellationToken)
+        private protected override async Task HandleAsync(TCommand request, CancellationToken cancellationToken)
         {
             try
             {

@@ -17,15 +17,15 @@ using NRules.Fluent.Dsl;
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
 #nullable disable
-    public class AlwaysFalseRule<TRequest> : Rule
-        where TRequest : IHubRequest
+    public class AlwaysFalseRule<TMessage> : Rule
+        where TMessage : IHubMessage
     {
         public override void Define()
         {
-            TRequest actionRequest = default;
+            TMessage message = default;
 
             When()
-                .Match<TRequest>(() => actionRequest);
+                .Match<TMessage>(() => message);
             Then()
                 .Yield(_ => new RuleResult(GetType().Name, string.Empty, false, string.Empty));
         }

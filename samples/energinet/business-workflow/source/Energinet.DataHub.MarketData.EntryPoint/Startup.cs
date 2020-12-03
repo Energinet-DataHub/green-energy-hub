@@ -35,7 +35,7 @@ namespace Energinet.DataHub.MarketData.EntryPoint
             }
 
             builder.Services.AddGreenEnergyHub(typeof(InitiateChangeOfSupplier).Assembly);
-            builder.Services.AddScoped<IHubRehydrate, JsonMessageDeserializer>();
+            builder.Services.AddScoped<IHubRehydrator, JsonMessageDeserializer>();
         }
     }
 }

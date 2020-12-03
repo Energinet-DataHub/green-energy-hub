@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #nullable disable
-using GreenEnergyHub.Messaging.RequestTypes;
+using GreenEnergyHub.Messaging.MessageTypes;
 using NRules.Fluent.Dsl;
 using NRules.RuleModel;
 
@@ -26,30 +26,30 @@ namespace GreenEnergyHub.Messaging.Rules
     /// RuleResult upon validation rule failure.
     /// </summary>
     [Repeatability(RuleRepeatability.NonRepeatable)]
-    public class NonNegativeCustomerIdRule<TRequest> : Rule
-        where TRequest : IHubRequest, IRequestHasConsumer
+    public class NonNegativeCustomerIdRule<TMessage> : Rule
+        where TMessage : IHubMessage, IHubMessageHasConsumer
     {
         /// <summary>
         /// Definition of the NRule.
         /// </summary>
         public override void Define()
         {
-            TRequest actionRequest = default;
+            TMessage message = default;
 
             When()
-                .Match<TRequest>(() => actionRequest);
+                .Match<TMessage>(() => message);
             Then()
-                .Yield(_ => DoValidation(actionRequest));
+                .Yield(_ => DoValidation(message));
         }
 
-        private RuleResult DoValidation(TRequest actionRequest)
+        private RuleResult DoValidation(TMessage message)
         {
-            if (int.TryParse(actionRequest.Consumer.MRid.Value, out var mrid) && mrid < 0)
+            if (int.TryParse(message.Consumer.MRid.Value, out var mrid) && mrid < 0)
             {
-                return new RuleResult(GetType().Name, actionRequest.Transaction.MRid, false, "CustomerId was negative");
+                return new RuleResult(GetType().Name, message.Transaction.MRid, false, "CustomerId was negative");
             }
 
-            return new RuleResult(GetType().Name, actionRequest.Transaction.MRid, true);
+            return new RuleResult(GetType().Name, message.Transaction.MRid, true);
         }
     }
 }

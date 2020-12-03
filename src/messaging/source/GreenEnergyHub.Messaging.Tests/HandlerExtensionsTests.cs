@@ -14,7 +14,7 @@
 
 using System.Linq;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
-using GreenEnergyHub.Messaging.RequestRouting;
+using GreenEnergyHub.Messaging.MessageRouting;
 using GreenEnergyHub.Messaging.Tests.TestHelpers;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,26 +46,26 @@ namespace GreenEnergyHub.Messaging.Tests
             serviceCollection.AddGreenEnergyHub(typeof(TestIngestionHandler).Assembly);
 
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes);
-            var requestRegistrations = serviceProvider.GetServices(typeof(RequestRegistration)).Count();
+            var messageRegistrations = serviceProvider.GetServices(typeof(MessageRegistration)).Count();
 
             const int expected = 4;
 
-            Assert.Equal(expected, requestRegistrations);
+            Assert.Equal(expected, messageRegistrations);
         }
 
         [Fact]
-        public void HandlerExtension_Should_inject_registrations_into_HubRequestTypeMap()
+        public void HandlerExtension_Should_inject_registrations_into_HubMessageTypeMap()
         {
             const bool validateScopes = true;
-            var expectedType = typeof(TestActionRequest);
+            var expectedType = typeof(TestMessage);
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddGreenEnergyHub(expectedType.Assembly);
 
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes);
-            var requestHub = serviceProvider.GetRequiredService<IHubRequestTypeMap>();
+            var messageHub = serviceProvider.GetRequiredService<IHubMessageTypeMap>();
 
-            var actualType = requestHub.GetTypeByCategory(expectedType.Name);
+            var actualType = messageHub.GetTypeByCategory(expectedType.Name);
 
             Assert.NotNull(actualType);
             Assert.Equal(expectedType, actualType);

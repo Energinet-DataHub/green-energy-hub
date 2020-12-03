@@ -21,22 +21,22 @@ namespace GreenEnergyHub.Messaging
     /// <summary>
     /// Rehydrates an object from a stream
     /// </summary>
-    public interface IHubRehydrate
+    public interface IHubRehydrator
     {
         /// <summary>
         /// Rehydrate a message
         /// </summary>
         /// <param name="message"><see cref="Stream"/> containing the message</param>
         /// <param name="messageType">Message type to rehydrate</param>
-        /// <returns>If the message type is known and the message content valid a <see cref="IHubRequest"/> else null</returns>
-        Task<IHubRequest?> RehydrateAsync(Stream message, Type messageType);
+        /// <returns>If the message type is known and the message content valid a <see cref="IHubMessage"/> else null</returns>
+        Task<IHubMessage?> RehydrateAsync(Stream message, Type messageType);
 
         /// <summary>
         /// Rehydrates a collection of hub requests
         /// </summary>
         /// <param name="message"><see cref="Stream"/> containing the message</param>
         /// <param name="messageType">Message type to rehydrate</param>
-        /// <returns>A collection of <see cref="IHubRequest"/></returns>
-        Task<IEnumerable<IHubRequest>?> RehydrateCollectionAsync(Stream message, Type messageType);
+        /// <returns>A collection of <see cref="IHubMessage"/></returns>
+        Task<IEnumerable<IHubMessage>?> RehydrateCollectionAsync(Stream message, Type messageType);
     }
 }

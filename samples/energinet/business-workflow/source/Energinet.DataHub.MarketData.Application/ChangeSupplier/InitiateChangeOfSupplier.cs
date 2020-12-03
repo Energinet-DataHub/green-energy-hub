@@ -14,19 +14,19 @@
 
 using System;
 using GreenEnergyHub.Messaging;
-using GreenEnergyHub.Messaging.RequestTypes;
-using GreenEnergyHub.Messaging.RequestTypes.Common;
+using GreenEnergyHub.Messaging.MessageTypes;
+using GreenEnergyHub.Messaging.MessageTypes.Common;
 
 namespace Energinet.DataHub.MarketData.Application.ChangeSupplier
 {
     /// <summary>
     /// POCO for a InitiateChangeOfSupplier.
     /// </summary>
-    [HubRequest("ChangeSupplier")]
-    public class InitiateChangeOfSupplier : IHubRequest, IRequestHasConsumer, IRequestHasEnergySupplier, IRequestHasBalanceResponsibleParty, IRequestHasStartDate
+    [HubMessage("ChangeSupplier")]
+    public class InitiateChangeOfSupplier : IHubMessage, IHubMessageHasConsumer, IHubMessageHasEnergySupplier, IHubMessageHasBalanceResponsibleParty, IHubMessageHasStartDate
     {
         /// <summary>
-        /// The id of the ChangeOfSupplierRequest message. Should be unique.
+        /// The id of the ChangeOfSupplierMessage. Should be unique.
         /// </summary>
         public Transaction Transaction { get; set; } = Transaction.NewTransaction();
 

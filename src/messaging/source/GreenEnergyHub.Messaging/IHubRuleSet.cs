@@ -18,12 +18,12 @@ using System.Collections.Generic;
 namespace GreenEnergyHub.Messaging
 {
     /// <summary>
-    /// An IEnumerable of rules which apply to the parameterized request type.
+    /// An IEnumerable of rules which apply to the parameterized message type.
     /// </summary>
-    /// <typeparam name="TRequest">The request type which this ruleset applies
+    /// <typeparam name="TMessage">The message type which this ruleset applies
     /// to.</typeparam>
-    public interface IHubRuleSet<out TRequest>
-        where TRequest : IHubRequest
+    public interface IHubRuleSet<out TMessage>
+        where TMessage : IHubMessage
     {
         /// <summary>
         /// The IEnumerable of rules.

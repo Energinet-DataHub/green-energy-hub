@@ -9,5 +9,5 @@ TODO:
 - [x] Invert Infrastructure reference from Application.
 - [ ] Remove Domain project.
 - [x] Rename `RequestT` generic to `TRequest`.
-- [x] Refactor `HubRequestTypeMap`, register request types with DI instead.
+- [x] Refactor `HubMessageTypeMap`, register message types with DI instead.
 - [x] Fix namespaces.

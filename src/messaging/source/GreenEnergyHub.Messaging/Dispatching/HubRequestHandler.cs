@@ -21,9 +21,9 @@ namespace GreenEnergyHub.Messaging.Dispatching
     /// <summary>
     /// A Handler for <see cref="BaseRequestHandler{TRequest,TResponse}"/>.
     /// </summary>
-    /// <typeparam name="TRequest">The <see cref="IHubRequest"/> to handle.</typeparam>
+    /// <typeparam name="TRequest">The <see cref="IHubMessage"/> to handle.</typeparam>
     public class HubRequestHandler<TRequest> : BaseRequestHandler<TRequest, IHubResponse>
-        where TRequest : IHubRequest
+        where TRequest : IHubMessage
     {
         protected HubRequestHandler() { }
 

@@ -16,7 +16,7 @@ using System;
 using System.Threading.Tasks;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
-using GreenEnergyHub.Messaging.RequestRouting;
+using GreenEnergyHub.Messaging.MessageRouting;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 
@@ -24,18 +24,18 @@ namespace Energinet.DataHub.MarketData.EntryPoint
 {
     public class QueueSubscriber
     {
-        private readonly IHubRequestTypeMap _resolver;
-        private readonly IHubRehydrate _rehydrate;
-        private readonly IHubCommandDispatcher _dispatcher;
+        private readonly IHubMessageTypeMap _resolver;
+        private readonly IHubRehydrator _rehydrator;
+        private readonly IHubRequestMediator _mediator;
 
         public QueueSubscriber(
-            IHubRequestTypeMap resolver,
-            IHubRehydrate rehydrate,
-            IHubCommandDispatcher dispatcher)
+            IHubMessageTypeMap resolver,
+            IHubRehydrator rehydrator,
+            IHubRequestMediator mediator)
         {
             _resolver = resolver;
-            _rehydrate = rehydrate;
-            _dispatcher = dispatcher;
+            _rehydrator = rehydrator;
+            _mediator = mediator;
         }
 
         [FunctionName("QueueSubscriber")]
@@ -43,28 +43,28 @@ namespace Energinet.DataHub.MarketData.EntryPoint
             [ServiceBusTrigger("%queueName%")] QueueMessage message,
             ILogger logger)
         {
-            if (message == null || message.RequestType == null || message.Request == null)
+            if (message == null || message.MessageType == null || message.Message == null)
             {
                 throw new ArgumentNullException(nameof(message));
             }
 
             logger.LogInformation($"C# ServiceBus queue trigger function processed message: {message}");
-            logger.LogInformation($"With request type: {message.RequestType}");
-            logger.LogInformation($"With request value: {message.Request}");
+            logger.LogInformation($"With type: {message.MessageType}");
+            logger.LogInformation($"With value: {message.Message}");
 
-            var requestType = _resolver.GetTypeByCategory(message.RequestType);
-            if (requestType == null)
+            var messageType = _resolver.GetTypeByCategory(message.MessageType);
+            if (messageType == null)
             {
-                throw new ArgumentNullException(message.RequestType);
+                throw new ArgumentNullException(message.MessageType);
             }
 
-            var hubRequest = await _rehydrate.RehydrateAsync(message.Request, requestType).ConfigureAwait(false);
+            var hubRequest = await _rehydrator.RehydrateAsync(message.Message, messageType).ConfigureAwait(false);
             if (hubRequest == null)
             {
-                throw new ArgumentException(nameof(message.Request));
+                throw new ArgumentException(nameof(message.Message));
             }
 
-            await _dispatcher.DispatchAsync(hubRequest).ConfigureAwait(false);
+            await _mediator.DispatchAsync(hubRequest).ConfigureAwait(false);
 
             await Task.CompletedTask.ConfigureAwait(false);
         }

@@ -13,15 +13,15 @@
 // limitations under the License.
 
 using System;
-using GreenEnergyHub.Messaging.RequestTypes;
-using GreenEnergyHub.Messaging.RequestTypes.Common;
+using GreenEnergyHub.Messaging.MessageTypes;
+using GreenEnergyHub.Messaging.MessageTypes.Common;
 
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
     /// <summary>
     /// Mock interface defining the properties necessary for rule matching
     /// </summary>
-    public class MockHasCustomerId : IHubRequest, IRequestHasConsumer
+    public class MockHasCustomerId : IHubMessage, IHubMessageHasConsumer
     {
         public Transaction Transaction { get; set; } = Transaction.NewTransaction();
 

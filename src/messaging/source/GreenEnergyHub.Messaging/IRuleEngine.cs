@@ -18,11 +18,11 @@ namespace GreenEnergyHub.Messaging
 {
     /// <summary>
     /// This provides an common interface for validation of messages of type
-    /// TRequest that must be implemented for each concrete IRulesEngine
+    /// TMessage that must be implemented for each concrete IRulesEngine
     /// implementation with the required logic to trigger that rule engine's execution.
     /// </summary>
-    public interface IRuleEngine<in TRequest>
-        where TRequest : IHubRequest
+    public interface IRuleEngine<in TMessage>
+        where TMessage : IHubMessage
     {
         /// <summary>
         /// Validates the provided message asynchronously.
@@ -30,6 +30,6 @@ namespace GreenEnergyHub.Messaging
         /// <param name="message">The message to validate.</param>
         /// <returns>True if the message is valid according to the rules in this
         /// IRuleEngine.</returns>
-        Task<bool> ValidateAsync(TRequest message);
+        Task<bool> ValidateAsync(TMessage message);
     }
 }

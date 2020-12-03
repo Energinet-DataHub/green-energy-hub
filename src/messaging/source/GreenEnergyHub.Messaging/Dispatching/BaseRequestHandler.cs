@@ -22,12 +22,12 @@ namespace GreenEnergyHub.Messaging.Dispatching
     /// </summary>
     /// <typeparam name="TRequest">The request to handle</typeparam>
     /// <typeparam name="TResponse">The response</typeparam>
-    public abstract class BaseRequestHandler<TRequest, TResponse> : IRequestHandler<HubRequestWrapper<TRequest, TResponse>, TResponse>
-        where TRequest : IHubRequest
+    public abstract class BaseRequestHandler<TRequest, TResponse> : IRequestHandler<HubRequest<TRequest, TResponse>, TResponse>
+        where TRequest : IHubMessage
         where TResponse : IHubResponse
     {
 #pragma warning disable CA1033
-        async Task<TResponse> IRequestHandler<HubRequestWrapper<TRequest, TResponse>, TResponse>.Handle(HubRequestWrapper<TRequest, TResponse> hubRequest, CancellationToken cancellationToken)
+        async Task<TResponse> IRequestHandler<HubRequest<TRequest, TResponse>, TResponse>.Handle(HubRequest<TRequest, TResponse> hubRequest, CancellationToken cancellationToken)
         {
             return await HandleAsync(hubRequest.Request, cancellationToken).ConfigureAwait(false);
         }

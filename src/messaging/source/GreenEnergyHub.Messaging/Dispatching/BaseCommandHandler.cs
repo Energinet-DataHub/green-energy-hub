@@ -18,19 +18,19 @@ using MediatR;
 
 namespace GreenEnergyHub.Messaging.Dispatching
 {
-    public abstract class BaseCommandHandler<TRequest> : AsyncRequestHandler<HubCommandWrapper<TRequest>>
-        where TRequest : IHubRequest
+    public abstract class BaseCommandHandler<TMessage> : AsyncRequestHandler<HubCommand<TMessage>>
+        where TMessage : IHubMessage
     {
-        protected sealed override Task Handle(HubCommandWrapper<TRequest> command, CancellationToken cancellationToken)
+        protected sealed override Task Handle(HubCommand<TMessage> hubCommand, CancellationToken cancellationToken)
         {
-            if (command == null)
+            if (hubCommand == null)
             {
-                throw new ArgumentNullException(nameof(command));
+                throw new ArgumentNullException(nameof(hubCommand));
             }
 
-            return HandleAsync(command.Request, cancellationToken);
+            return HandleAsync(hubCommand.Command, cancellationToken);
         }
 
-        private protected abstract Task HandleAsync(TRequest request, CancellationToken cancellationToken);
+        private protected abstract Task HandleAsync(TMessage command, CancellationToken cancellationToken);
     }
 }

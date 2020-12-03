@@ -24,8 +24,8 @@ namespace GreenEnergyHub.Messaging.RulesEngine
     /// <summary>
     /// An implementation of the IRuleEngine backed by the NRules library.
     /// </summary>
-    public class NRulesEngine<TRequest> : IRuleEngine<TRequest>
-        where TRequest : IHubRequest
+    public class NRulesEngine<TMessage> : IRuleEngine<TMessage>
+        where TMessage : IHubMessage
     {
         private readonly ISession _session;
 
@@ -34,11 +34,11 @@ namespace GreenEnergyHub.Messaging.RulesEngine
         /// </summary>
         /// <param name="ruleSet">The rules to create the NRules session from.
         /// </param>
-        public NRulesEngine(IHubRuleSet<TRequest> ruleSet)
+        public NRulesEngine(IHubRuleSet<TMessage> ruleSet)
         {
             // Load rules
             var repository = new RuleRepository();
-            repository.Load(x => x.From(ruleSet.Rules.Select(_ => _.MakeGenericType(typeof(TRequest)))));
+            repository.Load(x => x.From(ruleSet.Rules.Select(_ => _.MakeGenericType(typeof(TMessage)))));
 
             // Compile rules
             var factory = repository.Compile();
@@ -50,18 +50,18 @@ namespace GreenEnergyHub.Messaging.RulesEngine
         /// <summary>
         /// Validates a message given this NRuleEngine's associated ruleset.
         /// </summary>
-        /// <param name="request">The message to validate.</param>
+        /// <param name="message">The message to validate.</param>
         /// <returns>True if the message is valid according to this instance's
         /// provided ruleset.</returns>
-        public Task<bool> ValidateAsync(TRequest request)
+        public Task<bool> ValidateAsync(TMessage message)
         {
-            _session.Insert(request);
+            _session.Insert(message);
 
             // Start match/resolve/act cycle
             _session.Fire();
 
             // TODO: This should be moved to a _logger.LogDebug()
-            Console.WriteLine($"Message {JsonSerializer.Serialize(request)}");
+            Console.WriteLine($"Message {JsonSerializer.Serialize(message)}");
             var results = _session.Query<RuleResult>();
             foreach (RuleResult result in results)
             {
@@ -77,7 +77,7 @@ namespace GreenEnergyHub.Messaging.RulesEngine
 
             var valid = results.All(r => r.IsSuccessful); // Must get result before retracting message because will remove linked facts
 
-            _session.Retract(request);
+            _session.Retract(message);
             return Task.FromResult(valid);
         }
     }

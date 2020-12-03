@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
-    public class AlwaysTrueRuleSet : IHubRuleSet<StubActionRequest>
+    public class AlwaysTrueRuleSet : IHubRuleSet<StubMessage>
     {
         public IEnumerable<Type> Rules => new List<Type>() { typeof(AlwaysTrueRule<>) };
     }

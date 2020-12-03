@@ -21,15 +21,15 @@ using GreenEnergyHub.Messaging;
 
 namespace Energinet.DataHub.MarketData.Infrastructure
 {
-    public class JsonMessageDeserializer : IHubRehydrate
+    public class JsonMessageDeserializer : IHubRehydrator
     {
-        public async Task<IHubRequest?> RehydrateAsync(Stream message, Type messageType)
+        public async Task<IHubMessage?> RehydrateAsync(Stream messageStream, Type messageType)
         {
-            var request = await JsonSerializer.DeserializeAsync(message, messageType).ConfigureAwait(false);
-            return request as IHubRequest;
+            var message = await JsonSerializer.DeserializeAsync(messageStream, messageType).ConfigureAwait(false);
+            return message as IHubMessage;
         }
 
-        public Task<IEnumerable<IHubRequest>?> RehydrateCollectionAsync(Stream message, Type messageType)
+        public Task<IEnumerable<IHubMessage>?> RehydrateCollectionAsync(Stream messageStream, Type messageType)
         {
             throw new NotImplementedException();
         }

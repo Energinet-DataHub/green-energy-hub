@@ -19,9 +19,9 @@ Core concepts for customizing the request processing flow are as follows:
 
 ## Requests and handlers
 
-To implement logic for a new request, classes for each of the types above should be created. `HubRequestAttribute` can be used to create a friendly name for a concrete hub action request type.
+To implement logic for a new request, classes for each of the types above should be created. `HubMessageAttribute` can be used to create a friendly name for a concrete hub action request type.
 
-All of the classes implementing `IHubActionRequest` and `IHubActionHandler<HubActionRequestType>` are auto-discovered and registered via `AddGreenEnergyHub()` service extension in the `HandlerExtensions` class, permitting requests of that type to flow to the correct handler automatically when called at `http://localhost:7071/api/HubActionRequestType`. `RequestRegistration` helps with this auto-registration.
+All of the classes implementing `IHubActionRequest` and `IHubActionHandler<HubActionRequestType>` are auto-discovered and registered via `AddGreenEnergyHub()` service extension in the `HandlerExtensions` class, permitting requests of that type to flow to the correct handler automatically when called at `http://localhost:7071/api/HubActionRequestType`. `MessageRegistration` helps with this auto-registration.
 
 ## Rules and rule sets
 
@@ -35,8 +35,8 @@ A rule's action can then validate request properties and then yield a new `RuleR
 
 All rules declarations must be generic (`where TRequest : IActionRequest`) because NRules matching happens against fact *types*. While matching the fact against the common interface `IActionRequest` will cause rules to execute, the validation cannot access any properties properties on the object; using generics, the `TRequest` can represent the expected and specific shape of the request and if we constrain `TRequest` using property-based interfaces, we can also guarantee their presence at compile time.
 
-Thus, the solution defines interfaces for various properties available on requests; for example `IRequestHasCustomerId` defines a single property `CustomerId`. A rule that requires `CustomerId` would then constrain its `where TRequest : IActionRequest, IRequestHasCustomerId` to expose the property for validation in the rule action.
+Thus, the solution defines interfaces for various properties available on requests; for example `IHubMessageHasCustomerId` defines a single property `CustomerId`. A rule that requires `CustomerId` would then constrain its `where TRequest : IActionRequest, IHubMessageHasCustomerId` to expose the property for validation in the rule action.
 
-Rule sets bind a group of `Rule`s to a particular request type by implementing `IRuleSet<HubActionRequestType>`. However, type references to rules in their static enumeration should be kept generic (i.e. `typeof(NonNegativeCustomerIdRule<>)`) so that the rule set can be composable; for example one may wish to create a "Customer" rule set that applies a set of validations to any request that references a `CustomerId` (via `IRequestHasCustomerId`).
+Rule sets bind a group of `Rule`s to a particular request type by implementing `IRuleSet<HubActionRequestType>`. However, type references to rules in their static enumeration should be kept generic (i.e. `typeof(NonNegativeCustomerIdRule<>)`) so that the rule set can be composable; for example one may wish to create a "Customer" rule set that applies a set of validations to any request that references a `CustomerId` (via `IHubMessageHasCustomerId`).
 
 As such, having rule sets listing generic `Rule` instances permits for composing rule sets at compile time and binding the `Rule` instances to the correct `TRequest` at runtime (which happens in the `NRulesEngine` class).
