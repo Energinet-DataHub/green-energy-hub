@@ -11,17 +11,5 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.functions import col
-from .enrichers.master_data_enricher import enrich_master_data
-from .enrichers.recipient_enricher import enrich_recipients
-
-
-class Enricher:
-
-    @staticmethod
-    def enrich(parsed_data: DataFrame, master_data: DataFrame):
-        master_data_enriched = enrich_master_data(parsed_data, master_data)
-        recipient_enriched = enrich_recipients(master_data_enriched)
-
-        return recipient_enriched
+from .recipient_enricher import enrich_recipients
+from .master_data_enricher import enrich_master_data

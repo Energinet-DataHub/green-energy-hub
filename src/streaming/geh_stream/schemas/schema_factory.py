@@ -46,10 +46,12 @@ class SchemaFactory:
         .add("MeteringMethod", StringType(), False) \
         .add("MeteringGridArea_Domain_mRID", StringType(), True) \
         .add("ConnectionState", StringType(), True) \
-        .add("EnergySupplier_MarketParticipant_mRID", StringType(), False) \
-        .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), False) \
+        .add("EnergySupplier_MarketParticipant_mRID", StringType(), True) \
+        .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True) \
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
+        .add("InMeteringGridArea_Domain_Owner_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
+        .add("OutMeteringGridArea_Domain_Owner_mRID", StringType(), False) \
         .add("Parent_Domain_mRID", StringType(), False) \
         .add("ServiceCategory_Kind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
@@ -83,8 +85,8 @@ class SchemaFactory:
         .add("MeterReadingPeriodicity", StringType(), True) \
         .add("MeteringGridArea_Domain_mRID", StringType(), False) \
         .add("ConnectionState", StringType(), False) \
-        .add("EnergySupplier_MarketParticipant_mRID", StringType(), True) \
-        .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True) \
+        .add("EnergySupplier_MarketParticipant_mRID", StringType(), False) \
+        .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), False) \
         .add("InMeteringGridArea_Domain_mRID", StringType(), True) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), True) \
         .add("Parent_Domain_mRID", StringType(), True) \

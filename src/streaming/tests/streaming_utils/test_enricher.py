@@ -18,7 +18,7 @@ from geh_stream.streaming_utils import Enricher
 from geh_stream.schemas import SchemaNames, SchemaFactory
 from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType
+from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType, ArrayType
 from pyspark.sql.functions import col
 
 # Create timestamps used in DataFrames
@@ -57,7 +57,9 @@ def master_data(spark, master_schema):
         "EnergySupplier_MarketParticipant_mRID": ["f"],
         "BalanceResponsibleParty_MarketParticipant_mRID": ["g"],
         "InMeteringGridArea_Domain_mRID": ["h"],
+        "InMeteringGridArea_Domain_Owner_mRID": ["ha"],
         "OutMeteringGridArea_Domain_mRID": ["i"],
+        "OutMeteringGridArea_Domain_Owner_mRID": ["ia"],
         "Parent_Domain_mRID": ["j"],
         "ServiceCategory_Kind": ["l"],
         "MarketEvaluationPointType": ["m"],
@@ -127,14 +129,17 @@ def expected_schema():
         .add(StructField("EnergySupplier_MarketParticipant_mRID", StringType(), True)) \
         .add(StructField("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True)) \
         .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
+        .add(StructField("InMeteringGridArea_Domain_Owner_mRID", StringType(), True)) \
         .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
+        .add(StructField("OutMeteringGridArea_Domain_Owner_mRID", StringType(), True)) \
         .add(StructField("Parent_Domain_mRID", StringType(), True)) \
         .add(StructField("ServiceCategory_Kind", StringType(), True)) \
         .add(StructField("MarketEvaluationPointType", StringType(), True)) \
         .add(StructField("SettlementMethod", StringType(), True)) \
         .add(StructField("QuantityMeasurementUnit_Name", StringType(), True)) \
         .add(StructField("Product", StringType(), True)) \
-        .add(StructField("Technology", StringType(), True))
+        .add(StructField("Technology", StringType(), True)) \
+        .add(StructField("RecipientList", ArrayType(StringType(), True), False))
 
 
 # Is the row count maintained

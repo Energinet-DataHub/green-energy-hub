@@ -49,7 +49,8 @@ def send_valid_data(batch_df: DataFrame, output_eh_conf, watch):
                 col("SettlementMethod"),
                 col("QuantityMeasurementUnit_Name"),
                 col("Product"),
-                col("ObservationTime")) \
+                col("ObservationTime"),
+                col("RecipientList")) \
         .select(to_json(struct(col("*"))).cast("string").alias("body")) \
         .write \
         .format("eventhubs") \

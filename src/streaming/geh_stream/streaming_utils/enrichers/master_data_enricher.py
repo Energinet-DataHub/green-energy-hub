@@ -13,15 +13,12 @@
 # limitations under the License.
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.functions import col
-from .enrichers.master_data_enricher import enrich_master_data
-from .enrichers.recipient_enricher import enrich_recipients
 
 
-class Enricher:
-
-    @staticmethod
-    def enrich(parsed_data: DataFrame, master_data: DataFrame):
-        master_data_enriched = enrich_master_data(parsed_data, master_data)
-        recipient_enriched = enrich_recipients(master_data_enriched)
-
-        return recipient_enriched
+def enrich_master_data(parsed_data: DataFrame, master_data: DataFrame):
+    return parsed_data.alias("pd") \
+        .join(master_data.alias("md"),
+              (col("pd.MarketEvaluationPoint_mRID") == col("md.MarketEvaluationPoint_mRID"))
+              & col("ObservationTime").between(col("md.ValidFrom"), col("md.ValidTo")), how="left") \
+        .drop(master_data["MarketEvaluationPoint_mRID"]) \
+        .drop(master_data["ValidFrom"]).drop(master_data["ValidTo"])
