@@ -6,5 +6,5 @@ Note that all code will still have to comply with the settings in `.editorconfig
 
 There's a bash script the help automate this.
 
-- Run `.\init-editorconfig.sh` to use the same `.editorconfig.ci` as your local `.editorconfig`.
-- Run `.\init-editorconfig.sh loose` to overwrite `warning` and `errors` with `suggestion` severity.
+- Run `./init-editorconfig.sh` to use the same `.editorconfig.ci` as your local `.editorconfig`.
+- Run `./init-editorconfig.sh loose` to overwrite `warning` and `errors` with `suggestion` severity.
