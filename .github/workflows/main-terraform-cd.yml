@@ -1,0 +1,40 @@
+name: Main Terraform CD
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - build/terraform/main
+      - build/terraform/modules
+      - .github/workflows/main-terraform-cd.yml
+  workflow_dispatch: {}
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_SPN_CLIENT_ID_DEV }}
+      ARM_TENANT_ID: ${{ secrets.TENANT_ID}}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV}}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_SPN_CLIENT_SECRET_DEV }}
+    steps:
+      - uses: hashicorp/setup-terraform@v1.2.1
+        with:
+          terraform_wrapper: false
+
+      - uses: actions/checkout@v2
+
+      - name: Set env Infra
+        working-directory: ./build/terraform/infra
+        run: |
+          echo "TF_VAR_current_spn_object_id=${{ secrets.AZURE_SPN_CLIENT_OBJECT_ID }}" >> $GITHUB_ENV 
+
+      - name: Terraform Init
+        working-directory: ./build/terraform/main
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./build/terraform/main
+        run: terraform apply -no-color -auto-approve
+        continue-on-error: false
