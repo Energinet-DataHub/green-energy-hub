@@ -21,3 +21,11 @@ All types contain the same core steps, but with different outcomes.
 - MoveIn
 - MoveOut
 - SendTimeSeries
+
+## Setup and configuration
+
+In order to run the synchronous ingestion sample, a Apache Kafka topic must be available in order for the `Energinet.DataHub.Ingestion.Synchronous.AzureFunction` to dispatch incoming Hub messages off to the hub message queue upon successful validation.
+Azure Event Hubs with Kafka surface enabled is also supported. The `local.settings.sample.json` provides a sample configuration for this scenario.
+
+`SslCaLocation` is required and must point to a path containing the cacert.pem file (<https://curl.haxx.se/docs/caextract.html>). This file contains a list of Certificate Authorities (CA).
+Please note, that this file is deployed with Azure Functions by default at either `C:\cacert\cacert.pem` or `D:\cacert\cacert.pem`.

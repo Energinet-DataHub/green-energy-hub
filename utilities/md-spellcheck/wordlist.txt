@@ -25,6 +25,8 @@ bjarkemeier
 BuildingNumber
 BusinessReasonCode
 ByteArray
+cacert
+caextract
 Carsten
 carstenrickers
 ChangeOfSupplier
@@ -150,6 +152,7 @@ GUID
 Gzip
 HasBalanceSupplier
 HasEnergySupplier
+haxx
 HDInsight
 HeaderEnergyDocument
 HeaderEnergyDocumentCreation
@@ -158,6 +161,7 @@ Heino
 Henriksen
 hoc
 hsvig
+html
 http
 https
 InArea
@@ -290,6 +294,7 @@ ParentMeteringPoint
 ParentMeteringPointId
 PayloadEnergyTimeSeries
 Pedersen
+pem
 perlysemose
 persister
 perthenriksen
@@ -358,6 +363,7 @@ schemas
 Scrummaster
 SDK
 SDKs
+se
 SecondCustomerCPR
 SecondCustomerCVR
 SecondCustomerName
