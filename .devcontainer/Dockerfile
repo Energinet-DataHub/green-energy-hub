@@ -70,7 +70,7 @@ WORKDIR $HOME
 
 RUN conda install --quiet --yes --satisfied-skip-solve \
     'pyarrow=2.0.*' 'rope=0.18.*' 'pytest=6.1.*' 'pylint=2.6.*' 'autopep8=1.5.*' 'configargparse=1.2.3' 'applicationinsights=0.11.9' && \
-    pip --no-cache-dir install pyspelling && \
+    pip --no-cache-dir install pyspelling azure-eventhub && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
