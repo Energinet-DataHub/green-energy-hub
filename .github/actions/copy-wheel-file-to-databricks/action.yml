@@ -1,0 +1,10 @@
+name: 'Copy Wheel File to Databricks Workspace'
+description: 'Copies specific wheel file version to Databricks workspace if it was not copied before. Note: env.DBFS_WHEEL_FILE  and env.WHEEL_FILE_NAME need to be set before running this step'
+# using sed instead of grep because of this issue: https://github.community/t/github-actions-using-grep-when-no-lines-selected/126719
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        WHEEL=$(dbfs ls 'dbfs:/streaming' | sed -n "/${{ env.WHEEL_FILE_NAME }}/ p")
+        if [ -z ${WHEEL} ]; then dbfs cp -r "./wheels/${{ env.WHEEL_FILE_NAME }}" "${{ env.DBFS_WHEEL_FILE }}"; fi
+      shell: bash

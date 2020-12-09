@@ -11,13 +11,17 @@ jobs:
     # Set the type of machine to run on
     runs-on: ubuntu-latest
     env:
+      WHEEL_VERSION: "1.0"
+      WHEEL_STORAGE_ADDRESS: https://enrgtwheels.blob.core.windows.net/wheels/
       TF_VAR_python_main_file: "dbfs:/streaming/enrichment_and_validation.py"
-      TF_VAR_wheel_file: "dbfs:/streaming/geh_stream-1.0-py3-none-any.whl"
 
     steps:
       
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Construct Wheel File Name
+        uses: ./.github/actions/construct-wheel-file-name
       
       - name: Read Pipeline Configuration
         uses: ./.github/actions/read-pipeline-configuration
@@ -64,6 +68,15 @@ jobs:
         with:
           workspace-url: ${{ steps.obtain-db-id-url.outputs.workspace-url }}
 
+      - uses: suisei-cn/actions-download-file@v1
+        name: Download the Wheel File
+        with:
+          url: "${{ env.WHEEL_STORAGE_ADDRESS }}${{ env.WHEEL_FILE_NAME }}"
+          target: wheels/
+
+      - name: Copy Wheel File to Databricks Workspace
+        uses: ./.github/actions/copy-wheel-file-to-databricks
+          
       - name: Copy Job Definition to DBFS
         id: copy_files_todbfs
         run: |    

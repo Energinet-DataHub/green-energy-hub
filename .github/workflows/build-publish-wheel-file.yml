@@ -1,0 +1,72 @@
+name: Build and Publish Wheel File
+# Run this workflow on demand
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/streaming/VERSION
+  workflow_dispatch:
+
+env:
+  WHEEL_STORAGE_NAME: 'enrgtwheels'
+  WHEEL_CONTAINER_NAME: 'wheels'
+
+jobs:
+  wheel_build_publish:
+    
+    # Name the Job
+    name: Build and Publish Wheel File
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.6' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Read Pipeline Configuration
+        uses: ./.github/actions/read-pipeline-configuration
+
+      - name: Read Client Secret
+        env:
+          SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
+        run: |  
+          echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+
+      - name: Azure CLI Install and Login
+        uses: ./.github/actions/azure-cli-install-login
+      
+      - name: Check If Wheel Repository Storage exists
+        id: wheel-storage-exists
+        run: |
+          storage_exists=$(az storage account check-name --name ${{ env.WHEEL_STORAGE_NAME }} | python3 -c "import sys, json; print(not json.load(sys.stdin)['nameAvailable'])")
+          echo "::set-output name=wheel-storage-exists::${storage_exists}"
+
+      #Create Wheel Repository Container if needed
+      - name: Create Wheel Repository Storage
+        run: |
+          az storage account create --resource-group ${{ env.RESOURCE_GROUP_NAME }} --name ${{ env.WHEEL_STORAGE_NAME }} --sku Standard_LRS --encryption-services blob
+          account_key=$(az storage account keys list --resource-group ${{ env.RESOURCE_GROUP_NAME }} --account-name ${{ env.WHEEL_STORAGE_NAME }} --query '[0].value' -o tsv)
+          az storage container create --name ${{ env.WHEEL_CONTAINER_NAME }} --account-name ${{ env.WHEEL_STORAGE_NAME }} --account-key $account_key --public-access blob
+        if: steps.wheel-storage-exists.outputs.wheel-storage-exists == 'False'
+
+      - name: Create Python Wheel for Databricks Jobs
+        working-directory: ./src/streaming
+        run: |
+          pip install wheel
+          python setup.py sdist bdist_wheel
+
+      - name: Upload Wheel
+        run: |
+          VERSION=$(cat src/streaming/VERSION)
+          account_key=$(az storage account keys list --resource-group ${{ env.RESOURCE_GROUP_NAME }} --account-name ${{ env.WHEEL_STORAGE_NAME }} --query '[0].value' -o tsv)
+          az storage blob upload --account-name ${{ env.WHEEL_STORAGE_NAME }} --container-name ${{ env.WHEEL_CONTAINER_NAME }} \
+          --name "geh_stream-${VERSION}-py3-none-any.whl" \
+          --file "./src/streaming/dist/geh_stream-${VERSION}-py3-none-any.whl" \
+          --account-key $account_key \

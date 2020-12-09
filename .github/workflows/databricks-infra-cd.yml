@@ -81,18 +81,3 @@ jobs:
           terraform apply -no-color -auto-approve
           echo "::set-output name=workspace-url::$(terraform output databricks_workspace_url)"
         continue-on-error: false
-
-      - name: Create Python Wheel for Databricks Jobs
-        working-directory: ./src/streaming
-        run: |
-          pip install wheel
-          python setup.py sdist bdist_wheel
-
-      - name: Databricks CLI Install and Connect
-        uses: ./.github/actions/databricks-cli-install-connect
-        with:
-          workspace-url: ${{ steps.terraform-apply.outputs.workspace-url }}
-    
-      - name: Copy Wheel File to Databricks Workspace
-        run: |
-          dbfs cp -r --overwrite ./src/streaming/dist/geh_stream-1.0-py3-none-any.whl dbfs:/streaming/geh_stream-1.0-py3-none-any.whl

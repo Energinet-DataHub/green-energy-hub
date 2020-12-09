@@ -1,0 +1,10 @@
+name: 'Construct Wheel File Name'
+description: 'Constructs proper wheel name based on repo address and version stated in ENV vars'
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        echo "WHEEL_FILE_NAME=geh_stream-${{ env.WHEEL_VERSION }}-py3-none-any.whl" >> $GITHUB_ENV
+        echo "DBFS_WHEEL_FILE=dbfs:/streaming/geh_stream-${{ env.WHEEL_VERSION }}-py3-none-any.whl" >> $GITHUB_ENV
+        echo "TF_VAR_wheel_file=dbfs:/streaming/geh_stream-${{ env.WHEEL_VERSION }}-py3-none-any.whl" >> $GITHUB_ENV
+      shell: bash
