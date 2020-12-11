@@ -27,7 +27,7 @@ namespace Energinet.DataHub.Ingestion.Tests.Application
         [Fact]
         public void Must_implement_request_queue_attribute()
         {
-            var assembly = typeof(ChangeOfSupplierHandler).Assembly;
+            var assembly = typeof(ChangeOfSupplierRequestHandler).Assembly;
             var actionRequests = assembly.GetTypes()
                 .Where(type => type.GetInterfaces().Contains(typeof(IHubMessage)))
                 .ToList();

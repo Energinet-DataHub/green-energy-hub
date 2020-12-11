@@ -25,6 +25,7 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.0.0" />
       <PackageReference Include="Confluent.Kafka" Version="1.5.2" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.10" />
     </ItemGroup>

@@ -40,6 +40,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
             builder.Services.AddScoped<IHubRehydrator, JsonMessageDeserializer>();
             builder.Services.AddGreenEnergyHub(typeof(HubTimeSeriesMessage).Assembly);
             builder.Services.AddMessageQueue();
+            builder.Services.AddMessageServiceBus();
             builder.Services.AddScoped<IHubCommandMediator, HubCommandMediator>();
         }
     }
