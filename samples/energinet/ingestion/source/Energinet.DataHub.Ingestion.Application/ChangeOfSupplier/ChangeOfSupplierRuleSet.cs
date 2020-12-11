@@ -14,11 +14,10 @@
 
 using System;
 using System.Collections.Generic;
-using Energinet.DataHub.Ingestion.Application.Messages;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Rules;
 
-namespace Energinet.DataHub.Ingestion.Application.RuleSets
+namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
 {
     /// <summary>
     /// Class which holds the ChangeOfSupplierRuleSet.

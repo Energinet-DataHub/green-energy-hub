@@ -17,7 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Application;
-using Energinet.DataHub.Ingestion.Application.Messages;
+using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Infrastructure;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;

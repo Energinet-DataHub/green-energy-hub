@@ -17,7 +17,7 @@ using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.MessageTypes;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
 
-namespace Energinet.DataHub.Ingestion.Application.Messages
+namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
 {
     /// <summary>
     /// POCO for a ChangeOfSupplierMessage.

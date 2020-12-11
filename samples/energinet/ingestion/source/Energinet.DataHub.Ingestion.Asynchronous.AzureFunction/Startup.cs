@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using System;
-using Energinet.DataHub.Ingestion.Application.Messages;
+using Energinet.DataHub.Ingestion.Application.TimeSeries;
 using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction;
 using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration;
 using Energinet.DataHub.Ingestion.Infrastructure;

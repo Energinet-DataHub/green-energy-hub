@@ -12,37 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Energinet.DataHub.Ingestion.Application.Messages;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.MessageQueue;
 
-namespace Energinet.DataHub.Ingestion.Application.Handlers
+namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
 {
     /// <summary>
     /// Class which defines how to handle ChangeOfSupplierMessages.
     /// </summary>
-    public class ChangeOfSupplierCommandHandler : HubCommandHandler<ChangeOfSupplierMessage>
+    public class ChangeOfSupplierRequestHandler : HubRequestHandler<ChangeOfSupplierMessage>
     {
         private readonly IRuleEngine<ChangeOfSupplierMessage> _rulesEngine;
-        private readonly IHubMessageServiceBusDispatcher _messageDispatcher;
+        private readonly IHubMessageQueueDispatcher _messageDispatcher;
 
         /// <summary>
-        /// Builds a ChangeOfSupplierCommandHandler which validates messages using a
-        /// provided IRuleEngine and dispatches valid messages to a Service Bus.
+        /// Builds a ChangeOfSupplierRequestHandler which validates messages using a
+        /// provided IRuleEngine and dispatches messages to a queue.
         /// </summary>
         /// <param name="rulesEngine">The IRuleEngine to validate messages with.
         /// </param>
-        /// <param name="messageServiceBusDispatcher">Service Bus dispatcher to use when request is successfully validated.</param>
-        public ChangeOfSupplierCommandHandler(
+        /// <param name="messageQueueDispatcher">Queue dispatcher to use when request is successfully validated.</param>
+        public ChangeOfSupplierRequestHandler(
             IRuleEngine<ChangeOfSupplierMessage> rulesEngine,
-            IHubMessageServiceBusDispatcher messageServiceBusDispatcher)
+            IHubMessageQueueDispatcher messageQueueDispatcher)
         {
             _rulesEngine = rulesEngine;
-            _messageDispatcher = messageServiceBusDispatcher;
+            _messageDispatcher = messageQueueDispatcher;
         }
 
         /// <summary>
@@ -63,29 +61,22 @@ namespace Energinet.DataHub.Ingestion.Application.Handlers
         /// </summary>
         /// <param name="actionData">The ChangeOfSupplierMessage.</param>
         /// <param name="cancellationToken"></param>
-        protected override async Task AcceptAsync(ChangeOfSupplierMessage actionData, CancellationToken cancellationToken)
+        /// <returns>True if the request was successfully accepted.</returns>
+        protected override async Task<bool> AcceptAsync(ChangeOfSupplierMessage actionData, CancellationToken cancellationToken)
         {
             await _messageDispatcher.DispatchAsync(actionData).ConfigureAwait(false);
+            return true;
         }
 
         /// <summary>
-        /// Rejects a given ChangeOfSupplierMessage.
+        /// Creates a response for the ChangeOfSupplierMessage.
         /// </summary>
         /// <param name="actionData">The ChangeOfSupplierMessage.</param>
         /// <param name="cancellationToken"></param>
-        protected override Task RejectAsync(ChangeOfSupplierMessage actionData, CancellationToken cancellationToken)
+        /// <returns>A response.</returns>
+        protected override Task<IHubResponse> RespondAsync(ChangeOfSupplierMessage actionData, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Called when the handle method experiences an unexpected exception.
-        /// </summary>
-        /// <param name="innerException">The exception that was thrown during Handle().</param>
-        protected override Task OnErrorAsync(Exception innerException)
-        {
-            // TODO: On error, send message to some dead-letter queue
-            throw innerException;
+            return Task.FromResult<IHubResponse>(new HubResponse());
         }
     }
 }

@@ -12,15 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Energinet.DataHub.Ingestion.Application.Messages;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.MessageQueue;
 
-namespace Energinet.DataHub.Ingestion.Application.Handlers
+namespace Energinet.DataHub.Ingestion.Application.TimeSeries
 {
     /// <summary>
     /// Class which defines how to handle TimeSeriesMessages

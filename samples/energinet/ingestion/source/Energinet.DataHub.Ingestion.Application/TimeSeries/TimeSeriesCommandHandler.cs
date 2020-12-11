@@ -12,32 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Energinet.DataHub.Ingestion.Application.Messages;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.MessageQueue;
 
-namespace Energinet.DataHub.Ingestion.Application.Handlers
+namespace Energinet.DataHub.Ingestion.Application.TimeSeries
 {
     /// <summary>
-    /// Class which defines how to handle ChangeOfSupplierMessages.
+    /// Class which defines how to handle TimeSeriesMessages
+    /// for the asynchronous ingestor.
     /// </summary>
-    public class ChangeOfSupplierRequestHandler : HubRequestHandler<ChangeOfSupplierMessage>
+    public class TimeSeriesCommandHandler : HubCommandHandler<TimeSeriesMessage>
     {
-        private readonly IRuleEngine<ChangeOfSupplierMessage> _rulesEngine;
+        private readonly IRuleEngine<TimeSeriesMessage> _rulesEngine;
         private readonly IHubMessageQueueDispatcher _messageDispatcher;
 
         /// <summary>
-        /// Builds a ChangeOfSupplierRequestHandler which validates messages using a
-        /// provided IRuleEngine and dispatches messages to a queue.
+        /// Builds a TimeSeriesCommandHandler which validates messages using a
+        /// provided IRuleEngine and dispatches valid messages to a queue.
         /// </summary>
         /// <param name="rulesEngine">The IRuleEngine to validate messages with.
         /// </param>
         /// <param name="messageQueueDispatcher">Queue dispatcher to use when request is successfully validated.</param>
-        public ChangeOfSupplierRequestHandler(
-            IRuleEngine<ChangeOfSupplierMessage> rulesEngine,
+        public TimeSeriesCommandHandler(
+            IRuleEngine<TimeSeriesMessage> rulesEngine,
             IHubMessageQueueDispatcher messageQueueDispatcher)
         {
             _rulesEngine = rulesEngine;
@@ -45,12 +46,12 @@ namespace Energinet.DataHub.Ingestion.Application.Handlers
         }
 
         /// <summary>
-        /// Validates a given ChangeOfSupplierMessage.
+        /// Validates a given TimeSeriesMessage.
         /// </summary>
-        /// <param name="actionData">The ChangeOfSupplierMessage.</param>
+        /// <param name="actionData">The TimeSeriesMessage.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>True if it is valid.</returns>
-        protected override Task<bool> ValidateAsync(ChangeOfSupplierMessage actionData, CancellationToken cancellationToken)
+        protected override Task<bool> ValidateAsync(TimeSeriesMessage actionData, CancellationToken cancellationToken)
         {
             // TODO: Enable validation when we are settled on a validation engine/methodology
             // return await _rulesEngine.ValidateAsync(actionData).ConfigureAwait(false);
@@ -58,26 +59,33 @@ namespace Energinet.DataHub.Ingestion.Application.Handlers
         }
 
         /// <summary>
-        /// Accepts a ChangeOfSupplierMessage.
+        /// Accepts a TimeSeriesMessage.
         /// </summary>
-        /// <param name="actionData">The ChangeOfSupplierMessage.</param>
+        /// <param name="actionData">The TimeSeriesMessage.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>True if the request was successfully accepted.</returns>
-        protected override async Task<bool> AcceptAsync(ChangeOfSupplierMessage actionData, CancellationToken cancellationToken)
+        protected override async Task AcceptAsync(TimeSeriesMessage actionData, CancellationToken cancellationToken)
         {
             await _messageDispatcher.DispatchAsync(actionData).ConfigureAwait(false);
-            return true;
         }
 
         /// <summary>
-        /// Creates a response for the ChangeOfSupplierMessage.
+        /// Rejects a given TimeSeriesMessage.
         /// </summary>
-        /// <param name="actionData">The ChangeOfSupplierMessage.</param>
+        /// <param name="actionData">The TimeSeriesMessage.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>A response.</returns>
-        protected override Task<IHubResponse> RespondAsync(ChangeOfSupplierMessage actionData, CancellationToken cancellationToken)
+        protected override Task RejectAsync(TimeSeriesMessage actionData, CancellationToken cancellationToken)
         {
-            return Task.FromResult<IHubResponse>(new HubResponse());
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Called when the handle method experiences an unexpected exception.
+        /// </summary>
+        /// <param name="innerException">The exception that was thrown during Handle().</param>
+        protected override Task OnErrorAsync(Exception innerException)
+        {
+            // TODO: On error, send message to some dead-letter queue
+            throw innerException;
         }
     }
 }

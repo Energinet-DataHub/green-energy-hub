@@ -14,7 +14,7 @@
 
 using System;
 using Energinet.DataHub.Ingestion.Application;
-using Energinet.DataHub.Ingestion.Application.Messages;
+using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Infrastructure;
 using Energinet.DataHub.Ingestion.Synchronous.AzureFunction;
 using Energinet.DataHub.Ingestion.Synchronous.AzureFunction.Configuration;

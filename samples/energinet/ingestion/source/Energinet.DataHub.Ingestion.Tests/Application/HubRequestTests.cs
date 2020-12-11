@@ -14,7 +14,7 @@
 
 using System;
 using System.Linq;
-using Energinet.DataHub.Ingestion.Application.Handlers;
+using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using FluentAssertions;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.MessageTypes;

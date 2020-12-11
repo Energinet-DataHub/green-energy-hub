@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Energinet.DataHub.Ingestion.Application.Messages;
+using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Infrastructure;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
 using Microsoft.Extensions.Logging;

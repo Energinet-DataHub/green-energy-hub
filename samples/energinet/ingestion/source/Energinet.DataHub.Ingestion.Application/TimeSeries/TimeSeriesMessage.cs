@@ -17,7 +17,7 @@ using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.MessageTypes;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
 
-namespace Energinet.DataHub.Ingestion.Application.Messages
+namespace Energinet.DataHub.Ingestion.Application.TimeSeries
 {
     /// <summary>
     /// Represents time series information from metering points.
