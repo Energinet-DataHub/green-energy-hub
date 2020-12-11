@@ -400,6 +400,7 @@ SubTypeOfMeteringPoint
 SuiteNumber
 SupplierAssociationId
 SupplyStart
+synchronizer
 SynchronousIngestor
 Tandrup
 TaxIndicator
