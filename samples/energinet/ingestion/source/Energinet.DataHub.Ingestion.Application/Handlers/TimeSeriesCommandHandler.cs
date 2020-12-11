@@ -23,22 +23,23 @@ using GreenEnergyHub.Messaging.MessageQueue;
 namespace Energinet.DataHub.Ingestion.Application.Handlers
 {
     /// <summary>
-    /// Class which defines how to handle HubTimeSeriesMessages.
+    /// Class which defines how to handle TimeSeriesMessages
+    /// for the asynchronous ingestor.
     /// </summary>
-    public class HubTimeSeriesHandler : HubCommandHandler<HubTimeSeriesMessage>
+    public class TimeSeriesCommandHandler : HubCommandHandler<TimeSeriesMessage>
     {
-        private readonly IRuleEngine<HubTimeSeriesMessage> _rulesEngine;
+        private readonly IRuleEngine<TimeSeriesMessage> _rulesEngine;
         private readonly IHubMessageQueueDispatcher _messageDispatcher;
 
         /// <summary>
-        /// Builds a HubTimeSeriesHandler which validates messages using a
-        /// provided IRuleEngine.
+        /// Builds a TimeSeriesCommandHandler which validates messages using a
+        /// provided IRuleEngine and dispatches valid messages to a queue.
         /// </summary>
         /// <param name="rulesEngine">The IRuleEngine to validate messages with.
         /// </param>
         /// <param name="messageQueueDispatcher">Queue dispatcher to use when request is successfully validated.</param>
-        public HubTimeSeriesHandler(
-            IRuleEngine<HubTimeSeriesMessage> rulesEngine,
+        public TimeSeriesCommandHandler(
+            IRuleEngine<TimeSeriesMessage> rulesEngine,
             IHubMessageQueueDispatcher messageQueueDispatcher)
         {
             _rulesEngine = rulesEngine;
@@ -46,12 +47,12 @@ namespace Energinet.DataHub.Ingestion.Application.Handlers
         }
 
         /// <summary>
-        /// Validates a given HubTimeSeriesMessage.
+        /// Validates a given TimeSeriesMessage.
         /// </summary>
-        /// <param name="actionData">The HubTimeSeriesMessage.</param>
+        /// <param name="actionData">The TimeSeriesMessage.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>True if it is valid.</returns>
-        protected override Task<bool> ValidateAsync(HubTimeSeriesMessage actionData, CancellationToken cancellationToken)
+        protected override Task<bool> ValidateAsync(TimeSeriesMessage actionData, CancellationToken cancellationToken)
         {
             // TODO: Enable validation when we are settled on a validation engine/methodology
             // return await _rulesEngine.ValidateAsync(actionData).ConfigureAwait(false);
@@ -59,23 +60,21 @@ namespace Energinet.DataHub.Ingestion.Application.Handlers
         }
 
         /// <summary>
-        /// Accepts a HubTimeSeriesMessage.
+        /// Accepts a TimeSeriesMessage.
         /// </summary>
-        /// <param name="actionData">The HubTimeSeriesMessage.</param>
+        /// <param name="actionData">The TimeSeriesMessage.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>True if the request was successfully accepted.</returns>
-        protected override async Task AcceptAsync(HubTimeSeriesMessage actionData, CancellationToken cancellationToken)
+        protected override async Task AcceptAsync(TimeSeriesMessage actionData, CancellationToken cancellationToken)
         {
             await _messageDispatcher.DispatchAsync(actionData).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Rejects a given HubTimeSeriesMessage.
+        /// Rejects a given TimeSeriesMessage.
         /// </summary>
-        /// <param name="actionData">The HubTimeSeriesMessage.</param>
+        /// <param name="actionData">The TimeSeriesMessage.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>True if it is valid.</returns>
-        protected override Task RejectAsync(HubTimeSeriesMessage actionData, CancellationToken cancellationToken)
+        protected override Task RejectAsync(TimeSeriesMessage actionData, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

@@ -23,11 +23,11 @@ namespace Energinet.DataHub.Ingestion.Application.Messages
     /// Represents time series information from metering points.
     /// </summary>
     [HubMessageQueue("CommandQueue")]
-    [HubMessage("HubTimeSeriesMessage")]
-    public class HubTimeSeriesMessage : IHubMessage
+    [HubMessage("TimeSeriesMessage")]
+    public class TimeSeriesMessage : IHubMessage
     {
         /// <summary>
-        /// The id of the HubTimeSeriesMessage. Should be unique.
+        /// The id of the TimeSeriesMessage. Should be unique.
         /// </summary>
         public Transaction Transaction { get; set; } = Transaction.NewTransaction();
 
