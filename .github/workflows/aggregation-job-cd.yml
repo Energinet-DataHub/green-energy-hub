@@ -108,10 +108,17 @@ jobs:
         run: | 
           echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id.outputs.keyvault-id }}" >> $GITHUB_ENV
 
+      - name: Configure Terraform Backend
+        uses: ./.github/actions/configure-terraform-backend
+        with:
+          backend-file-path: "./build/terraform/databricks_aggregation_job/backend.tf"
+          resource-group-name: "enrgtfstate${{ env.RESOURCE_GROUP_NAME }}"
+          storage-account-name: "enrgtfstate${{ env.ENV_NAME }}"
+
       # Create aggregation job
       - name: Terraform Databricks Init
         working-directory: ./build/terraform/databricks_aggregation_job
-        run: terraform init -backend-config="resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" -backend-config="storage_account_name=enrgtfstate${{ env.ENV_NAME }}"
+        run: terraform init
                   
       - name: Terraform Databricks Apply
         id: terraform-apply 

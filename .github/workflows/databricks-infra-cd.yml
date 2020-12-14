@@ -70,7 +70,14 @@ jobs:
           echo "TF_VAR_invalid_output_eventhub_name=invalid-output" >> $GITHUB_ENV
           echo "TF_VAR_storage_account_name=enrgnt${{ env.ENV_NAME }}" >> $GITHUB_ENV
           echo "TF_VAR_databricks_name=energinetdbricks-${{ env.ENV_NAME }}" >> $GITHUB_ENV
-                 
+
+      - name: Configure Terraform Backend
+        uses: ./.github/actions/configure-terraform-backend
+        with:
+          backend-file-path: "./build/terraform/infra/backend.tf"
+          resource-group-name: "enrgtfstate${{ env.RESOURCE_GROUP_NAME }}"
+          storage-account-name: "enrgtfstate${{ env.ENV_NAME }}"
+
       - name: Terraform Infra Init
         working-directory: ./build/terraform/infra
         run: terraform init

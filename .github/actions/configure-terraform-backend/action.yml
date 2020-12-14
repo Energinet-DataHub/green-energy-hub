@@ -1,0 +1,20 @@
+name: 'Configure Terraform Backend'
+description: 'Set proper resource group and storage account names in backend.tf file'
+inputs:
+  backend-file-path:
+    description: 'path to backend file to be changed'
+    required: true
+  resource-grup-name:
+    description: 'Name of Resource Group to use in backend.tf'
+    required: true
+  storage-account-name:
+    description: 'Name of Storage Account to use in backend.tf'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: run-job
+      run: |
+        sed -i 's/@resource_group_name/${{ inputs.resource-group-name }}/' ${{ inputs.backend-file-path }}
+        sed -i 's/@storage_account_name/${{ inputs.storage-account-name }}/' ${{ inputs.backend-file-path }}
+      shell: bash

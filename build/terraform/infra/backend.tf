@@ -1,7 +1,7 @@
 terraform {
   backend "azurerm" {
-    resource_group_name   = "rg-GreenEnergyHub_Sandbox-S"
-    storage_account_name  = "enrgtfstateprod"
+    resource_group_name   = "@resource_group_name"
+    storage_account_name  = "@storage_account_name"
     container_name        = "tfstate"
     key                   = "terraform_infra.tfstate"
   }
