@@ -94,7 +94,7 @@ jobs:
         uses: ./.github/actions/configure-terraform-backend
         with:
           backend-file-path: "./build/terraform/databricks_streaming_job/backend.tf"
-          resource-group-name: "enrgtfstate${{ env.RESOURCE_GROUP_NAME }}"
+          resource-group-name: "${{ env.RESOURCE_GROUP_NAME }}"
           storage-account-name: "enrgtfstate${{ env.ENV_NAME }}"
 
       # Create streaming job

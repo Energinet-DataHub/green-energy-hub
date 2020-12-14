@@ -75,7 +75,7 @@ jobs:
         uses: ./.github/actions/configure-terraform-backend
         with:
           backend-file-path: "./build/terraform/infra/backend.tf"
-          resource-group-name: "enrgtfstate${{ env.RESOURCE_GROUP_NAME }}"
+          resource-group-name: "${{ env.RESOURCE_GROUP_NAME }}"
           storage-account-name: "enrgtfstate${{ env.ENV_NAME }}"
 
       - name: Terraform Infra Init
