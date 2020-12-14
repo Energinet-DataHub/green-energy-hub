@@ -74,6 +74,10 @@ jobs:
       - name: Terraform Infra Init
         working-directory: ./build/terraform/infra
         run: terraform init
+
+      - name: Terraform Infra Plan
+        working-directory: ./build/terraform/infra
+        run: terraform plan
         
       - name: Terraform Infra Apply
         id: terraform-apply
