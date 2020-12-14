@@ -79,6 +79,6 @@ jobs:
         id: terraform-apply
         working-directory: ./build/terraform/infra
         run: |
-          terraform apply -no-color -auto-approve
+          terraform apply -no-color -auto-approve -backend-config="resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" -backend-config="storage_account_name=enrgtfstate${{ env.ENV_NAME }}"
           echo "::set-output name=workspace-url::$(terraform output databricks_workspace_url)"
         continue-on-error: false
