@@ -1,6 +1,7 @@
 name: Databricks Infrastructure Deploy
 # Run this workflow on demand
 on:
+  push:
   workflow_dispatch:
 
 jobs:

@@ -1,0 +1,9 @@
+{
+    "resource_group_name" : "databricks-integration-testing",
+    "_env_name_comment":"use short lower case env_name values as it is used to name azure resources",
+    "env_name":"itest",
+    "tenant_id":"72f988bf-86f1-41af-91ab-2d7cd011db47",
+    "subscription_id":"4388a205-1a64-4cfe-86e9-2cfab9b0300f",
+    "client_id":"1e0c345b-8fa1-4662-b9e4-6033e41dc367",
+    "object_id":"7a26f92a-c03e-46a3-8d3f-9d68ba6240c4"
+}

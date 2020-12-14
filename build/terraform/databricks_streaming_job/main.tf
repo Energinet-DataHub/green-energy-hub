@@ -34,58 +34,17 @@ data "azurerm_key_vault_secret" "invalid_output_eventhub_send_connection_string"
   key_vault_id = var.keyvault_id
 }
 
-resource "databricks_job" "streaming_job" {
-  name = "StreamProcessing"
-  max_retries = 2
-  max_concurrent_runs = 1
-
-  new_cluster { 
-    spark_version  = "7.2.x-scala2.12"
-    node_type_id   = "Standard_DS3_v2"
-    num_workers    = 1
-  }
-	
-  library {
-    maven {
-      coordinates = "com.microsoft.azure:azure-eventhubs-spark_2.12:2.3.17"
-    }
-  }
-
-  library {
-    pypi {
-      package = "configargparse==1.2.3"
-    }
-  }
-
-  library {
-    pypi {
-      package = "applicationinsights==0.11.9"
-    }
-  } 
-
-  library {
-    whl = var.wheel_file
-  } 
-
-  spark_python_task {
-    python_file = var.python_main_file
-    parameters  = [
-      "--storage-account-name=${var.storage_account_name}",
-      "--storage-account-key=${data.azurerm_key_vault_secret.storage_account_key.value}",
-      "--storage-container-name=${var.streaming_container_name}",
-      "--master-data-path=master-data/master-data.csv",
-      "--output-path=delta/meter-data/",
-      "--input-eh-connection-string=${data.azurerm_key_vault_secret.input_eventhub_listen_connection_string.value}",
-      "--max-events-per-trigger=1000",
-      "--trigger-interval=1 second",
-      "--streaming-checkpoint-path=checkpoints/streaming",
-      "--valid-output-eh-connection-string=${data.azurerm_key_vault_secret.valid_output_eventhub_send_connection_string.value}",
-      "--invalid-output-eh-connection-string=${data.azurerm_key_vault_secret.invalid_output_eventhub_send_connection_string.value}",
-      "--telemetry-instrumentation-key=${data.azurerm_key_vault_secret.appinsights_instrumentation_key.value}"
-    ]
-  }
-
-  email_notifications {
-    no_alert_for_skipped_runs = true
-  }
+module "streaming_job" {
+  source                                         = "../job_modules/streaming_job"
+  databricks_id                                  = var.databricks_id
+  module_name                                    = "StreamingJob"
+  storage_account_name                           = var.storage_account_name
+  storage_account_key                            = data.azurerm_key_vault_secret.storage_account_key.value
+  streaming_container_name                       = var.streaming_container_name
+  input_eventhub_listen_connection_string        = data.azurerm_key_vault_secret.input_eventhub_listen_connection_string.value
+  valid_output_eventhub_send_connection_string   = data.azurerm_key_vault_secret.valid_output_eventhub_send_connection_string.value
+  invalid_output_eventhub_send_connection_string = data.azurerm_key_vault_secret.invalid_output_eventhub_send_connection_string.value 
+  appinsights_instrumentation_key                = data.azurerm_key_vault_secret.appinsights_instrumentation_key.value
+  wheel_file                                     = var.wheel_file
+  python_main_file                               = var.python_main_file
 }

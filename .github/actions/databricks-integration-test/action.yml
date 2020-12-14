@@ -1,0 +1,35 @@
+name: 'PySpark execution'
+description: 'This action allows you to execute code, written for Spark, Databricks or other similar engines.'
+inputs:
+  storage-account-name:
+    description: 'A name of storage account will be used in tests'
+    required: true
+    default: ''
+  storage-account-key:
+    description: 'Key for storage account will be used in tests'
+    required: true
+    default: ''
+  storage-container-name:
+    description: 'Container name in storage account'
+    required: true
+    default: ''
+  input-eh-connection-string:
+    description: 'Input Event Hub connection string'
+    required: true
+    default: ''
+  delta-lake-output-path:
+    description: 'Delta lake path'
+    required: true
+    default: ''
+outputs:
+  result:
+    description: 'True or False, that represents a result of test run'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.storage-account-name }}
+    - ${{ inputs.storage-account-key }}
+    - ${{ inputs.storage-container-name }}
+    - ${{ inputs.input-eh-connection-string }}
+    - ${{ inputs.delta-lake-output-path }}

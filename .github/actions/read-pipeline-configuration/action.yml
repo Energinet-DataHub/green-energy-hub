@@ -1,11 +1,26 @@
 name: 'Read Pipeline Configuration File'
 description: 'Reads pipeline configuration file based on last section of branch name and sets environemnt variables. Note: expects Python to be installed on a runner.'
+inputs:
+  config-file:
+    description: 'Configuration file to use'
+    required: false
 runs:
   using: "composite"
   steps: 
     - run: |
-        IFS='/' read -ra ADDR <<< "${GITHUB_REF#refs/heads/}"
-        if test -f "./build/configurations/${ADDR[-1]}.json"; then filename="${ADDR[-1]}.json"; else filename="main.json"; fi
+        if [ -z ${{ inputs.config-file }} ]
+        then
+          IFS='/' read -ra ADDR <<< "${GITHUB_REF#refs/heads/}"
+          if test -f "./build/configurations/${ADDR[-1]}.json";
+          then
+            filename="${ADDR[-1]}.json";
+          else
+            filename="main.json";
+          fi;
+        else
+         filename=${{ inputs.config-file }}
+        fi
+        
         file_content=$(cat "./build/configurations/${filename}")
         env_name=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['env_name'])")
         resource_group_name=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['resource_group_name'])")

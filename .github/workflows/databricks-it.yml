@@ -1,0 +1,146 @@
+name: Databricks Integration Test
+
+on:
+  # pull_request:
+  #   branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  build-and-deploy:
+    name: Run DataBricks integration test
+    runs-on: ubuntu-latest
+    env:
+      TF_VAR_python_main_file: "dbfs:/streaming/enrichment_and_validation.py"
+      TF_VAR_wheel_file: "dbfs:/streaming/geh_stream-1.0-py3-none-any.whl"
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Read Pipeline Configuration
+      uses: ./.github/actions/read-pipeline-configuration
+      with:
+        config-file: 'integration-tests.json'
+
+    - name: Read Client Secret
+      env:
+        SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
+      run: |  
+        echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1.2.1
+      with:
+        terraform_wrapper: false
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+    - name: Azure CLI Install and Login
+      uses: ./.github/actions/azure-cli-install-login
+    # book resources
+    - name: Book resources for integration test
+      id: rb-book
+      uses: ./.github/actions/resource-book
+      with:
+        action: book
+        azure-storage-connection-string: $(echo ${{ secrets.RSM_STORAGE_ACCOUNT }} | base64 -d)
+        group: 'INPUT,VALID_OUTPUT,INVALID_OUTPUT,OUTPUT_CONTAINER'
+        state-blob: state
+        state-container: pipeline-state
+
+    - name: Set TF Vars
+      run: |
+        connectionString=$(echo ${{ secrets.EVENT_HUB_INTEGRATION_TEST }} | base64 -d)
+        ehInputCS=$(echo "$connectionString;EntityPath=${{ env.RB_OUT_INPUT }}")
+        ehVoutputCS=$(echo "$connectionString;EntityPath=${{ env.RB_OUT_VALID_OUTPUT }}")
+        ehIoutputCS=$(echo "$connectionString;EntityPath=${{ env.RB_OUT_INVALID_OUTPUT }}")
+
+        echo "TF_VAR_input_eventhub_listen_connection_string=$ehInputCS" >> $GITHUB_ENV
+        echo "TF_VAR_valid_output_eventhub_send_connection_string=$ehVoutputCS" >> $GITHUB_ENV
+        echo "TF_VAR_invalid_output_eventhub_send_connection_string=$ehIoutputCS" >> $GITHUB_ENV
+        echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
+        echo "TF_VAR_storage_account_name=enrgnt${{ env.ENV_NAME }}" >> $GITHUB_ENV
+        echo "TF_VAR_storage_account_key=${{ secrets.STORAGE_ACCOUNT_KEY_INTEGRATION_TEST }}" >> $GITHUB_ENV
+        echo "TF_VAR_streaming_container_name=${{ env.RB_OUT_OUTPUT_CONTAINER }}" >> $GITHUB_ENV
+        echo "TF_VAR_appinsights_instrumentation_key=${{ secrets.APP_INSIGHTS_INSTRUMENTATION_KEY_INTEGRATION_TEST }}" >> $GITHUB_ENV
+
+    - name: Obtain Databricks Workspace ID and Url
+      id: obtain-db-id-url
+      uses: ./.github/actions/obtain-databricks-id-url
+      
+    - name: Set databricks_id TF Var  
+      run: |
+        echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV 
+    - name: Databricks CLI Install And Connect
+      uses: ./.github/actions/databricks-cli-install-connect
+      with:
+        workspace-url: ${{ steps.obtain-db-id-url.outputs.workspace-url }}
+
+    - name: Copy Job Definition to DBFS
+      id: copy_files_todbfs
+      run: |    
+        dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py ${{ env.TF_VAR_python_main_file }}
+    
+    - name: Obtain Keyvault ID
+      id: obtain-keyvault-id 
+      uses: ./.github/actions/obtain-keyvault-id
+
+    - name: Terraform Databricks Init
+      working-directory: ./build/terraform/databricks_streaming_job_it
+      run: terraform init
+
+    # Resource in command must match with resource name in main.tf
+    # after feature: https://github.com/databrickslabs/terraform-provider-databricks/issues/389 
+    # is available this should be changed and job should not be recreated on each run - taint to be removed           
+    - name: Terraform Databricks Apply
+      id: terraform-apply
+      working-directory: ./build/terraform/databricks_streaming_job_it
+      run: |
+        terraform apply -no-color -auto-approve
+        terraform taint "module.streaming_job.databricks_job.streaming_job"
+        echo "::set-output name=job-id::$(terraform output databricks_job_id)"
+      continue-on-error: false
+
+    - name: Databricks CLI Run the Job
+      id: run-job
+      uses: ./.github/actions/databricks-cli-run-job
+      with:
+        job-id: ${{ steps.terraform-apply.outputs.job-id }}
+        
+    - name: Check Job Status
+      working-directory: ./build
+      run: |
+        pip install configargparse
+        pip install requests
+        python -u job_status_check.py --job-run-ids  ${{ steps.run-job.outputs.job-run-id }} --retries 2 --databricks-url 'https://${{ steps.obtain-db-id-url.outputs.workspace-url }}' --token ${{ env.DATABRICKS_AAD_TOKEN }}
+
+    - name: Integration tests
+      uses: ./.github/actions/databricks-integration-test
+      with:
+        storage-account-name: ${{ env.TF_VAR_storage_account_name }}
+        storage-account-key: ${{ secrets.STORAGE_ACCOUNT_KEY_INTEGRATION_TEST }}
+        storage-container-name: ${{ env.RB_OUT_OUTPUT_CONTAINER }}
+        input-eh-connection-string: ${{ env.TF_VAR_input_eventhub_listen_connection_string }}
+        delta-lake-output-path: delta/meter-data
+
+    #Final steps, running always, event if workflow has been canceled
+    - name: Terraform Destroy
+      id: terraform-destroy
+      if: ${{ always() && steps.terraform-apply.outputs.job-id != '' }}
+      working-directory: ./build/terraform/databricks_streaming_job_it
+      run: |
+        terraform destroy -no-color -auto-approve
+
+    - name: Release resources after integration test
+      id: rb-release
+      if: ${{ always() && steps.rb-book.outputs.result == 'True' }}
+      uses: ./.github/actions/resource-book
+      with:
+        action: release
+        azure-storage-connection-string: $(echo ${{ secrets.RSM_STORAGE_ACCOUNT }} | base64 -d)
+        resource: ${{ steps.rb-book.outputs.output }}
+        state-blob: state
+        state-container: pipeline-state

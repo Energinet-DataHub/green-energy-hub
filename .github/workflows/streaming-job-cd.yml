@@ -103,7 +103,7 @@ jobs:
         working-directory: ./build/terraform/databricks_streaming_job
         run: |
           terraform apply -no-color -auto-approve
-          terraform taint databricks_job.streaming_job
+          terraform taint module.streaming_job.databricks_job.streaming_job
           echo "::set-output name=job-id::$(terraform output databricks_job_id)"
         continue-on-error: false
 

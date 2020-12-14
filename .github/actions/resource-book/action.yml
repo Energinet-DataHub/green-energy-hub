@@ -1,0 +1,49 @@
+name: 'Book or release resources'
+description: 'Book or release resources'
+inputs:
+  action:
+    description: 'A type of action: "book" or "release"'
+    required: true
+  azure-storage-connection-string:
+    description: 'A connection string to Azure Storage where state file will be stored'
+    required: true
+  state-blob:
+    description: 'A blob, where state is stored'
+    required: true
+  state-container:
+    description: 'A container, where state is stored'
+    required: true
+  group:
+    description: 'A comma separated values of groups to book'
+    required: false
+    default: 'none'
+  resource:
+    description: 'A comma separated values of resources to release'
+    required: false
+    default: 'none'
+outputs:
+  output: 
+    description: 'The output from book or release process'
+    value: ${{ steps.rb-process.outputs.RB_OUTPUT }}
+  result: 
+    description: '"True" or "False", that corresponds to result of processing defined action'
+    value: ${{ steps.rb-process.outputs.RB_RESULT }}
+runs:
+  using: "composite"
+  steps: 
+    - run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      shell: bash
+    - id: rb-process
+      run: |
+        chmod +x $GITHUB_WORKSPACE/.github/actions/resource-book/state-manager.sh
+
+        IFS=;
+        . $GITHUB_WORKSPACE/.github/actions/resource-book/state-manager.sh \
+        --action "${{ inputs.action }}" \
+        --blob-name "${{ inputs.state-blob }}" \
+        --container-name "${{ inputs.state-container }}" \
+        --group "${{ inputs.group }}" \
+        --resource "${{ inputs.resource }}" \
+        --connection-string "${{ inputs.azure-storage-connection-string }}" \
+        --server github
+      shell: bash
