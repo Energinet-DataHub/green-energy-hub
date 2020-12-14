@@ -1,3 +1,5 @@
+data "azurerm_client_config" "current" {}
+
 module "kv_shared" {
   source                          = "../modules/key-vault"
   name                            = "kvshared${var.environment}"
@@ -9,11 +11,12 @@ module "kv_shared" {
   
   access_policy = [
     {
+      tenant_id               = var.current_tenant_id
       object_id               = var.current_spn_object_id
-      secret_permissions      = ["set", "get", "list"]
+      secret_permissions      = ["set", "get", "list", "delete"]
       certificate_permissions = []
       key_permissions         = []
       storage_permissions     = []
-    }
+    },
   ]
 }

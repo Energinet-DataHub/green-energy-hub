@@ -2,9 +2,9 @@ locals {
   sqlServerAdminName = "gehdbadmin"
 }
 
-module "sqlsrv_masterdata" {
+module "sqlsrv_marketdata" {
   source                        = "../modules/sql-server"
-  name                          = "sqlsrv-masterdata-${var.environment}"
+  name                          = "sqlsrv-marketdata-${var.environment}"
   resource_group_name           = data.azurerm_resource_group.greenenergyhub.name
   location                      = data.azurerm_resource_group.greenenergyhub.location
   administrator_login           = local.sqlServerAdminName
@@ -12,14 +12,14 @@ module "sqlsrv_masterdata" {
   tags                          = data.azurerm_resource_group.greenenergyhub.tags
 }
 
-module "sqldb_masterdata" {
+module "sqldb_marketdata" {
   source              = "../modules/sql-database"
-  name                = "sqldb-masterdata-${var.environment}"
+  name                = "sqldb-marketdata-${var.environment}"
   resource_group_name = data.azurerm_resource_group.greenenergyhub.name
   location            = data.azurerm_resource_group.greenenergyhub.location
   tags                = data.azurerm_resource_group.greenenergyhub.tags
-  server_name         = module.sqlsrv_masterdata.name
-  dependencies        = [module.sqlsrv_masterdata.dependent_on]
+  server_name         = module.sqlsrv_marketdata.name
+  dependencies        = [module.sqlsrv_marketdata.dependent_on]
 }
 
 module "sqlsrv_admin_username" {

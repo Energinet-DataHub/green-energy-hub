@@ -10,17 +10,31 @@ module "azfun_soaptojsonadapter" {
   tags                                      = data.azurerm_resource_group.greenenergyhub.tags
   app_settings                              = {
     # Region: Default Values
-    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true,
-    WEBSITE_RUN_FROM_PACKAGE              = 1,
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true,
-    FUNCTIONS_WORKER_RUNTIME              = "dotnet",
-    SYNCHRONOUS_INGESTOR_BASE_URL         = "https://${module.azfun_synchronousingestor.default_hostname}"
+    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
+    WEBSITE_RUN_FROM_PACKAGE              = 1
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
+    FUNCTIONS_WORKER_RUNTIME              = "dotnet"
+    # Endregion: Default Values
+    KAFKA_SECURITY_PROTOCOL               = "SaslSsl"
+    KAFKA_SASL_MECHANISM                  = "Plain"
+    KAFKA_SSL_CA_LOCATION                 = "C:\\cacert\\cacert.pem"
+    KAFKA_USERNAME                        = "$ConnectionString"
+    KAFKA_MESSAGE_SEND_MAX_RETRIES        = 5
+    KAFKA_MESSAGE_TIMEOUT_MS              = 1000
+    VALIDATION_REPORTS_URL                = "${module.evhnm_validationreport.name}.servicebus.windows.net:9093"
+    VALIDATION_REPORTS_CONNECTION_STRING  = module.evhar_validationreport_sender.primary_connection_string
+    SYNCHRONOUS_INGESTOR_BASE_URL         = "https://${module.azfun_synchronousingestor.default_hostname}/api"
+    SOAP_TO_JSON_STORAGE_ACCOUNT          = module.stor_soaptojsonadapterstorage.primary_connection_string
   }
-  connection_string                         = {
-    SOAP_TO_JSON_STORAGE_ACCOUNT            = module.stor_soaptojsonadapterstorage.primary_connection_string
-    VALIDATION_REPORTS_QUEUE                = module.evhar_validationreport_sender.primary_connection_string
-  }
-  dependencies                              = [module.azfun_soaptojsonadapter_plan.dependent_on, module.azfun_soaptojsonadapter_stor.dependent_on]
+  dependencies                          = [
+    module.appi_shared.dependent_on,
+    module.azfun_soaptojsonadapter_plan.dependent_on,
+    module.azfun_soaptojsonadapter_stor.dependent_on,
+    module.stor_soaptojsonadapterstorage.dependent_on,
+    module.evhnm_validationreport.dependent_on,
+    module.evhar_validationreport_sender.dependent_on,
+    module.azfun_synchronousingestor.dependent_on,
+  ]
 }
 
 module "azfun_soaptojsonadapter_plan" {

@@ -28,7 +28,8 @@ jobs:
       - name: Set env Infra
         working-directory: ./build/terraform/infra
         run: |
-          echo "TF_VAR_current_spn_object_id=${{ secrets.AZURE_SPN_CLIENT_OBJECT_ID }}" >> $GITHUB_ENV 
+          echo "TF_VAR_current_spn_object_id=${{ secrets.AZURE_SPN_CLIENT_OBJECT_ID }}" >> $GITHUB_ENV
+          echo "TF_VAR_current_tenant_id=${{ secrets.TENANT_ID }}" >> $GITHUB_ENV
 
       - name: Terraform Init
         working-directory: ./build/terraform/main

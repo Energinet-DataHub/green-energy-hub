@@ -15,9 +15,9 @@ module "sbq_marketdata" {
   dependencies        = [module.sbn_marketdata]
 }
 
-module "sbnar_marketdata_businesswflow" {
+module "sbnar_marketdata_listener" {
   source                    = "../modules/service-bus-queue-auth-rule"
-  name                      = "sbnar-marketdata-businesswflow-${var.environment}"
+  name                      = "sbnar-marketdata-listener-${var.environment}"
   namespace_name            = module.sbn_marketdata.name
   queue_name                = module.sbq_marketdata.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
@@ -25,9 +25,9 @@ module "sbnar_marketdata_businesswflow" {
   dependencies              = [module.sbn_marketdata]
 }
 
-module "sbnar_marketdata_asyncingest" {
+module "sbnar_marketdata_sender" {
   source                    = "../modules/service-bus-queue-auth-rule"
-  name                      = "sbnar-marketdata-asyncingest-${var.environment}"
+  name                      = "sbnar-marketdata-sender-${var.environment}"
   namespace_name            = module.sbn_marketdata.name
   queue_name                = module.sbq_marketdata.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name

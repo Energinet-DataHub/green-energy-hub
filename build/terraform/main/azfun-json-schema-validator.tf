@@ -10,15 +10,17 @@ module "azfun_jsonschemavalidator" {
   tags                                      = data.azurerm_resource_group.greenenergyhub.tags
   app_settings                              = {
     # Region: Default Values
-    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true,
-    WEBSITE_RUN_FROM_PACKAGE              = 1,
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true,
-    FUNCTIONS_WORKER_RUNTIME              = "dotnet",
+    WEBSITE_ENABLE_SYNC_UPDATE_SITE     = true,
+    WEBSITE_RUN_FROM_PACKAGE            = 1,
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = true,
+    FUNCTIONS_WORKER_RUNTIME            = "dotnet",
+    # Endregion: Default Values
   }
-  connection_string                         = {
-    VALIDATION_REPORTS_QUEUE                = module.evhar_validationreport_sender.primary_connection_string
-  }
-  dependencies                              = [module.azfun_jsonschemavalidator_plan.dependent_on, module.azfun_jsonschemavalidator_stor.dependent_on]
+  dependencies                              = [
+    module.appi_shared.dependent_on,
+    module.azfun_jsonschemavalidator_plan.dependent_on, 
+    module.azfun_jsonschemavalidator_stor.dependent_on,
+  ]
 }
 
 module "azfun_jsonschemavalidator_plan" {

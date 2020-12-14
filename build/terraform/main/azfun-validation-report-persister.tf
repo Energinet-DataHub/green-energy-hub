@@ -10,16 +10,21 @@ module "azfun_validationreportpersister" {
   tags                                      = data.azurerm_resource_group.greenenergyhub.tags
   app_settings                              = {
     # Region: Default Values
-    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true,
-    WEBSITE_RUN_FROM_PACKAGE              = 1,
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true,
-    FUNCTIONS_WORKER_RUNTIME              = "dotnet",
+    WEBSITE_ENABLE_SYNC_UPDATE_SITE     = true
+    WEBSITE_RUN_FROM_PACKAGE            = 1
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = true
+    FUNCTIONS_WORKER_RUNTIME            = "dotnet"
+    # Endregion: Default Values
+    VALIDATION_REPORTS_STORAGE_ACCOUNT  = module.stor_validationreportsstorage.primary_connection_string
+    VALIDATION_REPORTS_QUEUE            = module.evhar_validationreport_receiver.primary_connection_string
   }
-  connection_string                         = {
-    VALIDATION_REPORTS_STORAGE_ACCOUNT      = module.stor_validationreportsstorage.primary_connection_string
-    VALIDATION_REPORTS_QUEUE                = module.evhar_validationreport_receiver.primary_connection_string
-  }
-  dependencies                              = [module.azfun_validationreportpersister_plan.dependent_on, module.azfun_validationreportpersister_stor.dependent_on]
+  dependencies                              = [
+    module.appi_shared.dependent_on,
+    module.azfun_validationreportpersister_plan.dependent_on,
+    module.azfun_validationreportpersister_stor.dependent_on,
+    module.stor_validationreportsstorage.dependent_on,
+    module.evhar_validationreport_receiver.dependent_on,
+  ]
 }
 
 module "azfun_validationreportpersister_plan" {

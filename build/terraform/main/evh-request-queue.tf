@@ -18,9 +18,9 @@ module "evh_requestqueue" {
   dependencies              = [module.evhnm_requestqueue]
 }
 
-module "evhar_requestqueue_synchronousingestor" {
+module "evhar_requestqueue_sender" {
   source                    = "../modules/event-hub-auth-rule"
-  name                      = "evhar-request-synchronousingestor-${var.environment}"
+  name                      = "evhar-request-sender-${var.environment}"
   namespace_name            = module.evhnm_requestqueue.name
   eventhub_name             = module.evh_requestqueue.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
@@ -28,9 +28,9 @@ module "evhar_requestqueue_synchronousingestor" {
   dependencies              = [module.evh_requestqueue]
 }
 
-module "evhar_requestqueue_asynchronousingestor" {
+module "evhar_requestqueue_listener" {
   source                    = "../modules/event-hub-auth-rule"
-  name                      = "evhar-request-asynchronousingestor-${var.environment}"
+  name                      = "evhar-request-listener-${var.environment}"
   namespace_name            = module.evhnm_requestqueue.name
   eventhub_name             = module.evh_requestqueue.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name

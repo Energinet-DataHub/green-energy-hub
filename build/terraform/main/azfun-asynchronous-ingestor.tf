@@ -10,22 +10,34 @@ module "azfun_asynchronousingestor" {
   tags                                      = data.azurerm_resource_group.greenenergyhub.tags
   app_settings                              = {
     # Region: Default Values
-    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true,
-    WEBSITE_RUN_FROM_PACKAGE              = 1,
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true,
-    FUNCTIONS_WORKER_RUNTIME              = "dotnet",
-  }
-  connection_string                         = {
-    VALIDATION_REPORTS_QUEUE                = module.evhar_validationreport_sender.primary_connection_string
-    REQUESTS_QUEUE                          = module.evhar_requestqueue_asynchronousingestor.primary_connection_string
-    MASTERDATA_INBOUND_QUEUE                = module.sbnar_marketdata_asyncingest.primary_connection_string
+    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
+    WEBSITE_RUN_FROM_PACKAGE              = 1
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
+    FUNCTIONS_WORKER_RUNTIME              = "dotnet"
+    # Endregion: Default Values
+    KAFKA_SECURITY_PROTOCOL               = "SaslSsl"
+    KAFKA_SASL_MECHANISM                  = "Plain"
+    KAFKA_SSL_CA_LOCATION                 = "C:\\cacert\\cacert.pem"
+    KAFKA_USERNAME                        = "$ConnectionString"
+    KAFKA_MESSAGE_SEND_MAX_RETRIES        = 5
+    KAFKA_MESSAGE_TIMEOUT_MS              = 1000
+    REQUEST_QUEUE_URL                     = "${module.evhnm_requestqueue.name}.servicebus.windows.net:9093"
+    REQUEST_QUEUE_CONNECTION_STRING       = module.evhar_requestqueue_listener.primary_connection_string
+    VALIDATION_REPORTS_URL                = "${module.evhnm_validationreport.name}.servicebus.windows.net:9093"
+    VALIDATION_REPORTS_CONNECTION_STRING  = module.evhar_validationreport_sender.primary_connection_string
+    MARKET_DATA_URL                       = "${module.sbn_marketdata.name}.servicebus.windows.net:9093"
+    MARKET_DATA_CONNECTION_STRING         = module.sbnar_marketdata_sender.primary_connection_string
   }
   dependencies                              = [
+    module.appi_shared.dependent_on,
     module.azfun_asynchronousingestor_plan.dependent_on,
     module.azfun_asynchronousingestor_stor.dependent_on,
-    module.sbnar_marketdata_asyncingest.dependent_on,
-    module.evhar_requestqueue_asynchronousingestor.dependent_on,
-    module.evhar_validationreport_sender.dependent_on
+    module.evhnm_requestqueue.dependent_on,
+    module.evhar_requestqueue_listener.dependent_on,
+    module.evhnm_validationreport.dependent_on,
+    module.evhar_validationreport_sender.dependent_on,
+    module.sbn_marketdata.dependent_on,
+    module.sbnar_marketdata_sender.dependent_on,
   ]
 }
 

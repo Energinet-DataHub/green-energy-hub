@@ -27,7 +27,7 @@ resource "azurerm_key_vault_access_policy" "main" {
   depends_on              = [azurerm_key_vault.main]
   count                   = length(var.access_policy)
   key_vault_id            = azurerm_key_vault.main.id
-  tenant_id               = data.azurerm_client_config.main.tenant_id
+  tenant_id               = var.access_policy[count.index].tenant_id
   object_id               = var.access_policy[count.index].object_id
   secret_permissions      = var.access_policy[count.index].secret_permissions
   key_permissions         = var.access_policy[count.index].key_permissions
