@@ -32,6 +32,17 @@
             },
             "required": [ "mRID" ]
         },
+        "customerMarketParticipant" : {
+            "type": "object",
+            "properties": {
+                "mRID": { "$ref": "#/definitions/mRID_qualifier" },
+                "name": { "type": "string" },
+                "WebAccessCodeMarketParticipant": {
+                    "WebAccessCodeDescription": { "type": "string" }
+                }
+            },
+            "required": [ "mRID" ]
+        },
         "marketEvaluationPoint": {
             "type": "object",
             "properties": {
