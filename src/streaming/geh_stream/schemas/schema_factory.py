@@ -14,28 +14,54 @@
 import copy
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.functions import col, from_json
-from pyspark.sql.types import DoubleType, StringType, StructType, TimestampType, DecimalType
+from pyspark.sql.types import StringType, StructType, StructField, TimestampType, DecimalType, ArrayType
 from .schema_names import SchemaNames
 
 
+# See NOTE on usage
+def make_all_nullable(schema):
+    schema.nullable = True
+    if isinstance(schema, StructField):
+        make_all_nullable(schema.dataType)
+    if isinstance(schema, ArrayType):
+        make_all_nullable(schema.elementType)
+    if isinstance(schema, StructType):
+        for f in schema.fields:
+            make_all_nullable(f)
+
+
 class SchemaFactory:
+
     message_body_schema: StructType = StructType() \
+        .add("mRID", StringType(), False) \
+        .add("MessageReference", StringType(), False) \
+        .add("MarketDocument", StructType()
+             .add("mRID", StringType(), False)
+             .add("Type", StringType(), False)
+             .add("CreatedDateTime", TimestampType(), False)
+             .add("SenderMarketParticipant", StructType()
+                  .add("mRID", StringType(), False)
+                  .add("Type", StringType(), False), False)
+             .add("RecipientMarketParticipant", StructType()
+                  .add("mRID", StringType(), False)
+                  .add("Type", StringType(), True), False)
+             .add("ProcessType", StringType(), False)
+             .add("MarketServiceCategory_Kind", StringType(), False), False) \
+        .add("MktActivityRecord_Status", StringType(), False) \
+        .add("Product", StringType(), False) \
+        .add("QuantityMeasurementUnit_Name", StringType(), False) \
+        .add("MarketEvaluationPointType", StringType(), False) \
+        .add("SettlementMethod", StringType(), True) \
         .add("MarketEvaluationPoint_mRID", StringType(), False) \
-        .add("ObservationTime", TimestampType(), False) \
-        .add("Quantity", DoubleType(), True) \
-        .add("CorrelationId", StringType(), True) \
-        .add("MessageReference", StringType(), True) \
-        .add("MarketDocument_mRID", StringType(), True) \
-        .add("CreatedDateTime", TimestampType(), True) \
-        .add("SenderMarketParticipant_mRID", StringType(), True) \
-        .add("ProcessType", StringType(), True) \
-        .add("SenderMarketParticipantMarketRole_Type", StringType(), True) \
-        .add("TimeSeries_mRID", StringType(), True) \
-        .add("MktActivityRecord_Status", StringType(), True) \
-        .add("Product", StringType(), True) \
-        .add("QuantityMeasurementUnit_Name", StringType(), True) \
-        .add("MarketEvaluationPointType", StringType(), True) \
-        .add("Quality", StringType(), True)
+        .add("CorrelationId", StringType(), False) \
+        .add("Period", StructType()
+             .add("Resolution", StringType(), False)
+             .add("TimeInterval_Start", TimestampType(), False)
+             .add("TimeInterval_End", TimestampType(), False)
+             .add("Points", ArrayType(StructType()
+                  .add("Quantity", DecimalType(), False)
+                  .add("Quality", StringType(), False)
+                  .add("ObservationTime", TimestampType(), False), True), False), False)
 
     # ValidFrom and ValidTo are not to be included in outputs from the time series point streaming process
     master_schema: StructType = StructType() \
@@ -60,7 +86,10 @@ class SchemaFactory:
         .add("Product", StringType(), False) \
         .add("Technology", StringType(), True)
 
-    parsed_schema = copy.deepcopy(message_body_schema).add("EventHubEnqueueTime", TimestampType(), False)
+    parsed_schema = copy.deepcopy(message_body_schema)
+    # NOTE: This is a workaround because for some unknown reason pyspark parsing from JSON
+    #       (in event_hub_parser.py) causes all to be nullable regardless of the schema
+    make_all_nullable(parsed_schema)
 
     parquet_schema: StructType = StructType() \
         .add("CorrelationId", StringType(), False) \

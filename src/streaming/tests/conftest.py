@@ -21,11 +21,12 @@ from pyspark import SparkConf
 from pyspark.sql import SparkSession, DataFrame
 import pandas as pd
 import time
-from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType
-from pyspark.sql.functions import col, lit
+from pyspark.sql.functions import col, lit, to_timestamp, explode
 from geh_stream.codelists import MarketEvaluationPointType, Quality
-from geh_stream.streaming_utils.enrichers.master_data_enricher import enrich_master_data
+from geh_stream.streaming_utils import Enricher
 from geh_stream.schemas import SchemaNames, SchemaFactory
+from geh_stream.dataframelib import flatten_df
+from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
 
 
 # Create Spark Conf/Session
@@ -62,16 +63,17 @@ def master_schema():
 # Create parsed data and master data Dataframes
 @pytest.fixture(scope="session")
 def master_data_factory(spark, master_schema):
-    def factory(market_evaluation_point_type,
-                marketparticipant_mrid,
-                meteringgridarea_domain_mrid,
-                inmeteringgridarea_domain_mrid,
-                inmeteringgridownerarea_domain_mrid,
-                outmeteringgridarea_domain_mrid,
-                outmeteringgridownerarea_domain_mrid,
-                settlement_method):
+    def factory(market_evaluation_point_mrid="mepm",
+                market_evaluation_point_type="mept",
+                marketparticipant_mrid="mm",
+                meteringgridarea_domain_mrid="mdm",
+                inmeteringgridarea_domain_mrid="idm",
+                inmeteringgridownerarea_domain_mrid="idm",
+                outmeteringgridarea_domain_mrid="odm",
+                outmeteringgridownerarea_domain_mrid="odm",
+                settlement_method="sm"):
         pandas_df = pd.DataFrame({
-            'MarketEvaluationPoint_mRID': ["1"],
+            'MarketEvaluationPoint_mRID': [market_evaluation_point_mrid],
             "ValidFrom": [timestamp_past],
             "ValidTo": [timestamp_future],
             "MeterReadingPeriodicity": ["a"],
@@ -96,33 +98,102 @@ def master_data_factory(spark, master_schema):
 
 
 @pytest.fixture(scope="session")
-def parsed_data_factory(spark, parsed_schema):
-    def factory(quantity):
-        pandas_df = pd.DataFrame({
-            "MarketEvaluationPoint_mRID": ["1"],
-            "ObservationTime": [timestamp_now],
-            "Quantity": [quantity],
-            "CorrelationId": ["a"],
-            "MessageReference": ["b"],
-            "MarketDocument_mRID": ["c"],
-            "CreatedDateTime": [timestamp_now],
-            "SenderMarketParticipant_mRID": ["d"],
-            "ProcessType": ["e"],
-            "SenderMarketParticipantMarketRole_Type": ["f"],
-            "TimeSeries_mRID": ["g"],
-            "MktActivityRecord_Status": ["h"],
-            "Product": ["i"],
-            "QuantityMeasurementUnit_Name": ["j"],
-            "MarketEvaluationPointType": [MarketEvaluationPointType.consumption.value],
-            "Quality": [Quality.as_read.value],
-            "EventHubEnqueueTime": [timestamp_now]})
-        return spark.createDataFrame(pandas_df, schema=parsed_schema)
+def time_series_json_factory():
+    def factory(market_evaluation_point_mrid="mepm",
+                quantity=1.0,
+                observation_time=timestamp_now):
+        json_str = """
+    {{
+        "TimeSeries_mRID": "g",
+        "MessageReference": "b",
+        "MarketDocument": {{
+            "mRID": "c",
+            "Type": "x",
+            "CreatedDateTime": "{0}",
+            "SenderMarketParticipant": {{
+                "mRID": "x",
+                "Type": "x"
+            }},
+            "RecipientMarketParticipant": {{
+                "mRID": "x",
+                "Type": "x"
+            }},
+            "ProcessType": "e",
+            "MarketServiceCategory_Kind": "x"
+        }},
+        "MktActivityRecord_Status": "h",
+        "Product": "i",
+        "QuantityMeasurementUnit_Name": "j",
+        "MarketEvaluationPointType": "{1}",
+        "SettlementMethod": "x",
+        "MarketEvaluationPoint_mRID": "{4}",
+        "CorrelationId": "a",
+        "Period": {{
+            "Resolution": "x",
+            "TimeInterval_Start": "{0}",
+            "TimeInterval_End": "{0}",
+            "Points": [
+                {{
+                    "Quantity": "{2}",
+                    "Quality": "{3}",
+                    "ObservationTime": "{5}"
+                }}
+            ]
+        }}
+    }}
+    """.format(timestamp_now.isoformat() + "Z",
+               MarketEvaluationPointType.consumption.value,
+               quantity,
+               Quality.as_read.value,
+               market_evaluation_point_mrid,
+               observation_time)
+        print("json_str:")
+        print(json_str)
+        return json_str
+
     return factory
 
 
 @pytest.fixture(scope="session")
+def time_series_json(time_series_json_factory):
+    return time_series_json_factory("mepm", 1.0)
+
+
+@pytest.fixture(scope="session")
+def parsed_data_factory(spark, parsed_schema, time_series_json_factory):
+    def factory(arg):
+        """
+        Accepts either a dictionary in which case a single row is created,
+        or accepts a list of dictionaries in which case a set of rows are created.
+        """
+        if not isinstance(arg, list):
+            arg = [arg]
+
+        json_strs = []
+        for dic in arg:
+            json_strs.append(time_series_json_factory(**dic))
+        json_array_str = "[{0}]".format(", ".join(json_strs))
+        json_rdd = spark.sparkContext.parallelize([json_array_str])
+        parsed_data = spark.read.json(json_rdd,
+                                      schema=None,
+                                      dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'")
+        print("parsed_data:")
+        parsed_data.printSchema()
+        parsed_data.show()
+        return parsed_data
+
+    return factory
+
+
+@pytest.fixture(scope="session")
+def parsed_data(parsed_data_factory):
+    return parsed_data_factory(dict())
+
+
+@pytest.fixture(scope="session")
 def enriched_data_factory(parsed_data_factory, master_data_factory):
-    def creator(quantity=1.0,
+    def creator(market_evaluation_point_mrid="mepm",
+                quantity=1.0,
                 market_evaluation_point_type="m",
                 settlement_method="n",
                 meteringgridarea_domain_mrid="101",
@@ -131,8 +202,10 @@ def enriched_data_factory(parsed_data_factory, master_data_factory):
                 inmeteringgridownerarea_domain_mrid="3",
                 outmeteringgridarea_domain_mrid="4",
                 outmeteringgridownerarea_domain_mrid="5"):
-        parsed_data = parsed_data_factory(quantity)
-        master_data = master_data_factory(market_evaluation_point_type,
+        parsed_data = parsed_data_factory(dict(market_evaluation_point_mrid=market_evaluation_point_mrid, quantity=quantity))
+        denormalized_parsed_data = denormalize_parsed_data(parsed_data)
+        master_data = master_data_factory(market_evaluation_point_mrid,
+                                          market_evaluation_point_type,
                                           marketparticipant_mrid,
                                           meteringgridarea_domain_mrid,
                                           inmeteringgridarea_domain_mrid,
@@ -140,5 +213,10 @@ def enriched_data_factory(parsed_data_factory, master_data_factory):
                                           outmeteringgridarea_domain_mrid,
                                           outmeteringgridownerarea_domain_mrid,
                                           settlement_method)
-        return enrich_master_data(parsed_data, master_data)
+        return Enricher.enrich(denormalized_parsed_data, master_data)
     return creator
+
+
+@pytest.fixture(scope="session")
+def enriched_data(enriched_data_factory):
+    return enriched_data_factory()

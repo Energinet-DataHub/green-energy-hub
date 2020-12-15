@@ -14,13 +14,14 @@
 import copy
 import pytest
 import pandas as pd
-import time
-from geh_stream.streaming_utils import EventHubParser
-from geh_stream.schemas import SchemaNames, SchemaFactory
 from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.types import BinaryType, BooleanType, DoubleType, LongType, StringType, StructField, StructType, TimestampType
+from pyspark.sql.types import BinaryType, LongType, StringType, StructField, StructType, TimestampType
 from pyspark.sql.functions import col, lit
+import time
+
+from geh_stream.streaming_utils import EventHubParser
+from geh_stream.schemas import SchemaNames, SchemaFactory
 
 # Create timestamp used in DataFrames
 time_now = time.time()
@@ -35,7 +36,6 @@ def event_hub_message_schema():
         .add("partition", StringType(), False) \
         .add("offset", StringType(), False) \
         .add("sequenceNumber", LongType(), False) \
-        .add("enqueuedTime", StringType(), False) \
         .add("publisher", StringType(), False) \
         .add("partitionKey", StringType(), False) \
         .add("properties", StructType(), True) \
@@ -47,35 +47,10 @@ def json_body_message_schema():
     return SchemaFactory.get_instance(SchemaNames.MessageBody)
 
 
-# NOTE: MarketEvaluationPoint_mRID, and ObservationTime should be non nullable but it looks
-#       like whenever one uses the from_json function, everyting becomes non nullable.
 @pytest.fixture(scope="class")
-def expected_parsed_data_schema():
-    return StructType() \
-        .add("MarketEvaluationPoint_mRID", StringType(), True) \
-        .add("ObservationTime", TimestampType(), True) \
-        .add("Quantity", DoubleType(), True) \
-        .add("CorrelationId", StringType(), True) \
-        .add("MessageReference", StringType(), True) \
-        .add("MarketDocument_mRID", StringType(), True) \
-        .add("CreatedDateTime", TimestampType(), True) \
-        .add("SenderMarketParticipant_mRID", StringType(), True) \
-        .add("ProcessType", StringType(), True) \
-        .add("SenderMarketParticipantMarketRole_Type", StringType(), True) \
-        .add("TimeSeries_mRID", StringType(), True) \
-        .add("MktActivityRecord_Status", StringType(), True) \
-        .add("Product", StringType(), True) \
-        .add("QuantityMeasurementUnit_Name", StringType(), True) \
-        .add("MarketEvaluationPointType", StringType(), True) \
-        .add("Quality", StringType(), True) \
-        .add("EventHubEnqueueTime", StringType(), False)
-
-
-@pytest.fixture(scope="class")
-def event_hub_message_df(event_hub_message_schema, spark):
+def event_hub_message_df(event_hub_message_schema, time_series_json, spark):
     # Create message body using the required fields
-    body_message = "{\"MarketEvaluationPoint_mRID\":\"1\", \"ObservationTime\":\"" + str(timestamp_now) + "\"}"
-    binary_body_message = bytes(body_message, encoding="utf8")
+    binary_body_message = bytes(time_series_json, encoding="utf8")
 
     # Create event hub message
     event_hub_message_pandas_df = pd.DataFrame({
@@ -83,7 +58,6 @@ def event_hub_message_df(event_hub_message_schema, spark):
         "partition": ["1"],
         "offset": ["offset"],
         "sequenceNumber": [2],
-        "enqueuedTime": [timestamp_now],
         "publisher": ["publisher"],
         "partitionKey": ["partitionKey"],
         "properties": [None],
@@ -98,10 +72,13 @@ def parsed_data(event_hub_message_df, json_body_message_schema):
 
 
 # Check that the nested json is parsed correctly
-def test_parse_event_hub_message_returns_correct_nested_columns(parsed_data):
-    assert parsed_data.first().MarketEvaluationPoint_mRID == "1"
+def test_parse_event_hub_message_returns_correct_nested_columns(parsed_data_factory):
+    market_evaluation_point_mrid = "mrid123"
+    parsed_data = parsed_data_factory(dict(market_evaluation_point_mrid=market_evaluation_point_mrid))
+    print(parsed_data.first())
+    assert parsed_data.first().MarketEvaluationPoint_mRID == market_evaluation_point_mrid
 
 
-# Check that resulting DataFrame has expected schema *See NOTE above
-def test_parse_event_hub_message_returns_correct_schema(parsed_data, expected_parsed_data_schema):
-    assert parsed_data.schema == expected_parsed_data_schema
+# Check that resulting DataFrame has expected schema
+def test_parse_event_hub_message_returns_correct_schema(parsed_data):
+    assert str(parsed_data.schema) == str(SchemaFactory.get_instance(SchemaNames.Parsed))

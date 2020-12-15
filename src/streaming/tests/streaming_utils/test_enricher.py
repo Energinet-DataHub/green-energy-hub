@@ -14,12 +14,15 @@
 import pytest
 import pandas as pd
 import time
-from geh_stream.streaming_utils import Enricher
-from geh_stream.schemas import SchemaNames, SchemaFactory
 from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType, ArrayType
+from pyspark.sql.types import DecimalType, StringType, StructField, StructType, TimestampType, ArrayType
 from pyspark.sql.functions import col
+
+from geh_stream.schemas import SchemaNames, SchemaFactory
+from geh_stream.streaming_utils import Enricher
+from geh_stream.dataframelib import has_column
+from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
 
 # Create timestamps used in DataFrames
 time_now = time.time()
@@ -32,114 +35,19 @@ timestamp_past = pd.Timestamp(time_past, unit='s')
 timestamp_far_future = pd.Timestamp(time_far_future, unit='s')
 
 
-# Create schema of parsed data (timeseries data) and master data
-@pytest.fixture(scope="class")
-def parsed_schema():
-    return SchemaFactory.get_instance(SchemaNames.Parsed)
-
-
-@pytest.fixture(scope="class")
-def master_schema():
-    return SchemaFactory.get_instance(SchemaNames.Master)
-
-
-# Create parsed data and master data Dataframes
-@pytest.fixture(scope="class")
-def master_data(spark, master_schema):
-    pandas_df = pd.DataFrame({
-        'MarketEvaluationPoint_mRID': ["1"],
-        "ValidFrom": [timestamp_past],
-        "ValidTo": [timestamp_future],
-        "MeterReadingPeriodicity": ["a"],
-        "MeteringMethod": ["b"],
-        "MeteringGridArea_Domain_mRID": ["d"],
-        "ConnectionState": ["e"],
-        "EnergySupplier_MarketParticipant_mRID": ["f"],
-        "BalanceResponsibleParty_MarketParticipant_mRID": ["g"],
-        "InMeteringGridArea_Domain_mRID": ["h"],
-        "InMeteringGridArea_Domain_Owner_mRID": ["ha"],
-        "OutMeteringGridArea_Domain_mRID": ["i"],
-        "OutMeteringGridArea_Domain_Owner_mRID": ["ia"],
-        "Parent_Domain_mRID": ["j"],
-        "ServiceCategory_Kind": ["l"],
-        "MarketEvaluationPointType": ["m"],
-        "SettlementMethod": ["n"],
-        "QuantityMeasurementUnit_Name": ["o"],
-        "Product": ["p"],
-        "Technology": ["t"]})
-    return spark.createDataFrame(pandas_df, schema=master_schema)
-
-
-@pytest.fixture(scope="class")
-def parsed_data(spark, parsed_schema):
-    pandas_df = pd.DataFrame({
-        "MarketEvaluationPoint_mRID": ["1", "1", "2"],
-        "ObservationTime": [timestamp_now, timestamp_far_future, timestamp_now],
-        "Quantity": [1.0, 2.0, 3.0],
-        "CorrelationId": ["a", "aa", "aaa"],
-        "MessageReference": ["b", "b", "b"],
-        "MarketDocument_mRID": ["c", "c", "c"],
-        "CreatedDateTime": [timestamp_now, timestamp_now, timestamp_now],
-        "SenderMarketParticipant_mRID": ["d", "d", "d"],
-        "ProcessType": ["e", "e", "e"],
-        "SenderMarketParticipantMarketRole_Type": ["f", "f", "f"],
-        "TimeSeries_mRID": ["g", "g", "g"],
-        "MktActivityRecord_Status": ["h", "h", "h"],
-        "Product": ["i", "i", "i"],
-        "QuantityMeasurementUnit_Name": ["j", "j", "j"],
-        "MarketEvaluationPointType": ["k", "k", "k"],
-        "Quality": ["l", "l", "l"],
-        "EventHubEnqueueTime": [timestamp_now, timestamp_now, timestamp_now]})
-    return spark.createDataFrame(pandas_df, schema=parsed_schema)
-
-
 # Run the enrich function
 @pytest.fixture(scope="class")
-def enriched_data(parsed_data, master_data):
-    return Enricher.enrich(parsed_data, master_data)
-
-
-# Create the expected schema
-# We cannot simply combine the two schemas (master and parsed) because due to the join,
-# all fields from master data becomes nullable and some columns are dropped.
-@pytest.fixture(scope="class")
-def expected_schema():
-    return StructType() \
-        .add(StructField("MarketEvaluationPoint_mRID", StringType(), False)) \
-        .add(StructField("ObservationTime", TimestampType(), False)) \
-        .add(StructField("Quantity", DoubleType(), True)) \
-        .add(StructField("CorrelationId", StringType(), True)) \
-        .add(StructField("MessageReference", StringType(), True)) \
-        .add(StructField("MarketDocument_mRID", StringType(), True)) \
-        .add(StructField("CreatedDateTime", TimestampType(), True)) \
-        .add(StructField("SenderMarketParticipant_mRID", StringType(), True)) \
-        .add(StructField("ProcessType", StringType(), True)) \
-        .add(StructField("SenderMarketParticipantMarketRole_Type", StringType(), True)) \
-        .add(StructField("TimeSeries_mRID", StringType(), True)) \
-        .add(StructField("MktActivityRecord_Status", StringType(), True)) \
-        .add(StructField("Product", StringType(), True)) \
-        .add(StructField("QuantityMeasurementUnit_Name", StringType(), True)) \
-        .add(StructField("MarketEvaluationPointType", StringType(), True)) \
-        .add(StructField("Quality", StringType(), True)) \
-        .add(StructField("EventHubEnqueueTime", TimestampType(), False)) \
-        .add(StructField("MeterReadingPeriodicity", StringType(), True)) \
-        .add(StructField("MeteringMethod", StringType(), True)) \
-        .add(StructField("MeteringGridArea_Domain_mRID", StringType(), True)) \
-        .add(StructField("ConnectionState", StringType(), True)) \
-        .add(StructField("EnergySupplier_MarketParticipant_mRID", StringType(), True)) \
-        .add(StructField("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True)) \
-        .add(StructField("InMeteringGridArea_Domain_mRID", StringType(), True)) \
-        .add(StructField("InMeteringGridArea_Domain_Owner_mRID", StringType(), True)) \
-        .add(StructField("OutMeteringGridArea_Domain_mRID", StringType(), True)) \
-        .add(StructField("OutMeteringGridArea_Domain_Owner_mRID", StringType(), True)) \
-        .add(StructField("Parent_Domain_mRID", StringType(), True)) \
-        .add(StructField("ServiceCategory_Kind", StringType(), True)) \
-        .add(StructField("MarketEvaluationPointType", StringType(), True)) \
-        .add(StructField("SettlementMethod", StringType(), True)) \
-        .add(StructField("QuantityMeasurementUnit_Name", StringType(), True)) \
-        .add(StructField("Product", StringType(), True)) \
-        .add(StructField("Technology", StringType(), True)) \
-        .add(StructField("RecipientList", ArrayType(StringType(), True), False))
+def enriched_data(parsed_data_factory, master_data_factory):
+    parsed_data = parsed_data_factory([
+        dict(market_evaluation_point_mrid="1", quantity=1.0, observation_time=timestamp_now),
+        # Not matched because it's outside the master data valid period
+        dict(market_evaluation_point_mrid="1", quantity=2.0, observation_time=timestamp_far_future),
+        # Not matched because no master data exists for this market evalution point
+        dict(market_evaluation_point_mrid="2", quantity=3.0, observation_time=timestamp_now)
+    ])
+    denormalized_parsed_data = denormalize_parsed_data(parsed_data)
+    master_data = master_data_factory(market_evaluation_point_mrid="1")
+    return Enricher.enrich(denormalized_parsed_data, master_data)
 
 
 # Is the row count maintained
@@ -160,6 +68,71 @@ def test_enrich_keeps_unmatched_rows(enriched_data):
     assert unmatched_rows.count() == 2
 
 
-# Is the schema of the returned DataFrame as expected
-def test_enrich_returns_proper_schema(enriched_data, expected_schema):
-    assert enriched_data.schema == expected_schema
+def test_enricher_adds_meter_reading_periodicity(enriched_data):
+    assert has_column(enriched_data, "md.MeterReadingPeriodicity")
+
+
+def test_enricher_adds_metering_method(enriched_data):
+    assert has_column(enriched_data, "md.MeteringMethod")
+
+
+def test_enricher_adds_metering_grid_area_domain_mrid(enriched_data):
+    assert has_column(enriched_data, "md.MeteringGridArea_Domain_mRID")
+
+
+def test_enricher_adds_connection_state(enriched_data):
+    assert has_column(enriched_data, "md.ConnectionState")
+
+
+def test_enricher_adds_energysupplier_marketParticipant_mrid(enriched_data):
+    assert has_column(enriched_data, "md.EnergySupplier_MarketParticipant_mRID")
+
+
+def test_enricher_adds_balance_responsible_party_market_participant_mrid(enriched_data):
+    assert has_column(enriched_data, "md.BalanceResponsibleParty_MarketParticipant_mRID")
+
+
+def test_enricher_adds_in_metering_grid_area_domain_mrid(enriched_data):
+    assert has_column(enriched_data, "md.InMeteringGridArea_Domain_mRID")
+
+
+def test_enricher_adds_in_metering_grid_area_domain_owner_mrid(enriched_data):
+    assert has_column(enriched_data, "md.InMeteringGridArea_Domain_Owner_mRID")
+
+
+def test_enricher_adds_out_metering_grid_area_domain_mrid(enriched_data):
+    assert has_column(enriched_data, "md.OutMeteringGridArea_Domain_mRID")
+
+
+def test_enricher_adds_out_metering_grid_area_domain_owner_mrid(enriched_data):
+    assert has_column(enriched_data, "md.OutMeteringGridArea_Domain_Owner_mRID")
+
+
+def test_enricher_adds_parent_domain_mrid(enriched_data):
+    assert has_column(enriched_data, "md.Parent_Domain_mRID")
+
+
+def test_enricher_adds_service_category_kind(enriched_data):
+    assert has_column(enriched_data, "md.ServiceCategory_Kind")
+
+
+def test_enricher_adds_market_evaluation_point_type(enriched_data):
+    assert has_column(enriched_data, "md.MarketEvaluationPointType")
+
+
+def test_enricher_adds_settlement_method(enriched_data):
+    assert has_column(enriched_data, "md.SettlementMethod")
+
+
+def test_enricher_adds_quantity_measurement_unit_Name(enriched_data):
+    assert has_column(enriched_data, "md.QuantityMeasurementUnit_Name")
+
+
+def test_enricher_adds_product(enriched_data):
+    print("enriched_data in product test")
+    enriched_data.show()
+    assert has_column(enriched_data, "md.Product")
+
+
+def test_enricher_adds_technology(enriched_data):
+    assert has_column(enriched_data, "md.Technology")

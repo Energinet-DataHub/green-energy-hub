@@ -27,6 +27,6 @@ def validate_vr_250(df):
                     ~
                     (
                         (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.production.value)
-                        & col("pd.Quantity").isNotNull()
-                        & (col("pd.Quantity") >= productionLimit)
+                        & col("pd.Period_Point_Quantity").isNotNull()
+                        & (col("pd.Period_Point_Quantity") >= productionLimit)
                     ))

@@ -1,0 +1,338 @@
+[
+  {
+    "mRID": "tId2020-12-01T13:16:29.330Z",
+    "MessageReference": "mId2020-12-01T13:16:29.330Z",
+    "MarketDocument": {
+      "mRID": "hId2020-12-01T13:16:29.330Z",
+      "Type": "E66",
+      "CreatedDateTime": "2020-12-01T13:16:29.3300000Z",
+      "SenderMarketParticipant": {
+        "mRID": "8100000000030",
+        "Type": "MDR"
+      },
+      "RecipientMarketParticipant": {
+        "mRID": "5790001330552",
+        "Type": null
+      },
+      "ProcessType": "D42",
+      "MarketServiceCategory_Kind": "23"
+    },
+    "MktActivityRecord_Status": "9",
+    "Product": "8716867000030",
+    "QuantityMeasurementUnit_Name": "KWH",
+    "MarketEvaluationPointType": "E17",
+    "SettlementMethod": "D01",
+    "MarketEvaluationPoint_mRID": "571313180000000005",
+    "CorrelationId": "66a28f7f-a8bc-4091-a870-0f54fccc6087",
+    "Period": {
+      "Resolution": "PT1H",
+      "TimeInterval_Start": "2020-11-20T23:00:00.0000000Z",
+      "TimeInterval_End": "2020-11-21T23:00:00.0000000Z",
+      "Points": [
+        {
+          "Position": 1,
+          "Quantity": 1.337,
+          "Quality": "E01",
+          "ObservationTime": "2020-11-20T23:00:00.0000000Z"
+        },
+        {
+          "Position": 2,
+          "Quantity": 2,
+          "Quality": "56",
+          "ObservationTime": "2020-11-21T00:00:00.0000000Z"
+        },
+        {
+          "Position": 3,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T01:00:00.0000000Z"
+        },
+        {
+          "Position": 4,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T02:00:00.0000000Z"
+        },
+        {
+          "Position": 5,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T03:00:00.0000000Z"
+        },
+        {
+          "Position": 6,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T04:00:00.0000000Z"
+        },
+        {
+          "Position": 7,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T05:00:00.0000000Z"
+        },
+        {
+          "Position": 8,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T06:00:00.0000000Z"
+        },
+        {
+          "Position": 9,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T07:00:00.0000000Z"
+        },
+        {
+          "Position": 10,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T08:00:00.0000000Z"
+        },
+        {
+          "Position": 11,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T09:00:00.0000000Z"
+        },
+        {
+          "Position": 12,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T10:00:00.0000000Z"
+        },
+        {
+          "Position": 13,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T11:00:00.0000000Z"
+        },
+        {
+          "Position": 14,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T12:00:00.0000000Z"
+        },
+        {
+          "Position": 15,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T13:00:00.0000000Z"
+        },
+        {
+          "Position": 16,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T14:00:00.0000000Z"
+        },
+        {
+          "Position": 17,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T15:00:00.0000000Z"
+        },
+        {
+          "Position": 18,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T16:00:00.0000000Z"
+        },
+        {
+          "Position": 19,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T17:00:00.0000000Z"
+        },
+        {
+          "Position": 20,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T18:00:00.0000000Z"
+        },
+        {
+          "Position": 21,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T19:00:00.0000000Z"
+        },
+        {
+          "Position": 22,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T20:00:00.0000000Z"
+        },
+        {
+          "Position": 23,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T21:00:00.0000000Z"
+        },
+        {
+          "Position": 24,
+          "Quantity": null,
+          "Quality": "D99",
+          "ObservationTime": "2020-11-21T22:00:00.0000000Z"
+        }
+      ]
+    },
+    "EventProcessedUtcTime": "2020-12-02T07:57:07.7861099Z",
+    "PartitionId": 26,
+    "EventEnqueuedUtcTime": "2020-12-01T13:16:31.4050000Z"
+  },
+  {
+    "mRID": "tId2020-12-01T12:47:37.169Z",
+    "MessageReference": "mId2020-12-01T12:47:37.169Z",
+    "MarketDocument": {
+      "mRID": "hId2020-12-01T12:47:37.169Z",
+      "Type": "E66",
+      "CreatedDateTime": "2020-12-01T12:47:37.1690000Z",
+      "SenderMarketParticipant": {
+        "mRID": "8100000000030",
+        "Type": "MDR"
+      },
+      "RecipientMarketParticipant": {
+        "mRID": "5790001330552",
+        "Type": null
+      },
+      "ProcessType": "D42",
+      "MarketServiceCategory_Kind": "23"
+    },
+    "MktActivityRecord_Status": "9",
+    "Product": "8716867000030",
+    "QuantityMeasurementUnit_Name": "KWH",
+    "MarketEvaluationPointType": "E17",
+    "SettlementMethod": "D01",
+    "MarketEvaluationPoint_mRID": "571313180000000005",
+    "CorrelationId": "e3de8839-f90c-45f6-aff9-ea5d01e70819",
+    "Period": {
+      "Resolution": "PT1H",
+      "TimeInterval_Start": "2020-11-20T23:00:00.0000000Z",
+      "TimeInterval_End": "2020-11-21T23:00:00.0000000Z",
+      "Point": [
+        {
+          "Position": "1",
+          "Quantity": 1.337,
+          "Quality": "E01"
+        },
+        {
+          "Position": "2",
+          "Quantity": 2,
+          "Quality": "56"
+        },
+        {
+          "Position": "3",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "4",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "5",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "6",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "7",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "8",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "9",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "10",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "11",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "12",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "13",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "14",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "15",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "16",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "17",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "18",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "19",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "20",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "21",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "22",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "23",
+          "Quantity": null,
+          "Quality": "D99"
+        },
+        {
+          "Position": "24",
+          "Quantity": null,
+          "Quality": "D99"
+        }
+      ]
+    },
+    "EventProcessedUtcTime": "2020-12-02T07:57:07.2860666Z",
+    "PartitionId": 25,
+    "EventEnqueuedUtcTime": "2020-12-01T12:47:39.0120000Z"
+  }
+]

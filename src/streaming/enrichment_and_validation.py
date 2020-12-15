@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 """
 Data ingestion stream
 """
@@ -125,7 +126,7 @@ input_eh_conf = {
     sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(input_eh_connection_string),
     'eventhubs.startingPosition': json.dumps(input_eh_starting_position),
     'eventhubs.prefetchCount': 5000,
-    'eventhubs.maxEventsPerTrigger': args.max_events_per_trigger,
+    'maxEventsPerTrigger': args.max_events_per_trigger,
 }
 
 print("Input event hub config:", input_eh_conf)
@@ -150,15 +151,24 @@ from geh_stream.schemas import SchemaFactory, SchemaNames
 message_schema: StructType = SchemaFactory.get_instance(SchemaNames.MessageBody)
 
 # Event hub message parser function
-parsed_data = EventHubParser.parse(raw_data, message_schema)
+parsed_data = EventHubParser.parse(raw_data, message_schema) \
+    .withColumnRenamed("mRID", "TimeSeries_mRID")
 
 print("Parsed stream schema:")
 parsed_data.printSchema()
 
+# %% Denormalize messages: Flatten and explode messages by each contained time series point
+from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
+
+denormalized_data = denormalize_parsed_data(parsed_data)
+
+print("denormalized_data schema")
+denormalized_data.printSchema()
+
 # %%
 from geh_stream.streaming_utils import Enricher
 
-enriched_data = Enricher.enrich(parsed_data, master_data)
+enriched_data = Enricher.enrich(denormalized_data, master_data)
 
 print("Enriched stream schema:")
 enriched_data.printSchema()
@@ -166,12 +176,14 @@ enriched_data.printSchema()
 # %%
 from geh_stream.validation import Validator
 
-validated_data = Validator.add_validation_status_column(enriched_data)
+validated_data = Validator.add_validation_status_columns(enriched_data)
+
 print("Validated stream schema:")
 validated_data.printSchema()
 
 # %%
 from pyspark.sql import DataFrame
+
 from geh_stream.monitoring import Telemetry, MonitoredStopwatch
 import geh_stream.batch_operations as batch_operations
 
@@ -201,7 +213,7 @@ def __store_data_frame(batch_df: DataFrame, _: int):
 
         persist_timer = watch.start_sub_timer("persist")
         # Cache the batch in order to avoid the risk of recalculation in each write operation
-        batch_df.persist()
+        batch_df = batch_df.persist()
         persist_timer.stop_timer()
 
         correlation_ids = batch_operations.get_involved_correlation_ids(batch_df, watch)
@@ -218,7 +230,7 @@ def __store_data_frame(batch_df: DataFrame, _: int):
         batch_operations.send_invalid_data(batch_df, invalid_output_eh_conf, watch)
 
         unpersist_timer = watch.start_sub_timer("unpersist")
-        batch_df.unpersist()
+        batch_df = batch_df.unpersist()
         unpersist_timer.stop_timer()
 
         watch.stop_timer(batch_count)
@@ -255,5 +267,10 @@ import time
 # can be done in less than 30 seconds.
 while True:
     print("(Re)start streaming with fresh master data.")
+
+    # Persist master data to avoid rereading them in each batch
+    master_data.persist()
+
     execution = out_stream.start()
     time.sleep(4.5 * 60)
+    master_data.unpersist()

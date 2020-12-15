@@ -30,8 +30,8 @@ def validate_vr_611(df):
                     ~  # Negate the below expression to make it an is-valid instead of is-invalid
                     (
                         # Expression for the exact situation where the violation is determined to have occurred
-                        col("pd.Quantity").isNotNull()
+                        col("pd.Period_Point_Quantity").isNotNull()
                         & (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.consumption.value)
                         & (col("md.SettlementMethod") == SettlementMethod.non_profiled.value)
-                        & (col("pd.Quantity") >= consumptionLimit)
+                        & (col("pd.Period_Point_Quantity") >= consumptionLimit)
                     ))

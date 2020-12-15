@@ -11,15 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from pyspark.sql import DataFrame, SparkSession
+from pyspark.sql import DataFrame, SparkSession, Window
 from pyspark.sql.functions import col
+import pyspark.sql.functions as F
+
 from .rules import rules
 
 
 class Validator:
 
     @staticmethod
-    def add_validation_status_column(enriched_data: DataFrame):
+    def add_validation_status_columns(enriched_data: DataFrame):
         validated_data = enriched_data
 
         for rule in rules:
@@ -28,7 +30,7 @@ class Validator:
         # Dropped columns are duplicates (from both streamed data and master data).
         # They should not be necessary after validation.
         return validated_data \
-            .withColumn("IsValid",
+            .withColumn("IsTimeSeriesPointValid",
                         col("VR-245-1-Is-Valid")
                         & col("VR-250-Is-Valid")
                         & col("VR-251-Is-Valid")
@@ -36,4 +38,6 @@ class Validator:
                         & col("VR-612-Is-Valid")) \
             .drop(col("pd.MarketEvaluationPointType")) \
             .drop(col("pd.QuantityMeasurementUnit_Name")) \
-            .drop(col("pd.Product"))
+            .drop(col("pd.Product")) \
+            .drop(col("pd.SettlementMethod")) \
+            .withColumn("IsTimeSeriesValid", F.min(col("IsTimeSeriesPointValid")).over(Window.partitionBy("TimeSeries_mRID")))

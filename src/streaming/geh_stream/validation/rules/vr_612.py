@@ -28,8 +28,8 @@ def validate_vr_612(df):
         .withColumn("VR-612-Is-Valid",
                     ~
                     (
-                        col("pd.Quantity").isNotNull()
+                        col("pd.Period_Point_Quantity").isNotNull()
                         & (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.consumption.value)
                         & (col("md.SettlementMethod") == SettlementMethod.flex_settled.value)
-                        & (col("pd.Quantity") >= consumptionLimit)
+                        & (col("pd.Period_Point_Quantity") >= consumptionLimit)
                     ))
