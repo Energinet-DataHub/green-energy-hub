@@ -42,7 +42,7 @@ namespace Energinet.DataHub.Ingestion.Application
             foreach (var hubRequest in hubRequests)
             {
                 var result = await _hubRequestMediator.DispatchAsync(hubRequest).ConfigureAwait(false);
-                var validationResult = new HubRequestValidationResult(hubRequest.Transaction.MRid);
+                var validationResult = new HubRequestValidationResult(hubRequest.Transaction.MRID);
 
                 result.Errors.ForEach(error => validationResult.Add(new ValidationError("UnknownCode", error)));
                 validationResults.Add(validationResult);

@@ -16,18 +16,18 @@ using System.Text.Json.Serialization;
 
 namespace GreenEnergyHub.Messaging.MessageTypes.Common
 {
-    public class MRid
+    public class MRID
     {
-        public MRid()
+        public MRID()
             : this(string.Empty) { }
 
-        public MRid(string value, string? qualifier = null)
+        public MRID(string value, string? qualifier = null)
         {
             Value = value;
             Qualifier = qualifier;
         }
 
-        public static MRid Empty => new MRid();
+        public static MRID Empty => new MRID();
 
         [JsonPropertyName(name: "value")]
         public string Value { get; set;  }
@@ -47,7 +47,7 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
                 return true;
             }
 
-            return obj.GetType() == typeof(MRid) && Equals((MRid)obj);
+            return obj.GetType() == typeof(MRID) && Equals((MRID)obj);
         }
 
         public override int GetHashCode()
@@ -55,7 +55,7 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
             return HashCode.Combine(Value, Qualifier);
         }
 
-        protected bool Equals(MRid other)
+        protected bool Equals(MRID other)
         {
             if (other == null)
             {

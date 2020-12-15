@@ -16,29 +16,34 @@ using System.Text.Json.Serialization;
 
 namespace GreenEnergyHub.Messaging.MessageTypes.Common
 {
-    [HubMessageQueue("MasterData")]
     public class MarketParticipant
     {
         public MarketParticipant()
-            : this(MRid.Empty, null) { }
+            : this(MRID.Empty, null, null) { }
 
         public MarketParticipant(string mrid)
-            : this(new MRid(mrid), null)
+            : this(new MRID(mrid), null, null)
         { }
 
-        public MarketParticipant(MRid mrid, string? name)
+        public MarketParticipant(MRID mrid, string? name, string? type)
         {
-            MRid = mrid;
+            MRID = mrid;
             Name = name;
+            Type = type;
         }
 
         public static MarketParticipant Empty => new MarketParticipant();
 
         [JsonPropertyName(name: "mRID")]
-        public MRid MRid { get; set; }
+        public MRID MRID { get; set; }
 
         [JsonPropertyName(name: "name")]
         public string? Name { get; set; }
+
+        /// <summary>
+        /// Process Role information for market participant, eg. MDR.
+        /// </summary>
+        public string? Type { get; set; }
 
         public override bool Equals(object? obj)
         {
@@ -57,7 +62,7 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(MRid, Name);
+            return HashCode.Combine(MRID, Name);
         }
 
         protected bool Equals(MarketParticipant other)
@@ -67,7 +72,7 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
                 throw new ArgumentNullException(nameof(other));
             }
 
-            return MRid.Equals(other.MRid) && Name == other.Name;
+            return MRID.Equals(other.MRID) && Name == other.Name;
         }
     }
 }

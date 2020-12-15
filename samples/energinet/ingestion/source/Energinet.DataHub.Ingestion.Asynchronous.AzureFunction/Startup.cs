@@ -13,9 +13,9 @@
 // limitations under the License.
 
 using System;
-using Energinet.DataHub.Ingestion.Application.TimeSeries;
 using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction;
 using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration;
+using Energinet.DataHub.Ingestion.Domain.TimeSeries;
 using Energinet.DataHub.Ingestion.Infrastructure;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;

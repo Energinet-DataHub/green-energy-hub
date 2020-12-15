@@ -43,10 +43,10 @@ namespace GreenEnergyHub.Messaging.Rules
         {
             if (message.StartDate < DateTime.UtcNow)
             {
-                return new RuleResult(GetType().Name, message.Transaction.MRid, false, "Effective date was in the past");
+                return new RuleResult(GetType().Name, message.Transaction.MRID, false, "Effective date was in the past");
             }
 
-            return new RuleResult(GetType().Name, message.Transaction.MRid, true);
+            return new RuleResult(GetType().Name, message.Transaction.MRID, true);
         }
     }
 }

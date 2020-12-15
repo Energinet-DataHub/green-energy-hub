@@ -13,27 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion.Application", "source\Energinet.DataHub.Ingestion.Application\Energinet.DataHub.Ingestion.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.Ingestion.Application", "source\Energinet.DataHub.Ingestion.Application\Energinet.DataHub.Ingestion.Application.csproj", "{B3CC1EFC-DA6C-45F3-9AA6-D75FDBE1504B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion.Infrastructure", "source\Energinet.DataHub.Ingestion.Infrastructure\Energinet.DataHub.Ingestion.Infrastructure.csproj", "{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.Ingestion.Infrastructure", "source\Energinet.DataHub.Ingestion.Infrastructure\Energinet.DataHub.Ingestion.Infrastructure.csproj", "{4EA05C50-C0AE-4ACB-90BA-A4433A9A1C61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion.Tests", "source\Energinet.DataHub.Ingestion.Tests\Energinet.DataHub.Ingestion.Tests.csproj", "{68412EBF-701D-467D-8716-74269E171F41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.Ingestion.Tests", "source\Energinet.DataHub.Ingestion.Tests\Energinet.DataHub.Ingestion.Tests.csproj", "{68412EBF-701D-467D-8716-74269E171F41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{832447E5-7A46-4381-817C-5D73A20510C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion.Synchronous.AzureFunction", "source\Energinet.DataHub.Ingestion.Synchronous.AzureFunction\Energinet.DataHub.Ingestion.Synchronous.AzureFunction.csproj", "{CFF3CA5B-275C-4A0F-8CBA-8423B45A76CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.Ingestion.Synchronous.AzureFunction", "source\Energinet.DataHub.Ingestion.Synchronous.AzureFunction\Energinet.DataHub.Ingestion.Synchronous.AzureFunction.csproj", "{CFF3CA5B-275C-4A0F-8CBA-8423B45A76CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreenEnergyHub", "GreenEnergyHub", "{C76FB4A4-036E-4D0F-A1BB-75E985766670}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj", "{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Messaging", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj", "{3ABF3B0D-2477-4822-90D4-88B4E1CE93BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging.Integration.ServiceCollection", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Integration.ServiceCollection\GreenEnergyHub.Messaging.Integration.ServiceCollection.csproj", "{1D28CC3F-18C4-423F-A176-76CBF10920C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Messaging.Integration.ServiceCollection", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Integration.ServiceCollection\GreenEnergyHub.Messaging.Integration.ServiceCollection.csproj", "{1D28CC3F-18C4-423F-A176-76CBF10920C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging.Tests", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Tests\GreenEnergyHub.Messaging.Tests.csproj", "{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Messaging.Tests", "..\..\..\src\messaging\source\GreenEnergyHub.Messaging.Tests\GreenEnergyHub.Messaging.Tests.csproj", "{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion.Asynchronous.AzureFunction", "source\Energinet.DataHub.Ingestion.Asynchronous.AzureFunction\Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.csproj", "{CEDACFCA-E860-4379-BBC5-DEC2132F205F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.Ingestion.Asynchronous.AzureFunction", "source\Energinet.DataHub.Ingestion.Asynchronous.AzureFunction\Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.csproj", "{CEDACFCA-E860-4379-BBC5-DEC2132F205F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion.Domain", "source\Energinet.DataHub.Ingestion.Domain\Energinet.DataHub.Ingestion.Domain.csproj", "{E868F413-1797-4235-91A4-D21855453C38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,13 @@ Global
 		{CEDACFCA-E860-4379-BBC5-DEC2132F205F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEDACFCA-E860-4379-BBC5-DEC2132F205F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEDACFCA-E860-4379-BBC5-DEC2132F205F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{68412EBF-701D-467D-8716-74269E171F41} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
@@ -81,5 +90,8 @@ Global
 		{1D28CC3F-18C4-423F-A176-76CBF10920C0} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 		{6788857A-02C0-41AA-9F17-8B8CBAB2EFD0} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 		{CEDACFCA-E860-4379-BBC5-DEC2132F205F} = {832447E5-7A46-4381-817C-5D73A20510C2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98635B0D-2BDD-4DFD-AC3B-4E3E8A84D553}
 	EndGlobalSection
 EndGlobal
