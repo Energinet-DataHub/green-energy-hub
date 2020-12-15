@@ -1,0 +1,18 @@
+name: 'Run Databricks Jobs'
+description: 'Invokes run of Databricks Jobs. Note: expects Databricks CLI and Python to be installed on a runner.'
+inputs:
+  job-ids:
+    description: 'databricks job ids to run'
+    required: true
+outputs:
+  job-run-ids: 
+    description: "Job Run Ids"
+    value: ${{ steps.run-jobs.outputs.job-run-ids }}
+runs:
+  using: "composite"
+  steps:
+    - id: run-jobs
+      run: |
+        res=$(./.github/actions/databricks-cli-run-jobs/run_jobs.sh "${{ inputs.job-ids }}")
+        echo "::set-output name=job-run-ids::${res}"
+      shell: bash

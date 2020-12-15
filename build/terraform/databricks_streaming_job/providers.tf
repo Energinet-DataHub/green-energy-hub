@@ -17,4 +17,3 @@ provider "databricks" {
 provider "azurerm" {
   features {}
 }
-

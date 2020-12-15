@@ -1,0 +1,26 @@
+{
+    "name": "<name of the aggregation job>",
+    "existing_cluster_id": "<existing aggregation cluster id>",
+    "spark_python_task" : {
+        "python_file": "dbfs:/streaming/<aggregation notebook>",
+        "parameters" : [
+            "--input-storage-account-name=<account name holding time series data>",
+            "--input-storage-account-key=<account key for input storage>",
+            "--input-storage-container-name=<container name for input storage>",
+            "--output-storage-account-name=<account name to store aggregated data>",
+            "--output-storage-account-key=<account key for output storage>",
+            "--output-storage-container-name=<container name for output storage>",
+            "--output-path=<path to aggregated data relative to container root>",
+            "--beginning-date-time=<date-time (timezone aware) representing the beginning of the time period of aggregation (ex: 2020-01-03T00:00:00-0100)>",
+            "--end-date-time=<date-time (timezone aware) representing the end of the time period of aggregation (ex: 2020-01-03T00:00:00+0100)>",
+            "--telemetry-instrumentation-key=<application insights instrumentation key, GUID format>"
+        ]
+    },
+    "email_notification": {
+        "no_alert_for_skipped_runs": true
+    },
+    "schedule": {
+        "quartz_cron_expression": "<schedule cron expression>",
+        "timezone_id": "<timezone id eg. UTC>"
+    }
+}

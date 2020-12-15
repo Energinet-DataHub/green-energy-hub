@@ -116,13 +116,13 @@ jobs:
 
       - name: Databricks CLI Run the Job
         id: run-job
-        uses: ./.github/actions/databricks-cli-run-job
+        uses: ./.github/actions/databricks-cli-run-jobs
         with:
-          job-id: ${{ steps.terraform-apply.outputs.job-id }}
+          job-ids: ${{ steps.terraform-apply.outputs.job-id }}
           
       - name: Check Job Status
         working-directory: ./build
         run: |
           pip install configargparse
           pip install requests
-          python -u job_status_check.py --job-run-ids  ${{ steps.run-job.outputs.job-run-id }} --retries 2 --databricks-url 'https://${{ steps.obtain-db-id-url.outputs.workspace-url }}' --token ${{ env.DATABRICKS_AAD_TOKEN }}
+          python -u job_status_check.py --job-run-ids  ${{ steps.run-job.outputs.job-run-ids }} --retries 2 --databricks-url 'https://${{ steps.obtain-db-id-url.outputs.workspace-url }}' --token ${{ env.DATABRICKS_AAD_TOKEN }}

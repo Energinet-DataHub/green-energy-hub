@@ -22,6 +22,3 @@ variable "wheel_file" {
 variable "keyvault_id" {
   type = string
 }
-
-
-

@@ -1,23 +1,14 @@
-name: Databricks Aggregator Job Deploy
+name: Databricks Aggregation Job Infrastructure Deploy
 
 on:
   workflow_dispatch:
-    inputs:
-      beginning_date_time:
-        description: 'Aggregation Beginning Date Time'
-        required: true
-        default: '2020-10-02T00:00:00+0100'
-      end_date_time:
-        description: 'Aggregation End Date Time'
-        required: true
-        default: '2020-10-03T00:00:00+0100'
 
 jobs:
   # Set the job key. The key is displayed as the job name
   # when a job name is not provided
   databricks_aggregation_job_deploy:
     # Name the Job
-    name: Create Databricks Aggregation Job
+    name: Create Databricks Aggregation Job Infrastructure
     # Set the type of machine to run on
     # Resource Group set for automated trigger purposes, if ran manually it is overriden
     # All ENV Vars set bellow are needed for all the actions to run successfuly
@@ -58,22 +49,6 @@ jobs:
       - name: Configure Azure CLI
         uses: ./.github/actions/azure-cli-install-login
 
-      - name: Set TF Vars
-        run: |
-          echo "TF_VAR_client_secret=${{ env.ARM_CLIENT_SECRET }}" >> $GITHUB_ENV
-          echo "TF_VAR_tenant_id=${{ env.ARM_TENANT_ID }}" >> $GITHUB_ENV
-          echo "TF_VAR_client_id=${{ env.ARM_CLIENT_ID }}" >> $GITHUB_ENV
-          echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_storage_account_name=enrgnt${{ env.ENV_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_backend_storage_name=entfstate${{ env.ENV_NAME }}" >> $GITHUB_ENV
-
-      # Run only if workflow started on demand (manually triggered)
-      - name: Set TF Vars from Pipeline Inputs
-        run: |
-          echo "TF_VAR_beginning_date_time=${{ github.event.inputs.beginning_date_time }}" >> $GITHUB_ENV
-          echo "TF_VAR_end_date_time=${{ github.event.inputs.end_date_time }}" >> $GITHUB_ENV
-        if:   github.event.inputs.end_date_time
-
       - name: Obtain Databricks Workspace ID and Url
         id: obtain-db-id-url
         uses: ./.github/actions/obtain-databricks-id-url
@@ -86,7 +61,7 @@ jobs:
         uses: ./.github/actions/databricks-cli-install-connect
         with:
           workspace-url: ${{ steps.obtain-db-id-url.outputs.workspace-url }}
-    
+
       - uses: suisei-cn/actions-download-file@v1
         name: Download the Wheel File
         with:
@@ -111,33 +86,19 @@ jobs:
       - name: Configure Terraform Backend
         uses: ./.github/actions/configure-terraform-backend
         with:
-          backend-file-path: "./build/terraform/databricks_aggregation_job/backend.tf"
+          backend-file-path: "./build/terraform/databricks_cluster/backend.tf"
           resource-group-name: "${{ env.RESOURCE_GROUP_NAME }}"
           storage-account-name: "enrgtfstate${{ env.ENV_NAME }}"
 
-      # Create aggregation job
+      # Create aggregation job cluster
       - name: Terraform Databricks Init
-        working-directory: ./build/terraform/databricks_aggregation_job
+        working-directory: ./build/terraform/databricks_cluster
         run: terraform init
                   
       - name: Terraform Databricks Apply
         id: terraform-apply 
-        working-directory: ./build/terraform/databricks_aggregation_job
+        working-directory: ./build/terraform/databricks_cluster
         run: |
           terraform apply -no-color -auto-approve
-          echo "::set-output name=job-id::$(terraform output databricks_job_id)"
+          echo "::set-output name=job-ids::$(terraform output databricks_job_ids)"
         continue-on-error: false
-
-      - name: Databricks CLI Run the Job
-        id: run-job
-        uses: ./.github/actions/databricks-cli-run-job
-        with:
-          job-id: ${{ steps.terraform-apply.outputs.job-id }}
-      
-      #Keep retries parameter set to 0 for jobs which might run in parallel
-      - name: Check Job Status
-        working-directory: ./build
-        run: |
-          pip install configargparse
-          pip install requests
-          python -u job_status_check.py --job-run-ids  ${{ steps.run-job.outputs.job-run-id }} --retries 0 --databricks-url 'https://${{ steps.obtain-db-id-url.outputs.workspace-url }}' --token ${{ env.DATABRICKS_AAD_TOKEN }}

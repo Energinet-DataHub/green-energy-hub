@@ -5,6 +5,15 @@ runs:
   using: "composite"
   steps:
     - run: |
-        WHEEL=$(dbfs ls 'dbfs:/streaming' | sed -n "/${{ env.WHEEL_FILE_NAME }}/ p")
-        if [ -z ${WHEEL} ]; then dbfs cp -r "./wheels/${{ env.WHEEL_FILE_NAME }}" "${{ env.DBFS_WHEEL_FILE }}"; fi
+        STREAMING_FOLDER=$(dbfs ls | sed -n "/streaming/ p")
+        if [ -z ${STREAMING_FOLDER} ]
+        then
+          dbfs cp -r "./wheels/${{ env.WHEEL_FILE_NAME }}" "${{ env.DBFS_WHEEL_FILE }}" 
+        else
+          WHEEL=$(dbfs ls 'dbfs:/streaming' | sed -n "/${{ env.WHEEL_FILE_NAME }}/ p")
+          if [ -z ${WHEEL} ]; 
+          then 
+            dbfs cp -r "./wheels/${{ env.WHEEL_FILE_NAME }}" "${{ env.DBFS_WHEEL_FILE }}"; 
+          fi;
+        fi  
       shell: bash

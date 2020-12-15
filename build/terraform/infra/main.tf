@@ -162,4 +162,3 @@ resource "azurerm_key_vault_secret" "appinsights_instrumentation_key" {
   value        = azurerm_application_insights.appinsight.instrumentation_key
   key_vault_id = azurerm_key_vault.key_vault.id
 }
-
