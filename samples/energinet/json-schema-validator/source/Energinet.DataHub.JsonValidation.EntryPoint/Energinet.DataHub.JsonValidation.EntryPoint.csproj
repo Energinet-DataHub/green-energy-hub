@@ -23,7 +23,6 @@ limitations under the License.
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JsonSchema.Net" Version="1.5.4" />
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
   </ItemGroup>
@@ -37,13 +36,8 @@ limitations under the License.
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Schemas\cim-definitions.schema.json" />
-    <EmbeddedResource Include="Schemas\cim-definitions.schema.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Remove="Schemas\ChangeOfSupplier.schema.json" />
-    <EmbeddedResource Include="Schemas\ChangeOfSupplier.schema.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <ProjectReference Include="..\..\..\..\..\src\schemas\source\GreenEnergyHub.Schemas.Json.Integration.ServiceCollection\GreenEnergyHub.Schemas.Json.Integration.ServiceCollection.csproj" />
+    <ProjectReference Include="..\..\..\..\..\src\schemas\source\GreenEnergyHub.Schemas.Json\GreenEnergyHub.Schemas.Json.csproj" />
+    <ProjectReference Include="..\Energinet.DataHub.JsonValidation.Application\Energinet.DataHub.JsonValidation.Application.csproj" />
   </ItemGroup>
 </Project>

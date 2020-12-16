@@ -11,19 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using Xunit;
 
-namespace GreenEnergyHub.JSONSchemaValidator.Tests
+using Json.Schema;
+
+namespace GreenEnergyHub.Schemas.Json
 {
-    public class SomeTests
+    /// <summary>
+    /// A custom implementation of json schemas
+    /// </summary>
+    public interface IJsonSchemaProvider
     {
-        [Fact]
-        public void DummySuccessfulTest()
-        {
-            // Write clever tests (not this one) to include in the template
-            var sut = nameof(DummySuccessfulTest);
-
-            Assert.Equal("DummySuccessfulTest", sut);
-        }
+        /// <summary>
+        /// Get a json schema for a <see cref="SchemaType"/>
+        /// </summary>
+        /// <param name="schemaType">Type to locate</param>
+        /// <returns><see cref="JsonSchema"/> found, if no match null is returned</returns>
+        JsonSchema? GetSchema(SchemaType schemaType);
     }
 }

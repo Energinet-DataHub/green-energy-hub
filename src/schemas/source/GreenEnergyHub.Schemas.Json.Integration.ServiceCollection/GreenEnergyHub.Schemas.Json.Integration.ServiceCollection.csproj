@@ -17,14 +17,14 @@ limitations under the License.
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Nullable>enable</Nullable>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GreenEnergyHub.JSONSchemaValidator.Domain\GreenEnergyHub.JSONSchemaValidator.Domain.csproj" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.10" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GreenEnergyHub.Schemas.Json\GreenEnergyHub.Schemas.Json.csproj" />
     </ItemGroup>
 
 </Project>

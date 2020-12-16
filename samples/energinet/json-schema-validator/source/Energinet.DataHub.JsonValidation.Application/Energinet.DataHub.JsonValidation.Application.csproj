@@ -24,8 +24,8 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GreenEnergyHub.JSONSchemaValidator.Application\GreenEnergyHub.JSONSchemaValidator.Application.csproj" />
-      <ProjectReference Include="..\GreenEnergyHub.JSONSchemaValidator.Domain\GreenEnergyHub.JSONSchemaValidator.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\..\src\schemas\source\GreenEnergyHub.Schemas.Json\GreenEnergyHub.Schemas.Json.csproj" />
+      <ProjectReference Include="..\Energinet.DataHub.JsonValidation.Domain\Energinet.DataHub.JsonValidation.Domain.csproj" />
     </ItemGroup>
 
 </Project>

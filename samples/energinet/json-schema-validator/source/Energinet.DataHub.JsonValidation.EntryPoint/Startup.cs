@@ -11,10 +11,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace GreenEnergyHub.JSONSchemaValidator.Validate
+
+using Energinet.DataHub.JsonValidation.EntryPoint;
+using GreenEnergyHub.Schemas.Json.Integration.ServiceCollection;
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+
+[assembly: FunctionsStartup(typeof(Startup))]
+
+namespace Energinet.DataHub.JsonValidation.EntryPoint
 {
-    public enum SchemaType
+    #pragma warning disable CA1812
+    internal class Startup : FunctionsStartup
     {
-        ChangeOfSupplier,
+        public override void Configure(IFunctionsHostBuilder builder)
+        {
+            // Register services
+            builder.Services.AddJsonValidation();
+        }
     }
+    #pragma warning restore CA1812
 }

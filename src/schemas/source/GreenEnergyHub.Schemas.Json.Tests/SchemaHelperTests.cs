@@ -11,19 +11,19 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
-using GreenEnergyHub.JSONSchemaValidator.Validate;
 using Xunit;
 
-namespace GreenEnergyHub.JSONSchemaValidator.Tests
+namespace GreenEnergyHub.Schemas.Json.Tests
 {
     public class SchemaHelperTests
     {
         [Fact]
         public void SchemaHelper_should_contain_schemas()
         {
-            string[] schemas = SchemaHelper.Schemas.ToArray();
+            var schemas = SchemaHelper.Schemas.ToArray();
 
             Assert.NotEmpty(schemas);
         }
@@ -31,7 +31,7 @@ namespace GreenEnergyHub.JSONSchemaValidator.Tests
         [Fact]
         public void SchemaHelper_should_resolve_schema()
         {
-            string[] schemas = SchemaHelper.Schemas.ToArray();
+            var schemas = SchemaHelper.Schemas.ToArray();
 
             var jsonSchema = SchemaHelper.GetSchema(schemas[0]);
 
@@ -41,19 +41,15 @@ namespace GreenEnergyHub.JSONSchemaValidator.Tests
         [Fact]
         public void SchemaHelper_should_resolve_all_schema_types()
         {
-            var schemaTypes = Enum.GetValues(typeof(SchemaType));
+            var schemaTypes = new[] { SchemaTypes.InitiateChangeSupplier };
 
             foreach (var schemaTypeValue in schemaTypes)
             {
-                if (schemaTypeValue == null)
-                {
-                    continue;
-                }
+                var schemaFound = SchemaType.TryParse(schemaTypeValue, out var schemaType);
 
-                var schemaType = (SchemaType)schemaTypeValue;
+                Assert.True(schemaFound);
 
                 var jsonSchema = SchemaHelper.GetSchema(schemaType);
-
                 Assert.NotNull(jsonSchema);
             }
         }

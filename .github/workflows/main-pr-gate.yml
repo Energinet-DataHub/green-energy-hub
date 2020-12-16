@@ -287,7 +287,7 @@ jobs:
         uses: fkirc/skip-duplicate-actions@v1.4.0
         with:
           github_token: ${{ github.token }}
-          paths: '["src/validators/GreenEnergyHub.JSONSchemaValidator/**",
+          paths: '["src/schemas/**","samples/energinet/json-schema-validator/**",
             ".github/workflows/main-pr-gate.yml", ".editorconfig",
             "Directory.Build.props"]'
 
@@ -301,8 +301,8 @@ jobs:
         if: ${{ steps.json_schema_validator_check.outputs.should_skip != 'true' }}
         uses: ./.github/actions/dotnet-build-and-test
         with:
-          SLN_NAME: 'GreenEnergyHub.JSONSchemaValidator.sln'
-          SLN_PATH: './src/validators/GreenEnergyHub.JSONSchemaValidator/'
+          SLN_NAME: 'Energinet.DataHub.JsonValidation.sln'
+          SLN_PATH: './samples/energinet/json-schema-validator/'
 
       - name: Upload build artifacts
         if: ${{ steps.json_schema_validator_check.outputs.should_skip != 'true' }}
