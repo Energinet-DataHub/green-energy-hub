@@ -32,8 +32,10 @@ namespace Energinet.DataHub.Ingestion.Domain.Messages
         public TimeInterval? TimeInterval { get; set; }
 
         /// <summary>
-        /// All the time intervals
+        /// All the time intervals.
         /// </summary>
-        public List<Point>? Points { get; } = new List<Point>();
+        #pragma warning disable CA2227 // Setter needed for JSON deserialization.
+        public List<Point>? Points { get; set; }
+        #pragma warning restore CA2227
     }
 }
