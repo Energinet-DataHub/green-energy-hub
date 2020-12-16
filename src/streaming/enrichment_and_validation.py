@@ -211,6 +211,10 @@ def __store_data_frame(batch_df: DataFrame, _: int):
     try:
         watch = MonitoredStopwatch.start_timer(telemetry_client, "StoreDataFrame")
 
+        # This validation cannot be done in the Validator due to the implementation.
+        # It uses a Window, which can not be used in streaming without time.
+        batch_df = batch_operations.add_time_series_validation_status_column(batch_df)
+
         persist_timer = watch.start_sub_timer("persist")
         # Cache the batch in order to avoid the risk of recalculation in each write operation
         batch_df = batch_df.persist()

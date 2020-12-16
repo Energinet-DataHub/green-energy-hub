@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from pyspark.sql import DataFrame, SparkSession, Window
+from pyspark.sql import DataFrame
 from pyspark.sql.functions import col
 import pyspark.sql.functions as F
 
@@ -39,5 +39,4 @@ class Validator:
             .drop(col("pd.MarketEvaluationPointType")) \
             .drop(col("pd.QuantityMeasurementUnit_Name")) \
             .drop(col("pd.Product")) \
-            .drop(col("pd.SettlementMethod")) \
-            .withColumn("IsTimeSeriesValid", F.min(col("IsTimeSeriesPointValid")).over(Window.partitionBy("TimeSeries_mRID")))
+            .drop(col("pd.SettlementMethod"))

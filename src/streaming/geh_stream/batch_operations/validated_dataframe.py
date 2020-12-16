@@ -12,12 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import inspect
-from pyspark.sql import DataFrame
+from pyspark.sql import DataFrame, Window
 from pyspark.sql.functions import year, month, dayofmonth, to_json, \
     struct, col, from_json, coalesce, lit
 import pyspark.sql.functions as F
 
 import geh_stream.dataframelib as D
+
+
+def add_time_series_validation_status_column(batch_df: DataFrame):
+    return batch_df.withColumn("IsTimeSeriesValid", F.min(col("IsTimeSeriesPointValid")).over(Window.partitionBy("TimeSeries_mRID")))
 
 
 def send_valid_data(batch_df: DataFrame, output_eh_conf, watch):
