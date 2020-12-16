@@ -115,7 +115,9 @@ def time_series_json_factory():
                 "Type": "x"
             }},
             "RecipientMarketParticipant": {{
-                "mRID": "x",
+                "mRID": {{
+                    "value": "x"
+                }},
                 "Type": "x"
             }},
             "ProcessType": "e",
