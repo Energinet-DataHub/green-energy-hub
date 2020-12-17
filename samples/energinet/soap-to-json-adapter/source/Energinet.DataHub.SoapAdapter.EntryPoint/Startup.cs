@@ -48,7 +48,14 @@ namespace Energinet.DataHub.SoapAdapter.EntryPoint
                 serviceProvider =>
                 {
                     var configuration = serviceProvider.GetService<IConfiguration>();
-                    return new IngestionClientSettings(configuration.GetValue<string>("IngestionServiceEndpoint"));
+                    const string synchronousIngestorBaseUrl = "SYNCHRONOUS_INGESTOR_BASE_URL";
+                    var endpoint = configuration.GetValue<string>(synchronousIngestorBaseUrl);
+                    if (string.IsNullOrWhiteSpace(endpoint))
+                    {
+                        throw new ArgumentException($"'{synchronousIngestorBaseUrl}' cannot be null or empty");
+                    }
+
+                    return new IngestionClientSettings(endpoint);
                 });
         }
     }
