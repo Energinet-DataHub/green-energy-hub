@@ -1,0 +1,95 @@
+<!--
+Copyright 2020 Energinet DataHub A/S
+
+Licensed under the Apache License, Version 2.0 (the "License2");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Body xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <SendMessageRequest xmlns="urn:www:datahub:dk:b2b:v01">
+            <MessageContainer>
+                <MessageReference>MessageID-0003</MessageReference>
+                <DocumentType>RequestUpdateMasterDataConsumer</DocumentType>
+                <MessageType>XML</MessageType>
+                <Payload>
+                    <DK_RequestUpdateMasterDataConsumer xmlns="un:unece:260:data:EEM-DK_RequestUpdateMasterDataConsumer:v3">
+                        <HeaderEnergyDocument>
+                            <Identification>MesId-2019-07-17-13-48-44.905</Identification>
+                            <DocumentType listAgencyIdentifier="260" listIdentifier="DK">D15</DocumentType>
+                            <Creation>2019-07-17T11:35:37Z</Creation>
+                            <SenderEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5799994000220</Identification>
+                            </SenderEnergyParty>
+                            <RecipientEnergyParty>
+                                <Identification schemeAgencyIdentifier="9">5790001330552</Identification>
+                            </RecipientEnergyParty>
+                        </HeaderEnergyDocument>
+                        <ProcessEnergyContext>
+                            <EnergyBusinessProcess listAgencyIdentifier="260">E34</EnergyBusinessProcess>
+                            <EnergyBusinessProcessRole listAgencyIdentifier="260" >DDQ</EnergyBusinessProcessRole>
+                            <EnergyIndustryClassification listAgencyIdentifier="6">23</EnergyIndustryClassification>
+                        </ProcessEnergyContext>
+                        <PayloadMasterDataMeteringPointPartyEvent>
+                            <Identification>TransId-2019-07-17-13-48-44.905</Identification>
+                            <Occurrence>2019-07-31T22:00:00Z</Occurrence>
+                            <MeteringPointPartyDetailMeteringPointPartyCharacteristic>
+                                <ElectricalHeating>false</ElectricalHeating>
+                                <ConsumerCategory />
+                                <AdministrativePartyMPAdministrativeParty>
+                                    <MPRelationType listAgencyIdentifier="260" listIdentifier="DK">D04</MPRelationType>
+                                    <AdministrativePartyAddressLocationAddress>
+                                        <StreetName>Tonnes Kjærsvej</StreetName>
+                                        <StreetCode />
+                                        <BuildingNumber />
+                                        <FloorIdentification />
+                                        <RoomIdentification />
+                                        <PostOfficeBox />
+                                        <CitySubDivisionName />
+                                        <Postcode>7000</Postcode>
+                                        <CityName>Fredericia</CityName>
+                                        <MunicipalityCode />
+                                        <CountryName />
+                                    </AdministrativePartyAddressLocationAddress>
+                                    <ProtectedAddress>true</ProtectedAddress>
+                                </AdministrativePartyMPAdministrativeParty>
+                                <AdministrativePartyMPAdministrativeParty>
+                                    <MPRelationType listAgencyIdentifier="260" listIdentifier="DK">D01</MPRelationType>
+                                    <AdministrativePartyAddressLocationAddress>
+                                        <StreetName>Tonnes Kjærsvej</StreetName>
+                                        <StreetCode />
+                                        <BuildingNumber>65</BuildingNumber>
+                                        <FloorIdentification />
+                                        <RoomIdentification />
+                                        <PostOfficeBox />
+                                        <CitySubDivisionName />
+                                        <Postcode>7000</Postcode>
+                                        <CityName>Fredericia</CityName>
+                                        <MunicipalityCode />
+                                        <CountryName>DK</CountryName>
+                                    </AdministrativePartyAddressLocationAddress>
+                                    <ProtectedAddress>true</ProtectedAddress>
+                                </AdministrativePartyMPAdministrativeParty>
+                                <FirstConsumerConsumerParty>
+                                    <Name>Mads</Name>
+                                    <CVR />
+                                </FirstConsumerConsumerParty>
+                            </MeteringPointPartyDetailMeteringPointPartyCharacteristic>
+                            <MeteringPointDomainLocation>
+                                <Identification schemeAgencyIdentifier="9">579010000000000022</Identification>
+                            </MeteringPointDomainLocation>
+                        </PayloadMasterDataMeteringPointPartyEvent>
+                    </DK_RequestUpdateMasterDataConsumer>
+                </Payload>
+            </MessageContainer>
+        </SendMessageRequest>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

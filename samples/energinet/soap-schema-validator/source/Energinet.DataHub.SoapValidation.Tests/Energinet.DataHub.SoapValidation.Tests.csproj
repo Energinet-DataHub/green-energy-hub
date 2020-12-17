@@ -52,6 +52,8 @@ limitations under the License.
 	  <EmbeddedResource Include="TestFiles\Rsm012\ValidHourlyButNoSOAP.xml" />
 	  <EmbeddedResource Include="TestFiles\Rsm012\ValidQuarterOfHour.xml" />
 	  <EmbeddedResource Include="TestFiles\Rsm012\ValidSchemaButWrongRoot.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm027\RSM027_invalid_missing_values.xml" />
+	  <EmbeddedResource Include="TestFiles\Rsm027\RSM027_valid.xml" />
 	</ItemGroup>
 
 	<ItemGroup>

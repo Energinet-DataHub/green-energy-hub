@@ -26,6 +26,7 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
         private const string RSM001Folder = "Rsm001";
         private const string RSM009Folder = "Rsm009";
         private const string RSM012Folder = "Rsm012";
+        private const string RSM027Folder = "Rsm027";
 
         [Theory]
         [InlineData("RSM001_CPR.xml", RSM001Folder, true, RejectionReason.None)]
@@ -49,6 +50,8 @@ namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
         [InlineData("SOAPAndEbixButNoB2B.xml", RSM012Folder, false, RejectionReason.DoesNotRespectSchema)]
         [InlineData("NotXML.xml", RSM012Folder, false, RejectionReason.InvalidXml)]
         [InlineData("InvalidXML.xml", RSM012Folder, false, RejectionReason.InvalidXml)]
+        [InlineData("RSM027_invalid_missing_values.xml", RSM027Folder, false, RejectionReason.DoesNotRespectSchema)]
+        [InlineData("RSM027_valid.xml", RSM027Folder, true, RejectionReason.None)]
         public async Task Validate_Rsm_answers_are_correct_based_on_input_stream(string inputFileName, string messageTypeFolder, bool expectSuccess, RejectionReason expectedRejectionReason)
         {
             // Assemble

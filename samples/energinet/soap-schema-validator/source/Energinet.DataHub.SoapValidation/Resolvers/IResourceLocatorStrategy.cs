@@ -15,6 +15,9 @@ using System;
 
 namespace Energinet.DataHub.SoapValidation.Resolvers
 {
+    /// <summary>
+    /// Resource locator
+    /// </summary>
     internal interface IResourceLocatorStrategy
     {
         /// <summary>
