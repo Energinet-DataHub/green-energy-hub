@@ -160,7 +160,9 @@ parsed_data.printSchema()
 # %% Denormalize messages: Flatten and explode messages by each contained time series point
 from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
 
-denormalized_data = denormalize_parsed_data(parsed_data)
+denormalized_data = denormalize_parsed_data(parsed_data) \
+    .withColumnRenamed("MarketDocument_SenderMarketParticipant_mRID_value", "MarketDocument_SenderMarketParticipant_mRID") \
+    .withColumnRenamed("MarketDocument_RecipientMarketParticipant_mRID_value", "MarketDocument_RecipientMarketParticipant_mRID")
 
 print("denormalized_data schema")
 denormalized_data.printSchema()
