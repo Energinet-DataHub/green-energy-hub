@@ -347,3 +347,40 @@ jobs:
         with:
           name: build-market-data_artifacts
           path: ${{ env.REPORT_PATH }}
+
+  timer-trigger:
+    name: Build timer trigger
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # https://github.com/marketplace/actions/skip-duplicate-actions
+      - name: timer trigger skip check
+        id: timer_trigger_check
+        uses: fkirc/skip-duplicate-actions@v1.4.0
+        with:
+          github_token: ${{ github.token }}
+          paths: '["samples/energinet/timer-trigger/**",
+            ".github/workflows/main-pr-gate.yml", ".editorconfig",
+            "Directory.Build.props"]'
+
+      - name: Setup .NET Core
+        if: ${{ steps.timer_trigger_check.outputs.should_skip != 'true' }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+
+      - name: Build and test
+        if: ${{ steps.timer_trigger_check.outputs.should_skip != 'true' }}
+        uses: ./.github/actions/dotnet-build-and-test
+        with:
+          SLN_NAME: 'Energinet.DataHub.TimerTrigger.sln'
+          SLN_PATH: './samples/energinet/timer-trigger/'
+
+      - name: Upload build artifacts
+        if: ${{ steps.timer_trigger_check.outputs.should_skip != 'true' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-timer-trigger_artifacts
+          path: ${{ env.REPORT_PATH }}
