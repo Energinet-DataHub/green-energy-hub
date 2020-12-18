@@ -15,7 +15,7 @@
 using System;
 using Confluent.Kafka;
 
-namespace Energinet.DataHub.Ingestion.Infrastructure.Queue
+namespace GreenEnergyHub.Queues.Kafka
 {
     public class KafkaProducerFactory : IKafkaProducerFactory
     {

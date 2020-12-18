@@ -12,21 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Threading.Tasks;
+using GreenEnergyHub.Queues;
 
-namespace GreenEnergyHub.Messaging.MessageQueue
+namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
 {
     /// <summary>
-    /// This provides an interface for dispatching messages to a queue.
+    /// Message queue dispatcher for market data messages
     /// </summary>
-    public interface IHubMessageQueueDispatcher
+    public interface IMarketDataMessageQueueDispatcher : IHubMessageQueueDispatcher
     {
-        /// <summary>
-        /// Dispatches an IHubMessage to an outside service.
-        /// </summary>
-        /// <param name="message"><see cref="IHubMessage"/>The message to
-        /// dispatch.</param>
-        /// <returns>A Task.</returns>
-        Task DispatchAsync(IHubMessage message);
     }
 }

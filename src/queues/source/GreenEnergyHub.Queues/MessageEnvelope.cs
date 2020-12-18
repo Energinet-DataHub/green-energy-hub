@@ -12,16 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Energinet.DataHub.Ingestion.Infrastructure.ServiceBus
+namespace GreenEnergyHub.Queues
 {
-    /// <summary>
-    /// Configuration settings used for building a Service Bus Client.
-    /// </summary>
-    public class ServiceBusConfiguration
+    public class MessageEnvelope
     {
-        /// <summary>
-        /// Connection String for the Service Bus instance.
-        /// </summary>
-        public string ConnectionString { get; set; } = string.Empty;
+        public MessageEnvelope(string message, string messageType)
+        {
+            Message = message;
+            MessageType = messageType;
+        }
+
+        public string MessageType { get; }
+
+        public string Message { get; }
     }
 }

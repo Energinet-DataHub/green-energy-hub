@@ -46,5 +46,8 @@ limitations under the License.
       <None Update="Assets\ChangeSupplier.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="Infrastructure\Queue\appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

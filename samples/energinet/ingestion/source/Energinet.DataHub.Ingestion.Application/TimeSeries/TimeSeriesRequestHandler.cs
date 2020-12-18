@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Domain.TimeSeries;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
-using GreenEnergyHub.Messaging.MessageQueue;
+using GreenEnergyHub.Queues;
 
 namespace Energinet.DataHub.Ingestion.Application.TimeSeries
 {

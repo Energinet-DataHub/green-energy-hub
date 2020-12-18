@@ -18,7 +18,6 @@ using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Domain.TimeSeries;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
-using GreenEnergyHub.Messaging.MessageQueue;
 
 namespace Energinet.DataHub.Ingestion.Application.TimeSeries
 {
@@ -29,7 +28,7 @@ namespace Energinet.DataHub.Ingestion.Application.TimeSeries
     public class TimeSeriesCommandHandler : HubCommandHandler<TimeSeriesMessage>
     {
         private readonly IRuleEngine<TimeSeriesMessage> _rulesEngine;
-        private readonly IHubMessageQueueDispatcher _messageDispatcher;
+        private readonly ITimeSeriesMessageQueueDispatcher _messageDispatcher;
 
         /// <summary>
         /// Builds a TimeSeriesCommandHandler which validates messages using a
@@ -40,7 +39,7 @@ namespace Energinet.DataHub.Ingestion.Application.TimeSeries
         /// <param name="messageQueueDispatcher">Queue dispatcher to use when request is successfully validated.</param>
         public TimeSeriesCommandHandler(
             IRuleEngine<TimeSeriesMessage> rulesEngine,
-            IHubMessageQueueDispatcher messageQueueDispatcher)
+            ITimeSeriesMessageQueueDispatcher messageQueueDispatcher)
         {
             _rulesEngine = rulesEngine;
             _messageDispatcher = messageQueueDispatcher;

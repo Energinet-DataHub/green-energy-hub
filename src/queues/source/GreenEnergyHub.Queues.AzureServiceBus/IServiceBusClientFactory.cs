@@ -12,18 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Energinet.DataHub.Ingestion.Infrastructure.Queue
+using Azure.Messaging.ServiceBus;
+
+namespace GreenEnergyHub.Queues.AzureServiceBus
 {
-    public class QueueMessage
+    /// <summary>
+    /// Factory for creating service bus client.
+    /// </summary>
+    public interface IServiceBusClientFactory
     {
-        public QueueMessage(string message, string messageType)
-        {
-            Message = message;
-            MessageType = messageType;
-        }
-
-        public string MessageType { get; }
-
-        public string Message { get; }
+        /// <summary>
+        /// Build a new Service Bus client instance.
+        /// </summary>
+        /// <returns>The client instance.</returns>
+        ServiceBusClient Build();
     }
 }

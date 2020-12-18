@@ -14,19 +14,25 @@
 
 using System.Threading.Tasks;
 
-namespace GreenEnergyHub.Messaging.MessageQueue
+namespace GreenEnergyHub.Queues.AzureServiceBus
 {
     /// <summary>
-    /// This provides an interface for dispatching messages to Service Bus.
+    /// Azure service bus based message queue dispatcher
     /// </summary>
-    public interface IHubMessageServiceBusDispatcher
+    public interface IServiceBusQueueDispatcher
     {
         /// <summary>
-        /// Dispatches an IHubMessage to Service Bus.
+        /// Dispatches a <see cref="MessageEnvelope"/>
         /// </summary>
-        /// <param name="message"><see cref="IHubMessage"/>The message to
-        /// dispatch.</param>
-        /// <returns>A Task.</returns>
-        Task DispatchAsync(IHubMessage message);
+        /// <param name="messageEnvelope"></param>
+        /// <param name="topic"></param>
+        /// <returns><see cref="Task"/></returns>
+        Task DispatchAsync(MessageEnvelope messageEnvelope, string topic);
+
+        /// <summary>
+        /// Disposes instance
+        /// </summary>
+        /// <returns><see cref="ValueTask"/></returns>
+        ValueTask DisposeAsync();
     }
 }

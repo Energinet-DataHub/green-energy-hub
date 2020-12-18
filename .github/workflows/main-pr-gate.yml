@@ -237,6 +237,41 @@ jobs:
         name: build-messaging-artifacts
         path: ${{ env.REPORT_PATH }}
 
+  queues:
+    name: Build Queues
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Queues skip check
+      id: queues_check
+      uses: fkirc/skip-duplicate-actions@v1.4.0
+      with:
+        github_token: ${{ github.token }}
+        paths: '["src/queues/**", ".github/workflows/main-pr-gate.yml",
+          ".editorconfig", "Directory.Build.props"]'
+
+    - name: Setup .NET Core
+      if: ${{ steps.queues_check.outputs.should_skip != 'true' }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.402
+
+    - name: Build and test
+      if: ${{ steps.queues_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-build-and-test
+      with:
+        SLN_NAME: 'GreenEnergyHub.Queues.sln'
+        SLN_PATH: './src/queues'
+
+    - name: Upload build artifacts
+      if: ${{ steps.queues_check.outputs.should_skip != 'true' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-queues-artifacts
+        path: ${{ env.REPORT_PATH }}
+
   validation-reports:
     name: Build Validation Reports
     runs-on: ubuntu-latest

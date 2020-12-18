@@ -12,17 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Threading.Tasks;
 using GreenEnergyHub.Messaging;
-using GreenEnergyHub.Queues;
 
-namespace Energinet.DataHub.Ingestion.Tests.Application
+namespace GreenEnergyHub.Queues
 {
-    public class HubMessageQueueDispatcherStub : IHubMessageQueueDispatcher
+    /// <summary>
+    /// Factory for creating message queue dispatcher messages
+    /// </summary>
+    public interface IMessageEnvelopeFactory
     {
-        public Task DispatchAsync(IHubMessage hubMessage)
-        {
-            return Task.CompletedTask;
-        }
+        /// <summary>
+        /// Creates message envelope for <see cref="IHubMessage"/>
+        /// </summary>
+        /// <param name="hubMessage"></param>
+        /// <returns><see cref="MessageEnvelope"/></returns>
+        MessageEnvelope CreateFrom(IHubMessage hubMessage);
     }
 }

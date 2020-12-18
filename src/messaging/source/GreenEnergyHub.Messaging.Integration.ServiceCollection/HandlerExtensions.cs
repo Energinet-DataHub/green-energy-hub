@@ -19,6 +19,7 @@ using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.MessageRouting;
 using GreenEnergyHub.Messaging.RulesEngine;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GreenEnergyHub.Messaging.Integration.ServiceCollection

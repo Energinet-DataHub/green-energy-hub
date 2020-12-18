@@ -12,17 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Threading.Tasks;
-using GreenEnergyHub.Messaging;
-using GreenEnergyHub.Queues;
+using Confluent.Kafka;
 
-namespace Energinet.DataHub.Ingestion.Tests.Application
+namespace GreenEnergyHub.Queues.Kafka
 {
-    public class HubMessageQueueDispatcherStub : IHubMessageQueueDispatcher
+    /// <summary>
+    /// Factory for creating kafka producer.
+    /// </summary>
+    public interface IKafkaProducerFactory
     {
-        public Task DispatchAsync(IHubMessage hubMessage)
-        {
-            return Task.CompletedTask;
-        }
+        /// <summary>
+        /// Build a new kafka producer instance.
+        /// </summary>
+        /// <returns>The producert instance.</returns>
+        IProducer<Null, string> Build();
     }
 }

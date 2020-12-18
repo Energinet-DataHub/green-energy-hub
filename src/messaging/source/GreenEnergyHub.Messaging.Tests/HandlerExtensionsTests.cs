@@ -17,7 +17,9 @@ using GreenEnergyHub.Messaging.Integration.ServiceCollection;
 using GreenEnergyHub.Messaging.MessageRouting;
 using GreenEnergyHub.Messaging.Tests.TestHelpers;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NSubstitute.Extensions;
 using Xunit;
 
 namespace GreenEnergyHub.Messaging.Tests

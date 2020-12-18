@@ -22,7 +22,7 @@ using Energinet.DataHub.Ingestion.Infrastructure;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
-using GreenEnergyHub.Messaging.MessageQueue;
+using GreenEnergyHub.Queues;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Xunit;

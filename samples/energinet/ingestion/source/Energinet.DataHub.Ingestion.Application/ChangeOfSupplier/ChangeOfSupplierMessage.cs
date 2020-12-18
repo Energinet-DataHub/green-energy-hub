@@ -22,8 +22,7 @@ namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
     /// <summary>
     /// POCO for a ChangeOfSupplierMessage.
     /// </summary>
-    [HubMessageQueue("MessageQueue")]
-    [HubMessage("ChangeSupplier")]
+    [HubMessage("RequestChangeOfSupplier")]
     public class ChangeOfSupplierMessage : IHubMessage, IHubMessageHasConsumer, IHubMessageHasEnergySupplier, IHubMessageHasBalanceResponsibleParty, IHubMessageHasStartDate
     {
         /// <summary>

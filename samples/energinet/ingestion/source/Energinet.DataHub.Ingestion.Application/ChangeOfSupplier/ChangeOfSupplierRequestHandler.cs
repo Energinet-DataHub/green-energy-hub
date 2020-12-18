@@ -16,7 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
-using GreenEnergyHub.Messaging.MessageQueue;
+using GreenEnergyHub.Queues;
 
 namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
 {

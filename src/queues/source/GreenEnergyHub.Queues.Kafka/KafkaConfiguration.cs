@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Energinet.DataHub.Ingestion.Infrastructure.Queue
+namespace GreenEnergyHub.Queues.Kafka
 {
     /// <summary>
     /// Configuration settings used for building a kafka producer.

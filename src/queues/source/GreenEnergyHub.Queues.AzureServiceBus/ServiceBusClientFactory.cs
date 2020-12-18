@@ -13,29 +13,25 @@
 // limitations under the License.
 
 using System;
-using System.Runtime.Serialization;
+using Azure.Messaging.ServiceBus;
 
-namespace Energinet.DataHub.Ingestion.Infrastructure.Queue
+namespace GreenEnergyHub.Queues.AzureServiceBus
 {
-    public class QueueException : Exception
+    public class ServiceBusClientFactory : IServiceBusClientFactory
     {
-        public QueueException()
+        private readonly ServiceBusConfiguration _serviceBusConfiguration;
+
+        public ServiceBusClientFactory(ServiceBusConfiguration serviceBusConfiguration)
         {
+            _serviceBusConfiguration = serviceBusConfiguration ?? throw new ArgumentNullException(nameof(serviceBusConfiguration));
         }
 
-        public QueueException(string? message)
-            : base(message)
+        public ServiceBusClient Build()
         {
-        }
+            var serviceBusClient = new ServiceBusClient(
+                _serviceBusConfiguration.ConnectionString);
 
-        public QueueException(string? message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
-
-        protected QueueException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
+            return serviceBusClient;
         }
     }
 }

@@ -12,19 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Confluent.Kafka;
-
-namespace Energinet.DataHub.Ingestion.Infrastructure.Queue
+namespace GreenEnergyHub.Queues.AzureServiceBus
 {
     /// <summary>
-    /// Factory for creating kafka producer.
+    /// Configuration settings used for building a Service Bus Client.
     /// </summary>
-    public interface IKafkaProducerFactory
+    public class ServiceBusConfiguration
     {
         /// <summary>
-        /// Build a new kafka producer instance.
+        /// Connection String for the Service Bus instance.
         /// </summary>
-        /// <returns>The producert instance.</returns>
-        IProducer<Null, string> Build();
+        public string ConnectionString { get; set; } = string.Empty;
     }
 }

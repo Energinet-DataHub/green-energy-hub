@@ -1,0 +1,65 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Copyright 2020 Energinet DataHub A/S
+#
+# Licensed under the Apache License, Version 2.0 (the "License2");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues", "source\GreenEnergyHub.Queues\GreenEnergyHub.Queues.csproj", "{EFDD421C-B920-4B35-A9BB-2BC26A629E4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.AzureServiceBus", "source\GreenEnergyHub.Queues.AzureServiceBus\GreenEnergyHub.Queues.AzureServiceBus.csproj", "{6F5DBFF4-8E7B-4372-BBC9-DF7E02D79D1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection", "source\GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection\GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection.csproj", "{7AD8292C-8D03-4890-8102-D98B18466622}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.Kafka", "source\GreenEnergyHub.Queues.Kafka\GreenEnergyHub.Queues.Kafka.csproj", "{F0F4BE02-B97E-4023-B7BE-3DA59F3A3F36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection", "source\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection.csproj", "{306F6DFD-E9FA-4E10-B139-493D4EE77FBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging", "..\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj", "{A484BD03-DECE-42F1-9BD6-8A2EE77B9D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.Tests", "source\GreenEnergyHub.Queues.Tests\GreenEnergyHub.Queues.Tests.csproj", "{4E39936C-AD5E-41DA-8641-A40C915EABAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFDD421C-B920-4B35-A9BB-2BC26A629E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFDD421C-B920-4B35-A9BB-2BC26A629E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFDD421C-B920-4B35-A9BB-2BC26A629E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFDD421C-B920-4B35-A9BB-2BC26A629E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F5DBFF4-8E7B-4372-BBC9-DF7E02D79D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5DBFF4-8E7B-4372-BBC9-DF7E02D79D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5DBFF4-8E7B-4372-BBC9-DF7E02D79D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5DBFF4-8E7B-4372-BBC9-DF7E02D79D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AD8292C-8D03-4890-8102-D98B18466622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AD8292C-8D03-4890-8102-D98B18466622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AD8292C-8D03-4890-8102-D98B18466622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AD8292C-8D03-4890-8102-D98B18466622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F4BE02-B97E-4023-B7BE-3DA59F3A3F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F4BE02-B97E-4023-B7BE-3DA59F3A3F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F4BE02-B97E-4023-B7BE-3DA59F3A3F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F4BE02-B97E-4023-B7BE-3DA59F3A3F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306F6DFD-E9FA-4E10-B139-493D4EE77FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{306F6DFD-E9FA-4E10-B139-493D4EE77FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{306F6DFD-E9FA-4E10-B139-493D4EE77FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{306F6DFD-E9FA-4E10-B139-493D4EE77FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A484BD03-DECE-42F1-9BD6-8A2EE77B9D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A484BD03-DECE-42F1-9BD6-8A2EE77B9D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A484BD03-DECE-42F1-9BD6-8A2EE77B9D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A484BD03-DECE-42F1-9BD6-8A2EE77B9D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E39936C-AD5E-41DA-8641-A40C915EABAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E39936C-AD5E-41DA-8641-A40C915EABAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E39936C-AD5E-41DA-8641-A40C915EABAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E39936C-AD5E-41DA-8641-A40C915EABAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

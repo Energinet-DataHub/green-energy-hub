@@ -14,15 +14,20 @@
 
 using System.Threading.Tasks;
 using GreenEnergyHub.Messaging;
-using GreenEnergyHub.Queues;
 
-namespace Energinet.DataHub.Ingestion.Tests.Application
+namespace GreenEnergyHub.Queues
 {
-    public class HubMessageQueueDispatcherStub : IHubMessageQueueDispatcher
+    /// <summary>
+    /// This provides an interface for dispatching messages to a queue.
+    /// </summary>
+    public interface IHubMessageQueueDispatcher
     {
-        public Task DispatchAsync(IHubMessage hubMessage)
-        {
-            return Task.CompletedTask;
-        }
+        /// <summary>
+        /// Dispatches an IHubMessage to an outside service.
+        /// </summary>
+        /// <param name="hubMessage"><see cref="IHubMessage"/>The message to
+        /// dispatch.</param>
+        /// <returns>A Task.</returns>
+        Task DispatchAsync(IHubMessage hubMessage);
     }
 }

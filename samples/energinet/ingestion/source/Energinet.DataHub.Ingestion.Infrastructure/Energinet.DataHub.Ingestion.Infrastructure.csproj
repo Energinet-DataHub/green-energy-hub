@@ -25,12 +25,13 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.0.0" />
-      <PackageReference Include="Confluent.Kafka" Version="1.5.2" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.10" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues.AzureServiceBus\GreenEnergyHub.Queues.AzureServiceBus.csproj" />
+      <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka\GreenEnergyHub.Queues.Kafka.csproj" />
+      <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues\GreenEnergyHub.Queues.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.Ingestion.Application\Energinet.DataHub.Ingestion.Application.csproj" />
     </ItemGroup>
 

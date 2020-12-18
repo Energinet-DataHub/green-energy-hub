@@ -16,10 +16,10 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Energinet.DataHub.Ingestion.Infrastructure.Queue;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.MessageRouting;
+using GreenEnergyHub.Queues;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 
@@ -60,7 +60,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
         /// <param name="logger">A logger.</param>
         [FunctionName("Router")]
         public async Task RunAsync(
-            [EventHubTrigger("%inboundqueuename%")] QueueMessage eventData,
+            [EventHubTrigger("%REQUEST_QUEUE_CONSUMER_GROUP%", Connection = "REQUEST_QUEUE_CONNECTION_STRING")] MessageEnvelope eventData,
             ILogger logger)
         {
             if (eventData is null)

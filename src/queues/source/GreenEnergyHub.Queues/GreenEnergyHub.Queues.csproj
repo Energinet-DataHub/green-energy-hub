@@ -17,17 +17,10 @@ limitations under the License.
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Nullable>enable</Nullable>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <RootNamespace>Energinet.DataHub.Ingestion.Application</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj" />
-      <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues\GreenEnergyHub.Queues.csproj" />
-      <ProjectReference Include="..\Energinet.DataHub.Ingestion.Domain\Energinet.DataHub.Ingestion.Domain.csproj" />
+      <ProjectReference Include="..\..\..\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj" />
     </ItemGroup>
 
 </Project>

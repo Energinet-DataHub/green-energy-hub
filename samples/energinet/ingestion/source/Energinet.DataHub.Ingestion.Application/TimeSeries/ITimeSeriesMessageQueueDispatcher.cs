@@ -12,21 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
+using GreenEnergyHub.Queues;
 
-namespace GreenEnergyHub.Messaging.MessageTypes
+namespace Energinet.DataHub.Ingestion.Application.TimeSeries
 {
     /// <summary>
-    /// Used for decorating HubMessages with name of designated queue/topic.
+    /// Message queue dispatcher for time series messages
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class HubMessageQueueAttribute : Attribute
+    public interface ITimeSeriesMessageQueueDispatcher : IHubMessageQueueDispatcher
     {
-        public HubMessageQueueAttribute(string queueName)
-        {
-            QueueName = queueName;
-        }
-
-        public string QueueName { get; }
     }
 }

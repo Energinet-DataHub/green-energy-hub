@@ -17,7 +17,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
-using GreenEnergyHub.Messaging.MessageQueue;
 
 namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
 {
@@ -27,7 +26,7 @@ namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
     public class ChangeOfSupplierCommandHandler : HubCommandHandler<ChangeOfSupplierMessage>
     {
         private readonly IRuleEngine<ChangeOfSupplierMessage> _rulesEngine;
-        private readonly IHubMessageServiceBusDispatcher _messageDispatcher;
+        private readonly IMarketDataMessageQueueDispatcher _messageDispatcher;
 
         /// <summary>
         /// Builds a ChangeOfSupplierCommandHandler which validates messages using a
@@ -38,7 +37,7 @@ namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
         /// <param name="messageServiceBusDispatcher">Service Bus dispatcher to use when request is successfully validated.</param>
         public ChangeOfSupplierCommandHandler(
             IRuleEngine<ChangeOfSupplierMessage> rulesEngine,
-            IHubMessageServiceBusDispatcher messageServiceBusDispatcher)
+            IMarketDataMessageQueueDispatcher messageServiceBusDispatcher)
         {
             _rulesEngine = rulesEngine;
             _messageDispatcher = messageServiceBusDispatcher;

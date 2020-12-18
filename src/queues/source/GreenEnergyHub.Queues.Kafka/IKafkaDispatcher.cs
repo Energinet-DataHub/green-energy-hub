@@ -12,19 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Azure.Messaging.ServiceBus;
+using System.Threading.Tasks;
 
-namespace Energinet.DataHub.Ingestion.Infrastructure.ServiceBus
+namespace GreenEnergyHub.Queues.Kafka
 {
     /// <summary>
-    /// Factory for creating service bus client.
+    /// Kafka based message queue dispatcher
     /// </summary>
-    public interface IServiceBusClientFactory
+    public interface IKafkaDispatcher
     {
         /// <summary>
-        /// Build a new Service Bus client instance.
+        /// Dispatches a <see cref="MessageEnvelope"/>
         /// </summary>
-        /// <returns>The client instance.</returns>
-        ServiceBusClient Build();
+        /// <param name="messageEnvelope"></param>
+        /// <param name="topic"></param>
+        /// <returns>Task</returns>
+        Task DispatchAsync(MessageEnvelope messageEnvelope, string topic);
+
+        /// <summary>
+        /// Disposes instance
+        /// </summary>
+        void Dispose();
     }
 }
