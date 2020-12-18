@@ -8,22 +8,33 @@ updates:
     directory: "/samples/energinet/synchronous-ingestor/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "Microsoft.CodeAdnalysis.FxCopAnalyzers"
+        versions: ["3.3.x"]
 
   - package-ecosystem: "nuget"
     directory: "/samples/energinet/soap-schema-validator/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "Microsoft.CodeAdnalysis.FxCopAnalyzers"
+        versions: ["3.3.x"]
 
   - package-ecosystem: "nuget"
     directory: "/samples/energinet/soap-to-json-adapter/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "Microsoft.CodeAdnalysis.FxCopAnalyzers"
+        versions: ["3.3.x"]
 
   - package-ecosystem: "nuget"
     directory: "/src/messaging/"
     schedule:
       interval: "weekly"
     ignore:
+      - dependency-name: "Microsoft.CodeAdnalysis.FxCopAnalyzers"
+        versions: ["3.3.x"]
       # .NET 5 dependency: no Azure Functions support yet
       # https://github.com/Azure/azure-functions-host/issues/6674
       - dependency-name: "Microsoft.Extensions.DependencyInjection"
@@ -33,13 +44,22 @@ updates:
     directory: "/src/master-data/GreenEnergyHub.MasterData/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "Microsoft.CodeAdnalysis.FxCopAnalyzers"
+        versions: ["3.3.x"]
 
   - package-ecosystem: "nuget"
     directory: "/src/validation-reports/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "Microsoft.CodeAdnalysis.FxCopAnalyzers"
+        versions: ["3.3.x"]
 
   - package-ecosystem: "nuget"
     directory: "/src/validators/GreenEnergyHub.JSONSchemaValidator/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "Microsoft.CodeAdnalysis.FxCopAnalyzers"
+        versions: ["3.3.x"]
