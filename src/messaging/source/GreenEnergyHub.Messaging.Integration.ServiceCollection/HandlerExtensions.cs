@@ -33,8 +33,8 @@ namespace GreenEnergyHub.Messaging.Integration.ServiceCollection
     {
         /// <summary>
         /// Searches the provided assemblies, as well as the common assemblies,
-        /// to find the IHubActionHandlers, IHubMessages, IHubRuleSets,
-        /// IEndpoints, IRuleEngines, the rules (represented as a list of
+        /// to find the HubRequestHandlers, HubCommandHandlers, IHubMessages, IHubRuleSets,
+        /// IRuleEngines, the rules (represented as a list of
         /// Types), the IEndpointResolver, and the IHubMessageTypeMap, and to
         /// automatically register and provide this instances on function
         /// startup.

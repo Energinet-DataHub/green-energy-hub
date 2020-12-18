@@ -169,6 +169,10 @@ hsvig
 html
 http
 https
+HubCommandHandlers
+HubRequestHandlers
+ie
+IHubMessages
 InArea
 IncludedProductCharacteristic
 IndustryClassification
