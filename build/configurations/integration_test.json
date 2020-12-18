@@ -1,0 +1,9 @@
+{
+    "resource_group_name" : "rg-Helpers-D",
+    "_env_name_comment":"use short lower case env_name values as it is used to name azure resources",
+    "env_name":"inttest",
+    "tenant_id":"f7619355-6c67-4100-9a78-1847f30742e2",
+    "subscription_id":"d252b8da-1db8-44f7-bd6e-8010cc01382b",
+    "client_id":"92441655-3eb7-473a-84b5-35360961c1a0",
+    "object_id":"ddecdfa7-28fc-4cec-bead-1185be97aecf"
+}

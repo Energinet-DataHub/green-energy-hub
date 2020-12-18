@@ -1,7 +1,35 @@
 name: Databricks Aggregation Job Infrastructure Deploy
 
 on:
-  workflow_dispatch:
+  #push:
+    # branches:
+    #   - main
+    # paths:
+    #   - build/terraform/aggregation_streaming_job/**
+    #   - src/streaming/aggregation-jobs/**
+    #   - .github/workflows/aggregation-job-cd.yml 
+    workflow_dispatch:
+      inputs:
+        resource_group_name:
+          description: 'Resource Group Name You Want to Use for Deployment'
+          required: true
+          default: ''
+        env_name:
+          description: 'Env name used to postfix resources names'
+          required: true
+          default: ''
+        client_id:
+          description: 'Service Principal Client (Application) Id'
+          required: true
+          default: ''
+        object_id:
+          description: 'Service Principal Object Id'
+          required: true
+          default: ''
+        client_secret:
+          description: 'Service Principal Secret'
+          required: true
+          default: ''
 
 jobs:
   # Set the job key. The key is displayed as the job name
@@ -16,7 +44,6 @@ jobs:
     env:
       WHEEL_VERSION: "1.0"
       WHEEL_STORAGE_ADDRESS: https://enrgtwheels.blob.core.windows.net/wheels/
-      TF_VAR_python_main_file: "dbfs:/streaming/hourly_consumption_aggregation.py"
 
     steps:
       
@@ -34,6 +61,11 @@ jobs:
           SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
         run: |  
           echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+
+      # Run only if workflow started on demand (manually triggered)
+      - name: Set TF Vars from Pipeline Inputs
+        uses: ./.github/actions/override_env_settings
+        if:   github.event.inputs.resource_group_name
     
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.2.1
@@ -71,18 +103,10 @@ jobs:
       - name: Copy Wheel File to Databricks Workspace
         uses: ./.github/actions/copy-wheel-file-to-databricks
 
-      - name: Copy Job Definition to DBFS
+      - name: Copy Job Definitions to DBFS
         run: |    
-          dbfs cp --overwrite ./src/streaming/hourly_consumption_aggregation.py ${{ env.TF_VAR_python_main_file }}
+          dbfs cp --overwrite -r ./src/streaming/aggregation-jobs "dbfs:/streaming"
       
-      - name: Obtain Keyvault ID
-        id: obtain-keyvault-id 
-        uses: ./.github/actions/obtain-keyvault-id
-
-      - name:  Set keyvault_id TF Var  
-        run: | 
-          echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id.outputs.keyvault-id }}" >> $GITHUB_ENV
-
       - name: Configure Terraform Backend
         uses: ./.github/actions/configure-terraform-backend
         with:

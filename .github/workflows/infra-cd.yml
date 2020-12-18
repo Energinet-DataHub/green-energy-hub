@@ -1,0 +1,107 @@
+name: Main Terraform CD
+
+on:
+  #push:
+    # branches: 
+    #   - main 
+    # paths:
+    #   - build/terraform/infra/**
+    #   - build/terraform/modules/**
+    #   - .github/workflows/infra-cd.yml
+  workflow_dispatch:
+    inputs:
+      resource_group_name:
+        description: 'Resource Group Name You Want to Use for Deployment'
+        required: true
+        default: ''
+      env_name:
+        description: 'Env name used to postfix resources names'
+        required: true
+        default: ''
+      client_id:
+        description: 'Service Principal Client (Application) Id'
+        required: true
+        default: ''
+      object_id:
+        description: 'Service Principal Object Id'
+        required: true
+        default: ''
+      client_secret:
+        description: 'Service Principal Secret'
+        required: true
+        default: ''
+
+jobs:
+  infra_deploy:
+    name: Deploy solution infrastructure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Read Pipeline Configuration
+        uses: ./.github/actions/read-pipeline-configuration
+
+      - name: Read Client Secret
+        env:
+          SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
+        run: |  
+          echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+
+      # Run only if workflow started on demand (manually triggered)
+      - name: Set TF Vars from Pipeline Inputs
+        uses: ./.github/actions/override_env_settings
+        if:   github.event.inputs.resource_group_name
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1.2.1
+        with:
+          terraform_wrapper: false
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+      - name: Azure CLI Install and Login
+        uses: ./.github/actions/azure-cli-install-login
+      
+      - name: Check If Terraform State Storage exists
+        id: state-storage-exists
+        run: |
+          storage_exists=$(az storage account check-name --name 'enrgtfstate${{ env.ENV_NAME }}' | python3 -c "import sys, json; print(not json.load(sys.stdin)['nameAvailable'])")
+          echo "::set-output name=state-storage-exists::${storage_exists}"
+
+      #Create TF State Container if needed
+      - name: Create Terraform State Storage
+        run: |
+          storage_name="enrgtfstate${{ env.ENV_NAME }}"
+          az storage account create --resource-group ${{ env.RESOURCE_GROUP_NAME }} --name $storage_name --sku Standard_LRS --encryption-services blob
+          account_key=$(az storage account keys list --resource-group ${{ env.RESOURCE_GROUP_NAME }} --account-name $storage_name --query '[0].value' -o tsv)
+          az storage container create --name tfstate --account-name $storage_name --account-key $account_key
+        if: steps.state-storage-exists.outputs.state-storage-exists == 'False'
+
+      - name: Set TF Vars
+        run: |
+          echo "TF_VAR_current_spn_object_id=${{ env.ARM_OBJECT_ID }}" >> $GITHUB_ENV 
+          echo "TF_VAR_current_tenant_id=${{ env.ARM_TENANT_ID }}" >> $GITHUB_ENV 
+          echo "TF_VAR_environment=${{ env.ENV_NAME }}" >> $GITHUB_ENV 
+          echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
+
+      - name: Configure Terraform Backend
+        uses: ./.github/actions/configure-terraform-backend
+        with:
+          backend-file-path: "./build/terraform/infra/backend.tf"
+          resource-group-name: "${{ env.RESOURCE_GROUP_NAME }}"
+          storage-account-name: "enrgtfstate${{ env.ENV_NAME }}"
+
+      - name: Terraform Init
+        working-directory: ./build/terraform/infra
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./build/terraform/infra
+        run: terraform apply -no-color -auto-approve
+        continue-on-error: false

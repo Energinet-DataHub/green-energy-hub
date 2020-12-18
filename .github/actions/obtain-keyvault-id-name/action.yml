@@ -1,0 +1,20 @@
+name: 'Obtain Keyvault ID & Name'
+description: 'Obtains Key Vault Id and Name. Note: expects Azure CLI to be installed on a runner.'
+outputs:
+  keyvault-id: 
+    description: "Keyvault Id"
+    value: ${{ steps.obtain-keyvault-id-name.outputs.keyvault-id }}
+  keyvault-name: 
+    description: "Keyvault Name"
+    value: ${{ steps.obtain-keyvault-id-name.outputs.keyvault-name }}
+runs:
+  using: "composite"
+  steps:
+    - id: obtain-keyvault-id-name
+      run: |
+        keyvault_details=$(az keyvault show -g ${{ env.RESOURCE_GROUP_NAME }} -n "kvshared${{ env.ENV_NAME }}")
+        keyvault_id=$(echo $keyvault_details | python -c "import sys, json; print(json.load(sys.stdin)['id'])")
+        keyvault_name=$(echo $keyvault_details | python -c "import sys, json; print(json.load(sys.stdin)['name'])")
+        echo "::set-output name=keyvault-id::$keyvault_id"
+        echo "::set-output name=keyvault-name::$keyvault_name"
+      shell: bash

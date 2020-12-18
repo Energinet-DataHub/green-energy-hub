@@ -2,15 +2,6 @@ variable "databricks_id" {
   type = string
 }
 
-variable "storage_account_name" {
-  type = string
-}
-
-variable "streaming_container_name" {
-  type = string
-  default = "messagedata"
-}
-
 variable "python_main_file" {
   type = string
 }
@@ -23,22 +14,22 @@ variable "keyvault_id" {
   type = string
 }
 
-variable "storage_account_key" {
+variable "receiver_eh_input_secret_name" {
   type = string
 }
 
-variable "input_eventhub_listen_connection_string" {
+variable "streaming_container_name" {
   type = string
 }
 
-variable "valid_output_eventhub_send_connection_string" {
+variable "cosmos_container" {
   type = string
 }
 
-variable "invalid_output_eventhub_send_connection_string" {
+variable "resource_group_name" {
   type = string
 }
 
-variable "appinsights_instrumentation_key" {
+variable "environment" {
   type = string
 }

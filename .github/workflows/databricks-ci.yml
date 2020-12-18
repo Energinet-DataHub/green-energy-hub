@@ -2,8 +2,9 @@ name: Databricks CI
 
 on:
   pull_request:
-    branches: [ main ]
-  workflow_dispatch: {}
+    branches: 
+      - main 
+  workflow_dispatch:
 
 jobs:
   databricks-ci:

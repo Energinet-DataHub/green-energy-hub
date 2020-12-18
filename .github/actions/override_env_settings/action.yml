@@ -1,0 +1,17 @@
+name: 'Override Env Variables'
+description: 'Should be called when environment setting should be overriden by input parameters when pipeline triggered on demand.'
+runs:
+  using: "composite"
+  steps: 
+    # add-mask does not work for inputs, using workaround from: https://github.com/actions/runner/issues/643 
+    - run: |
+        echo "ARM_CLIENT_ID=${{ github.event.inputs.client_id }}" >> $GITHUB_ENV
+        echo "ARM_OBJECT_ID=${{ github.event.inputs.object_id }}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_SECRET=${{ github.event.inputs.client_secret }}" >> $GITHUB_ENV
+        SECRET=jq -r '.inputs.client_secret' $GITHUB_EVENT_PATH
+        echo "::add-mask::$SECRET"
+        echo "ARM_CLIENT_SECRET=${SECRET}" >> $GITHUB_ENV
+        echo "ENV_NAME=${{ github.event.inputs.env_name }}" >> $GITHUB_ENV
+        echo "RESOURCE_GROUP_NAME=${resource_group_name}" >> $GITHUB_ENV
+        echo "RESOURCE_GROUP_NAME=${{ github.event.inputs.resource_group_name }}" >> $GITHUB_ENV
+      shell: bash

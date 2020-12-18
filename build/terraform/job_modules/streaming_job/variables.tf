@@ -30,6 +30,14 @@ variable "invalid_output_eventhub_send_connection_string" {
   type = string
 }
 
+variable "cosmosdb-account-endpoint" {
+  type = string
+}
+
+variable "cosmosdb-account-primary-key" {
+  type = string
+}
+
 variable "appinsights_instrumentation_key" {
   type = string
 }

@@ -76,11 +76,12 @@ for job_run_id in args.job_run_ids :
             break
         else:
             attempts += 1
-            print(f'Job run {run_id} with job id: {job_id} failed. Retrying...')
             # Get new run id for particular job
-            if attempts <= retries :
-              run_list_response = databricks_request(f'jobs/runs/list?job_id={job_id}&active_only=true&limit=1')
-              run_id = run_list_response.json()['runs'][0]['run_id']
+            if attempts < retries :
+                print(f'Job run {run_id} with job id: {job_id} failed. Retrying...')
+                run_list_response = databricks_request(f'jobs/runs/list?job_id={job_id}&active_only=true&limit=1')
+                run_id = run_list_response.json()['runs'][0]['run_id']
+
     
     if attempts > retries :
         print(f'Job {job_id} failed.')

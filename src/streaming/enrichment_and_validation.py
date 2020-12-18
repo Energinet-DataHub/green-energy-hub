@@ -49,6 +49,10 @@ p.add('--invalid-output-eh-connection-string', type=str, required=True,
       help='Output Event Hub connection string for invalid time series points', env_var='GEH_STREAMING_INVALID_OUTPUT_EH_CONNECTION_STRING')
 p.add('--telemetry-instrumentation-key', type=str, required=True,
       help='Instrumentation key used for telemetry')
+p.add('--cosmosdb-account-endpoint', type=str, required=True,
+      help='Post office outgoing queue CosmoDB endpoint')
+p.add('--cosmosdb-account-primary-key', type=str, required=True,
+      help='Post office outgoing queue CosmoDB key')
 
 args, unknown_args = p.parse_known_args()
 

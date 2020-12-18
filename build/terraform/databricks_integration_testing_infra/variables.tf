@@ -26,3 +26,9 @@ variable "current_tenant_id" {
   type          = string
   description   = "tenant Id"
 }
+
+variable "env_count" {
+  type          = number
+  description   = "Count of Environments to Create"
+  default       = 3
+}

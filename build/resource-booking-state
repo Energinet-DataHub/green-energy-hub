@@ -1,0 +1,9 @@
+evhar-inboundqueue-connection-string-0|free|INPUT
+evhar-inboundqueue-connection-string-1|free|INPUT
+evhar-inboundqueue-connection-string-2|free|INPUT
+energinet-docs-container-0|free|COSMOS
+energinet-docs-container-1|free|COSMOS
+energinet-docs-container-2|free|COSMOS
+messagedata0|free|OUTPUT_CONTAINER
+messagedata1|free|OUTPUT_CONTAINER
+messagedata2|free|OUTPUT_CONTAINER

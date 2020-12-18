@@ -32,6 +32,8 @@ jobs:
         
       - name: Read Pipeline Configuration
         uses: ./.github/actions/read-pipeline-configuration
+        with:
+          config-file: sandbox.json
 
       - name: Read Client Secret
         env:

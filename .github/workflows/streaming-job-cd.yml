@@ -1,7 +1,34 @@
 name: Streaming Job Deploy (Enrichment and Validation)
-# Run this workflow on demand
 on:
+  #push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - build/terraform/databricks_streaming_job/**
+  #     - build/terraform/job_modules/**
+  #     - .github/workflows/streaming-job-cd.yml 
   workflow_dispatch:
+    inputs:
+      resource_group_name:
+        description: 'Resource Group Name You Want to Use for Deployment'
+        required: true
+        default: ''
+      env_name:
+        description: 'Env name used to postfix resources names'
+        required: true
+        default: ''
+      client_id:
+        description: 'Service Principal Client (Application) Id'
+        required: true
+        default: ''
+      object_id:
+        description: 'Service Principal Object Id'
+        required: true
+        default: ''
+      client_secret:
+        description: 'Service Principal Secret'
+        required: true
+        default: ''
 
 jobs:
   streaming_job_deploy:
@@ -13,7 +40,7 @@ jobs:
     env:
       WHEEL_VERSION: "1.0"
       WHEEL_STORAGE_ADDRESS: https://enrgtwheels.blob.core.windows.net/wheels/
-      TF_VAR_python_main_file: "dbfs:/streaming/enrichment_and_validation.py"
+      MAIN_PYTHON_FILE: "dbfs:/streaming/enrichment_and_validation.py"
 
     steps:
       
@@ -31,6 +58,11 @@ jobs:
           SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
         run: |  
           echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+
+      # Run only if workflow started on demand (manually triggered)
+      - name: Set TF Vars from Pipeline Inputs
+        uses: ./.github/actions/override_env_settings
+        if:   github.event.inputs.resource_group_name
     
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.2.1
@@ -46,27 +78,26 @@ jobs:
       - name: Azure CLI Install and Login
         uses: ./.github/actions/azure-cli-install-login
 
-      - name: Set TF Vars
-        run: |
-          echo "TF_VAR_client_secret=${{ env.ARM_CLIENT_SECRET }}" >> $GITHUB_ENV
-          echo "TF_VAR_tenant_id=${{ env.ARM_TENANT_ID }}" >> $GITHUB_ENV
-          echo "TF_VAR_client_id=${{ env.ARM_CLIENT_ID }}" >> $GITHUB_ENV
-          echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_storage_account_name=enrgnt${{ env.ENV_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_backend_storage_name=entfstate${{ env.ENV_NAME }}" >> $GITHUB_ENV
-
       - name: Obtain Databricks Workspace ID and Url
         id: obtain-db-id-url
         uses: ./.github/actions/obtain-databricks-id-url
         
-      - name: Set databricks_id TF Var  
-        run: |
-          echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV 
-
       - name: Databricks CLI Install And Connect
         uses: ./.github/actions/databricks-cli-install-connect
         with:
           workspace-url: ${{ steps.obtain-db-id-url.outputs.workspace-url }}
+
+      - name: Obtain Keyvault ID and Name
+        id: obtain-keyvault-id-name 
+        uses: ./.github/actions/obtain-keyvault-id-name
+
+      - name: Set TF Vars
+        run: |
+          echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_storage_account_name=timeseriesdata${{ env.ENV_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id-name.outputs.keyvault-id }}" >> $GITHUB_ENV
+          echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV
+          echo "TF_VAR_python_main_file=${{ env.MAIN_PYTHON_FILE}}" >> $GITHUB_ENV  
 
       - uses: suisei-cn/actions-download-file@v1
         name: Download the Wheel File
@@ -80,15 +111,7 @@ jobs:
       - name: Copy Job Definition to DBFS
         id: copy_files_todbfs
         run: |    
-          dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py ${{ env.TF_VAR_python_main_file }}
-      
-      - name: Obtain Keyvault ID
-        id: obtain-keyvault-id 
-        uses: ./.github/actions/obtain-keyvault-id
-
-      - name:  Set keyvault_id TF Var  
-        run: | 
-          echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id.outputs.keyvault-id }}" >> $GITHUB_ENV
+          dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py ${{ env.MAIN_PYTHON_FILE }}
 
       - name: Configure Terraform Backend
         uses: ./.github/actions/configure-terraform-backend

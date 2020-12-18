@@ -46,3 +46,8 @@ variable dependencies {
   description = "A mapping of dependencies which this module depends on."
   default     = []
 }
+
+variable is_hns_enabled {
+  description = "Enable Hierarchical Namespace"
+  default = false
+}

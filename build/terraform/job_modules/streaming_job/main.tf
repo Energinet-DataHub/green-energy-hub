@@ -45,7 +45,9 @@ resource "databricks_job" "streaming_job" {
       "--streaming-checkpoint-path=checkpoints/streaming",
       "--valid-output-eh-connection-string=${var.valid_output_eventhub_send_connection_string}",
       "--invalid-output-eh-connection-string=${var.invalid_output_eventhub_send_connection_string}",
-      "--telemetry-instrumentation-key=${var.appinsights_instrumentation_key}"
+      "--telemetry-instrumentation-key=${var.appinsights_instrumentation_key}",
+      "--cosmosdb-account-endpoint=${var.cosmosdb-account-endpoint}",
+      "--cosmosdb-account-primary-key=${var.cosmosdb-account-primary-key}"
     ]
   }
 

@@ -1,31 +1,64 @@
 name: Databricks Integration Test
 
 on:
+  # push:
   # pull_request:
-  #   branches: [ main ]
-  workflow_dispatch: {}
+  #   branches: 
+  #      - main 
+  workflow_dispatch:
+    inputs:
+      resource_group_name:
+        description: 'Resource Group Name You Want to Use for Deployment'
+        required: true
+        default: ''
+      env_name:
+        description: 'Env name used to postfix resources names'
+        required: true
+        default: ''
+      client_id:
+        description: 'Service Principal Client (Application) Id'
+        required: true
+        default: ''
+      object_id:
+        description: 'Service Principal Object Id'
+        required: true
+        default: ''
+      client_secret:
+        description: 'Service Principal Secret'
+        required: true
+        default: ''
 
 jobs:
   build-and-deploy:
     name: Run DataBricks integration test
     runs-on: ubuntu-latest
     env:
-      TF_VAR_python_main_file: "dbfs:/streaming/enrichment_and_validation.py"
-      TF_VAR_wheel_file: "dbfs:/streaming/geh_stream-1.0-py3-none-any.whl"
+      WHEEL_VERSION: "1.0"
+      WHEEL_STORAGE_ADDRESS: https://enrgtwheels.blob.core.windows.net/wheels/
+      MAIN_PYTHON_FILE: "dbfs:/streaming/enrichment_and_validation.py"
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Construct Wheel File Name
+      uses: ./.github/actions/construct-wheel-file-name
+
     - name: Read Pipeline Configuration
       uses: ./.github/actions/read-pipeline-configuration
-      with:
-        config-file: 'integration-tests.json'
+      # with:
+      #   config-file: 'integration-tests.json'
 
     - name: Read Client Secret
       env:
         SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
       run: |  
         echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+
+    # Run only if workflow started on demand (manually triggered)
+    - name: Set TF Vars from Pipeline Inputs
+      uses: ./.github/actions/override_env_settings
+      if:   github.event.inputs.resource_group_name
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1.2.1
@@ -40,53 +73,69 @@ jobs:
 
     - name: Azure CLI Install and Login
       uses: ./.github/actions/azure-cli-install-login
+
+    - name: Setup storage credentials
+      run: |
+        booking_connection_string=$(az storage account show-connection-string --name "enrgstate${{ env.ENV_NAME }}" --resource-group ${{ env.RESOURCE_GROUP_NAME }} --output tsv)
+        echo ::add-mask::$booking_connection_string
+        echo "BOOKING_STORAGE_CONNECTION_STRING=$booking_connection_string" >> $GITHUB_ENV
+        output_storage_key=$(az storage account keys list --resource-group ${{ env.RESOURCE_GROUP_NAME }} --account-name "timeseriesdata${{ env.ENV_NAME }}" --query '[0].value' -o tsv)
+        echo ::add-mask::$output_storage_key
+        echo "OUTPUT_STORAGE_KEY"=$output_storage_key >> $GITHUB_ENV
+
     # book resources
     - name: Book resources for integration test
       id: rb-book
       uses: ./.github/actions/resource-book
       with:
         action: book
-        azure-storage-connection-string: $(echo ${{ secrets.RSM_STORAGE_ACCOUNT }} | base64 -d)
-        group: 'INPUT,VALID_OUTPUT,INVALID_OUTPUT,OUTPUT_CONTAINER'
-        state-blob: state
-        state-container: pipeline-state
-
-    - name: Set TF Vars
-      run: |
-        connectionString=$(echo ${{ secrets.EVENT_HUB_INTEGRATION_TEST }} | base64 -d)
-        ehInputCS=$(echo "$connectionString;EntityPath=${{ env.RB_OUT_INPUT }}")
-        ehVoutputCS=$(echo "$connectionString;EntityPath=${{ env.RB_OUT_VALID_OUTPUT }}")
-        ehIoutputCS=$(echo "$connectionString;EntityPath=${{ env.RB_OUT_INVALID_OUTPUT }}")
-
-        echo "TF_VAR_input_eventhub_listen_connection_string=$ehInputCS" >> $GITHUB_ENV
-        echo "TF_VAR_valid_output_eventhub_send_connection_string=$ehVoutputCS" >> $GITHUB_ENV
-        echo "TF_VAR_invalid_output_eventhub_send_connection_string=$ehIoutputCS" >> $GITHUB_ENV
-        echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
-        echo "TF_VAR_storage_account_name=enrgnt${{ env.ENV_NAME }}" >> $GITHUB_ENV
-        echo "TF_VAR_storage_account_key=${{ secrets.STORAGE_ACCOUNT_KEY_INTEGRATION_TEST }}" >> $GITHUB_ENV
-        echo "TF_VAR_streaming_container_name=${{ env.RB_OUT_OUTPUT_CONTAINER }}" >> $GITHUB_ENV
-        echo "TF_VAR_appinsights_instrumentation_key=${{ secrets.APP_INSIGHTS_INSTRUMENTATION_KEY_INTEGRATION_TEST }}" >> $GITHUB_ENV
+        azure-storage-connection-string: ${{ env.BOOKING_STORAGE_CONNECTION_STRING }}
+        group: 'INPUT,COSMOS,OUTPUT_CONTAINER'
+        state-blob: resource-booking-state
+        state-container: it-booking-state
 
     - name: Obtain Databricks Workspace ID and Url
       id: obtain-db-id-url
       uses: ./.github/actions/obtain-databricks-id-url
-      
-    - name: Set databricks_id TF Var  
+
+    - name: Obtain Keyvault ID and Name
+      id: obtain-keyvault-id-name 
+      uses: ./.github/actions/obtain-keyvault-id-name
+
+    - name: Set TF Vars
       run: |
+        receiver_eh_input_secret_name="receiver-${{ env.RB_OUT_INPUT }}"
+        streaming_container_name=${{ env.RB_OUT_OUTPUT_CONTAINER }}
+        cosmos_container=${{ env.RB_OUT_COSMOS }}
+
+        echo "TF_VAR_sender_eh_input_secret_name=$sender_eh_input_secret_name" >> $GITHUB_ENV
+        echo "TF_VAR_receiver_eh_input_secret_name=$receiver_eh_input_secret_name" >> $GITHUB_ENV
+        echo "TF_VAR_streaming_container_name=$streaming_container_name" >> $GITHUB_ENV
+        echo "TF_VAR_cosmos_container=$cosmos_container" >> $GITHUB_ENV
+        echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
+        echo "TF_VAR_environment=${{ env.ENV_NAME }}" >> $GITHUB_ENV
+        echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id-name.outputs.keyvault-id }}" >> $GITHUB_ENV
         echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV 
+        echo "TF_VAR_python_main_file=${{ env.MAIN_PYTHON_FILE}}" >> $GITHUB_ENV 
+      
     - name: Databricks CLI Install And Connect
       uses: ./.github/actions/databricks-cli-install-connect
       with:
         workspace-url: ${{ steps.obtain-db-id-url.outputs.workspace-url }}
 
+    - uses: suisei-cn/actions-download-file@v1
+      name: Download the Wheel File
+      with:
+        url: "${{ env.WHEEL_STORAGE_ADDRESS }}${{ env.WHEEL_FILE_NAME }}"
+        target: wheels/
+
+    - name: Copy Wheel File to Databricks Workspace
+      uses: ./.github/actions/copy-wheel-file-to-databricks
+
     - name: Copy Job Definition to DBFS
       id: copy_files_todbfs
       run: |    
-        dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py ${{ env.TF_VAR_python_main_file }}
-    
-    - name: Obtain Keyvault ID
-      id: obtain-keyvault-id 
-      uses: ./.github/actions/obtain-keyvault-id
+        dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py ${{ env.MAIN_PYTHON_FILE }}
 
     - name: Terraform Databricks Init
       working-directory: ./build/terraform/databricks_streaming_job_it
@@ -106,24 +155,31 @@ jobs:
 
     - name: Databricks CLI Run the Job
       id: run-job
-      uses: ./.github/actions/databricks-cli-run-job
+      uses: ./.github/actions/databricks-cli-run-jobs
       with:
-        job-id: ${{ steps.terraform-apply.outputs.job-id }}
-        
+        job-ids: ${{ steps.terraform-apply.outputs.job-id }}
+
     - name: Check Job Status
       working-directory: ./build
       run: |
         pip install configargparse
         pip install requests
-        python -u job_status_check.py --job-run-ids  ${{ steps.run-job.outputs.job-run-id }} --retries 2 --databricks-url 'https://${{ steps.obtain-db-id-url.outputs.workspace-url }}' --token ${{ env.DATABRICKS_AAD_TOKEN }}
+        python -u job_status_check.py --job-run-ids  ${{ steps.run-job.outputs.job-run-ids }} --retries 2 --databricks-url 'https://${{ steps.obtain-db-id-url.outputs.workspace-url }}' --token ${{ env.DATABRICKS_AAD_TOKEN }}
+   
+    - name: Setup Sender Event Hub Connection String
+      run: |
+        keyvault_secret_details=$(az keyvault secret show --name "sender-${{ env.RB_OUT_INPUT }}" --vault-name ${{ steps.obtain-keyvault-id-name.outputs.keyvault-name }})
+        sender_eh_connection_string=$(echo $keyvault_secret_details | python -c "import sys, json; print(json.load(sys.stdin)['value'])")
+        echo ::add-mask::$sender_eh_connection_string
+        echo "SENDER_EVENT_HUB_CONNECTION_STRING=$sender_eh_connection_string" >> $GITHUB_ENV
 
-    - name: Integration tests
+    - name: Integration Tests
       uses: ./.github/actions/databricks-integration-test
       with:
-        storage-account-name: ${{ env.TF_VAR_storage_account_name }}
-        storage-account-key: ${{ secrets.STORAGE_ACCOUNT_KEY_INTEGRATION_TEST }}
+        storage-account-name: "timeseriesdata${{ env.ENV_NAME }}​​"
+        storage-account-key: ${{ env.OUTPUT_STORAGE_KEY }}
         storage-container-name: ${{ env.RB_OUT_OUTPUT_CONTAINER }}
-        input-eh-connection-string: ${{ env.TF_VAR_input_eventhub_listen_connection_string }}
+        input-eh-connection-string: ${{ env.SENDER_EVENT_HUB_CONNECTION_STRING }} 
         delta-lake-output-path: delta/meter-data
 
     #Final steps, running always, event if workflow has been canceled
@@ -134,13 +190,13 @@ jobs:
       run: |
         terraform destroy -no-color -auto-approve
 
-    - name: Release resources after integration test
+    - name: Release Resources After Integration Test
       id: rb-release
       if: ${{ always() && steps.rb-book.outputs.result == 'True' }}
       uses: ./.github/actions/resource-book
       with:
         action: release
-        azure-storage-connection-string: $(echo ${{ secrets.RSM_STORAGE_ACCOUNT }} | base64 -d)
+        azure-storage-connection-string: ${{ env.BOOKING_STORAGE_CONNECTION_STRING }}
         resource: ${{ steps.rb-book.outputs.output }}
-        state-blob: state
-        state-container: pipeline-state
+        state-blob: resource-booking-state
+        state-container: it-booking-state
