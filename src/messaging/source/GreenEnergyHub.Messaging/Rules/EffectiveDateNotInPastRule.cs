@@ -14,6 +14,7 @@
 #nullable disable
 using System;
 using GreenEnergyHub.Messaging.MessageTypes;
+using NodaTime;
 using NRules.Fluent.Dsl;
 using NRules.RuleModel;
 
@@ -41,7 +42,7 @@ namespace GreenEnergyHub.Messaging.Rules
 
         private RuleResult DoValidation(TMessage message)
         {
-            if (message.StartDate < DateTime.UtcNow)
+            if (message.StartDate < SystemClock.Instance.GetCurrentInstant())
             {
                 return new RuleResult(GetType().Name, message.Transaction.MRID, false, "Effective date was in the past");
             }

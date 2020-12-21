@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using Newtonsoft.Json;
+using NodaTime;
 using NUnit.Framework;
 using RulesEngine.Models;
 using ValidatorTool.RuleEngines;
@@ -49,7 +50,7 @@ namespace ValidatorTool.Tests
         [Test]
         public async Task EvaluateRules_NegativeConsumerId_ReturnsFalse()
         {
-            var meterMessage = new MeterMessage(1, 1, DateTime.UtcNow, -1);
+            var meterMessage = new MeterMessage(1, 1, SystemClock.Instance.GetCurrentInstant(), -1);
             var result = await _engine.ValidateAsync(meterMessage).ConfigureAwait(false);
             Assert.IsFalse(result, $"consumerId in {meterMessage} should not be negative");
         }
@@ -57,7 +58,7 @@ namespace ValidatorTool.Tests
         [Test]
         public async Task EvaluateRules_NegativeMeterId_ReturnsFalse()
         {
-            var meterMessage = new MeterMessage(1, -1, DateTime.UtcNow, 1);
+            var meterMessage = new MeterMessage(1, -1, SystemClock.Instance.GetCurrentInstant(), 1);
             var result = await _engine.ValidateAsync(meterMessage).ConfigureAwait(false);
             Assert.IsFalse(result, $"meterId in {meterMessage} should not be negative");
         }
@@ -65,7 +66,7 @@ namespace ValidatorTool.Tests
         [Test]
         public async Task EvaluateRules_PositiveIds_ReturnsTrue()
         {
-            var meterMessage = new MeterMessage(1, 1, DateTime.UtcNow, 1);
+            var meterMessage = new MeterMessage(1, 1, SystemClock.Instance.GetCurrentInstant(), 1);
             var result = await _engine.ValidateAsync(meterMessage).ConfigureAwait(false);
             Assert.IsTrue(result);
         }

@@ -23,6 +23,7 @@ limitations under the License.
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.EventHubs" Version="4.1.1" />
+    <PackageReference Include="NodaTime" Version="3.0.3" />
     <PackageReference Include="NRules" Version="0.9.0" />
     <PackageReference Include="RulesEngine" Version="2.1.1" />
   </ItemGroup>

@@ -31,14 +31,14 @@ namespace ConsoleApp
         private readonly ILogger<QueueService> _logger;
         private readonly IHostApplicationLifetime _appLifetime;
         private readonly IConfiguration _config;
-        private readonly EventHubProducerClient _ehClient;
+        private readonly EventHubProducerClient _eventHubClient;
 
-        public QueueService(ILogger<QueueService> logger, IHostApplicationLifetime appLifetime, IConfiguration config, EventHubProducerClient ehClient)
+        public QueueService(ILogger<QueueService> logger, IHostApplicationLifetime appLifetime, IConfiguration config, EventHubProducerClient eventHubClient)
         {
             _logger = logger;
             _appLifetime = appLifetime;
             _config = config;
-            _ehClient = ehClient;
+            _eventHubClient = eventHubClient;
         }
 
         public async Task DoWorkAsync()
@@ -52,7 +52,7 @@ namespace ConsoleApp
             {
                 // Create a batch of events and continue adding until no longer able
                 batchCount = 0;
-                using var eventBatch = await _ehClient.CreateBatchAsync().ConfigureAwait(false);
+                using var eventBatch = await _eventHubClient.CreateBatchAsync().ConfigureAwait(false);
                 while (amountLeft > 0)
                 {
                     var meterReadDate = DateTime.UtcNow.ToString("O");
@@ -70,7 +70,7 @@ namespace ConsoleApp
                 }
 
                 // Use the producer client to send the batch of events to the event hub
-                await _ehClient.SendAsync(eventBatch).ConfigureAwait(false);
+                await _eventHubClient.SendAsync(eventBatch).ConfigureAwait(false);
                 if (amountLeft == 0)
                 {
                     _logger.LogInformation($"Final flush - A batch of {batchCount} events has been published.");

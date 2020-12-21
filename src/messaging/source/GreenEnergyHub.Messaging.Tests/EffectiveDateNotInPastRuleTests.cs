@@ -19,6 +19,7 @@ using GreenEnergyHub.Messaging.Rules;
 using GreenEnergyHub.Messaging.Tests.TestHelpers;
 using Moq;
 using Moq.AutoMock;
+using NodaTime;
 using NRules;
 using NRules.Fluent;
 using Xunit;
@@ -46,7 +47,7 @@ namespace GreenEnergyHub.Messaging.Tests
         [Fact]
         public void RulesEngine_FactWithPastDate_YieldsInvalidRuleResult()
         {
-            var pastDate = DateTime.UtcNow - TimeSpan.FromDays(1);
+            var pastDate = SystemClock.Instance.GetCurrentInstant() - Duration.FromDays(1);
             var fact = _fixture.Build<MockHasStartDate>()
                 .With(_ => _.StartDate, pastDate)
                 .Create();
@@ -62,7 +63,7 @@ namespace GreenEnergyHub.Messaging.Tests
         [Fact]
         public void RulesEngine_FactWithFutureDate_YieldsValidRuleResult()
         {
-            var futureDate = DateTime.UtcNow + TimeSpan.FromDays(1);
+            var futureDate = SystemClock.Instance.GetCurrentInstant() + Duration.FromDays(1);
             var fact = _fixture.Build<MockHasStartDate>()
                         .With(_ => _.StartDate, futureDate)
                         .Create();

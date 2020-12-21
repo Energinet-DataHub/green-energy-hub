@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using NodaTime;
 
 namespace Energinet.DataHub.Ingestion.Domain.Messages
 {
@@ -22,12 +23,12 @@ namespace Energinet.DataHub.Ingestion.Domain.Messages
         /// When the time series period starts.
         /// That is the same as when the first time series point starts.
         /// </summary>
-        public DateTime? Start { get; set; }
+        public Instant? Start { get; set; }
 
         /// <summary>
         /// When the time series period ends.
         /// That is the same as when the last time series point ends.
         /// </summary>
-        public DateTime? End { get; set; }
+        public Instant? End { get; set; }
     }
 }

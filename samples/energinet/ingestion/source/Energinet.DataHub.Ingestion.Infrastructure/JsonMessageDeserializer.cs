@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.Messaging;
 using Microsoft.Extensions.Logging;
 
@@ -25,18 +26,21 @@ namespace Energinet.DataHub.Ingestion.Infrastructure
     public class JsonMessageDeserializer : IHubRehydrator
     {
         private readonly ILogger<JsonMessageDeserializer> _logger;
+        private readonly IJsonSerializer _jsonSerializer;
 
         public JsonMessageDeserializer(
-            ILogger<JsonMessageDeserializer> logger)
+            ILogger<JsonMessageDeserializer> logger,
+            IJsonSerializer jsonSerializer)
         {
             _logger = logger;
+            _jsonSerializer = jsonSerializer;
         }
 
         public async Task<IHubMessage?> RehydrateAsync(Stream message, Type messageType)
         {
             try
             {
-                var request = await JsonSerializer.DeserializeAsync(message, messageType).ConfigureAwait(false);
+                var request = await _jsonSerializer.DeserializeAsync(message, messageType).ConfigureAwait(false);
                 return request as IHubMessage;
             }
             catch (JsonException e)
@@ -52,7 +56,7 @@ namespace Energinet.DataHub.Ingestion.Infrastructure
             try
             {
                 var genericType = typeof(IEnumerable<>).MakeGenericType(messageType);
-                var messages = await JsonSerializer.DeserializeAsync(message, genericType).ConfigureAwait(false);
+                var messages = await _jsonSerializer.DeserializeAsync(message, genericType).ConfigureAwait(false);
                 return new List<IHubMessage>((IEnumerable<IHubMessage>)messages);
             }
             catch (JsonException e)

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using NodaTime;
 
 namespace Energinet.DataHub.Ingestion.Domain.Messages
 {
@@ -40,6 +41,6 @@ namespace Energinet.DataHub.Ingestion.Domain.Messages
         /// <summary>
         /// Calculated start time for this data point
         /// </summary>
-        public DateTime? Time { get; set; }
+        public Instant? Time { get; set; }
     }
 }

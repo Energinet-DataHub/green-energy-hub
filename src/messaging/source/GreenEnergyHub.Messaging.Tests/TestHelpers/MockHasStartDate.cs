@@ -15,6 +15,7 @@
 using System;
 using GreenEnergyHub.Messaging.MessageTypes;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
+using NodaTime;
 
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
@@ -25,8 +26,8 @@ namespace GreenEnergyHub.Messaging.Tests.TestHelpers
     {
         public Transaction Transaction { get; set; } = Transaction.NewTransaction();
 
-        public DateTime RequestDate { get; set; } = DateTime.Now;
+        public Instant RequestDate { get; set; } = SystemClock.Instance.GetCurrentInstant();
 
-        public DateTime StartDate { get; set; }
+        public Instant StartDate { get; set; }
     }
 }

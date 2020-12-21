@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Copyright 2020 Energinet DataHub A/S
+#
+# Licensed under the Apache License, Version 2.0 (the "License2");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Json", "source\GreenEnergyHub.Json\GreenEnergyHub.Json.csproj", "{60FF6407-E93B-4D00-98C8-8AF69630E67D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Json.Tests", "source\GreenEnergyHub.Json.Tests\GreenEnergyHub.Json.Tests.csproj", "{0416897A-246D-4C6B-8C14-A4579DCACB1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60FF6407-E93B-4D00-98C8-8AF69630E67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60FF6407-E93B-4D00-98C8-8AF69630E67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60FF6407-E93B-4D00-98C8-8AF69630E67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60FF6407-E93B-4D00-98C8-8AF69630E67D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0416897A-246D-4C6B-8C14-A4579DCACB1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0416897A-246D-4C6B-8C14-A4579DCACB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0416897A-246D-4C6B-8C14-A4579DCACB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0416897A-246D-4C6B-8C14-A4579DCACB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0416897A-246D-4C6B-8C14-A4579DCACB1F} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
+	EndGlobalSection
+EndGlobal

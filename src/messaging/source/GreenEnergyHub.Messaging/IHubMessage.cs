@@ -14,6 +14,7 @@
 
 using System;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
+using NodaTime;
 
 namespace GreenEnergyHub.Messaging
 {
@@ -32,6 +33,6 @@ namespace GreenEnergyHub.Messaging
         /// The date the message was sent.
         /// </summary>
         /// <value>A DateTime.</value>
-        DateTime RequestDate { get; set; }
+        Instant RequestDate { get; set; }
     }
 }

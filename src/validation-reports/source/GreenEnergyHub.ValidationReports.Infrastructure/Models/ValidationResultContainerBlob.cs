@@ -16,6 +16,7 @@ using System;
 using System.Text.Json;
 using GreenEnergyHub.ValidationReports.Domain.Models;
 using Microsoft.Azure.Cosmos.Table;
+using NodaTime;
 
 namespace GreenEnergyHub.ValidationReports.Infrastructure.Models
 {
@@ -25,7 +26,7 @@ namespace GreenEnergyHub.ValidationReports.Infrastructure.Models
             string? partitionKey,
             string? rowKey,
             Guid? correlationId,
-            DateTime? created,
+            Instant? created,
             string? systemUser,
             string? id,
             string? validationResults)
@@ -46,7 +47,7 @@ namespace GreenEnergyHub.ValidationReports.Infrastructure.Models
         /// <summary>
         /// Creation time and date
         /// </summary>
-        public DateTime? Created { get; set; }
+        public Instant? Created { get; set; }
 
         /// <summary>
         /// Owner of the data
@@ -79,7 +80,7 @@ namespace GreenEnergyHub.ValidationReports.Infrastructure.Models
                 resultContainer.SystemUser,
                 resultContainer.MarketEvaluationPointMrId,
                 resultContainer.CorrelationId,
-                resultContainer.Created?.ToDateTimeUtc(),
+                resultContainer.Created,
                 resultContainer.SystemUser,
                 resultContainer.MarketEvaluationPointMrId,
                 JsonSerializer.Serialize(resultContainer.ValidationResults));

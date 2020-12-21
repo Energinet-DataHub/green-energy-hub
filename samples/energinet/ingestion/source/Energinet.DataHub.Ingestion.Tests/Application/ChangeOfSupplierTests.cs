@@ -19,12 +19,14 @@ using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Application;
 using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Infrastructure;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
 using GreenEnergyHub.Queues;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NSubstitute;
 using Xunit;
 
 namespace Energinet.DataHub.Ingestion.Tests.Application
@@ -38,7 +40,10 @@ namespace Energinet.DataHub.Ingestion.Tests.Application
         {
             var services = new ServiceCollection();
             services.AddGreenEnergyHub(typeof(ChangeOfSupplierMessage).Assembly);
-            services.AddScoped<IHubRehydrator>(sp => new JsonMessageDeserializer(NSubstitute.Substitute.For<ILogger<JsonMessageDeserializer>>()));
+            services.AddScoped<IHubRehydrator>(
+                sp => new JsonMessageDeserializer(
+                    Substitute.For<ILogger<JsonMessageDeserializer>>(),
+                    new JsonSerializer()));
             services.AddScoped<IHubMessageQueueDispatcher, HubMessageQueueDispatcherStub>();
             var serviceProvider = services.BuildServiceProvider();
             var hubRequestMediator = serviceProvider.GetRequiredService<IHubRequestMediator>();
@@ -72,7 +77,8 @@ namespace Energinet.DataHub.Ingestion.Tests.Application
         private async Task<IEnumerable<IHubMessage>?> RehydrateHubRequestsFromFile()
         {
             await using var inputRequestStream = File.OpenRead("Assets/ChangeSupplierRequestArray.json");
-            return await _hubRehydrator.RehydrateCollectionAsync(inputRequestStream, typeof(ChangeOfSupplierMessage)).ConfigureAwait(false);
+            return await _hubRehydrator.RehydrateCollectionAsync(inputRequestStream, typeof(ChangeOfSupplierMessage))
+                .ConfigureAwait(false);
         }
     }
 }

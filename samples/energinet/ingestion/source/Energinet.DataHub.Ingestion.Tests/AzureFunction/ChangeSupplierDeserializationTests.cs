@@ -18,8 +18,10 @@ using System.IO;
 using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Infrastructure;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
 using Microsoft.Extensions.Logging;
+using NodaTime;
 using NSubstitute;
 using Xunit;
 
@@ -31,7 +33,7 @@ namespace Energinet.DataHub.Ingestion.Tests.AzureFunction
         public async Task Can_deserialize_incoming_json()
         {
             var logger = Substitute.For<ILogger<JsonMessageDeserializer>>();
-            var serializer = new JsonMessageDeserializer(logger);
+            var serializer = new JsonMessageDeserializer(logger, new JsonSerializer());
             var targetType = typeof(ChangeOfSupplierMessage);
 
             var expected = new ChangeOfSupplierMessage();
@@ -40,7 +42,7 @@ namespace Energinet.DataHub.Ingestion.Tests.AzureFunction
             expected.Consumer.Name = "Hans Hansen";
             expected.Consumer.MRID = new MRID("1234567890", "ARR");
             expected.MarketEvaluationPoint = new MarketEvaluationPoint("123456789123456789");
-            expected.StartDate = new DateTime(2020, 9, 30, 22, 0, 0, 1, DateTimeKind.Utc);
+            expected.StartDate = Instant.FromUtc(2020, 9, 30, 22, 0, 0) + Duration.FromMilliseconds(1);
             expected.Transaction = new Transaction("a01dbf8b-ea99-4798-9bd4-ed85ecf79897");
 
             await using var fs = File.OpenRead("Assets/ChangeSupplier.json");

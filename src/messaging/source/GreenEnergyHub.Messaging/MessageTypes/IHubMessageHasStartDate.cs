@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using NodaTime;
 
 namespace GreenEnergyHub.Messaging.MessageTypes
 {
@@ -23,6 +24,6 @@ namespace GreenEnergyHub.Messaging.MessageTypes
         /// <summary>
         /// The start date field
         /// </summary>
-        DateTime StartDate { get; set; }
+        Instant StartDate { get; set; }
     }
 }

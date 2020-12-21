@@ -26,9 +26,11 @@ limitations under the License.
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.10" />
+      <PackageReference Include="NodaTime.Serialization.SystemTextJson" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.Json\GreenEnergyHub.Json.csproj" />
       <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues.AzureServiceBus\GreenEnergyHub.Queues.AzureServiceBus.csproj" />
       <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka\GreenEnergyHub.Queues.Kafka.csproj" />
       <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues\GreenEnergyHub.Queues.csproj" />

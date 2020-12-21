@@ -14,6 +14,7 @@
 
 using System;
 using System.Text.Json.Serialization;
+using NodaTime;
 
 namespace ValidatorTool
 {
@@ -23,7 +24,7 @@ namespace ValidatorTool
         {
         }
 
-        public MeterMessage(int meterValue, int meterId, DateTime dateTime, int customerId)
+        public MeterMessage(int meterValue, int meterId, Instant dateTime, int customerId)
         {
             MeterValue = meterValue;
             MeterId = meterId;
@@ -41,7 +42,7 @@ namespace ValidatorTool
         public int MeterId { get; set; }
 
         [JsonPropertyName("meterReadDate")]
-        public DateTime MeterDateTime { get; set; }
+        public Instant MeterDateTime { get; set; }
 
         [JsonPropertyName("customerId")]
         public int CustomerId { get; set; }

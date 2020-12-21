@@ -41,6 +41,7 @@ limitations under the License.
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\shared\GreenEnergyHub\source\GreenEnergyHub.Json\GreenEnergyHub.Json.csproj" />
     <ProjectReference Include="..\GreenEnergyHub.ValidationReports.Domain\GreenEnergyHub.ValidationReports.Domain.csproj" />
     <ProjectReference Include="..\GreenEnergyHub.ValidationReports.Infrastructure\GreenEnergyHub.ValidationReports.Infrastructure.csproj" />
   </ItemGroup>

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Text.Json;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.ValidationReports.Domain.Models;
 using GreenEnergyHub.ValidationReports.Infrastructure.Models;
 using Microsoft.Azure.WebJobs;
@@ -21,11 +21,11 @@ namespace GreenEnergyHub.ValidationReports.ValidationReportsPersister
 {
     public class ReportPersister
     {
-        private readonly JsonSerializerOptions _options;
+        private readonly IJsonSerializer _jsonSerializer;
 
-        public ReportPersister(JsonSerializerOptions options)
+        public ReportPersister(IJsonSerializer jsonSerializer)
         {
-            _options = options;
+            _jsonSerializer = jsonSerializer;
         }
 
         [FunctionName("ReportPersister")]
@@ -34,7 +34,7 @@ namespace GreenEnergyHub.ValidationReports.ValidationReportsPersister
             [EventHubTrigger("evh-validation-reports-sandbox", Connection = "VALIDATION_REPORTS_QUEUE")]
             string queueItem)
         {
-            var report = JsonSerializer.Deserialize<ValidationResultContainer>(queueItem, _options);
+            var report = _jsonSerializer.Deserialize<ValidationResultContainer>(queueItem);
 
             return ValidationResultContainerBlob.FromReport(report);
         }

@@ -13,6 +13,8 @@
 // limitations under the License.
 using System.Text.Json;
 using Energinet.DataHub.Ingestion.Domain.TimeSeries;
+using NodaTime;
+using NodaTime.Serialization.SystemTextJson;
 using Xunit;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -90,13 +92,16 @@ namespace Energinet.DataHub.Ingestion.Tests.Domain
 }";
 
             var prettyPrintOptions = new JsonSerializerOptions { WriteIndented = true };
-            var timeSeriesMessage = JsonSerializer.Deserialize<TimeSeriesMessage>(expectedTimeSeriesJson);
+            prettyPrintOptions.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+            var nodaTimeOptions = new JsonSerializerOptions();
+            nodaTimeOptions.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+            var timeSeriesMessage = JsonSerializer.Deserialize<TimeSeriesMessage>(expectedTimeSeriesJson, nodaTimeOptions);
 
             // Act
             var actual = JsonSerializer.Serialize(timeSeriesMessage, prettyPrintOptions);
 
             // Assert
-            Assert.Equal(expectedTimeSeriesJson, actual);
+            Assert.Equal(expectedTimeSeriesJson, actual.Replace("\r\n", "\n"));
         }
     }
 }

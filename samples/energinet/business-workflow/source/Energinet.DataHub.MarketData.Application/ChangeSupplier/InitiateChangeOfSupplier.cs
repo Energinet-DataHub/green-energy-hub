@@ -16,6 +16,7 @@ using System;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.MessageTypes;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
+using NodaTime;
 
 namespace Energinet.DataHub.MarketData.Application.ChangeSupplier
 {
@@ -53,11 +54,11 @@ namespace Energinet.DataHub.MarketData.Application.ChangeSupplier
         /// <summary>
         /// Start of occurrence
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public Instant StartDate { get; set; }
 
         /// <summary>
         /// The date this request was made.
         /// </summary>
-        public DateTime RequestDate { get; set; } = DateTime.UtcNow;
+        public Instant RequestDate { get; set; } = SystemClock.Instance.GetCurrentInstant();
     }
 }

@@ -19,6 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NodaTime;
 using ValidatorTool;
 using ValidatorTool.RuleEngines;
 using ValidatorTool.RuleEngines.FluentValidation;
@@ -62,7 +63,7 @@ namespace ConsoleApp
                 var customerId = random.Next(-5, 15);
                 var meterId = random.Next(-5, 15);
                 var meterValue = random.Next(-5, 15);
-                var meterReadDate = DateTime.UtcNow;
+                var meterReadDate = SystemClock.Instance.GetCurrentInstant();
                 messages.Add(new MeterMessage(meterValue, meterId, meterReadDate, customerId));
             }
 

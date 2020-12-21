@@ -14,6 +14,7 @@
 
 using System;
 using System.Threading.Tasks;
+using NodaTime;
 using ValidatorTool;
 using ValidatorTool.RuleEngines;
 using ValidatorTool.RuleEngines.NRules;
@@ -36,28 +37,28 @@ namespace ValidatorToolTests
         [Fact]
         public async Task NonNegativeValueAndValidCustomerId_ReturnsTrue()
         {
-            var m = new MeterMessage(1, 1, DateTime.UtcNow.ToUniversalTime(), 1);
+            var m = new MeterMessage(1, 1, SystemClock.Instance.GetCurrentInstant(), 1);
             Assert.True(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
 
         [Fact]
         public async Task NonNegativeValueAndInvalidCustomerId_ReturnsFalse()
         {
-            var m = new MeterMessage(1, 1, DateTime.UtcNow.ToUniversalTime(), 6);
+            var m = new MeterMessage(1, 1, SystemClock.Instance.GetCurrentInstant(), 6);
             Assert.False(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
 
         [Fact]
         public async Task NegativeValueAndValidCustomerId_ReturnsFalse()
         {
-            var m = new MeterMessage(-1, 1, DateTime.UtcNow.ToUniversalTime(), 3);
+            var m = new MeterMessage(-1, 1, SystemClock.Instance.GetCurrentInstant(), 3);
             Assert.False(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
 
         [Fact]
         public async Task NegativeValueAndInvalidCustomerId_ReturnsFalse()
         {
-            var m = new MeterMessage(-1, 1, DateTime.UtcNow.ToUniversalTime(), 6);
+            var m = new MeterMessage(-1, 1, SystemClock.Instance.GetCurrentInstant(), 6);
             Assert.False(await _ruleEngine.ValidateAsync(m).ConfigureAwait(false));
         }
     }

@@ -14,6 +14,7 @@
 
 using System;
 using System.Text.Json.Serialization;
+using NodaTime;
 
 namespace GreenEnergyHub.Messaging.MessageTypes.Common
 {
@@ -37,7 +38,7 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
         /// <summary>
         /// Time of when the time series was created
         /// </summary>
-        public DateTime? CreatedDateTime { get; set; }
+        public Instant? CreatedDateTime { get; set; }
 
         /// <summary>
         /// The ID and Type of the sender of the time series message

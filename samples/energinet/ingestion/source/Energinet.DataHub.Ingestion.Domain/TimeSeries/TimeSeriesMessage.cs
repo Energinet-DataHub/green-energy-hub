@@ -14,10 +14,11 @@
 
 using System;
 using System.Text.Json.Serialization;
-using Energinet.DataHub.Ingestion.Domain.Messages;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.MessageTypes;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
+using NodaTime;
+using Period = Energinet.DataHub.Ingestion.Domain.Messages.Period;
 
 namespace Energinet.DataHub.Ingestion.Domain.TimeSeries
 {
@@ -94,6 +95,6 @@ namespace Energinet.DataHub.Ingestion.Domain.TimeSeries
         /// <summary>
         /// The date this request was made.
         /// </summary>
-        public DateTime RequestDate { get; set; } = DateTime.UtcNow;
+        public Instant RequestDate { get; set; } = SystemClock.Instance.GetCurrentInstant();
     }
 }
