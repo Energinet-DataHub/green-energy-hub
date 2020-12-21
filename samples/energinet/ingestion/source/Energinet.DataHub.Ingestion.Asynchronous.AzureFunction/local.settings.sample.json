@@ -13,7 +13,7 @@
     "MARKET_DATA_CONNECTION_STRING": "Service Bus connection string",
     "MARKET_DATA_QUEUE": "Service bus queue name for market data messages",
     "TIMESERIES_QUEUE_TOPIC": "<Name of topic for timeseries messages>",
-    "TIMESERIES_QUEUE_URL":  "<Service bus host name>.servicebus.windows.net:9093",
+    "TIMESERIES_QUEUE_URL": "<Service bus host name>.servicebus.windows.net:9093",
     "TIMESERIES_QUEUE_CONNECTION_STRING": "Endpoint=sb://<Service bus namespace fqdn>/;SharedAccessKeyName=<Name of shared access key>;SharedAccessKey=<Value of shared key>",
     "REQUEST_QUEUE_CONSUMER_GROUP": "<Event hub consumer group name>",
     "REQUEST_QUEUE_CONNECTION_STRING": "<Event hub connection string>",

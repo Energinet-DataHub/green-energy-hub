@@ -30,7 +30,7 @@ namespace GreenEnergyHub.Queues
             }
 
             var requestType = ExtractMessageTypeNameFrom(hubMessage);
-            var serializedActionRequest = JsonSerializer.Serialize(hubMessage);
+            var serializedActionRequest = JsonSerializer.Serialize<object>(hubMessage);
             return new MessageEnvelope(serializedActionRequest, requestType);
         }
 

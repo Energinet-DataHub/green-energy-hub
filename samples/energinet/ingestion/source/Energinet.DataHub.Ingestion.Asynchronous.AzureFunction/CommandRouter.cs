@@ -73,9 +73,9 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
                 throw new ArgumentNullException(nameof(logger));
             }
 
-            logger.LogInformation("C# Event Hub trigger function processed a request.");
+            logger.LogInformation("Async Ingestor started processing a request.");
 
-            var requestType = Type.GetType(eventData.MessageType);
+            var requestType = _resolver.GetTypeByCategory(eventData.MessageType);
             if (requestType == null)
             {
                 return; // TODO: go to error queue or storage?

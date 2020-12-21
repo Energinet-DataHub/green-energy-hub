@@ -45,6 +45,7 @@ limitations under the License.
         <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka\GreenEnergyHub.Queues.Kafka.csproj" />
         <ProjectReference Include="..\Energinet.DataHub.Ingestion.Application\Energinet.DataHub.Ingestion.Application.csproj" />
+        <ProjectReference Include="..\Energinet.DataHub.Ingestion.Domain\Energinet.DataHub.Ingestion.Domain.csproj" />
         <ProjectReference Include="..\Energinet.DataHub.Ingestion.Infrastructure\Energinet.DataHub.Ingestion.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

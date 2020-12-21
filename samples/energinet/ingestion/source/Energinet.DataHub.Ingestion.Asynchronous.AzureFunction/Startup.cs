@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using Energinet.DataHub.Ingestion.Application.TimeSeries;
 using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction;
 using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration;
 using Energinet.DataHub.Ingestion.Domain.TimeSeries;
@@ -38,6 +39,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
 
             // Register services
             builder.Services.AddScoped<IHubRehydrator, JsonMessageDeserializer>();
+            builder.Services.AddGreenEnergyHub(typeof(TimeSeriesCommandHandler).Assembly);
             builder.Services.AddGreenEnergyHub(typeof(TimeSeriesMessage).Assembly);
             builder.Services.AddMarketDataMessageQueue();
             builder.Services.AddTimeSeriesMessageQueue();
