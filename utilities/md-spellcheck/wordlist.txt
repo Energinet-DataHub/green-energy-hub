@@ -84,6 +84,9 @@ deno
 denormalized
 dependabot
 deployable
+Dequeue
+dequeue
+dequeues
 Deserialization
 deserialize
 DetailMeasurementMeteringPointCharacteristic
@@ -119,6 +122,7 @@ EnergySupplier
 EnergySupplierID
 enqueue
 enqueueing
+entrypoint
 enum
 env
 envolope
@@ -413,6 +417,7 @@ synchronizer
 SynchronousIngestor
 Tandrup
 TaxIndicator
+TBD
 TechStack
 TemplateFunction
 TemplateSolution
