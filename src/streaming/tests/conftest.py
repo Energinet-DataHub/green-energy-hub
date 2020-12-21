@@ -21,6 +21,8 @@ from pyspark import SparkConf
 from pyspark.sql import SparkSession, DataFrame
 import pandas as pd
 import time
+import uuid
+
 from pyspark.sql.functions import col, lit, to_timestamp, explode
 from geh_stream.codelists import MarketEvaluationPointType, Quality
 from geh_stream.streaming_utils import Enricher
@@ -203,9 +205,17 @@ def enriched_data_factory(parsed_data_factory, master_data_factory):
                 inmeteringgridarea_domain_mrid="2",
                 inmeteringgridownerarea_domain_mrid="3",
                 outmeteringgridarea_domain_mrid="4",
-                outmeteringgridownerarea_domain_mrid="5"):
+                outmeteringgridownerarea_domain_mrid="5",
+                do_fail_enrichment=False):
         parsed_data = parsed_data_factory(dict(market_evaluation_point_mrid=market_evaluation_point_mrid, quantity=quantity))
         denormalized_parsed_data = denormalize_parsed_data(parsed_data)
+
+        # Should join find a matching master data record or not?
+        # If so use a non matching mRID for the master data record.
+        if do_fail_enrichment:
+            non_matching_market_evaluation_point_mrid = str(uuid.uuid4())
+            market_evaluation_point_mrid = non_matching_market_evaluation_point_mrid
+
         master_data = master_data_factory(market_evaluation_point_mrid,
                                           market_evaluation_point_type,
                                           marketparticipant_mrid,
@@ -222,3 +232,9 @@ def enriched_data_factory(parsed_data_factory, master_data_factory):
 @pytest.fixture(scope="session")
 def enriched_data(enriched_data_factory):
     return enriched_data_factory()
+
+
+@pytest.fixture(scope="session")
+def non_enriched_data(enriched_data_factory):
+    """Simulate data with no master data for market evaluation point."""
+    return enriched_data_factory(do_fail_enrichment=True)

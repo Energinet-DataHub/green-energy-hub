@@ -31,7 +31,8 @@ class Validator:
         # They should not be necessary after validation.
         return validated_data \
             .withColumn("IsTimeSeriesPointValid",
-                        col("VR-245-1-Is-Valid")
+                        col("VR-200-Is-Valid")
+                        & col("VR-245-1-Is-Valid")
                         & col("VR-250-Is-Valid")
                         & col("VR-251-Is-Valid")
                         & col("VR-611-Is-Valid")

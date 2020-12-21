@@ -79,6 +79,7 @@ def send_invalid_data(batch_df: DataFrame, output_invalid_eh_conf, watch):
              D.first(col("MarketDocument_SenderMarketParticipant_mRID")).alias("SenderMarketParticipant_mRID"),
              D.first(col("MarketDocument_mRID")),
              D.first(col("MktActivityRecord_Status")),
+             D.min(col("VR-200-Is-Valid")),
              D.min(col("VR-245-1-Is-Valid")),
              D.min(col("VR-250-Is-Valid")),
              D.min(col("VR-251-Is-Valid")),

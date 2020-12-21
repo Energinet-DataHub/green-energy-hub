@@ -38,6 +38,10 @@ def test_validator_adds_is_time_series_point_valid_col(validated_data):
     assert has_column(validated_data, "IsTimeSeriesPointValid")
 
 
+def test_validator_adds_vr200_col(validated_data):
+    assert has_column(validated_data, "VR-200-Is-Valid")
+
+
 def test_validator_adds_vr245_1_col(validated_data):
     assert has_column(validated_data, "VR-245-1-Is-Valid")
 

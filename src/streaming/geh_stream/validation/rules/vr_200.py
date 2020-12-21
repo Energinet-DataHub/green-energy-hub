@@ -11,13 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.functions import col
 
 
-def enrich_master_data(parsed_data: DataFrame, master_data: DataFrame):
-    return parsed_data.alias("pd") \
-        .join(master_data.alias("md"),
-              (col("pd.MarketEvaluationPoint_mRID") == col("md.MarketEvaluationPoint_mRID"))
-              & col("pd.Period_Point_ObservationTime").between(col("md.ValidFrom"), col("md.ValidTo")), how="left") \
-        .drop(master_data["ValidFrom"]).drop(master_data["ValidTo"])
+# VR.200
+#
+# Market evaluation point must exist.
+def validate_vr_200(df):
+    return df \
+        .withColumn("VR-200-Is-Valid", col("md.MarketEvaluationPoint_mRID").isNotNull())

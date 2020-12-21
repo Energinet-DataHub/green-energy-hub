@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from pyspark.sql.functions import col
-from geh_stream.codelists import SettlementMethod, MarketEvaluationPointType
+from geh_stream.codelists import MarketEvaluationPointType
 
 
 # VR.250
