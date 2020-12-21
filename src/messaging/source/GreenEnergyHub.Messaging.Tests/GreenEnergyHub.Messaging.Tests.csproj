@@ -24,7 +24,7 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoFixture" Version="4.14.0" />
+        <PackageReference Include="AutoFixture" Version="4.15.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.10" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.10" />
         <PackageReference Include="Moq.AutoMock" Version="2.3.0" />
