@@ -89,7 +89,7 @@ This dictionary can be used for looking up what the name of your CIM attribute s
 | SupplyStart | **DateTime** |
 | TaxIndicator | **TaxIndicator** |
 | TimeseriesID | **Mrid** |
-| InArea | **InMeteringGridAreaDomain** |
+| InArea | **Mrid** |
 | TransactionID | **Mrid** |
 | MPType | **MarketEvaluationPointType** |
 | Unit | **Name** |
