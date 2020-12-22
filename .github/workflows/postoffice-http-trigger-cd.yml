@@ -1,7 +1,13 @@
 name: Postoffice HttpTrigger Function Deploy
 
 on:
-  #push:
+  push:
+    branches: 
+      - main
+    paths:
+      - spikes/postoffice/httpTrigger/**
+      - .github/workflows/postoffice-http-trigger-cd.yml
+
   workflow_dispatch: {}
 
 env:

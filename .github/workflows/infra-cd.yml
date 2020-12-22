@@ -1,13 +1,13 @@
 name: Main Terraform CD
 
 on:
-  #push:
-    # branches: 
-    #   - main 
-    # paths:
-    #   - build/terraform/infra/**
-    #   - build/terraform/modules/**
-    #   - .github/workflows/infra-cd.yml
+  push:
+    branches: 
+      - main 
+    paths:
+      - build/terraform/infra/**
+      - build/terraform/modules/**
+      - .github/workflows/infra-cd.yml
   workflow_dispatch:
     inputs:
       resource_group_name:

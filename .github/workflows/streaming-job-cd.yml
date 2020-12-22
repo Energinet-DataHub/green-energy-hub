@@ -1,12 +1,12 @@
 name: Streaming Job Deploy (Enrichment and Validation)
 on:
   push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - build/terraform/databricks_streaming_job/**
-  #     - build/terraform/job_modules/**
-  #     - .github/workflows/streaming-job-cd.yml 
+    branches:
+      - main
+    paths:
+      - build/terraform/databricks_streaming_job/**
+      - build/terraform/job_modules/**
+      - .github/workflows/streaming-job-cd.yml 
   workflow_dispatch:
     inputs:
       resource_group_name:

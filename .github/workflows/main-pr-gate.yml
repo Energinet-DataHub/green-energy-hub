@@ -2,7 +2,8 @@ name: Main PR Gate
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: 
+      - main
   workflow_dispatch: {}
 
 env:
