@@ -32,20 +32,40 @@ resource "azurerm_cosmosdb_sql_container" "coll" {
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.acc.name
   database_name       = azurerm_cosmosdb_sql_database.db.name
-  partition_key_path  = "/Vendor"
+  partition_key_path  = "/RecipientMarketParticipant_mRID"
 }
 
-module "cosmosdb_account_endpoint" {
-  source       = "../modules/key-vault-secret"
-  name         = "cosmosdb-account-endpoint"
-  value        = azurerm_cosmosdb_account.acc.endpoint
-  key_vault_id = module.kv_shared.id
-  dependencies = [
-      module.kv_shared.dependent_on 
-  ]
+resource "azurerm_cosmosdb_sql_stored_procedure" "bulkPeek" {
+  name                = "bulkPeek"
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.acc.name
+  database_name       = azurerm_cosmosdb_sql_database.db.name
+  container_name      = azurerm_cosmosdb_sql_container.coll.name
+
+  body = file("../../../spikes/postoffice/cosmos-db/bulkPeek.js")
 }
 
-module "cosmosdb-account-primary-key" {
+resource "azurerm_cosmosdb_sql_stored_procedure" "bulkDelete" {
+  name                = "bulkDelete"
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.acc.name
+  database_name       = azurerm_cosmosdb_sql_database.db.name
+  container_name      = azurerm_cosmosdb_sql_container.coll.name
+
+  body = file("../../../spikes/postoffice/cosmos-db/bulkDelete.js")
+}
+
+resource "azurerm_cosmosdb_sql_stored_procedure" "bulkPeekRejected" {
+  name                = "bulkPeekRejected"
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.acc.name
+  database_name       = azurerm_cosmosdb_sql_database.db.name
+  container_name      = azurerm_cosmosdb_sql_container.coll.name
+
+  body = file("../../../spikes/postoffice/cosmos-db/bulkPeekRejected.js")
+}
+
+module "cosmosdb_account_primary_key" {
   source       = "../modules/key-vault-secret"
   name         = "cosmosdb-account-primary-key"
   value        = azurerm_cosmosdb_account.acc.primary_key

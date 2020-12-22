@@ -1,10 +1,11 @@
 name: Postoffice HttpTrigger Function Deploy
 
 on:
+  #push:
   workflow_dispatch: {}
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/postoffice/httpTrigger'    # set this to the path to your web app project, defaults to the repository root
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'spikes/postoffice/httpTrigger'    # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '3.1'              # set this to the dotnet version to use
 
 jobs:
@@ -28,7 +29,7 @@ jobs:
 
       - name: Get Function Name
         run: |  
-          echo "AZURE_FUNCTIONAPP_NAME=postoffice${{ env.ENV_NAME }}" >> $GITHUB_ENV
+          echo "AZURE_FUNCTIONAPP_NAME=postoffice-${{ env.ENV_NAME }}" >> $GITHUB_ENV
 
       - name: Configure Azure CLI
         uses: ./.github/actions/azure-cli-install-login

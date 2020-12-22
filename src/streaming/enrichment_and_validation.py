@@ -43,16 +43,17 @@ p.add('--trigger-interval', type=str, required=False, default='1 second',
       help='Trigger interval to generate streaming batches (format: N seconds)')
 p.add('--streaming-checkpoint-path', type=str, required=False, default="checkpoints/streaming",
       help='Path to checkpoint folder for streaming')
-p.add('--valid-output-eh-connection-string', type=str, required=True,
-      help='Output Event Hub connection string for valid time series points', env_var='GEH_STREAMING_VALID_OUTPUT_EH_CONNECTION_STRING')
-p.add('--invalid-output-eh-connection-string', type=str, required=True,
-      help='Output Event Hub connection string for invalid time series points', env_var='GEH_STREAMING_INVALID_OUTPUT_EH_CONNECTION_STRING')
 p.add('--telemetry-instrumentation-key', type=str, required=True,
       help='Instrumentation key used for telemetry')
-p.add('--cosmosdb-account-endpoint', type=str, required=True,
-      help='Post office outgoing queue CosmoDB endpoint')
-p.add('--cosmosdb-account-primary-key', type=str, required=True,
-      help='Post office outgoing queue CosmoDB key')
+p.add('--cosmos-db-endpoint', type=str, required=True,
+      help='Cosmos DB endpoint')
+p.add('--cosmos-db-masterkey', type=str, required=True,
+      help='Cosmos DB access key')
+p.add('--cosmos-db-database-name', type=str, required=True,
+      help='Cosmos DB database name')
+p.add('--cosmos-db-collection-name', type=str, required=True,
+      help='Cosmos DB collection name')
+
 
 args, unknown_args = p.parse_known_args()
 
@@ -129,8 +130,7 @@ input_eh_conf = {
     'eventhubs.connectionString': \
     sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(input_eh_connection_string),
     'eventhubs.startingPosition': json.dumps(input_eh_starting_position),
-    'eventhubs.prefetchCount': 5000,
-    'maxEventsPerTrigger': args.max_events_per_trigger,
+    'maxEventsPerTrigger': args.max_events_per_trigger
 }
 
 print("Input event hub config:", input_eh_conf)
@@ -189,28 +189,27 @@ validated_data.printSchema()
 
 # %%
 from pyspark.sql import DataFrame
+from pyspark.sql import Window
+
+import pyspark.sql.functions as F
 
 from geh_stream.monitoring import Telemetry, MonitoredStopwatch
 import geh_stream.batch_operations as batch_operations
+from geh_stream.batch_operations import PostOffice
 
 telemetry_client = Telemetry.create_telemetry_client(args.telemetry_instrumentation_key)
 
-valid_output_eh_connection_string = args.valid_output_eh_connection_string
-invalid_output_eh_connection_string = args.invalid_output_eh_connection_string
 output_delta_lake_path = BASE_STORAGE_PATH + args.output_path
 checkpoint_path = BASE_STORAGE_PATH + args.streaming_checkpoint_path
 
-# Event Hub for valid times series points
-valid_output_eh_conf = {
-    'eventhubs.connectionString':
-    sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(valid_output_eh_connection_string),
+writeConfigCosmosDb = {
+    "Endpoint": args.cosmos_db_endpoint,
+    "Masterkey": args.cosmos_db_masterkey,
+    "Database": args.cosmos_db_database_name,
+    "Collection": args.cosmos_db_collection_name,
+    "Upsert": "false"
 }
-
-# Event Hub for invalid time series points
-invalid_output_eh_conf = {
-    'eventhubs.connectionString':
-    sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(invalid_output_eh_connection_string),
-}
+postOffice = PostOffice(writeConfigCosmosDb)
 
 
 def __store_data_frame(batch_df: DataFrame, _: int):
@@ -232,12 +231,10 @@ def __store_data_frame(batch_df: DataFrame, _: int):
         # Make valid time series points available to aggregations (by storing in Delta lake)
         batch_operations.store_valid_data(batch_df, output_delta_lake_path, watch)
 
-        # Forward all valid time series points to message shipping (by sending to Kafka topic)
-        batch_operations.send_valid_data(batch_df, valid_output_eh_conf, watch)
-
-        # Forward all invalid time series points to further processing like sending
-        # a negative acknowledgement to the sending market actor.
-        batch_operations.send_invalid_data(batch_df, invalid_output_eh_conf, watch)
+        # send new time series messages to market actors.
+        # Cosmos DB storage for post office configuration
+        postOffice.sendValid(batch_df)
+        postOffice.sendRejected(batch_df)
 
         unpersist_timer = watch.start_sub_timer("unpersist")
         batch_df = batch_df.unpersist()

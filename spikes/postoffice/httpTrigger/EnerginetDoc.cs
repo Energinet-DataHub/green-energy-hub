@@ -12,41 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Cosmos;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using NodaTime;
 
 namespace Postoffice
 {
     public class EnerginetDoc
     {
-        [JsonProperty(PropertyName = "id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
         public string Vendor { get; set; }
 
         public double MeteringPointValue { get; set; }
 
-        public DateTime TimeStamp { get; set; } = DateTime.UtcNow;
+        public Instant TimeStamp { get; set; } = SystemClock.Instance.GetCurrentInstant();
 
         public static EnerginetDoc FromString(string input)
         {
-            return JsonConvert.DeserializeObject<EnerginetDoc>(input);
+            return JsonSerializer.Deserialize<EnerginetDoc>(input);
         }
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonSerializer.Serialize(this);
         }
     }
 }

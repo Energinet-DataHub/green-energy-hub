@@ -56,7 +56,7 @@ jobs:
         echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
 
     # Run only if workflow started on demand (manually triggered)
-    - name: Set TF Vars from Pipeline Inputs
+    - name: Set Variables from Pipeline Inputs
       uses: ./.github/actions/override_env_settings
       if:   github.event.inputs.resource_group_name
 
@@ -102,16 +102,19 @@ jobs:
       id: obtain-keyvault-id-name 
       uses: ./.github/actions/obtain-keyvault-id-name
 
+      # Try not to reference TF_VAR variables in pipeline yml files, only values should be set and they should be read in terraform only
+      # rather create duplicate ENV pipeline vatiable if needed to separate concerns
     - name: Set TF Vars
       run: |
         receiver_eh_input_secret_name="receiver-${{ env.RB_OUT_INPUT }}"
         streaming_container_name=${{ env.RB_OUT_OUTPUT_CONTAINER }}
-        cosmos_container=${{ env.RB_OUT_COSMOS }}
+        cosmos_coll=${{ env.RB_OUT_COSMOS }}
 
         echo "TF_VAR_sender_eh_input_secret_name=$sender_eh_input_secret_name" >> $GITHUB_ENV
         echo "TF_VAR_receiver_eh_input_secret_name=$receiver_eh_input_secret_name" >> $GITHUB_ENV
         echo "TF_VAR_streaming_container_name=$streaming_container_name" >> $GITHUB_ENV
-        echo "TF_VAR_cosmos_container=$cosmos_container" >> $GITHUB_ENV
+        echo "TF_VAR_cosmos_coll=$cosmos_coll" >> $GITHUB_ENV
+        echo "TF_VAR_environment=${{ env.ENV_NAME }}" >> $GITHUB_ENV 
         echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
         echo "TF_VAR_environment=${{ env.ENV_NAME }}" >> $GITHUB_ENV
         echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id-name.outputs.keyvault-id }}" >> $GITHUB_ENV

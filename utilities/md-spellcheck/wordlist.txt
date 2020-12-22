@@ -90,7 +90,6 @@ deno
 denormalized
 dependabot
 deployable
-Dequeue
 dequeue
 dequeues
 Deserialization
@@ -224,8 +223,8 @@ Lachance
 Lani
 LinkedDomain
 LinkedPowerPlant
-Linter
 linter
+Linter
 linters
 LongDescription
 lookups
@@ -330,11 +329,12 @@ PhysicalConnectionCapacity
 PhysicalStatusOfMeteringPoint
 pluggable
 png
-POBox
 PoBox
+POBox
 POCO
 Poplavskyi
 PostalCode
+PostOffice
 Powershell
 prebuilt
 preconfigured
@@ -469,6 +469,7 @@ UDF
 UI
 UnitName
 UnitType
+unpeeked
 upskilled
 uptime
 user's
@@ -492,8 +493,8 @@ xml
 XmlSchemaValidator
 xmlStream
 xmlValidator
-XSD
 xsd
+XSD
 yml
 Zach
 zmmille

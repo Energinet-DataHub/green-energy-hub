@@ -2,8 +2,8 @@ name: Build and Publish Wheel File
 # Run this workflow on demand
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
     paths:
       - src/streaming/VERSION
   workflow_dispatch:

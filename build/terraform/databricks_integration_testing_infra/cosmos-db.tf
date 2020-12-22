@@ -31,14 +31,37 @@ resource "azurerm_cosmosdb_sql_container" "coll" {
   partition_key_path  = "/Vendor"
 }
 
-module "cosmosdb_account_endpoint" {
-  source       = "../modules/key-vault-secret"
-  name         = "cosmosdb-account-endpoint"
-  value        = azurerm_cosmosdb_account.acc.endpoint
-  key_vault_id = module.kv_shared.id
-  dependencies = [
-      module.kv_shared.dependent_on 
-  ]
+resource "azurerm_cosmosdb_sql_stored_procedure" "bulkPeek" {
+  name                = "bulkPeek"
+  count               = var.env_count
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.acc.name
+  database_name       = azurerm_cosmosdb_sql_database.db.name
+  container_name      = azurerm_cosmosdb_sql_container[count.index].coll.name
+
+  body = file("../../../spikes/postoffice/cosmos-db/bulkPeek.js")
+}
+
+resource "azurerm_cosmosdb_sql_stored_procedure" "bulkDelete" {
+  name                = "bulkDelete"
+  count               = var.env_count
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.acc.name
+  database_name       = azurerm_cosmosdb_sql_database.db.name
+  container_name      = azurerm_cosmosdb_sql_container[count.index].coll.name
+
+  body = file("../../../spikes/postoffice/cosmos-db/bulkDelete.js")
+}
+
+resource "azurerm_cosmosdb_sql_stored_procedure" "bulkPeekRejected" {
+  name                = "bulkPeekRejected"
+  count               = var.env_count
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.acc.name
+  database_name       = azurerm_cosmosdb_sql_database.db.name
+  container_name      = azurerm_cosmosdb_sql_container[count.index].coll.name
+
+  body = file("../../../spikes/postoffice/cosmos-db/bulkPeekRejected.js")
 }
 
 module "cosmosdb-account-primary-key" {

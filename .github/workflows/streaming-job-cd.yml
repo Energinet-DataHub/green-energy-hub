@@ -1,6 +1,6 @@
 name: Streaming Job Deploy (Enrichment and Validation)
 on:
-  #push:
+  push:
   #   branches:
   #     - main
   #   paths:
@@ -38,7 +38,7 @@ jobs:
     # Set the type of machine to run on
     runs-on: ubuntu-latest
     env:
-      WHEEL_VERSION: "1.0"
+      WHEEL_VERSION: "1.4"
       WHEEL_STORAGE_ADDRESS: https://enrgtwheels.blob.core.windows.net/wheels/
       MAIN_PYTHON_FILE: "dbfs:/streaming/enrichment_and_validation.py"
 
@@ -60,7 +60,7 @@ jobs:
           echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
 
       # Run only if workflow started on demand (manually triggered)
-      - name: Set TF Vars from Pipeline Inputs
+      - name: Set Variables from Pipeline Inputs
         uses: ./.github/actions/override_env_settings
         if:   github.event.inputs.resource_group_name
     
@@ -91,14 +91,6 @@ jobs:
         id: obtain-keyvault-id-name 
         uses: ./.github/actions/obtain-keyvault-id-name
 
-      - name: Set TF Vars
-        run: |
-          echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_storage_account_name=timeseriesdata${{ env.ENV_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id-name.outputs.keyvault-id }}" >> $GITHUB_ENV
-          echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV
-          echo "TF_VAR_python_main_file=${{ env.MAIN_PYTHON_FILE}}" >> $GITHUB_ENV  
-
       - uses: suisei-cn/actions-download-file@v1
         name: Download the Wheel File
         with:
@@ -108,10 +100,33 @@ jobs:
       - name: Copy Wheel File to Databricks Workspace
         uses: ./.github/actions/copy-wheel-file-to-databricks
           
-      - name: Copy Job Definition to DBFS
-        id: copy_files_todbfs
+      - name: Copy Job Definition to Databricks File System (DBFS)
+        id: copy_main_file_todbfs
         run: |    
           dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py ${{ env.MAIN_PYTHON_FILE }}
+
+      - uses: suisei-cn/actions-download-file@v1
+        name: Download Custom CosmosDB connector
+        with:
+          # Temporarily used package. See comments in .devcontainer/spark-defaults.conf.
+          url: "https://github.com/FabianMeiswinkel/PrivateNugetPackages/raw/master/azure-cosmosdb-spark_3.0.0_2.12-3.6.2-uber.jar"
+          target: cosmosdb_connector/
+
+      - name: Copy Custom CosmosDB connector to DBFS
+        id: copy_cosmosdb_connector_todbfs
+        run: |    
+          dbfs cp --overwrite ./cosmosdb_connector/azure-cosmosdb-spark_3.0.0_2.12-3.6.2-uber.jar dbfs:/streaming/cosmosdb-connector.jar
+
+      # Try not to reference TF_VAR variables in pipeline yml files, only values should be set and they should be read in terraform only
+      # rather create duplicate ENV pipeline vatiable if needed to separate concerns
+      - name: Set TF Vars
+        run: |
+          echo "TF_VAR_environment=${{ env.ENV_NAME }}" >> $GITHUB_ENV 
+          echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_storage_account_name=timeseriesdata${{ env.ENV_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_keyvault_id=${{ steps.obtain-keyvault-id-name.outputs.keyvault-id }}" >> $GITHUB_ENV
+          echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV
+          echo "TF_VAR_python_main_file=${{ env.MAIN_PYTHON_FILE}}" >> $GITHUB_ENV  
 
       - name: Configure Terraform Backend
         uses: ./.github/actions/configure-terraform-backend

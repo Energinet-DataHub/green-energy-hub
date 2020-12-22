@@ -20,6 +20,8 @@ import pytest
 from pyspark import SparkConf
 from pyspark.sql import SparkSession, DataFrame
 import pandas as pd
+from decimal import Decimal
+from datetime import datetime
 import time
 import uuid
 
@@ -29,6 +31,7 @@ from geh_stream.streaming_utils import Enricher
 from geh_stream.schemas import SchemaNames, SchemaFactory
 from geh_stream.dataframelib import flatten_df
 from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType, DecimalType, TimestampType, BooleanType
 
 
 # Create Spark Conf/Session
@@ -85,16 +88,16 @@ def master_data_factory(spark, master_schema):
             "EnergySupplier_MarketParticipant_mRID": [marketparticipant_mrid],
             "BalanceResponsibleParty_MarketParticipant_mRID": ["f"],
             "InMeteringGridArea_Domain_mRID": [inmeteringgridarea_domain_mrid],
-            "InMeteringGridArea_Domain_Owner_mRID": [inmeteringgridownerarea_domain_mrid],
             "OutMeteringGridArea_Domain_mRID": [outmeteringgridarea_domain_mrid],
-            "OutMeteringGridArea_Domain_Owner_mRID": [outmeteringgridownerarea_domain_mrid],
             "Parent_Domain_mRID": ["j"],
             "ServiceCategory_Kind": ["l"],
             "MarketEvaluationPointType": [market_evaluation_point_type],
             "SettlementMethod": [settlement_method],
             "QuantityMeasurementUnit_Name": ["o"],
             "Product": ["p"],
-            "Technology": ["t"]})
+            "Technology": ["t"],
+            "OutMeteringGridArea_Domain_Owner_mRID": [outmeteringgridownerarea_domain_mrid],
+            "InMeteringGridArea_Domain_Owner_mRID": [inmeteringgridownerarea_domain_mrid]})
         return spark.createDataFrame(pandas_df, schema=master_schema)
     return factory
 
@@ -238,3 +241,113 @@ def enriched_data(enriched_data_factory):
 def non_enriched_data(enriched_data_factory):
     """Simulate data with no master data for market evaluation point."""
     return enriched_data_factory(do_fail_enrichment=True)
+
+
+date_time_formatting_string = "%Y-%m-%dT%H:%M:%S%z"
+default_obs_time = datetime.strptime("2020-01-01T00:00:00+0000", date_time_formatting_string)
+
+
+@pytest.fixture(scope="module")
+def cosmos_write_config():
+    writeConfig = {
+        "Endpoint": "",
+        "Masterkey": "",
+        "Database": "",
+        "Collection": "",
+        "Upsert": "true"
+    }
+    return writeConfig
+
+
+@pytest.fixture(scope="module")
+def valid_atomic_value_schema():
+    """
+    Valid atomic data point schema to send
+    """
+    return StructType([
+        StructField("IsTimeSeriesValid", BooleanType(), False),
+        StructField("CorrelationId", StringType(), False),
+        StructField("MarketEvaluationPoint_mRID", StringType(), False),
+        StructField("MeterReadingPeriodicity", StringType(), False),
+        StructField("Product", StringType(), False),
+        StructField("QuantityMeasurementUnit_Name", StringType(), False),
+        StructField("MarketEvaluationPointType", StringType(), False),
+        StructField("SettlementMethod", StringType(), False),
+        StructField("MarketDocument_ProcessType", StringType(), False),
+        StructField("MarketDocument_RecipientMarketParticipant_Type", StringType(), False),
+        StructField("MarketDocument_MarketServiceCategory_Kind", StringType(), False),
+        StructField("RecipientList", ArrayType(StringType()), False),
+        StructField("Period_Point_Quantity", DecimalType(), False),
+        StructField("Period_Point_Quality", StringType(), False),
+        StructField("Period_Point_ObservationTime", TimestampType(), False),
+        StructField("MarketDocument_CreatedDateTime", TimestampType(), False),
+        StructField("EventHubEnqueueTime", TimestampType(), False)
+    ])
+
+
+@pytest.fixture(scope="module")
+def valid_atomic_values_for_actors_sample_df(spark, valid_atomic_value_schema):
+    structureData = [
+        (True, "10024", "3456", "15min", "product1", "m", "pointtype", "smet", "pr_type", "actor_role", "SC_KIND", ["r1", "r2", "r3"], Decimal(20048), "", default_obs_time, default_obs_time, default_obs_time)
+    ]
+    df2 = spark.createDataFrame(data=structureData, schema=valid_atomic_value_schema)
+    return df2
+
+
+@pytest.fixture(scope="module")
+def invalid_atomic_value_schema():
+    """
+    Valid atomic data point schema to send
+    """
+    return StructType([
+        StructField("TimeSeries_mRID", StringType(), False),
+        StructField("IsTimeSeriesValid", BooleanType(), False),
+        StructField("CorrelationId", StringType(), False),
+        StructField("MarketDocument_SenderMarketParticipant_mRID", StringType(), False),
+        StructField("MarketDocument_SenderMarketParticipant_Type", StringType(), False),
+        StructField("MarketDocument_mRID", StringType(), False),
+        StructField("MarketDocument_ProcessType", StringType(), False),
+        StructField("VR-245-1-Is-Valid", BooleanType(), False),
+        StructField("VR-250-Is-Valid", BooleanType(), False),
+        StructField("VR-251-Is-Valid", BooleanType(), False),
+        StructField("VR-611-Is-Valid", BooleanType(), False),
+        StructField("VR-612-Is-Valid", BooleanType(), False)
+    ])
+
+
+@pytest.fixture(scope="module")
+def invalid_atomic_values_for_actors_sample_df(spark, invalid_atomic_value_schema):
+    structureData = [
+        ("tseries_id", False, "10024", "420901", "actor_role", "12345", "ptype", True, False, True, True, True)
+    ]
+    df2 = spark.createDataFrame(data=structureData, schema=invalid_atomic_value_schema)
+    return df2
+
+
+@pytest.fixture(scope="module")
+def validation_results_schema():
+    """
+    Validation subset of columns
+    """
+    return StructType([
+        StructField("VR-245-1-Is-Valid", BooleanType(), False),
+        StructField("VR-250-Is-Valid", BooleanType(), False),
+        StructField("VR-251-Is-Valid", BooleanType(), False),
+        StructField("VR-611-Is-Valid", BooleanType(), False),
+        StructField("VR-612-Is-Valid", BooleanType(), False)
+    ])
+
+
+@pytest.fixture(scope="module")
+def validation_results_values_for_actors_sample_df(spark, validation_results_schema):
+    structureData = [
+        (True, True, True, True, True),
+        (False, True, True, True, True),
+        (True, False, True, True, True),
+        (True, True, False, True, True),
+        (True, True, True, False, True),
+        (True, True, True, True, False),
+        (False, False, False, False, False)
+    ]
+    df2 = spark.createDataFrame(data=structureData, schema=validation_results_schema)
+    return df2

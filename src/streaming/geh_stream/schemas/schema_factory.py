@@ -77,18 +77,20 @@ class SchemaFactory:
         .add("EnergySupplier_MarketParticipant_mRID", StringType(), True) \
         .add("BalanceResponsibleParty_MarketParticipant_mRID", StringType(), True) \
         .add("InMeteringGridArea_Domain_mRID", StringType(), False) \
-        .add("InMeteringGridArea_Domain_Owner_mRID", StringType(), False) \
         .add("OutMeteringGridArea_Domain_mRID", StringType(), False) \
-        .add("OutMeteringGridArea_Domain_Owner_mRID", StringType(), False) \
         .add("Parent_Domain_mRID", StringType(), False) \
         .add("ServiceCategory_Kind", StringType(), False) \
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), False) \
         .add("QuantityMeasurementUnit_Name", StringType(), False) \
         .add("Product", StringType(), False) \
-        .add("Technology", StringType(), True)
+        .add("Technology", StringType(), True) \
+        .add("OutMeteringGridArea_Domain_Owner_mRID", StringType(), False) \
+        .add("InMeteringGridArea_Domain_Owner_mRID", StringType(), False)
 
-    parsed_schema = copy.deepcopy(message_body_schema)
+    parsed_schema = copy.deepcopy(message_body_schema) \
+        .add("EventHubEnqueueTime", TimestampType(), True)
+
     # NOTE: This is a workaround because for some unknown reason pyspark parsing from JSON
     #       (in event_hub_parser.py) causes all to be nullable regardless of the schema
     make_all_nullable(parsed_schema)

@@ -5,7 +5,10 @@ storage-container-name=data
 master-data-path=master-data/master-data.csv
 
 input-eh-connection-string=Endpoint=sb://myeventhub.servicebus.windows.net/;SharedAccessKeyName=Listen;SharedAccessKey=<key>;EntityPath=input;
-valid-output-eh-connection-string=Endpoint=sb://myeventhub.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=<key>;EntityPath=valid-output;
-invalid-output-eh-connection-string=Endpoint=sb://myeventhub.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=<key>;EntityPath=invalid-output;
+
+cosmos-db-endpoint=https://xxxx.documents.azure.com:port/
+cosmos-db-masterkey=<masterkey>
+cosmos-db-database-name=database_name
+cosmos-db-collection-name=database_collection_name
 
 telemetry-instrumentation-key=<application insights instrumentation key, GUID format>

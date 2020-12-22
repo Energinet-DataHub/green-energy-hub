@@ -22,7 +22,7 @@ variable "streaming_container_name" {
   type = string
 }
 
-variable "cosmos_container" {
+variable "cosmos_coll" {
   type = string
 }
 

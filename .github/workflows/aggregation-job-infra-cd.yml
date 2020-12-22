@@ -63,7 +63,7 @@ jobs:
           echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
 
       # Run only if workflow started on demand (manually triggered)
-      - name: Set TF Vars from Pipeline Inputs
+      - name: Set Variables from Pipeline Inputs
         uses: ./.github/actions/override_env_settings
         if:   github.event.inputs.resource_group_name
     

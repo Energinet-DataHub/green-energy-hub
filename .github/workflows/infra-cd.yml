@@ -50,7 +50,7 @@ jobs:
           echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
 
       # Run only if workflow started on demand (manually triggered)
-      - name: Set TF Vars from Pipeline Inputs
+      - name: Set Variables from Pipeline Inputs
         uses: ./.github/actions/override_env_settings
         if:   github.event.inputs.resource_group_name
 
@@ -83,6 +83,8 @@ jobs:
           az storage container create --name tfstate --account-name $storage_name --account-key $account_key
         if: steps.state-storage-exists.outputs.state-storage-exists == 'False'
 
+      # Try not to reference TF_VAR variables in pipeline yml files, only values should be set and they should be read in terraform only
+      # rather create duplicate ENV pipeline vatiable if needed to separate concerns
       - name: Set TF Vars
         run: |
           echo "TF_VAR_current_spn_object_id=${{ env.ARM_OBJECT_ID }}" >> $GITHUB_ENV 

@@ -23,5 +23,6 @@ class EventHubParser:
         return raw_data \
             .select(from_json(col("body").cast("string"),
                               message_schema,
-                              options={"dateFormat": "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"}).alias("message")) \
-            .select(col("message.*"))
+                              options={"dateFormat": "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"}).alias("message"),
+                    col("enqueuedTime").alias("EventHubEnqueueTime")) \
+            .select(col("message.*"), col("EventHubEnqueueTime"))

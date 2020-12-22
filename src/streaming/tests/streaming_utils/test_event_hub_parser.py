@@ -39,7 +39,8 @@ def event_hub_message_schema():
         .add("publisher", StringType(), False) \
         .add("partitionKey", StringType(), False) \
         .add("properties", StructType(), True) \
-        .add("systemProperties", StructType(), True)
+        .add("systemProperties", StructType(), True) \
+        .add("enqueuedTime", TimestampType(), True)
 
 
 @pytest.fixture(scope="class")
@@ -61,7 +62,8 @@ def event_hub_message_df(event_hub_message_schema, time_series_json, spark):
         "publisher": ["publisher"],
         "partitionKey": ["partitionKey"],
         "properties": [None],
-        "systemProperties": [None], })
+        "systemProperties": [None],
+        "enqueuedTime": [timestamp_now]})
 
     return spark.createDataFrame(event_hub_message_pandas_df, event_hub_message_schema)
 

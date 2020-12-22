@@ -13,9 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostOfficeHttpTrigger", "PostOfficeHttpTrigger.csproj", "{A9016EBB-8753-41B8-B75B-65F9A17A2F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpTrigger", "HttpTrigger.csproj", "{A9016EBB-8753-41B8-B75B-65F9A17A2F43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
