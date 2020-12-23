@@ -16,12 +16,12 @@ The mapping covers the following RSM-033 messages and adheres to the general [rs
 >- **DK_ConfirmUpdateChargeInformation**
 >- **DK_RejectUpdateChargeInformation**
 
+### Generic message content
+
 All RSM-messages share a generic set of attributes, e.g. _MessageReference_, _Sender/Recipient information_ and _DocumentType_ to mention a few.
 The mapping below covers the generic set of attributes.
 
 > Do note, that some of the CIM names are identical and will require a context to acquire uniqueness, hence a suggested context is provided for those mappings.
-
-### Generic message content
 
 | **EbIX attribute**|**CIM name**| **Suggested "context" if needed to obtain CIM name uniqueness** | **CIM path** |
 |:-|:-|:-|:-|

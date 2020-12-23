@@ -86,6 +86,7 @@ DateTime
 ddp
 decarbonized
 DecimalType
+Delta
 deno
 denormalized
 dependabot
@@ -102,6 +103,7 @@ DisconnectionType
 DistributionOfMeteringPointsCsvFileName
 djorgensendk
 DK
+DKExt
 DocumentID
 DocumentType
 DomainArea
@@ -220,6 +222,7 @@ Kristian
 kristianschneider
 Kubernetes
 Lachance
+Lake
 Lani
 LinkedDomain
 LinkedPowerPlant
@@ -245,6 +248,7 @@ Mech
 MessageReference
 MessageType
 MeteredDataCollectionMethod
+MeteredDataTimeSeries
 MeterID
 MeteringGridArea
 MeteringMethod
@@ -356,6 +360,8 @@ py
 pyspark
 PySpark
 pyspelling
+QuantityMeasurementUnit
+QuantityMissing
 QuantityQuality
 RatedCapacity
 RatedCurrent
@@ -448,6 +454,7 @@ TemplateSolution
 terraform
 TestTools
 Thomsen
+TimeInterval
 timeseries
 TimeSeries
 TimeseriesID
