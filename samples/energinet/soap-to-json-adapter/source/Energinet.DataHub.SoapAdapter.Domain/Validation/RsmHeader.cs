@@ -22,6 +22,11 @@ namespace Energinet.DataHub.SoapAdapter.Domain.Validation
     public sealed class RsmHeader
     {
         /// <summary>
+        /// The message reference from the message container
+        /// </summary>
+        public string? MessageReference { get; set; }
+
+        /// <summary>
         /// Some id
         /// </summary>
         public string? Identification { get; set; }
@@ -79,12 +84,13 @@ namespace Energinet.DataHub.SoapAdapter.Domain.Validation
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Identification, DocumentType, Creation, SenderIdentification, RecipientIdentification, EnergyBusinessProcess, EnergyBusinessProcessRole, EnergyIndustryClassification);
+            var id = Identification + MessageReference; // Needed because HashCode combine only allows 8 params.
+            return HashCode.Combine(id, DocumentType, Creation, SenderIdentification, RecipientIdentification, EnergyBusinessProcess, EnergyBusinessProcessRole, EnergyIndustryClassification);
         }
 
         private bool Equals(RsmHeader other)
         {
-            return Identification == other.Identification && DocumentType == other.DocumentType && Nullable.Equals(Creation, other.Creation) && SenderIdentification == other.SenderIdentification && RecipientIdentification == other.RecipientIdentification && EnergyBusinessProcess == other.EnergyBusinessProcess && EnergyBusinessProcessRole == other.EnergyBusinessProcessRole && EnergyIndustryClassification == other.EnergyIndustryClassification;
+            return MessageReference == other.MessageReference && Identification == other.Identification && DocumentType == other.DocumentType && Nullable.Equals(Creation, other.Creation) && SenderIdentification == other.SenderIdentification && RecipientIdentification == other.RecipientIdentification && EnergyBusinessProcess == other.EnergyBusinessProcess && EnergyBusinessProcessRole == other.EnergyBusinessProcessRole && EnergyIndustryClassification == other.EnergyIndustryClassification;
         }
     }
 }

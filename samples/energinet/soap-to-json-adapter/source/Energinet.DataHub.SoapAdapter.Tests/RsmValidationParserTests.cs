@@ -43,6 +43,7 @@ namespace Energinet.DataHub.SoapAdapter.Tests
                 EnergyBusinessProcess = "E03",
                 EnergyIndustryClassification = "23",
                 EnergyBusinessProcessRole = "DDQ",
+                MessageReference = null,
             };
 
             Assert.Equal(expected, actual.RsmHeader);

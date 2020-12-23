@@ -45,6 +45,10 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
 
                 try
                 {
+                    reader.ReadToFollowing("MessageContainer", B2BNamespace);
+
+                    await ParseMessageContainerAsync(reader, header).ConfigureAwait(false);
+
                     reader.ReadToFollowing("Payload", B2BNamespace);
 
                     await ParseRsmHeaderAsync(reader, header).ConfigureAwait(false);
@@ -87,6 +91,18 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
             }
 
             throw new XmlException("Missing xml exception");
+        }
+
+        private static async ValueTask ParseMessageContainerAsync(XmlReader reader, RsmHeader header)
+        {
+            while (await reader.ReadAsync().ConfigureAwait(false))
+            {
+                if (reader.Is("MessageReference", B2BNamespace))
+                {
+                    header.MessageReference = await reader.ReadElementContentAsStringAsync().ConfigureAwait(false);
+                    break; // We do not need further values
+                }
+            }
         }
 
         private static async ValueTask ParseRsmHeaderAsync(XmlReader reader, RsmHeader header)
