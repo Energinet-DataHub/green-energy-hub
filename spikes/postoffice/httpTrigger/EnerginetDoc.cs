@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using GreenEnergyHub.Json;
 using NodaTime;
 
 namespace Postoffice
@@ -31,12 +31,12 @@ namespace Postoffice
 
         public static EnerginetDoc FromString(string input)
         {
-            return JsonSerializer.Deserialize<EnerginetDoc>(input);
+            return new JsonSerializer().Deserialize<EnerginetDoc>(input);
         }
 
         public override string ToString()
         {
-            return JsonSerializer.Serialize(this);
+            return new JsonSerializer().Serialize(this);
         }
     }
 }

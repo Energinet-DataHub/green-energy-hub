@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using NodaTime;
 
 namespace TimeSeriesGenerator.Domain
 {
@@ -30,7 +31,7 @@ namespace TimeSeriesGenerator.Domain
         /// <summary>
         ///     UTC time
         /// </summary>
-        public DateTime CreatedDateTime { get; set; }
+        public Instant CreatedDateTime { get; set; }
 
         public string SenderMarketParticipant_mRID { get; set; }
 
@@ -69,7 +70,7 @@ namespace TimeSeriesGenerator.Domain
 
         public string Quality { get; set; }
 
-        public DateTime ObservationTime { get; set; }
+        public Instant ObservationTime { get; set; }
 
         /*Items below are joined master data*/
 

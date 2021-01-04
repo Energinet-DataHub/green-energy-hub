@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Energinet.DataHub.SoapAdapter.Application.Parsers;
 using Energinet.DataHub.SoapAdapter.Domain.Validation;
+using NodaTime;
 
 namespace Energinet.DataHub.SoapAdapter.Application.Converters
 {
@@ -157,7 +158,7 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
                 }
                 else if (reader.Is("Creation", ns))
                 {
-                    rsmHeader.Creation = reader.ReadElementContentAsDateTime();
+                    rsmHeader.Creation = Instant.FromDateTimeUtc(reader.ReadElementContentAsDateTime());
                 }
                 else if (reader.Is("SenderEnergyParty", ns))
                 {

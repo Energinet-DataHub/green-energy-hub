@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using NodaTime;
 using TimeSeriesGenerator.Domain;
 
 namespace TimeSeriesGenerator
@@ -40,7 +41,7 @@ namespace TimeSeriesGenerator
             tsp.ProcessType = "E30";
             tsp.SenderMarketParticipantMarketRole_Type = "DDQ";
             tsp.MarketDocument_mRID = "HEDmRID101099323243434344343443";
-            tsp.CreatedDateTime = DateTime.UtcNow;
+            tsp.CreatedDateTime = SystemClock.Instance.GetCurrentInstant();
             tsp.SenderMarketParticipant_mRID = "1234567890123";
             tsp.MessageReference = "MS10000100101010011";
             tsp.CorrelationId = Guid.NewGuid().ToString();

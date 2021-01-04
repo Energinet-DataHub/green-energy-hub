@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using Energinet.DataHub.SoapAdapter.Application.Parsers;
 using Energinet.DataHub.SoapAdapter.Domain.Validation;
+using NodaTime;
+using NodaTime.Text;
 
 namespace Energinet.DataHub.SoapAdapter.Application.Converters
 {
@@ -161,9 +163,11 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
                 }
                 else if (reader.Is("StartOfOccurrence", B2BNamespace))
                 {
-                    if (DateTimeOffset.TryParse(await reader.ReadElementContentAsStringAsync().ConfigureAwait(false), out var startDate))
+                    var instantResult = InstantPattern.ExtendedIso.Parse(
+                        await reader.ReadElementContentAsStringAsync().ConfigureAwait(false));
+                    if (instantResult.Success)
                     {
-                        writer.WriteString("StartDate", startDate);
+                        writer.WriteString("StartDate", instantResult.Value.ToString());
                     }
                 }
                 else if (reader.Is("MeteringPointDomainLocation", B2BNamespace))

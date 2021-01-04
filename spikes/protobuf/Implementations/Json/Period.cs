@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using NodaTime;
 
 namespace Protobuf.Implementations.Json
 {
@@ -19,8 +20,8 @@ namespace Protobuf.Implementations.Json
     {
         public string Resolution { get; set; }
 
-        public DateTime Start { get; set; }
+        public Instant Start { get; set; }
 
-        public DateTime End { get; set; }
+        public Instant End { get; set; }
     }
 }

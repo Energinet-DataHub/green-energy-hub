@@ -29,6 +29,7 @@ limitations under the License.
     <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
     <PackageReference Include="CompareNETObjects" Version="4.67.0" />
     <PackageReference Include="Google.Protobuf" Version="3.13.0" />
+    <PackageReference Include="NodaTime" Version="3.0.3" />
     <PackageReference Include="System.IO.Abstractions" Version="12.2.7" />
     <PackageReference Include="System.IO.Abstractions.TestingHelpers" Version="12.2.7" />
   </ItemGroup>

@@ -58,5 +58,15 @@ namespace GreenEnergyHub.Json
         /// UTF-8 methods since the implementation natively uses UTF-8.
         /// </remarks>
         TValue Deserialize<TValue>(string json);
+
+        /// <summary>
+        /// Convert the provided value into a <see cref="string"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> representation of the value.</returns>
+        /// <param name="value">The value to convert.</param>
+        /// <remarks>Using a <see cref="string"/> is not as efficient as using UTF-8
+        /// encoding since the implementation internally uses UTF-8.
+        /// </remarks>
+        string Serialize<TValue>(TValue value);
     }
 }

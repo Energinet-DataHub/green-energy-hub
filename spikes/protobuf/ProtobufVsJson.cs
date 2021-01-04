@@ -22,8 +22,10 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using Google.Protobuf.WellKnownTypes;
 using KellermanSoftware.CompareNetObjects;
+using NodaTime;
 using Protobuf.Implementations.Json;
 using Protobuf.Implementations.Protobuf;
+using Period = Protobuf.Implementations.Json.Period;
 using Proto = SpikeProtobuf.Implementations.Protobuf;
 
 namespace Protobuf
@@ -284,28 +286,28 @@ namespace Protobuf
                     ObservationPeriod = new SpikeProtobuf.Implementations.Protobuf.Timeseries.Types.Period
                     {
                         Resolution = S,
-                        Start = Timestamp.FromDateTime(DateTime.UtcNow),
-                        End = Timestamp.FromDateTime(DateTime.UtcNow)
+                        Start = Timestamp.FromDateTimeOffset(SystemClock.Instance.GetCurrentInstant().ToDateTimeOffset()),
+                        End = Timestamp.FromDateTimeOffset(SystemClock.Instance.GetCurrentInstant().ToDateTimeOffset()),
                     },
                     Product = new SpikeProtobuf.Implementations.Protobuf.Timeseries.Types.ProductType
                     {
                         Identification = S,
-                        UnitType = S
+                        UnitType = S,
                     },
                     TransactionId = S,
                     MeteringPointCharacteristic = new SpikeProtobuf.Implementations.Protobuf.Timeseries.Types.DetailMeasurementMeteringPointCharacteristic
                     {
                         SettlementMethod = S,
-                        TypeOfMeteringPoint = S
+                        TypeOfMeteringPoint = S,
                     },
-                    MeteringPointDomainLocation = S
+                    MeteringPointDomainLocation = S,
                 };
                 timeseries.Observations.AddRange(ManyOf(96, i => new SpikeProtobuf.Implementations.Protobuf.Timeseries.Types.Observation
                 {
                     Missing = false,
                     Position = i,
                     Quality = S,
-                    Quantity = 10
+                    Quantity = 10,
                 }));
                 return timeseries;
             }
@@ -325,20 +327,20 @@ namespace Protobuf
                     Function = S,
                     Period = new Period
                     {
-                        Start = DateTime.Now,
-                        End = DateTime.Now,
-                        Resolution = S
+                        Start = SystemClock.Instance.GetCurrentInstant(),
+                        End = SystemClock.Instance.GetCurrentInstant(),
+                        Resolution = S,
                     },
                     Product = new Product
                     {
                         Identification = S,
-                        UnitType = S
+                        UnitType = S,
                     },
                     TransactionId = S,
                     MeteringPointCharacteristic = new DetailMeasurementMeteringPointCharacteristic
                     {
                         SettlementMethod = S,
-                        TypeOfMeteringPoint = S
+                        TypeOfMeteringPoint = S,
                     },
                     MeteringPointDomainLocation = S,
                     Observations = ManyOf(96, i => new Observation
@@ -346,8 +348,8 @@ namespace Protobuf
                         Missing = false,
                         Position = i,
                         Quality = S,
-                        Quantity = 10
-                    })
+                        Quantity = 10,
+                    }),
                 };
                 return obj;
             }

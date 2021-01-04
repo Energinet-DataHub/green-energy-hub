@@ -23,4 +23,8 @@ limitations under the License.
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="NodaTime" Version="3.0.3" />
+    </ItemGroup>
+
 </Project>

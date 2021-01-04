@@ -13,17 +13,18 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using NodaTime;
 using TimeSeriesGenerator.Domain;
 
 namespace TimeSeriesGenerator
 {
     public interface ITimeSeriesGeneratorService
     {
-        List<DateTime> GenerateTimeSpans(DateTime startDate, DateTime endTime, int resolution);
+        List<Instant> GenerateTimeSpans(Instant startDate, Instant endTime, int resolution);
 
         TimeSeriesPoint[] GenerateTimeSeriesFromCsvFile(
             string csvFile,
-        List<DateTime> generatedTimeSpanSet,
+        List<Instant> generatedTimeSpanSet,
             int numberOfMeteringPoints);
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace TimeSeriesGenerator
         /// <param name="numberOfMeteringPoints">the approximate number of metering points per grid area.</param>
         /// <returns>An array with the time series points</returns>
         TimeSeriesPoint[] ExchangeDataset(
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfMeteringPoints);
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace TimeSeriesGenerator
         /// <param name="numberOfMeteringPoints">The approximate number of metering points per grid area.</param>
         /// <returns>An array with the time series points.</returns>
         TimeSeriesPoint[] ProductionDataset(
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfMeteringPoints);
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace TimeSeriesGenerator
         /// <param name="numberOfMeteringPoints">Total number of metering points</param>
         /// <returns>An array with the time series points.</returns>
         TimeSeriesPoint[] ConsumptionDataset(
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfGridAreas,
             int meteringPointsPerGridArea,
             int numberOfMeteringPoints);

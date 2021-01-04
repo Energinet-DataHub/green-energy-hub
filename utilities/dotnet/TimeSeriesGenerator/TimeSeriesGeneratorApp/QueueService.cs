@@ -24,6 +24,8 @@ using Azure.Messaging.EventHubs.Producer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NodaTime;
+using NodaTime.Text;
 using TimeSeriesGenerator;
 using TimeSeriesGenerator.Domain;
 using TimeSeriesGeneratorApp;
@@ -88,8 +90,8 @@ internal class QueueService : IHostedService
             _numberOfMeteringPoints = _numberOfGridAreas * _meteringPointsPerGridArea;
             var csvFile = Config.GetValue<string>("DistributionOfMeteringPointsCsvFileName");
             var resolution = Config.GetValue<int>("MinutesPerTimeSeriesPoint");
-            var start = DateTime.ParseExact($"{Config.GetValue<string>("StartDate")}", "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            var end = DateTime.ParseExact(Config.GetValue<string>("EndDate"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var start = InstantPattern.CreateWithInvariantCulture("yyyy-MM-dd").Parse(Config.GetValue<string>("StartDate")).Value;
+            var end = InstantPattern.CreateWithInvariantCulture("yyyy-MM-dd").Parse(Config.GetValue<string>("EndDate")).Value;
             var generatedTimeSpanSet = _timeSeriesGeneratorService.GenerateTimeSpans(start, end, resolution);
 
             if (string.IsNullOrWhiteSpace(csvFile))
@@ -108,7 +110,7 @@ internal class QueueService : IHostedService
         }
     }
 
-    private void GenerateAndRunBasedOnApproximateMethod(List<DateTime> generatedTimeSpanSet)
+    private void GenerateAndRunBasedOnApproximateMethod(List<Instant> generatedTimeSpanSet)
     {
         var exchange =
             _timeSeriesGeneratorService.ExchangeDataset(generatedTimeSpanSet, _numberOfMeteringPoints);
@@ -122,7 +124,7 @@ internal class QueueService : IHostedService
         SendPerTU(consumption, "Consumption dataset");
     }
 
-    private void GenerateAndRunBasedOfCsvFile(string csvFile, List<DateTime> generatedTimeSpanSet)
+    private void GenerateAndRunBasedOfCsvFile(string csvFile, List<Instant> generatedTimeSpanSet)
     {
         var timeSeriesSetFromCsv =
             _timeSeriesGeneratorService.GenerateTimeSeriesFromCsvFile(csvFile, generatedTimeSpanSet, _numberOfMeteringPoints);

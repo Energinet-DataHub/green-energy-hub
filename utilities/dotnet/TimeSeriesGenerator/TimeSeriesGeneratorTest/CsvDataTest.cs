@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Moq;
+using NodaTime;
 using TimeSeriesGenerator;
 using TimeSeriesGenerator.Domain;
 using Xunit;
@@ -32,8 +33,8 @@ namespace TimeSeriesGeneratorTest
         {
             var logger = Mock.Of<ILogger<TimeSeriesGeneratorService>>();
             _timeSeriesGenerator = new TimeSeriesGeneratorService(logger);
-            var start = new DateTime(2020, 10, 3, 0, 0, 0);
-            var end = new DateTime(2020, 10, 3, 1, 0, 0);
+            var start = Instant.FromUtc(2020, 10, 3, 0, 0, 0);
+            var end = Instant.FromUtc(2020, 10, 3, 1, 0, 0);
             var generatedTimeSpanSet = _timeSeriesGenerator.GenerateTimeSpans(start, end, 60);
             _generatedTimeSpanSetCount = generatedTimeSpanSet.Count;
             _timeSeriesPoints =

@@ -17,6 +17,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Energinet.DataHub.SoapAdapter.Application.Parsers;
 using Energinet.DataHub.SoapAdapter.Domain.Validation;
+using NodaTime;
 using Xunit;
 
 namespace Energinet.DataHub.SoapAdapter.Tests
@@ -35,7 +36,7 @@ namespace Energinet.DataHub.SoapAdapter.Tests
 
             var expected = new RsmHeader
             {
-                Creation = new DateTime(2020, 02, 20, 10, 56, 46, 0, DateTimeKind.Utc),
+                Creation = Instant.FromUtc(2020, 02, 20, 10, 56, 46),
                 Identification = "MsgId-0.58755000-1582196206",
                 DocumentType = "392",
                 RecipientIdentification = "5790001330552",

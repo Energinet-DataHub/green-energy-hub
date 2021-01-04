@@ -19,6 +19,10 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpTrigger", "HttpTrigger.csproj", "{A9016EBB-8753-41B8-B75B-65F9A17A2F43}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreenEnergyHub", "GreenEnergyHub", "{86E2F7E2-0810-4582-A3C1-EACFF49979A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Json", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.Json\GreenEnergyHub.Json.csproj", "{FCBC95E4-6BEE-4909-9BE5-9A0BA7F22494}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +33,18 @@ Global
 		{A9016EBB-8753-41B8-B75B-65F9A17A2F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9016EBB-8753-41B8-B75B-65F9A17A2F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9016EBB-8753-41B8-B75B-65F9A17A2F43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBC95E4-6BEE-4909-9BE5-9A0BA7F22494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBC95E4-6BEE-4909-9BE5-9A0BA7F22494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBC95E4-6BEE-4909-9BE5-9A0BA7F22494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBC95E4-6BEE-4909-9BE5-9A0BA7F22494}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C320C76A-3709-45C2-9180-C55984F39F80}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FCBC95E4-6BEE-4909-9BE5-9A0BA7F22494} = {86E2F7E2-0810-4582-A3C1-EACFF49979A0}
 	EndGlobalSection
 EndGlobal

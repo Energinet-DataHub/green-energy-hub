@@ -21,6 +21,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CsvHelper;
 using Microsoft.Extensions.Logging;
+using NodaTime;
 using TimeSeriesGenerator.Domain;
 
 namespace TimeSeriesGenerator
@@ -38,7 +39,7 @@ namespace TimeSeriesGenerator
 
         public TimeSeriesPoint[] GenerateTimeSeriesFromCsvFile(
             string csvFile,
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfMeteringPoints)
         {
             _logger.LogInformation("Generating data of csv file. Stand by....");
@@ -74,13 +75,13 @@ namespace TimeSeriesGenerator
             return bag.ToArray();
         }
 
-        public List<DateTime> GenerateTimeSpans(DateTime startDate, DateTime endTime, int resolution)
+        public List<Instant> GenerateTimeSpans(Instant startDate, Instant endTime, int resolution)
         {
-            var list = new List<DateTime>();
+            var list = new List<Instant>();
             var old = startDate;
             while (old < endTime)
             {
-                old = old.AddMinutes(resolution);
+                old = old.Plus(Duration.FromMinutes(resolution));
                 list.Add(old);
             }
 
@@ -88,21 +89,21 @@ namespace TimeSeriesGenerator
         }
 
         public TimeSeriesPoint[] ExchangeDataset(
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfMeteringPoints)
         {
             return GenerateDataset(50, "E20", "E02", generatedTimeSpanSet, numberOfMeteringPoints);
         }
 
         public TimeSeriesPoint[] ProductionDataset(
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfMeteringPoints)
         {
             return GenerateDataset(10, "E18", "E02", generatedTimeSpanSet, numberOfMeteringPoints);
         }
 
         public TimeSeriesPoint[] ConsumptionDataset(
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfGridAreas,
             int meteringPointsPerGridArea,
             int numberOfMeteringPoints)
@@ -152,7 +153,7 @@ namespace TimeSeriesGenerator
             int parallelizeAcross,
             string marketEvaluationPointType,
             string settlementMethod,
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             int numberOfMeteringPoints)
         {
             var random = new Random();
@@ -189,7 +190,7 @@ namespace TimeSeriesGenerator
 
         private IEnumerable<TimeSeriesPoint> GenerateTimeSeriesPoints(
             Random random,
-            List<DateTime> generatedTimeSpanSet,
+            List<Instant> generatedTimeSpanSet,
             string marketEvaluationPointType,
             string settlementMethod,
             string gridAreaId,

@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using NodaTime;
+
 namespace Energinet.DataHub.SoapAdapter.Domain.Validation
 {
     using System;
@@ -39,7 +41,7 @@ namespace Energinet.DataHub.SoapAdapter.Domain.Validation
         /// <summary>
         /// Time of when the time series was created
         /// </summary>
-        public DateTime? Creation { get; set; }
+        public Instant? Creation { get; set; }
 
         /// <summary>
         /// The ID of the sender of the time series message

@@ -21,6 +21,7 @@ using Azure.Messaging.EventHubs.Producer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NodaTime;
 
 namespace ConsoleApp
 {
@@ -55,7 +56,7 @@ namespace ConsoleApp
                 using var eventBatch = await _eventHubClient.CreateBatchAsync().ConfigureAwait(false);
                 while (amountLeft > 0)
                 {
-                    var meterReadDate = DateTime.UtcNow.ToString("O");
+                    var meterReadDate = SystemClock.Instance.GetCurrentInstant().ToString();
                     var jsonContent = $"{{\"customerId\":{random.Next(-5, 15)},\"meterId\":{random.Next(-5, 15)},\"meterValue\":{random.Next(-5, 15)},\"meterReadDate\":\"{meterReadDate}\"}}";
                     var bytes = Encoding.UTF8.GetBytes(jsonContent);
 
