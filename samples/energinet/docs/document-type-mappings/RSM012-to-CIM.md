@@ -10,7 +10,7 @@ The purpose of this document is create a single mapping reference for RSM-012 me
 
 ## Mapping table
 
-The mapping covers the RSM-012 message **DK_MeteredDataTimeSeries** and adheres to the general [rsm-to-cim.md](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/document-type-mappings/rsm-to-cim.md) document.
+The mapping covers the RSM-012 message **DK_MeteredDataTimeSeries** and adheres to the general [rsm-to-cim.md](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/samples/energinet/docs/document-type-mappings/rsm-to-cim.md) document.
 
 > For information on how the time series data is stored in the TimeSeries Delta Lake, please visit our [Parquet schema definition for Time Series](https://github.com/Energinet-DataHub/green-energy-hub/wiki/Parquet-schema-for-Time-Series-Points)
 
@@ -49,7 +49,7 @@ The mapping below covers the generic set of attributes.
 | IncludedProductCharacteristic/UnitType | Name | QuantityMeasurementUnit | TimeSeries/Quantity_Measurement_Unit/name |
 | TypeOfMeteringPoint | MarketEvaluationPointType | | TimeSeries/MarketEvaluationPoint/MarketEvaluationPointType |
 | SettlementMethod | SettlementMethod | | TimeSeries/MarketEvaluationPoint/SettlementMethod |
-| MeteringPointDomainLocation/Identification | mRID | MarketEvaluationPoint | DKExt_MarketEvaluationPoint/mRID |
+| MeteringPointDomainLocation/Identification | mRID | MarketEvaluationPoint | MarketEvaluationPoint/mRID |
 | IntervalEnergyObservation | Period | | TimeSeries/Period |
 | Position | Position | Point | TimeSeries/Period/Point/Position |
 | EnergyQuantity | Quantity | | Energy_Quantity/Quantity |

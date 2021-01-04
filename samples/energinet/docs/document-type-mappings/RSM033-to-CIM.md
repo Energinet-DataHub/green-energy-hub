@@ -10,7 +10,7 @@ The purpose of this document is create a single mapping reference for RSM-033 me
 
 ## Mapping table
 
-The mapping covers the following RSM-033 messages and adheres to the general [rsm-to-cim.md](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/document-type-mappings/rsm-to-cim.md) document.
+The mapping covers the following RSM-033 messages and adheres to the general [rsm-to-cim.md](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/samples/energinet/docs/document-type-mappings/rsm-to-cim.md) document.
 
 >- **DK_RequestUpdateChargeInformation**
 >- **DK_ConfirmUpdateChargeInformation**

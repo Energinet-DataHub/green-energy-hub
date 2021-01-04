@@ -126,7 +126,6 @@ Below is the initial document structure for CIM documents.
         "HasBalanceSupplier": "",
         "ParentDomain": "",
         "Description": "",
-        "Mrid": "",
         "MeterReadingPeriodicity": "",
         "PhysicalConnectionCapacity": "",
         "MPConnectionType": "",
@@ -188,6 +187,7 @@ Below is the initial document structure for CIM documents.
         }
     },
     "MarketEvaluationPoint": {
+        "Mrid": "",
         "AdministrativePartyUsagePointLocation": {
             "AttnNames": {
                 "Name": ""
