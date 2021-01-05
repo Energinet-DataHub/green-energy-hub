@@ -1,6 +1,6 @@
 module "azfun_soapschemavalidator" {
   source                                    = "../modules/function-app"
-  name                                      = "azfun-soapschemavalidator-${var.environment}"
+  name                                      = "azfun-soapschemavalidator-${var.organisation}-${var.environment}"
   resource_group_name                       = data.azurerm_resource_group.greenenergyhub.name
   location                                  = data.azurerm_resource_group.greenenergyhub.location
   storage_account_access_key                = module.azfun_soapschemavalidator_stor.primary_access_key
@@ -25,7 +25,7 @@ module "azfun_soapschemavalidator" {
 
 module "azfun_soapschemavalidator_plan" {
   source              = "../modules/app-service-plan"
-  name                = "asp-soapschemavalidator-${var.environment}"
+  name                = "asp-soapschemavalidator-${var.organisation}-${var.environment}"
   resource_group_name = data.azurerm_resource_group.greenenergyhub.name
   location            = data.azurerm_resource_group.greenenergyhub.location
   kind                = "FunctionApp"
@@ -38,11 +38,18 @@ module "azfun_soapschemavalidator_plan" {
 
 module "azfun_soapschemavalidator_stor" {
   source                    = "../modules/storage-account"
-  name                      = "storsoapvalidator${lower(var.environment)}"
+  name                      = "stor${random_string.soapschemavalidator.result}${var.organisation}${lower(var.environment)}"
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   location                  = data.azurerm_resource_group.greenenergyhub.location
   account_replication_type  = "LRS"
   access_tier               = "Cool"
   account_tier              = "Standard"
   tags                      = data.azurerm_resource_group.greenenergyhub.tags
+}
+
+# Since all functions need a storage connected we just generate a random name
+resource "random_string" "soapschemavalidator" {
+  length  = 5
+  special = false
+  upper   = false
 }

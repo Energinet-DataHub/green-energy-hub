@@ -1,6 +1,6 @@
 module "azfun_asynchronousingestor" {
   source                                    = "../modules/function-app"
-  name                                      = "azfun-asynchronousingestor-${var.environment}"
+  name                                      = "azfun-asynchronousingestor-${var.organisation}-${var.environment}"
   resource_group_name                       = data.azurerm_resource_group.greenenergyhub.name
   location                                  = data.azurerm_resource_group.greenenergyhub.location
   storage_account_access_key                = module.azfun_asynchronousingestor_stor.primary_access_key
@@ -38,14 +38,13 @@ module "azfun_asynchronousingestor" {
     module.evhnm_validationreport.dependent_on,
     module.evhar_validationreport_sender.dependent_on,
     module.sbn_marketdata.dependent_on,
-    module.sbnar_marketdata_sender.dependent_on,
-    module.evhar_inboundqueue_sender_connection_string.dependent_on
+    module.sbnar_marketdata_sender.dependent_on
   ]
 }
 
 module "azfun_asynchronousingestor_plan" {
   source              = "../modules/app-service-plan"
-  name                = "asp-asynchronousingestor-${var.environment}"
+  name                = "asp-asynchronousingestor-${var.organisation}-${var.environment}"
   resource_group_name = data.azurerm_resource_group.greenenergyhub.name
   location            = data.azurerm_resource_group.greenenergyhub.location
   kind                = "FunctionApp"
@@ -58,11 +57,18 @@ module "azfun_asynchronousingestor_plan" {
 
 module "azfun_asynchronousingestor_stor" {
   source                    = "../modules/storage-account"
-  name                      = "storasyncingest${lower(var.environment)}"
+  name                      = "stor${random_string.asynchronousingestor.result}${var.organisation}${lower(var.environment)}"
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   location                  = data.azurerm_resource_group.greenenergyhub.location
   account_replication_type  = "LRS"
   access_tier               = "Cool"
   account_tier              = "Standard"
   tags                      = data.azurerm_resource_group.greenenergyhub.tags
+}
+
+# Since all functions need a storage connected we just generate a random name
+resource "random_string" "asynchronousingestor" {
+  length  = 5
+  special = false
+  upper   = false
 }

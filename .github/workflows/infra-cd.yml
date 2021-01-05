@@ -2,7 +2,7 @@ name: Main Terraform CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ renetnielsen/terraform-part-1 ]
     paths:
       - build/terraform/infra/**
       - build/terraform/modules/**
@@ -89,9 +89,10 @@ jobs:
       # rather create duplicate ENV pipeline vatiable if needed to separate concerns
       - name: Set TF Vars
         run: |
-          echo "TF_VAR_current_spn_object_id=${{ env.ARM_CLIENT_OBJECT_ID }}" >> $GITHUB_ENV 
-          echo "TF_VAR_current_tenant_id=${{ env.ARM_TENANT_ID }}" >> $GITHUB_ENV 
-          echo "TF_VAR_environment=${{ env.ENV_NAME }}" >> $GITHUB_ENV 
+          echo "TF_VAR_current_spn_object_id=${{ env.ARM_CLIENT_OBJECT_ID }}" >> $GITHUB_ENV
+          echo "TF_VAR_current_tenant_id=${{ env.ARM_TENANT_ID }}" >> $GITHUB_ENV
+          echo "TF_VAR_environment=${{ env.ENV_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_organisation=${{ env.ORGANISATION_NAME }}" >> $GITHUB_ENV
           echo "TF_VAR_resource_group_name=${{ env.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
 
       - name: Configure Terraform Backend

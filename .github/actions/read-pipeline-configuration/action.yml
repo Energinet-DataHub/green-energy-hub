@@ -23,6 +23,7 @@ runs:
         
         file_content=$(cat "./build/configurations/${filename}")
         env_name=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['env_name'])")
+        organisation_name=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['organisation_name'])")
         resource_group_name=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['resource_group_name'])")
         github_secret_name_spn_secret=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['github_secret_name_spn_secret'])")
         github_secret_name_spn_object_id=$(echo $file_content | python3 -c "import sys, json; print(json.load(sys.stdin)['github_secret_name_spn_object_id'])")
@@ -31,6 +32,7 @@ runs:
         
         echo "RESOURCE_GROUP_NAME=${resource_group_name}" >> $GITHUB_ENV
         echo "ENV_NAME=${env_name}" >> $GITHUB_ENV
+        echo "ORGANISATION_NAME=${organisation_name}" >> $GITHUB_ENV
         echo "GITHUB_SECRET_NAME_SPN_SECRET=${github_secret_name_spn_secret^^}" >> $GITHUB_ENV
         echo "GITHUB_SECRET_NAME_SPN_OBJECT_ID=${github_secret_name_spn_object_id^^}" >> $GITHUB_ENV
         echo "GITHUB_SECRET_NAME_SPN_ID=${github_secret_name_spn_id^^}" >> $GITHUB_ENV

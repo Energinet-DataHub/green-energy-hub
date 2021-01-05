@@ -1,6 +1,6 @@
 module "evhnm_requestqueue" {
   source                    = "../modules/event-hub-namespace"
-  name                      = "evhnm-request-queue-${var.environment}"
+  name                      = "evhnm-request-queue-${var.organisation}-${var.environment}"
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   location                  = data.azurerm_resource_group.greenenergyhub.location
   sku                       = "Standard"
@@ -10,7 +10,7 @@ module "evhnm_requestqueue" {
 
 module "evh_requestqueue" {
   source                    = "../modules/event-hub"
-  name                      = "evh-request-queue-${var.environment}"
+  name                      = "evh-request-queue"
   namespace_name            = module.evhnm_requestqueue.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   partition_count           = 32
@@ -20,7 +20,7 @@ module "evh_requestqueue" {
 
 module "evhar_requestqueue_sender" {
   source                    = "../modules/event-hub-auth-rule"
-  name                      = "evhar-request-sender-${var.environment}"
+  name                      = "evhar-request-sender"
   namespace_name            = module.evhnm_requestqueue.name
   eventhub_name             = module.evh_requestqueue.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
@@ -30,7 +30,7 @@ module "evhar_requestqueue_sender" {
 
 module "evhar_requestqueue_listener" {
   source                    = "../modules/event-hub-auth-rule"
-  name                      = "evhar-request-listener-${var.environment}"
+  name                      = "evhar-request-listener"
   namespace_name            = module.evhnm_requestqueue.name
   eventhub_name             = module.evh_requestqueue.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name

@@ -1,6 +1,6 @@
 module "evhnm_timeseries_inbound_queue" {
   source                    = "../modules/event-hub-namespace"
-  name                      = "evhnm-timeseries-inbound-queue-${var.environment}"
+  name                      = "evhnm-timeseries-inbound-queue-${var.organisation}-${var.environment}"
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   location                  = data.azurerm_resource_group.greenenergyhub.location
   sku                       = "Standard"
@@ -10,7 +10,7 @@ module "evhnm_timeseries_inbound_queue" {
 
 module "evh_inboundqueue" {
   source                    = "../modules/event-hub"
-  name                      = "evh-inbound-queue-${var.environment}"
+  name                      = "evh-inbound-queue"
   namespace_name            = module.evhnm_timeseries_inbound_queue.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   partition_count           = 32
@@ -28,17 +28,6 @@ module "evhar_inboundqueue_sender" {
   dependencies              = [module.evh_inboundqueue.dependent_on]
 }
 
-module "evhar_inboundqueue_sender_connection_string" {
-  source       = "../modules/key-vault-secret"
-  name         = "evhar-inboundqueue-sender-connection-string"
-  value        = module.evhar_inboundqueue_sender.primary_connection_string
-  key_vault_id = module.kv_shared.id
-  dependencies = [
-      module.kv_shared.dependent_on, 
-      module.evhar_inboundqueue_sender.dependent_on
-  ]
-}
-
 module "evhar_inboundqueue_receiver" {
   source                    = "../modules/event-hub-auth-rule"
   name                      = "evhar-inboundqueue-receiver"
@@ -47,6 +36,17 @@ module "evhar_inboundqueue_receiver" {
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   listen                    = true
   dependencies              = [module.evh_inboundqueue.dependent_on]
+}
+
+module "kvs_inboundqueue_sender_connection_string" {
+  source       = "../modules/key-vault-secret"
+  name         = "evhar-inboundqueue-sender-connection-string"
+  value        = module.evhar_inboundqueue_sender.primary_connection_string
+  key_vault_id = module.kv_shared.id
+  dependencies = [
+      module.kv_shared.dependent_on, 
+      module.evhar_inboundqueue_sender.dependent_on
+  ]
 }
 
 module "evhar_inboundqueue_receiver_connection_string" {

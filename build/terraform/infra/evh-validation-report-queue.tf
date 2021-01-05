@@ -10,7 +10,7 @@ module "evhnm_validationreport" {
 
 module "evh_validationreport" {
   source                    = "../modules/event-hub"
-  name                      = "evh-validation-reports-${var.environment}"
+  name                      = "evh-validation-reports"
   namespace_name            = module.evhnm_validationreport.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   partition_count           = 32
@@ -20,7 +20,7 @@ module "evh_validationreport" {
 
 module "evhar_validationreport_sender" {
   source                    = "../modules/event-hub-auth-rule"
-  name                      = "evhar-request-sender-${var.environment}"
+  name                      = "evhar-request-sender"
   namespace_name            = module.evhnm_validationreport.name
   eventhub_name             = module.evh_validationreport.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
@@ -30,7 +30,7 @@ module "evhar_validationreport_sender" {
 
 module "evhar_validationreport_receiver" {
   source                    = "../modules/event-hub-auth-rule"
-  name                      = "evhar-request-receivers-${var.environment}"
+  name                      = "evhar-request-receivers"
   namespace_name            = module.evhnm_validationreport.name
   eventhub_name             = module.evh_validationreport.name
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name

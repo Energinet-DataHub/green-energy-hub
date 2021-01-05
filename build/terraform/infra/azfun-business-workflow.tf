@@ -1,6 +1,6 @@
 module "azfun_businessworkflow" {
   source                                    = "../modules/function-app"
-  name                                      = "azfun-businessworkflow-${var.environment}"
+  name                                      = "azfun-businessworkflow-${var.organisation}-${var.environment}"
   resource_group_name                       = data.azurerm_resource_group.greenenergyhub.name
   location                                  = data.azurerm_resource_group.greenenergyhub.location
   storage_account_access_key                = module.azfun_businessworkflow_stor.primary_access_key
@@ -46,7 +46,7 @@ module "azfun_businessworkflow" {
 
 module "azfun_businessworkflow_plan" {
   source              = "../modules/app-service-plan"
-  name                = "asp-businessworkflow-${var.environment}"
+  name                = "asp-businessworkflow-${var.organisation}-${var.environment}"
   resource_group_name = data.azurerm_resource_group.greenenergyhub.name
   location            = data.azurerm_resource_group.greenenergyhub.location
   kind                = "FunctionApp"
@@ -59,11 +59,18 @@ module "azfun_businessworkflow_plan" {
 
 module "azfun_businessworkflow_stor" {
   source                    = "../modules/storage-account"
-  name                      = "storbizwrkflow${lower(var.environment)}"
+  name                      = "stor${random_string.businessworkflow.result}${var.organisation}${lower(var.environment)}"
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   location                  = data.azurerm_resource_group.greenenergyhub.location
   account_replication_type  = "LRS"
   access_tier               = "Cool"
   account_tier              = "Standard"
   tags                      = data.azurerm_resource_group.greenenergyhub.tags
+}
+
+# Since all functions need a storage connected we just generate a random name
+resource "random_string" "businessworkflow" {
+  length  = 5
+  special = false
+  upper   = false
 }

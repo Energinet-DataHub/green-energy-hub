@@ -1,6 +1,6 @@
 module "stor_timeseries_data" {
   source                    = "../modules/storage-account"
-  name                      = "timeseriesdata${var.environment}"
+  name                      = "timeseriesdata${lower(var.organisation)}${lower(var.environment)}"
   resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
   location                  = data.azurerm_resource_group.greenenergyhub.location
   account_replication_type  = "LRS"
@@ -10,7 +10,7 @@ module "stor_timeseries_data" {
   tags                      = data.azurerm_resource_group.greenenergyhub.tags
 }
 
-module "timeseries_storage_account_key" {
+module "kvs_timeseries_storage_account_key" {
   source       = "../modules/key-vault-secret"
   name         = "timeseries-storage-account-key"
   value        = module.stor_timeseries_data.primary_access_key
@@ -21,7 +21,7 @@ module "timeseries_storage_account_key" {
   ]
 }
 
-module "streaming_container" {
+module "stor_streaming_container" {
   source                = "../modules/storage-container"
   container_name        = var.streaming_container_name
   storage_account_name  = module.stor_timeseries_data.name
@@ -29,7 +29,7 @@ module "streaming_container" {
   dependencies = [ module.stor_timeseries_data.dependent_on ]
 }
 
-module "aggregation_container" {
+module "stor_aggregation_container" {
   source                = "../modules/storage-container"
   container_name        = var.aggregation_container_name
   storage_account_name  = module.stor_timeseries_data.name
@@ -40,7 +40,7 @@ module "aggregation_container" {
 resource "azurerm_storage_blob" "master_data" {
   name                   = "master-data/master-data.csv"
   storage_account_name   = module.stor_timeseries_data.name
-  storage_container_name = module.streaming_container.name
+  storage_container_name = module.stor_streaming_container.name
   type                   = "Block"
   source                 = "../../../samples/mock-data/master-data.csv"
 }
