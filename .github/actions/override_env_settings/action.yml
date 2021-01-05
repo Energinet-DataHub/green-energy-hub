@@ -6,7 +6,7 @@ runs:
     # add-mask does not work for inputs, using workaround from: https://github.com/actions/runner/issues/643 
     - run: |
         echo "ARM_CLIENT_ID=${{ github.event.inputs.client_id }}" >> $GITHUB_ENV
-        echo "ARM_OBJECT_ID=${{ github.event.inputs.object_id }}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_OBJECT_ID=${{ github.event.inputs.object_id }}" >> $GITHUB_ENV
         echo "ARM_CLIENT_SECRET=${{ github.event.inputs.client_secret }}" >> $GITHUB_ENV
         SECRET=$(jq -r '.inputs.client_secret' $GITHUB_EVENT_PATH)
         echo "::add-mask::$SECRET"
