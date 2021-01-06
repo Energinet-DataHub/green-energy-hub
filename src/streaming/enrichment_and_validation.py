@@ -13,12 +13,12 @@
 # limitations under the License.
 
 """
-Data ingestion stream
+Time Series Ingestion Stream
 """
 
 # TODO: consider using pyspark-stubs=3.0.0 and mypy
 
-# %%
+# %% Job Parameters
 import configargparse
 
 p = configargparse.ArgParser(prog='enrichment_and_validation.py',
@@ -61,7 +61,7 @@ if unknown_args:
     print("Unknown args:")
     _ = [print(arg) for arg in unknown_args]
 
-# %%
+# %% Create or get Spark session
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
@@ -78,45 +78,23 @@ sc = spark.sparkContext
 print("Spark Configuration:")
 _ = [print(k + '=' + v) for k, v in sc.getConf().getAll()]
 
-# %%
+# %% Get base storage path
 BASE_STORAGE_PATH = "abfss://{0}@{1}.dfs.core.windows.net/".format(
     args.storage_container_name, args.storage_account_name
 )
 
 print("Base storage url:", BASE_STORAGE_PATH)
 
-# %%
-
-from geh_stream.schemas import SchemaFactory, SchemaNames
-from pyspark.sql.functions import coalesce, lit, col
+# %% Read master data from input source
+from geh_stream.streaming_utils.input_source_readers import read_master_data_from_csv
 
 master_data_storage_path = BASE_STORAGE_PATH + args.master_data_path
+master_data = read_master_data_from_csv(spark, master_data_storage_path)
 
-csv_read_config = {
-    "inferSchema": "True",
-    "delimiter": ";",
-    "header": "True",
-    "nullValues": "NULL"
-}
-
-master_data_schema = SchemaFactory.get_instance(SchemaNames.Master)
-
-master_data = spark \
-    .read \
-    .format("csv") \
-    .schema(master_data_schema) \
-    .options(**csv_read_config) \
-    .load(master_data_storage_path)
-
-master_data = master_data \
-    .withColumn("ValidTo",
-                coalesce(col("ValidTo"), lit("9999-12-31").cast("timestamp")))
-
-master_data.printSchema()
-master_data.show()
-
-# %%
+# %% Read raw time series streaming data from input source
 import json
+
+from geh_stream.streaming_utils.input_source_readers import read_time_series_streaming_data
 
 input_eh_starting_position = {
     "offset": "-1",         # starting from beginning of stream
@@ -135,57 +113,12 @@ input_eh_conf = {
 
 print("Input event hub config:", input_eh_conf)
 
-# %%
-raw_data = spark \
-    .readStream \
-    .format("eventhubs") \
-    .options(**input_eh_conf) \
-    .option("inferSchema", True) \
-    .load()
+raw_data = read_time_series_streaming_data(spark, input_eh_conf)
 
-print("Input stream schema:")
-raw_data.printSchema()
+# %% Process time series as points
+from geh_stream.streaming_utils import parse_enrich_and_validate_time_series_as_points
 
-# %%
-from pyspark.sql.types import StructType
-
-from geh_stream.streaming_utils import EventHubParser
-from geh_stream.schemas import SchemaFactory, SchemaNames
-
-message_schema: StructType = SchemaFactory.get_instance(SchemaNames.MessageBody)
-
-# Event hub message parser function
-parsed_data = EventHubParser.parse(raw_data, message_schema) \
-    .withColumnRenamed("mRID", "TimeSeries_mRID")
-
-print("Parsed stream schema:")
-parsed_data.printSchema()
-
-# %% Denormalize messages: Flatten and explode messages by each contained time series point
-from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
-
-denormalized_data = denormalize_parsed_data(parsed_data) \
-    .withColumnRenamed("MarketDocument_SenderMarketParticipant_mRID_value", "MarketDocument_SenderMarketParticipant_mRID") \
-    .withColumnRenamed("MarketDocument_RecipientMarketParticipant_mRID_value", "MarketDocument_RecipientMarketParticipant_mRID")
-
-print("denormalized_data schema")
-denormalized_data.printSchema()
-
-# %%
-from geh_stream.streaming_utils import Enricher
-
-enriched_data = Enricher.enrich(denormalized_data, master_data)
-
-print("Enriched stream schema:")
-enriched_data.printSchema()
-
-# %%
-from geh_stream.validation import Validator
-
-validated_data = Validator.add_validation_status_columns(enriched_data)
-
-print("Validated stream schema:")
-validated_data.printSchema()
+time_series_points = parse_enrich_and_validate_time_series_as_points(raw_data, master_data)
 
 # %%
 from pyspark.sql import DataFrame
@@ -212,32 +145,32 @@ writeConfigCosmosDb = {
 postOffice = PostOffice(writeConfigCosmosDb)
 
 
-def __store_data_frame(batch_df: DataFrame, _: int):
+def __store_data_frame(batched_time_series_points: DataFrame, _: int):
     try:
         watch = MonitoredStopwatch.start_timer(telemetry_client, "StoreDataFrame")
 
         # This validation cannot be done in the Validator due to the implementation.
         # It uses a Window, which can not be used in streaming without time.
-        batch_df = batch_operations.add_time_series_validation_status_column(batch_df)
+        batched_time_series_points = batch_operations.add_time_series_validation_status_column(batched_time_series_points)
 
         persist_timer = watch.start_sub_timer("persist")
         # Cache the batch in order to avoid the risk of recalculation in each write operation
-        batch_df = batch_df.persist()
+        batched_time_series_points = batched_time_series_points.persist()
         persist_timer.stop_timer()
 
-        correlation_ids = batch_operations.get_involved_correlation_ids(batch_df, watch)
-        batch_count = batch_operations.get_rows_in_batch(batch_df, watch)
+        correlation_ids = batch_operations.get_involved_correlation_ids(batched_time_series_points, watch)
+        batch_count = batch_operations.get_rows_in_batch(batched_time_series_points, watch)
 
         # Make valid time series points available to aggregations (by storing in Delta lake)
-        batch_operations.store_valid_data(batch_df, output_delta_lake_path, watch)
+        batch_operations.store_valid_data(batched_time_series_points, output_delta_lake_path, watch)
 
         # send new time series messages to market actors.
         # Cosmos DB storage for post office configuration
-        postOffice.sendValid(batch_df)
-        postOffice.sendRejected(batch_df)
+        postOffice.sendValid(batched_time_series_points)
+        postOffice.sendRejected(batched_time_series_points)
 
         unpersist_timer = watch.start_sub_timer("unpersist")
-        batch_df = batch_df.unpersist()
+        batched_time_series_points = batched_time_series_points.unpersist()
         unpersist_timer.stop_timer()
 
         watch.stop_timer(batch_count)
@@ -258,7 +191,7 @@ def __store_data_frame(batch_df: DataFrame, _: int):
 # recovery with a exactly-once semantic. See more on
 # https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#fault-tolerance-semantics.
 # The trigger determines how often a batch is created and processed.
-out_stream = validated_data \
+out_stream = time_series_points \
     .writeStream \
     .option("checkpointLocation", checkpoint_path) \
     .trigger(processingTime=args.trigger_interval) \

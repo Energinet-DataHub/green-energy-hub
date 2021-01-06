@@ -15,6 +15,8 @@ from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.functions import col, from_json
 from pyspark.sql.types import StructType
 
+json_date_format = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
+
 
 class EventHubParser:
 
@@ -23,6 +25,6 @@ class EventHubParser:
         return raw_data \
             .select(from_json(col("body").cast("string"),
                               message_schema,
-                              options={"dateFormat": "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"}).alias("message"),
+                              options={"dateFormat": json_date_format}).alias("message"),
                     col("enqueuedTime").alias("EventHubEnqueueTime")) \
             .select(col("message.*"), col("EventHubEnqueueTime"))

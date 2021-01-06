@@ -19,19 +19,20 @@ defined in the geh_stream directory in our tests.
 import pytest
 from pyspark import SparkConf
 from pyspark.sql import SparkSession, DataFrame
+from pyspark.sql.functions import col, lit, to_timestamp, explode
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType, DecimalType, TimestampType, BooleanType
 import pandas as pd
 from decimal import Decimal
 from datetime import datetime
 import time
 import uuid
 
-from pyspark.sql.functions import col, lit, to_timestamp, explode
+
 from geh_stream.codelists import MarketEvaluationPointType, Quality
-from geh_stream.streaming_utils import Enricher
+from geh_stream.streaming_utils.streamhandlers import Enricher
 from geh_stream.schemas import SchemaNames, SchemaFactory
 from geh_stream.dataframelib import flatten_df
-from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
-from pyspark.sql.types import StructType, StructField, StringType, ArrayType, DecimalType, TimestampType, BooleanType
+from geh_stream.streaming_utils.streamhandlers.denormalization import denormalize_parsed_data
 
 
 # Create Spark Conf/Session
@@ -143,7 +144,7 @@ def time_series_json_factory():
                 {{
                     "Quantity": "{2}",
                     "Quality": "{3}",
-                    "ObservationTime": "{5}"
+                    "Time": "{5}"
                 }}
             ]
         }}
@@ -279,7 +280,7 @@ def valid_atomic_value_schema():
         StructField("RecipientList", ArrayType(StringType()), False),
         StructField("Period_Point_Quantity", DecimalType(), False),
         StructField("Period_Point_Quality", StringType(), False),
-        StructField("Period_Point_ObservationTime", TimestampType(), False),
+        StructField("Period_Point_Time", TimestampType(), False),
         StructField("MarketDocument_CreatedDateTime", TimestampType(), False),
         StructField("EventHubEnqueueTime", TimestampType(), False)
     ])

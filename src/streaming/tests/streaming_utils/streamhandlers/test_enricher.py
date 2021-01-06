@@ -20,9 +20,9 @@ from pyspark.sql.types import DecimalType, StringType, StructField, StructType, 
 from pyspark.sql.functions import col
 
 from geh_stream.schemas import SchemaNames, SchemaFactory
-from geh_stream.streaming_utils import Enricher
+from geh_stream.streaming_utils.streamhandlers import Enricher
 from geh_stream.dataframelib import has_column
-from geh_stream.streaming_utils.denormalization import denormalize_parsed_data
+from geh_stream.streaming_utils.streamhandlers import denormalize_parsed_data
 
 # Create timestamps used in DataFrames
 time_now = time.time()

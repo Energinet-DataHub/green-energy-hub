@@ -58,12 +58,13 @@ class SchemaFactory:
         .add("CorrelationId", StringType(), False) \
         .add("Period", StructType()
              .add("Resolution", StringType(), False)
-             .add("TimeInterval_Start", TimestampType(), False)
-             .add("TimeInterval_End", TimestampType(), False)
+             .add("TimeInterval", StructType()
+                  .add("Start", TimestampType(), False)
+                  .add("End", TimestampType(), False), False)
              .add("Points", ArrayType(StructType()
                   .add("Quantity", DecimalType(), False)
                   .add("Quality", StringType(), False)
-                  .add("ObservationTime", TimestampType(), False), True), False), False)
+                  .add("Time", TimestampType(), False), True), False), False)
 
     # ValidFrom and ValidTo are not to be included in outputs from the time series point streaming process
     master_schema: StructType = StructType() \
@@ -113,7 +114,7 @@ class SchemaFactory:
         .add("MarketEvaluationPoint_mRID", StringType(), False) \
         .add("Quantity", DecimalType(), True) \
         .add("Quality", StringType(), True) \
-        .add("ObservationTime", TimestampType(), False) \
+        .add("Time", TimestampType(), False) \
         .add("MeteringMethod", StringType(), True) \
         .add("MeterReadingPeriodicity", StringType(), True) \
         .add("MeteringGridArea_Domain_mRID", StringType(), False) \

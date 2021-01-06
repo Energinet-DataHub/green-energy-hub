@@ -29,7 +29,7 @@ def store_valid_data(batch_df: DataFrame, output_delta_lake_path, watch):
     batch_df \
         .filter(col("IsTimeSeriesValid") == lit(True)) \
         .select(col("MarketEvaluationPoint_mRID"),
-                col("Period_Point_ObservationTime").alias("ObservationTime"),
+                col("Period_Point_Time").alias("Time"),
                 col("Period_Point_Quantity").alias("Quantity"),
                 col("CorrelationId"),
                 col("MessageReference"),
@@ -56,9 +56,9 @@ def store_valid_data(batch_df: DataFrame, output_delta_lake_path, watch):
                 col("QuantityMeasurementUnit_Name"),
                 col("Product"),
 
-                year("Period_Point_ObservationTime").alias("year"),
-                month("Period_Point_ObservationTime").alias("month"),
-                dayofmonth("Period_Point_ObservationTime").alias("day")) \
+                year("Period_Point_Time").alias("year"),
+                month("Period_Point_Time").alias("month"),
+                dayofmonth("Period_Point_Time").alias("day")) \
         .repartition("year", "month", "day") \
         .write \
         .partitionBy("year", "month", "day") \

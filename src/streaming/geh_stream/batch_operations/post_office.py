@@ -57,7 +57,7 @@ class PostOffice:
                     col("Period_Point_Quantity").alias("Quantity"),
                     col("Period_Point_Quality").alias("Quality"),
                     date_format("EventHubEnqueueTime", self.__dateFormat).alias("EventHubEnqueueTime"),
-                    date_format("Period_Point_ObservationTime", self.__dateFormat).alias("ObservationTime"),
+                    date_format("Period_Point_Time", self.__dateFormat).alias("ObservationTime"),
                     date_format("MarketDocument_CreatedDateTime", self.__dateFormat).alias("MarketDocument_CreatedDateTime"))
         return df
 

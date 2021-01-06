@@ -15,7 +15,7 @@
 from pyspark.sql.dataframe import DataFrame
 import pytest
 
-from geh_stream.streaming_utils.enrichers.recipient_enricher import find_sts_recipient, \
+from geh_stream.streaming_utils.streamhandlers.enrichers.recipient_enricher import find_sts_recipient, \
     find_ddq_recipient, find_ez_recipient, find_ddm_recipients, enrich_recipients
 from geh_stream.codelists.market_evaluation_point_type import MarketEvaluationPointType
 

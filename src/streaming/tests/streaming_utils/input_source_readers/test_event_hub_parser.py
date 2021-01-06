@@ -20,7 +20,7 @@ from pyspark.sql.types import BinaryType, LongType, StringType, StructField, Str
 from pyspark.sql.functions import col, lit
 import time
 
-from geh_stream.streaming_utils import EventHubParser
+from geh_stream.streaming_utils.input_source_readers.event_hub_parser import EventHubParser
 from geh_stream.schemas import SchemaNames, SchemaFactory
 
 # Create timestamp used in DataFrames

@@ -19,5 +19,5 @@ def enrich_master_data(parsed_data: DataFrame, master_data: DataFrame):
     return parsed_data.alias("pd") \
         .join(master_data.alias("md"),
               (col("pd.MarketEvaluationPoint_mRID") == col("md.MarketEvaluationPoint_mRID"))
-              & col("pd.Period_Point_ObservationTime").between(col("md.ValidFrom"), col("md.ValidTo")), how="left") \
+              & col("pd.Period_Point_Time").between(col("md.ValidFrom"), col("md.ValidTo")), how="left") \
         .drop(master_data["ValidFrom"]).drop(master_data["ValidTo"])
