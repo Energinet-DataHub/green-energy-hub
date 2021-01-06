@@ -2,7 +2,7 @@ name: Main Terraform CD
 
 on:
   push:
-    branches: [ renetnielsen/terraform-part-1 ]
+    branches: [ main ]
     paths:
       - build/terraform/infra/**
       - build/terraform/modules/**
