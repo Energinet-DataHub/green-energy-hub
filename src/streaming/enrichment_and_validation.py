@@ -166,8 +166,9 @@ def __store_data_frame(batched_time_series_points: DataFrame, _: int):
 
         # send new time series messages to market actors.
         # Cosmos DB storage for post office configuration
-        postOffice.sendValid(batched_time_series_points)
-        postOffice.sendRejected(batched_time_series_points)
+        numExecutors = spark.sparkContext.defaultParallelism
+        postOffice.sendValid(batched_time_series_points, numExecutors)
+        postOffice.sendRejected(batched_time_series_points, numExecutors)
 
         unpersist_timer = watch.start_sub_timer("unpersist")
         batched_time_series_points = batched_time_series_points.unpersist()
