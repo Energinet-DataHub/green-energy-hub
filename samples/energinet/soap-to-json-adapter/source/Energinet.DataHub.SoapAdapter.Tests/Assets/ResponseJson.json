@@ -1,24 +1,24 @@
 ﻿[
   {
-    "TransactionMrid":"2222222222",
-    "Errors":[{
-      "Message":"Something is wrong",
-      "Code":"B2B-001"
+    "mrid":"2222222222",
+    "errors":[{
+      "message":"Something is wrong",
+      "code":"B2B-001"
     }]
   },
   {
-    "TransactionMrid":"33333333",
-    "Errors":[{
-      "Message":"Oops",
-      "Code":"B2B-001"
+    "mrid":"33333333",
+    "errors":[{
+      "message":"Oops",
+      "code":"B2B-001"
     },
       {
-        "Message":"Oops we did it again",
-        "Code":"B2B-002"
+        "message":"Oops we did it again",
+        "code":"B2B-002"
       }]
   },
   {
-    "TransactionMrid":"11111111",
-    "Errors":[]
+    "mrid":"11111111",
+    "errors":[]
   }
 ]

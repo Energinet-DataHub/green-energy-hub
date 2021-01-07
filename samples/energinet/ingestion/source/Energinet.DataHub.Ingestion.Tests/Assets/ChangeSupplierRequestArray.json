@@ -1,22 +1,16 @@
 ﻿[
   {
     "BalanceResponsibleParty": {
-      "mRID": {
-        "value": "12345678",
-        "qualifier": "VA"
-      }
+      "mRID": "12345678",
+      "qualifier": "VA"
     },
     "EnergySupplier": {
-      "mRID": {
-        "value": "12345678",
-        "qualifier": "VA"
-      }
+      "mRID": "12345678",
+      "qualifier": "VA"
     },
     "Consumer": {
-      "mRID": {
-        "value": "1234567890",
-        "qualifier": "ARR"
-      },
+      "mRID": "1234567890",
+      "qualifier": "ARR",
       "name": "Hans Hansen"
     },
     "MarketEvaluationPoint": {
@@ -27,22 +21,16 @@
   },
   {
     "BalanceResponsibleParty": {
-      "mRID": {
-        "value": "12345678",
-        "qualifier": "VA"
-      }
+      "mRID": "12345678",
+      "qualifier": "VA"
     },
     "EnergySupplier": {
-      "mRID": {
-        "value": "12345678",
-        "qualifier": "VA"
-      }
+      "mRID": "12345678",
+      "qualifier": "VA"
     },
     "Consumer": {
-      "mRID": {
-        "value": "1234567890",
-        "qualifier": "ARR"
-      },
+      "mRID": "1234567890",
+      "qualifier": "ARR",
       "name": "Hans Hansen"
     },
     "MarketEvaluationPoint": {

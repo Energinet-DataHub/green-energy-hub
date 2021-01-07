@@ -17,11 +17,20 @@ using System.Linq;
 using System.Text.Json;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.MessageTypes;
+using NodaTime.Serialization.SystemTextJson;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace GreenEnergyHub.Queues
 {
     public class MessageEnvelopeFactory : IMessageEnvelopeFactory
     {
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions();
+
+        static MessageEnvelopeFactory()
+        {
+            _jsonSerializerOptions.Converters.Add(NodaConverters.InstantConverter);
+        }
+
         public MessageEnvelope CreateFrom(IHubMessage hubMessage)
         {
             if (hubMessage is null)
@@ -30,7 +39,7 @@ namespace GreenEnergyHub.Queues
             }
 
             var requestType = ExtractMessageTypeNameFrom(hubMessage);
-            var serializedActionRequest = JsonSerializer.Serialize<object>(hubMessage);
+            var serializedActionRequest = JsonSerializer.Serialize<object>(hubMessage, _jsonSerializerOptions);
             return new MessageEnvelope(serializedActionRequest, requestType);
         }
 

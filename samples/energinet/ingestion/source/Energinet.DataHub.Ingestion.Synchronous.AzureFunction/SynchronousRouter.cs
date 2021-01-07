@@ -13,7 +13,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Application;
 using GreenEnergyHub.Messaging;
@@ -31,8 +30,10 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
     /// Class which gives the only Azure Function endpoint which handles
     /// requests by getting endpoints from a provided resolver.
     /// </summary>
-    public class RequestRouter
+    public class SynchronousRouter
     {
+        private const string FunctionName = nameof(SynchronousRouter);
+
         private readonly IHubMessageTypeMap _resolver;
         private readonly IHubRehydrator _rehydrator;
         private readonly IHubMessageBulkMediator _bulkMediator;
@@ -45,7 +46,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
         /// <param name="rehydrator">Rehydrate a message to a message type</param>
         /// <param name="bulkMediator">Service for dispatching collection of
         /// messages.</param>
-        public RequestRouter(
+        public SynchronousRouter(
             IHubMessageTypeMap resolver,
             IHubRehydrator rehydrator,
             IHubMessageBulkMediator bulkMediator)
@@ -59,7 +60,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
         /// The Azure Functions endpoint.
         /// </summary>
         /// <returns>The HTTP result of running this function.</returns>
-        [FunctionName("Router")]
+        [FunctionName(FunctionName)]
         public async Task<IActionResult> RunAsync(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "{category:alpha}")] HttpRequest httpRequest,
             ILogger logger,
@@ -75,7 +76,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
                 throw new ArgumentNullException(nameof(logger));
             }
 
-            logger.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation($"{FunctionName} started processing a request.");
 
             var requestType = _resolver.GetTypeByCategory(category);
             if (requestType == null)

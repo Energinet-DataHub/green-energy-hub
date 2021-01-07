@@ -37,10 +37,9 @@ namespace Energinet.DataHub.Ingestion.Tests.AzureFunction
             var targetType = typeof(ChangeOfSupplierMessage);
 
             var expected = new ChangeOfSupplierMessage();
-            expected.BalanceResponsibleParty.MRID = new MRID("12345678", "VA");
-            expected.EnergySupplier.MRID = new MRID("12345678", "VA");
-            expected.Consumer.Name = "Hans Hansen";
-            expected.Consumer.MRID = new MRID("1234567890", "ARR");
+            expected.BalanceResponsibleParty = new MarketParticipant("12345678", null, null, "VA");
+            expected.EnergySupplier = new MarketParticipant("12345678", null, null, "VA");
+            expected.Consumer = new MarketParticipant("1234567890", "Hans Hansen", null, "ARR");
             expected.MarketEvaluationPoint = new MarketEvaluationPoint("123456789123456789");
             expected.StartDate = Instant.FromUtc(2020, 9, 30, 22, 0, 0) + Duration.FromMilliseconds(1);
             expected.Transaction = new Transaction("a01dbf8b-ea99-4798-9bd4-ed85ecf79897");

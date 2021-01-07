@@ -28,8 +28,10 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
     /// <summary>
     /// Class which gives the async queue-triggered Azure Function.
     /// </summary>
-    public class CommandRouter
+    public class AsynchronousRouter
     {
+        private const string FunctionName = nameof(AsynchronousRouter);
+
         private readonly IHubMessageTypeMap _resolver;
         private readonly IHubRehydrator _rehydrator;
         private readonly IHubCommandMediator _commandDispatcher;
@@ -42,7 +44,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
         /// <param name="rehydrator">Rehydrates a message to a message type</param>
         /// <param name="commandDispatcher">Service for dispatching collection
         /// of requests.</param>
-        public CommandRouter(
+        public AsynchronousRouter(
             IHubMessageTypeMap resolver,
             IHubRehydrator rehydrator,
             IHubCommandMediator commandDispatcher)
@@ -58,7 +60,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
         /// </summary>
         /// <param name="eventData">The message read.</param>
         /// <param name="logger">A logger.</param>
-        [FunctionName("Router")]
+        [FunctionName(FunctionName)]
         public async Task RunAsync(
             [EventHubTrigger("%REQUEST_QUEUE_CONSUMER_GROUP%", Connection = "REQUEST_QUEUE_CONNECTION_STRING")] MessageEnvelope eventData,
             ILogger logger)
@@ -73,11 +75,12 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
                 throw new ArgumentNullException(nameof(logger));
             }
 
-            logger.LogInformation("Async Ingestor started processing a request.");
+            logger.LogInformation($"{FunctionName} started processing a request.");
 
             var requestType = _resolver.GetTypeByCategory(eventData.MessageType);
             if (requestType == null)
             {
+                logger.LogWarning("{messageType} not found", eventData.MessageType);
                 return; // TODO: go to error queue or storage?
             }
 
@@ -86,6 +89,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
                 var hubRequest = await _rehydrator.RehydrateAsync(body, requestType).ConfigureAwait(false);
                 if (hubRequest == null)
                 {
+                    logger.LogWarning("CommandRouter: could not rehydrate {messageType}", eventData.MessageType);
                     return; // TODO: go to error queue or storage?
                 }
 

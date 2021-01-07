@@ -18,6 +18,7 @@ using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction;
 using Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration;
 using Energinet.DataHub.Ingestion.Domain.TimeSeries;
 using Energinet.DataHub.Ingestion.Infrastructure;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
@@ -44,6 +45,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
             builder.Services.AddMarketDataMessageQueue();
             builder.Services.AddTimeSeriesMessageQueue();
             builder.Services.AddScoped<IHubCommandMediator, HubCommandMediator>();
+            builder.Services.AddSingleton<IJsonSerializer, JsonSerializer>();
         }
     }
 }

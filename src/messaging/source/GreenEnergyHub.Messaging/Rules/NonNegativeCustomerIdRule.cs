@@ -44,7 +44,7 @@ namespace GreenEnergyHub.Messaging.Rules
 
         private RuleResult DoValidation(TMessage message)
         {
-            if (int.TryParse(message.Consumer.MRID.Value, out var mrid) && mrid < 0)
+            if (int.TryParse(message.Consumer.MRID, out var mrid) && mrid < 0)
             {
                 return new RuleResult(GetType().Name, message.Transaction.MRID, false, "CustomerId was negative");
             }

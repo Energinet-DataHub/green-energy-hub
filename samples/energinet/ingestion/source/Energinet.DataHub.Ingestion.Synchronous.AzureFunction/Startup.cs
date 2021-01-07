@@ -16,11 +16,14 @@ using System;
 using Energinet.DataHub.Ingestion.Application;
 using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Infrastructure;
+using Energinet.DataHub.Ingestion.Infrastructure.MessageQueue;
 using Energinet.DataHub.Ingestion.Synchronous.AzureFunction;
 using Energinet.DataHub.Ingestion.Synchronous.AzureFunction.Configuration;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
+using GreenEnergyHub.Queues;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -42,6 +45,7 @@ namespace Energinet.DataHub.Ingestion.Synchronous.AzureFunction
             builder.Services.AddGreenEnergyHub(typeof(ChangeOfSupplierMessage).Assembly);
             builder.Services.AddMessageQueue();
             builder.Services.AddScoped<IHubMessageBulkMediator, HubRequestBulkMediator>();
+            builder.Services.AddSingleton<IJsonSerializer, JsonSerializer>();
         }
     }
 }

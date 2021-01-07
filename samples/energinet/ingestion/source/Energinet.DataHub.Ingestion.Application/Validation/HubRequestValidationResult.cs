@@ -24,10 +24,10 @@ namespace Energinet.DataHub.Ingestion.Application.Validation
 
         public HubRequestValidationResult(string transactionId)
         {
-            TransactionId = !string.IsNullOrWhiteSpace(transactionId) ? transactionId : throw new ArgumentNullException(nameof(transactionId));
+            MRID = !string.IsNullOrWhiteSpace(transactionId) ? transactionId : throw new ArgumentNullException(nameof(transactionId));
         }
 
-        public string TransactionId { get; }
+        public string MRID { get; }
 
         public IReadOnlyList<ValidationError> Errors => _validationErrors.AsReadOnly();
 

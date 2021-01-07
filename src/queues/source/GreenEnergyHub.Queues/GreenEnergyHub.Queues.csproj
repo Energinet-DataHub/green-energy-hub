@@ -23,4 +23,8 @@ limitations under the License.
       <ProjectReference Include="..\..\..\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="NodaTime.Serialization.SystemTextJson" Version="1.0.0" />
+    </ItemGroup>
+
 </Project>

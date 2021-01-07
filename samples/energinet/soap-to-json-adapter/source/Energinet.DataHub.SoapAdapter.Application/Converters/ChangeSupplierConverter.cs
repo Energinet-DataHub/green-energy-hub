@@ -125,10 +125,8 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
             }
 
             writer.WriteStartObject("Consumer");
-            writer.WriteStartObject("mRID");
-            writer.WriteString("value", cvr ?? cpr);
+            writer.WriteString("mRID", cvr ?? cpr);
             writer.WriteString("qualifier", qualifier);
-            writer.WriteEndObject();
 
             if (name != null)
             {

@@ -19,26 +19,29 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
     public class MarketParticipant
     {
         public MarketParticipant()
-            : this(MRID.Empty, null, null) { }
+            : this(null, null, null, null) { }
 
         public MarketParticipant(string mrid)
-            : this(new MRID(mrid), null, null)
-        { }
+            : this(mrid, null, null, null) { }
 
-        public MarketParticipant(MRID mrid, string? name, string? type)
+        public MarketParticipant(string? mrid, string? name, string? type, string? qualifier)
         {
             MRID = mrid;
             Name = name;
             Type = type;
+            Qualifier = qualifier;
         }
 
         public static MarketParticipant Empty => new MarketParticipant();
 
         [JsonPropertyName(name: "mRID")]
-        public MRID MRID { get; set; }
+        public string? MRID { get; set; }
 
         [JsonPropertyName(name: "name")]
         public string? Name { get; set; }
+
+        [JsonPropertyName(name: "qualifier")]
+        public string? Qualifier { get; set; }
 
         /// <summary>
         /// Process Role information for market participant, eg. MDR.
@@ -62,7 +65,7 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(MRID, Name);
+            return HashCode.Combine(MRID, Name, Qualifier, Type);
         }
 
         protected bool Equals(MarketParticipant other)
@@ -72,7 +75,7 @@ namespace GreenEnergyHub.Messaging.MessageTypes.Common
                 throw new ArgumentNullException(nameof(other));
             }
 
-            return MRID.Equals(other.MRID) && Name == other.Name;
+            return MRID == other.MRID && Name == other.Name && Qualifier == other.Qualifier && Type == other.Type;
         }
     }
 }
