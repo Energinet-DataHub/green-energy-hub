@@ -25,6 +25,9 @@ namespace GreenEnergyHub.Schemas.Json.Tests
 {
     public class GreenEnergyHubSchemaValidatorTests : IClassFixture<ValidationOptionsFixture>
     {
+        private const bool DocumentIsValid = true;
+        private const bool DocumentIsInvalid = false;
+
         private readonly ValidationOptionsFixture _validationOptionsFixture;
 
         public GreenEnergyHubSchemaValidatorTests(ValidationOptionsFixture validationOptionsFixture)
@@ -32,42 +35,21 @@ namespace GreenEnergyHub.Schemas.Json.Tests
             _validationOptionsFixture = validationOptionsFixture;
         }
 
-        [Fact]
-        public void DocumentShouldBeValid()
+        [Theory]
+        [InlineData("TestData/ChangeOfSupplierValid.json", SchemaTypes.InitiateChangeSupplier, DocumentIsValid)]
+        [InlineData("TestData/ChangeOfSupplierInvalidDate.json", SchemaTypes.InitiateChangeSupplier, DocumentIsInvalid)]
+        [InlineData("TestData/ChangeOfSupplierMissingEnergySupplierMridQualifier.json", SchemaTypes.InitiateChangeSupplier, DocumentIsInvalid)]
+        [InlineData("TestData/UpdateCustomerMasterDataNoContactAddress.json", SchemaTypes.UpdateCustomerMasterData, DocumentIsValid)]
+        [InlineData("TestData/UpdateCustomerMasterDataWithContactAddresses.json", SchemaTypes.UpdateCustomerMasterData, DocumentIsValid)]
+        public void AssertThatJsonDocumentIsValid(string jsonDocumentPath, string schemaType, bool expectedResult)
         {
-            var document = JsonDocument.Parse(File.ReadAllText("TestData/ChangeOfSupplierValid.json"));
-            var schema = new SchemaType(SchemaTypes.InitiateChangeSupplier);
+            var document = JsonDocument.Parse(File.ReadAllText(jsonDocumentPath));
+            var schema = new SchemaType(schemaType);
             var sut = new GreenEnergyHubSchemaValidator(_validationOptionsFixture.Options, new GreenEnergyHubJsonSchemaProvider());
 
             var results = sut.ValidateDocument(schema, document);
 
-            Assert.True(results);
-        }
-
-        [Fact]
-        public void DocumentDateShouldBeInvalid()
-        {
-            var document = JsonDocument.Parse(File.ReadAllText("TestData/ChangeOfSupplierInvalidDate.json"));
-
-            var schema = new SchemaType(SchemaTypes.InitiateChangeSupplier);
-            var sut = new GreenEnergyHubSchemaValidator(_validationOptionsFixture.Options, new GreenEnergyHubJsonSchemaProvider());
-
-            var results = sut.ValidateDocument(schema, document);
-
-            Assert.False(results);
-        }
-
-        [Fact]
-        public void DocumentMissingPropertyShouldBeInvalid()
-        {
-            var document = JsonDocument.Parse(File.ReadAllText("TestData/ChangeOfSupplierMissingEnergySupplierMridQualifier.json"));
-
-            var schema = new SchemaType(SchemaTypes.InitiateChangeSupplier);
-            var sut = new GreenEnergyHubSchemaValidator(_validationOptionsFixture.Options, new GreenEnergyHubJsonSchemaProvider());
-
-            var results = sut.ValidateDocument(schema, document);
-
-            Assert.False(results);
+            Assert.Equal(expectedResult, results);
         }
 
         [Fact]

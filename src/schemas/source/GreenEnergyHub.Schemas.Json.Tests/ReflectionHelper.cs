@@ -12,11 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace GreenEnergyHub.Schemas.Json
+using System;
+using System.Linq;
+using System.Reflection;
+
+namespace GreenEnergyHub.Schemas.Json.Tests
 {
-    internal static class SchemaTypes
+    internal class ReflectionHelper
     {
-        public const string InitiateChangeSupplier = "InitiateChangeSupplier";
-        public const string UpdateCustomerMasterData = "UpdateCustomerMasterData";
+        internal static TOutput[] GetAllStaticFields<TOutput>(Type targetType)
+        {
+            var members = targetType
+                .GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Select(field => field.GetValue(null))
+                .OfType<TOutput>();
+
+            return members.ToArray();
+        }
     }
 }

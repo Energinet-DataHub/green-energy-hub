@@ -1,0 +1,49 @@
+﻿{
+  "MktActivityRecord": {
+    "ContactAddress": {
+      "AdministrativeParty_UsagePointLocation": {
+        "name": "Test Address",
+        "attention": "blank",
+        "MPRelationType": "E17",
+        "phone1": "12312312",
+        "phone2": "32132121",
+        "electronicAddress": "test@endk.dk",
+        "remark": "remark",
+        "UsagePointLocation": {
+          "buildingNumber": "5",
+          "cityName": "Fredericia",
+          "citySubDivisionName": "erritsø",
+          "country": "DK",
+          "geoInfoReference": "geo ref",
+          "floorIdentification": "3",
+          "municipalityCode": "7055",
+          "postalCode": "7070",
+          "poBox": "po box",
+          "suiteNumber": "55",
+          "streetCode": "street code 2",
+          "streetName": "tonne kjærs vej"
+        }
+      }
+    },
+    "FirstConsumerParty": {
+      "mRID": "12312312",
+      "name": "Consumer name 1",
+      "qualifier": "AAR"
+    },
+    "SecondConsumerParty": {
+      "mRID": "12312321",
+      "name": "Consumer name 2",
+      "qualifier": "AAR"
+    },
+    "MarketEvaluationPoint": {
+      "mRID": "123456789123456789"
+    },
+    "StartDate": "2020-10-10T20:00:00.000Z",
+    "BusinessTransaction": {
+      "mRID": "a01dbf8b-ea99-4798-9bd4-ed85ecf79897"
+    },
+    "OriginalTransaction": {
+      "mRID": "a01dbf8b-ea99-4798-9bd4-ed85ecf79886"
+    }
+  }
+}

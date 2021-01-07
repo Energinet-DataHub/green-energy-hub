@@ -30,6 +30,8 @@ limitations under the License.
     <EmbeddedResource Include="Schemas\ChangeOfSupplier.schema.json" />
     <None Remove="Schemas\cim-definitions.schema.json" />
     <EmbeddedResource Include="Schemas\cim-definitions.schema.json" />
+    <None Remove="Schemas\UpdateCustomerMasterData.schema.json" />
+    <EmbeddedResource Include="Schemas\UpdateCustomerMasterData.schema.json" />
   </ItemGroup>
 
   <ItemGroup>

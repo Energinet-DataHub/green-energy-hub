@@ -39,6 +39,12 @@ limitations under the License.
     <None Update="TestData\ChangeOfSupplierValid.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestData\UpdateCustomerMasterDataNoContactAddress.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\UpdateCustomerMasterDataWithContactAddresses.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

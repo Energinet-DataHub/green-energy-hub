@@ -1,62 +1,187 @@
 {
-    "$id": "https://github.com/green-energy-hub/schemas",
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "CIM object definitions",
-    "description": "The common models for Green Energy Hub is defined within this file",
-    "type": "object",
-    "definitions": {
-        "mRID": {
-            "title": "mRID - identification",
-            "description": "Represents a generic identification",
-            "type": "string"
+  "$id": "https://github.com/Energinet-DataHub/green-energy-hub/schemas",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CIM object definitions",
+  "description": "The common models for Green Energy Hub is defined within this file",
+  "type": "object",
+  "definitions": {
+    "mRID": {
+      "title": "mRID - identification",
+      "description": "Represents a generic identification",
+      "type": "string"
+    },
+    "qualifier": {
+      "title": "Market Participant Qualifier",
+      "description": "Indicates if market participant is private or business",
+      "type": "string"
+    },
+    "UsagePointLocation": {
+      "type": "object",
+      "title": "Address details",
+      "properties": {
+        "buildingNumber": {
+          "type": "string"
         },
-        "mRID_qualifier": {
-            "type": "object",
-            "title": "Extended mRID",
-            "properties": {
-                "value": {"title": "value of identification", "type": "string"},
-                "qualifier": { "type": "string"}
-            },
-            "required": [ "value", "qualifier" ]
+        "cityName": {
+          "type": "string"
         },
-        "utc_date": {
-            "type": "string",
-            "title": "Date and time",
-            "format": "date-time"
+        "citySubDivisionName": {
+          "type": "string"
         },
-        "marketParticipant": {
-            "type": "object",
-            "properties": {
-                "mRID": { "$ref": "#/definitions/mRID_qualifier" },
-                "name": { "type": "string" }
-            },
-            "required": [ "mRID" ]
+        "country": {
+          "type": "string"
         },
-        "customerMarketParticipant" : {
-            "type": "object",
-            "properties": {
-                "mRID": { "$ref": "#/definitions/mRID_qualifier" },
-                "name": { "type": "string" },
-                "WebAccessCodeMarketParticipant": {
-                    "WebAccessCodeDescription": { "type": "string" }
-                }
-            },
-            "required": [ "mRID" ]
+        "geoInfoReference": {
+          "type": "string"
         },
-        "marketEvaluationPoint": {
-            "type": "object",
-            "properties": {
-                "mRID": { "$ref": "#/definitions/mRID" }
-            },
-            "required": [ "mRID" ]
+        "floorIdentification": {
+          "type": "string"
         },
-        "referenceId": {
-            "type": "object",
-            "title": "Business reference",
-            "properties": { 
-                "mRID": { "$ref": "#/definitions/mRID" }
-            }, 
-            "required": [ "mRID" ]
+        "municipalityCode": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "poBox": {
+          "type": "string"
+        },
+        "suiteNumber": {
+          "type": "string"
+        },
+        "streetCode": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
         }
+      }
+    },
+    "AdministrativeParty_UsagePointLocation": {
+      "type": "object",
+      "title": "Contact Address details",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "attention": {
+          "type": "string"
+        },
+        "MPRelationType": {
+          "type": "string"
+        },
+        "phone1": {
+          "type": "string"
+        },
+        "phone2": {
+          "type": "string"
+        },
+        "electronicAddress": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        }
+      }
+    },
+    "ContactAddress": {
+      "AdministrativeParty_UsagePointLocation": {
+        "$ref": "#/definitions/AdministrativeParty_UsagePointLocation",
+        "UsagePointLocation": {
+          "$ref": "#/definitions/UsagePointLocation"
+        }
+      }
+    },
+    "ServiceCategory": {
+      "type": "object",
+      "properties": {
+        "CustomerAgreement": {
+          "customer": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "D01: Electrical heating, empty = not chosen",
+          "enum": [
+            "D01"
+          ]
+        }
+      }
+    },
+    "DateAndOrTime": {
+      "dateTime": {
+        "title": "Start of occurrence",
+        "description": "Date in UTC that defines the start date of electrical heating",
+        "$ref": "#/definitions/utc_date"
+      }
+    },
+    "utc_date": {
+      "type": "string",
+      "title": "Date and time",
+      "format": "date-time"
+    },
+    "marketParticipant": {
+      "type": "object",
+      "properties": {
+        "mRID": {
+          "$ref": "#/definitions/mRID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "qualifier": {
+          "$ref": "#/definitions/qualifier"
+        }
+      },
+      "required": [
+        "mRID", "qualifier"
+      ]
+    },
+    "customerMarketParticipant": {
+      "type": "object",
+      "properties": {
+        "mRID": {
+          "$ref": "#/definitions/mRID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "qualifier": {
+          "$ref": "#/definitions/qualifier"
+        },
+        "webAccessCodeMarketParticipant": {
+          "webAccessCodeDescription": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "mRID", "qualifier"
+      ]
+    },
+    "marketEvaluationPoint": {
+      "type": "object",
+      "properties": {
+        "mRID": {
+          "$ref": "#/definitions/mRID"
+        }
+      },
+      "required": [
+        "mRID"
+      ]
+    },
+    "referenceId": {
+      "type": "object",
+      "title": "Business reference",
+      "properties": {
+        "mRID": {
+          "$ref": "#/definitions/mRID"
+        }
+      },
+      "required": [
+        "mRID"
+      ]
     }
+  }
 }

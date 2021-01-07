@@ -28,7 +28,7 @@ namespace GreenEnergyHub.Schemas.Json
 
         static SchemaHelper()
         {
-            SchemaRegistry.Global.Register(new Uri("https://github.com/green-energy-hub/schemas"), SchemaHelper.CimDefinitions);
+            SchemaRegistry.Global.Register(new Uri("https://github.com/Energinet-DataHub/green-energy-hub/schemas"), SchemaHelper.CimDefinitions);
         }
 
         /// <summary>
@@ -50,6 +50,12 @@ namespace GreenEnergyHub.Schemas.Json
             GetSchema("GreenEnergyHub.Schemas.Json.Schemas.ChangeOfSupplier.schema.json");
 
         /// <summary>
+        /// Update customer master data
+        /// </summary>
+        internal static JsonSchema? UpdateCustomerMasterData =>
+            GetSchema("GreenEnergyHub.Schemas.Json.Schemas.UpdateCustomerMasterData.schema.json");
+
+        /// <summary>
         /// Get a <see cref="JsonSchema"/> for a <see cref="SchemaType"/>
         /// </summary>
         /// <param name="schemaType">Type to locate</param>
@@ -59,6 +65,7 @@ namespace GreenEnergyHub.Schemas.Json
             return schemaType.Name switch
             {
                 SchemaTypes.InitiateChangeSupplier => InitiateChangeSupplier,
+                SchemaTypes.UpdateCustomerMasterData => UpdateCustomerMasterData,
                 _ => null
             };
         }

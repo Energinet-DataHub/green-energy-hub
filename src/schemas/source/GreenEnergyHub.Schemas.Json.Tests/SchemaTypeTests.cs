@@ -39,10 +39,14 @@ namespace GreenEnergyHub.Schemas.Json.Tests
         [Fact]
         public void Known_schema_type_should_be_valid()
         {
-            var schema = new SchemaType(SchemaTypes.InitiateChangeSupplier);
+            var schemas = ReflectionHelper.GetAllStaticFields<string>(typeof(SchemaTypes));
 
-            Assert.True(schema.IsValid());
-            Assert.True(SchemaType.IsValid(SchemaTypes.InitiateChangeSupplier));
+            foreach (var schema in schemas)
+            {
+                var schemaType = new SchemaType(schema);
+                Assert.True(schemaType.IsValid());
+                Assert.True(SchemaType.IsValid(schema));
+            }
         }
 
         [Fact]

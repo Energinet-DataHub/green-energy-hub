@@ -24,6 +24,7 @@ namespace GreenEnergyHub.Schemas.Json
         private static readonly HashSet<string> _validSchemaTypes = new HashSet<string>(new[]
         {
             SchemaTypes.InitiateChangeSupplier,
+            SchemaTypes.UpdateCustomerMasterData,
         });
 
         /// <summary>

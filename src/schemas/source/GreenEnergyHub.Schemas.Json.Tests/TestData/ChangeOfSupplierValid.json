@@ -1,28 +1,24 @@
 ﻿{
-  "BalanceResponsibleParty": {
-    "mRID": {
-      "value": "12345678",
+  "MktActivityRecord": {
+    "BalanceResponsibleParty": {
+      "mRID": "12345678",
       "qualifier": "VA"
-    }
-  },
-  "EnergySupplier": {
-    "mRID": {
-      "value": "12345678",
+    },
+    "EnergySupplier": {
+      "mRID": "12345678",
       "qualifier": "VA"
-    }
-  },
-  "Consumer": {
-    "mRID": {
-      "value": "1234567890",
+    },
+    "Consumer": {
+      "mRID": "1234567890",
+      "Name": "Hans Hansen",
       "qualifier": "ARR"
     },
-    "name": "Hans Hansen"
-  },
-  "MarketEvaluationPoint": {
-    "mRID": "123456789123456789"
-  },
-  "StartDate": "2020-10-10T20:00:00.000Z",
-  "Transaction": {
-    "mRID": "a01dbf8b-ea99-4798-9bd4-ed85ecf79897"
+    "MarketEvaluationPoint": {
+      "mRID": "123456789123456789"
+    },
+    "StartDate": "2020-10-10T20:00:00.000Z",
+    "BusinessTransaction": {
+      "mRID": "a01dbf8b-ea99-4798-9bd4-ed85ecf79897"
+    }
   }
 }
