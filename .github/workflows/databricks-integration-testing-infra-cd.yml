@@ -49,14 +49,16 @@ jobs:
           
         - name: Read Pipeline Configuration
           uses: ./.github/actions/read-pipeline-configuration
-          # with:
-          #   config-file: "integration_test.json"
+          with:
+             config-file: "integration_test.json"
 
-        - name: Read Client Secret
-          env:
-            SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
-          run: |  
-            echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+      - name: Set Environment Secrets
+        run: |  
+          echo "ARM_TENANT_ID=${{ secrets.TENANT_ID }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_ID=${{ secrets[env.GITHUB_SECRET_NAME_SPN_ID] }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_OBJECT_ID=${{ secrets[env.GITHUB_SECRET_NAME_SPN_OBJECT_ID] }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_SECRET=${{ secrets[env.GITHUB_SECRET_NAME_SPN_SECRET] }}" >> $GITHUB_ENV
+          echo "ARM_SUBSCRIPTION_ID=${{ secrets[env.GITHUB_SECRET_NAME_SUBSCRIPTION_ID] }}" >> $GITHUB_ENV
 
         # Run only if workflow started on demand (manually triggered)
         - name: Set Variables from Pipeline Inputs

@@ -1,9 +1,9 @@
 name: Databricks Integration Test
 
 on:
-  # push:
-  # pull_request:
-  #   branches: 
+  #push:
+  #  pull_request:
+  #    branches: 
   #      - main 
   workflow_dispatch:
     inputs:
@@ -33,7 +33,7 @@ jobs:
     name: Run DataBricks integration test
     runs-on: ubuntu-latest
     env:
-      WHEEL_VERSION: "1.0"
+      WHEEL_VERSION: "1.4"
       WHEEL_STORAGE_ADDRESS: https://enrgtwheels.blob.core.windows.net/wheels/
       MAIN_PYTHON_FILE: "dbfs:/streaming/enrichment_and_validation.py"
 
@@ -46,14 +46,16 @@ jobs:
 
     - name: Read Pipeline Configuration
       uses: ./.github/actions/read-pipeline-configuration
-      # with:
-      #   config-file: 'integration-tests.json'
+      with:
+        config-file: 'integration-tests.json'
 
-    - name: Read Client Secret
-      env:
-        SECRET_NAME: CLIENT_SECRET_${{ env.UPPERCASE_ENV_NAME }}
+    - name: Set Environment Secrets
       run: |  
-        echo "ARM_CLIENT_SECRET=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+        echo "ARM_TENANT_ID=${{ secrets.TENANT_ID }}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_ID=${{ secrets[env.GITHUB_SECRET_NAME_SPN_ID] }}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_OBJECT_ID=${{ secrets[env.GITHUB_SECRET_NAME_SPN_OBJECT_ID] }}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_SECRET=${{ secrets[env.GITHUB_SECRET_NAME_SPN_SECRET] }}" >> $GITHUB_ENV
+        echo "ARM_SUBSCRIPTION_ID=${{ secrets[env.GITHUB_SECRET_NAME_SUBSCRIPTION_ID] }}" >> $GITHUB_ENV
 
     # Run only if workflow started on demand (manually triggered)
     - name: Set Variables from Pipeline Inputs
@@ -140,6 +142,18 @@ jobs:
       run: |    
         dbfs cp --overwrite ./src/streaming/enrichment_and_validation.py ${{ env.MAIN_PYTHON_FILE }}
 
+    - uses: suisei-cn/actions-download-file@v1
+      name: Download Custom CosmosDB connector
+      with:
+        # Temporarily used package. See comments in .devcontainer/spark-defaults.conf.
+        url: "https://github.com/FabianMeiswinkel/PrivateNugetPackages/raw/master/azure-cosmosdb-spark_3.0.0_2.12-3.6.2-uber.jar"
+        target: cosmosdb_connector/
+
+    - name: Copy Custom CosmosDB connector to DBFS
+      id: copy_cosmosdb_connector_todbfs
+      run: |    
+        dbfs cp --overwrite ./cosmosdb_connector/azure-cosmosdb-spark_3.0.0_2.12-3.6.2-uber.jar dbfs:/streaming/cosmosdb-connector.jar
+
     - name: Terraform Databricks Init
       working-directory: ./build/terraform/databricks_streaming_job_it
       run: terraform init
@@ -179,7 +193,7 @@ jobs:
     - name: Integration Tests
       uses: ./.github/actions/databricks-integration-test
       with:
-        storage-account-name: "timeseriesdata${{ env.ENV_NAME }}​​"
+        storage-account-name: "timeseriesdata${{ env.ENV_NAME }}"
         storage-account-key: ${{ env.OUTPUT_STORAGE_KEY }}
         storage-container-name: ${{ env.RB_OUT_OUTPUT_CONTAINER }}
         input-eh-connection-string: ${{ env.SENDER_EVENT_HUB_CONNECTION_STRING }} 

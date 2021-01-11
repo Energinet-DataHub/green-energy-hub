@@ -1,9 +1,10 @@
 {
     "resource_group_name" : "rg-GreenEnergyHub_Sandbox-S",
-    "_env_name_comment":"use short lower case env_name values as it is used to name azure resources",
-    "env_name":"sndbx",
-    "tenant_id":"f7619355-6c67-4100-9a78-1847f30742e2",
-    "subscription_id":"3764e1f0-3a1b-4a28-a340-1ed0d8d388fd",
-    "client_id":"bec3e7e4-47eb-4df2-ae35-34f8756a5a8f",
-    "object_id":"c8fcae98-ef04-46e5-9e7a-e34c546ed944"
+    "_comment":"use alphanumerical values for env_name and organisation_name. Together they should not be longer than 7 characters",
+    "env_name":"s",
+    "organisation_name": "endk",
+    "github_secret_name_spn_secret": "RG_SANDBOX_S_SPN_SECRET",
+    "github_secret_name_spn_object_id": "RG_SANDBOX_S_SPN_OBJECT_ID",
+    "github_secret_name_spn_id": "RG_SANDBOX_S_SPN_ID",
+    "github_secret_name_subscription_id": "RG_SANDBOX_S_SUBSCRIPTION_ID"
 }

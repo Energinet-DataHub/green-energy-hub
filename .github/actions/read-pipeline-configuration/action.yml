@@ -33,8 +33,8 @@ runs:
         echo "RESOURCE_GROUP_NAME=${resource_group_name}" >> $GITHUB_ENV
         echo "ENV_NAME=${env_name}" >> $GITHUB_ENV
         echo "ORGANISATION_NAME=${organisation_name}" >> $GITHUB_ENV
-        echo "GITHUB_SECRET_NAME_SPN_SECRET=${github_secret_name_spn_secret^^}" >> $GITHUB_ENV
-        echo "GITHUB_SECRET_NAME_SPN_OBJECT_ID=${github_secret_name_spn_object_id^^}" >> $GITHUB_ENV
-        echo "GITHUB_SECRET_NAME_SPN_ID=${github_secret_name_spn_id^^}" >> $GITHUB_ENV
-        echo "GITHUB_SECRET_NAME_SUBSCRIPTION_ID=${github_secret_name_subscription_id^^}" >> $GITHUB_ENV
+        echo "GITHUB_SECRET_NAME_SPN_SECRET=${github_secret_name_spn_secret}" >> $GITHUB_ENV
+        echo "GITHUB_SECRET_NAME_SPN_OBJECT_ID=${github_secret_name_spn_object_id}" >> $GITHUB_ENV
+        echo "GITHUB_SECRET_NAME_SPN_ID=${github_secret_name_spn_id}" >> $GITHUB_ENV
+        echo "GITHUB_SECRET_NAME_SUBSCRIPTION_ID=${github_secret_name_subscription_id}" >> $GITHUB_ENV
       shell: bash

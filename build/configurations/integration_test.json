@@ -1,9 +1,10 @@
 {
     "resource_group_name" : "rg-Helpers-D",
-    "_env_name_comment":"use short lower case env_name values as it is used to name azure resources",
-    "env_name":"inttest",
-    "tenant_id":"f7619355-6c67-4100-9a78-1847f30742e2",
-    "subscription_id":"d252b8da-1db8-44f7-bd6e-8010cc01382b",
-    "client_id":"92441655-3eb7-473a-84b5-35360961c1a0",
-    "object_id":"ddecdfa7-28fc-4cec-bead-1185be97aecf"
+    "_comment":"use alphanumerical values for env_name and organisation_name. Together they should not be longer than 7 characters",
+    "env_name":"it",
+    "organisation_name": "endk",
+    "github_secret_name_spn_secret": "RG_HELPERS_D_SPN_SECRET",
+    "github_secret_name_spn_object_id": "RG_HELPERS_D_SPN_OBJECT_ID",
+    "github_secret_name_spn_id": "RG_HELPERS_D_SPN_ID",
+    "github_secret_name_subscription_id": "RG_HELPERS_D_SUBSCRIPTION_ID"
 }

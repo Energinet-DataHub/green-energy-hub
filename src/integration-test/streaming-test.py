@@ -32,7 +32,7 @@ Remember to put "" around input_eh_connection_string
 """
 
 TIMEOUT_IN_MINUTES = 5
-VALID_ATOMIC_VALUE_CORRELATION_ID = "5c5d3f9e-eabf-46d9-8f86-f88d2de1f16d"
+VALID_SINGLE_POINT_MESSAGE_CORRELATION_ID = "5c5d3f9e-eabf-46d9-8f86-f88d2de1f16d"
 
 storage_account_name = sys.argv[1]
 storage_account_key = sys.argv[2]
@@ -44,15 +44,15 @@ spark = spark_helper.get_spark_session(storage_account_name, storage_account_key
 delta_lake_base_path = spark_helper.get_base_storage_path(storage_container_name, storage_account_name)
 
 
-async def test_load_valid_atomic_timeseries_value_into_eventhub():
+async def test_load_valid_single_point_timeseries_value_into_eventhub():
     # Arrange
     column_name = "CorrelationId"
-    valid_atomic_value = file_helper.read_file_as_string("helper_files/valid_atomic_value.json")
+    valid_single_point_message = file_helper.read_file_as_string("helper_files/valid_single_point_message.json")
     random_guid = str(uuid.uuid4())
-    valid_atomic_value_with_unique_correlation = valid_atomic_value.replace(VALID_ATOMIC_VALUE_CORRELATION_ID, random_guid)
+    valid_single_point_message_with_unique_correlation = valid_single_point_message.replace(VALID_SINGLE_POINT_MESSAGE_CORRELATION_ID, random_guid)
 
     # Act
-    await eventhub_helper.insert_content_on_eventhub(input_eh_connection_string, valid_atomic_value_with_unique_correlation)
+    await eventhub_helper.insert_content_on_eventhub(input_eh_connection_string, valid_single_point_message_with_unique_correlation)
 
     # Assert
     stored_value = spark_helper.get_stored_value_in_deltalake(spark, TIMEOUT_IN_MINUTES, delta_lake_base_path + delta_lake_output_path, column_name, random_guid)
@@ -60,5 +60,5 @@ async def test_load_valid_atomic_timeseries_value_into_eventhub():
 
 # Eventhub requires async https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send#send-events
 loop = asyncio.get_event_loop()
-loop.run_until_complete(test_load_valid_atomic_timeseries_value_into_eventhub())
+loop.run_until_complete(test_load_valid_single_point_timeseries_value_into_eventhub())
 loop.close()
