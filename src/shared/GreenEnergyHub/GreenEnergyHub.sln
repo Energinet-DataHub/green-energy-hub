@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Json", "sour
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Json.Tests", "source\GreenEnergyHub.Json.Tests\GreenEnergyHub.Json.Tests.csproj", "{0416897A-246D-4C6B-8C14-A4579DCACB1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.TestHelpers", "source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj", "{47926952-30CC-4C13-AB09-684B00BD7F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.TestHelpers.Tests", "source\GreenEnergyHub.TestHelpers.Tests\GreenEnergyHub.TestHelpers.Tests.csproj", "{A64B4BD4-C706-431B-BE25-82B7C3BB9E35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,17 @@ Global
 		{0416897A-246D-4C6B-8C14-A4579DCACB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0416897A-246D-4C6B-8C14-A4579DCACB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0416897A-246D-4C6B-8C14-A4579DCACB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47926952-30CC-4C13-AB09-684B00BD7F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47926952-30CC-4C13-AB09-684B00BD7F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47926952-30CC-4C13-AB09-684B00BD7F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47926952-30CC-4C13-AB09-684B00BD7F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A64B4BD4-C706-431B-BE25-82B7C3BB9E35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A64B4BD4-C706-431B-BE25-82B7C3BB9E35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A64B4BD4-C706-431B-BE25-82B7C3BB9E35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A64B4BD4-C706-431B-BE25-82B7C3BB9E35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0416897A-246D-4C6B-8C14-A4579DCACB1F} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
+		{A64B4BD4-C706-431B-BE25-82B7C3BB9E35} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
 	EndGlobalSection
 EndGlobal
