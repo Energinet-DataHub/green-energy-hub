@@ -11,12 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import inspect
 from pyspark.sql import DataFrame, Window
 from pyspark.sql.functions import year, month, dayofmonth, to_json, \
     struct, col, from_json, coalesce, lit
 import pyspark.sql.functions as F
 
+from geh_stream.monitoring import MonitoredStopwatch
 import geh_stream.dataframelib as D
 
 
@@ -24,8 +24,8 @@ def add_time_series_validation_status_column(batch_df: DataFrame):
     return batch_df.withColumn("IsTimeSeriesValid", F.min(col("IsTimeSeriesPointValid")).over(Window.partitionBy("TimeSeries_mRID")))
 
 
-def store_valid_data(batch_df: DataFrame, output_delta_lake_path, watch):
-    timer = watch.start_sub_timer(inspect.currentframe().f_code.co_name)
+def store_points_of_valid_time_series(batch_df: DataFrame, output_delta_lake_path, watch: MonitoredStopwatch):
+    timer = watch.start_sub_timer(store_points_of_valid_time_series.__name__)
     batch_df \
         .filter(col("IsTimeSeriesValid") == lit(True)) \
         .select(col("MarketEvaluationPoint_mRID"),

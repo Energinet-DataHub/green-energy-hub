@@ -145,38 +145,52 @@ writeConfigCosmosDb = {
 postOffice = PostOffice(writeConfigCosmosDb)
 
 
-def __store_data_frame(batched_time_series_points: DataFrame, _: int):
+def __send_to_post_office(batched_time_series_points: DataFrame, watch: MonitoredStopwatch):
+    # Send time series messages to post office (CosmosDb) in order to eventually be sent to market actors.
+    # Number of executors is used for a temporariy workaround to improve throughput and lower latency.
+    # See more in post office implementation.
+    number_of_executors = spark.sparkContext.defaultParallelism
+
+    timer = watch.start_sub_timer(postOffice.sendValid.__name__)
+    postOffice.sendValid(batched_time_series_points, number_of_executors)
+    timer.stop_timer()
+
+    timer = watch.start_sub_timer(postOffice.sendRejected.__name__)
+    postOffice.sendRejected(batched_time_series_points, number_of_executors)
+    timer.stop_timer()
+
+
+def __process_data_frame(batched_time_series_points: DataFrame, _: int):
     try:
-        watch = MonitoredStopwatch.start_timer(telemetry_client, "StoreDataFrame")
+        watch = MonitoredStopwatch.start_timer(telemetry_client, __process_data_frame.__name__)
 
         # This validation cannot be done in the Validator due to the implementation.
         # It uses a Window, which can not be used in streaming without time.
         batched_time_series_points = batch_operations.add_time_series_validation_status_column(batched_time_series_points)
 
-        persist_timer = watch.start_sub_timer("persist")
         # Cache the batch in order to avoid the risk of recalculation in each write operation
         batched_time_series_points = batched_time_series_points.persist()
-        persist_timer.stop_timer()
-
-        correlation_ids = batch_operations.get_involved_correlation_ids(batched_time_series_points, watch)
-        batch_count = batch_operations.get_rows_in_batch(batched_time_series_points, watch)
 
         # Make valid time series points available to aggregations (by storing in Delta lake)
-        batch_operations.store_valid_data(batched_time_series_points, output_delta_lake_path, watch)
+        batch_operations.store_points_of_valid_time_series(batched_time_series_points, output_delta_lake_path, watch)
 
-        # send new time series messages to market actors.
-        # Cosmos DB storage for post office configuration
-        numExecutors = spark.sparkContext.defaultParallelism
-        postOffice.sendValid(batched_time_series_points, numExecutors)
-        postOffice.sendRejected(batched_time_series_points, numExecutors)
+        __send_to_post_office(batched_time_series_points, watch)
 
-        unpersist_timer = watch.start_sub_timer("unpersist")
-        batched_time_series_points = batched_time_series_points.unpersist()
-        unpersist_timer.stop_timer()
+        batch_count = batch_operations.get_rows_in_batch(batched_time_series_points, watch)
 
         watch.stop_timer(batch_count)
 
-        batch_operations.track_batch_back_to_original_correlation_requests(correlation_ids, batch_count, telemetry_client, watch)
+        # Collect serializable data about the batch. In order to be able to use it on individual worker nodes
+        # when sending telemetry per correlation ID from worker nodes.
+        batch_info = {
+            "batch_dependency_id": watch.watch_id,
+            "batch_row_count": batch_count,
+            "batch_duration_ms": watch.duration_ms
+        }
+
+        batch_operations.track_batch_back_to_original_correlation_requests(batched_time_series_points, batch_info, args.telemetry_instrumentation_key)
+
+        batched_time_series_points.unpersist()
 
     except Exception as err:
         # Make sure the exception is not accidently tracked on the last used parent
@@ -196,7 +210,7 @@ out_stream = time_series_points \
     .writeStream \
     .option("checkpointLocation", checkpoint_path) \
     .trigger(processingTime=args.trigger_interval) \
-    .foreachBatch(__store_data_frame)
+    .foreachBatch(__process_data_frame)
 
 # %%
 import time

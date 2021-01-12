@@ -59,7 +59,7 @@ class MonitoredStopwatch:
 
     def stop_timer(self, item_count=None):
         """Stops the monitored stopwatch and sends the resulting time to Application Insights.
-        If the item_count property is provided then an calculates the average time per item will be calculated and attached the result.
+        If the item_count property is provided then the average time per item will be calculated and attached to the result.
 
         Parameters:
             item_count (int): The number of items that were processed as part of what is being tracked by the stopwatch (default is none)

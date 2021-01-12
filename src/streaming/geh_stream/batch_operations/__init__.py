@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .validated_dataframe import add_time_series_validation_status_column, store_valid_data
-from .monitor_batch import get_involved_correlation_ids, get_rows_in_batch, track_batch_back_to_original_correlation_requests
+from .validated_dataframe import add_time_series_validation_status_column, store_points_of_valid_time_series
+from .monitor_batch import get_rows_in_batch, track_batch_back_to_original_correlation_requests
 
 from .post_office import PostOffice
