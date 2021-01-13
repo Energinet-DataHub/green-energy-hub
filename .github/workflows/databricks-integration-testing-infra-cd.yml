@@ -1,20 +1,20 @@
 name: Deploy Databricks Integration Testing Infrastructure
 
 on:
-  # push:
-  #   # branches: 
-  #   #   - main
-  #   paths:
-  #     - build/terraform/databricks_integration_testing_infra/**
-  #     - build/terraform/modules/application-insights/**
-  #     - build/terraform/modules/event-hub/**
-  #     - build/terraform/modules/event-hub-auth-rule/**
-  #     - build/terraform/modules/event-hub-namespace/**
-  #     - build/terraform/modules/key-vault/**
-  #     - build/terraform/modules/key-vault-secret/**
-  #     - build/terraform/modules/storage-account/**
-  #     - build/terraform/modules/storage-container/**
-  #     - .github/workflows/databricks-integration-testing-infra-cd.yml
+  push:
+    branches: 
+      - main
+    paths:
+      - build/terraform/databricks_integration_testing_infra/**
+      - build/terraform/modules/application-insights/**
+      - build/terraform/modules/event-hub/**
+      - build/terraform/modules/event-hub-auth-rule/**
+      - build/terraform/modules/event-hub-namespace/**
+      - build/terraform/modules/key-vault/**
+      - build/terraform/modules/key-vault-secret/**
+      - build/terraform/modules/storage-account/**
+      - build/terraform/modules/storage-container/**
+      - .github/workflows/databricks-integration-testing-infra-cd.yml
   workflow_dispatch:
     inputs:
       resource_group_name:
