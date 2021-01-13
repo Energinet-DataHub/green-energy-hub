@@ -1,5 +1,6 @@
 AdministrativeCustomerMarketParticipant
 AdministrativePartyUsagePointLocation
+agonistic
 ajv
 Alfa
 analytics
@@ -83,6 +84,7 @@ DataHUBB
 DataStream
 DateAndOrTime
 DateTime
+DDD
 ddp
 decarbonized
 DecimalType
@@ -254,6 +256,7 @@ MeteringGridArea
 MeteringMethod
 MeteringPointDomainLocation
 MeteringPointID
+MeteringPointId
 MeteringPointsPerGridArea
 MeterReadingOccurrence
 MeterReadingPeriodicity
