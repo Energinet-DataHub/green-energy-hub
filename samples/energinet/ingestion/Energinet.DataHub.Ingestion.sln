@@ -35,21 +35,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Messaging.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.Ingestion.Asynchronous.AzureFunction", "source\Energinet.DataHub.Ingestion.Asynchronous.AzureFunction\Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.csproj", "{CEDACFCA-E860-4379-BBC5-DEC2132F205F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.Ingestion.Domain", "source\Energinet.DataHub.Ingestion.Domain\Energinet.DataHub.Ingestion.Domain.csproj", "{E868F413-1797-4235-91A4-D21855453C38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.Ingestion.Domain", "source\Energinet.DataHub.Ingestion.Domain\Energinet.DataHub.Ingestion.Domain.csproj", "{E868F413-1797-4235-91A4-D21855453C38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Json", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.Json\GreenEnergyHub.Json.csproj", "{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Json", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.Json\GreenEnergyHub.Json.csproj", "{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues", "..\..\..\src\queues\source\GreenEnergyHub.Queues\GreenEnergyHub.Queues.csproj", "{D7656152-6C7E-4A4B-B8EE-4816D80E3BB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues", "..\..\..\src\queues\source\GreenEnergyHub.Queues\GreenEnergyHub.Queues.csproj", "{D7656152-6C7E-4A4B-B8EE-4816D80E3BB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.AzureServiceBus", "..\..\..\src\queues\source\GreenEnergyHub.Queues.AzureServiceBus\GreenEnergyHub.Queues.AzureServiceBus.csproj", "{6E2DA21C-EFD4-4E17-8D6A-AFE7F47130EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.AzureServiceBus", "..\..\..\src\queues\source\GreenEnergyHub.Queues.AzureServiceBus\GreenEnergyHub.Queues.AzureServiceBus.csproj", "{6E2DA21C-EFD4-4E17-8D6A-AFE7F47130EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.Kafka", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka\GreenEnergyHub.Queues.Kafka.csproj", "{E1996D31-5E06-4DB8-B643-9C8EB3376884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.Kafka", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka\GreenEnergyHub.Queues.Kafka.csproj", "{E1996D31-5E06-4DB8-B643-9C8EB3376884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection", "..\..\..\src\queues\source\GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection\GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection.csproj", "{D3159FBA-5E8F-4A93-A221-B5A72D705E7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection", "..\..\..\src\queues\source\GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection\GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection.csproj", "{D3159FBA-5E8F-4A93-A221-B5A72D705E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection.csproj", "{EAA7F404-2B4F-4219-A174-94550795BC3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection.csproj", "{EAA7F404-2B4F-4219-A174-94550795BC3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Queues.Tests", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Tests\GreenEnergyHub.Queues.Tests.csproj", "{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.Tests", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Tests\GreenEnergyHub.Queues.Tests.csproj", "{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.TestHelpers", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj", "{CA7B8670-DED2-431F-823E-A5BFCE57BA82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,14 @@ Global
 		{CEDACFCA-E860-4379-BBC5-DEC2132F205F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEDACFCA-E860-4379-BBC5-DEC2132F205F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEDACFCA-E860-4379-BBC5-DEC2132F205F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E868F413-1797-4235-91A4-D21855453C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7656152-6C7E-4A4B-B8EE-4816D80E3BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7656152-6C7E-4A4B-B8EE-4816D80E3BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7656152-6C7E-4A4B-B8EE-4816D80E3BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,18 +119,14 @@ Global
 		{EAA7F404-2B4F-4219-A174-94550795BC3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAA7F404-2B4F-4219-A174-94550795BC3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAA7F404-2B4F-4219-A174-94550795BC3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E868F413-1797-4235-91A4-D21855453C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E868F413-1797-4235-91A4-D21855453C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E868F413-1797-4235-91A4-D21855453C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E868F413-1797-4235-91A4-D21855453C38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D526FC92-7D49-4F6F-BC3B-F7824A9FF788}.Release|Any CPU.Build.0 = Release|Any CPU
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA7B8670-DED2-431F-823E-A5BFCE57BA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7B8670-DED2-431F-823E-A5BFCE57BA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7B8670-DED2-431F-823E-A5BFCE57BA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7B8670-DED2-431F-823E-A5BFCE57BA82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,6 +145,7 @@ Global
 		{D3159FBA-5E8F-4A93-A221-B5A72D705E7C} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 		{EAA7F404-2B4F-4219-A174-94550795BC3D} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
+		{CA7B8670-DED2-431F-823E-A5BFCE57BA82} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98635B0D-2BDD-4DFD-AC3B-4E3E8A84D553}

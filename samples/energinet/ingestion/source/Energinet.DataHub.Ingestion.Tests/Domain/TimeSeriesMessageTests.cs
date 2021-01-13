@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
 using System.Text.Json;
 using Energinet.DataHub.Ingestion.Domain.TimeSeries;
 using NodaTime;
@@ -102,7 +104,7 @@ namespace Energinet.DataHub.Ingestion.Tests.Domain
             var actual = JsonSerializer.Serialize(timeSeriesMessage, prettyPrintOptions);
 
             // Assert
-            Assert.Equal(expectedTimeSeriesJson, actual.Replace("\r\n", "\n"));
+            Assert.Equal(expectedTimeSeriesJson, actual, StringComparer.InvariantCulture);
         }
     }
 }
