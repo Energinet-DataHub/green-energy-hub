@@ -14,6 +14,7 @@
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import array, array_except, when, col, lit
+from pyspark.sql.utils import AnalysisException
 import time
 import datetime
 from datetime import timedelta
@@ -41,7 +42,13 @@ def get_spark_session(storage_account_name, storage_account_key):
 
 
 def find_row_in_delta_lake(spark, directory, column_name, column_value):
-    df = spark.read.format("delta").load(directory)
+    # Handle exception that occurs if necessary Delta directory hasn't been created by the streaming yet
+    # and no other or previous test runs have created it.
+    try:
+        df = spark.read.format("delta").load(directory)
+    except AnalysisException:
+        return None
+
     filter_result = df.filter(col(column_name) == column_value)
 
     if filter_result.count() == 0:
