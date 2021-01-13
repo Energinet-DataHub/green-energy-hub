@@ -433,6 +433,7 @@ stateful
 StatusType
 StdDev
 stewartadam
+storages
 StreetName
 StringType
 stylecop
