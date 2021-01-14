@@ -20,7 +20,7 @@ using Xunit;
 
 namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
 {
-    public class DataHubSchemaValidatorTest
+    public class DataHubSchemaValidatorTests
     {
         private const string TestFileFolder = "Energinet.DataHub.SoapValidation.Tests.TestFiles";
         private const string RSM001Folder = "Rsm001";

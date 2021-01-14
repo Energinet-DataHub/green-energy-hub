@@ -23,13 +23,13 @@ using Xunit;
 
 namespace TimeSeriesGeneratorTest
 {
-    public class CsvDataTest
+    public class CsvDataTests
     {
         private readonly ITimeSeriesGeneratorService _timeSeriesGenerator;
         private readonly int _generatedTimeSpanSetCount;
         private readonly IEnumerable<TimeSeriesPoint> _timeSeriesPoints;
 
-        public CsvDataTest()
+        public CsvDataTests()
         {
             var logger = Mock.Of<ILogger<TimeSeriesGeneratorService>>();
             _timeSeriesGenerator = new TimeSeriesGeneratorService(logger);
