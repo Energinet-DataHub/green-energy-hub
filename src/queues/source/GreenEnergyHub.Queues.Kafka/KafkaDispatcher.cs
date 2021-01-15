@@ -41,6 +41,14 @@ namespace GreenEnergyHub.Queues.Kafka
             GC.SuppressFinalize(this);
         }
 
+        public async Task DispatchAsync(string message, string topic)
+        {
+            var producerMessage = CreateProducerMessage(message);
+            var deliveryResult = await _producer.ProduceAsync(topic, producerMessage).ConfigureAwait(false);
+
+            EnsureDelivered(deliveryResult);
+        }
+
         public async Task DispatchAsync(MessageEnvelope messageEnvelope, string topic)
         {
             if (messageEnvelope == null)
@@ -75,6 +83,14 @@ namespace GreenEnergyHub.Queues.Kafka
             return new Message<Null, string>()
             {
                 Value = payload,
+            };
+        }
+
+        private static Message<Null, string> CreateProducerMessage(string message)
+        {
+            return new Message<Null, string>()
+            {
+                Value = message,
             };
         }
 

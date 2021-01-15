@@ -12,21 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
-namespace Energinet.DataHub.Ingestion.Application.Validation
+namespace GreenEnergyHub.Queues.ValidationReportDispatcher
 {
-    // TODO: This class could be placed in GreenEnergyHub.Messaging module.
-    public class ValidationError
+    /// <summary>
+    /// Message queue dispatcher for validation reports
+    /// </summary>
+    public interface IValidationReportQueueDispatcher : IHubMessageQueueDispatcher
     {
-        public ValidationError(string code, string message)
-        {
-            Code = !string.IsNullOrWhiteSpace(code) ? code : throw new ArgumentNullException(nameof(code));
-            Message = !string.IsNullOrWhiteSpace(message) ? message : throw new ArgumentNullException(nameof(message));
-        }
-
-        public string Code { get; }
-
-        public string Message { get; }
     }
 }

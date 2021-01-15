@@ -1,4 +1,4 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Copyright 2020 Energinet DataHub A/S
 #
 # Licensed under the Apache License, Version 2.0 (the "License2");
@@ -50,6 +50,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection\GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection.csproj", "{EAA7F404-2B4F-4219-A174-94550795BC3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.Tests", "..\..\..\src\queues\source\GreenEnergyHub.Queues.Tests\GreenEnergyHub.Queues.Tests.csproj", "{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.Queues.ValidationReportDispatcher", "..\..\..\src\queues\source\GreenEnergyHub.Queues.ValidationReportDispatcher\GreenEnergyHub.Queues.ValidationReportDispatcher.csproj", "{3547D3F9-330D-4802-A0B8-E4EC83C01E91}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.TestHelpers", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj", "{CA7B8670-DED2-431F-823E-A5BFCE57BA82}"
 EndProject
@@ -123,6 +125,10 @@ Global
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3547D3F9-330D-4802-A0B8-E4EC83C01E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3547D3F9-330D-4802-A0B8-E4EC83C01E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3547D3F9-330D-4802-A0B8-E4EC83C01E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3547D3F9-330D-4802-A0B8-E4EC83C01E91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA7B8670-DED2-431F-823E-A5BFCE57BA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA7B8670-DED2-431F-823E-A5BFCE57BA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA7B8670-DED2-431F-823E-A5BFCE57BA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -145,7 +151,7 @@ Global
 		{D3159FBA-5E8F-4A93-A221-B5A72D705E7C} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 		{EAA7F404-2B4F-4219-A174-94550795BC3D} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 		{092370CC-25DB-4E0A-B88F-86C2BEC7D51F} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
-		{CA7B8670-DED2-431F-823E-A5BFCE57BA82} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
+		{3547D3F9-330D-4802-A0B8-E4EC83C01E91} = {C76FB4A4-036E-4D0F-A1BB-75E985766670}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98635B0D-2BDD-4DFD-AC3B-4E3E8A84D553}

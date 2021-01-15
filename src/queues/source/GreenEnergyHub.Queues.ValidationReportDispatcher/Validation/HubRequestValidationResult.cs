@@ -14,20 +14,28 @@
 
 using System;
 using System.Collections.Generic;
+using GreenEnergyHub.Messaging;
+using GreenEnergyHub.Messaging.MessageTypes.Common;
+using NodaTime;
 
-namespace Energinet.DataHub.Ingestion.Application.Validation
+namespace GreenEnergyHub.Queues.ValidationReportDispatcher.Validation
 {
-    // TODO: This class could be placed in GreenEnergyHub.Messaging module.
-    public class HubRequestValidationResult
+    /// <summary>
+    /// POCO for a validation results.
+    /// </summary>
+    public class HubRequestValidationResult : IHubMessage
     {
         private readonly List<ValidationError> _validationErrors = new List<ValidationError>();
 
         public HubRequestValidationResult(string transactionId)
         {
-            MRID = !string.IsNullOrWhiteSpace(transactionId) ? transactionId : throw new ArgumentNullException(nameof(transactionId));
+            Transaction = !string.IsNullOrWhiteSpace(transactionId) ? new Transaction(transactionId) : throw new ArgumentNullException(nameof(transactionId));
+            RequestDate = SystemClock.Instance.GetCurrentInstant();
         }
 
-        public string MRID { get; }
+        public Transaction Transaction { get; set; }
+
+        public Instant RequestDate { get; set; }
 
         public IReadOnlyList<ValidationError> Errors => _validationErrors.AsReadOnly();
 

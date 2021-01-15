@@ -66,12 +66,12 @@ namespace Energinet.DataHub.Ingestion.Tests.Application
         public async Task Validation_result_must_contain_mrid_of_request()
         {
             var hubRequests = await RehydrateHubRequestsFromFile().ConfigureAwait(false);
-            var expectedMrids = new List<string>(hubRequests.Select(x => x.Transaction.MRID));
+            var expectedTransactionIds = new List<string>(hubRequests.Select(x => x.Transaction.MRID));
 
             var response = await _bulkMediator.DispatchAsync(hubRequests!).ConfigureAwait(false) as CustomHubResponse;
 
-            var returnedMrids = response?.ValidationResults.Select(x => x.MRID).ToList();
-            Assert.Equal(expectedMrids, returnedMrids);
+            var returnedTransactionIds = response?.ValidationResults.Select(x => x.Transaction.MRID).ToList();
+            Assert.Equal(expectedTransactionIds, returnedTransactionIds);
         }
 
         private async Task<IEnumerable<IHubMessage>?> RehydrateHubRequestsFromFile()

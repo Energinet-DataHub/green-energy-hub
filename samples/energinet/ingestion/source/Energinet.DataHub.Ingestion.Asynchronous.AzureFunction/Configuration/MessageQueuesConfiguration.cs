@@ -16,11 +16,12 @@ using System;
 using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Application.TimeSeries;
 using Energinet.DataHub.Ingestion.Infrastructure.MessageQueue;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.Queues;
 using GreenEnergyHub.Queues.AzureServiceBus;
 using GreenEnergyHub.Queues.AzureServiceBus.Integration.ServiceCollection;
 using GreenEnergyHub.Queues.Kafka;
-using GreenEnergyHub.Queues.Kafka.Integration.ServiceCollection;
+using GreenEnergyHub.Queues.ValidationReportDispatcher;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,10 +31,10 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration
     {
         internal static void AddTimeSeriesMessageQueue(this IServiceCollection services)
         {
-            services.AddSingleton<KafkaConfiguration>(sp =>
+            services.AddSingleton<ITimeSeriesMessageQueueDispatcher>(sp =>
             {
                 var configuration = sp.GetRequiredService<IConfiguration>();
-                return new KafkaConfiguration()
+                var kaftaConfiguration = new KafkaConfiguration
                 {
                     BoostrapServers = configuration.GetValue<string>("TIMESERIES_QUEUE_URL"),
                     SaslMechanism = configuration.GetValue<string>("KAFKA_SASL_MECHANISM"),
@@ -44,14 +45,9 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration
                     MessageTimeoutMs = configuration.GetValue<int>("KAFKA_MESSAGE_TIMEOUT_MS"),
                     MessageSendMaxRetries = configuration.GetValue<int>("KAFKA_MESSAGE_SEND_MAX_RETRIES"),
                 };
-            });
-            services.AddKafkaQueueDispatcher();
-            services.AddSingleton<ITimeSeriesMessageQueueDispatcher>(sp =>
-            {
-                var configuration = sp.GetRequiredService<IConfiguration>();
                 string messageQueueTopic = configuration.GetValue<string>("TIMESERIES_QUEUE_TOPIC");
                 return new TimeSeriesMessageQueueDispatcher(
-                    sp.GetRequiredService<IKafkaDispatcher>(),
+                    new KafkaDispatcher(new KafkaProducerFactory(kaftaConfiguration)),
                     sp.GetRequiredService<IMessageEnvelopeFactory>(),
                     messageQueueTopic);
             });
@@ -78,6 +74,30 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration
                     marketDataQueueName);
             });
             return services;
+        }
+
+        internal static void AddValidationReportQueue(this IServiceCollection services)
+        {
+            services.AddSingleton<IValidationReportQueueDispatcher>(sp =>
+            {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                var kaftaConfiguration = new KafkaConfiguration()
+                {
+                    BoostrapServers = configuration.GetValue<string>("VALIDATION_REPORTS_URL"),
+                    SaslMechanism = configuration.GetValue<string>("KAFKA_SASL_MECHANISM"),
+                    SaslUsername = configuration.GetValue<string>("KAFKA_USERNAME"),
+                    SaslPassword = configuration.GetValue<string>("VALIDATION_REPORTS_CONNECTION_STRING"),
+                    SecurityProtocol = configuration.GetValue<string>("KAFKA_SECURITY_PROTOCOL"),
+                    SslCaLocation = Environment.ExpandEnvironmentVariables(configuration.GetValue<string>("KAFKA_SSL_CA_LOCATION")),
+                    MessageTimeoutMs = configuration.GetValue<int>("KAFKA_MESSAGE_TIMEOUT_MS"),
+                    MessageSendMaxRetries = configuration.GetValue<int>("KAFKA_MESSAGE_SEND_MAX_RETRIES"),
+                };
+                string validationReportTopic = configuration.GetValue<string>("VALIDATION_REPORTS_QUEUE_TOPIC");
+                return new ValidationReportQueueDispatcher(
+                    new KafkaDispatcher(new KafkaProducerFactory(kaftaConfiguration)),
+                    sp.GetRequiredService<IJsonSerializer>(),
+                    validationReportTopic);
+            });
         }
     }
 }

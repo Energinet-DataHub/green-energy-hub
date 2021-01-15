@@ -13,8 +13,8 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using Energinet.DataHub.Ingestion.Application.Validation;
 using GreenEnergyHub.Messaging;
+using GreenEnergyHub.Queues.ValidationReportDispatcher.Validation;
 
 namespace Energinet.DataHub.Ingestion.Application
 {

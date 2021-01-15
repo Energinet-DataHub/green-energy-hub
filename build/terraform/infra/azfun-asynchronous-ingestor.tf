@@ -17,17 +17,21 @@ module "azfun_asynchronousingestor" {
     # Endregion: Default Values
     KAFKA_SECURITY_PROTOCOL               = "SaslSsl"
     KAFKA_SASL_MECHANISM                  = "Plain"
-    KAFKA_SSL_CA_LOCATION                 = "C:\\cacert\\cacert.pem"
-    KAFKA_USERNAME                        = "$ConnectionString"
     KAFKA_MESSAGE_SEND_MAX_RETRIES        = 5
     KAFKA_MESSAGE_TIMEOUT_MS              = 1000
-    REQUEST_QUEUE_URL                     = "${module.evhnm_requestqueue.name}.servicebus.windows.net:9093"
-    REQUEST_QUEUE_CONNECTION_STRING       = module.evhar_requestqueue_listener.primary_connection_string
-    VALIDATION_REPORTS_URL                = "${module.evhnm_validationreport.name}.servicebus.windows.net:9093"
-    VALIDATION_REPORTS_CONNECTION_STRING  = module.evhar_validationreport_sender.primary_connection_string
+    KAFKA_USERNAME                        = "$ConnectionString"
+    KAFKA_SSL_CA_LOCATION                 = "C:\\cacert\\cacert.pem"
     MARKET_DATA_URL                       = "${module.sbn_marketdata.name}.servicebus.windows.net:9093"
     MARKET_DATA_CONNECTION_STRING         = module.sbnar_marketdata_sender.primary_connection_string
-    TIMESERIES_INBOUND_QUEUE              = module.evhar_inboundqueue_sender.primary_connection_string
+    MARKET_DATA_QUEUE                     = module.sbq_marketdata.name
+    TIMESERIES_QUEUE_TOPIC                = module.evh_inboundqueue.name
+    TIMESERIES_QUEUE_URL                  = "${module.evhnm_timeseries_inbound_queue.name}.servicebus.windows.net:9093"
+    TIMESERIES_QUEUE_CONNECTION_STRING    = module.evhar_inboundqueue_sender.primary_connection_string
+    REQUEST_QUEUE_CONSUMER_GROUP          = "$Default"
+    REQUEST_QUEUE_CONNECTION_STRING       = module.evhar_requestqueue_listener.primary_connection_string
+    VALIDATION_REPORTS_QUEUE_TOPIC        = module.evh_validationreport.name
+    VALIDATION_REPORTS_URL                = "${module.evhnm_validationreport.name}.servicebus.windows.net:9093"
+    VALIDATION_REPORTS_CONNECTION_STRING  = module.evhar_validationreport_sender.primary_connection_string
   }
   dependencies                              = [
     module.appi_shared.dependent_on,

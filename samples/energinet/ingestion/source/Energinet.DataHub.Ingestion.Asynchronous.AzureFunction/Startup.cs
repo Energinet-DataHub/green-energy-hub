@@ -44,6 +44,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction
             builder.Services.AddGreenEnergyHub(typeof(TimeSeriesMessage).Assembly);
             builder.Services.AddMarketDataMessageQueue();
             builder.Services.AddTimeSeriesMessageQueue();
+            builder.Services.AddValidationReportQueue();
             builder.Services.AddScoped<IHubCommandMediator, HubCommandMediator>();
             builder.Services.AddSingleton<IJsonSerializer, JsonSerializer>();
         }

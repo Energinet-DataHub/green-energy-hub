@@ -15,9 +15,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Energinet.DataHub.Ingestion.Application.Validation;
 using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
+using GreenEnergyHub.Queues.ValidationReportDispatcher.Validation;
 
 namespace Energinet.DataHub.Ingestion.Application
 {
