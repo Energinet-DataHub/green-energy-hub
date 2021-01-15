@@ -87,10 +87,6 @@ jobs:
         id: obtain-db-id-url
         uses: ./.github/actions/obtain-databricks-id-url
         
-      - name: Set databricks_id TF Var  
-        run: |
-          echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV 
-
       - name: Databricks CLI Install and Connect
         uses: ./.github/actions/databricks-cli-install-connect
         with:
@@ -108,6 +104,10 @@ jobs:
       - name: Copy Job Definitions to DBFS
         run: |    
           dbfs cp --overwrite -r ./src/streaming/aggregation-jobs "dbfs:/streaming"
+
+      - name: Set databricks_id TF Var  
+        run: |
+          echo "TF_VAR_databricks_id=${{ steps.obtain-db-id-url.outputs.workspace-id }}" >> $GITHUB_ENV 
       
       - name: Configure Terraform Backend
         uses: ./.github/actions/configure-terraform-backend

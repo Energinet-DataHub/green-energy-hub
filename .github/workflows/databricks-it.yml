@@ -112,7 +112,6 @@ jobs:
         streaming_container_name=${{ env.RB_OUT_OUTPUT_CONTAINER }}
         cosmos_coll=${{ env.RB_OUT_COSMOS }}
 
-        echo "TF_VAR_sender_eh_input_secret_name=$sender_eh_input_secret_name" >> $GITHUB_ENV
         echo "TF_VAR_receiver_eh_input_secret_name=$receiver_eh_input_secret_name" >> $GITHUB_ENV
         echo "TF_VAR_streaming_container_name=$streaming_container_name" >> $GITHUB_ENV
         echo "TF_VAR_cosmos_coll=$cosmos_coll" >> $GITHUB_ENV

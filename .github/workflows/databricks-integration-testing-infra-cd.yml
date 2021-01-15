@@ -85,13 +85,14 @@ jobs:
             storage_exists=$(az storage account check-name --name 'enrgstate${{ env.ENV_NAME }}' | python3 -c "import sys, json; print(not json.load(sys.stdin)['nameAvailable'])")
             echo "::set-output name=state-storage-exists::${storage_exists}"
 
-        #Create TF State Container if needed
+        #Create TF State and Resource Booking Container if needed
         - name: Create Terraform State Storage
           run: |
             storage_name="enrgstate${{ env.ENV_NAME }}"
             az storage account create --resource-group ${{ env.RESOURCE_GROUP_NAME }} --name $storage_name --sku Standard_LRS --encryption-services blob
             account_key=$(az storage account keys list --resource-group ${{ env.RESOURCE_GROUP_NAME }} --account-name $storage_name --query '[0].value' -o tsv)
             az storage container create --name tfstate --account-name $storage_name --account-key $account_key
+            az storage container create --name it-booking-state --account-name $storage_name --account-key $account_key
           if: steps.state-storage-exists.outputs.state-storage-exists == 'False'
 
         # Try not to reference TF_VAR variables in pipeline yml files, only values should be set and they should be read in terraform only
@@ -109,14 +110,6 @@ jobs:
             backend-file-path: "./build/terraform/databricks_integration_testing_infra/backend.tf"
             resource-group-name: "${{ env.RESOURCE_GROUP_NAME }}"
             storage-account-name: "enrgstate${{ env.ENV_NAME }}"
-
-        - name: Create Integration Test State Storage
-          run: |
-            storage_name="enrgstate${{ env.ENV_NAME }}"
-            az storage account create --resource-group ${{ env.RESOURCE_GROUP_NAME }} --name $storage_name --sku Standard_LRS --encryption-services blob
-            account_key=$(az storage account keys list --resource-group ${{ env.RESOURCE_GROUP_NAME }} --account-name $storage_name --query '[0].value' -o tsv)
-            az storage container create --name it-booking-state --account-name $storage_name --account-key $account_key
-          if: steps.state-storage-exists.outputs.state-storage-exists == 'False'
 
         - name: Upload booking state
           run: |

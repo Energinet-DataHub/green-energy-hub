@@ -1,4 +1,4 @@
-name: Main Terraform CD
+name: Main Infrastructure Deploy
 
 on:
   push:
