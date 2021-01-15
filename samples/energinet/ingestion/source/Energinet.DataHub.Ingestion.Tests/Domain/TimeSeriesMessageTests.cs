@@ -32,8 +32,7 @@ namespace Energinet.DataHub.Ingestion.Tests.Domain
         /// of time series messages. In that case you must make sure to update the Databricks
         /// streaming job to make sure the change of format doesn't break it.
         /// </summary>
-        // TODO: Fix this test and the streaming part: https://dev.azure.com/energinet/Datahub/_boards/board/t/Volt/Stories/?workitem=105024
-        [Fact(Skip = "fix streaming part while updating this test.")]
+        [Fact]
         public void Output_format_must_comply_with_expected_streaming_input_format()
         {
             // Arrange
@@ -48,19 +47,15 @@ namespace Energinet.DataHub.Ingestion.Tests.Domain
     ""Type"": ""E66"",
     ""CreatedDateTime"": ""2020-12-01T13:16:29.33Z"",
     ""SenderMarketParticipant"": {
-      ""mRID"": {
-        ""value"": ""8100000000030"",
-        ""qualifier"": ""VA""
-      },
+      ""mRID"": ""8100000000030"",
       ""name"": null,
+      ""qualifier"": ""VA"",
       ""Type"": ""MDR""
     },
     ""RecipientMarketParticipant"": {
-      ""mRID"": {
-        ""value"": ""5790001330552"",
-        ""qualifier"": ""VA""
-      },
+      ""mRID"": ""5790001330552"",
       ""name"": null,
+      ""qualifier"": ""VA"",
       ""Type"": null
     },
     ""ProcessType"": ""D42"",
@@ -104,7 +99,7 @@ namespace Energinet.DataHub.Ingestion.Tests.Domain
             var actual = JsonSerializer.Serialize(timeSeriesMessage, prettyPrintOptions);
 
             // Assert
-            Assert.Equal(expectedTimeSeriesJson, actual, StringComparer.InvariantCulture);
+            Assert.Equal(expectedTimeSeriesJson.Replace("\r", string.Empty), actual.Replace("\r", string.Empty));
         }
     }
 }

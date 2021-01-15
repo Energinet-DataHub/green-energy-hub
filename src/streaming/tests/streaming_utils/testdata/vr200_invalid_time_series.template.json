@@ -6,18 +6,14 @@
     "Type": "E66",
     "CreatedDateTime": "2020-12-01T13:16:29.33Z",
     "SenderMarketParticipant": {
-      "mRID": {
-        "value": "8100000000030",
-        "qualifier": "VA"
-      },
+      "mRID": "8100000000030",
+      "qualifier": "VA",
       "name": null,
       "Type": "MDR"
     },
     "RecipientMarketParticipant": {
-      "mRID": {
-        "value": "5790001330552",
-        "qualifier": "VA"
-      },
+      "mRID": "5790001330552",
+      "qualifier": "VA",
       "name": null,
       "Type": null
     },

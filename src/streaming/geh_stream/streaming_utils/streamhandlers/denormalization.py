@@ -21,6 +21,4 @@ def denormalize_parsed_data(parsed_data: DataFrame) -> DataFrame:
     flattened_parsed_data = flatten_df(parsed_data)
     exploded_data = flattened_parsed_data.select(col("*"), explode(col("Period_Points")).alias("Period_Point")) \
                                          .drop("Period_Points")
-    return flatten_df(exploded_data) \
-        .withColumnRenamed("MarketDocument_SenderMarketParticipant_mRID_value", "MarketDocument_SenderMarketParticipant_mRID") \
-        .withColumnRenamed("MarketDocument_RecipientMarketParticipant_mRID_value", "MarketDocument_RecipientMarketParticipant_mRID")
+    return flatten_df(exploded_data)
