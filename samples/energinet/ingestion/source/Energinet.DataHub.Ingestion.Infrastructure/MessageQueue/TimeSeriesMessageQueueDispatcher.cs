@@ -15,8 +15,8 @@
 using System;
 using System.Threading.Tasks;
 using Energinet.DataHub.Ingestion.Application.TimeSeries;
+using GreenEnergyHub.Json;
 using GreenEnergyHub.Messaging;
-using GreenEnergyHub.Queues;
 using GreenEnergyHub.Queues.Kafka;
 
 namespace Energinet.DataHub.Ingestion.Infrastructure.MessageQueue
@@ -24,16 +24,16 @@ namespace Energinet.DataHub.Ingestion.Infrastructure.MessageQueue
     public class TimeSeriesMessageQueueDispatcher : ITimeSeriesMessageQueueDispatcher
     {
         private readonly IKafkaDispatcher _kafkaDispatcher;
-        private readonly IMessageEnvelopeFactory _messageEnvelopeFactory;
+        private readonly IJsonSerializer _jsonSerializer;
         private readonly string _topic;
 
         public TimeSeriesMessageQueueDispatcher(
             IKafkaDispatcher kafkaDispatcher,
-            IMessageEnvelopeFactory messageEnvelopeFactory,
+            IJsonSerializer jsonSerializer,
             string topic)
         {
             _kafkaDispatcher = kafkaDispatcher ?? throw new ArgumentNullException(nameof(kafkaDispatcher));
-            _messageEnvelopeFactory = messageEnvelopeFactory ?? throw new ArgumentNullException(nameof(messageEnvelopeFactory));
+            _jsonSerializer = jsonSerializer ?? throw new ArgumentNullException(nameof(jsonSerializer));
             _topic = !string.IsNullOrEmpty(topic) ? topic : throw new ArgumentNullException(nameof(topic));
         }
 
@@ -44,7 +44,7 @@ namespace Energinet.DataHub.Ingestion.Infrastructure.MessageQueue
                 throw new ArgumentNullException(nameof(hubMessage));
             }
 
-            return _kafkaDispatcher.DispatchAsync(_messageEnvelopeFactory.CreateFrom(hubMessage), _topic);
+            return _kafkaDispatcher.DispatchAsync(_jsonSerializer.Serialize(hubMessage), _topic);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace GreenEnergyHub.Json
 
         public string Serialize<TValue>(TValue value)
         {
-            return System.Text.Json.JsonSerializer.Serialize(value, _options);
+            return System.Text.Json.JsonSerializer.Serialize<object>(value, _options);
         }
     }
 }

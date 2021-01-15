@@ -48,7 +48,7 @@ namespace Energinet.DataHub.Ingestion.Asynchronous.AzureFunction.Configuration
                 string messageQueueTopic = configuration.GetValue<string>("TIMESERIES_QUEUE_TOPIC");
                 return new TimeSeriesMessageQueueDispatcher(
                     new KafkaDispatcher(new KafkaProducerFactory(kaftaConfiguration)),
-                    sp.GetRequiredService<IMessageEnvelopeFactory>(),
+                    sp.GetRequiredService<IJsonSerializer>(),
                     messageQueueTopic);
             });
         }
