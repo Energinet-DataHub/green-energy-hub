@@ -24,7 +24,7 @@ namespace Energinet.DataHub.Ingestion.Domain.TimeSeries
     /// <summary>
     /// Contains the time series payload
     /// </summary>
-    [HubMessage("TimeSeriesMessage")]
+    [HubMessage("MeteredDataTimeSeries")]
     public class TimeSeriesMessage : IHubMessage
     {
         /// <summary>

@@ -21,8 +21,10 @@ module "azfun_synchronousingestor" {
     KAFKA_USERNAME                        = "$ConnectionString"
     KAFKA_MESSAGE_SEND_MAX_RETRIES        = 5
     KAFKA_MESSAGE_TIMEOUT_MS              = 1000
+    REQUEST_QUEUE_TOPIC                   = module.evhar_requestqueue_sender.name
     REQUEST_QUEUE_URL                     = "${module.evhnm_requestqueue.name}.servicebus.windows.net:9093"
     REQUEST_QUEUE_CONNECTION_STRING       = module.evhar_requestqueue_sender.primary_connection_string
+    VALIDATION_REPORTS_QUEUE_TOPIC        = module.evhar_validationreport_sender.name
     VALIDATION_REPORTS_URL                = "${module.evhnm_validationreport.name}.servicebus.windows.net:9093"
     VALIDATION_REPORTS_CONNECTION_STRING  = module.evhar_validationreport_sender.primary_connection_string
   }

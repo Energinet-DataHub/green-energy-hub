@@ -24,6 +24,10 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="NodaTime" Version="3.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\..\..\..\..\src\messaging\source\GreenEnergyHub.Messaging\GreenEnergyHub.Messaging.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.SoapAdapter.Domain\Energinet.DataHub.SoapAdapter.Domain.csproj" />
     </ItemGroup>

@@ -24,12 +24,14 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.SoapAdapter.Application\Energinet.DataHub.SoapAdapter.Application.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.SoapAdapter.Domain\Energinet.DataHub.SoapAdapter.Domain.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.SoapAdapter.Infrastructure\Energinet.DataHub.SoapAdapter.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoFixture.Xunit2" Version="4.15.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
@@ -46,6 +48,15 @@ limitations under the License.
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Update="Assets\ResponseJson.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Assets\RSM-012_ValidHourly.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Assets\RSM-012_ValidBundledTimeSeries_15min_and_1hour.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Assets\SinglePurposeJsonUsedToValidateSoapAdapterNotAllowedInOtherTests.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>

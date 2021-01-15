@@ -27,6 +27,7 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
             return marketDocumentType switch
             {
                 DocumentTypes.RequestChangeOfSupplier => new SendMessageResponseConverter(),
+                DocumentTypes.MeteredDataTimeSeries => new SendMessageResponseConverter(),
                 _ => throw new UnknownConverterException(marketDocumentType)
             };
         }
