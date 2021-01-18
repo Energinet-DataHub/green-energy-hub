@@ -19,8 +19,7 @@ from geh_stream.schemas import SchemaFactory, SchemaNames
 csv_read_config = {
     "inferSchema": "True",
     "delimiter": ";",
-    "header": "True",
-    "nullValues": "NULL"
+    "header": "True"
 }
 
 master_data_schema = SchemaFactory.get_instance(SchemaNames.Master)
