@@ -12,7 +12,7 @@ runs:
   steps:
     - id: obtain-keyvault-id-name
       run: |
-        keyvault_details=$(az keyvault show -g ${{ env.RESOURCE_GROUP_NAME }} -n "kvshared${{ env.ENV_NAME }}")
+        keyvault_details=$(az keyvault show -g ${{ env.RESOURCE_GROUP_NAME }} -n "kvshared${{ ORGANISATION_NAME }}${{ env.ENV_NAME }}")
         keyvault_id=$(echo $keyvault_details | python -c "import sys, json; print(json.load(sys.stdin)['id'])")
         keyvault_name=$(echo $keyvault_details | python -c "import sys, json; print(json.load(sys.stdin)['name'])")
         echo "::set-output name=keyvault-id::$keyvault_id"

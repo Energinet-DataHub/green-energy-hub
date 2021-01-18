@@ -13,7 +13,7 @@ runs:
     - id: obtain-db-id-url
       run: |
         az config set extension.use_dynamic_install=yes_without_prompt 
-        res=$(az databricks workspace show -g ${{ env.RESOURCE_GROUP_NAME }} -n "energinetdbricks-${{ env.ENV_NAME }}")
+        res=$(az databricks workspace show -g ${{ env.RESOURCE_GROUP_NAME }} -n "dbw-${{ env.ORGANISATION_NAME }}"-${{ env.ENV_NAME }}")
         DATABRICKS_ID=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)['id'])")
         WORKSPACE_URL=$(echo $res | python -c "import sys, json; print(json.load(sys.stdin)['workspaceUrl'])")
         echo "::set-output name=databricks-id::$(echo $DATABRICKS_ID)"
