@@ -66,12 +66,13 @@ namespace Energinet.DataHub.SoapAdapter.Application.Converters
 
                 using (var jsonDocument = await JsonDocument.ParseAsync(input).ConfigureAwait(false))
                 {
-                    foreach (var transaction in jsonDocument.RootElement.EnumerateArray())
+                    foreach (var validationResult in jsonDocument.RootElement.EnumerateArray())
                     {
                         await xmlWriter.WriteStartElementAsync(string.Empty, "Transaction", BodyNamespace).ConfigureAwait(false);
+                        var transaction = validationResult.GetProperty("transaction");
                         await xmlWriter.WriteElementStringAsync(string.Empty, "Mrid", BodyNamespace, transaction.GetProperty("mrid").GetString()).ConfigureAwait(false);
 
-                        foreach (var error in transaction.GetProperty("errors").EnumerateArray())
+                        foreach (var error in validationResult.GetProperty("errors").EnumerateArray())
                         {
                             await xmlWriter.WriteStartElementAsync(string.Empty, "Error", BodyNamespace).ConfigureAwait(false);
                             await xmlWriter.WriteElementStringAsync(string.Empty, "Code", BodyNamespace, error.GetProperty("code").GetString()).ConfigureAwait(false);
