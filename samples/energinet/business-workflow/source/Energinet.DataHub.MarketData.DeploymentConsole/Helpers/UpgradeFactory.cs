@@ -14,21 +14,24 @@
 using System;
 using System.Reflection;
 using DbUp;
-using Energinet.DataHub.MarketData.DeploymentConsole.Helpers;
+using DbUp.Engine;
 
-namespace Energinet.DataHub.MarketData.DeploymentConsole
+namespace Energinet.DataHub.MarketData.DeploymentConsole.Helpers
 {
-    public static class Program
+    public static class UpgradeFactory
     {
-        public static int Main(string[] args)
+        public static UpgradeEngine GetUpgradeEngine(string connectionString)
         {
-            var connectionString = ConnectionStringFactory.GetConnectionString(args);
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new ArgumentException("Connection string must have a value");
+            }
 
-            var upgrader = UpgradeFactory.GetUpgradeEngine(connectionString);
-
-            var result = upgrader.PerformUpgrade();
-
-            return ResultReporter.ReportResult(result);
+            return DeployChanges.To
+                .SqlDatabase(connectionString)
+                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+                .LogToConsole()
+                .Build();
         }
     }
 }

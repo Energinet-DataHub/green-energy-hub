@@ -24,17 +24,22 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.MarketData.Application\Energinet.DataHub.MarketData.Application.csproj" />
+      <ProjectReference Include="..\Energinet.DataHub.MarketData.DeploymentConsole\Energinet.DataHub.MarketData.DeploymentConsole.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.MarketData.Domain\Energinet.DataHub.MarketData.Domain.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.MarketData.Infrastructure\Energinet.DataHub.MarketData.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
         <PackageReference Include="NSubstitute" Version="4.2.2" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
         <PackageReference Include="coverlet.collector" Version="1.2.0" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 </Project>

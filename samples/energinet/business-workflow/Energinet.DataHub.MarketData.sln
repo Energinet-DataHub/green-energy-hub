@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Messaging.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.MarketData.DeploymentConsole", "source\Energinet.DataHub.MarketData.DeploymentConsole\Energinet.DataHub.MarketData.DeploymentConsole.csproj", "{CD5BE0DF-53DB-42AA-B65F-5D08759D49AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.TestHelpers", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj", "{A5142866-F3F1-422C-992A-07008D90E545}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,7 +80,11 @@ Global
 		{CD5BE0DF-53DB-42AA-B65F-5D08759D49AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD5BE0DF-53DB-42AA-B65F-5D08759D49AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD5BE0DF-53DB-42AA-B65F-5D08759D49AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD5BE0DF-53DB-42AA-B65F-5D08759D49AD}.Release|Any CPU.Build.0 = Release|Any CPU		
+		{CD5BE0DF-53DB-42AA-B65F-5D08759D49AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5142866-F3F1-422C-992A-07008D90E545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5142866-F3F1-422C-992A-07008D90E545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5142866-F3F1-422C-992A-07008D90E545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5142866-F3F1-422C-992A-07008D90E545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{68412EBF-701D-467D-8716-74269E171F41} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
@@ -86,5 +92,6 @@ Global
 		{E45F3D17-DB2E-42DE-B7BC-E60B7D873763} = {938244C7-0C83-430D-A17B-60CF906B1C6A}
 		{0D89BE07-DADE-4842-9469-D0D5BD9056B2} = {938244C7-0C83-430D-A17B-60CF906B1C6A}
 		{C62FB121-1BDD-45FE-B1A7-B27267FF1365} = {938244C7-0C83-430D-A17B-60CF906B1C6A}
+		{A5142866-F3F1-422C-992A-07008D90E545} = {938244C7-0C83-430D-A17B-60CF906B1C6A}
 	EndGlobalSection
 EndGlobal

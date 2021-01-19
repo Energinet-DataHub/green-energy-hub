@@ -11,24 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
-using System.Reflection;
-using DbUp;
-using Energinet.DataHub.MarketData.DeploymentConsole.Helpers;
+using System.Linq;
 
-namespace Energinet.DataHub.MarketData.DeploymentConsole
+namespace Energinet.DataHub.MarketData.DeploymentConsole.Helpers
 {
-    public static class Program
+    public static class ConnectionStringFactory
     {
-        public static int Main(string[] args)
+        private const string DefaultConnectionString =
+            "Server=(local); Database=MasterData; Trusted_connection=true";
+
+        public static string GetConnectionString(string[] args)
         {
-            var connectionString = ConnectionStringFactory.GetConnectionString(args);
-
-            var upgrader = UpgradeFactory.GetUpgradeEngine(connectionString);
-
-            var result = upgrader.PerformUpgrade();
-
-            return ResultReporter.ReportResult(result);
+            return args.FirstOrDefault() ?? DefaultConnectionString;
         }
     }
 }

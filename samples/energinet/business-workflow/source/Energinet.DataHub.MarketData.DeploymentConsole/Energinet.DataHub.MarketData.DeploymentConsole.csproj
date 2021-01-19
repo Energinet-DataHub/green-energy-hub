@@ -23,5 +23,14 @@ limitations under the License.
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>    
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\Script0001 - Add master data ODS view.sql" />
+    <EmbeddedResource Include="Scripts\Script0001 - Add master data ODS view.sql" />
+  </ItemGroup>
   
 </Project>
