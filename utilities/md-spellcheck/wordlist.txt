@@ -129,6 +129,7 @@ DomainArea
 Donnelly
 dotnet
 DotNet
+DTO
 Duna
 DWH
 ebiX
@@ -195,6 +196,7 @@ GreenEnergyHub
 greenenergyhub
 GridArea
 Grigorenko
+grpc
 GUID
 Gzip
 HasBalanceSupplier
@@ -378,6 +380,7 @@ pluggable
 png
 PoBox
 POBox
+POC
 POCO
 Poplavskyi
 pre
@@ -402,6 +405,7 @@ ProductionObligation
 ProductObligation
 ProtectedAddress
 ProtectedName
+proto
 protobot
 Protobuf
 provisioner
