@@ -37,9 +37,9 @@ def enrich_recipients(enriched_data: DataFrame):
 def find_sts_recipient(enriched_data: DataFrame):
     return enriched_data.withColumn(
         "intermediate_sts_recipient",
-        when((col("md.MarketEvaluationPointType") == MarketEvaluationPointType.production.name)
-             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.ve_production.name)
-             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.surplus_production_group.name),
+        when((col("md.MarketEvaluationPointType") == MarketEvaluationPointType.production.value)
+             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.ve_production.value)
+             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.surplus_production_group.value),
              sts_mrid)
         .otherwise(None))
 
@@ -55,23 +55,23 @@ def find_ddq_recipient(enriched_data: DataFrame):
 def find_ez_recipient(enriched_data: DataFrame):
     return enriched_data.withColumn(
         "intermediate_ez_recipient",
-        when(col("md.MarketEvaluationPointType") == MarketEvaluationPointType.analysis.name, ez_mrid)
+        when(col("md.MarketEvaluationPointType") == MarketEvaluationPointType.analysis.value, ez_mrid)
         .otherwise(None))
 
 
 def find_ddm_recipients(enriched_data: DataFrame):
     in_column = enriched_data.withColumn(
         "intermediate_ddm_in_recipient",
-        when(((col("md.MarketEvaluationPointType") == MarketEvaluationPointType.exchange.name)
-             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.reactive_energy.name))
+        when(((col("md.MarketEvaluationPointType") == MarketEvaluationPointType.exchange.value)
+             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.reactive_energy.value))
              & (col("md.MeteringGridArea_Domain_mRID") != col("md.InMeteringGridArea_Domain_mRID")),
              col("md.InMeteringGridArea_Domain_Owner_mRID"))
         .otherwise(None))
 
     both_columns = in_column.withColumn(
         "intermediate_ddm_out_recipient",
-        when(((col("md.MarketEvaluationPointType") == MarketEvaluationPointType.exchange.name)
-             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.reactive_energy.name))
+        when(((col("md.MarketEvaluationPointType") == MarketEvaluationPointType.exchange.value)
+             | (col("md.MarketEvaluationPointType") == MarketEvaluationPointType.reactive_energy.value))
              & (col("md.MeteringGridArea_Domain_mRID") != col("md.OutMeteringGridArea_Domain_mRID")),
              col("md.OutMeteringGridArea_Domain_Owner_mRID"))
         .otherwise(None))

@@ -26,7 +26,7 @@
   "MarketEvaluationPointType": "E17",
   "SettlementMethod": "D01",
   "MarketEvaluationPoint_mRID": "571313180000000005",
-  "CorrelationId": "5c5d3f9e-eabf-46d9-8f86-f88d2de1f16d",
+  "CorrelationId": "WILL BE REPLACED BY INTEGRATION TEST",
   "Period": {
     "Resolution": "PT1H",
     "TimeInterval": {

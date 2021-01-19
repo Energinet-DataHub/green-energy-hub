@@ -17,7 +17,8 @@ import asyncio
 import uuid
 from helpers import spark_helper, eventhub_helper, file_helper
 
-"""How to run:
+"""
+HOW TO RUN THE TEST(S):
 To run it execute the test 5 arguments need to be submitted when executing
 
 storage_account_name = sys.argv[1]
@@ -37,7 +38,7 @@ command from /src/streaming in a new terminal:
 """
 
 TIMEOUT_IN_MINUTES = 5
-CORRELATION_ID_IN_FILE = "5c5d3f9e-eabf-46d9-8f86-f88d2de1f16d"
+CORRELATION_ID_IN_FILE = "WILL BE REPLACED BY INTEGRATION TEST"
 
 storage_account_name = sys.argv[1]
 storage_account_key = sys.argv[2]
@@ -48,26 +49,93 @@ delta_lake_output_path = sys.argv[5]
 spark = spark_helper.get_spark_session(storage_account_name, storage_account_key)
 delta_lake_base_path = spark_helper.get_base_storage_path(storage_container_name, storage_account_name)
 
+import datetime
+from decimal import Decimal
 import pathlib
 script_dir = str(pathlib.Path(__file__).parent.absolute())
-valid_time_series_message_json_path = script_dir + "/helper_files/valid_time_series_message.json"
+consumption_time_series_message_json_path = script_dir + "/helper_files/valid_time_series_message.json"
+exchange_time_series_message_json_path = script_dir + "/helper_files/valid_time_series_message_for_exchange.json"
 
 
-async def test_load_valid_single_point_timeseries_value_into_eventhub():
+def __get_time_series_from_delta_lake_by_correlation_id(correlation_id):
+    return spark_helper.get_stored_value_in_deltalake(
+        spark,
+        TIMEOUT_IN_MINUTES,
+        delta_lake_base_path + delta_lake_output_path,
+        "CorrelationId",
+        correlation_id)
+
+
+async def test_streaming_adds_valid_time_series_with_all_required_data_to_delta_lake():
+    """
+    This is an integration test, which tests that the streaming job stores all required streamed and enriched fields
+    of valid time series in Delta Lake for aggregations.
+
+    It is worth to note that test sends to different messages (one for at consumption market evalution point and one
+    for an exchange point) in order to observe values in all fields.
+
+    Please don't update this test without ensuring that necessary changes to Delta Lake data format has
+    also been made.
+    """
+
     # Arrange
-    column_name = "CorrelationId"
-    valid_time_series_message = file_helper.read_file_as_string(valid_time_series_message_json_path)
-    correlation_id = str(uuid.uuid4())  # Make sure correlation ID is unique to avoid interference with others
-    valid_time_series_message_with_unique_correlation = valid_time_series_message.replace(CORRELATION_ID_IN_FILE, correlation_id)
+    consumption_time_series_template = file_helper.read_file_as_string(consumption_time_series_message_json_path)
+    consumption_correlation_id = str(uuid.uuid4())  # Make sure correlation ID is unique to avoid interference with others
+    consumption_time_series_message = consumption_time_series_template.replace(CORRELATION_ID_IN_FILE, consumption_correlation_id)
+
+    exchange_time_series_template = file_helper.read_file_as_string(exchange_time_series_message_json_path)
+    exchange_correlation_id = str(uuid.uuid4())  # Make sure correlation ID is unique to avoid interference with others
+    exchange_time_series_message = exchange_time_series_template.replace(CORRELATION_ID_IN_FILE, exchange_correlation_id)
 
     # Act
-    await eventhub_helper.insert_content_on_eventhub(input_eh_connection_string, valid_time_series_message_with_unique_correlation)
+    await eventhub_helper.insert_content_on_eventhub(input_eh_connection_string, consumption_time_series_message)
+    await eventhub_helper.insert_content_on_eventhub(input_eh_connection_string, exchange_time_series_message)
 
     # Assert
-    stored_value = spark_helper.get_stored_value_in_deltalake(spark, TIMEOUT_IN_MINUTES, delta_lake_base_path + delta_lake_output_path, column_name, correlation_id)
-    assert stored_value is not None
+    consumption_time_series_points = __get_time_series_from_delta_lake_by_correlation_id(consumption_correlation_id)
+    point = next(p for p in consumption_time_series_points if lambda p: p.Time == datetime.datetime(2020, 11, 13, 0, 0))
+
+    assert point.MarketEvaluationPoint_mRID == "571313180000000005"
+    assert point.Time == datetime.datetime(2020, 11, 13, 0, 0)
+    assert point.Quantity == Decimal("2")
+    assert point.CorrelationId == consumption_correlation_id
+    assert point.MessageReference == "mId2020-12-01T13:16:29.330Z"
+    assert point.MarketDocument_mRID == "hId2020-12-01T13:16:29.330Z"
+    assert point.CreatedDateTime == datetime.datetime(2020, 12, 1, 13, 16, 29, 330000)
+    assert point.SenderMarketParticipant_mRID == "8100000000030"
+    assert point.ProcessType == "D42"
+    assert point.SenderMarketParticipantMarketRole_Type == "MDR"
+    assert point.TimeSeries_mRID == "tId2020-12-01T13:16:29.330Z"
+    assert point.MktActivityRecord_Status == "9"
+    assert point.MarketEvaluationPointType == "E17"
+    assert point.Quality == "E01"
+    assert point.MeterReadingPeriodicity == "PT1H"
+    assert point.MeteringMethod == "D01"
+    assert point.MeteringGridArea_Domain_mRID == "800"
+    assert point.ConnectionState == "E22"
+    assert point.EnergySupplier_MarketParticipant_mRID == "8100000000108"
+    assert point.BalanceResponsibleParty_MarketParticipant_mRID == "8100000000207"
+    assert point.InMeteringGridArea_Domain_mRID is None
+    assert point.OutMeteringGridArea_Domain_mRID is None
+    assert point.Parent_Domain_mRID is None
+    assert point.ServiceCategory_Kind == "23"
+    assert point.SettlementMethod == "D01"
+    assert point.QuantityMeasurementUnit_Name == "KWH"
+    assert point.Product == "8716867000030"
+    assert point.year == 2020
+    assert point.month == 11
+    assert point.day == 13
+
+    exchange_time_series_points = __get_time_series_from_delta_lake_by_correlation_id(exchange_correlation_id)
+    exchange_point = next(p for p in exchange_time_series_points if lambda p: p.Time == datetime.datetime(2020, 12, 6, 0, 0))
+
+    # These are the only fields we couldn't test with the consumption message - no need to assert the rest of the fields again.
+    assert exchange_point.InMeteringGridArea_Domain_mRID == "802"
+    assert exchange_point.OutMeteringGridArea_Domain_mRID == "803"
+    assert exchange_point.Parent_Domain_mRID == "571313180000000074"
+
 
 # Eventhub requires async https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send#send-events
 loop = asyncio.get_event_loop()
-loop.run_until_complete(test_load_valid_single_point_timeseries_value_into_eventhub())
+loop.run_until_complete(test_streaming_adds_valid_time_series_with_all_required_data_to_delta_lake())
 loop.close()

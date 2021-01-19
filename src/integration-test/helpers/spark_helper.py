@@ -41,7 +41,7 @@ def get_spark_session(storage_account_name, storage_account_key):
     return spark
 
 
-def find_row_in_delta_lake(spark, directory, column_name, column_value):
+def find_rows_in_delta_lake(spark: SparkSession, directory, column_name, column_value):
     # Handle exception that occurs if necessary Delta directory hasn't been created by the streaming yet
     # and no other or previous test runs have created it.
     try:
@@ -54,7 +54,7 @@ def find_row_in_delta_lake(spark, directory, column_name, column_value):
     if filter_result.count() == 0:
         return None
 
-    return filter_result.first()
+    return filter_result.collect()
 
 
 def get_stored_value_in_deltalake(spark, function_timeout_minutes, directory, column_name, column_value):
@@ -62,10 +62,10 @@ def get_stored_value_in_deltalake(spark, function_timeout_minutes, directory, co
     wait_until = datetime.datetime.now() + timedelta(minutes=function_timeout_minutes)
     break_loop = False
     while not break_loop:
-        file = find_row_in_delta_lake(spark, directory, column_name, column_value)
+        rows = find_rows_in_delta_lake(spark, directory, column_name, column_value)
 
-        if file is not None:
-            return file
+        if rows is not None:
+            return rows
 
         time.sleep(sleep_time_in_seconds)
         if wait_until < datetime.datetime.now():

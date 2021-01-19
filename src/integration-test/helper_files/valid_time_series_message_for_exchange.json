@@ -1,0 +1,615 @@
+{
+    "mRID": "D20_t_2021-01-19T07:46:58.981Z",
+    "MessageReference": "mId2021-01-19T07:46:58.981Z",
+    "MarketDocument": {
+      "mRID": "D20_h_2021-01-19T07:46:58.981Z",
+      "Type": "E66",
+      "CreatedDateTime": "2021-01-19T07:46:58.0000000Z",
+      "SenderMarketParticipant": {
+        "mRID": "8100000000030",
+        "name": null,
+        "qualifier": "VA",
+        "Type": "MDR"
+      },
+      "RecipientMarketParticipant": {
+        "mRID": "5790001330552",
+        "name": null,
+        "qualifier": "VA",
+        "Type": null
+      },
+      "ProcessType": "E23",
+      "MarketServiceCategory_Kind": "23"
+    },
+    "MktActivityRecord_Status": "9",
+    "Product": "8716867000047",
+    "QuantityMeasurementUnit_Name": "K3",
+    "MarketEvaluationPointType": "D20",
+    "SettlementMethod": "",
+    "MarketEvaluationPoint_mRID": "571313180000000081",
+    "CorrelationId": "WILL BE REPLACED BY INTEGRATION TEST",
+    "Period": {
+      "Resolution": "PT15M",
+      "TimeInterval": {
+        "Start": "2020-12-05T23:00:00.0000000Z",
+        "End": "2020-12-06T23:00:00.0000000Z"
+      },
+      "Points": [
+        {
+          "Position": 1,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-05T23:00:00.0000000Z"
+        },
+        {
+          "Position": 2,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-05T23:15:00.0000000Z"
+        },
+        {
+          "Position": 3,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-05T23:30:00.0000000Z"
+        },
+        {
+          "Position": 4,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-05T23:45:00.0000000Z"
+        },
+        {
+          "Position": 5,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T00:00:00.0000000Z"
+        },
+        {
+          "Position": 6,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T00:15:00.0000000Z"
+        },
+        {
+          "Position": 7,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T00:30:00.0000000Z"
+        },
+        {
+          "Position": 8,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T00:45:00.0000000Z"
+        },
+        {
+          "Position": 9,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T01:00:00.0000000Z"
+        },
+        {
+          "Position": 10,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T01:15:00.0000000Z"
+        },
+        {
+          "Position": 11,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T01:30:00.0000000Z"
+        },
+        {
+          "Position": 12,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T01:45:00.0000000Z"
+        },
+        {
+          "Position": 13,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T02:00:00.0000000Z"
+        },
+        {
+          "Position": 14,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T02:15:00.0000000Z"
+        },
+        {
+          "Position": 15,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T02:30:00.0000000Z"
+        },
+        {
+          "Position": 16,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T02:45:00.0000000Z"
+        },
+        {
+          "Position": 17,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T03:00:00.0000000Z"
+        },
+        {
+          "Position": 18,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T03:15:00.0000000Z"
+        },
+        {
+          "Position": 19,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T03:30:00.0000000Z"
+        },
+        {
+          "Position": 20,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T03:45:00.0000000Z"
+        },
+        {
+          "Position": 21,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T04:00:00.0000000Z"
+        },
+        {
+          "Position": 22,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T04:15:00.0000000Z"
+        },
+        {
+          "Position": 23,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T04:30:00.0000000Z"
+        },
+        {
+          "Position": 24,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T04:45:00.0000000Z"
+        },
+        {
+          "Position": 25,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T05:00:00.0000000Z"
+        },
+        {
+          "Position": 26,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T05:15:00.0000000Z"
+        },
+        {
+          "Position": 27,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T05:30:00.0000000Z"
+        },
+        {
+          "Position": 28,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T05:45:00.0000000Z"
+        },
+        {
+          "Position": 29,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T06:00:00.0000000Z"
+        },
+        {
+          "Position": 30,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T06:15:00.0000000Z"
+        },
+        {
+          "Position": 31,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T06:30:00.0000000Z"
+        },
+        {
+          "Position": 32,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T06:45:00.0000000Z"
+        },
+        {
+          "Position": 33,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T07:00:00.0000000Z"
+        },
+        {
+          "Position": 34,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T07:15:00.0000000Z"
+        },
+        {
+          "Position": 35,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T07:30:00.0000000Z"
+        },
+        {
+          "Position": 36,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T07:45:00.0000000Z"
+        },
+        {
+          "Position": 37,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T08:00:00.0000000Z"
+        },
+        {
+          "Position": 38,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T08:15:00.0000000Z"
+        },
+        {
+          "Position": 39,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T08:30:00.0000000Z"
+        },
+        {
+          "Position": 40,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T08:45:00.0000000Z"
+        },
+        {
+          "Position": 41,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T09:00:00.0000000Z"
+        },
+        {
+          "Position": 42,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T09:15:00.0000000Z"
+        },
+        {
+          "Position": 43,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T09:30:00.0000000Z"
+        },
+        {
+          "Position": 44,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T09:45:00.0000000Z"
+        },
+        {
+          "Position": 45,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T10:00:00.0000000Z"
+        },
+        {
+          "Position": 46,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T10:15:00.0000000Z"
+        },
+        {
+          "Position": 47,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T10:30:00.0000000Z"
+        },
+        {
+          "Position": 48,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T10:45:00.0000000Z"
+        },
+        {
+          "Position": 49,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T11:00:00.0000000Z"
+        },
+        {
+          "Position": 50,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T11:15:00.0000000Z"
+        },
+        {
+          "Position": 51,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T11:30:00.0000000Z"
+        },
+        {
+          "Position": 52,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T11:45:00.0000000Z"
+        },
+        {
+          "Position": 53,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T12:00:00.0000000Z"
+        },
+        {
+          "Position": 54,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T12:15:00.0000000Z"
+        },
+        {
+          "Position": 55,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T12:30:00.0000000Z"
+        },
+        {
+          "Position": 56,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T12:45:00.0000000Z"
+        },
+        {
+          "Position": 57,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T13:00:00.0000000Z"
+        },
+        {
+          "Position": 58,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T13:15:00.0000000Z"
+        },
+        {
+          "Position": 59,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T13:30:00.0000000Z"
+        },
+        {
+          "Position": 60,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T13:45:00.0000000Z"
+        },
+        {
+          "Position": 61,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T14:00:00.0000000Z"
+        },
+        {
+          "Position": 62,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T14:15:00.0000000Z"
+        },
+        {
+          "Position": 63,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T14:30:00.0000000Z"
+        },
+        {
+          "Position": 64,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T14:45:00.0000000Z"
+        },
+        {
+          "Position": 65,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T15:00:00.0000000Z"
+        },
+        {
+          "Position": 66,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T15:15:00.0000000Z"
+        },
+        {
+          "Position": 67,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T15:30:00.0000000Z"
+        },
+        {
+          "Position": 68,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T15:45:00.0000000Z"
+        },
+        {
+          "Position": 69,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T16:00:00.0000000Z"
+        },
+        {
+          "Position": 70,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T16:15:00.0000000Z"
+        },
+        {
+          "Position": 71,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T16:30:00.0000000Z"
+        },
+        {
+          "Position": 72,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T16:45:00.0000000Z"
+        },
+        {
+          "Position": 73,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T17:00:00.0000000Z"
+        },
+        {
+          "Position": 74,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T17:15:00.0000000Z"
+        },
+        {
+          "Position": 75,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T17:30:00.0000000Z"
+        },
+        {
+          "Position": 76,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T17:45:00.0000000Z"
+        },
+        {
+          "Position": 77,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T18:00:00.0000000Z"
+        },
+        {
+          "Position": 78,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T18:15:00.0000000Z"
+        },
+        {
+          "Position": 79,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T18:30:00.0000000Z"
+        },
+        {
+          "Position": 80,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T18:45:00.0000000Z"
+        },
+        {
+          "Position": 81,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T19:00:00.0000000Z"
+        },
+        {
+          "Position": 82,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T19:15:00.0000000Z"
+        },
+        {
+          "Position": 83,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T19:30:00.0000000Z"
+        },
+        {
+          "Position": 84,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T19:45:00.0000000Z"
+        },
+        {
+          "Position": 85,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T20:00:00.0000000Z"
+        },
+        {
+          "Position": 86,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T20:15:00.0000000Z"
+        },
+        {
+          "Position": 87,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T20:30:00.0000000Z"
+        },
+        {
+          "Position": 88,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T20:45:00.0000000Z"
+        },
+        {
+          "Position": 89,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T21:00:00.0000000Z"
+        },
+        {
+          "Position": 90,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T21:15:00.0000000Z"
+        },
+        {
+          "Position": 91,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T21:30:00.0000000Z"
+        },
+        {
+          "Position": 92,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T21:45:00.0000000Z"
+        },
+        {
+          "Position": 93,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T22:00:00.0000000Z"
+        },
+        {
+          "Position": 94,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T22:15:00.0000000Z"
+        },
+        {
+          "Position": 95,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T22:30:00.0000000Z"
+        },
+        {
+          "Position": 96,
+          "Quantity": 2,
+          "Quality": "E01",
+          "Time": "2020-12-06T22:45:00.0000000Z"
+        }
+      ]
+  }
+}
