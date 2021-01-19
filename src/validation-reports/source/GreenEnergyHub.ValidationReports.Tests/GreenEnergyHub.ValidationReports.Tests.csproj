@@ -31,6 +31,10 @@ limitations under the License.
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="coverlet.msbuild" Version="3.0.0">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />

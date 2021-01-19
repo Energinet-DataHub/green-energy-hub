@@ -30,6 +30,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void ValidCategory_ReturnsCorrectType()
         {
             var messageMaps = new[] { new MessageRegistration("ServiceStart", typeof(Type)) };
@@ -40,6 +41,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void InvalidCategory_ReturnsNull()
         {
             var messageMaps = Array.Empty<MessageRegistration>();

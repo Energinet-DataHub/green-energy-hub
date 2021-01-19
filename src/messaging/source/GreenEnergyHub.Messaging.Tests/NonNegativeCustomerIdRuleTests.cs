@@ -41,6 +41,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void RulesEngine_FactWithNonNegativeCustomerId_YieldsValidRuleResult()
         {
             const string? customerId = "1";
@@ -57,6 +58,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void RulesEngine_FactWithNegativeCustomerId_YieldsInvalidRuleResult()
         {
             var customerId = "-1";

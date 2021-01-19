@@ -31,6 +31,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public async Task ValidateAsync_SuccessfulRules_ReturnTrueAsync()
         {
             var ruleEngine = new NRulesEngine<StubMessage>(new AlwaysTrueRuleSet());
@@ -40,6 +41,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public async Task ValidateAsync_UnsuccessfulRules_ReturnFalseAsync()
         {
             var ruleEngine = new NRulesEngine<StubMessage>(new AlwaysFalseRuleSet());
@@ -49,6 +51,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public async Task ValidateAsync_MixedSuccessfulRules_ReturnFalseAsync()
         {
             var ruleEngine = new NRulesEngine<StubMessage>(new MixedResultRuleSet());

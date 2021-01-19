@@ -1,0 +1,12 @@
+name: 'Generate Code Coverage Report'
+description: 'Generate code coverage report from Coverlet output.'
+inputs:
+  sln_path:
+    description: 'Path to the solution file.'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - run: ./temp/reportgenerator/reportgenerator -reports:**/${{ inputs.sln_path }}/**/coverage.cobertura.xml -targetDir:./outputs/code-coverage -reporttypes:"Cobertura;TextSummary;Html"
+      shell: bash

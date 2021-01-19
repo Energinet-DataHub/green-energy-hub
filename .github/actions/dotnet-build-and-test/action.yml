@@ -25,12 +25,10 @@ runs:
   using: composite
   steps:
     - run: mv .editorconfig.ci .editorconfig
+      shell: bash    
+    - run: dotnet build ${{ inputs.sln_path }}/${{ inputs.sln_name }}
       shell: bash
-    - run: dotnet build --configuration Debug ${{ inputs.sln_path }}/${{ inputs.sln_name }}
-      shell: bash
-    - run: |
-        dotnet tool install --tool-path ./temp/reportgenerator dotnet-reportgenerator-globaltool ;
-        dotnet test --configuration Debug --collect "XPlat Code Coverage" ${{ inputs.sln_path }}/${{ inputs.sln_name }} &&
-        ./temp/reportgenerator/reportgenerator -reports:${{ inputs.sln_path }}/**/coverage.cobertura.xml -targetDir:${{ inputs.report_path }}/code-coverage -reporttypes:"Cobertura;TextSummary;Html" &&
-        cat ${{ inputs.report_path }}/code-coverage/Summary.txt
+    - run: | 
+        dotnet tool install --tool-path ./temp/reportgenerator dotnet-reportgenerator-globaltool ;              
+        dotnet test ${{ inputs.sln_path }}/${{ inputs.sln_name }} --filter Category=Unit /p:CollectCoverage=true /p:CoverletOutput=../${{ inputs.report_path }}/ /p:CoverletOutputFormat=cobertura /p:Threshold=0
       shell: bash

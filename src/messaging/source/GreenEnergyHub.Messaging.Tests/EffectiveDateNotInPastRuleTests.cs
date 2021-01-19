@@ -45,6 +45,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void RulesEngine_FactWithPastDate_YieldsInvalidRuleResult()
         {
             var pastDate = SystemClock.Instance.GetCurrentInstant() - Duration.FromDays(1);
@@ -61,6 +62,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void RulesEngine_FactWithFutureDate_YieldsValidRuleResult()
         {
             var futureDate = SystemClock.Instance.GetCurrentInstant() + Duration.FromDays(1);

@@ -27,6 +27,7 @@ namespace GreenEnergyHub.Messaging.Tests
     public class HandlerExtensionsTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public void HandlerExtensionsWithReasonableDefaults_Should_Setup_MediatR()
         {
             const bool validateScopes = true;
@@ -41,6 +42,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void HandlerExtension_Should_Locate_One_IngestionHandler()
         {
             const bool validateScopes = true;
@@ -56,6 +58,7 @@ namespace GreenEnergyHub.Messaging.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void HandlerExtension_Should_inject_registrations_into_HubMessageTypeMap()
         {
             const bool validateScopes = true;

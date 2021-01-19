@@ -46,10 +46,16 @@ jobs:
       uses: ./.github/actions/dotnet-build-and-test
       with:
         SLN_NAME: 'Energinet.DataHub.SoapValidation.sln'
-        SLN_PATH: './samples/energinet/soap-schema-validator'        
+        SLN_PATH: './samples/energinet/soap-schema-validator'
+
+    - name: Code Coverage Report
+      if: ${{ always() && steps.soap_validation_check.outputs.should_skip != 'true'}}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './samples/energinet/soap-schema-validator'
 
     - name: Upload build artifacts
-      if: ${{ steps.soap_validation_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.soap_validation_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-soap-validation_artifacts
@@ -85,8 +91,14 @@ jobs:
         SLN_NAME: 'Energinet.DataHub.SoapAdapter.sln'
         SLN_PATH: './samples/energinet/soap-to-json-adapter'
 
+    - name: Code Coverage Report
+      if: ${{ always() && steps.soap_adapter_check.outputs.should_skip != 'true'}}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './samples/energinet/soap-to-json-adapter'
+
     - name: Upload build artifacts
-      if: ${{ steps.soap_adapter_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.soap_adapter_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-soap-adapter_artifacts
@@ -121,9 +133,15 @@ jobs:
       with:
         SLN_NAME: 'Energinet.DataHub.Ingestion.sln'
         SLN_PATH: './samples/energinet/ingestion'
+      
+    - name: Code Coverage Report
+      if: ${{ always() && steps.ingestion_check.outputs.should_skip != 'true'}}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './samples/energinet/ingestion'
 
     - name: Upload build artifacts
-      if: ${{ steps.ingestion_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.ingestion_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-ingestion-artifacts
@@ -158,8 +176,14 @@ jobs:
         SLN_NAME: 'GreenEnergyHub.MasterData.sln'
         SLN_PATH: './src/master-data/GreenEnergyHub.MasterData'
 
+    - name: Code Coverage Report
+      if: ${{ always() && steps.master_data_serverless_check.outputs.should_skip != 'true'}}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './src/master-data/GreenEnergyHub.MasterData'
+
     - name: Upload build artifacts
-      if: ${{ steps.master_data_serverless_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.master_data_serverless_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-master-data-serverless_artifacts
@@ -187,29 +211,34 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-  
+
     - name: Build and test
       if: ${{ steps.time_series_generator_check.outputs.should_skip != 'true' }}
       uses: ./.github/actions/dotnet-build-and-test
       with:
         SLN_NAME: 'TimeSeriesGenerator.sln'
         SLN_PATH: './utilities/dotnet/TimeSeriesGenerator/'
+      
+    - name: Code Coverage Report
+      if: ${{ always() && steps.time_series_generator_check.outputs.should_skip != 'true'}}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './utilities/dotnet/TimeSeriesGenerator/'
 
     - name: Upload build artifacts
-      if: ${{ steps.time_series_generator_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.time_series_generator_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-time-series-generator_artifacts
         path: ${{ env.REPORT_PATH }}
-
 
   messaging:
     name: Build Messaging
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-
+    - uses: actions/checkout@v2    
+    
     - name: Messaging skip check
       id: messaging_check
       uses: fkirc/skip-duplicate-actions@v1.4.0
@@ -230,9 +259,15 @@ jobs:
       with:
         SLN_NAME: 'GreenEnergyHub.Messaging.sln'
         SLN_PATH: './src/messaging'
+    
+    - name: Code Coverage Report
+      if: ${{ always() && steps.messaging_check.outputs.should_skip != 'true'}}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './src/messaging'
 
     - name: Upload build artifacts
-      if: ${{ steps.messaging_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.messaging_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-messaging-artifacts
@@ -266,8 +301,14 @@ jobs:
         SLN_NAME: 'GreenEnergyHub.Queues.sln'
         SLN_PATH: './src/queues'
 
+    - name: Code Coverage Report
+      if: ${{ always() && steps.queues_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './src/queues'
+
     - name: Upload build artifacts
-      if: ${{ steps.queues_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.queues_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-queues-artifacts
@@ -303,8 +344,14 @@ jobs:
         SLN_NAME: 'GreenEnergyHub.ValidationReports.sln'
         SLN_PATH: './src/validation-reports/'
 
+    - name: Code Coverage Report
+      if: ${{ always() && steps.validation_reports_check.outputs.should_skip != 'true' }}
+      uses: ./.github/actions/dotnet-generate-code-coverage-report
+      with:
+        SLN_PATH: './src/validation-reports/'
+
     - name: Upload build artifacts
-      if: ${{ steps.validation_reports_check.outputs.should_skip != 'true' }}
+      if: ${{ always() && steps.validation_reports_check.outputs.should_skip != 'true' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-validation-reports_artifacts
@@ -340,8 +387,14 @@ jobs:
           SLN_NAME: 'Energinet.DataHub.JsonValidation.sln'
           SLN_PATH: './samples/energinet/json-schema-validator/'
 
+      - name: Code Coverage Report
+        if: ${{ always() && steps.json_schema_validator_check.outputs.should_skip != 'true' }}
+        uses: ./.github/actions/dotnet-generate-code-coverage-report
+        with:
+          SLN_PATH: './samples/energinet/json-schema-validator/'
+
       - name: Upload build artifacts
-        if: ${{ steps.json_schema_validator_check.outputs.should_skip != 'true' }}
+        if: ${{ always() && steps.json_schema_validator_check.outputs.should_skip != 'true' }}
         uses: actions/upload-artifact@v2
         with:
           name: build-json-schema-validator_artifacts
@@ -377,8 +430,14 @@ jobs:
           SLN_NAME: 'Energinet.DataHub.MarketData.sln'
           SLN_PATH: './samples/energinet/business-workflow/'
 
+      - name: Code Coverage Report
+        if: ${{ always() && steps.market_data_check.outputs.should_skip != 'true' }}
+        uses: ./.github/actions/dotnet-generate-code-coverage-report
+        with:
+          SLN_PATH: './samples/energinet/business-workflow/'
+
       - name: Upload build artifacts
-        if: ${{ steps.market_data_check.outputs.should_skip != 'true' }}
+        if: ${{ always() && steps.market_data_check.outputs.should_skip != 'true' }}
         uses: actions/upload-artifact@v2
         with:
           name: build-market-data_artifacts
@@ -414,8 +473,14 @@ jobs:
           SLN_NAME: 'Energinet.DataHub.TimerTrigger.sln'
           SLN_PATH: './samples/energinet/timer-trigger/'
 
+      - name: Code Coverage Report
+        if: ${{ always() && steps.timer_trigger_check.outputs.should_skip != 'true' }}
+        uses: ./.github/actions/dotnet-generate-code-coverage-report
+        with:
+          SLN_PATH: './samples/energinet/timer-trigger/'
+
       - name: Upload build artifacts
-        if: ${{ steps.timer_trigger_check.outputs.should_skip != 'true' }}
+        if: ${{ always() && steps.timer_trigger_check.outputs.should_skip != 'true' }}
         uses: actions/upload-artifact@v2
         with:
           name: build-timer-trigger_artifacts
