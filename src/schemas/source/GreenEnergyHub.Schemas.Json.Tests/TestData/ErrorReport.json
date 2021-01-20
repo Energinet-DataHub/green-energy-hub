@@ -1,0 +1,15 @@
+﻿{
+  "MarketDocument": {
+    "OriginalTransaction": {
+      "mRID": "a01dbs8b-ea99-4798-9bd4-ed85ecf79897"
+    },
+    "BusinessTransaction": {
+      "mRID": "a01dbf8b-ea99-4798-9bd4-ed85ecf72897"
+    },
+    "Process": "Change of supplier",
+    "Reason": {
+      "errorCode": "E10",
+      "text": "Can only change supplier on E17/E18 market evaluation points"
+    }
+  }
+}

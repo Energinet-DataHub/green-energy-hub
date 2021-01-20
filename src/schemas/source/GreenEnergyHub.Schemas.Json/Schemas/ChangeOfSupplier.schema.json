@@ -26,7 +26,7 @@
           "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/utc_date"
         },
         "BusinessTransaction": {
-          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/referenceId"
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/BusinessTransaction"
         }
       },
       "required": [

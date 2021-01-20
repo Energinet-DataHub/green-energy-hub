@@ -8,10 +8,8 @@
     "MktActivityRecord": {
       "type": "object",
       "properties": {
-        "ReferenceTransaction": {
-          "title": "Business Transaction Reference",
-          "description": "Reference to original transaction which prompted update of customer master data",
-          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/referenceId"
+        "OriginalTransaction": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/OriginalTransaction"
         },
         "StartDate": {
           "title": "Start of occurrence",
@@ -19,7 +17,7 @@
           "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/utc_date"
         },
         "BusinessTransaction": {
-          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/referenceId"
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/BusinessTransaction"
         },
         "ServiceCategory": {
           "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/ServiceCategory"
@@ -29,7 +27,9 @@
         },
         "ContactAddress": {
           "type": "array",
-          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/ContactAddress"
+          "addresses": {
+            "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/ContactAddress"
+          }
         },
         "FirstConsumerParty": {
           "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/marketParticipant"

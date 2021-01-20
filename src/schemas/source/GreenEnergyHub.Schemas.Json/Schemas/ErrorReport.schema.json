@@ -1,0 +1,36 @@
+﻿{
+  "$id": "https://github.com/Energinet-DataHub/green-energy-hub/schemas/error-report",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Error report",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "MarketDocument": {
+      "type": "object",
+      "properties": {
+        "OriginalTransaction": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/OriginalTransaction"
+        },
+        "BusinessTransaction": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/BusinessTransaction"
+        },
+        "Process": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/process"
+        },
+        "Reason": {
+          "type": "array",
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/reason"
+        }
+      },
+      "required": [
+        "OriginalTransaction",
+        "BusinessTransaction",
+        "Process",
+        "Reason"
+      ]
+    }
+  },
+  "required": [
+    "MarketDocument"
+  ]
+}

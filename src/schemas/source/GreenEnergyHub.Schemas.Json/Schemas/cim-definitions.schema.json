@@ -15,6 +15,30 @@
       "description": "Indicates if market participant is private or business",
       "type": "string"
     },
+    "process": {
+      "title": "process type",
+      "description": "Describes the process confirmed/rejected (eg. change of supplier)",
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Confirmed",
+        "Rejected"
+      ]
+    },
+    "reason": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": ["errorCode"]
+    },
     "UsagePointLocation": {
       "type": "object",
       "title": "Address details",
@@ -182,6 +206,14 @@
       "required": [
         "mRID"
       ]
+    },
+    "BusinessTransaction": {
+      "description": "TransactionID for this message",
+      "$ref": "#/definitions/referenceId"
+    },
+    "OriginalTransaction": {
+      "description": "Original transaction which initiated process",
+      "$ref": "#/definitions/referenceId"
     }
   }
 }

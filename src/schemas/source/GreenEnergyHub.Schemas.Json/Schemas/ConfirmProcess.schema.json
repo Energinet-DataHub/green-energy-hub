@@ -1,0 +1,47 @@
+{
+  "$id": "https://github.com/Energinet-DataHub/green-energy-hub/schemas/confirm-process",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Confirm process",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "MktActivityRecord": {
+      "type": "object",
+      "properties": {
+        "Process": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/process"
+        },
+        "MarketEvaluationPoint": {
+          "title": "Market Evaluation Point",
+          "description": "The market evaluation point that this confirm process concerns",
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/marketEvaluationPoint"
+        },
+        "OriginalTransaction": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/OriginalTransaction"
+        },
+        "Status": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/status"
+        },
+        "Reason": {
+          "type": "array",
+          "reasons": {
+            "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/reason"
+          }
+        },
+        "BusinessTransaction": {
+          "$ref": "https://github.com/Energinet-DataHub/green-energy-hub/schemas#/definitions/BusinessTransaction"
+        }
+      },
+      "required": [
+        "Process",
+        "MarketEvaluationPoint",
+        "OriginalTransaction",
+        "Status",
+        "BusinessTransaction"
+      ]
+    }
+  },
+  "required": [
+    "MktActivityRecord"
+  ]
+}
