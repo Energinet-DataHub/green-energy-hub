@@ -26,7 +26,6 @@ GitHub Actions workflows which are part of the project contain main building blo
 There are also several **testing workflows** which perform unit and integration testing.
 Fully automated deployment strategy was not yet implemented however majority of the workflows is set to be invoked both automatically and manually.
 Besides workflows responsible for deployments and tests, this repository contains also workflow which helps to keep markdown documentation within some standard of quality by enforcing **markdown spell, lint** and **link checks** - [md-check](../../.github/workflows/md-check.yml) workflow.
-There is also [Combine PRs](../../.github/workflows/combine-prs.yml) workflow present, which can be ran manually and combines PRs created by dependabot, which bumps up the versions of libraries and packages used in the project.
 
 **Important note**: there are several features still missing from GitHub Actions while job templates are the most important of them. Once these features are available, it will create space for streamlining the deployment story quite substantially.
 
@@ -45,7 +44,7 @@ In the following sections we briefly describe infrastructure deployment workflow
 
 ### Main Infrastructure Deploy
 
-[infra-cd.yml](../../.github/workflows/infra-cd.yml)
+[infrastructure-cd.yml](../../.github/workflows/infrastructure-cd.yml)
 
 Main Infrastructure Deploy workflow deploys almost entire infrastructure needed to run the solution spanning Azure Services such as API Management, Azure Functions, Azure SQL Database, Storage accounts, Azure Event hubs, Service Bus Queues, Databricks Workspace, Cosmos DB, Azure Key Vault etc.
 
@@ -153,50 +152,6 @@ Later, number of clusters and their scaling settings might be changed based on t
 
 Terraform files make use of official [Databricks Terraform resource provider](https://registry.terraform.io/providers/databrickslabs/databricks/latest/docs) and it requires *azure_workspace_resource_id* property to be set (see [build/terraform/databricks_cluster/providers.tf](../../build/terraform/databricks_cluster/providers.tf)).
 It is forwarded to Terraform from the workflow as *databricks_id* variable.
-
-### Deploy Databricks Integration Testing Infrastructure
-
-[databricks-integration-testing-infra-cd.yml](../../.github/workflows/databricks-integration-testing-infra-cd.yml)
-
-This workflow deploys infrastructure used for running integration test of stream processing job. Until integration testing strategy is not determined, this workflow is not being triggered automatically.
-
-*Deploy Databricks Integration Testing Infrastructure* workflow deploys only subset of resources deployed in Main Infrastructure Deploy workflow, while some of these resources are deployed in multiple instances.
-Reason for that is to enable running of multiple integration tests in parallels without any risk of conflicts and possible test failures due to these conflicts.
-Resources that are deployed in multiple instances are Event Hubs, Azure Storage containers and Cosmos DB collections.
-Multi instance deployment is achieved using [*count meta argument*](https://www.terraform.io/docs/configuration/meta-arguments/count.html) supported by Terraform.
-Bellow you can see example of deployment of multiple Event Hubs and creation of sender auth rule for each of them.
-This example is copied from [evh-timeseries-inbound-queue.tf](../../build/terraform/databricks_integration_testing_infra/evh-timeseries-inbound-queue.tf) file.
-
-```yaml
-module "evh_inboundqueue" {
-  count                     = var.env_count
-  source                    = "../modules/event-hub"
-  name                      = "evh-inbound-queue-${var.environment}-${count.index}"
-  namespace_name            = module.evhnm_timeseries_inbound_queue.name
-  resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
-  partition_count           = 32
-  message_retention         = 1
-  dependencies              = [module.evhnm_timeseries_inbound_queue.dependent_on]
-}
-
-module "sender_evhar_inboundqueue" {
-  count                     = var.env_count
-  source                    = "../modules/event-hub-auth-rule"
-  name                      = "sender-evhar-inboundqueue-${count.index}"
-  namespace_name            = module.evhnm_timeseries_inbound_queue.name
-  eventhub_name             = module.evh_inboundqueue[count.index].name
-  resource_group_name       = data.azurerm_resource_group.greenenergyhub.name
-  send                      = true
-  dependencies              = [module.evh_inboundqueue[count.index].dependent_on]
-}
-```
-
-Notice how *${count.index}* value is used to create unique name of resources.
-Also notice how the *[count.index]* value is used in *sender_evhar_inboundqueue*'s *eventhub_name* property to reference correct Event Hub instance.
-
-*Deploy Databricks Integration Testing Infrastructure* workflow runs also two extra additional activities, both related to booking of the resources for integration testing.
-First is that besides Terraform State Storage Container it also creates storage container to store *booking state table*. Second step is upload of [the file with default booking state table](../../build/resource-booking-state) which defines what resources can be booked during integration test run.
-Resource booking process is described in detail in later part of this document. See [Databricks Integration Tests section](#databricks-integration-tests)
 
 ## Application Logic Deployment Workflows
 

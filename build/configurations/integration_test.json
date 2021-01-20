@@ -1,7 +1,7 @@
 {
     "resource_group_name" : "rg-Helpers-D",
     "_comment":"use alphanumerical values for env_name and organisation_name. Together they should not be longer than 7 characters",
-    "env_name":"it",
+    "env_name":"d",
     "organisation_name": "endk",
     "github_secret_name_spn_secret": "RG_HELPERS_D_SPN_SECRET",
     "github_secret_name_spn_object_id": "RG_HELPERS_D_SPN_OBJECT_ID",

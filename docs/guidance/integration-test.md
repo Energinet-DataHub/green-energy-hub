@@ -3,7 +3,6 @@
 Integration testing (sometimes called integration and testing, abbreviated I&T) is the phase in software testing in which individual software modules or micro services are combined and tested as a group.
 Integration tests are important, but not only part of quality assurance procedures.
 Usually, they are ran after unit testing and before validation testing.
-As of now, there are two workflows related to Integration testing - deployment of [Integration Testing Infra](../../.github/workflows/databricks-integration-testing-infra-cd.yml) and [Integration Testing](../../.github/workflows/databricks-it.yml) workflow.
 Also sample [Streaming Integration Test](../../src/integration-test/streaming-test.py) has been created for Green Energy Hub project.
 It covers EventHub, DataBricks, CosmosDB integration points and helps to validate changes in DataBricks Jobs.
 

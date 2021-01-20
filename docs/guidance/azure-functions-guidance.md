@@ -44,7 +44,7 @@ Basically, all Function App jobs have the same code only with different paramete
 
 ## Postoffice Http Trigger CD ([postoffice-http-trigger-cd.yml](../../.github/workflows/postoffice-http-trigger-cd.yml) based on deploy-function.yml sample)
 
-[postoffice-http-trigger-cd.yml](../../.github/workflows/postoffice-http-trigger-cd.yml) workflow is quite simple, and its sole responsibility is to create function package and deploy it to pre-deployed Azure Function App resource in Azure (this should be created by running [infra-cd.yml](../../.github/workflows/infra-cd.yml) workflow).
+[postoffice-http-trigger-cd.yml](../../.github/workflows/postoffice-http-trigger-cd.yml) workflow is quite simple, and its sole responsibility is to create function package and deploy it to pre-deployed Azure Function App resource in Azure (this should be created by running [infrastructure-cd.yml](../../.github/workflows/infrastructure-cd.yml) workflow).
 This workflow is not making use of *Build and Publish custom action*, however as further improvement it can be introduced and swapped for *Build package step* to include unit testing. So, the workflow is capable to deploy the Function App package it needs publish profile definition, which is obtained using Azure CLI:
 
 ```yml

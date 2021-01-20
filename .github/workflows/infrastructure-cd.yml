@@ -1,4 +1,4 @@
-name: Main Infrastructure Deploy
+name: Infrastructure CD
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     paths:
       - build/terraform/infra/**
       - build/terraform/modules/**
-      - .github/workflows/infra-cd.yml
+      - .github/workflows/infrastructure-cd.yml
   workflow_dispatch:
     inputs:
       resource_group_name:
@@ -32,8 +32,10 @@ on:
 
 jobs:
   infra_deploy:
-    name: Deploy solution infrastructure
+    name: Deploy infrastructure
     runs-on: ubuntu-latest
+    environment:
+      name: rg-DataHub-D
 
     steps:
       - name: Checkout code
@@ -45,10 +47,10 @@ jobs:
       - name: Set Environment Secrets
         run: |  
           echo "ARM_TENANT_ID=${{ secrets.TENANT_ID }}" >> $GITHUB_ENV
-          echo "ARM_CLIENT_ID=${{ secrets[env.GITHUB_SECRET_NAME_SPN_ID] }}" >> $GITHUB_ENV
-          echo "ARM_CLIENT_OBJECT_ID=${{ secrets[env.GITHUB_SECRET_NAME_SPN_OBJECT_ID] }}" >> $GITHUB_ENV
-          echo "ARM_CLIENT_SECRET=${{ secrets[env.GITHUB_SECRET_NAME_SPN_SECRET] }}" >> $GITHUB_ENV
-          echo "ARM_SUBSCRIPTION_ID=${{ secrets[env.GITHUB_SECRET_NAME_SUBSCRIPTION_ID] }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_ID=${{ secrets.SPN_ID }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_OBJECT_ID=${{ secrets.SPN_OBJECT_ID }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_SECRET=${{ secrets.SPN_SECRET }}" >> $GITHUB_ENV
+          echo "ARM_SUBSCRIPTION_ID=${{ secrets.SPN_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
 
       # Run only if workflow started on demand (manually triggered)
       - name: Set Variables from Pipeline Inputs
