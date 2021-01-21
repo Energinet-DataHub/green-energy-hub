@@ -1,0 +1,2 @@
+/* Ignore output from Python code coverage */
+htmlcov
