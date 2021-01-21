@@ -17,9 +17,7 @@ using GreenEnergyHub.Messaging.Integration.ServiceCollection;
 using GreenEnergyHub.Messaging.MessageRouting;
 using GreenEnergyHub.Messaging.Tests.TestHelpers;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NSubstitute.Extensions;
 using Xunit;
 
 namespace GreenEnergyHub.Messaging.Tests
@@ -52,7 +50,7 @@ namespace GreenEnergyHub.Messaging.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes);
             var messageRegistrations = serviceProvider.GetServices(typeof(MessageRegistration)).Count();
 
-            const int expected = 4;
+            const int expected = 2;
 
             Assert.Equal(expected, messageRegistrations);
         }

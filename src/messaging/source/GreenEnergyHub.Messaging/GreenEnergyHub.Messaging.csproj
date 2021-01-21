@@ -25,9 +25,21 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="9.4.0" />
         <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="NodaTime" Version="3.0.3" />
-        <PackageReference Include="NRules" Version="0.9.1" />
     </ItemGroup>
+
+  <ItemGroup>
+  <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+    <_Parameter1>GreenEnergyHub.Messaging.Tests</_Parameter1>
+  </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>GreenEnergyHub.Messaging.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 
 </Project>

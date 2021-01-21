@@ -12,22 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NRules.Fluent.Dsl;
-
-namespace GreenEnergyHub.Messaging.Tests.TestHelpers
+namespace GreenEnergyHub.Messaging.Tests.TestHelpers.Validation
 {
-#nullable disable
-    public class AlwaysFalseRule<TMessage> : Rule
-        where TMessage : IHubMessage
+    public class ChangeOfSupplier
     {
-        public override void Define()
-        {
-            TMessage message = default;
-
-            When()
-                .Match<TMessage>(() => message);
-            Then()
-                .Yield(_ => new RuleResult(GetType().Name, string.Empty, false, string.Empty));
-        }
+        public string? MarketEvaluationPointMrid { get; set; }
     }
 }

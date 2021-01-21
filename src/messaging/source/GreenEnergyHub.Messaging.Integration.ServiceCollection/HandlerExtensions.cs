@@ -17,9 +17,8 @@ using System.Collections.Generic;
 using System.Linq;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.MessageRouting;
-using GreenEnergyHub.Messaging.RulesEngine;
+using GreenEnergyHub.Messaging.Validation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GreenEnergyHub.Messaging.Integration.ServiceCollection
@@ -33,7 +32,7 @@ namespace GreenEnergyHub.Messaging.Integration.ServiceCollection
     {
         /// <summary>
         /// Searches the provided assemblies, as well as the common assemblies,
-        /// to find the HubRequestHandlers, HubCommandHandlers, IHubMessages, IHubRuleSets,
+        /// to find the HubRequestHandlers, HubCommandHandlers, IHubMessages,
         /// IRuleEngines, the rules (represented as a list of
         /// Types), the IEndpointResolver, and the IHubMessageTypeMap, and to
         /// automatically register and provide this instances on function
@@ -70,48 +69,17 @@ namespace GreenEnergyHub.Messaging.Integration.ServiceCollection
                 messageTypesToRegister.AddRange(newMessageTypes);
             }
 
-            // Collection of IRuleSet types to discover related classes for
-            var ruleSetsToRegister = new List<Type>();
-
-            // With the set of unique message types determined, discover
-            // rulesets based on assembly ordering
-            foreach (var messageType in messageTypesToRegister)
-            {
-                foreach (var assembly in assemblies)
-                {
-                    var assemblyTypes = assembly.GetTypes();
-                    var genericType = typeof(IHubRuleSet<>).MakeGenericType(messageType);
-
-                    // Discover rule sets but omit any already pending registration by same name from another assembly
-                    var ruleSet = assemblyTypes
-                        .Where(type => type.GetInterfaces().Contains(genericType))
-                        .Where(existingRuleSet => ruleSetsToRegister.All(ruleSetType => ruleSetType.Name != existingRuleSet.Name))
-                        .FirstOrDefault();
-
-                    if (ruleSet != default)
-                    {
-                        // Keep track of the registered rulesets to avoid duplicated registrations in next iterations
-                        ruleSetsToRegister.Add(ruleSet);
-
-                        // Register the discovered ruleset
-                        services.AddScoped(genericType, ruleSet);
-                    }
-                }
-            }
-
             foreach (var messageType in messageTypesToRegister)
             {
                 // Register with mapping class for the message type
                 services.AddTransient(_ => new MessageRegistration(messageType));
-
-                // Register supporting classes
-                services.AddScoped(typeof(IRuleEngine<>).MakeGenericType(messageType), typeof(NRulesEngine<>).MakeGenericType(messageType));
             }
 
             services.AddSingleton<IHubRequestMediator, HubRequestMediator>();
             services.AddSingleton<IHubCommandMediator, HubCommandMediator>();
-
             services.AddSingleton<IHubMessageTypeMap, HubMessageTypeMap>();
+
+            services.DiscoverValidation(assemblies);
         }
     }
 }

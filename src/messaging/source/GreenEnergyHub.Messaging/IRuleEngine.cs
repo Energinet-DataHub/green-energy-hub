@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System.Threading.Tasks;
+using GreenEnergyHub.Messaging.Validation;
 
 namespace GreenEnergyHub.Messaging
 {
@@ -22,14 +23,15 @@ namespace GreenEnergyHub.Messaging
     /// implementation with the required logic to trigger that rule engine's execution.
     /// </summary>
     public interface IRuleEngine<in TMessage>
-        where TMessage : IHubMessage
     {
         /// <summary>
         /// Validates the provided message asynchronously.
         /// </summary>
         /// <param name="message">The message to validate.</param>
-        /// <returns>True if the message is valid according to the rules in this
-        /// IRuleEngine.</returns>
-        Task<bool> ValidateAsync(TMessage message);
+        /// <returns>
+        /// Returns a <see cref="RuleResultCollection"/> indicating whether or not the validation was a success.
+        /// If the validation was unsuccessful, the <see cref="RuleResultCollection"/> contains a list of error messages.
+        /// </returns>
+        Task<RuleResultCollection> ValidateAsync(TMessage message);
     }
 }

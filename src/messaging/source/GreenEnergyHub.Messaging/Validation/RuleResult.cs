@@ -12,20 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using GreenEnergyHub.Messaging;
-
-namespace Energinet.DataHub.Ingestion.Domain.TimeSeries
+namespace GreenEnergyHub.Messaging.Validation
 {
     /// <summary>
-    /// Class which holds the TimeSeriesRuleSet.
+    /// Result for a negative validation rule
     /// </summary>
-    public class TimeSeriesRuleSet : IHubRuleSet<TimeSeriesMessage>
+    public sealed class RuleResult
     {
+        internal RuleResult(string ruleNumber, string message)
+        {
+            RuleNumber = ruleNumber;
+            Message = message;
+        }
+
         /// <summary>
-        /// The rules.
+        /// Gets rule number that failed
         /// </summary>
-        public IEnumerable<Type> Rules => new List<Type>();
+        public string RuleNumber { get; }
+
+        /// <summary>
+        /// Gets validation message
+        /// </summary>
+        public string Message { get; }
     }
 }

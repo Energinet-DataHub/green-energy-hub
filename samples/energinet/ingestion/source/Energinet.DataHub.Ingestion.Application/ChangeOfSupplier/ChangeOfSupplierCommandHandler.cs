@@ -25,21 +25,16 @@ namespace Energinet.DataHub.Ingestion.Application.ChangeOfSupplier
     /// </summary>
     public class ChangeOfSupplierCommandHandler : HubCommandHandler<ChangeOfSupplierMessage>
     {
-        private readonly IRuleEngine<ChangeOfSupplierMessage> _rulesEngine;
         private readonly IMarketDataMessageQueueDispatcher _messageDispatcher;
 
         /// <summary>
         /// Builds a ChangeOfSupplierCommandHandler which validates messages using a
         /// provided IRuleEngine and dispatches valid messages to a Service Bus.
         /// </summary>
-        /// <param name="rulesEngine">The IRuleEngine to validate messages with.
-        /// </param>
         /// <param name="messageServiceBusDispatcher">Service Bus dispatcher to use when request is successfully validated.</param>
         public ChangeOfSupplierCommandHandler(
-            IRuleEngine<ChangeOfSupplierMessage> rulesEngine,
             IMarketDataMessageQueueDispatcher messageServiceBusDispatcher)
         {
-            _rulesEngine = rulesEngine;
             _messageDispatcher = messageServiceBusDispatcher;
         }
 

@@ -12,22 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NRules.Fluent.Dsl;
+using FluentValidation.Validators;
+using GreenEnergyHub.Messaging.Validation;
 
-namespace GreenEnergyHub.Messaging.Tests.TestHelpers
+namespace GreenEnergyHub.Messaging.Tests.TestHelpers.Rules
 {
-#nullable disable
-    public class AlwaysTrueRule<TMessage> : Rule
-        where TMessage : IHubMessage
+    public class MarketEvaluationPointIsNotNullOrEmptyRule : PropertyRule<string>
     {
-        public override void Define()
-        {
-            TMessage message = default;
+        protected internal override string Code { get; } = "VR.001";
 
-            When()
-                .Match<TMessage>(() => message);
-            Then()
-                .Yield(_ => new RuleResult(GetType().Name, string.Empty, true, string.Empty));
+        protected override bool IsValid(string propertyValue, PropertyValidatorContext context)
+        {
+            return !string.IsNullOrEmpty(propertyValue);
         }
     }
 }

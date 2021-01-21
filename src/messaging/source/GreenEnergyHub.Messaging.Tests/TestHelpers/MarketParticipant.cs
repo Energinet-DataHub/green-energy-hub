@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
-    public class AlwaysTrueRuleSet : IHubRuleSet<StubMessage>
+    public class MarketParticipant
     {
-        public IEnumerable<Type> Rules => new List<Type>() { typeof(AlwaysTrueRule<>) };
+        public string? MRID { get; set; }
+
+        public string? Name { get; set; }
     }
 }

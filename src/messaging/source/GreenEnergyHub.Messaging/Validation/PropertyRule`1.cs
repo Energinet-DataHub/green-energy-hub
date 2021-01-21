@@ -13,12 +13,21 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using FluentValidation.Validators;
 
-namespace GreenEnergyHub.Messaging.Tests.TestHelpers
+namespace GreenEnergyHub.Messaging.Validation
 {
-    public class MixedResultRuleSet : IHubRuleSet<StubMessage>
+    public abstract class PropertyRule<T> : PropertyRule
     {
-        public IEnumerable<Type> Rules => new List<Type>() { typeof(AlwaysFalseRule<>), typeof(AlwaysTrueRule<>) };
+        protected override bool IsValid(PropertyValidatorContext context)
+        {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+
+            if (context.PropertyValue is T propertyValue) return IsValid(propertyValue, context);
+
+            return false;
+        }
+
+        protected abstract bool IsValid(T propertyValue, PropertyValidatorContext context);
     }
 }

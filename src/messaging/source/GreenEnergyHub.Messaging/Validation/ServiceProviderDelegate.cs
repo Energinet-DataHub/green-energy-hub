@@ -13,21 +13,12 @@
 // limitations under the License.
 
 using System;
-using GreenEnergyHub.Messaging.MessageTypes;
-using GreenEnergyHub.Messaging.MessageTypes.Common;
-using NodaTime;
 
-namespace GreenEnergyHub.Messaging.Tests.TestHelpers
+namespace GreenEnergyHub.Messaging.Validation
 {
     /// <summary>
-    /// Mock interface defining the properties necessary for rule matching
+    /// Get an instance of a given <see cref="Type"/> via the designated service provider (dependency container).
     /// </summary>
-    public class MockHasStartDate : IHubMessage, IHubMessageHasStartDate
-    {
-        public Transaction Transaction { get; set; } = Transaction.NewTransaction();
-
-        public Instant RequestDate { get; set; } = SystemClock.Instance.GetCurrentInstant();
-
-        public Instant StartDate { get; set; }
-    }
+    /// <param name="serviceType">The type to retrieve.</param>
+    public delegate object ServiceProviderDelegate(Type serviceType);
 }

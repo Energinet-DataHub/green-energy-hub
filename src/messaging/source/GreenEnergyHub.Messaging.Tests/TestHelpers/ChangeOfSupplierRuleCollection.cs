@@ -12,22 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using GreenEnergyHub.Messaging.MessageTypes;
-using GreenEnergyHub.Messaging.MessageTypes.Common;
-using NodaTime;
+using GreenEnergyHub.Messaging.Tests.TestHelpers.Rules;
+using GreenEnergyHub.Messaging.Validation;
 
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
-    /// <summary>
-    /// Mock interface defining the properties necessary for rule matching
-    /// </summary>
-    //public class MockHasCustomerId : IHubMessage, IHubMessageHasConsumer
-    //{
-    //    public Transaction Transaction { get; set; } = Transaction.NewTransaction();
-
-    //    public Instant RequestDate { get; set; } = SystemClock.Instance.GetCurrentInstant();
-
-    //    public MarketParticipant Consumer { get; set; } = MarketParticipant.Empty;
-    //}
+    public class ChangeOfSupplierRuleCollection : RuleCollection<ChangeOfSupplier>
+    {
+        public ChangeOfSupplierRuleCollection()
+        {
+            RuleForEach(t => t.ListOfNumbers!)
+                .PropertyRule<NumberOver10>();
+        }
+    }
 }

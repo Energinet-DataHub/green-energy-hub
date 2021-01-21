@@ -12,13 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
-    public class AlwaysFalseRuleSet : IHubRuleSet<StubMessage>
+    public class ChangeOfSupplier
     {
-        public IEnumerable<Type> Rules => new List<Type>() { typeof(AlwaysFalseRule<>) };
+        public ChangeOfSupplier(List<int> listOfNumbers)
+        {
+            ListOfNumbers = listOfNumbers;
+        }
+
+        public string? MarketEvaluationPoint { get; set; }
+
+        public List<int> ListOfNumbers { get; }
+
+        public MarketParticipant? EnergySupplier { get; set; }
     }
 }

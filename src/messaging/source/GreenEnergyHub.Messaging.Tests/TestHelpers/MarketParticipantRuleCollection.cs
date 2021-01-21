@@ -14,21 +14,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
+using GreenEnergyHub.Messaging.Tests.TestHelpers.Rules;
+using GreenEnergyHub.Messaging.Validation;
 
-namespace GreenEnergyHub.Messaging
+namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
-    /// <summary>
-    /// An IEnumerable of rules which apply to the parameterized message type.
-    /// </summary>
-    /// <typeparam name="TMessage">The message type which this ruleset applies
-    /// to.</typeparam>
-    public interface IHubRuleSet<out TMessage>
-        where TMessage : IHubMessage
-    {
-        /// <summary>
-        /// The IEnumerable of rules.
-        /// </summary>
-        /// <value>The rules.</value>
-        IEnumerable<Type> Rules { get; }
-    }
+    // public class MarketParticipantRuleCollection : RuleCollection<MarketParticipant>
+//    {
+//        public MarketParticipantRuleCollection()
+//        {
+//        }
+//    }
 }
