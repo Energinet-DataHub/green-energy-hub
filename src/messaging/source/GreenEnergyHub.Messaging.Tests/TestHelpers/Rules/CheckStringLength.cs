@@ -12,22 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using FluentValidation.Validators;
+using GreenEnergyHub.Messaging.Validation;
 
-namespace GreenEnergyHub.Messaging.Tests.TestHelpers
+namespace GreenEnergyHub.Messaging.Tests.TestHelpers.Rules
 {
-    public class MarketParticipant
+    public class CheckStringLength : PropertyRule<string>
     {
-        private string _mrid;
+        protected internal override string Code { get; } = "VR.666";
 
-        public MarketParticipant(string mrid, string name)
+        protected override bool IsValid(string propertyValue, PropertyValidatorContext context)
         {
-            _mrid = mrid;
-            Name = name;
+            return propertyValue != null && propertyValue.Length > 5;
         }
-
-        public string? Name { get; }
-
-        public List<string> List { get; } = new List<string>();
     }
 }

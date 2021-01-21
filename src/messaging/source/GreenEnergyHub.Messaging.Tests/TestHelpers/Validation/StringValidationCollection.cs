@@ -12,22 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using GreenEnergyHub.Messaging.Tests.TestHelpers.Rules;
+using GreenEnergyHub.Messaging.Validation;
 
-namespace GreenEnergyHub.Messaging.Tests.TestHelpers
+namespace GreenEnergyHub.Messaging.Tests.TestHelpers.Validation
 {
-    public class MarketParticipant
+    public class StringValidationCollection : RuleCollection<string>
     {
-        private string _mrid;
-
-        public MarketParticipant(string mrid, string name)
+        public StringValidationCollection()
         {
-            _mrid = mrid;
-            Name = name;
+            RuleFor(x => x)
+                .PropertyRule<StringContainsThis>()
+                .PropertyRule<CheckStringLength>();
         }
-
-        public string? Name { get; }
-
-        public List<string> List { get; } = new List<string>();
     }
 }

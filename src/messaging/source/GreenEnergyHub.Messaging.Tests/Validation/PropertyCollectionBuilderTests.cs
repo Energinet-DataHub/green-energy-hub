@@ -25,7 +25,7 @@ namespace GreenEnergyHub.Messaging.Tests.Validation
     {
         [Fact]
         [Trait("Category", "Unit")]
-        public async Task PropertyCollectionBuilder_Use()
+        public async Task PropertyCollectionBuilder_PropertyRule()
         {
             var cos = new ChangeOfSupplier(new List<int>());
             cos.ListOfNumbers.Add(2);
@@ -35,6 +35,20 @@ namespace GreenEnergyHub.Messaging.Tests.Validation
 
             var result = await ruleset.ValidateAsync(new ValidationContext<ChangeOfSupplier>(cos), SP).ConfigureAwait(false);
             Assert.False(result.Success);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public async Task PropertyCollectionBuilder_RuleCollection()
+        {
+            var mp = new MarketParticipant("216asdAdsasd", "This is a Test");
+            mp.List.Add("This is an item.");
+            mp.List.Add("This string has more than 5 characters.");
+            var ruleset = new MarketParticipantListRuleCollection();
+
+            var result = await ruleset.ValidateAsync(new ValidationContext<MarketParticipant>(mp), SP)
+                .ConfigureAwait(false);
+            Assert.True(result.Success);
         }
 
         private static object SP(Type type)

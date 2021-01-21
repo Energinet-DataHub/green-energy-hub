@@ -16,8 +16,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation;
+using GreenEnergyHub.Messaging.Tests.TestHelpers;
 using GreenEnergyHub.Messaging.Tests.TestHelpers.Validation;
 using GreenEnergyHub.Messaging.Validation;
 using Xunit;
@@ -29,6 +31,7 @@ namespace GreenEnergyHub.Messaging.Tests.Validation
     public class PropertyBuilderTests
     {
         [Fact]
+        [Trait("Category", "Unit")]
         public void PropertyRuleShouldBeAssigned()
         {
             // Arrange
@@ -41,6 +44,23 @@ namespace GreenEnergyHub.Messaging.Tests.Validation
 
             // Act
             builder.PropertyRule<MarketEvaluationPointValidation>();
+
+            // Assert
+            tracking.Should().HaveCount(1);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void RuleCollectionShouldBeAssigned()
+        {
+            // Arrange
+            Expression<Func<MarketParticipant, string>> selector = mp => mp.Name!;
+            var tracking = new List<Action<ServiceProviderDelegate, AbstractValidator<MarketParticipant>>>();
+
+            var builder = new PropertyBuilder<MarketParticipant, string>(selector, tracking);
+
+            // Act
+            builder.RuleCollection<MarketParticipantNameRuleCollection>();
 
             // Assert
             tracking.Should().HaveCount(1);

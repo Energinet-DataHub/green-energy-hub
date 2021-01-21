@@ -16,14 +16,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using GreenEnergyHub.Messaging.Tests.TestHelpers.Rules;
+using GreenEnergyHub.Messaging.Tests.TestHelpers.Validation;
 using GreenEnergyHub.Messaging.Validation;
 
 namespace GreenEnergyHub.Messaging.Tests.TestHelpers
 {
-    // public class MarketParticipantRuleCollection : RuleCollection<MarketParticipant>
-//    {
-//        public MarketParticipantRuleCollection()
-//        {
-//        }
-//    }
+    public class MarketParticipantListRuleCollection : RuleCollection<MarketParticipant>
+    {
+        public MarketParticipantListRuleCollection()
+        {
+            RuleForEach(t => t.List)
+                .RuleCollection<StringValidationCollection>();
+        }
+    }
 }
