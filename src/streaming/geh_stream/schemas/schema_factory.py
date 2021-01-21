@@ -31,6 +31,7 @@ def make_all_nullable(schema):
 
 
 class SchemaFactory:
+    quantity_type = DecimalType(18, 3)
 
     message_body_schema: StructType = StructType() \
         .add("mRID", StringType(), False) \
@@ -60,7 +61,7 @@ class SchemaFactory:
                   .add("Start", TimestampType(), False)
                   .add("End", TimestampType(), False), False)
              .add("Points", ArrayType(StructType()
-                  .add("Quantity", DecimalType(), False)
+                  .add("Quantity", quantity_type, False)
                   .add("Quality", StringType(), False)
                   .add("Time", TimestampType(), False), True), False), False)
 
@@ -110,7 +111,7 @@ class SchemaFactory:
         .add("MarketEvaluationPointType", StringType(), False) \
         .add("SettlementMethod", StringType(), True) \
         .add("MarketEvaluationPoint_mRID", StringType(), False) \
-        .add("Quantity", DecimalType(), True) \
+        .add("Quantity", quantity_type, True) \
         .add("Quality", StringType(), True) \
         .add("Time", TimestampType(), False) \
         .add("MeteringMethod", StringType(), True) \

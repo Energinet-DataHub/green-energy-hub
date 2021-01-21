@@ -93,11 +93,11 @@ async def test_streaming_adds_valid_time_series_with_all_required_data_to_delta_
 
     # Assert
     consumption_time_series_points = __get_time_series_from_delta_lake_by_correlation_id(consumption_correlation_id)
-    point = next(p for p in consumption_time_series_points if lambda p: p.Time == datetime.datetime(2020, 11, 13, 0, 0))
+    point = next(p for p in consumption_time_series_points if p.Time == datetime.datetime(2020, 11, 13, 1, 0))
 
     assert point.MarketEvaluationPoint_mRID == "571313180000000005"
-    assert point.Time == datetime.datetime(2020, 11, 13, 0, 0)
-    assert point.Quantity == Decimal("2")
+    assert point.Time == datetime.datetime(2020, 11, 13, 1, 0)
+    assert point.Quantity == Decimal("3.337")
     assert point.CorrelationId == consumption_correlation_id
     assert point.MessageReference == "mId2020-12-01T13:16:29.330Z"
     assert point.MarketDocument_mRID == "hId2020-12-01T13:16:29.330Z"
@@ -108,7 +108,7 @@ async def test_streaming_adds_valid_time_series_with_all_required_data_to_delta_
     assert point.TimeSeries_mRID == "tId2020-12-01T13:16:29.330Z"
     assert point.MktActivityRecord_Status == "9"
     assert point.MarketEvaluationPointType == "E17"
-    assert point.Quality == "E01"
+    assert point.Quality == "56"
     assert point.MeterReadingPeriodicity == "PT1H"
     assert point.MeteringMethod == "D01"
     assert point.MeteringGridArea_Domain_mRID == "800"
@@ -127,7 +127,7 @@ async def test_streaming_adds_valid_time_series_with_all_required_data_to_delta_
     assert point.day == 13
 
     exchange_time_series_points = __get_time_series_from_delta_lake_by_correlation_id(exchange_correlation_id)
-    exchange_point = next(p for p in exchange_time_series_points if lambda p: p.Time == datetime.datetime(2020, 12, 6, 0, 0))
+    exchange_point = next(p for p in exchange_time_series_points if p.Time == datetime.datetime(2020, 12, 6, 0, 0))
 
     # These are the only fields we couldn't test with the consumption message - no need to assert the rest of the fields again.
     assert exchange_point.InMeteringGridArea_Domain_mRID == "802"

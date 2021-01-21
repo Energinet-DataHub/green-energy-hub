@@ -16,7 +16,6 @@ import pandas as pd
 import time
 from pyspark import SparkConf
 from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.types import DecimalType, StringType, StructField, StructType, TimestampType, ArrayType
 from pyspark.sql.functions import col
 
 from geh_stream.schemas import SchemaNames, SchemaFactory

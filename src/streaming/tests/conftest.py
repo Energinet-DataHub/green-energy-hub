@@ -278,7 +278,7 @@ def valid_atomic_value_schema():
         StructField("MarketDocument_RecipientMarketParticipant_Type", StringType(), False),
         StructField("MarketDocument_MarketServiceCategory_Kind", StringType(), False),
         StructField("RecipientList", ArrayType(StringType()), False),
-        StructField("Period_Point_Quantity", DecimalType(), False),
+        StructField("Period_Point_Quantity", SchemaFactory.quantity_type, False),
         StructField("Period_Point_Quality", StringType(), False),
         StructField("Period_Point_Time", TimestampType(), False),
         StructField("MarketDocument_CreatedDateTime", TimestampType(), False),
