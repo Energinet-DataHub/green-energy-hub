@@ -1,3 +1,3 @@
 [run]
-include = */src/*
-omit = *migrations*, *tests*
+include = */src/streaming/*
+omit = *tests*

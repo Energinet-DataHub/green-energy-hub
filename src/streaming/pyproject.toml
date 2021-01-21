@@ -1,0 +1,18 @@
+# Configuration of Python unit test code coverage thresholds
+
+[coverage-threshold]
+# OBS: This should be 80, but that requirement isn't satisfied at the time of creation of this
+combined_coverage_min = 80
+line_coverage_min = 80
+
+    [coverage-threshold.modules."aggregation-jobs/"]
+    combined_coverage_min = 80
+    line_coverage_min = 80
+
+    [coverage-threshold.modules."geh_stream/"]
+    combined_coverage_min = 80
+    line_coverage_min = 80
+
+    [coverage-threshold.modules."geh_stream/*/"]
+    combined_coverage_min = 80
+    line_coverage_min = 80
