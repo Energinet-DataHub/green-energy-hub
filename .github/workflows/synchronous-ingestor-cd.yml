@@ -1,0 +1,68 @@
+name: Synchronous ingestor CD
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - src/**
+      - samples/energinet/ingestion/**
+      - .github/workflows/synchronous-ingestor-cd.yml
+
+  workflow_dispatch: {}
+
+env:
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'samples/energinet/ingestion/source/Energinet.DataHub.Ingestion.Synchronous.AzureFunction'
+  DOTNET_VERSION: '3.1'
+
+jobs:
+
+  build-and-deploy-function:
+    name: Build and deploy function
+    runs-on: ubuntu-latest
+    environment:
+      name: rg-DataHub-D
+    steps:
+      
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@master
+
+      - name: Read Pipeline Configuration
+        uses: ./.github/actions/read-pipeline-configuration
+
+      - name: Set Environment Secrets
+        run: |
+          echo "ARM_TENANT_ID=${{ secrets.TENANT_ID }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_ID=${{ secrets.SPN_ID }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_OBJECT_ID=${{ secrets.SPN_OBJECT_ID }}" >> $GITHUB_ENV
+          echo "ARM_CLIENT_SECRET=${{ secrets.SPN_SECRET }}" >> $GITHUB_ENV
+          echo "ARM_SUBSCRIPTION_ID=${{ secrets.SPN_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
+          echo "AZURE_FUNCTIONAPP_NAME=azfun-synchronousingestor-${{ env.ORGANISATION_NAME }}-${{ env.ENV_NAME }}" >> $GITHUB_ENV
+
+      - name: Configure Azure CLI
+        uses: ./.github/actions/azure-cli-install-login
+
+      - name: Get Function Publish Profile
+        id: get-publish-profile
+        run: |
+          publish_profile=$(az webapp deployment list-publishing-profiles --name ${{ env.AZURE_FUNCTIONAPP_NAME }} --resource-group ${{ env.RESOURCE_GROUP_NAME }} --subscription ${{ env.ARM_SUBSCRIPTION_ID }} --xml)
+          echo "::set-output name=publish-profile::${publish_profile}"
+
+      - name: Setup .NET ${{ env.DOTNET_VERSION }} Environment
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build Project
+        shell: bash
+        run: |
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          dotnet build --configuration Release --output ./output
+          popd
+
+      - name: 'Run Azure Functions Action'
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          package: './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          publish-profile: ${{ steps.get-publish-profile.outputs.publish-profile }}
