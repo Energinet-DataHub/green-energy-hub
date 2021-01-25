@@ -24,7 +24,7 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="NodaTime" Version="3.0.3" />
+      <PackageReference Include="NodaTime" Version="3.0.5" />
     </ItemGroup>
 
 </Project>
