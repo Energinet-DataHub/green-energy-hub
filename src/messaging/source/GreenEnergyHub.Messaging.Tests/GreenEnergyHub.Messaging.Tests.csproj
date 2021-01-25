@@ -34,7 +34,7 @@ limitations under the License.
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.10" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.10" />
         <PackageReference Include="Moq.AutoMock" Version="2.3.0" />
-        <PackageReference Include="NodaTime" Version="3.0.3" />
+        <PackageReference Include="NodaTime" Version="3.0.5" />
         <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />

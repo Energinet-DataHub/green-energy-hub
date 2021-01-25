@@ -27,7 +27,7 @@ limitations under the License.
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="9.4.0" />
         <PackageReference Include="MediatR" Version="9.0.0" />
-        <PackageReference Include="NodaTime" Version="3.0.3" />
+        <PackageReference Include="NodaTime" Version="3.0.5" />
     </ItemGroup>
 
   <ItemGroup>
