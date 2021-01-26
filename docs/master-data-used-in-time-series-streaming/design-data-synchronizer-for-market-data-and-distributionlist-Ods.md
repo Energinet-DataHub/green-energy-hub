@@ -13,7 +13,7 @@ In this document we are addressing the following components in the architecture:
 - The MarketDataEnrichment ODS, realized by one or more CSV files stored in a Data or Delta Lake.
 - The DistributionList ODS, which is a CSV file stored in a Data or Delta Lake.
 
-![Technical Stack Diagram](..\images\TechStack.png)
+![Technical Stack Diagram](../images/TechStack.png)
 
 ## Basic concept
 

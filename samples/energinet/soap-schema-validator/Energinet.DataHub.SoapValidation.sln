@@ -17,11 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{832447E5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05DE980B-A2A7-4235-AE53-3167E94699DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.SoapValidation.EntryPoint", "source\Energinet.DataHub.SoapValidation.EntryPoint\Energinet.DataHub.SoapValidation.EntryPoint.csproj", "{8525789C-B883-4EF9-98F2-81147DEAE25C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.SoapValidation.EntryPoint", "source\Energinet.DataHub.SoapValidation.EntryPoint\Energinet.DataHub.SoapValidation.EntryPoint.csproj", "{8525789C-B883-4EF9-98F2-81147DEAE25C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.SoapValidation.Tests", "source\Energinet.DataHub.SoapValidation.Tests\Energinet.DataHub.SoapValidation.Tests.csproj", "{32DAB32F-1371-4654-B4D3-92C211680922}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.SoapValidation.Tests", "source\Energinet.DataHub.SoapValidation.Tests\Energinet.DataHub.SoapValidation.Tests.csproj", "{32DAB32F-1371-4654-B4D3-92C211680922}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energinet.DataHub.SoapValidation", "source\Energinet.DataHub.SoapValidation\Energinet.DataHub.SoapValidation.csproj", "{77F21686-6F9A-4673-B185-24A88A96C3A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Energinet.DataHub.SoapValidation", "source\Energinet.DataHub.SoapValidation\Energinet.DataHub.SoapValidation.csproj", "{77F21686-6F9A-4673-B185-24A88A96C3A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreenEnergyHub", "GreenEnergyHub", "{81FF61F0-C514-4F6D-BE88-7EC5219692DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.TestHelpers", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj", "{92A895AA-96B8-4E8D-B100-5AD8C04526CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +45,20 @@ Global
 		{77F21686-6F9A-4673-B185-24A88A96C3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77F21686-6F9A-4673-B185-24A88A96C3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77F21686-6F9A-4673-B185-24A88A96C3A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A895AA-96B8-4E8D-B100-5AD8C04526CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A895AA-96B8-4E8D-B100-5AD8C04526CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A895AA-96B8-4E8D-B100-5AD8C04526CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A895AA-96B8-4E8D-B100-5AD8C04526CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8525789C-B883-4EF9-98F2-81147DEAE25C} = {832447E5-7A46-4381-817C-5D73A20510C2}
 		{32DAB32F-1371-4654-B4D3-92C211680922} = {05DE980B-A2A7-4235-AE53-3167E94699DD}
+		{92A895AA-96B8-4E8D-B100-5AD8C04526CD} = {81FF61F0-C514-4F6D-BE88-7EC5219692DC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61EA6FAF-C8F1-4DA5-A0A7-E7CBEDB7E86E}
 	EndGlobalSection
 EndGlobal

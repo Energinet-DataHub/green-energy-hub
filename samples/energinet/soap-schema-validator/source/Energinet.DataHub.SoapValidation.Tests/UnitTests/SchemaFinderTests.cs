@@ -16,10 +16,12 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Energinet.DataHub.SoapValidation.Dtos;
+using GreenEnergyHub.TestHelpers.Traits;
 using Xunit;
 
 namespace Energinet.DataHub.SoapValidation.Tests.UnitTests
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class SchemaFinderTests
     {
         private const string TestFileFolder = "Energinet.DataHub.SoapValidation.Tests.TestFiles";

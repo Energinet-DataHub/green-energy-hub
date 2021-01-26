@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Text.Json;
 using Energinet.DataHub.Ingestion.Domain.TimeSeries;
+using GreenEnergyHub.TestHelpers.Traits;
 using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
 using Xunit;
@@ -22,6 +22,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Energinet.DataHub.Ingestion.Tests.Domain
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class TimeSeriesMessageTests
     {
         /// <summary>

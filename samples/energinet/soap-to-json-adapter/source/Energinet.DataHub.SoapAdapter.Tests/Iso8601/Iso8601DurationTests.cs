@@ -14,11 +14,13 @@
 using System;
 using Energinet.DataHub.SoapAdapter.Application.Converters.Iso8601;
 using FluentAssertions;
+using GreenEnergyHub.TestHelpers.Traits;
 using NodaTime;
 using Xunit;
 
 namespace Energinet.DataHub.SoapAdapter.Tests.Iso8601
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class Iso8601DurationTests
     {
         [Theory]

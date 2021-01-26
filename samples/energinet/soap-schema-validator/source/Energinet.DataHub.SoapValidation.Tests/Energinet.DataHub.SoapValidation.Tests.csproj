@@ -65,6 +65,7 @@ limitations under the License.
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj" />
 	  <ProjectReference Include="..\Energinet.DataHub.SoapValidation\Energinet.DataHub.SoapValidation.csproj" />
 	</ItemGroup>
 

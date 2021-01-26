@@ -18,10 +18,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Energinet.DataHub.SoapAdapter.Application.Converters;
 using FluentAssertions;
+using GreenEnergyHub.TestHelpers.Traits;
 using Xunit;
 
 namespace Energinet.DataHub.SoapAdapter.Tests
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class RsmConverterTests
     {
         [Fact]

@@ -11,13 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
-using System.Collections.Generic;
 using Energinet.DataHub.SoapValidation.Schemas;
+using GreenEnergyHub.TestHelpers.Traits;
 using Xunit;
 
 namespace Energinet.DataHub.SoapValidation.Tests.EnforcerTests
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class SchemaCollectionUniquenessTests
     {
         [Fact]

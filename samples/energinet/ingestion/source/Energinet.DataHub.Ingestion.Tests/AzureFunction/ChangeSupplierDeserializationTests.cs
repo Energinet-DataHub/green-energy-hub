@@ -20,6 +20,7 @@ using Energinet.DataHub.Ingestion.Application.ChangeOfSupplier;
 using Energinet.DataHub.Ingestion.Infrastructure;
 using GreenEnergyHub.Json;
 using GreenEnergyHub.Messaging.MessageTypes.Common;
+using GreenEnergyHub.TestHelpers.Traits;
 using Microsoft.Extensions.Logging;
 using NodaTime;
 using NSubstitute;
@@ -27,6 +28,7 @@ using Xunit;
 
 namespace Energinet.DataHub.Ingestion.Tests.AzureFunction
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class ChangeSupplierDeserializationTests
     {
         [Fact]

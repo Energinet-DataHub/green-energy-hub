@@ -25,6 +25,7 @@ limitations under the License.
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.Ingestion.Application\Energinet.DataHub.Ingestion.Application.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.Ingestion.Infrastructure\Energinet.DataHub.Ingestion.Infrastructure.csproj" />
       <ProjectReference Include="..\Energinet.DataHub.Ingestion.Synchronous.AzureFunction\Energinet.DataHub.Ingestion.Synchronous.AzureFunction.csproj" />
@@ -37,7 +38,7 @@ limitations under the License.
         </PackageReference>
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
         <PackageReference Include="NSubstitute" Version="4.2.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
         <PackageReference Include="coverlet.collector" Version="1.3.0" />

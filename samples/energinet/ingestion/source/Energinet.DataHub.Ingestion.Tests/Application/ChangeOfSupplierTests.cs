@@ -24,6 +24,7 @@ using GreenEnergyHub.Messaging;
 using GreenEnergyHub.Messaging.Dispatching;
 using GreenEnergyHub.Messaging.Integration.ServiceCollection;
 using GreenEnergyHub.Queues;
+using GreenEnergyHub.TestHelpers.Traits;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -31,6 +32,7 @@ using Xunit;
 
 namespace Energinet.DataHub.Ingestion.Tests.Application
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class ChangeOfSupplierTests
     {
         private readonly HubRequestBulkMediator _bulkMediator;

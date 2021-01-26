@@ -14,10 +14,12 @@
 
 using Energinet.DataHub.SoapAdapter.Application.Converters.Fragments.RSM012;
 using GreenEnergyHub.TestHelpers;
+using GreenEnergyHub.TestHelpers.Traits;
 using Xunit;
 
 namespace Energinet.DataHub.SoapAdapter.Tests.Fragments.RSM012
 {
+    [Trait(TraitNames.Category, TraitValues.UnitTest)]
     public class TimeSeriesPointTests
     {
         private const decimal FixedTestQuantity = 4.45m;
