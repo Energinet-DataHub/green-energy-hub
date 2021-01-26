@@ -35,3 +35,10 @@ jobs:
       - name: Unit tests
         if: ${{ steps.skip_check.outputs.should_skip == 'false' }}
         uses: ./.github/actions/databricks-unit-test
+
+      - name: Upload build artifacts
+        if: ${{ always() && steps.skip_check.outputs.should_skip == 'false' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-databricks_artifacts
+          path: ./src/streaming/htmlcov/
