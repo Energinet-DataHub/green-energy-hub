@@ -16,9 +16,15 @@ from pyspark.sql.functions import col
 
 
 def enrich_master_data(parsed_data: DataFrame, master_data: DataFrame):
-    return parsed_data.alias("pd") \
+    # Enrich time series points with master data by joining on market evaluation point mRID and valid period.
+    # ValidFrom is inclusive while ValidTo is exclusive.
+    joined_data = parsed_data.alias("pd") \
         .join(master_data.alias("md"),
               (col("pd.MarketEvaluationPoint_mRID") == col("md.MarketEvaluationPoint_mRID"))
-              & col("pd.Period_Point_Time").between(col("md.ValidFrom"), col("md.ValidTo")), how="left") \
+              & (col("pd.Period_Point_Time") >= col("md.ValidFrom"))
+              & (col("pd.Period_Point_Time") < col("md.ValidTo")), how="left")
+
+    # Remove column that are only needed in order to be able to do the join
+    return joined_data \
         .drop(parsed_data["MarketEvaluationPoint_mRID"]) \
         .drop(master_data["ValidFrom"]).drop(master_data["ValidTo"])

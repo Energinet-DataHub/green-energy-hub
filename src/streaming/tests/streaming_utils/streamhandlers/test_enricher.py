@@ -45,7 +45,7 @@ def enriched_data(parsed_data_factory, master_data_factory):
         dict(market_evaluation_point_mrid="2", quantity=3.0, observation_time=timestamp_now)
     ])
     denormalized_parsed_data = denormalize_parsed_data(parsed_data)
-    master_data = master_data_factory(market_evaluation_point_mrid="1")
+    master_data = master_data_factory(dict(market_evaluation_point_mrid="1"))
     return Enricher.enrich(denormalized_parsed_data, master_data)
 
 

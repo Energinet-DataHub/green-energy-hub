@@ -69,19 +69,23 @@ def master_schema():
 # Create parsed data and master data Dataframes
 @pytest.fixture(scope="session")
 def master_data_factory(spark, master_schema):
-    def factory(market_evaluation_point_mrid="mepm",
-                market_evaluation_point_type="mept",
-                marketparticipant_mrid="mm",
-                meteringgridarea_domain_mrid="mdm",
-                inmeteringgridarea_domain_mrid="idm",
-                inmeteringgridownerarea_domain_mrid="idm",
-                outmeteringgridarea_domain_mrid="odm",
-                outmeteringgridownerarea_domain_mrid="odm",
-                settlement_method="sm"):
-        pandas_df = pd.DataFrame({
+
+    def __create_pandas(market_evaluation_point_mrid="mepm",
+                        valid_from=timestamp_past,
+                        valid_to=timestamp_future,
+                        market_evaluation_point_type="mept",
+                        marketparticipant_mrid="mm",
+                        meteringgridarea_domain_mrid="mdm",
+                        inmeteringgridarea_domain_mrid="idm",
+                        inmeteringgridownerarea_domain_mrid="idm",
+                        outmeteringgridarea_domain_mrid="odm",
+                        outmeteringgridownerarea_domain_mrid="odm",
+                        settlement_method="sm",
+                        technology="tech"):
+        return pd.DataFrame({
             'MarketEvaluationPoint_mRID': [market_evaluation_point_mrid],
-            "ValidFrom": [timestamp_past],
-            "ValidTo": [timestamp_future],
+            "ValidFrom": [valid_from],
+            "ValidTo": [valid_to],
             "MeterReadingPeriodicity": ["a"],
             "MeteringMethod": ["b"],
             "MeteringGridArea_Domain_mRID": [meteringgridarea_domain_mrid],
@@ -96,10 +100,19 @@ def master_data_factory(spark, master_schema):
             "SettlementMethod": [settlement_method],
             "QuantityMeasurementUnit_Name": ["o"],
             "Product": ["p"],
-            "Technology": ["t"],
+            "Technology": [technology],
             "OutMeteringGridArea_Domain_Owner_mRID": [outmeteringgridownerarea_domain_mrid],
             "InMeteringGridArea_Domain_Owner_mRID": [inmeteringgridownerarea_domain_mrid]})
-        return spark.createDataFrame(pandas_df, schema=master_schema)
+
+    def factory(arg):
+        if not isinstance(arg, list):
+            arg = [arg]
+
+        pandas_dfs = []
+        for dic in arg:
+            pandas_dfs.append(__create_pandas(**dic))
+
+        return spark.createDataFrame(pd.concat(pandas_dfs), schema=master_schema)
     return factory
 
 
@@ -155,8 +168,6 @@ def time_series_json_factory():
                Quality.as_read.value,
                market_evaluation_point_mrid,
                observation_time)
-        print("json_str:")
-        print(json_str)
         return json_str
 
     return factory
@@ -185,17 +196,9 @@ def parsed_data_factory(spark, parsed_schema, time_series_json_factory):
         parsed_data = spark.read.json(json_rdd,
                                       schema=None,
                                       dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'")
-        print("parsed_data:")
-        parsed_data.printSchema()
-        parsed_data.show()
         return parsed_data
 
     return factory
-
-
-@pytest.fixture(scope="session")
-def parsed_data(parsed_data_factory):
-    return parsed_data_factory(dict())
 
 
 @pytest.fixture(scope="session")
@@ -204,6 +207,7 @@ def enriched_data_factory(parsed_data_factory, master_data_factory):
                 quantity=1.0,
                 market_evaluation_point_type="m",
                 settlement_method="n",
+                technology="tech",
                 meteringgridarea_domain_mrid="101",
                 marketparticipant_mrid="11",
                 inmeteringgridarea_domain_mrid="2",
@@ -220,15 +224,16 @@ def enriched_data_factory(parsed_data_factory, master_data_factory):
             non_matching_market_evaluation_point_mrid = str(uuid.uuid4())
             market_evaluation_point_mrid = non_matching_market_evaluation_point_mrid
 
-        master_data = master_data_factory(market_evaluation_point_mrid,
-                                          market_evaluation_point_type,
-                                          marketparticipant_mrid,
-                                          meteringgridarea_domain_mrid,
-                                          inmeteringgridarea_domain_mrid,
-                                          inmeteringgridownerarea_domain_mrid,
-                                          outmeteringgridarea_domain_mrid,
-                                          outmeteringgridownerarea_domain_mrid,
-                                          settlement_method)
+        master_data = master_data_factory(dict(market_evaluation_point_mrid=market_evaluation_point_mrid,
+                                               market_evaluation_point_type=market_evaluation_point_type,
+                                               marketparticipant_mrid=marketparticipant_mrid,
+                                               meteringgridarea_domain_mrid=meteringgridarea_domain_mrid,
+                                               inmeteringgridarea_domain_mrid=inmeteringgridarea_domain_mrid,
+                                               inmeteringgridownerarea_domain_mrid=inmeteringgridownerarea_domain_mrid,
+                                               outmeteringgridarea_domain_mrid=outmeteringgridarea_domain_mrid,
+                                               outmeteringgridownerarea_domain_mrid=outmeteringgridownerarea_domain_mrid,
+                                               settlement_method=settlement_method,
+                                               technology=technology))
         return Enricher.enrich(denormalized_parsed_data, master_data)
     return creator
 
