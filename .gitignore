@@ -391,3 +391,5 @@ src/streaming/geh_stream.egg-info/
 
 # Terraform
 .terraform
+.terraform.lock.hcl
+build/terraform/**/*.tfvars
