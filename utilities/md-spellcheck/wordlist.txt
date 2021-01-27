@@ -221,6 +221,7 @@ http
 https
 HubCommandHandlers
 HubRequestHandlers
+IaC
 ie
 IHubMessages
 IM
@@ -270,6 +271,7 @@ LinkedPowerPlant
 linter
 Linter
 linters
+localhost
 LongDescription
 lookups
 Lysemose
@@ -511,6 +513,7 @@ StyleCop's
 subfolder
 substring
 Substring
+subtree
 SubTypeOfMeteringPoint
 SuiteNumber
 SupplierAssociationId

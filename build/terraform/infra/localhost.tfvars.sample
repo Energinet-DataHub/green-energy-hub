@@ -1,0 +1,5 @@
+current_spn_object_id = "YOUR_SPN_OBJECT_ID"
+current_tenant_id     = "YOUR_TENANT_ID"
+environment           = "YOUR_ENVIRONMENT"
+organisation          = "YOUR_ORGANIZATION"
+resource_group_name   = "YOUR_RESOURCE_GROUP"
