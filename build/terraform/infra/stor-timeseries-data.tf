@@ -42,5 +42,5 @@ resource "azurerm_storage_blob" "master_data" {
   storage_account_name   = module.stor_timeseries_data.name
   storage_container_name = module.stor_streaming_container.name
   type                   = "Block"
-  source                 = "../../../samples/mock-data/master-data.csv"
+  source                 = "../../../src/streaming/tests/streaming_utils/testdata/master-data.csv"
 }
