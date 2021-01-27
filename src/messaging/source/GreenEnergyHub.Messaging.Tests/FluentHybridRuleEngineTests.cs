@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GreenEnergyHub.Messaging.Tests.TestHelpers;
 using GreenEnergyHub.Messaging.Validation;
@@ -21,10 +22,10 @@ using Xunit;
 
 namespace GreenEnergyHub.Messaging.Tests
 {
+    [Trait("Category", "Unit")]
     public class FluentHybridRuleEngineTests
     {
         [Fact]
-        [Trait("Category", "Unit")]
         public async Task Null_Message_should_raise_null_guard()
         {
             var ruleCollectionMock = new Mock<RuleCollection<TestMessage>>();
@@ -34,6 +35,19 @@ namespace GreenEnergyHub.Messaging.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
                 await sut.ValidateAsync(null!).ConfigureAwait(false))
                 .ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task Correct_input_should_return_true()
+        {
+            var ruleCollection = new ChangeOfSupplierRuleCollection();
+            static object ActivatorServiceProvider(Type type) => Activator.CreateInstance(type) ?? throw new InvalidOperationException("Can't create type");
+
+            var sut = new FluentHybridRuleEngine<ChangeOfSupplier>(ruleCollection, ActivatorServiceProvider);
+            var list = new List<int> { 11, 12, 13 };
+            var result = await sut.ValidateAsync(new ChangeOfSupplier(list)).ConfigureAwait(false);
+
+            Assert.True(result.Success);
         }
     }
 }

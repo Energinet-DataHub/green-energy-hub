@@ -12,27 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace GreenEnergyHub.Messaging.Validation
+using System;
+using AutoFixture.Idioms;
+using AutoFixture.Xunit2;
+using GreenEnergyHub.Messaging.Validation;
+using Xunit;
+
+namespace GreenEnergyHub.Messaging.Tests.Validation
 {
-    /// <summary>
-    /// Result for a negative validation rule
-    /// </summary>
-    public sealed class RuleResult
+    [Trait("Category", "Unit")]
+    public class RuleResultTests
     {
-        public RuleResult(string ruleNumber, string message)
+        [Theory]
+        [AutoData]
+        public void Constructor_Parameters_Should_Map_To_Parameters(ConstructorInitializedMemberAssertion assertion)
         {
-            RuleNumber = ruleNumber;
-            Message = message;
+            if (assertion == null) throw new ArgumentNullException(nameof(assertion));
+
+            // Assert that the constructor input is assigned correctly to the properties
+            assertion.Verify(typeof(RuleResult));
         }
-
-        /// <summary>
-        /// Gets rule number that failed
-        /// </summary>
-        public string RuleNumber { get; }
-
-        /// <summary>
-        /// Gets validation message
-        /// </summary>
-        public string Message { get; }
     }
 }

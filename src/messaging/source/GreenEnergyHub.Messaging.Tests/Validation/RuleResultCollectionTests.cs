@@ -12,12 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using GreenEnergyHub.Messaging.Validation;
 using Xunit;
 
 namespace GreenEnergyHub.Messaging.Tests.Validation
 {
+    [Trait("Category", "Unit")]
     public class RuleResultCollectionTests
     {
         private readonly RuleResult _result1 = new RuleResult("VAR001", "This is an error");
@@ -45,6 +48,48 @@ namespace GreenEnergyHub.Messaging.Tests.Validation
             var sut = RuleResultCollection.From(new List<RuleResult> { _result1 });
 
             Assert.False(sut.Success);
+        }
+
+        [Fact]
+        public void Null_Collection_Should_Throw_Argument_Null_Exception()
+        {
+            IEnumerable<RuleResult> nullResults = null!;
+            Assert.Throws<ArgumentNullException>(() => RuleResultCollection.From(nullResults));
+        }
+
+        [Fact]
+        public void Collection_Should_Implement_IEnumerable()
+        {
+            IEnumerable sut = RuleResultCollection.From(new[] { _result1, _result2 });
+
+            Assert.NotNull(sut.GetEnumerator());
+        }
+
+        [Fact]
+        public void Result_Should_Implement_Generic_IEnumerable()
+        {
+            var sut = RuleResultCollection.From(new[] { _result1, _result2 });
+
+            foreach (var result in sut)
+            {
+                Assert.NotNull(result);
+            }
+        }
+
+        [Fact]
+        public void Result_Should_Implement_GetEnumerator()
+        {
+            var sut = RuleResultCollection.From(new[] { _result1, _result2 });
+
+            var enumerator = sut.GetEnumerator();
+
+            Assert.NotNull(enumerator);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(_result1, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(_result2, enumerator.Current);
         }
     }
 }

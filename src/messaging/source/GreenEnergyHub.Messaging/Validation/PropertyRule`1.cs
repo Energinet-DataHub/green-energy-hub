@@ -17,8 +17,18 @@ using FluentValidation.Validators;
 
 namespace GreenEnergyHub.Messaging.Validation
 {
+    /// <summary>
+    /// The class is used to validate a single property
+    /// </summary>
+    /// <typeparam name="T">PropertyType to validate</typeparam>
     public abstract class PropertyRule<T> : PropertyRule
     {
+        /// <summary>
+        /// Validates the property - this is the contract from FluentValidation
+        /// </summary>
+        /// <param name="context">context describing what is being validated</param>
+        /// <returns><c>true</c> if successful, else <c>false</c></returns>
+        /// <exception cref="ArgumentNullException">if <paramref name="context"/> is null</exception>
         protected override bool IsValid(PropertyValidatorContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
@@ -28,6 +38,12 @@ namespace GreenEnergyHub.Messaging.Validation
             return false;
         }
 
+        /// <summary>
+        /// Validates the property value
+        /// </summary>
+        /// <param name="propertyValue">Value to validate</param>
+        /// <param name="context">The context for the property</param>
+        /// <returns><c>true</c> if successful, else <c>false</c></returns>
         protected abstract bool IsValid(T propertyValue, PropertyValidatorContext context);
     }
 }

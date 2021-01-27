@@ -16,8 +16,14 @@ using FluentValidation.Validators;
 
 namespace GreenEnergyHub.Messaging.Validation
 {
+    /// <summary>
+    /// Base class for a property validation
+    /// </summary>
     public abstract class PropertyRule : PropertyValidator
     {
+        /// <summary>
+        /// Code identifying the validation
+        /// </summary>
         protected internal abstract string Code { get; }
     }
 }

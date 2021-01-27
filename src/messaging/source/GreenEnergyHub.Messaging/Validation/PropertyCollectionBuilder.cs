@@ -19,11 +19,21 @@ using FluentValidation;
 
 namespace GreenEnergyHub.Messaging.Validation
 {
+    /// <summary>
+    /// A builder for properties that implement <see cref="IEnumerable{T}"/>
+    /// </summary>
+    /// <typeparam name="T">class that contains the property</typeparam>
+    /// <typeparam name="TProperty">property type to validate</typeparam>
     public class PropertyCollectionBuilder<T, TProperty>
     {
         private readonly Expression<Func<T, IEnumerable<TProperty>>> _selectorForEach;
         private readonly List<Action<ServiceProviderDelegate, AbstractValidator<T>>> _tracking;
 
+        /// <summary>
+        /// Creates a new builder
+        /// </summary>
+        /// <param name="selector">selector for the property</param>
+        /// <param name="tracking">a list of rules to apply to the current validator</param>
         internal PropertyCollectionBuilder(
             Expression<Func<T, IEnumerable<TProperty>>> selector,
             List<Action<ServiceProviderDelegate, AbstractValidator<T>>> tracking)
@@ -32,6 +42,11 @@ namespace GreenEnergyHub.Messaging.Validation
             _tracking = tracking;
         }
 
+        /// <summary>
+        /// Assign a validator to the selector
+        /// </summary>
+        /// <typeparam name="TValidator">Validator to assign</typeparam>
+        /// <exception cref="InvalidOperationException">If the <see cref="PropertyRule{TValidator}"/> is not registered within the service provider</exception>
         public PropertyCollectionBuilder<T, TProperty> PropertyRule<TValidator>()
             where TValidator : PropertyRule<TProperty>
         {
@@ -44,6 +59,11 @@ namespace GreenEnergyHub.Messaging.Validation
             return this;
         }
 
+        /// <summary>
+        /// Assign a validator to the selector
+        /// </summary>
+        /// <typeparam name="TCollection">Validator to assign for the collection</typeparam>
+        /// <exception cref="InvalidOperationException">If the <see cref="PropertyRule{TValidator}"/> is not registered within the service provider</exception>
         public PropertyCollectionBuilder<T, TProperty> RuleCollection<TCollection>()
             where TCollection : RuleCollection<TProperty>
         {

@@ -24,6 +24,11 @@ namespace GreenEnergyHub.Messaging.Validation
         private readonly Expression<Func<T, TProperty>> _selector;
         private readonly List<Action<ServiceProviderDelegate, AbstractValidator<T>>> _tracking;
 
+        /// <summary>
+        /// Creates a new builder
+        /// </summary>
+        /// <param name="selector">Property selector</param>
+        /// <param name="tracking">Tracking list of validators to apply to the selector</param>
         internal PropertyBuilder(
             Expression<Func<T, TProperty>> selector,
             List<Action<ServiceProviderDelegate, AbstractValidator<T>>> tracking)
@@ -49,6 +54,11 @@ namespace GreenEnergyHub.Messaging.Validation
             return this;
         }
 
+        /// <summary>
+        /// Assign a rule to a property
+        /// </summary>
+        /// <typeparam name="TCollection">Collection of rules to assign</typeparam>
+        /// <exception cref="InvalidOperationException">If the validator is not registered within the service provider</exception>
         public PropertyBuilder<T, TProperty> RuleCollection<TCollection>()
             where TCollection : RuleCollection<TProperty>
         {

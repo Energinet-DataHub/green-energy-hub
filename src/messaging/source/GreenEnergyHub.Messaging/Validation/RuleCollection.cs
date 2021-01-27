@@ -35,8 +35,6 @@ namespace GreenEnergyHub.Messaging.Validation
     /// }
     /// </code>
     /// </example>
-    /// Documentation for FluentValidation can be found at:
-    /// https://docs.fluentvalidation.net/en/latest/start.html#
     /// </summary>
     public class RuleCollection<T>
     {
@@ -53,11 +51,12 @@ namespace GreenEnergyHub.Messaging.Validation
         /// Validates the <see cref="ValidationContext{T}"/> asynchronous
         /// </summary>
         /// <param name="context">instance to validate</param>
-        /// <param name="serviceProviderDelegate"></param>
+        /// <param name="serviceProviderDelegate">the delegate to resolve instances from</param>
         /// <returns>
         /// Returns a <see cref="RuleResultCollection"/> indicating whether or not the validation was a success.
         /// If the validation was unsuccessful, the <see cref="RuleResultCollection"/> contains a list of error messages.
         /// </returns>
+        /// <exception cref="ArgumentNullException">if <paramref name="context"/> or <paramref name="serviceProviderDelegate"/> is null</exception>
         internal async Task<RuleResultCollection> ValidateAsync(ValidationContext<T> context, ServiceProviderDelegate serviceProviderDelegate)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));

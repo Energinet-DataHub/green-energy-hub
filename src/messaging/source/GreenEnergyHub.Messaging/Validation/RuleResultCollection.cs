@@ -25,8 +25,6 @@ namespace GreenEnergyHub.Messaging.Validation
     {
         private readonly List<RuleResult> _results = new List<RuleResult>();
 
-        internal RuleResultCollection() { }
-
         private RuleResultCollection(IEnumerable<RuleResult> results)
         {
             if (results == null) throw new ArgumentNullException(nameof(results));
@@ -40,7 +38,7 @@ namespace GreenEnergyHub.Messaging.Validation
         public int Count => _results.Count;
 
         /// <summary>
-        /// <value>true</value> if the validation did not fail
+        /// <c>true</c> if the validation did not fail
         /// </summary>
         public bool Success => _results.Count == 0;
 
