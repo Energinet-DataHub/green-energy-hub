@@ -1,0 +1,16 @@
+{
+  "CosmosDBSettings": {
+    "DatabaseName": "name",
+    "CollectionName": "collection name",
+    "EndpointUrl": "endpointUrl",
+    "AuthorizationKey": "authorizationKey"
+  },
+  "EventHubSettings": {
+    "ConnectionString": "ConnectionString",
+    "EventHubName": "EventHubName"
+  },
+  "BlobStorageSettings": {
+    "AccountName": "ConnectionString",
+    "AccountKey": "ContainerName" 
+  } 
+}
