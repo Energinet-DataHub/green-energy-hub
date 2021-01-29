@@ -55,16 +55,14 @@ limitations under the License.
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="GreenEnergyHub.TestHelpers">
-      <HintPath>..\..\..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\bin\Debug\netcoreapp3.1\GreenEnergyHub.TestHelpers.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj" />
   </ItemGroup>
 
 </Project>

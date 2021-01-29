@@ -19,6 +19,10 @@ VisualStudioVersion = 16.0.30803.129
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenEnergyHub.IntegrationTest", "source\GreenEnergyHub.IntegrationTest\GreenEnergyHub.IntegrationTest.csproj", "{A1A89DDD-4988-44DB-ABDB-60F79F240E05}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreenEnergyHub", "GreenEnergyHub", "{9FA6C90B-ADAF-44EA-89BD-4215F1BC3C25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.TestHelpers", "..\..\..\src\shared\GreenEnergyHub\source\GreenEnergyHub.TestHelpers\GreenEnergyHub.TestHelpers.csproj", "{C791719D-7580-482E-99EE-AFFBF54F13F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +33,18 @@ Global
 		{A1A89DDD-4988-44DB-ABDB-60F79F240E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1A89DDD-4988-44DB-ABDB-60F79F240E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1A89DDD-4988-44DB-ABDB-60F79F240E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C791719D-7580-482E-99EE-AFFBF54F13F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C791719D-7580-482E-99EE-AFFBF54F13F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C791719D-7580-482E-99EE-AFFBF54F13F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C791719D-7580-482E-99EE-AFFBF54F13F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58B11DF5-3F98-4C9F-BA90-A002833FE094}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C791719D-7580-482E-99EE-AFFBF54F13F5} = {9FA6C90B-ADAF-44EA-89BD-4215F1BC3C25}
 	EndGlobalSection
 EndGlobal
