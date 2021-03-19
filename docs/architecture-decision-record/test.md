@@ -1,5 +1,7 @@
 # Event data in Green Energy Hub integration events
 
+* Status: accepted
+* Deciders: @Energinet-DataHub/mightyducks @MartinFHansen
 * Date: 2021-03-19
 
 ## Context and Problem Statement
