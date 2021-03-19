@@ -41,12 +41,6 @@ jobs:
         continue-on-error: true
         id: md-link-check
 
-      # https://github.com/marketplace/actions/github-spellcheck-action
-      - name: Markdown spell check
-        uses: rojopolis/spellcheck-github-actions@0.5.0
-        continue-on-error: true
-        id: md-spell-check
-
       - name: Register markdownlint problem matcher
         uses: xt0rted/markdownlint-problem-matcher@v1
         id: md-lint-check-matcher
@@ -68,12 +62,6 @@ jobs:
             echo -e "- Markdown links check:   \e[31mFailure"
           else
             echo -e "- Markdown links check:   \e[32mSuccess"
-          fi
-          if [[ "${{steps.md-spell-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-spell-check.outcome}}" == "failure" ]]; then
-            fail=1
-            echo -e "- Markdown spell check:   \e[31mFailure"
-          else
-            echo -e "- Markdown spell check:   \e[32mSuccess"
           fi
           if [[ "${{steps.md-lint-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-lint-check.outcome}}" == "failure" ]]; then
             fail=1
