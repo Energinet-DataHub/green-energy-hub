@@ -1,0 +1,87 @@
+name: Markdown Check
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+jobs:
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - name: Should skip?
+        id: skip_check
+        uses: fkirc/skip-duplicate-actions@v1.4.0
+        with:
+          github_token: ${{ github.token }}
+          paths: '[
+            "**.md"
+          ]'
+
+  md-check:
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+    name: Markdown Check
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/actions/checkout
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # https://github.com/marketplace/actions/markdown-link-check
+      - name: Markdown links check
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'yes'
+          config-file: './.github/utilities/md-linkcheck/mlc_config.json'
+        continue-on-error: true
+        id: md-link-check
+
+      # https://github.com/marketplace/actions/github-spellcheck-action
+      - name: Markdown spell check
+        uses: rojopolis/spellcheck-github-actions@0.5.0
+        continue-on-error: true
+        id: md-spell-check
+
+      - name: Register markdownlint problem matcher
+        uses: xt0rted/markdownlint-problem-matcher@v1
+        id: md-lint-check-matcher
+
+      # https://github.com/marketplace/actions/markdownlint-mdl-action
+      - name: Markdown lint check
+        uses: avto-dev/markdown-lint@v1
+        with:
+          args: '.'
+        continue-on-error: true
+        id: md-lint-check
+
+      - name: Summarize
+        run: |
+          echo "Markdown check results: "
+          fail=0
+          if [[ "${{steps.md-link-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-link-check.outcome}}" == "failure" ]]; then
+            fail=1
+            echo -e "- Markdown links check:   \e[31mFailure"
+          else
+            echo -e "- Markdown links check:   \e[32mSuccess"
+          fi
+          if [[ "${{steps.md-spell-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-spell-check.outcome}}" == "failure" ]]; then
+            fail=1
+            echo -e "- Markdown spell check:   \e[31mFailure"
+          else
+            echo -e "- Markdown spell check:   \e[32mSuccess"
+          fi
+          if [[ "${{steps.md-lint-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-lint-check.outcome}}" == "failure" ]]; then
+            fail=1
+            echo -e "- Markdown lint check:    \e[31mFailure"
+          else
+            echo -e "- Markdown lint check:    \e[32mSuccess"
+          fi
+          if [[ $fail -eq 1 ]]; then
+            echo -e "Expand individual steps above to view specific errors."
+            exit 1
+          fi
