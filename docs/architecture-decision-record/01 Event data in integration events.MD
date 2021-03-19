@@ -38,9 +38,10 @@ Option 2 has been chosen because this option is the best fit to support a loosel
 ### [option 2]
 
 * Good, because it facilitates the inter-domain communication to be purely event-driven. NB.: The exeption to this rule being communication from the API gateway domain, which must return synchronous responses to the market actors.
-* Good, because domains aren't depended on the availability of applications in other domains.
-* Bad(ish), because the Protobuf contracts that describe the intergration events will be extended over time with new properties being sent (results in a new version of a contract).
-  * If used correctly Protobuf supports backward and forward compatibility, see links.
+* Good, because inter-domain communication in Green Energy Hub is done using one communication paradigm.
+* Good, because domains are not depended on the availability of applications in other domains.
+* Bad(ish), because the Protobuf contracts that describe the integration events will be extended over time with new properties being sent (results in a new version of a contract).
+  * If used correctly Protobuf contracts are backward and forward compatible, see links.
 
 ## Links
 
