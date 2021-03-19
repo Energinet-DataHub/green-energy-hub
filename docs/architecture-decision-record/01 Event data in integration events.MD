@@ -9,7 +9,7 @@ Green Energy Hub is platform composed of several domains that needs exchange dat
 ## Considered Options
 
 * Option 1: Events informing that an action has occured (e.g. a market evaluation point has been created) without any additional event data.
-* Option 2: Events informing that an action has occured (e.g. a market evaluation point has been created) with additional event data (e.g. ID and location of the new market evaluation point).
+* Option 2: Events informing that an action has occured (e.g. a market evaluation point has been created) without any additional event data (e.g. ID and location of the new market evaluation point).
 
 ## Decision Outcome
 
