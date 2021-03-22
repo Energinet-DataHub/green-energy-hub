@@ -4,7 +4,7 @@
 * Deciders: Martin F. Hansen, René Thyge Nielsen, Daniel Bjerring Jørgensen, Søren Søndergaard <!-- optional -->
 * Date: 2021-03-18 (PI4 Planning event) <!-- optional -->
 
-Technical Story: <https://dev.azure.com/energinet/Datahub/_boards/board/t/Mighty%20Ducks/Stories/?workitem=118297> <!-- optional -->
+Technical Story: <https://github.com/Energinet-DataHub/geh/issues/6>
 
 ## Context and Problem Statement
 
