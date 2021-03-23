@@ -8,7 +8,21 @@ With a consistent naming through out the application, it is easier for developer
 
 Concepts in this context is general constructs that can be applied across multiple domains. Each concept is described and listed with sample properties of what is expected to be bound to each concept.
 
-A domain is not mandated to use everything from a single concept if it is not applicable. Eg. if a concept has a notion of `StreetNames` but it's not needed, then it is not expected to be implemented - *only use what is needed*.
+A domain is not mandated to use everything from a single concept if it is not applicable. Eg. if a concept has a notion of `StreetName` but it's not needed within a domain, then it is not expected to be implemented - *only use what is needed*.
+
+### Communication
+
+*Description:* Defines means of communication among parties. This could be data recorded on a party for how to get in touch with customer support, contact details for a consumer etc.
+
+Properties related to communication:
+
+- Email
+- Phone
+- Fax
+
+### Consumer
+
+*Description:* A consumer is a party that has engaged in a legal contract with an energy supplier.
 
 ### Physical location
 
@@ -24,6 +38,7 @@ Properties related to a physical location:
 - PostalCode
 - StreetCode
 - StreetNameX (X is to be substituted with the individual street number e.g. StreetName1, StreetName2, StreetName3 etc.)
+- SuiteNumber
 
 ## Suffix on common properties
 
