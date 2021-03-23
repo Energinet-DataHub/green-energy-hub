@@ -10,6 +10,21 @@ Concepts in this context is general constructs that can be applied across multip
 
 A domain is not mandated to use everything from a single concept if it is not applicable. Eg. if a concept has a notion of `StreetNames` but it's not needed, then it is not expected to be implemented - *only use what is needed*.
 
+### Physical location
+
+*Description:* A physical location is as the name applies, a location that is bound to a physical location e.g. `building, street name, gps-coordinates`.
+
+Properties related to a physical location:
+
+- BuildingNumber
+- CityName
+- CitySubDivisionName
+- CountryCode
+- CountryName
+- PostalCode
+- StreetCode
+- StreetNameX (X is to be substituted with the individual street number e.g. StreetName1, StreetName2, StreetName3 etc.)
+
 ## Suffix on common properties
 
 Properties that are commonly used across many entities is expected to be easy identified.
