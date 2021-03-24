@@ -113,7 +113,7 @@ These are to ensure a common coding and CI/CD practise across repos/domains.
 ## CI/CD Pipeline
 
 All repos has a build-in CI/CD infrastructure.
-Please read the [Templatereadme.md](https://github.com/Energinet-DataHub/geh-shared-resources/tree/main/docs/template-readme)  for each repository for more information on how to trigger this.
+Please read the [Templatereadme.md](/https://github.com/Energinet-DataHub/geh-shared-resources/tree/main/docs/template-readme)  for each repository for more information on how to trigger this.
 
 ## Matrices in pipeline code
 
