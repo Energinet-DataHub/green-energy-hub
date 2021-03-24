@@ -56,13 +56,13 @@ This section is meant as inspiration when naming objects and properties in domai
 
 | Type | Name | Description |
 | :---: | --- | ----------- |
-| Entity | Accounting Point | A domain under balance responsibility where Energy Supplier change can take place and for which commercial business processes are defined. |
-| Entity | Bidding Zone | The largest geographical area within which market participants are able to exchange energy without capacity allocation. |
-| Entity | Bidding Zone Border | Defines the aggregated connection capacity between two Bidding Zones. A market area (Which defines the aggregated connection capacity between two Bidding Zones) where the transmission capacity between the Bidding Zones is given to the Balance Responsible Parties according to rules carried out by a Transmission Capacity Allocator. Trade between Bidding Zones is carried out on a bilateral or unilateral basis. |
-| Entity | Capacity Calculation Region | The Capacity Calculation Region is the geographic area in which coordinated capacity calculation is applied. |
-| Entity | Exchange Point | A domain for establishing energy exchange between two Metering Grid Areas. **Additional information:** This is a type of Metering Point. |
-| Entity | Metering Grid Area | A Metering Grid Area is a physical area where consumption, production and exchange can be measured. It is delimited by the placement of meters for continuous measurement for input to, and withdrawal from the area. **Additional information:** It can be used to establish volumes that cannot be measured such as network losses. |
-| Entity | Metering Point | An entity where energy products are measured or computed. |
+| Term | Accounting Point | A domain under balance responsibility where Energy Supplier change can take place and for which commercial business processes are defined. |
+| Term | Bidding Zone | The largest geographical area within which market participants are able to exchange energy without capacity allocation. |
+| Term | Bidding Zone Border | Defines the aggregated connection capacity between two Bidding Zones. A market area (Which defines the aggregated connection capacity between two Bidding Zones) where the transmission capacity between the Bidding Zones is given to the Balance Responsible Parties according to rules carried out by a Transmission Capacity Allocator. Trade between Bidding Zones is carried out on a bilateral or unilateral basis. |
+| Term | Capacity Calculation Region | The Capacity Calculation Region is the geographic area in which coordinated capacity calculation is applied. |
+| Term | Exchange Point | A domain for establishing energy exchange between two Metering Grid Areas. **Additional information:** This is a type of Metering Point. |
+| Term | Metering Grid Area | A Metering Grid Area is a physical area where consumption, production and exchange can be measured. It is delimited by the placement of meters for continuous measurement for input to, and withdrawal from the area. **Additional information:** It can be used to establish volumes that cannot be measured such as network losses. |
+| Term | Metering Point | An entity where energy products are measured or computed. |
 | Role | Balance Responsible Party | A Balance Responsible Party is responsible for its imbalances, meaning the difference between the energy volume physically injected to or withdrawn from the system and the final nominated energy volume, including any imbalance adjustment within a given imbalance settlement period. **Additional information:** Responsibility for imbalances (Balance responsibility) requires a contract proving financial security with the Imbalance Settlement Responsible of the Scheduling Area entitling the party to operate in the market. |
 | Role | Billing Agent | The party responsible for invoicing a concerned party. |
 | Role | Capacity Trader | A party that has a contract to participate in the Capacity Market to acquire capacity through a Transmission Capacity Allocator. |
