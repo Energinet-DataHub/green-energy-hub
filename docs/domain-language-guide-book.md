@@ -50,7 +50,7 @@ Attributes related to a physical location:
 - StreetNameX (X is to be substituted with a consecutively number e.g. StreetName1, StreetName2, StreetName3 etc.)
 - SuiteNumber
 
-## Definitions found in `The harmonised electricity role model`
+## Definitions extracted from the harmonised electricity role model
 
 This section is meant as inspiration when naming objects and properties in domains. This is not a complete list, for all details referrer to the PDF. [Full description](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/HRM/Harmonised_Role_Model_2020-01.pdf).
 
