@@ -1,6 +1,6 @@
 # Environments
 
-Here is the total list on available resource groups per repo. These environments are all a reflection of environemnts created in the Azure portal. Links are available from individual repo.
+Here is the total list on available resource groups per repo. These environments are all a reflection of environments created in the Azure portal. Links are available from individual repo.
 
 rg - resource group
 
@@ -93,9 +93,9 @@ N/A - A collection of modules
 
 ### Code Owners
 
- Please note, if you are contributing a PR in a repo, where you are not recknognized as 'code owner' your PR will automatically request 2 approvals from contributers stated as 'code owners'. This request is done automatically and you are able to identify code owners on your review list by a given badge.
+ Please note, if you are contributing a PR in a repo, where you are not recognized as 'code owner' your PR will automatically request 2 approvals from contributors stated as 'code owners'. This request is done automatically and you are able to identify code owners on your review list by a given badge.
 
-This rule is to ensure stable environments and decentralizing the responsibility of the domain repos and product stability in all environments.
+This rule is to ensure stable environments and decentralizing the responsibility of the domain repositories and product stability in all environments.
 With this, it is a part of the PR gate up to the code owners to review, plan, accept and finally merge PR's, so that they are able to control stability on their main branch - and therefore also into their environments. This is as a way of ensuring domain ownership. Please respect these reviews and the process of this.
 
 ### Status checks
@@ -108,12 +108,12 @@ This is to ensure that we are always merging to the latest version of main avail
 
 ### Markdown checks and build validations
 
-These are to ensure a common coding and CI/CD practise across repos/domains.
+These are to ensure a common coding and CI/CD practice across repositories/domains.
 
 ## CI/CD Pipeline
 
-All repos has a build-in CI/CD infrastructure.
-Please read the [Templatereadme.md](https://github.com/Energinet-DataHub/geh-shared-resources/tree/main/docs/template-readme)  for each repository for more information on how to trigger this.
+All repositories has a build-in CI/CD infrastructure.
+Please read the [Templatereadme.md](https://github.com/Energinet-DataHub/geh-shared-resources/tree/main/docs/template-readme) for each repository for more information on how to trigger this.
 
 ## Matrices in pipeline code
 
@@ -141,14 +141,14 @@ If you need to get access to an environment for testing purposes - we refer to m
 
 Please note that only Development environments are not protected by a deployment rule stating that the repo owners (team based) should approve deployment to a specific environment.
 
-## Best practise on test of infrastructure as code
+## Best practice on test of infrastructure as code
 
 [TBD]
 
 ## Changes to Terraform modules - how to
 
-If Terraform announces large changes to their modules that needs to be prioritized upgraded a common announcement will happen, so that all contributers are made aware of the needed work to be done. In the matter of small non-blocking version changes to Terraform modules it is up to the repo-owners to decide when to update their modules in the specific repo. Please remember to inform relevant contributers if the work interfers with anything.
+If Terraform announces large changes to their modules that needs to be prioritized upgraded a common announcement will happen, so that all contributors are made aware of the needed work to be done. In the matter of small non-blocking version changes to Terraform modules it is up to the repo-owners to decide when to update their modules in the specific repo. Please remember to inform relevant contributors if the work interferes with anything.
 
-## How to get more information on specific repos setup
+## How to get more information on specific repositories setup
 
 Please reach out by creating an issue in the specific repo you are requesting information on.
