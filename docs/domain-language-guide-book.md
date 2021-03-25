@@ -50,6 +50,21 @@ Attributes related to a physical location:
 - StreetNameX (X is to be substituted with a consecutively number e.g. StreetName1, StreetName2, StreetName3 etc.)
 - SuiteNumber
 
+## Be explicit
+
+When naming properties try to as explicit as possible. It will be easier to read and understand the purpose/intent of the class.
+
+``` csharp
+MeteringPointId { get; set; } // bad
+MeteringPointmRID { get; set; } // bad
+MeteringPointGSRN { get; set; }  // good
+```
+
+``` csharp
+Created { get; set; } // bad
+CreatedDate { get; set; } // good
+```
+
 ## Definitions extracted from the harmonised electricity role model
 
 This section is meant as inspiration when naming objects and properties in domains. This is not a complete list, for all details referrer to the PDF. [Full description](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/HRM/Harmonised_Role_Model_2020-01.pdf).
@@ -90,35 +105,3 @@ This section is meant as inspiration when naming objects and properties in domai
 | Role | Reconciliation Accountable | A party that is financially accountable for the reconciled volume of energy products for a profiled Accounting Point. |
 | Role | Reconciliation Responsible | A party that is responsible for reconciling, within a Metering Grid Area, the volumes used in the imbalance settlement process for profiled Accounting Points and the actual measured quantities. **Note:** The Reconciliation Responsible may delegate the invoicing responsibility to a more generic role such as a Billing Agent. |
 | Role | System Operator | A party responsible for operating, ensuring the maintenance of and, if necessary, developing the system in a given area and, where applicable, its interconnections with other systems, and for ensuring the long-term ability of the system to meet reasonable demands for the distribution or transmission of electricity. |
-
-## Suffix on common properties
-
-Properties that share a common trait, is expected to be easy identified. For a reader of the source code, it should be easy to identify the intent of the property.
-
-### Date suffix
-
-This suffix is used when the property represents a point in time. It is not restricted to calendar date, but could also contain a time part.
-
-Example:
-
-``` csharp
-// C#
-public class AccountingPoint 
-{
-    public Instant CreatedDate { get; set; }
-}
-```
-
-### ID suffix
-
-A property with this suffix denotes a value that identifies an entity. This should not be interpreted as database record id or any other storage identification.
-
-Example:
-
-``` csharp
-// C#
-public class AccountingPoint
-{
-    public string AccountingPointID { get; private set; }
-}
-```
