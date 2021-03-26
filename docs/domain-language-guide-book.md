@@ -55,15 +55,23 @@ Attributes related to a physical location:
 When naming properties try to as explicit as possible. It will be easier to read and understand the purpose/intent of the class.
 
 ``` csharp
-MeteringPointId { get; set; } // bad
-MeteringPointmRID { get; set; } // bad
-MeteringPointGSRN { get; set; }  // good
+public class ConsumptionPoint {
+    public string MeteringPointId { get; private set; } // bad
+    public string MeteringPointmRID { get; private set; } // bad
+    public GSRN MeteringPointGSRN { get; private set; }  // good
+}
 ```
 
+**Good** because we are explicit about what the property represents. In this case a metering point is identified by a GSRN value.
+
 ``` csharp
-Created { get; set; } // bad
-CreatedDate { get; set; } // good
+public class Document {
+    public Instant Created { get; private set; } // bad
+    public Instant CreatedDate { get; private set; } // good
+}
 ```
+
+**Good** since it is easy to understand what the backing value is. From the naming we can see that it is date, and not a boolean value.
 
 ## Definitions extracted from the harmonised electricity role model
 
