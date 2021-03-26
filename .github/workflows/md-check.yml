@@ -18,6 +18,9 @@ jobs:
         with:
           github_token: ${{ github.token }}
           paths: '[
+            "**.MD",
+            "**.Md",
+            "**.mD",
             "**.md"
           ]'
 
