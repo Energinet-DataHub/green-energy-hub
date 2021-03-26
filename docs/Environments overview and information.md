@@ -11,20 +11,15 @@ U = Development
 
 ## Energinet-Datahub/geh
 
-N/A - Project information repo
-
-## Energinet-Datahub/green-energy-hub-core
-
-- Terraform-Module-Tests
+Project information repo
 
 ## Energinet-Datahub/geh-terraform-modules
 
-N/A - A collection of modules
+ A collection of Terraform modules
 
 ## Energinet-Datahub/Environments-overview
 
-- rg-Datahub-D
-- rg-Datahub-T
+This repository will collect changelogs and readme files from domain respositories
 
 ## Energinet-Datahub/geh-shared-resources
 
@@ -98,36 +93,38 @@ N/A - A collection of modules
 This rule is to ensure stable environments and decentralizing the responsibility of the domain repositories and product stability in all environments.
 With this, it is a part of the PR gate up to the code owners to review, plan, accept and finally merge PR's, so that they are able to control stability on their main branch - and therefore also into their environments. This is as a way of ensuring domain ownership. Please respect these reviews and the process of this.
 
-### Status checks
+### Other branch protection rules
 
-All PR gated status checks must be run and approved before merge approval (This is automated).
+- Require pull request reviews before merging
 
-### Branch must be updated with latest version
+- Dismiss stale pull request approvals when new commits are pushed
 
-This is to ensure that we are always merging to the latest version of main available (This is automated).
+- Require status checks to pass before merging
 
-### Markdown checks and build validations
-
-These are to ensure a common coding and CI/CD practice across repositories/domains.
+- Require branches to be up to date before merging
 
 ## CI/CD Pipeline
 
-All repositories has a build-in CI/CD infrastructure.
-Please read the [Templatereadme.md](https://github.com/Energinet-DataHub/geh-shared-resources/tree/main/docs/template-readme) for each repository for more information on how to trigger this.
+### Infrastructure CI/CD
 
-## Matrices in pipeline code
+When triggering deployments to a any environment through Github, the resources will automatically be created inside the corresponding resource group in Azure.
 
-Please ensure not to make any changes to the matrix definitions in the pipeline infrastructure, as this ensures that all 4 resource groups (environments) for the repo are spun up correctly, and adding to the matrix will result in creating other unsupported environments in the azure portal.
+Please read the template-readme.md located in each domain repository at the path docs/template-readme.md
+
+### Azure Function CI/CD
+
+Triggering a function CD will automatically build and deploy your application to the given resource in Azure.
+
+## Matrixes in pipeline code
+
+Please ensure not to make any changes to the matrix definitions in the CI/CD pipelines, as this ensures that the connection (SPN) to the corresponding environments are kept intact.
+Also do not add any new matrixes, since this will create new and unsupported environments in github.
 
 ## How to use Github Actions
 
 [TBD]
 
-When triggering deployment to a specific environment in Github, the environment will automatically spin up with content in the Azure portal, and all functionality will be reflected in Azure Portal when the workflow is finished.
-
-This will also happen when triggering deployment of Azure functions this workflow covers both build and deployment to Azure Portal.
-
-Please note that it is not possible to trigger manually deployment to an environment from other branches than main.
+Please note that it is not possible to trigger deployments to any environment from other branches than main.
 
 If you need to get access to an environment for testing purposes - we refer to manual triggering a sandbox environment before requesting PR approval and adding functionality to the main branches of the domains.
 
@@ -147,7 +144,13 @@ Please note that only Development environments are not protected by a deployment
 
 ## Changes to Terraform modules - how to
 
-If Terraform announces large changes to their modules that needs to be prioritized upgraded a common announcement will happen, so that all contributors are made aware of the needed work to be done. In the matter of small non-blocking version changes to Terraform modules it is up to the repo-owners to decide when to update their modules in the specific repo. Please remember to inform relevant contributors if the work interferes with anything.
+If Hashicorp announces large changes to their Terraform providers, which will require updates to our modules (geh-terraform-modules).
+
+The platform team will handle these updates, and distribute a message to the teams once the update has been done.
+
+Each domain will be using the Terraform modules with a release tag, meaning that any changes made by the platform team, will not break any running code.
+
+Please be aware, that we can in case of security issues or similar, require you to update your module usage to the latest running version.
 
 ## How to get more information on specific repositories setup
 
