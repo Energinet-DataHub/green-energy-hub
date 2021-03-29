@@ -31,7 +31,7 @@ The currently identified domains:
 * [PostOffice](https://github.com/Energinet-DataHub/post-office)
 * [ValidationReports](https://github.com/Energinet-DataHub/validation-reports)
 
-![Domains](0005-Segregate-the-system-into-smaller-chunks.png "Domains")
+![Domains](ADR-0004 - Seggregation of system into domains.png "Domains")
 
 As we progress further into these workshops with the business, we will identity more domains, especially in context of TimeSeries and MarketData.
 These will then be added as a new ADR.
