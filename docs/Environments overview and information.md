@@ -136,7 +136,7 @@ If you need to get access to an environment for testing purposes - we refer to m
 
 [TBD]
 
-Please note that only Development environments are not protected by a deployment rule stating that the repo owners (team based) should approve deployment to a specific environment.
+Please note that only Development environments are not protected by a deployment rule stating that the repo owners (currently team based) should approve deployment to a specific environment.
 
 ## Best practice on test of infrastructure as code
 
