@@ -63,7 +63,7 @@ Option 2, while simple, will take about as much work as option 3, but will most 
 
 To support multiple subscribers, we are using topics on the Service Bus rather than queues. Queues serve events to the first one wanting it, meaning that multiple subscribers are not supported.
 
-To keep things simple, we will start by using only one topic for all internal domain events and then use subscription filtering to make sure an internal subscriber only gets the events they want. We can add integration events later using other topics once then need arise.
+To keep things simple, we will start by using only one topic for all internal domain events and then use subscription filtering to make sure an internal subscriber only gets the events they want. We can add integration events later using other topics once the need arise.
 
 Charge domain event guidelines used:
 
