@@ -1,4 +1,4 @@
-# [short title of solved problem and solution]
+# Event handling in the Charges domain
 
 * Status: proposed
 * Deciders: `@bemwen, @bjarkemeier, @Mech0z, @lasrinnil, @prtandrup`
