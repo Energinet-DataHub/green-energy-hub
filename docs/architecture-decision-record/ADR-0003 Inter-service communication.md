@@ -55,7 +55,7 @@ More work up front but less work down the line.
 * Bad, because it doesn't play well with azure functions.
 * Bad, because it requires alot of boilerplate (swagger) code to in most cases document a single endpoint vs. Traditional API's with alot of endpoints
 
-### nuget shared C# Dtos
+### Nuget shared C# Dtos
 
 * Good, because it's simple.
 * Bad, because it's not cross language/platform friendly.
