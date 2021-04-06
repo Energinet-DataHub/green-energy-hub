@@ -18,7 +18,7 @@ _MarketData DB in the context of this ADR simply represents "something" from whe
 2. Distribution list as its own ODS
 3. Distribution list in mixed mode
 
-![Solution architecture](ADR-0001_time_series_distribution-list-for-market-evaluation-point-time-series.png) "Solution architecture")
+![Solution architecture](ADR-0001_time_series_distribution-list-for-market-evaluation-point-time-series.png "Solution architecture")
 
 Option 1 is shown with solid lines. Option 2 is shown with the dimmed "ODS Distribution list". Option 3 is a mixture of 1 and 2.
 
