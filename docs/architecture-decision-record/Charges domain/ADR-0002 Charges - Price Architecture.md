@@ -49,7 +49,7 @@ Chosen option: Option 1 "Store in Market Data DB", because it
 
 The solution architecture
 
-![Solution architecture](Charges domain\ADR-0002 Charges -Price Architecture.png "Solution architecture")
+![Solution architecture](ADR-0002%20Charges%20-Price%20Architecture.png "Solution architecture")
 
 The diagram can be opened and edited using drawio.
 
@@ -122,4 +122,4 @@ The same bad reasons that apply to option 3 are considered enough to discard thi
 
 ## Links <!-- optional -->
 
-* [Sizing and retrospective changes of prices](Charges domain\ADR-0001 Charges - Sizing and retrospective changes of prices.md)
+* [Sizing and retrospective changes of prices](Charges%20domain/ADR-0001%20Charges%20-%20Sizing%20and%20retrospective%20changes%20of%20prices.md)
