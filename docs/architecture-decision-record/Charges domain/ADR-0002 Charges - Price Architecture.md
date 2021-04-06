@@ -122,4 +122,4 @@ The same bad reasons that apply to option 3 are considered enough to discard thi
 
 ## Links <!-- optional -->
 
-* [Sizing and retrospective changes of prices](Charges%20domain/ADR-0001%20Charges%20-%20Sizing%20and%20retrospective%20changes%20of%20prices.md)
+* [Sizing and retrospective changes of prices](ADR-0001%20Charges%20-%20Sizing%20and%20retrospective%20changes%20of%20prices.md)
