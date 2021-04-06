@@ -22,7 +22,7 @@ _MarketData DB in the context of this ADR simply represents "something" from whe
 
 Option 1 is shown with solid lines. Option 2 is shown with the dimmed "ODS Distribution list". Option 3 is a mixture of 1 and 2.
 
-None of the solutions add any complexity regarding the _sync window problem_. See [ADR-0002](Charges domain\ADR-0002 Charges - Price Architecture.md) for more information about this problem.
+None of the solutions add any complexity regarding the _sync window problem_. See [ADR-0002](../Charges%20domain\ADR-0002%20Charges%20-%20Price%20Architecture.md) for more information about this problem.
 
 **It is worth noting that this solution does not address distribution lists for aggregations as suggested by the current state of the architectural diagram of the whole system. Those distribution lists are different and thus require their own design decisions - and probably also solution.**
 
