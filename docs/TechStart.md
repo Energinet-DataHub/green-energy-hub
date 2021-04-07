@@ -1,19 +1,37 @@
 # Getting started with Green energy hub as a tech person
 
-## What are the thoughts behind the domains 
+## Architecture
 
-### The approach for spliting the domains
+### Technical Stack Diagram
+
+## What are the thoughts behind the domains
+
+### The approach for splitting the domains
 
 - link to Domain 1
 - link to Domain 2
 - link Domain 3
 - link Domain 4
 
+---
+
+## Prepare dev environment
+
+### Configuring .editorconfig for local development
+
+### DataBricks development
+
+### Markdown development
+
+---
+
 ## How to contribute
 
 ### Reaching out to the community (how and where)
 
-### Permission to become a contributer
+### Permission to become a contributor
+
+---
 
 ## Security
 
@@ -21,6 +39,16 @@
 
 ### How to report or fix a security issue
 
-## QA statement - what do we do about qaulity
+---
+
+## QA statement - what do we do about quality
+
+### Unit tests
+
+### Integration tests
+
+### QA in the deployment pipeline
+
+---
 
 ## Code of conduct
