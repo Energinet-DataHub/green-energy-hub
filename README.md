@@ -8,13 +8,13 @@
 
 Mission statement (Lundø)
 
-## [I want to know more about the bussiness values](/docs/ExecutiveStart.md)
+## [I want to know more about the bussiness values](./docs/ExecutiveStart.md)
 
 ## Technical introduction
 
 Tech intro (Martin)
 
-## [I want to start using green energy hub and perhaps contribute](/docs/TechStart.md)
+## [I want to start using green energy hub and perhaps contribute](./docs/TechStart.md)
 
 ---
 
