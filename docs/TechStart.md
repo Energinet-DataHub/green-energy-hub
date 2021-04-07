@@ -15,6 +15,11 @@
 
 ---
 
+(TBD) Build badges
+---
+
+## Getting Started
+
 ## Prepare dev environment
 
 ### Configuring .editorconfig for local development
@@ -30,6 +35,8 @@
 ### Reaching out to the community (how and where)
 
 ### Permission to become a contributor
+
+<a href="https://github.com/vuejs/vue/graphs/contributors"><img src="https://opencollective.com/vuejs/contributors.svg?width=890" /></a>
 
 ---
 
