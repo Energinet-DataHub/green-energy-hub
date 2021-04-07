@@ -15,7 +15,8 @@
 
 ---
 
-(TBD) Build badges [https://github.com/badges/shields](https://github.com/badges/shields)
+## (TBD) Build badges [https://github.com/badges/shields](https://github.com/badges/shields)
+
 ---
 
 ## Getting Started
