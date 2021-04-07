@@ -15,7 +15,7 @@
 
 ---
 
-(TBD) Build badges
+(TBD) Build badges [https://github.com/badges/shields](https://github.com/badges/shields)
 ---
 
 ## Getting Started
@@ -30,13 +30,13 @@
 
 ---
 
-## How to contribute
+## Contribute
 
 ### Reaching out to the community (how and where)
 
 ### Permission to become a contributor
 
-<a href="https://github.com/vuejs/vue/graphs/contributors"><img src="https://opencollective.com/vuejs/contributors.svg?width=890" /></a>
+### Roadmap
 
 ---
 
