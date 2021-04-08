@@ -24,7 +24,7 @@ Tech intro (Martin)
 
 <img src="https://www.lfenergy.org/wp-content/uploads/sites/67/2018/06/logo_lfe_clr.png" alt="LF" style="width: 300px" />
 
-<img src="https://brandslogos.com/wp-content/uploads/images/microsoft-logo-vector.svg" alt="LF" style="width: 300px;" />
+<img src="https://e7.pngegg.com/pngimages/186/665/png-clipart-microsoft-logo-power-bi-computer-software-windows-logos-text-service-thumbnail.png" alt="LF" style="width: 300px;" />
 
 ---
 
