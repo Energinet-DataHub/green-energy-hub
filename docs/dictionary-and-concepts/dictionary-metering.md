@@ -1,0 +1,45 @@
+# **Dictionary**
+
+This dictionary will cover the general use of attributes naming in documentation - This will NOT contain all technical naming throughout the project - but a general definition of objects.
+
+The terms listed here, are all terms relating to the topics of defining metering.
+
+## **The Concept of Metering**
+
+| Term   | Definition    |
+|----------|-------------|
+| **A** |   |
+| Accounting Point |  A domain under balance responsibility where Energy Supplier change can take place and for which commercial business processes are defined. |
+| Asset Type | The technology used on a specific metering point  |
+| **B** |   |
+| **C** |   |
+| **D** |   |
+| Disconnection Type |  How the metering point has been disconnected |
+| **E** |   |
+|  |   |
+| Exchange Point |  A domain for establishing energy exchange between two Metering Grid Areas. **Additional information:** This is a type of Metering Point.|
+| **F** |   |
+| **G** |   |
+| **H** |   |
+| **I** |   |
+| **J** |   |
+| **K** |   |
+| **L** |   |
+| **M** |   |
+| Meter |  A physical device containing one or more registers.|
+| Metering Grid Area |  A Metering Grid Area is a physical area where consumption, production and exchange can be measured. It is delimited by the placement of meters for continuous measurement for input to, and withdrawal from the area. **Additional information:** It can be used to establish volumes that cannot be measured such as network losses. |
+| Metering Point | An entity where energy products are measured or computed.|
+| Multiplier |  Meter conversion |
+| **N** |   |
+| **O** |   |
+| **P** |   |
+| **Q** |   |
+| **R** |   |
+| Register | A physical or logical counter measuring energy products.|
+| **S** |   |
+| **T** |   |
+| **U** |   |
+| **W** |   |
+| **X** |   |
+| **Y** |   |
+| **Z** |   |
