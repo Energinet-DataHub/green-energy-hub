@@ -4,7 +4,6 @@ This dictionary will cover the general use of attributes naming in documentation
 
 The terms listed here, are all terms relating to the topics of defining physical locations.
 
-
 ## **The Concept of Physical Location**
 
 | Role   | Definition    |
@@ -38,4 +37,3 @@ The terms listed here, are all terms relating to the topics of defining physical
 | **X** |   |
 | **Y** |   |
 | **Z** |   |
-

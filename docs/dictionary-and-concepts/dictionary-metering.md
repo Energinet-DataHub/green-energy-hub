@@ -28,9 +28,11 @@ The terms listed here, are all terms relating to the topics of defining metering
 | **K** |   |
 | **L** |   |
 | **M** |   |
-| Meter |  A physical device containing one or more registers.|
+| Meter ID | ID for a physical device containing one or more registers.|
 | Metering Grid Area |  A Metering Grid Area is a physical area where consumption, production and exchange can be measured. It is delimited by the placement of meters for continuous measurement for input to, and withdrawal from the area. **Additional information:** It can be used to establish volumes that cannot be measured such as network losses. |
 | Metering Point | An entity where energy products are measured or computed.|
+| Meter Reading Periodicity| The frequency for which a metered data will be submitted |
+| Meter Type | Indicates what kind of meter it is????????????????????? |
 | MP Description | A way of adding specific description to an metering point, exchange point or accounting point|
 | Multiplier |  Meter conversion |
 | **N** |   |
@@ -40,6 +42,8 @@ The terms listed here, are all terms relating to the topics of defining metering
 | Parent Metering Point | A term identifying an accounting point that has the possibility to have matering points related  |
 | **Q** |   |
 | **R** |   |
+| Rated Capacity | The maximum amount of power contracted for a metering point   |
+| Rated Current |  The maximum amount of current contrated for a metering point  |
 | Register | A physical or logical counter measuring energy products.|
 | **S** |   |
 | **T** |   |
