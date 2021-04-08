@@ -8,7 +8,7 @@
 
 Mission statement (Lundø)
 
-## [I want to know more about the bussiness values](./docs/ExecutiveStart.md)
+## [I want to know more about the business values](./docs/ExecutiveStart.md)
 
 ## Technical introduction
 
