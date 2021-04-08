@@ -1,7 +1,7 @@
 # Green Energy Hub
 
 <div align="center">
-    <img src="./images/Logo.png" style="width: 300px"/>
+    <img src="./images/logo.png" style="width: 300px"/>
 </div>
 
 (TBW) Very high level description of how GEH works
