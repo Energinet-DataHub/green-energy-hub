@@ -1,6 +1,8 @@
 # Green Energy Hub
 
-![Logo](Logo_small.png)
+<div align="center">
+    <img src="Logo.png" style="width: 300px"/>
+</div>
 
 (TBW) Very high level description of how GEH works
 
