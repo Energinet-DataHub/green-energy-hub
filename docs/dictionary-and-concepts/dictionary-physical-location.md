@@ -14,9 +14,11 @@ The terms listed here, are all terms relating to the topics of defining physical
 | Building Number |   |
 | **C** |   |
 | City Name |   |
+| Country |   |
 | **D** |   |
 | **E** |   |
 | **F** |   |
+| Floor Identification |  ground floor, first floor etc. |
 | **G** |   |
 | **H** |   |
 | **I** |   |

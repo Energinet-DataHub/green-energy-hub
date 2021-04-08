@@ -11,11 +11,11 @@ The terms listed here, are all terms relating to the topics of defining charges.
 | **A** |   |
 | **B** |   |
 | **C** |   |
-| Charge Name  |   |
-| Charge Occurence |   |
-| Charge Owner |   |
-| Charge Type |   |
-| Currence Unit |   |
+| Charge Name  | The identifyer of a specific charge  |
+| Charge Occurence | An indication on how often the charge are being billed  |
+| Charge Owner | Defining which Energy Supplier that are requesting this charge  |
+| Charge Type | This could be either a Tariff, Fee or Subscription  |
+| Currency Unit | Defining which currency is used  |
 | **D** |   |
 | **E** |   |
 | **F** |   |
@@ -29,8 +29,11 @@ The terms listed here, are all terms relating to the topics of defining charges.
 | **N** |   |
 | **O** |   |
 | **P** |   |
-| Price |   |
+| Price | Price of a specific type of energy  |
+| Price Amount | the price sum of a specific type and amount of energy  |
+| Price Area | ?????????????????????  |
 | **Q** |   |
+| Quantity | Quantity of a specific type of energy  |
 | **R** |   |
 | **S** |   |
 | **T** |   |

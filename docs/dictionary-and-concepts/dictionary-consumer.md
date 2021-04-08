@@ -11,9 +11,8 @@ The terms listed here, are all terms relating to the topics of defining a Consum
 | **A** |   |
 | **B** |   |
 | **C** |   |
-| Consumer Category |   |
-| Consumer Name |   |
-| Country |   |
+| Consumer Category | This can be used to identify a unique type of consumer  |
+| Consumer Name | The name of the consumer registered to an accounting point  |
 | **D** |   |
 | **E** |   |
 | **F** |   |
