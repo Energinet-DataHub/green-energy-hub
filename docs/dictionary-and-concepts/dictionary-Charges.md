@@ -29,6 +29,7 @@ The terms listed here, are all terms relating to the topics of defining charges.
 | **N** |   |
 | **O** |   |
 | **P** |   |
+| Price | Charge price  |
 | **Q** |   |
 | Quantity | Quantity of a specific type of energy  |
 | **R** |   |
