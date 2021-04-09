@@ -46,7 +46,7 @@
 
 <img src="./images/energinet.png" alt="Energinet" style="width: 150px" />
 
-<img src="./images/microsoft.png" alt="LF" style="width: 150px;" />
+<img src="./images/microsoft.png" alt="Microsoft" style="width: 150px;" />
 
 ---
 
