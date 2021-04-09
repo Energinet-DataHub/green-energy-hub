@@ -33,7 +33,7 @@ The terms listed here, are all terms relating to the topics of defining metering
 | Metering Point | An entity where energy products are measured or computed.|
 | Meter Reading Periodicity| The frequency for which a metered data will be submitted |
 | Meter Type |  |
-| MP Description | A way of adding specific description to an metering point, exchange point or accounting point|
+| MP Description | An option that can be used to describe how a physical meter can be located, e.g. basement |
 | Multiplier |  Meter conversion |
 | **N** |   |
 | **O** |   |
