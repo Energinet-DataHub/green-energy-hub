@@ -6,7 +6,7 @@ The terms listed here, are all terms relating to the topics of defining charges.
 
 ## **The Concept of Charges**
 
-| Role   | Definition    |
+| Terms | Definition    |
 |----------|-------------|
 | **A** |   |
 | **B** |   |
