@@ -8,7 +8,7 @@ All terms defined here are created as part the Harmonnised Electricity Market Ro
 
 ## **Market Participants**
 
-| Role   | Definition    |
+| Term | Definition    |
 |----------|-------------|
 | **A** |   |
 | **B** |   |
