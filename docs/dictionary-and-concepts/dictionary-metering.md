@@ -15,7 +15,7 @@ The terms listed here, are all terms relating to the topics of defining metering
 | **C** |   |
 | Child Metering Point | a sub category of metering points that are all in relation to an accounting point  |
 | **D** |   |
-| Disconnection Type |  How the metering point has been disconnected |
+| Disconnection Type |  How the metering point can be disconnected |
 | **E** |   |
 | Estimated Annual Volume | The predicted annual volume of consumed energy for an accounting point  |
 | Exchange Point |  A domain for establishing energy exchange between two Metering Grid Areas. **Additional information:** This is a type of Metering Point.|
