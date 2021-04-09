@@ -44,7 +44,7 @@ The terms listed here, are all terms relating to the topics of defining metering
 | Quantity | Quantity of a specific type of energy  |
 | **R** |   |
 | Rated Capacity | The maximum amount of power contracted for a metering point   |
-| Rated Current |  The maximum amount of current contrated for a metering point  |
+| Rated Current |  The maximum amount of current contracted for a metering point  |
 | Register | A physical or logical counter measuring energy products.|
 | **S** |   |
 | **T** |   |
