@@ -29,9 +29,6 @@ The terms listed here, are all terms relating to the topics of defining charges.
 | **N** |   |
 | **O** |   |
 | **P** |   |
-| Price | Price of a specific type of energy  |
-| Price Amount | the price sum of a specific type and amount of energy  |
-| Price Area | ?????????????????????  |
 | **Q** |   |
 | Quantity | Quantity of a specific type of energy  |
 | **R** |   |
