@@ -1,4 +1,4 @@
-# **Dictionary for the concept of physical location**
+# **Dictionary for the concept of Physical Location**
 
 This dictionary will cover the general use of attributes naming in documentation - This will NOT contain all technical naming throughout the project - but a general definition of objects.
 
