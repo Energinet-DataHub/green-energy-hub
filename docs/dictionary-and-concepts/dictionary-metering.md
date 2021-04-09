@@ -23,7 +23,7 @@ The terms listed here, are all terms relating to the topics of defining metering
 | **G** |   |
 | **H** |   |
 | **I** |   |
-| In Area |  Out area are an indication of Grid receiving energy from an exchange point going out of the calculating grid??????????????  |
+| In Area | Indicates which grid an exchange point transports energy into   |
 | **J** |   |
 | **K** |   |
 | **L** |   |
@@ -32,12 +32,12 @@ The terms listed here, are all terms relating to the topics of defining metering
 | Metering Grid Area |  A Metering Grid Area is a physical area where consumption, production and exchange can be measured. It is delimited by the placement of meters for continuous measurement for input to, and withdrawal from the area. **Additional information:** It can be used to establish volumes that cannot be measured such as network losses. |
 | Metering Point | An entity where energy products are measured or computed.|
 | Meter Reading Periodicity| The frequency for which a metered data will be submitted |
-| Meter Type | Indicates what kind of meter it is????????????????????? |
+| Meter Type |  |
 | MP Description | A way of adding specific description to an metering point, exchange point or accounting point|
 | Multiplier |  Meter conversion |
 | **N** |   |
 | **O** |   |
-| Out Area |  Out area are an indication of Grid receiving energy from an exchange point going out of the calculating grid????????????????  |
+| Out Area |  Indicates which grid an exchange point transports energy out of   |
 | **P** |   |
 | Parent Metering Point | A term identifying an accounting point that has the possibility to have matering points related  |
 | **Q** |   |
