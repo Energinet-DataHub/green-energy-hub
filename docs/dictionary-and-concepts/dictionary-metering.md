@@ -41,6 +41,7 @@ The terms listed here, are all terms relating to the topics of defining metering
 | **P** |   |
 | Parent Metering Point | A term identifying an accounting point that has the possibility to have matering points related  |
 | **Q** |   |
+| Quantity | Quantity of a specific type of energy  |
 | **R** |   |
 | Rated Capacity | The maximum amount of power contracted for a metering point   |
 | Rated Current |  The maximum amount of current contrated for a metering point  |
