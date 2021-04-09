@@ -12,7 +12,7 @@ The terms listed here, are all terms relating to the topics of defining charges.
 | **B** |   |
 | **C** |   |
 | Charge Name  | The identifyer of a specific charge  |
-| Charge Occurence | An indication on how often the charge are being billed  |
+| Charge Occurrence | An indication on how often the charge is being billed  |
 | Charge Owner | Defining which Energy Supplier that are requesting this charge  |
 | Charge Type | This could be either a Tariff, Fee or Subscription  |
 | Currency Unit | Defining which currency is used  |
