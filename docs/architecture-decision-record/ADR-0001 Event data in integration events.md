@@ -43,7 +43,7 @@ Option 2 has been chosen because this option is the best fit to support a loosel
 - Good, because inter-domain communication in Green Energy Hub is done using one communication paradigm.
 - Good, because domains are not depended on the availability of applications in other domains.
 - Bad(ish), because the Protobuf contracts that describe the integration events will be extended over time with new properties being sent (results in a new version of a contract).
-    - If used correctly Protobuf contracts are backward and forward compatible, see links.
+- If used correctly Protobuf contracts are backward and forward compatible, see links.
 
 ## Links
 
