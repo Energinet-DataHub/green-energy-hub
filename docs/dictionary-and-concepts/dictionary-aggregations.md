@@ -6,7 +6,7 @@ The terms listed here, are all terms relating to the topics of defining aggregat
 
 ## **The Concept of Aggregations**
 
-| Role   | Definition    |
+| Term   | Definition    |
 |----------|-------------|
 | **A** |   |
 | **B** |   |

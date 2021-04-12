@@ -6,7 +6,7 @@ The terms listed here, are all terms relating to the topics of defining a Consum
 
 ## **The Concept of Consumer**
 
-| Role   | Definition    |
+| Term   | Definition    |
 |----------|-------------|
 | **A** |   |
 | **B** |   |

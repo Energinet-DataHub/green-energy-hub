@@ -6,7 +6,7 @@ The terms listed here, are all terms relating to the topics of defining physical
 
 ## **The Concept of Physical Location**
 
-| Role   | Definition    |
+| Term   | Definition    |
 |----------|-------------|
 | **A** |   |
 | **B** |   |
