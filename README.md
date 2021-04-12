@@ -1,8 +1,14 @@
 # Welcome to the Green Energy Hub
 
-## **Our Mission statement**
+- [Our mission statement](#our-mission-statement)
+- [What is the Green Energy Hub](#what-is-the-green-energy-hub)
+- [Getting started](#getting-started)
+- [Business values](#business-values)
+- [Project Sponsors and contributors](#project-sponsors-and-contributors)
 
-### **Energinet engages with Green Energy Hub in Open Source with a desire to accelerate the green transition**
+## Our Mission statement
+
+### Energinet engages with Green Energy Hub in Open Source with a desire to accelerate the green transition
 
 *"The movement must be seen in relation to Energinet's vision and strategy, as well as the political ambitions of Europe - in particular the Danish ambitions for 100% renewable energy in the electricity system by 2030 and a climate-neutral society by 2050*  
 *We are continuously working to design, maintain, develop, and expand energy systems, that will make it possible to use renewable energy - nationally and globally.*  
@@ -15,28 +21,83 @@
 
 **Martin Lundoe, CEO of Datahub, Part of the Danish TSO, Energinet.**
 
-<br>
-<br>
-<br>
+## What is the Green Energy Hub
 
-## **What is the Green Energy Hub**
+Green Energy Hub is a national energy transmission systems operator, to support change toward decarbonised economies.
 
-<br>
-<br>
-<br>
+The Green Energy Hub system consist of several different domains. There are 2 different types of domains:
 
-## [I want to know more about the business values](./docs/executive-start.md)
+- A domain that is responsible for handling a subset of business processes.
+- A domain that is responsible for handling an internal part of the system (Like log accumulation, secret sharing or similar).
 
-## [I want to start using green energy hub and perhaps contribute](./docs/tech-start.md)
+Below is a list of these domains, and the business flows they are responsible for.
+
+- Business Process Domains
+    - [Metering Point](https://github.com/Energinet-DataHub/geh-metering-point)
+        - Create metering point
+        - Submission of master data – grid company
+        - Close down metering point
+        - Connection of metering point with status new
+        - Change of settlement method
+        - Disconnection and reconnection of metering point
+        - Meter management
+        - Update production obligation
+        - Request for service from grid company
+    - [Aggregations](https://github.com/Energinet-DataHub/geh-aggregations)
+        - Submission of calculated energy time series
+        - Request for historical data
+        - Request for calculated energy time series
+        - Aggregation of wholesale services
+        - Request for aggregated tariffs
+        - Request for settlement basis
+    - [Time Series](https://github.com/Energinet-DataHub/geh-timeseries)
+        - Submission of metered data for metering point
+        - Send missing data log
+        - Request for metered data for a metering point
+    - [Charges](https://github.com/Energinet-DataHub/geh-charges)
+        - Request for aggregated subscriptions or fees
+        - Update subscription price list
+        - Update fee price list
+        - Update tariff price list
+        - Request price list
+        - Settlement master data for a metering point – subscription, fee and tariff links
+        - Request for settlement master data for metering point
+    - [Market Roles](https://github.com/Energinet-DataHub/geh-market-roles)
+        - Change of supplier
+        - End of supply
+        - Managing an incorrect change of supplier
+        - Move-in
+        - Move-out
+        - Incorrect move
+        - Submission of customer master data by balance supplier
+        - Initiate cancel change of supplier by customer
+        - Change of supplier at short notice
+        - Mandatory change of supplier for metering point
+        - Submission of contact address from grid company
+        - Change of BRP for energy supplier
+    - [Data Requests](https://github.com/Energinet-DataHub/geh-market-roles)
+        - Master data request
+- System Domains
+    - [Shared Resources](https://github.com/Energinet-DataHub/geh-shared-resources)
+        - Secrets handling
+        - DataBricks workspace
+    - [Validation Reports](https://github.com/Energinet-DataHub/geh-validation-reports)
+        - Log accumulation for all domains
+    - [Post Office](https://github.com/Energinet-DataHub/geh-post-office)
+        - Messaging service for outbound messages
+    - [API Gateway](https://github.com/Energinet-DataHub/geh-api-gateway)
+        - Authentication and routing
+
+## Business Values
+
+To know more about the Green Energy Hub business values, please read [this](./docs/executive-start.md).
+
+## Getting started
+
+To get started utilizing the Green Energy Hub, please read [this](./docs/tech-start.md).
 
 ## Project Sponsors and contributors
 
-<img src="./images/energinet.png" alt="Energinet" style="width: 150px" />
-
-<img src="./images/microsoft.png" alt="Microsoft" style="width: 150px;" />
-
----
-
-## License
-
-[Apache License 2.0](LICENSE)
+<img src="./images/energinet.png" alt="Energinet" style="width: 250px; height: auto;" />
+<br />
+<img src="./images/microsoft.png" alt="Microsoft" style="width: 250px; height: auto;" />
