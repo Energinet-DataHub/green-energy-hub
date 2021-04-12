@@ -90,7 +90,7 @@ Below is a list of these domains, and the business flows they are responsible fo
 
 ## Business Value
 
-To know more about the Green Energy Hub business values, please read [this](./docs/executive-start.md).
+To know more about the Green Energy Hub business value, please read [this](./docs/executive-start.md).
 
 ## Getting started
 
