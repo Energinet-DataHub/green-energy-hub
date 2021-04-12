@@ -3,7 +3,7 @@
 - [Our Mission Statement](#our-mission-statement)
 - [What is the Green Energy Hub](#what-is-the-green-energy-hub)
 - [Getting started](#getting-started)
-- [Business value](#business-values)
+- [Business value](#business-value)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
 
 ## Our Mission Statement
