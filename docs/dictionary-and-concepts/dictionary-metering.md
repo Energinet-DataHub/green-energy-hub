@@ -9,7 +9,7 @@ The terms listed here, are all terms relating to the topics of defining metering
 | Term   | Definition    |
 |----------|-------------|
 | **A** |   |
-| Accounting Point |  A domain under balance responsibility where Energy Supplier change can take place and for which commercial business processes are defined. |
+| Accounting Point |  A domain under balance responsibility where Energy Supplier change can take place and for which commercial business processes are defined. **Additional information:** This is a type of Metering Point. |
 | Asset Type | The technology used on a specific metering point  |
 | **B** |   |
 | **C** |   |
