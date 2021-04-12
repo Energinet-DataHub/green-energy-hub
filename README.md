@@ -1,12 +1,12 @@
 # Welcome to the Green Energy Hub
 
-- [Our mission statement](#our-mission-statement)
+- [Our Mission Statement](#our-mission-statement)
 - [What is the Green Energy Hub](#what-is-the-green-energy-hub)
 - [Getting started](#getting-started)
-- [Business values](#business-values)
+- [Business value](#business-value)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
 
-## Our Mission statement
+## Our Mission Statement
 
 ### Energinet engages with Green Energy Hub in Open Source with a desire to accelerate the green transition
 
@@ -88,9 +88,9 @@ Below is a list of these domains, and the business flows they are responsible fo
     - [API Gateway](https://github.com/Energinet-DataHub/geh-api-gateway)
         - Authentication and routing
 
-## Business Values
+## Business Value
 
-To know more about the Green Energy Hub business values, please read [this](./docs/executive-start.md).
+To know more about the Green Energy Hub business value, please read [this](./docs/executive-start.md).
 
 ## Getting started
 
