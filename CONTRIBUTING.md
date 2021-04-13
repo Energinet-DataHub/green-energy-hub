@@ -49,7 +49,7 @@ Here is a few helping pointers, that might help you get started:
 
 <!-- markdown-link-check-disable -->
 
-1. Please review our [code of conduct](docs\code-of-conduct.md) before contributing.
+1. Please review our [code of conduct](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/code-of-conduct.md) before contributing.
 2. Before submitting your first PR -  we ask that you sign our CLA [link here]
 3. If you find a vulnerability in our code, please follow the guidelines in [SECURITY.md](SECURITY.md).
 4. Please use the provided templates in each repository, when submitting issues.
