@@ -1,7 +1,8 @@
 # Welcome to the Green Energy Hub
 
 - [Our Mission Statement](#our-mission-statement)
-- [What is the Green Energy Hub](#what-is-the-green-energy-hub)
+- [The Architectural Principles](#the-architectural-principles-behind-green-energy-hub)
+- [The Green Energy Hub Domains](#the-green-energy-hub-domains)
 - [Solution Roadmap](#Solution-Roadmap)
 - [Getting started](#getting-started)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
@@ -10,20 +11,32 @@
 
 ### Energinet engages with Green Energy Hub in Open Source with a desire to accelerate the green transition
 
-*"The movement must be seen in relation to Energinet's vision and strategy, as well as the political ambitions of Europe - in particular the Danish ambitions for 100% renewable energy in the electricity system by 2030 and a climate-neutral society by 2050*  
-*We are continuously working to design, maintain, develop, and expand energy systems, that will make it possible to use renewable energy - nationally and globally.*  
-*We want to use digitalization as a way to accelerate a market-driven transition towards a sustainable and efficient energy system, and we will build the foundation for both new players (market participants) and business models through digital partnerships.*  
+*"The movement must be seen in relation to Energinet's vision and strategy, as well as the political ambitions of Europe - in particular the Danish ambitions for 100% renewable energy in the electricity system by 2030 and a climate-neutral society by 2050.*  
+*We are continuously working to design, develop, maintain, and expand energy systems, that will make it possible to use renewable energy - nationally and globally.*  
+*We want to use digitalization as a way to accelerate a market-driven transition towards a sustainable and efficient energy system, and we will build the foundation for both new market participants and business models through digital partnerships.*  
 *We want to create access to relevant data and insights from the energy market and thereby pushing our goals and direction.*  
-*We believe that across TSOs, market players (participants) and technology companies, we can support reaching the goals through an open and equal collaboration*
-*Our approach is therefore driven by a strategic belief that digital development is essential, and societal value creation will follow as we engage and open up.*
-*Therefore, we have chosen an approach that we believe best supports our overall vision. We are actively working to maximize value creation both nationally and internationally by choosing a system approach, where we will open and partner with others to minimize development costs and maximize deployment. We see an opportunity to reduce the cost of software, but also to greatly increase the quality and pace of development through open collaborations. It is a method and approach that we see is increasingly gaining prominence in TSO cooperation.*
-*Energinet is not an IT company, and therefore we do not sell systems, services or operate other TSOs. Our core business is clear, and it must be maintained, but we can contribute to the acceleration (of change?) inside and outside the country through the methods and tools we use – in this movement we see open source as an important tool."*
 
-**Martin Lundoe, CEO of Datahub, Part of the Danish TSO, Energinet.**
+*We believe that across TSO's, market participants and technology companies, we can support reaching the goals through an open and equal collaboration.*
+*Our approach is therefore driven by a strategic belief, that digital development is essential, and societal value creation will follow as we engage and open up.*
 
-## What is the Green Energy Hub
+*Therefore, we have chosen an approach that we believe best supports our overall vision. We are actively working to maximize value creation both nationally and internationally by choosing a system approach, where we will open up and partner with others to minimize development costs and maximize deployment. We see an opportunity to reduce the cost of software, but also to greatly increase the quality and pace of development through open collaborations. It is a method and approach that we see is increasingly gaining prominence in TSO cooperation.*
+*Energinet is not an IT company, and therefore we do not sell systems, services, or operate other TSO's. Our core business is clear, and it must be maintained, but we can contribute to the acceleration of change inside and outside the country, through the methods and tools we use – in this movement we see open source as an important tool.*
 
-Green Energy Hub is a national energy transmission systems operator, to support change toward decarbonised economies.
+*If we can accelerate and disseminate our green digital solutions, we see an opportunity to accelerate the green transition and increase socio-economic value creation."*
+<br>
+
+**Martin Lundø, Vice President & CEO of Energinet DataHub, part of the Danish TSO Energinet.**
+
+## The Architectural Principles behind Green Energy Hub
+
+*By implementing Domain Driven Design, we divide Green Energy Hub, into smaller independent domains. This gives the possibility only to use the domains that are needed for other participants in the Open-Source community. As the domains send events when data changes, and the other domains listen on these events to have the most updated version of data, this means that when only using one or few domains, data missing from the other domains must be either excluded or retrieved elsewhere.*
+
+*This gives a good offset for open collaboration on smaller parts of Green Energy Hub, and new domains can be added by contributors, to extend the Green Energy Hub’s functionality, when needed to accelerate the green transition.*
+
+**Martin Hansen, Solution Architect - Green Energy Hub**
+<br>
+
+## The Green Energy Hub Domains
 
 The Green Energy Hub system consist of several different domains. There are 2 different types of domains:
 
