@@ -3,6 +3,7 @@
 - [Our Mission Statement](#our-mission-statement)
 - [The Architectural Principles](#the-architectural-principles-behind-green-energy-hub)
 - [The Green Energy Hub Domains](#the-green-energy-hub-domains)
+- [Solution Roadmap](#Solution-Roadmap)
 - [Getting started](#getting-started)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
 
@@ -99,6 +100,24 @@ Below is a list of these domains, and the business flows they are responsible fo
         - Messaging service for outbound messages
     - [API Gateway](https://github.com/Energinet-DataHub/geh-api-gateway)
         - Authentication and routing
+
+## Solution Roadmap
+
+To understand the journey of Green Energy Hub, is to understand the business objectives that we are currently working on to achieve. A way to do this - is to visit our repos and their README files. Each domain repo have their own roadmap - so below is a structure visualizing our repo structure, and also indicating which repos are currently being worked on - upcoming milestones and links to further reading in each domain.
+
+| **Business Process Domain** | Status | Next Milestone | Domain Roadmap |
+| ----------- | ----------- | ----------- | ----------- |
+| Metering Point | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-metering-point/blob/main/README.md#domain-roadmap) |
+| Aggregations | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-aggregations/blob/main/README.md#domain-road-map) |
+| Timeseries | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-timeseries#domain-road-map) |
+| Charges | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-timeseries#domain-road-map) |
+| Data Requests | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-data-requests#domain-road-map) |
+| **System Domains** |  |  |  |
+| Shared Resources | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-shared-resources/blob/main/README.md) |
+| Validation Reports | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-validation-reports/blob/main/README.md) |
+| Post Office | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-post-office/blob/main/README.md) |
+| API Gateway | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-api-gateway/blob/main/README.md) |
+<br>
 
 ## Getting started
 
