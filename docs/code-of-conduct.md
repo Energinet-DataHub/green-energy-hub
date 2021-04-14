@@ -43,7 +43,7 @@ In your report please include:
 
 • *Your contact information.*
 
-• *Names (real, usernames or pseudonyms) of any individuals involved. If there are additional witnesses, please include them as well.*
+• *Names (real, usernames or pseudonyms) of any individuals involved. If there are additional witnesses, please include them as well).*
 
 • *Your account of what occurred, and if you believe the incident is ongoing. If there is a publicly available record (e.g. a mailing list archive or a public chat log), please include a link or attachment.*
 
