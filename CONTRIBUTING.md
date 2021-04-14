@@ -53,7 +53,7 @@ Here is a few helping pointers, that might help you get started:
 2. Before submitting your first PR -  we ask that you sign our CLA [link here]
 3. If you find a vulnerability in our code, please follow the guidelines in [SECURITY.md](SECURITY.md).
 4. Please use the provided templates in each repository, when submitting issues.
-5. Filling out all the relevant information will give your contribution a higher chance of getting looked at and resolved faster!.
+5. Filling out all the relevant information will give your contribution a higher chance of getting looked at and resolved faster!
 6. Create issues for major changes or enhancements that you wish to make to allow for transparency and community feedback.
 
 <!-- markdown-link-check-enable -->
