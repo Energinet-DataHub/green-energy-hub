@@ -20,5 +20,5 @@ For now all contributing issues and pull requests are screened by identified mai
 
 ## *Getting in touch with the Steering Commitee*
 
-The Green Energy Hub are still in the progress of defining how to establish a functional steering committee for funneling project initiatives. Please send all questions regarding this work to [greenenergyhub@energinet.dk](mailto:greenenergyhub@energinet.dk)
+The Green Energy Hub is still in the progress of defining how to establish a functional steering committee for funneling project initiatives. Please send all questions regarding this work to [greenenergyhub@energinet.dk](mailto:greenenergyhub@energinet.dk)
 <br>
