@@ -2,7 +2,9 @@
 
 ## *Where to find the latest news*
 
-In each of the Green Energy Hub domain repos you will find a domain roadmap in the README file. This contains a statement on current work being done within the repo. This indicates on which activities are currently within scope and maintainers on each repo are responsible to update the community on the roadmap outline.
+The Domain Overview in [README](/README.md) will tell you where to read about the current work being done in each domain.
+
+A solution Roadmap for each domain indicates which activities are currently within scope, and maintainers on each repo are responsible to update the community on the roadmap outline within a specific domain.
 <br>
 
 ## *Getting in touch with the Commit Team*
