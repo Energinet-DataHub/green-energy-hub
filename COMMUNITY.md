@@ -2,14 +2,14 @@
 
 ## *Where to find the latest news*
 
-The Domain Overview in [README](README.md) will tell you where to read about the current work being done in each domain.
+The Domain Overview in [README](README.md) will have a subsection telling you where to read about the current work being done in each domain.
 
-A solution Roadmap for each domain indicates which activities are currently within scope, and maintainers on each repo are responsible to update the community on the roadmap outline within a specific domain.
+A Domain Roadmap for each domain indicates which activities are currently within scope, and maintainers on each repo are responsible to update the community on the roadmap outline within a specific domain.
 <br>
 
 ## *Getting in touch with the Commit Team*
 
-The Green Energy Hub is still in the progress of defining how we want to ensure the work being done across the community.
+The Green Energy Hub is still in the progress of defining how we want to ensure the work being done across the community. We are aiming for having a commit team - but are not quite there yet.
 
 Be assured that if you want to participate or ask any questions, the community will be focusing on keeping in touch and being transparent - so please don't hesitate to reach out on any of our channels, [Github](https://github.com/Energinet-DataHub/green-energy-hub), [Email](mailto:greenenergyhub@energinet.dk) or [Slack](https://join.slack.com/t/greenenergyhub/shared_invite/zt-ik120p69-h8sysERkqRGS0Fj6adKqBw)
 
