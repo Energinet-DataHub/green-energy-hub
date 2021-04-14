@@ -1,7 +1,8 @@
 # Welcome to the Green Energy Hub
 
 - [Our Mission Statement](#our-mission-statement)
-- [What is the Green Energy Hub](#what-is-the-green-energy-hub)
+- [The Architectural Principles](#the-archtitectural-principles-behind-green-energy-hub)
+- [The Green Energy Hub Domains](#the-green-energy-hub-domains)
 - [Getting started](#getting-started)
 - [Business value](#business-value)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
@@ -21,7 +22,7 @@
 
 **Martin Lundoe, CEO of Datahub, Part of the Danish TSO, Energinet.**
 
-## The architectural principles behind Green Energy Hub
+## The Architectural Principles behind Green Energy Hub
 
 *By implementing Domain Driven Design, we divide Green Energy Hub, into smaller independent domains. This gives the possibility only to use the domains that are needed for other participants in the Open-Source community. As the domains sends event when data changes, and the other domains listen on these events to have the most updated version of data. This means that when only using one or few domains, data missing from the other domains must be either excluded or retrieved elsewhere.*
 
