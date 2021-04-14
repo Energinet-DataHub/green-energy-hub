@@ -1,7 +1,8 @@
 # Welcome to the Green Energy Hub
 
 - [Our Mission Statement](#our-mission-statement)
-- [What is the Green Energy Hub](#what-is-the-green-energy-hub)
+- [The Architectural Principles](#the-architectural-principles-behind-green-energy-hub)
+- [The Green Energy Hub Domains](#the-green-energy-hub-domains)
 - [Getting started](#getting-started)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
 
@@ -25,9 +26,16 @@
 
 **Martin Lundø, Vice President & CEO of Energinet DataHub, part of the Danish TSO Energinet.**
 
-## What is the Green Energy Hub
+## The Architectural Principles behind Green Energy Hub
 
-Green Energy Hub is a national energy transmission systems operator, to support change toward decarbonised economies.
+*By implementing Domain Driven Design, we divide Green Energy Hub, into smaller independent domains. This gives the possibility only to use the domains that are needed for other participants in the Open-Source community. As the domains send events when data changes, and the other domains listen on these events to have the most updated version of data, this means that when only using one or few domains, data missing from the other domains must be either excluded or retrieved elsewhere.*
+
+*This gives a good offset for open collaboration on smaller parts of Green Energy Hub, and new domains can be added by contributors, to extend the Green Energy Hub’s functionality, when needed to accelerate the green transition.*
+
+**Martin Hansen, Solution Architect - Green Energy Hub**
+<br>
+
+## The Green Energy Hub Domains
 
 The Green Energy Hub system consist of several different domains. There are 2 different types of domains:
 
