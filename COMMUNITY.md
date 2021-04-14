@@ -2,7 +2,7 @@
 
 ## *Where to find the latest news*
 
-The Domain Overview in [README](/README.md) will tell you where to read about the current work being done in each domain.
+The Domain Overview in [README](README.md) will tell you where to read about the current work being done in each domain.
 
 A solution Roadmap for each domain indicates which activities are currently within scope, and maintainers on each repo are responsible to update the community on the roadmap outline within a specific domain.
 <br>
