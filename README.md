@@ -1,13 +1,6 @@
 # Welcome to the Green Energy Hub
 
-<style>
-img {
-    width: 150px;
-    height: auto;
-    float:right;
-}
-</style>
-<img align="right" src="./images/GEH-Green-logo.jpg" alt="GreenEnergyHub" />
+<img align="right" src="./images/GEH-Green-logo.png" alt="GreenEnergyHub" />
 
 - [Our Mission Statement](#our-mission-statement)
 - [The Architectural Principles](#the-architectural-principles-behind-green-energy-hub)
