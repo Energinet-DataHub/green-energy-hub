@@ -28,6 +28,7 @@
 *This gives a good offset for open collaboration on smaller parts of Green Energy Hub, and new domains can be added by contributors, to extend the Green Energy Hub’s functionality, when needed to accelerate the green transition.*
 
 **Martin Hansen, Solution Architect - Green Energy Hub**
+<br>
 
 ## The Green Energy Hub Domains
 
