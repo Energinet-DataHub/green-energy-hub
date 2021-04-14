@@ -75,7 +75,7 @@ Below is a list of these domains, and the business flows they are responsible fo
         - Mandatory change of supplier for metering point
         - Submission of contact address from grid company
         - Change of BRP for energy supplier
-    - [Data Requests](https://github.com/Energinet-DataHub/geh-market-roles)
+    - [Data Requests](https://github.com/Energinet-DataHub/geh-data-requests)
         - Master data request
 - System Domains
     - [Shared Resources](https://github.com/Energinet-DataHub/geh-shared-resources)
