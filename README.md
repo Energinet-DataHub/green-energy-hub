@@ -4,7 +4,6 @@
 - [The Architectural Principles](#the-architectural-principles-behind-green-energy-hub)
 - [The Green Energy Hub Domains](#the-green-energy-hub-domains)
 - [Getting started](#getting-started)
-- [Business value](#business-value)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
 
 ## Our Mission Statement
@@ -83,7 +82,7 @@ Below is a list of these domains, and the business flows they are responsible fo
         - Mandatory change of supplier for metering point
         - Submission of contact address from grid company
         - Change of BRP for energy supplier
-    - [Data Requests](https://github.com/Energinet-DataHub/geh-market-roles)
+    - [Data Requests](https://github.com/Energinet-DataHub/geh-data-requests)
         - Master data request
 - System Domains
     - [Shared Resources](https://github.com/Energinet-DataHub/geh-shared-resources)
@@ -95,10 +94,6 @@ Below is a list of these domains, and the business flows they are responsible fo
         - Messaging service for outbound messages
     - [API Gateway](https://github.com/Energinet-DataHub/geh-api-gateway)
         - Authentication and routing
-
-## Business Value
-
-To know more about the Green Energy Hub business value, please read [this](./docs/executive-start.md).
 
 ## Getting started
 
