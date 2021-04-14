@@ -124,7 +124,7 @@ To understand the journey of Green Energy Hub, is to understand the business obj
 
 ## Getting started
 
-To get started utilizing the Green Energy Hub, please read [this](./docs/tech-start.md).
+To get started utilizing the Green Energy Hub, please read [this](./docs/getting-started.md).
 
 ## Project Sponsors and contributors
 
