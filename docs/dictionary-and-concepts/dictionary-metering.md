@@ -39,7 +39,7 @@ The terms listed here are all terms relating to the topics of defining metering.
 | **O** |   |
 | Out Area |  Indicates which grid an exchange point transports energy out of   |
 | **P** |   |
-| Parent Metering Point | A term used when a Metering Point, (or Accounting Point depending on the status of the metering point) becomes part of a Metering Point Parent-Child hierachy, where the Parent acts as the top-level Metering Point. |
+| Parent Metering Point | A term used when a Metering Point, or Accounting Point becomes part of a Metering Point Parent-Child hierachy, where the Parent acts as the top-level Metering Point. |
 | **Q** |   |
 | Quantity | Quantity of a specific type of energy  |
 | **R** |   |
