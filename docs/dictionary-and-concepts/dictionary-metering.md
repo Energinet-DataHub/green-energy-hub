@@ -2,7 +2,7 @@
 
 This dictionary will cover the general use of attribute naming in documentation - This will NOT contain all technical naming throughout the project - but a general definition of objects.
 
-The terms listed here, are all terms relating to the topics of defining metering.
+The terms listed here are all terms relating to the topics of defining metering.
 
 ## **The Concept of Metering**
 
