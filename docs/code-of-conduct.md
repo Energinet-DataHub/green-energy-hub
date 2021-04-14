@@ -37,7 +37,7 @@ Disrespectful and unacceptable behavior includes, but is not limited to:
 
 ## Reporting Code of Conduct Issues
 
-We encourage all contributers to resolve issues on their own whenever possible. This builds a broader and deeper understanding and ultimately a healthier interaction. In the event that an issue cannot be resolved locally, please feel free to report your concerns by contacting [Green Energy Hub Project Management Team](mailto:greenenergyhub@energinet.dk). Your report will be handled in accordance with the issue resolution process described in the [COMMUNITY.md](COMMUNITY.md).
+We encourage all contributers to resolve issues on their own whenever possible. This builds a broader and deeper understanding and ultimately a healthier interaction. In the event that an issue cannot be resolved locally, please feel free to report your concerns by contacting [Green Energy Hub Project Management Team](mailto:greenenergyhub@energinet.dk). Your report will be handled in accordance with the issue resolution process described in the [COMMUNITY.md](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/COMMUNITY.md).
 
 In your report please include:
 
