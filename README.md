@@ -3,7 +3,6 @@
 - [Our Mission Statement](#our-mission-statement)
 - [What is the Green Energy Hub](#what-is-the-green-energy-hub)
 - [Getting started](#getting-started)
-- [Business value](#business-value)
 - [Project Sponsors and contributors](#project-sponsors-and-contributors)
 
 ## Our Mission Statement
@@ -87,10 +86,6 @@ Below is a list of these domains, and the business flows they are responsible fo
         - Messaging service for outbound messages
     - [API Gateway](https://github.com/Energinet-DataHub/geh-api-gateway)
         - Authentication and routing
-
-## Business Value
-
-To know more about the Green Energy Hub business value, please read [this](./docs/executive-start.md).
 
 ## Getting started
 
