@@ -10,7 +10,7 @@ There are a few guidelines to contributing that we all appreciate being followed
 Respecting them pays respect to the time we all spend on developing, maintaining and managing this project.
 In return, the community will respect your contribution by addressing issues, discussing and helping finalize pull requests.
 
-### *Where to contribute*
+### Where to contribute
 
 For general inquries - please reach out by submitting an issue through [Green Energy Hub](https://github.com/Energinet-DataHub/green-energy-hub)
 
@@ -18,28 +18,28 @@ Or contact our project management on [greenenergyhub@energinet.dk](mailto:greene
 
 Or join us on Slack...
 
-### *Joining the Slack Community*
+### Joining the Slack Community
 
 The Green Energy Hub have a public Slack channel for any questions.
 
 Join us [HERE](https://join.slack.com/t/greenenergyhub/shared_invite/zt-ik120p69-h8sysERkqRGS0Fj6adKqBw)
 
-### *The First Contribution*
+### The First Contribution
 
 Contributing to open source can be intimidating, but you can do it!
 
 There are many ways to contribute, including updating documentation, fixing issues, reporting bugs, requesting features, or even adding functionality.
 
-The Green Energy hub consists of many repo's as we want to develop a micro-service structure in a domain driven environment. This means that when contributing, you must try to align the topic and to which domain repo it belongs.
+The Green Energy hub consists of many repositories as we want to develop a micro-service structure in a domain driven environment. This means that when contributing, you must try to align the topic and to which domain repository it belongs.
 
-When in doubt on the relation of the topic or issue - Go to the Green Energy Hub repo, or *#green-energy-hub-general* on Slack
+When in doubt on the relation of the topic or issue - Go to the Green Energy Hub repository, or *#green-energy-hub-general* on Slack
 
 Here is a few helping pointers, that might help you get started:
 [How to Contribute to an Open Source Project on Github](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) is very good, as is [firsttimersonly.com](https://www.firsttimersonly.com/).
 
 <br>
 
-### *Practicalities for Contributing*
+### Practicalities for Contributing
 
 <!-- markdown-link-check-disable -->
 
@@ -54,6 +54,6 @@ Here is a few helping pointers, that might help you get started:
 
 <br>
 
-### *More information on the Community*
+### More information on the Community
 
 Please read our [COMMUNITY.md](COMMUNITY.md) to get more information.
