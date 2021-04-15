@@ -15,8 +15,6 @@ Microsoft NuGet packages have been omitted from this list.
 
 ### GitHub Actions
 
-TODO: fill table below.
-
 <!---
   Table content created using this command:
 
