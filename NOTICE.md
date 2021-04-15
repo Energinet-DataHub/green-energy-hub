@@ -10,8 +10,6 @@ The Green Energy Hub repository relies on open source libraries and tools. We re
 
 ### GitHub Actions
 
-TODO: fill table below.
-
 <!---
   Table content created using this command:
 
@@ -23,4 +21,8 @@ TODO: fill table below.
 --->
 | Name | Version | Url | License |
 | -- | -- | -- | -- |
-| ... | .. | .. | .. |
+| `actions/checkout` | 2 | <https://github.com/actions/checkout> | MIT |
+| `avto-dev/markdown-lint` | 1 | <https://github.com/avto-dev/markdown-lint> | MIT |
+| `fkirc/skip-duplicate-actions` | 1.4.0 | <https://github.com/fkirc/skip-duplicate-actions> | MIT |
+| `gaurav-nelson/github-action-markdown-link-check` | 1 | <https://github.com/gaurav-nelson/github-action-markdown-link-check> | MIT |
+| `xt0rted/markdownlint-problem-matcher` | 1 | <https://github.com/xt0rted/markdownlint-problem-matcher> | MIT |
