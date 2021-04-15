@@ -14,7 +14,7 @@ In return, the community will respect your contribution by addressing issues, di
 
 For general inquiries - please reach out by submitting an issue through [Green Energy Hub](https://github.com/Energinet-DataHub/green-energy-hub)
 
-Or contact our project management on [greenenergyhub@energinet.dk](mailto:greenenergyhub@energinet.dk)
+Or contact our project management by [mail](mailto:greenenergyhub@energinet.dk)
 
 Or join us on Slack...
 
@@ -45,7 +45,7 @@ Here is a few helping pointers, that might help you get started:
 
 1. Please review our [code of conduct](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/code-of-conduct.md) before contributing.
 2. Before submitting your first PR -  we ask that you sign our Contributor License Agreement [HERE]( https://cla-assistant.io/Energinet-DataHub/green-energy-hub)
-3. If you find a vulnerability in our code, please follow the guidelines in [SECURITY.md](SECURITY.md).
+3. If you find a vulnerability in our code, please follow the guidelines in [SECURITY](SECURITY.md).
 4. Please use the provided templates in each repository, when submitting issues.
 5. Filling out all the relevant information will give your contribution a higher chance of getting looked at and resolved faster!
 6. Create issues for major changes or enhancements that you wish to make to allow for transparency and community feedback.

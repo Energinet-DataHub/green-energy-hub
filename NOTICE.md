@@ -2,7 +2,7 @@
 
 Energinet and any contributors reserve all others rights, whether under their respective copyrights, patents, licenses, or trademarks, whether by implication, estoppel or otherwise.
 
-It is our intention to acknowledge all third-party product licenses used in this document. If you miss your license please contact greenenergyhub@energinet.dk, and we will take action to change the file.
+It is our intention to acknowledge all third-party product licenses used in this document. If you miss your license please contact us by [mail](greenenergyhub@energinet.dk), and we will take action to change the file.
 
 ## Third-Party Licenses
 
@@ -10,16 +10,17 @@ The Green Energy Hub repository relies on open source libraries and tools. We re
 
 ### GitHub Actions
 
-<!---
-  Table content created using this command:
+<!--
+Table content created using this command:
 
-      grep -rh " uses: " .github/**/*.y*ml | sed 's/[ -]*uses: //g' | grep -v "./.github/actions" | sort -u | sed 's/\(.*\)@v\?\(.*\)/| `\1` | \2 | <https:\/\/github.com\/\1> | MIT |/'
+  grep -rh " uses: " .github/**/*.y*ml | sed 's/[ -]*uses: //g' | grep -v "./.github/actions" | sort -u | sed 's/\(.*\)@v\?\(.*\)/| `\1` | \2 | [Link](https:\/\/github.com\/\1) | MIT |/'
 
-  Please fix LICENSE and add probably also (re)add Azure CLI in case you update the whole table.
+Please fix LICENSE and add probably also (re)add `Azure CLI` in case you update the whole table.
 
-    | `Azure CLI` | | <https://aka.ms/InstallAzureCLIDeb> | MIT |
---->
-| Name | Version | Url | License |
+  | `Azure CLI` | | [Link](https://aka.ms/InstallAzureCLIDeb) | MIT |` 
+-->
+
+| Name | Version | Website | License |
 | -- | -- | -- | -- |
 | `actions/checkout` | 2 | [Link](https://github.com/actions/checkout) | MIT |
 | `avto-dev/markdown-lint` | 1 | [Link](https://github.com/avto-dev/markdown-lint) | MIT |

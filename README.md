@@ -22,7 +22,7 @@
 *Our approach is therefore driven by a strategic belief, that digital development is essential, and societal value creation will follow as we engage and open up.*
 
 *Therefore, we have chosen an approach that we believe best supports our overall vision. We are actively working to maximize value creation both nationally and internationally by choosing a system approach, where we will open up and partner with others to minimize development costs and maximize deployment. We see an opportunity to reduce the cost of software, but also to greatly increase the quality and pace of development through open collaborations. It is a method and approach that we see is increasingly gaining prominence in TSO cooperation.*
-*Energinet is not an IT company, and therefore we do not sell systems, services, or operate other TSO's. Our core business is clear, and it must be maintained, but we can contribute to the acceleration of change inside and outside the country, through the methods and tools we use – in this movement we see open source as an important tool.*
+*Energinet is not an IT company, and therefore we do not sell systems, services, or operate other TSOs. Our core business is clear, and it must be maintained, but we can contribute to the acceleration of change inside and outside the country, through the methods and tools we use – in this movement we see open source as an important tool.*
 
 *If we can accelerate and disseminate our green digital solutions, we see an opportunity to accelerate the green transition and increase socioeconomic value creation."*
 <br>

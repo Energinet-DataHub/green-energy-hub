@@ -1,7 +1,12 @@
+BRP
+DataBricks
+DataHub
 Energinet
+Lundø
 README
 roadmap
 Roadmap
 TSO
-BRP
-DataBricks
+TSOs
+digitalization
+Energinets
