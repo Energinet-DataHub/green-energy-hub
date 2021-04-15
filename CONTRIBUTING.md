@@ -35,7 +35,7 @@ The Green Energy hub consists of many repositories as we want to develop a micro
 When in doubt on the relation of the topic or issue - Go to the Green Energy Hub repository, or *#green-energy-hub-general* on Slack
 
 Here is a few helping pointers, that might help you get started:
-[How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) is very good, as is [firsttimersonly.com](https://www.firsttimersonly.com/).
+[How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) is very good, as is [firsttimersonly](https://www.firsttimersonly.com/).
 
 <br>
 
@@ -56,4 +56,4 @@ Here is a few helping pointers, that might help you get started:
 
 ### More information on the Community
 
-Please read our [COMMUNITY.md](COMMUNITY.md) to get more information.
+Please read our [COMMUNITY](COMMUNITY.md) to get more information.
