@@ -33,4 +33,3 @@ TODO: fill table below.
 | `fkirc/skip-duplicate-actions` | 1.4.0 | <https://github.com/fkirc/skip-duplicate-actions> | MIT |
 | `gaurav-nelson/github-action-markdown-link-check` | 1 | <https://github.com/gaurav-nelson/github-action-markdown-link-check> | MIT |
 | `xt0rted/markdownlint-problem-matcher` | 1 | <https://github.com/xt0rted/markdownlint-problem-matcher> | MIT |
-
