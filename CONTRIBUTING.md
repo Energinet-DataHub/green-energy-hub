@@ -12,7 +12,7 @@ In return, the community will respect your contribution by addressing issues, di
 
 ### Where to contribute
 
-For general inquries - please reach out by submitting an issue through [Green Energy Hub](https://github.com/Energinet-DataHub/green-energy-hub)
+For general inquiries - please reach out by submitting an issue through [Green Energy Hub](https://github.com/Energinet-DataHub/green-energy-hub)
 
 Or contact our project management on [greenenergyhub@energinet.dk](mailto:greenenergyhub@energinet.dk)
 
@@ -35,7 +35,7 @@ The Green Energy hub consists of many repositories as we want to develop a micro
 When in doubt on the relation of the topic or issue - Go to the Green Energy Hub repository, or *#green-energy-hub-general* on Slack
 
 Here is a few helping pointers, that might help you get started:
-[How to Contribute to an Open Source Project on Github](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) is very good, as is [firsttimersonly.com](https://www.firsttimersonly.com/).
+[How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) is very good, as is [firsttimersonly.com](https://www.firsttimersonly.com/).
 
 <br>
 

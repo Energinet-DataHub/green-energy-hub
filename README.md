@@ -13,18 +13,18 @@
 
 ### Energinet engages with Green Energy Hub in Open Source with a desire to accelerate the green transition
 
-*"The movement must be seen in relation to Energinet's vision and strategy, as well as the political ambitions of Europe - in particular the Danish ambitions for 100% renewable energy in the electricity system by 2030 and a climate-neutral society by 2050.*  
+*"The movement must be seen in relation to Energinets vision and strategy, as well as the political ambitions of Europe - in particular the Danish ambitions for 100% renewable energy in the electricity system by 2030 and a climate-neutral society by 2050.*  
 *We are continuously working to design, develop, maintain, and expand energy systems, that will make it possible to use renewable energy - nationally and globally.*  
 *We want to use digitalization as a way to accelerate a market-driven transition towards a sustainable and efficient energy system, and we will build the foundation for both new market participants and business models through digital partnerships.*  
 *We want to create access to relevant data and insights from the energy market and thereby pushing our goals and direction.*  
 
-*We believe that across TSO's, market participants and technology companies, we can support reaching the goals through an open and equal collaboration.*
+*We believe that across TSOs, market participants and technology companies, we can support reaching the goals through an open and equal collaboration.*
 *Our approach is therefore driven by a strategic belief, that digital development is essential, and societal value creation will follow as we engage and open up.*
 
 *Therefore, we have chosen an approach that we believe best supports our overall vision. We are actively working to maximize value creation both nationally and internationally by choosing a system approach, where we will open up and partner with others to minimize development costs and maximize deployment. We see an opportunity to reduce the cost of software, but also to greatly increase the quality and pace of development through open collaborations. It is a method and approach that we see is increasingly gaining prominence in TSO cooperation.*
 *Energinet is not an IT company, and therefore we do not sell systems, services, or operate other TSO's. Our core business is clear, and it must be maintained, but we can contribute to the acceleration of change inside and outside the country, through the methods and tools we use – in this movement we see open source as an important tool.*
 
-*If we can accelerate and disseminate our green digital solutions, we see an opportunity to accelerate the green transition and increase socio-economic value creation."*
+*If we can accelerate and disseminate our green digital solutions, we see an opportunity to accelerate the green transition and increase socioeconomic value creation."*
 <br>
 
 **Martin Lundø, Vice President & CEO of Energinet DataHub, part of the Danish TSO Energinet.**
@@ -54,7 +54,7 @@ Below is a list of these domains, and the business flows they are responsible fo
         - Close down metering point
         - Connection of metering point with status new
         - Change of settlement method
-        - Disconnection and reconnection of metering point
+        - Disconnection and reconnecting of metering point
         - Meter management
         - Update production obligation
         - Request for service from grid company
@@ -105,13 +105,13 @@ Below is a list of these domains, and the business flows they are responsible fo
 
 ## Solution Roadmap
 
-To understand the journey of Green Energy Hub, is to understand the business objectives that we are currently working on to achieve. A way to do this - is to visit our repos and their README files. Each domain repo have their own roadmap - so below is a structure visualizing our repo structure, and also indicating which repos are currently being worked on - upcoming milestones and links to further reading in each domain.
+To understand the journey of Green Energy Hub, is to understand the business objectives that we are currently working on to achieve. A way to do this - is to visit our repositories and their README files. Each domain repository have their own roadmap - so below is a structure visualizing our repository structure, and also indicating which repositories are currently being worked on - upcoming milestones and links to further reading in each domain.
 
 | **Business Process Domain** | Status | Next Milestone | Domain Roadmap |
 | ----------- | ----------- | ----------- | ----------- |
 | Metering Point | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-metering-point/blob/main/README.md#domain-roadmap) |
 | Aggregations | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-aggregations/blob/main/README.md#domain-road-map) |
-| Timeseries | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-timeseries#domain-road-map) |
+| Time Series | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-timeseries#domain-road-map) |
 | Charges | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-charges/blob/main/README.md#domain-road-map) |
 | Market Roles | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-market-roles#domain-roadmap)
 | Data Requests | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-data-requests#domain-road-map) |
