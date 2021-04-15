@@ -9,18 +9,18 @@
 
 ## Introduction
 
-Below you will find a thorough explanation on how to get started using the Green Energy Hub.
+Below you will find an explanation on how to get started using the Green Energy Hub.
 The outcome of this documentation should make you able to setup any domain inside the Green Energy Hub.
 
 ### Bounded contexts
 
-Each domain consists of a boundex context. Below is a visual representation of these.
+Each domain consists of a bounded context. Below is a visual representation of these.
 
 ![bounded contexts](../images/bounded-contexts.png)
 
 ### Relevant links
 
-To be able to understand some of the aspects of this guide, we encourage you to read the links below.
+To be able to understand some of the aspects of this guide, we encourage you to familiarize your self with the concepts below.
 
 - Github
     - [Fork a repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
@@ -36,7 +36,7 @@ To be able to understand some of the aspects of this guide, we encourage you to 
 
 ## Setting up a domain
 
-All domains is created using the same domain template, which means that the following approach to setting up a domain, can be used on all domains in the Green Energy Hub.
+All domains are created using the same domain template, which means that the following approach to setting up a domain, can be used on all domains in the Green Energy Hub.
 
 ### Prerequisites
 
@@ -47,13 +47,13 @@ To begin setting up a domain, you will need the following:
 
 ### Forking a domain
 
-Once you have selected a domain to setup, start by forking it into your own organisation.
+Once you have selected a domain to setup, start by forking it into your own github account.
 
 ### Setting up the cloud environment
 
 Each domain is reliant on having a cloud environment that it can deploy both infrastructure and code into.
 
-Therefor the first thing we need to do is setup the environment for a domain.
+Therefore the first thing we need to do is setup the environment for a domain.
 To do this please follow these steps (Please read the list of references in the [Relevant links](#relevant-links)).
 
 1. Create an Azure Subscription
@@ -67,3 +67,5 @@ To be able to this we need to configure an environment in github. (Please read t
 
 All domains is dependent on a having a github environment with a corresponding set of secrets.
 The secrets each domain needs can be found in the file located at `docs/environment-secrets.md` in each domain.
+
+
