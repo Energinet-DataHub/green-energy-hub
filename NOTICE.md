@@ -10,7 +10,7 @@ The Green Energy Hub repository relies on open source libraries and tools. We re
 
 ### GitHub Actions
 
-Table content created using this command:
+<!-- Table content created using this command:
 
 ```bash
   grep -rh " uses: " .github/**/*.y*ml | sed 's/[ -]*uses: //g' | grep -v "./.github/actions" | sort -u | sed 's/\(.*\)@v\?\(.*\)/| `\1` | \2 | [Link](https:\/\/github.com\/\1) | MIT |/'
@@ -18,7 +18,9 @@ Table content created using this command:
 
 Please fix LICENSE and add probably also (re)add `Azure CLI` in case you update the whole table.
 
-  | `Azure CLI` | | [Link](https://aka.ms/InstallAzureCLIDeb) | MIT |` 
+  ```bash
+  | `Azure CLI` | | [Link](https://aka.ms/InstallAzureCLIDeb) | MIT |
+  ``` -->
 
 | Name | Version | Website | License |
 | -- | -- | -- | -- |
