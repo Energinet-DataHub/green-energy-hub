@@ -56,6 +56,20 @@ jobs:
         continue-on-error: true
         id: md-lint-check
 
+      - name: Copy configuration files
+        run: |
+          cp ${GITHUB_WORKSPACE}/.github/utilities/md-spellcheck/wordlist.txt ${GITHUB_WORKSPACE}/wordlist.txt
+          cp ${GITHUB_WORKSPACE}/.github/utilities/md-spellcheck/spellcheck.yml ${GITHUB_WORKSPACE}/spellcheck.yml
+
+      - name: Replace path in Spell Check config
+        run: |
+          sed -i -e 's/..\/..\///g' ${GITHUB_WORKSPACE}/spellcheck.yml
+
+      - name: Markdown spell check
+        uses: rojopolis/spellcheck-github-actions@0.5.0
+        continue-on-error: true
+        id: md-spell-check
+
       - name: Summarize
         run: |
           echo "Markdown check results: "
@@ -71,6 +85,12 @@ jobs:
             echo -e "- Markdown lint check:    \e[31mFailure"
           else
             echo -e "- Markdown lint check:    \e[32mSuccess"
+          fi
+          if [[ "${{steps.md-spell-check.conclusion}}" == "failure" ]] || [[ "${{steps.md-spell-check.outcome}}" == "failure" ]]; then
+            fail=1
+            echo -e "- Markdown spell check:   \e[31mFailure"
+          else
+            echo -e "- Markdown spell check:   \e[32mSuccess"
           fi
           if [[ $fail -eq 1 ]]; then
             echo -e "Expand individual steps above to view specific errors."
