@@ -9,5 +9,6 @@ Lundø
 README
 roadmap
 Roadmap
+socio
 TSO
 TSOs
