@@ -1,8 +1,8 @@
 # Event handling in the Charges domain
 
-* Status: proposed
+* Status: approved
 * Deciders: `@bemwen, @bjarkemeier, @Mech0z, @lasrinnil, @prtandrup`
-* Date: 2021-03-31
+* Date: 2021-04-19
 
 Technical Story: ADO-119260
 
