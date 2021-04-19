@@ -27,7 +27,7 @@ This address how we want to handle events in the charge domain, which we have id
 
 Chosen option: "Option 4 - Event driven architecture, using the Service Bus".
 
-This options was chosen because it gives us the most freedom in how to design and implement the charges domain, and is also the option most likely to keep the cost of using event sourcing lower (should we choose to go that way).
+This options was chosen because it gives us the most freedom in how to design and implement the charges domain, keeping the design simpler and the cost lower.
 
 In comparison, option 1 does not live up to our requirements of multiple subscribers and does not really promote event driven architecture in the degree that we want to.
 
@@ -106,7 +106,7 @@ In addition, we aim to save the events in the Service Bus itself.
 * Bad: We rely a lot on Service Bus; we are more tied to it
 * Consequence: Data is owned by events; query models (like SQL server data) can be wiped and rebuild with a new model
 
-### Option 2 - Event sourcing, by use of Service Bus retention
+### Option 3 - Preparing for event sourcing, saving events in external storage (for example table storage)
 
 In this option, we aim to use Event Sourcing. This means that we let the events determine the state of our system.
 In addition, we aim to save the events in an external storage, like for example a table storage.
