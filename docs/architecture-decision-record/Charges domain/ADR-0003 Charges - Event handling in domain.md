@@ -1,7 +1,7 @@
 # Event handling in the Charges domain
 
 * Status: approved
-* Deciders: `@bemwen, @bjarkemeier, @Mech0z, @lasrinnil, @prtandrup`
+* Deciders: `@bemwen, @bjarkemeier, @Mech0z, @lasrinnil, @prtandrup, @HenrikSommer`
 * Date: 2021-04-19
 
 Technical Story: ADO-119260
@@ -13,51 +13,46 @@ This address how we want to handle events in the charge domain, which we have id
 ## Decision Drivers
 
 * We want to make our architecture event driven
-* We want to prepare for the possibility to use event sourcing in the domain
+* ~~We want to prepare for the possibility to use event sourcing in the domain~~
 * We want to support multiple subscribers for events
 
 ## Considered Options
 
 * Option 1 - Passing `DTO's` though `EventHub's` (like previously)
 * Option 2 - Event sourcing, by use of Service Bus retention
-* __Option 3 - Preparing for event sourcing, saving events in external storage (for example table storage)__
+* Option 3 - Preparing for event sourcing, saving events in external storage (for example table storage)
+* __Option 4 - Event driven architecture, using the Service Bus__
 
 ## Decision Outcome
 
-Chosen option: "Option 3 - Preparing for event sourcing, saving events in external storage (for example table storage)".
-
-In this option, we work towards using Event Sourcing. This means that we work towards letting the events determine the state of our system.
-
-In addition, we aim to save the events themselves in some external storage (for example a table storage).
+Chosen option: "Option 4 - Event driven architecture, using the Service Bus".
 
 This options was chosen because it gives us the most freedom in how to design and implement the charges domain, and is also the option most likely to keep the cost of using event sourcing lower (should we choose to go that way).
 
 In comparison, option 1 does not live up to our requirements of multiple subscribers and does not really promote event driven architecture in the degree that we want to.
 
-Option 2, while simple, will take about as much work as option 3, but will most likely be more expensive to run later. In addition, it ties us more to the chosen technologies.
+Option 2 and 3 will require at least the same amount of work as option 4, but will most likely be more expensive to run later. In addition, event sourcing does not seem to benefit us enough in this domain to justify the added complexity and cost.
+
+As such, we will move forward with implementing an event driven architecture in the charges domain, without going fully into event sourcing.
 
 ### Positive Consequences <!-- optional -->
 
 * Good: Promotes low coupling
-* Good: Total history - You can go back to any specific point in time and recreate the state once event sourcing is implemented
 * Good: You are less likely to need locks -> Higher performance
 * Good: Works well with given/when/then testing, making testing scenarios easier
 * Good: Components do not rely on other components running.
-* Good: Refactoring can be less of an issue as you can rebuild your model based on existing events
 * Good: Topics allow multiple subscribers to listen to any type of event
-* Good: Saving the events to table storage or similar means that we can potentially keep the cost lower as storage is usually cheaper.
-* Good: We can implement in stages, starting with event driven architecture and going towards event sourcing if needed
-* Good: The SQL server will start owning the data, but can then later be demoted to a query model; we are working towards event sourcing
+* Good: We can implement in stages, starting with event driven architecture and potentially change this to event sourcing later if the need arise
+* Good: It is a much simpler model (`KISS`)
+* Good: Current state is easily reflected in the database
+* Good: Less storage space is required
 
 ### Negative Consequences <!-- optional -->
 
-* Bad: We need to build mechanisms for replaying events from the table storage; it does not come out of the box
-* Bad: We need to build mechanisms for saving events to the table storage
-* Bad: With only events, you cannot easily see the current state of your application; a query model is needed to make it perform
-* Bad: It takes more boiler plating
-* Bad: Data will be replicated (both event and query model are needed, so the cost is higher than option 1)
-* Bad: You are stuck with your events; It will be a log of all your bad design decisions
-* Bad: It is another way to work; you have to think differently
+* Bad: Events are not persisted
+* Bad: We will not be able to get a total history of our domain solely based on events as these are not persisted indefinatly
+* Bad: Tracking a chain of events might get more complicated
+* Bad: Refactoring the rest of the system can be more of an issue
 
 ### Implementation notes
 
@@ -109,4 +104,28 @@ In addition, we aim to save the events in the Service Bus itself.
 * Bad: You are stuck with your events; It will be a log of all your bad design decisions
 * Bad: It is another way to work; you have to think differently
 * Bad: We rely a lot on Service Bus; we are more tied to it
+* Consequence: Data is owned by events; query models (like SQL server data) can be wiped and rebuild with a new model
+
+### Option 2 - Event sourcing, by use of Service Bus retention
+
+In this option, we aim to use Event Sourcing. This means that we let the events determine the state of our system.
+In addition, we aim to save the events in an external storage, like for example a table storage.
+
+* Good: Promotes low coupling
+* Good: Total history - You can go back to any specific point in time and recreate the state once event sourcing is implemented
+* Good: You are less likely to need locks -> Higher performance
+* Good: Works well with given/when/then testing, making testing scenarios easier
+* Good: Components do not rely on other components running.
+* Good: Refactoring can be less of an issue as you can rebuild your model based on existing events
+* Good: Topics allow multiple subscribers to listen to any type of event
+* Good: Saving the events to table storage or similar means that we can potentially keep the cost lower as storage is usually cheaper.
+* Good: We can implement in stages, starting with event driven architecture and going towards event sourcing if needed
+* Good: The SQL server will start owning the data, but can then later be demoted to a query model; we are working towards event sourcing
+* Bad: We need to build mechanisms for replaying events from the table storage; it does not come out of the box
+* Bad: We need to build mechanisms for saving events to the table storage
+* Bad: With only events, you cannot easily see the current state of your application; a query model is needed to make it perform
+* Bad: It takes more boiler plating
+* Bad: Data will be replicated (both event and query model are needed, so the cost is higher than option 1)
+* Bad: You are stuck with your events; It will be a log of all your bad design decisions
+* Bad: It is another way to work; you have to think differently
 * Consequence: Data is owned by events; query models (like SQL server data) can be wiped and rebuild with a new model
