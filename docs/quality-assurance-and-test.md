@@ -4,11 +4,29 @@ Welcome to the introduction on how we are working with Quality Assurance and Tes
 
 ## Quality Statement
 
-The content of this section will be overall concepts of thinking and working with quality activities in Green Energy Hub.
+As the founder of this project the danish TSO, Energinet, and Microsoft has together set the bar for the Green Energy Hub to be the best big data handling solution for green energy markets worldwide – and with this statement we all agree to work towards giving the world access to a maintainable, secure, configurable, and fast big data system.  
+
+We consider every contribution to be thought through, described, peer reviewed and tested before accepted into our product portfolio.
+This is a common responsibility, and are you, as a contributor, not able to meet these guidelines by yourself – please reach out to the community for assistance, input or help towards ensuring your contribution lives up to this quality statement.
 
 ## Quality Risk
 
-Building a product always gives reason to consider product risk areas and the possible costs of these risks elements. In this section we would like to elaborate on how we are working with these considerations, and give inspration to how practically address this.
+Building a product always gives reason to consider product risk areas and the possible costs of these risks elements. In this section we would like to elaborate on how we are working with these considerations, and give inspration on how to practically address this.
+
+In a project like this product risk contains two overall questions
+
+1. *Are we building the right product?*
+2. *Are we building the product right?*
+
+In regards to the first question - we want to be certain that the solution is delivering us the value we need. This question can be answered by evaulating on the quality characteristics of the product. Do the functionality reach the expected level of functionality, security, performance, maintainability, usability etc. Here it is important to have all the relevant considerations outlined before starting to implement. What is the value, the targets, the expectations and the formal requirements for this product.
+
+Writing acceptance criteria or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
+
+Building the right product has in earlier times been proven by a post-developing test - We want to have this mitigation before implementing, as a way of ensuring alignment of expectations. Thus the knowlegde and the learnings of this risk evaluation could also be used for automating regression test within the pipeline so we remember to re-visit our acceptance criteria throughout the project.
+
+Regarding the second question on how we are delevoping our solutions. Here we talk about issues that could affect the way we are able to deliver a solution. Considering complexity, knowledge levels, tools, experience [...]
+
+*Are you working on a product/solution and are you unsure of the risk versus the work - or how to mitigate certain risks you have identified? - use the community for collaboration and discussion.*
 
 ### Testing Quadrants
 
@@ -18,9 +36,38 @@ A way of mitigating risk factors.
 
 A way of visualizing the migitation of risks.
 
-## Test Strategy Elements
+## Test Approach Elements
 
-This section will have an introduction to how we work with testing - where, how, when, and why.
+### Working with issue templates
+
+We are securing the quality of issue-submission by using templates for different kinds of issues – please choose the template you need, when creating an issue.
+
+The life cycle of an issue is dynamic, and the commit team and community in general will handle the life span of an issue, according to activity for these. Please remember that all issues can be re-opened if needed.  
+
+Please use domain repos and process tagging (e.g. change of energy supplier) on issues for enhancing traceability, transparency, and history.
+
+### Content of Pull Requests
+
+A Pull Request should always be,
+
+- Related to an accepted issue
+- Have signed CLA's for both author and reviewers
+- Have a well-described purpose
+- Adhering to established project standards (Read more on ADR's and other standards here [Here])
+- Documented (The expectations to Documentation is further outlined [Here] )
+- Tested (The expectations for tested is further outlined [Here] )
+
+### Continuous integration
+
+In each Green Energy Hub repo you will find a provided [Getting Started] and also a pre-set of CI Pipeline that contains,
+
+- Build Scripts
+- Validation of infrastructure
+- Validation of code base
+- Unit testing
+- Code Coverage analysis and reporting
+- Spell, links and lint checks
+- [...]
 
 ### Test levels and types
 
@@ -32,11 +79,7 @@ In Green Energy Hub we need to share and delevop our ways of working - here will
 
 ### Code Coverage
 
-Unit test code coverage tool.
-
-### CI/CD Inspiration
-
-How to do CI/CD.
+Unit test code coverage tool and KPI's.
 
 ## Test Data
 
