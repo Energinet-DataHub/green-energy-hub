@@ -22,15 +22,19 @@ In regards to the first question - we want to be certain that the solution is de
 
 Writing acceptance criteria or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
 
-Building the right product has in earlier times been proven by a post-developing test - We want to have this mitigation before implementing, as a way of ensuring alignment of expectations. Thus the knowlegde and the learnings of this risk evaluation could also be used for automating regression test within the pipeline so we remember to re-visit our acceptance criteria throughout the project.
+Building the right product has in earlier times been proven by a post-developing test - We want to have this mitigation before implementing, as a way of ensuring alignment of expectations. Thus the knowlegde and the learnings of this risk evaluation could also be used for automating regression test within the pipeline so we remember to re-visit our acceptance criteria throughout the delivery pipeline.
 
-Regarding the second question on how we are delevoping our solutions. Here we talk about issues that could affect the way we are able to deliver a solution. Considering complexity, knowledge levels, tools, experience [...]
+Regarding the second question on how we are delevoping our solutions. Here we talk about issues that could affect the way we are able to deliver a solution. Considering complexity, knowledge levels, tools, experience etc. is important, as these risks would very easily impact the work needed and the quality of the solution.
 
-*Are you working on a product/solution and are you unsure of the risk versus the work - or how to mitigate certain risks you have identified? - use the community for collaboration and discussion.*
+*Are you working on a product/solution and are you unsure of the risks - or how to mitigate certain risks you have identified? - use the community for collaboration and discussion.*
+
+### Working with risk
+
+One way of mitigating risks is testing - but we are all familiar with the old saying that test is a timeboxed event/a bottleneck before go live - In Green Energy we wish to ensure that test/QA is happening all the time, by everyone. We don't have a verification team - we are all responsible for mitigating risks, and ensuring quality - so rest assure that it is never too early to talk quality.
 
 ### Testing Quadrants
 
-A way of mitigating risk factors.
+One way of translating risk items to actual testing could be using the testing quadrants for identifying - the relevant test types for specific areas.
 
 ### Risk Radar
 
