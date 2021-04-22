@@ -1,0 +1,14 @@
+# Basic dependabot.yml file with
+# minimum configuration for nuget
+# https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/keeping-your-dependencies-updated-automatically
+
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/src"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "nuget"
+    directory: "/test"
+    schedule:
+      interval: "weekly"
