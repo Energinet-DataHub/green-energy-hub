@@ -91,8 +91,6 @@ Happy/Negative flows covered - everything else is up to the domain.
 
 ### Green Energy Hub - Stubs and Mocks (Test Doubles)
 
-
-
 ### Test levels and types
 
 There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub and how we use them.
