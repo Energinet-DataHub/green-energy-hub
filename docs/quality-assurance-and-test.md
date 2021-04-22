@@ -20,7 +20,7 @@ In a project like this product risk contains two overall questions
 
 In regards to the first question - we want to be certain that the solution is delivering us the value we need. This question can be answered by evaulating on the quality characteristics of the product. Do the functionality reach the expected level of functionality, security, performance, maintainability, usability etc. Here it is important to have all the relevant considerations outlined before starting to implement. What is the value, the targets, the expectations and the formal requirements for this product.
 
-Writing acceptance criteria or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
+Writing acceptance criteria and/or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
 
 Building the right product has in earlier times been proven by a post-developing test - We want to have this mitigation before implementing, as a way of ensuring alignment of expectations. Thus the knowlegde and the learnings of this risk evaluation could also be used for automating regression test within the pipeline so we remember to re-visit our acceptance criteria throughout the delivery pipeline.
 
@@ -36,13 +36,19 @@ One way of mitigating risks is testing - but we are all familiar with the old sa
 
 One way of translating risk items to actual testing could be using the testing quadrants for identifying - the relevant test types for specific areas.
 
+[image]
+
 ### Risk Radar
 
 A way of visualizing the migitation of risks.
 
-## Test Approach Elements
+[TBW]
 
-### Working with issue templates
+## Open Source and Test Approach Elements
+
+This section is meant as inspiration for all contributors to Green Energy Hub. Whether you're working on forked instance or delivering into the community - we would like to share the thoughts, and choices we have made to ensure QA and testing activities througout our work with Green Energy Hub. Some of the choices and activities are done to ensure an alignment towards our community and Green Energy Hub as a whole, and some activities are done in the Energinet setup.
+
+### Green Energy Hub - Working with issue templates
 
 We are securing the quality of issue-submission by using templates for different kinds of issues – please choose the template you need, when creating an issue.
 
@@ -50,7 +56,7 @@ The life cycle of an issue is dynamic, and the commit team and community in gene
 
 Please use domain repos and process tagging (e.g. change of energy supplier) on issues for enhancing traceability, transparency, and history.
 
-### Content of Pull Requests
+### Green Energy Hub - Content of Pull Requests
 
 A Pull Request should always be,
 
@@ -61,7 +67,7 @@ A Pull Request should always be,
 - Documented (The expectations to Documentation is further outlined [Here] )
 - Tested (The expectations for tested is further outlined [Here] )
 
-### Continuous integration
+### Green Energy Hub - Continuous integration
 
 In each Green Energy Hub repo you will find a provided [Getting Started] and also a pre-set of CI Pipeline that contains,
 
@@ -73,6 +79,20 @@ In each Green Energy Hub repo you will find a provided [Getting Started] and als
 - Spell, links and lint checks
 - [...]
 
+### Green Energy Hub - Test Data
+
+Green Energy Hub would like to publish test data for use and inspiration.
+
+Aggregation input data
+
+Scripts for populating DB
+
+Happy/Negative flows covered - everything else is up to the domain.
+
+### Green Energy Hub - Stubs and Mocks (Test Doubles)
+
+
+
 ### Test levels and types
 
 There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub and how we use them.
@@ -81,13 +101,11 @@ There are a lot of frameworks and definitions of testing activities, and here we
 
 In Green Energy Hub we need to share and delevop our ways of working - here will be of list of tools being used.
 
+[PACT]
+
 ### Code Coverage
 
 Unit test code coverage tool and KPI's.
-
-## Test Data
-
-Green Energy Hub would like to publish test data for use and inspiration.
 
 ## Metrics
 
