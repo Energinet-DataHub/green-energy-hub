@@ -1,0 +1,93 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Copyright 2020 Energinet DataHub A/S
+#
+# Licensed under the Apache License, Version 2.0 (the "License2");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+VisualStudioVersion = 16.6.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Conversion", "src\GreenEnergyHub.Conversion\GreenEnergyHub.Conversion.csproj", "{1D234020-9234-4039-9A64-7241C675C7BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C3BE7343-FD5A-42C7-85D0-2361060D273F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.Conversion.Tests", "test\GreenEnergyHub.Conversion.Tests\GreenEnergyHub.Conversion.Tests.csproj", "{EB15A676-83F2-45C4-B4B1-985E8CA65830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.DkEbix", "src\GreenEnergyHub.DkEbix\GreenEnergyHub.DkEbix.csproj", "{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEnergyHub.DkEbix.Tests", "test\GreenEnergyHub.DkEbix.Tests\GreenEnergyHub.DkEbix.Tests.csproj", "{2500B895-AD1E-49BB-862A-D9DBDF7371FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Debug|x64.Build.0 = Debug|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Debug|x86.Build.0 = Debug|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Release|x64.ActiveCfg = Release|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Release|x64.Build.0 = Release|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D234020-9234-4039-9A64-7241C675C7BD}.Release|x86.Build.0 = Release|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Debug|x64.Build.0 = Debug|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Debug|x86.Build.0 = Debug|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Release|x64.ActiveCfg = Release|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Release|x64.Build.0 = Release|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830}.Release|x86.Build.0 = Release|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Debug|x64.Build.0 = Debug|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Debug|x86.Build.0 = Debug|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Release|x64.ActiveCfg = Release|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Release|x64.Build.0 = Release|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Release|x86.ActiveCfg = Release|Any CPU
+		{53641AA7-EF50-4D3E-8DAF-074D6F2E8497}.Release|x86.Build.0 = Release|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Debug|x64.Build.0 = Debug|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Debug|x86.Build.0 = Debug|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Release|x64.ActiveCfg = Release|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Release|x64.Build.0 = Release|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Release|x86.ActiveCfg = Release|Any CPU
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EB15A676-83F2-45C4-B4B1-985E8CA65830} = {C3BE7343-FD5A-42C7-85D0-2361060D273F}
+		{2500B895-AD1E-49BB-862A-D9DBDF7371FA} = {C3BE7343-FD5A-42C7-85D0-2361060D273F}
+	EndGlobalSection
+EndGlobal
