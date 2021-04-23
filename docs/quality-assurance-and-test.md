@@ -156,3 +156,23 @@ Currently we have templates for:
 
 - Issues
 - Repo structure and standard documentation
+
+When writing technical documentation for features/functionality following topics can be relevant:
+
+- Name/version/Service provided
+- Overall description and relation to the overall architectural landscape and functionality
+- Terms/Definitions used in document and solution
+- Acceptance criterias for the product
+- Preconditions/mandatory requirements of the product
+- Non functional requirements
+- Security notices. General description of security observations and needs
+- Contract relations
+- Test doubles used
+- Test data used
+- Class definitions
+- Validation rules
+- Expected result
+- Examples
+- Error codes
+- Debugging notes
+- Installation guides
