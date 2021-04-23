@@ -80,29 +80,65 @@ In each Green Energy Hub repo you will find a provided [Getting Started] and als
 
 ### Green Energy Hub - Test Data
 
-Green Energy Hub would like to publish test data for use and inspiration.
-
-Aggregation input data
-
-Scripts for populating DB
-
-Happy/Negative flows covered - everything else is up to the domain.
+Green Energy Hub would like for all contributors to share their knowledgde and artefacts used during building and testing. So if you contribute, and you already have created test data sets that covers general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a basis of test data to use.
 
 ### Green Energy Hub - Stubs and Mocks (Test Doubles)
 
-### Test levels and types
+We want to encourage the use of test doubles like stubs, drivers, mocks etc when working in a specific domain, where there are contracted integrations to other domains.
 
-There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub and how we use them.
+The Green Energy Hub is build on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividual developed, and with different scope - we are not able to provide fully implemented integrations points, and so we must use test doubles for simulating these integration points in our build process.
+
+When creating such, please share the relevant information and make sure that your test double fits already agreed contracts, or remember to give notice to the community if new integration points arises, or changes to contracts are needed.
+
+### Test activities and types
+
+There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub and how we use them. Some of these activities are only done on indivdual forks - but please see this as an inspiration to how you as an individual contributor or organisation can organize your quality activities. Depending on your contribution or task the coverage on different test activities might differ, and some might not be applicable. We do not want you to test for the sake of testing - but share the experiences and results of testing, so that the testing is a collaborative activity, where the community are open to share concerns, ideas and new ways of thinking.
+
+Are you using TTD or BDD or other types of code practises please be inspirational - but respect the difference in ways of working as well.
+
+- Peer Review (Mandatory activity in Green Energy Hub PR gate)
+
+- Unit/Component test (Mandatory activity in Green Energy Hub PR gate)
+
+- Internal Domain integration test
+
+- Infrastructure testing
+
+- Contract test
+
+- Inter-domain integration test
+
+- Performance testing
+
+- Security test
+
+- Automated regression test
+
+- Business flow test
 
 ## Tools
 
 In Green Energy Hub we need to share and delevop our ways of working - here will be of list of tools being used.
 
-[PACT]
-
 ### Code Coverage
 
-Unit test code coverage tool and KPI's.
+We are currently using Coverlet in our PR gate to ensure a 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to gain quality where possible, and also be true to the expectation of challenging your own work and others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
+
+**Types of Code Coverage**
+
+- Line Coverage
+100% line coverage are exercised when covering at least one element of each line.
+
+- Statement Coverage
+100% statement coverage is achieved when covering all statements in the code.
+
+- Decision Coverage
+100% Decision Coverage are exercised when all possible outcomes of decision statements are covered
+
+- Path Coverage
+Same approach as decision coverage, whereas decision coverage only test for all possible outcomes are functional - path coverage are to determine how the business logic are functional across multiple decisions.Path coverage will automatically require decisions being tested multiple times in different paths, and the test coverage for decision coverage will exceed 100% with path coverage.
+
+*NB! Always compare the result of unit test to expected result*
 
 ## Metrics
 
