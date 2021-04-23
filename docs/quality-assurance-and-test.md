@@ -98,7 +98,9 @@ Are you using TTD or BDD or other types of code practises please be inspirationa
 
 - Peer Review (Mandatory activity in Green Energy Hub PR gate)
 
-- Unit/Component test (Mandatory activity in Green Energy Hub PR gate)
+- Unit test (Mandatory activity in Green Energy Hub PR gate)
+
+- Component test
 
 - Internal Domain integration test
 
