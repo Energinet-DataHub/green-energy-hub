@@ -92,31 +92,33 @@ When creating such, please share the relevant information and make sure that you
 
 ### Test activities and types
 
-There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub and how we use them. Some of these activities are only done on indivdual forks - but please see this as an inspiration to how you as an individual contributor or organisation can organize your quality activities. Depending on your contribution or task the coverage on different test activities might differ, and some might not be applicable. We do not want you to test for the sake of testing - but share the experiences and results of testing, so that the testing is a collaborative activity, where the community are open to share concerns, ideas and new ways of thinking.
+There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub. Some of these activities are only done on indivdual forks - but please see this as an inspiration to how you as an individual contributor or organisation can organize your quality activities. Depending on your contribution or task the coverage on different test activities might differ, and some might not be applicable. We do not want you to test for the sake of testing - but share the experiences and results of testing, so that the testing is a collaborative activity, where the community are open to share concerns, ideas and new ways of thinking.
 
 Are you using TTD or BDD or other types of code practises please be inspirational - but respect the difference in ways of working as well.
 
 - Peer Review (Mandatory activity in Green Energy Hub PR gate)
 
-- Unit test (Mandatory activity in Green Energy Hub PR gate)
+- Unit Test (Mandatory activity in Green Energy Hub PR gate)
 
-- Component test
+- Component Test
 
-- Internal Domain integration test
+- Infrastructure Test
 
-- Infrastructure testing
+- Internal Domain Integration Test
 
-- Contract test
+- Domain System Test
 
-- Inter-domain integration test
+- Contract Test
 
-- Performance testing
+- Inter-domain Integration Test
 
-- Security test
+- Performance Test
 
-- Automated regression test
+- Security Test
 
-- Business flow test
+- Automated Regression Test
+
+- Business Process Test
 
 ## Tools
 
