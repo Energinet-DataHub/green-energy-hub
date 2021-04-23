@@ -96,6 +96,8 @@ There are a lot of frameworks and definitions of testing activities, and here we
 
 Are you using TTD or BDD or other types of code practises please be inspirational - but respect the difference in ways of working as well.
 
+(NB! The list is not thought to be sequential - only as inspiration)
+
 - Peer Review (Mandatory activity in Green Energy Hub PR gate)
 
 - Unit Test (Mandatory activity in Green Energy Hub PR gate)
