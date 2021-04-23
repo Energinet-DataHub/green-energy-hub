@@ -124,7 +124,7 @@ In Green Energy Hub we need to share and delevop our ways of working - here will
 
 We are currently using Coverlet in our PR gate to ensure a 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to gain quality where possible, and also be true to the expectation of challenging your own work and others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
 
-**Types of Code Coverage**
+#### Types of Code Coverage
 
 - Line Coverage
 100% line coverage are exercised when covering at least one element of each line.
@@ -136,9 +136,9 @@ We are currently using Coverlet in our PR gate to ensure a 80% unit test code co
 100% Decision Coverage are exercised when all possible outcomes of decision statements are covered
 
 - Path Coverage
-Same approach as decision coverage, whereas decision coverage only test for all possible outcomes are functional - path coverage are to determine how the business logic are functional across multiple decisions.Path coverage will automatically require decisions being tested multiple times in different paths, and the test coverage for decision coverage will exceed 100% with path coverage.
+Same approach as decision coverage, whereas decision coverage only test for all possible outcomes are functional - path coverage are to determine how the business logic are functional across multiple decisions. Path coverage will automatically require decisions being tested multiple times in different paths, and the test coverage for decision coverage will exceed 100% with path coverage.
 
-*NB! Always compare the result of unit test to expected result*
+NB! Always compare the result of unit test to expected result
 
 ## Metrics
 
