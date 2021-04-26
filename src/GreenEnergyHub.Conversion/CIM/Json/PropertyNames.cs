@@ -17,7 +17,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace GreenEnergyHub.Conversion.CIM.Json
 {
     [SuppressMessage("StyleCop.Analyzers", "SA1303", Justification = "Properties should match that of CIM convention")]
-    public static class PropertyNames
+    internal static class PropertyNames
     {
         public const string amount = nameof(amount);
         public const string businessProcessReferenceMktActivityRecord = "businessProcessReference_MktActivityRecord";

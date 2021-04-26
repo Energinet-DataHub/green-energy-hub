@@ -25,7 +25,7 @@ namespace GreenEnergyHub.Conversion.CIM.Json
     public abstract class JsonPayloadWriter<TPayload> : JsonPayloadWriter
         where TPayload : MktActivityRecord
     {
-        internal override void WritePayload(Utf8JsonWriter writer, MktActivityRecord record)
+        protected internal override void WritePayload(Utf8JsonWriter writer, MktActivityRecord record)
         {
             if (record is not TPayload payload) throw new ArgumentException("Input does not match record type");
 

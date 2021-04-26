@@ -17,8 +17,16 @@ using GreenEnergyHub.Conversion.CIM.Components;
 
 namespace GreenEnergyHub.Conversion.CIM.Json
 {
+    /// <summary>
+    /// An implementation is capable of writing the record to a Json document
+    /// </summary>
     public abstract class JsonPayloadWriter
     {
-        internal abstract void WritePayload(Utf8JsonWriter writer, MktActivityRecord record);
+        /// <summary>
+        /// Write <paramref name="record"/> to the <paramref name="writer"/>
+        /// </summary>
+        /// <param name="writer">write for the Json document</param>
+        /// <param name="record">record data to write</param>
+        protected internal abstract void WritePayload(Utf8JsonWriter writer, MktActivityRecord record);
     }
 }

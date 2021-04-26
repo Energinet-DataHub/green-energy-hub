@@ -17,6 +17,10 @@ using GreenEnergyHub.Conversion.CIM.Components;
 
 namespace GreenEnergyHub.Conversion.CIM.Json
 {
+    /// <summary>
+    /// JsonDocumentWriter that accepts a generic argument
+    /// </summary>
+    /// <typeparam name="TPayload">Payload type to write</typeparam>
     public class JsonDocumentWriter<TPayload> : JsonDocumentWriter
         where TPayload : MktActivityRecord
     {
@@ -24,6 +28,10 @@ namespace GreenEnergyHub.Conversion.CIM.Json
         : base(writer, payloadWriter)
         { }
 
+        /// <summary>
+        /// Write a payload to the Json document
+        /// </summary>
+        /// <param name="payload">payload to write</param>
         public void WritePayload(TPayload payload)
         {
             base.WritePayload(payload);

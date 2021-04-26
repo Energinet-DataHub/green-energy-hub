@@ -22,6 +22,9 @@ using GreenEnergyHub.Conversion.CIM.Components;
 
 namespace GreenEnergyHub.Conversion.CIM.Json
 {
+    /// <summary>
+    /// Write a Json document with the use of <see cref="Utf8JsonWriter"/>
+    /// </summary>
     public class JsonDocumentWriter : IAsyncDisposable, IDisposable
     {
         private readonly Stack<Action<Utf8JsonWriter>> _closeOperations;
@@ -31,13 +34,24 @@ namespace GreenEnergyHub.Conversion.CIM.Json
         private bool _marketDocumentWritten;
         private bool _payloadStartTagWritten;
 
-        public JsonDocumentWriter(Utf8JsonWriter writer, JsonPayloadWriter payloadWriter)
+        /// <summary>
+        /// Construct a <see cref="JsonDocumentWriter"/>
+        /// </summary>
+        /// <param name="writer">Json writer to use</param>
+        /// <param name="payloadWriter">Payload writer implementation</param>
+        internal JsonDocumentWriter(Utf8JsonWriter writer, JsonPayloadWriter payloadWriter)
         {
             _writer = writer;
             _payloadWriter = payloadWriter;
             _closeOperations = new Stack<Action<Utf8JsonWriter>>(5);
         }
 
+        /// <summary>
+        /// Write a <see cref="MarketDocument"/> to the output stream
+        /// </summary>
+        /// <param name="document">content to write</param>
+        /// <remarks>if called multiple times, it will only write on the first invocation</remarks>
+        /// <exception cref="ObjectDisposedException">object has been disposed</exception>
         public void WriteDocument(MarketDocument document)
         {
             if (_writer == null) throw new ObjectDisposedException(nameof(_writer), "Object has been disposed");
@@ -60,6 +74,11 @@ namespace GreenEnergyHub.Conversion.CIM.Json
             _writer.WriteMarketParticipant(PropertyNames.ReceiverMarketParticipant, document.Receiver);
         }
 
+        /// <summary>
+        /// Write a <see cref="MktActivityRecord"/> implementation
+        /// </summary>
+        /// <param name="record">record to write</param>
+        /// <exception cref="ObjectDisposedException">object has been disposed</exception>
         public void WritePayload(MktActivityRecord record)
         {
             if (_writer == null) throw new ObjectDisposedException(nameof(_writer), "Object has been disposed");
@@ -68,6 +87,11 @@ namespace GreenEnergyHub.Conversion.CIM.Json
             _payloadWriter.WritePayload(_writer, record);
         }
 
+        /// <summary>
+        /// Close the document
+        /// </summary>
+        /// <exception cref="ObjectDisposedException">object has been disposed</exception>
+        /// <remarks>This will also <see cref="Flush"/> the <see cref="Utf8JsonWriter"/></remarks>
         public void Close()
         {
             if (_writer == null) throw new ObjectDisposedException(nameof(_writer), "Object has been disposed");
@@ -80,6 +104,12 @@ namespace GreenEnergyHub.Conversion.CIM.Json
             Flush();
         }
 
+        /// <summary>
+        /// Close the document
+        /// </summary>
+        /// <param name="cancellationToken"><see cref="CancellationToken"/> for the current operation</param>
+        /// <exception cref="ObjectDisposedException">The object has been disposed</exception>
+        /// <remarks>This will also <see cref="FlushAsync"/> the <see cref="Utf8JsonWriter"/></remarks>
         public Task CloseAsync(CancellationToken cancellationToken = default)
         {
             if (_writer == null) throw new ObjectDisposedException(nameof(_writer), "Object has been disposed");
@@ -92,18 +122,30 @@ namespace GreenEnergyHub.Conversion.CIM.Json
             return FlushAsync(cancellationToken);
         }
 
+        /// <summary>
+        /// Flush the document
+        /// </summary>
+        /// <exception cref="ObjectDisposedException">Object has been disposed</exception>
         public void Flush()
         {
             if (_writer == null) throw new ObjectDisposedException(nameof(_writer), "Object has been disposed");
             _writer.Flush();
         }
 
+        /// <summary>
+        /// Flush the document
+        /// </summary>
+        /// <param name="cancellationToken"><see cref="CancellationToken"/> for the current operation</param>
+        /// <exception cref="ObjectDisposedException">Object has been disposed</exception>
         public Task FlushAsync(CancellationToken cancellationToken = default)
         {
             if (_writer == null) throw new ObjectDisposedException(nameof(_writer), "Object has been disposed");
             return _writer.FlushAsync(cancellationToken);
         }
 
+        /// <summary>
+        /// Dispose of the object
+        /// </summary>
         public async ValueTask DisposeAsync()
         {
             await DisposeAsyncCore();
@@ -112,6 +154,9 @@ namespace GreenEnergyHub.Conversion.CIM.Json
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Dispose of the object
+        /// </summary>
         public void Dispose()
         {
             Dispose(disposing: true);
