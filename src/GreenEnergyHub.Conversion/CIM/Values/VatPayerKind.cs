@@ -26,9 +26,9 @@ namespace GreenEnergyHub.Conversion.CIM.Values
         {
         }
 
-        public static VatPayerKind PayedByIssuer { get; } = new (D01);
+        public static VatPayerKind PayedByIssuer { get; } = new(D01);
 
-        public static VatPayerKind PayedByRecipient { get; } = new (D02);
+        public static VatPayerKind PayedByRecipient { get; } = new(D02);
 
         public static bool TryParse(string vatPayerCode, out VatPayerKind? vatPayerKind)
         {
