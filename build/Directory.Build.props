@@ -7,12 +7,12 @@
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.8.55" />
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" />
 
-        <!-- <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.333" /> -->
+        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.333" />
 
         <!--
         Additional settings for specific rules (e.g. SA1200 specify namespaces must be placed correctly, the json file then defines what "correctly" means)
         See also [stylecop.json](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md)
         -->
-        <!-- <AdditionalFiles Include="$(MSBuildThisFileDirectory)/stylecop.json" /> -->
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)/stylecop.json" />
     </ItemGroup>
 </Project>
