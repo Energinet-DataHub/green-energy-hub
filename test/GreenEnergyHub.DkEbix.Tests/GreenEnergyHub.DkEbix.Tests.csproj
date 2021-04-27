@@ -40,4 +40,10 @@ limitations under the License.
     <ProjectReference Include="..\..\src\GreenEnergyHub.DkEbix\GreenEnergyHub.DkEbix.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Assets\RSM033.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
