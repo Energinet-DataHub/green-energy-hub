@@ -28,6 +28,9 @@ namespace GreenEnergyHub.DkEbix
     /// </summary>
     public sealed class ConversionService
     {
+        /// <summary>
+        /// Map ebix documents to corresponding CIM objects
+        /// </summary>
         private static readonly Dictionary<Type, Type> _conversionMap = new ()
         {
             { typeof(Rsm033), typeof(RequestChangeOfPriceList) },

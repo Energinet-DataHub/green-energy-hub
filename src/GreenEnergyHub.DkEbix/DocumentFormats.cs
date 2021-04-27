@@ -17,6 +17,7 @@ namespace GreenEnergyHub.DkEbix
     internal static class DocumentFormats
     {
         internal static readonly ElementIdentification RSM033 = new (
-            "DK_RequestUpdateChargeInformation", "un:unece:260:data:EEM-DK_RequestUpdateChargeInformation:v3");
+            "DK_RequestUpdateChargeInformation",
+            "un:unece:260:data:EEM-DK_RequestUpdateChargeInformation:v3");
     }
 }

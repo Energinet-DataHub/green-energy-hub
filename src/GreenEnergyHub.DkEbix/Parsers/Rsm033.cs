@@ -22,7 +22,7 @@ using GreenEnergyHub.Conversion.CIM.Values;
 
 namespace GreenEnergyHub.DkEbix.Parsers
 {
-    public class Rsm033 : RsmParser
+    internal class Rsm033 : RsmParser
     {
         protected override async Task<MktActivityRecord?> ReadPayloadAsync(XmlReader reader)
         {
