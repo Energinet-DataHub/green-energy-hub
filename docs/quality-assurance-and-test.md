@@ -80,7 +80,7 @@ In each Green Energy Hub repo you will find a provided [Getting Started] and als
 
 ### Green Energy Hub - Test Data
 
-Green Energy Hub would like for all contributors to share their knowledgde and artefacts used during building and testing. So if you contribute, and you already have created test data sets that covers general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a basis of test data to use.
+Green Energy Hub would like for all contributors to share their knowledgde and artefacts used during building and testing. So if you contribute, and you already have created test data sets that cover general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a useful test data basis available.
 
 ### Green Energy Hub - Stubs and Mocks (Test Doubles)
 
