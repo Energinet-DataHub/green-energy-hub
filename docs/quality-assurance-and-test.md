@@ -88,13 +88,13 @@ We want to encourage the use of test doubles like stubs, drivers, mocks etc when
 
 The Green Energy Hub is built on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividually developed, and with different scopes - we are not able to provide fully implemented integration points, and so we must use test doubles for simulating these integration points in our build process.
 
-When creating such, please share the relevant information and make sure that your test double fits already agreed contracts, or remember to give notice to the community if new integration points arises, or changes to contracts are needed.
+When creating such, please share the relevant information and make sure that your test double fits already agreed contracts, or remember to give notice to the community if new integration points arise, or changes to contracts are needed.
 
 ### Test activities and types
 
 There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub. Some of these activities are only done on indivdual forks - but please see this as an inspiration to how you as an individual contributor or organisation can organize your quality activities. Depending on your contribution or task the coverage on different test activities might differ, and some might not be applicable. We do not want you to test for the sake of testing - but share the experiences and results of testing, so that the testing is a collaborative activity, where the community are open to share concerns, ideas and new ways of thinking.
 
-Are you using TTD or BDD or other types of code practises please be inspirational - but respect the difference in ways of working as well.
+Are you using TDD or BDD or other types of coding practises please be inspirational - but respect the difference in ways of working as well.
 
 (NB! The list is not a sequential representation of test activities)
 
