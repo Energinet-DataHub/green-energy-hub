@@ -10,7 +10,7 @@ This is a common responsibility, and are you, as a contributor, not able to meet
 
 ## Quality Risk
 
-Building a product always gives reason to consider product risk areas and the possible costs of these risks elements. In this section we would like to elaborate on how we are working with these considerations, and give inspration on how to practically address this.
+Building a product always gives reason to consider product risk areas and the possible costs of these risk elements. In this section we would like to elaborate on how we are working with these considerations, and give inspiration on how to practically address this.
 
 In a project like this product risk contains two overall questions
 
