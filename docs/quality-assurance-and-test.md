@@ -29,7 +29,7 @@ Regarding the second question on how we are delevoping our solutions. Here we ta
 
 ### Working with risk
 
-One way of mitigating risks is testing - but we are all familiar with the old saying that test is a timeboxed event/a bottleneck before go live - In Green Energy we wish to ensure that test/QA is happening all the time, by everyone. We don't have a verification team - we are all responsible for mitigating risks, and ensuring quality - so rest assure that it is never too early to talk quality.
+One way of mitigating risks is testing - but we are all familiar with the old saying that test is a timeboxed event/a bottleneck before go live - In Green Energy Hub we wish to ensure that test/QA is happening all the time, by everyone. We don't have a verification team - we are all responsible for mitigating risks, and ensuring quality - so rest assure that it is never too early to talk quality.
 
 ### Testing Quadrants
 
@@ -45,7 +45,7 @@ A way of visualizing the migitation of risks.
 
 ## Open Source and Test Approach Elements
 
-This section is meant as inspiration for all contributors to Green Energy Hub. Whether you're working on forked instance or delivering into the community - we would like to share the thoughts, and choices we have made to ensure QA and testing activities througout our work with Green Energy Hub. Some of the choices and activities are done to ensure an alignment towards our community and Green Energy Hub as a whole, and some activities are done in the Energinet setup.
+This section is meant as inspiration for all contributors to Green Energy Hub. Whether you're working on a forked instance or delivering into the community - we would like to share the thoughts, and choices, we have made to ensure QA and testing activities throughout our work with Green Energy Hub. Some of the choices and activities are done to ensure an alignment towards our community and Green Energy Hub as a whole, and some activities are done in the Energinet setup.
 
 ### Green Energy Hub - Working with issue templates
 
@@ -80,13 +80,13 @@ In each Green Energy Hub repo you will find a provided [Getting Started] and als
 
 ### Green Energy Hub - Test Data
 
-Green Energy Hub would like for all contributors to share their knowledgde and artefacts used during building and testing. So if you contribute, and you already have created test data sets that covers general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a basis of test data to use.
+Green Energy Hub would like for all contributors to share their knowledgde and artefacts used during building and testing. So if you contribute, and you already have created test data sets that cover general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a useful test data basis available.
 
 ### Green Energy Hub - Stubs and Mocks (Test Doubles)
 
 We want to encourage the use of test doubles like stubs, drivers, mocks etc when working in a specific domain, where there are contracted integrations to other domains.
 
-The Green Energy Hub is build on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividual developed, and with different scope - we are not able to provide fully implemented integrations points, and so we must use test doubles for simulating these integration points in our build process.
+The Green Energy Hub is built on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividually developed, and with different scopes - we are not able to provide fully implemented integration points, and so we must use test doubles for simulating these integration points in our build process.
 
 When creating such, please share the relevant information and make sure that your test double fits already agreed contracts, or remember to give notice to the community if new integration points arises, or changes to contracts are needed.
 
@@ -124,11 +124,11 @@ Are you using TTD or BDD or other types of code practises please be inspirationa
 
 ## Tools
 
-In Green Energy Hub we need to share and delevop our ways of working - here will be of list of tools being used.
+In Green Energy Hub we need to share and delevop our ways of working together - here will be a list of tools used.
 
 ### Code Coverage
 
-We are currently using Coverlet in our PR gate to ensure a 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to gain quality where possible, and also be true to the expectation of challenging your own work and others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
+We are currently using Coverlet in our PR gate to ensure 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to increase the level of quality where possible, and also be true to the expectation of challenging your own work and the work of others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
 
 #### Types of Code Coverage
 
