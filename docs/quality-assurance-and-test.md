@@ -128,7 +128,7 @@ In Green Energy Hub we need to share and delevop our ways of working - here will
 
 ### Code Coverage
 
-We are currently using Coverlet in our PR gate to ensure a 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to gain quality where possible, and also be true to the expectation of challenging your own work and others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
+We are currently using Coverlet in our PR gate to ensure 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to increase the level of quality where possible, and also be true to the expectation of challenging your own work and the work of others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
 
 #### Types of Code Coverage
 
