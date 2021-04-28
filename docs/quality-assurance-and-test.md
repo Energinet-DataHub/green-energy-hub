@@ -21,7 +21,7 @@ In regards to the first question - we want to be certain that the solution is de
 
 Writing acceptance criteria and/or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
 
-Building the right product has in earlier times been proven by a post-developing test - We want to have this mitigation before implementing, as a way of ensuring alignment of expectations. Thus the knowlegde and the learnings of this risk evaluation could also be used for automating regression test within the pipeline so we remember to re-visit our acceptance criteria throughout the delivery pipeline.
+Building the right product has in earlier times been proven by a post-developing test. We want to  mitigate risks during implementation, so that we are working with aligned expectations and relevant measures, so that we are able to avoid large-scaled testing bottle necks before deployment. The knowlegde and the learnings of risk evaluation could also be used for inspiring automated regression tests within a pipeline setup.
 
 Regarding the second question on how we are delevoping our solutions. Here we talk about issues that could affect the way we are able to deliver a solution. Considering complexity, knowledge levels, tools, experience etc. is important, as these risks could very easily impact the work needed and the quality of the solution.
 
