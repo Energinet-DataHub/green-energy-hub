@@ -6,7 +6,7 @@ Welcome to the introduction on how we are working with Quality Assurance and Tes
 
 As the founder of this project the danish TSO, Energinet, and Microsoft have together set the bar for the Green Energy Hub to be the best big data handling solution for green energy markets worldwide – and with this statement we all agree to work towards giving the world access to a maintainable, secure, configurable, and fast big data system.  
 We expect every contribution to be thorougly thought through, described, peer reviewed and tested before it can be accepted into our product portfolio.
-This is a common responsibility, and are you, as a contributor, not able to meet these guidelines by yourself, please reach out to the community for assistance, input or help towards ensuring your contribution lives up to this quality statement.
+This is a common responsibility, and are you, as a contributor, not able to meet these guidelines by yourself, please reach out to the community for assistance, input or help towards ensuring your contribution lives up to this quality expectation.
 
 ## Quality Risk
 
