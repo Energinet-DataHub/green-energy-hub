@@ -124,7 +124,7 @@ Are you using TTD or BDD or other types of code practises please be inspirationa
 
 ## Tools
 
-In Green Energy Hub we need to share and delevop our ways of working - here will be of list of tools being used.
+In Green Energy Hub we need to share and delevop our ways of working together - here will be a list of tools used.
 
 ### Code Coverage
 
