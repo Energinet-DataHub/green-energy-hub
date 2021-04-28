@@ -17,7 +17,7 @@ In a project like this product risk contains two overarching questions
 1. *Are we building the right product?*
 2. *Are we building the product right?*
 
-In regards to the first question - we want to be certain that the solution is delivering us the value we need. This question can be answered by evaulating on the quality characteristics of the product. Do the functionality reach the expected level of functionality, security, performance, maintainability, usability etc. Here it is important to have all the relevant considerations outlined before starting to implement. What is the value, the targets, the expectations and the formal requirements for this product.
+In regards to the first question - we want to be certain that the solution is delivering us the value we need. This question can be answered by evaulating on the quality characteristics of the product. Does the functionality reach the expected level of functionality, security, performance, maintainability, usability etc. Here it is important to have all the relevant considerations outlined before starting the implementation. What is the value, the targets, the expectations and the formal requirements for this product.
 
 Writing acceptance criteria and/or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
 
