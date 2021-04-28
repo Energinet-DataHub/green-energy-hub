@@ -86,7 +86,7 @@ Green Energy Hub would like for all contributors to share their knowledgde and a
 
 We want to encourage the use of test doubles like stubs, drivers, mocks etc when working in a specific domain, where there are contracted integrations to other domains.
 
-The Green Energy Hub is build on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividual developed, and with different scope - we are not able to provide fully implemented integrations points, and so we must use test doubles for simulating these integration points in our build process.
+The Green Energy Hub is built on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividually developed, and with different scopes - we are not able to provide fully implemented integration points, and so we must use test doubles for simulating these integration points in our build process.
 
 When creating such, please share the relevant information and make sure that your test double fits already agreed contracts, or remember to give notice to the community if new integration points arises, or changes to contracts are needed.
 
