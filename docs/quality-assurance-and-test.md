@@ -142,7 +142,7 @@ We are currently using Coverlet in our PR gate to ensure 80% unit test code cove
 100% Decision Coverage are exercised when all possible outcomes of decision statements are covered
 
 - Path Coverage
-Same approach as decision coverage, whereas decision coverage only test for all possible outcomes are functional - path coverage are to determine how the business logic are functional across multiple decisions. Path coverage will automatically require decisions being tested multiple times in different paths, and the test coverage for decision coverage will exceed 100% with path coverage.
+Same approach as decision coverage, whereas decision coverage only test for all possible outcomes are functional - path coverage are to determine how the business logic are functional across multiple decisions.  This means that to ensure Path coverage will require decisions being tested multiple times in different paths, and would result in test coverage for decisions will exceed 100% with path coverage.
 
 NB! Always compare the result of unit test to expected result
 
