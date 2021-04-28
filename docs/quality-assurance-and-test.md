@@ -45,7 +45,7 @@ A way of visualizing the migitation of risks.
 
 ## Open Source and Test Approach Elements
 
-This section is meant as inspiration for all contributors to Green Energy Hub. Whether you're working on forked instance or delivering into the community - we would like to share the thoughts, and choices we have made to ensure QA and testing activities througout our work with Green Energy Hub. Some of the choices and activities are done to ensure an alignment towards our community and Green Energy Hub as a whole, and some activities are done in the Energinet setup.
+This section is meant as inspiration for all contributors to Green Energy Hub. Whether you're working on a forked instance or delivering into the community - we would like to share the thoughts, and choices, we have made to ensure QA and testing activities throughout our work with Green Energy Hub. Some of the choices and activities are done to ensure an alignment towards our community and Green Energy Hub as a whole, and some activities are done in the Energinet setup.
 
 ### Green Energy Hub - Working with issue templates
 
