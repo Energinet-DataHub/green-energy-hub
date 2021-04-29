@@ -10,36 +10,36 @@ This is a common responsibility, and are you, as a contributor, not able to meet
 
 ## Quality Risk
 
-Building a product always gives reason to consider product risk areas and the possible costs of these risk elements. In this section we would like to elaborate on how we are working with these considerations, and give inspiration on how to practically address this.
+Building a product always gives reason to consider quality risk areas and the possible costs of these risk elements. In this section we would like to elaborate on how we are working with these considerations, and inspire on how to practically address them.
 
-In a project like this product risk contains two overarching questions
+In a product like this quality risk contains two overarching questions:
 
-1. *Are we building the right product?*
-2. *Are we building the product right?*
+1. **Are we building the right product?**
+2. **Are we building the product right?**
 
-In regards to the first question - we want to be certain that the solution is delivering us the value we need. This question can be answered by evaulating the quality characteristics of the product. Does the functionality reach our expected level of functionality, security, performance, maintainability, usability etc. In that way we are able to evaluate the product against the value, the targets, the expectations and the formal requirements for this product.
+In regards to the first question - we want to be certain that the solution delivers the value we expect and need. This question can be answered by evaluating the quality characteristics of the product. Does the functionality reach our expected level of functionality, security, performance, maintainability, usability etc. In that way we are able to evaluate the product against the value, the targets, the expectations and the formal requirements for this product.
 
 Writing acceptance criteria and/or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
 
-Building the right product has in earlier times been proven by a post-developing test. We want to  mitigate risks during implementation, so that we are working with aligned expectations and relevant measures, so that we are able to avoid large-scaled testing bottle necks before deployment. The knowlegde and the learnings of risk evaluation could also be used for inspiring automated regression tests within a pipeline setup.
+Building the right product has in earlier times been proven by a post-developing test. We want to mitigate risks during implementation, so that we are working with aligned expectations and relevant measures, so that we are able to avoid large-scaled testing bottlenecks before releasing it to end users. The knowlegde and the learnings of quality risk evaluation could also be used for inspiring automated regression tests within a pipeline setup.
 
-Regarding the second question on how we are delevoping our solutions. Here we talk about issues that could affect the way we are able to deliver a solution. Considering complexity, knowledge levels, tools, experience etc. is important, as these risks could very easily impact the work needed and the quality of the solution.
+Regarding the second question on how we are developing our solutions. Here we talk about issues that could affect the way we are able to deliver a solution. Considering complexity, knowledge levels, tools, experience etc. is important, as these could easily impact the quality of the delivered solution and thus the amount of quality assurance work needed to mitigate the quality risk.
 
 *Are you working on a product/solution and are you unsure of the risks - or how to mitigate certain risks you have identified? - use the community for collaboration and discussion.*
 
-### Working with risk
+### Working with quality risk
 
-One way of mitigating risks is testing - but we are all familiar with the old saying that test is a timeboxed event/a bottleneck before go live - In Green Energy Hub we wish to ensure that test/QA is happening all the time, by everyone. We don't have a verification team - we are all responsible for mitigating risks, and ensuring quality - so rest assure that it is never too early to talk quality.
+One way of mitigating quality risks is testing - but we are all familiar with the old saying that test is a timeboxed event/a bottleneck before go live - In Green Energy Hub we wish to ensure that test/QA is happening all the time, by everyone. We don't have a verification team - we are all responsible for mitigating risks, and ensuring quality - so rest assure that it is never too early to talk quality.
 
 ### Testing Quadrants
 
-One way of translating risk items to actual testing could be using the testing quadrants for identifying - the relevant test types for specific areas.
+One way of translating quality risk items to actual test activities could be done using the Testing Quadrants.
 
-[image]
+[TODO: Add image and elaborate]
 
 ### Risk Radar
 
-A way of visualizing the migitation of risks.
+A way of visualizing several quality risk areas within a domain or an entire solution.
 
 [TBW]
 
@@ -57,18 +57,18 @@ Please use domain repos and process tagging (e.g. change of energy supplier) on 
 
 ### Green Energy Hub - Content of Pull Requests
 
-A Pull Request should always be,
+A Pull Request is intended to be,
 
 - Related to an accepted issue
 - Have signed CLA's for both author and reviewers
 - Have a well-described purpose
-- Adhering to established project standards (Read more on ADR's and other standards here [Here])
-- Documented (The expectations to Documentation is further outlined [Here] )
-- Tested (The expectations for tested is further outlined [Here] )
+- Adhering to established project standards (Read more on ADR's and other standards [here])
+- Documented (The expectations for Documentation is further outlined [here])
+- Tested (The expectations for tested is further outlined [here])
 
 ### Green Energy Hub - Continuous integration
 
-In each Green Energy Hub repo you will find a provided [Getting Started] and also a pre-set of CI Pipeline that contains,
+In each Green Energy Hub repo you will find a Getting Started section and also a pre-set of CI Pipeline that contains,
 
 - Build Scripts
 - Validation of infrastructure
@@ -80,21 +80,21 @@ In each Green Energy Hub repo you will find a provided [Getting Started] and als
 
 ### Green Energy Hub - Test Data
 
-Green Energy Hub would like for all contributors to share their knowledgde and artefacts used during building and testing. So if you contribute, and you already have created test data sets that cover general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a useful test data basis available.
+Green Energy Hub would like for all contributors to share their knowledge and artefacts used during building and testing. So if you contribute, and you already have created test data sets that cover general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a useful test data basis available.
 
 ### Green Energy Hub - Stubs and Mocks (Test Doubles)
 
 We want to encourage the use of test doubles like stubs, drivers, mocks etc when working in a specific domain, where there are contracted integrations to other domains.
 
-The Green Energy Hub is built on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividually developed, and with different scopes - we are not able to provide fully implemented integration points, and so we must use test doubles for simulating these integration points in our build process.
+The Green Energy Hub is built on a domain structure and micro service setup - which causes a need for contrating our integration points between domains. As all domains are inividually developed, and with different scopes - we are not able to provide fully implemented integration points, and so we must use test doubles for simulating these integration points in our development process.
 
 When creating such, please share the relevant information and make sure that your test double fits already agreed contracts, or remember to give notice to the community if new integration points arise, or changes to contracts are needed.
 
 ### Test activities and types
 
-There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub. Some of these activities are only done on indivdual forks - but please see this as an inspiration to how you as an individual contributor or organisation can organize your quality activities. Depending on your contribution or task the coverage on different test activities might differ, and some might not be applicable. We do not want you to test for the sake of testing - but share the experiences and results of testing, so that the testing is a collaborative activity, where the community are open to share concerns, ideas and new ways of thinking.
+There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub. Some of these activities are only done on indivdual forks - but please see this as an inspiration to how you as an individual contributor or organisation can organize your testing activities. Depending on your contribution or task the coverage on different test activities might differ, and some might not be applicable. We do not want you to test for the sake of testing - but share the experiences and results of testing, so that the testing is a collaborative activity, where the community are open to share concerns, ideas and new ways of thinking.
 
-Are you using TDD or BDD or other types of coding practises please be inspirational - but respect the difference in ways of working as well.
+Are you using TDD or BDD or other types of coding practices please be inspirational - but respect the differences in ways of working as well.
 
 (NB! The list is not a sequential representation of test activities)
 
@@ -124,11 +124,11 @@ Are you using TDD or BDD or other types of coding practises please be inspiratio
 
 ## Tools
 
-In Green Energy Hub we need to share and delevop our ways of working together - here will be a list of tools used.
+In Green Energy Hub we need to share and develop our ways of working together - here will be a list of tools used.
 
 ### Code Coverage
 
-We are currently using Coverlet in our PR gate to ensure 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to increase the level of quality where possible, and also be true to the expectation of challenging your own work and the work of others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
+We are currently using Coverlet in our PR gate to ensure 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to increase the level of coverage where possible, and also be true to the expectation of challenging your own work and the work of others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
 
 #### Types of Code Coverage
 
@@ -139,7 +139,7 @@ We are currently using Coverlet in our PR gate to ensure 80% unit test code cove
 100% statement coverage is achieved when covering all statements in the code.
 
 - Decision Coverage
-100% Decision Coverage are exercised when all possible outcomes of decision statements are covered
+100% Decision Coverage ensures that all possible outcomes of the decision are tested at least once
 
 - Path Coverage
 In contrast to decision coverage, which tests each decision once and only once, path coverage tests a decision multiple times depending on the viable paths.
@@ -155,7 +155,7 @@ NB! Always compare the result of unit test to expected result
 
 ## NFR
 
-A catalog of common NFR considerations and targets [Read More](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/non-functional-requirements.md).
+A catalog of common NFR considerations and targets can be found [here](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/non-functional-requirements.md).
 
 ## Documentation - Standards/structures
 
