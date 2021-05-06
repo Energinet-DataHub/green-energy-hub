@@ -20,9 +20,9 @@ The documentation must contain a description of the dataflow ( e.g. direction, c
 
 Outline what kind of technical solution the integration point is build upon and how it works.
 
-## Message Types and Message Content + the use of Protobuf
+## Communication
 
-What is being exchanged between domains on the specific integration point.
+What is being exchanged between domains on the specific integration point, and how is it being exchanged.
 
 ## Configurations
 
@@ -32,9 +32,11 @@ Are there any specifics configurations or requirements needed to run the integra
 
 Please elaborate the business flow(s) that uses the integration point.
 
-## Version Control/Changelog
+## Versioning
 
-Ensure that you have considered how to run maintenance on it, and control of changes - so that other domains always are in loop on the updated functionality, changes, bug fixes etc.
+Does multiple versions of the integration point exist?
+
+And what about the content it distributes, does it come in several versions
 
 ## Test Data
 
@@ -44,10 +46,6 @@ We would like to provide our project with sample data that are used to test the 
 
 Describe how to set up monitoring on the integration point and what it should monitor - or describe what has already been implemented and where to get more information.
 
-## How To's
+## How have we tested this integration point
 
-Furthermore please consider other topics that would bring value to share on your specific integration point - so that others are self-helped to start working on and with the solution, both integrated domains but also in our community. We would like to inspire and knowledge share our solution - including the bounded contexts.
-
-### How to simulate the integration point - using test doubles
-
-### How to test and debug
+Please share your test setup and example(s).
