@@ -36,7 +36,7 @@ Please elaborate the business flow(s) that uses the integration point.
 
 Does multiple versions of the integration point exist?
 
-And what about the content it distributes, does it come in several versions
+And what about the content it distributes, does it come in several versions?
 
 ## Test Data
 
