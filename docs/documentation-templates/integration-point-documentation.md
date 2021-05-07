@@ -28,7 +28,7 @@ What is being exchanged between domains on the specific integration point, and h
 
 Are there any specifics configurations or requirements needed to run the integration.
 
-## Expected Behavior (rejections, passing etc)
+## Expected Behavior (positive and negative scenarios)
 
 Please elaborate the business flow(s) that uses the integration point.
 
@@ -38,9 +38,9 @@ Does multiple versions of the integration point exist?
 
 And what about the content it distributes, does it come in several versions?
 
-## Test Data
+## Sample Data
 
-We would like to provide our project with sample data that are used to test the integration point. Please refer to this from your documentation.
+Please add sample data, e.g. integration point input and output data.
 
 ## Integration Monitoring (Reporting, alarms etc)
 
