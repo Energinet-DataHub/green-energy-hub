@@ -22,7 +22,7 @@ Or join us on Slack...
 
 The Green Energy Hub have a public Slack channel for any questions.
 
-Join us [HERE](https://join.slack.com/t/greenenergyhub/shared_invite/zt-ik120p69-h8sysERkqRGS0Fj6adKqBw)
+Join us [HERE](https://join.slack.com/t/greenenergyhub/shared_invite/zt-oru9lk6v-lPZ5L_k1pX9TG4DiZmfI5A)
 
 ### The First Contribution
 
