@@ -10,39 +10,39 @@ The terms listed here are all terms relating to the topics of defining charges.
 |----------|-------------|
 | **A** |   |
 | **B** |   |
-| Business Reason Code | Indicates the business context, e.g. D10 = 'Request update charge information'. This covers all three charge operation types; 'create', 'update' and 'stop' |
+| Business Reason Code | Indicates the business context, e.g. D10 = 'Request update charge information', which covers all three charge operation types; 'Create', 'Update' and 'Stop' |
 | **C** |   |
 | Charge Description |  |
 | Charge Id | A charge identifier provided by the Market Participant. Combined with Charge Owner it becomes unique |
 | Charge Name |  |
-| Charge Owner | An identifier for the charge owner, e.g. the Market Participant's GLN number |
-| Charge Type | The type of charge; this could be either Tariff, Fee or Subscription  |
-| Currency |The charge price currency |
+| Charge Owner | A charge owner identification, e.g. the Market Participant's GLN or EIC number |
+| Charge Type | The type of charge; tariff, fee or subscription  |
+| Currency | The charge price currency |
 | **D** |   |
 | **E** |   |
 | **F** |   |
 | **G** |   |
 | **H** |   |
 | **I** |   |
-| IndustryClassification | Indicates the industry context, e.g. E23 = Electricity |
+| Industry Classification | Indicates the industry context, e.g. E23 = Electricity |
 | **J** |   |
 | **K** |   |
 | **L** |   |
 | **M** |   |
 | **N** |   |
 | **O** |   |
-| Operation Type | Indicates the type of operation, e.g. 'Create', 'Update' or 'Stop' a charge |
+| Operation Type | Indicates the type of charge operation, e.g. 'Create', 'Update' or 'Stop' |
 | **P** |   |
 | Position | Indicates a price's position in a charge price list |
-| Price | Charge price |
+| Price | A charge price |
 | **Q** |   |
 | **R** |   |
 | Resolution | The resolution of a charge price list, e.g. 15 mins, hourly, daily, monthly |
 | **S** |   |
 | **T** |   |
-| Tax Indicator |  |
+| Tax Indicator | Government tax indicator |
 | Time | A point in time where the charge price applies |
-| Transparent Invoicing | Indicates whether the Charge Owner wants the charge to be displayed on the customer invoice |
+| Transparent Invoicing | Indicates whether the charge Owner wants the charge to be displayed on the customer invoice |
 | **U** |   |
 | **V** |   |
 | VAT Classification | Indicates whether Value Added Tax applies |
