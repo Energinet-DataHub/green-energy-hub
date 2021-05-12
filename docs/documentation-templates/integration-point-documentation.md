@@ -8,6 +8,8 @@ To ensure that we are able to define specific contracts containing all relevant 
 
 We encourage that all domains have a visual overview on the contexts, that the domain is a part of. But futher more each of the integration points needs to be defined with following information when applicable.
 
+See an explanation of bounded context in [Getting Started](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/getting-started.md)
+
 ## Ownership of Integration Point (which domain are in charge of defining, building and maintaining the integration point function)
 
 Before setting up an integration point we want to establish ownership. This may vary depending on the function of the integration. Having ownership does not mean that other domains cannot make changes through PR's, but the changes must be approved by code owners and must happen to the owning repository. That is why the integration point must also be documented in the domain of the ownership.
