@@ -40,12 +40,12 @@ The terms listed here are all terms relating to the topics of defining charges.
 | Resolution | The resolution of a charge price list, e.g. 15 mins, hourly, daily, monthly |
 | **S** |   |
 | **T** |   |
-| Tax Indicator | Government tax indicator |
+| Tax Indicator | Indicates whether a tariff is considered a tax or not |
 | Time | A point in time where the charge price applies |
 | Transparent Invoicing | Indicates whether the charge Owner wants the charge to be displayed on the customer invoice |
 | **U** |   |
 | **V** |   |
-| VAT Classification | Indicates whether Value Added Tax applies |
+| VAT Classification | Indicates whether the charge is subject to Value Added Tax (VAT) |
 | **W** |   |
 | **X** |   |
 | **Y** |   |
