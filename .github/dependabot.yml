@@ -5,10 +5,13 @@
 version: 2
 updates:
   - package-ecosystem: "nuget"
-    directory: "/src"
+    directory: "/src/GreenEnergyHub.Conversion"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "NodaTime"
+        update-types: ["version-update:semver-patch"]
   - package-ecosystem: "nuget"
-    directory: "/test"
+    directory: "/test/GreenEnergyHub.Conversion.Tests"
     schedule:
       interval: "weekly"
