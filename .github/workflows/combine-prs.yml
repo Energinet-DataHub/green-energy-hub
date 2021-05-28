@@ -2,6 +2,9 @@ name: 'Combine PRs'
 
 # Controls when the action will run - in this case triggered manually
 on:
+  pull_request:
+    branches:
+      - feature/dbj-126273-change-dependabot-configurations
   workflow_dispatch:
     inputs:
       branchPrefix:
