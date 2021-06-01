@@ -66,7 +66,7 @@ This is not a full list but can inspire to consider.
 
 ## Suitability (of infrastructure)
 
-- Expectation on technical architecture in a general sense – relevance and how it interconnects)
+- Expectation on technical architecture in a general sense – relevance and how it interconnects
 
 ## Maintainability
 
