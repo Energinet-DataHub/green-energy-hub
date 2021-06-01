@@ -2,6 +2,8 @@
 
 Welcome to the introduction on how we are working with Quality Assurance and Testing in the Green Energy Hub.
 
+ This document focuses on various concepts, concerns, and approaches we consider while working on this product. How we specifically organise our approach to testing in the Danish implementation will be published as a Test Strategy at a later date.
+
 ## Quality Statement
 
 As the founder of this project the danish TSO, Energinet, and Microsoft have together set the bar for the Green Energy Hub to be the best big data handling solution for green energy markets worldwide – and with this statement we all agree to work towards giving the world access to a maintainable, secure, configurable, and fast big data system.  
@@ -19,11 +21,12 @@ In a product like this quality risk contains two overarching questions:
 
 In regards to the first question - we want to be certain that the solution delivers the value we expect and need. This question can be answered by evaluating the quality characteristics of the product. Does the functionality reach our expected level of functionality, security, performance, maintainability, usability etc. In that way we are able to evaluate the product against the value, the targets, the expectations and the formal requirements for this product.
 
-Writing acceptance criteria and/or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase. But don't forget to try and reason for the costs of not delivering to target or expectation.
+Writing acceptance criteria and/or use case scenarios before starting to develop is a great way to ensure that all considerations are taken into account during the development phase.
 
 Building the right product has in earlier times been proven by a post-developing test. We want to mitigate risks during implementation, so that we are working with aligned expectations and relevant measures, so that we are able to avoid large-scaled testing bottlenecks before releasing it to end users. The knowlegde and the learnings of quality risk evaluation could also be used for inspiring automated regression tests within a pipeline setup.
 
-Regarding the second question on how we are developing our solutions. Here we talk about issues that could affect the way we are able to deliver a solution. Considering complexity, knowledge levels, tools, experience etc. is important, as these could easily impact the quality of the delivered solution and thus the amount of quality assurance work needed to mitigate the quality risk.
+Regarding if we are building the product right it is important to evaluate if the chosen architecture, technologies and tooling fits the purpose.
+Does the business domain warrant a specific architecture to seperate concerns? Do we need to structure business domains in similar ways, or is it only the contracts between them that matter? All this, and more, are important considerations as they will impact the quality of the delivered solution and thus the amount of quality assurance work needed to mitigate quality risk. And most importantly, does the second question enforce the answers to the first?
 
 *Are you working on a product/solution and are you unsure of the risks - or how to mitigate certain risks you have identified? - use the community for collaboration and discussion.*
 
@@ -37,15 +40,7 @@ One way of translating quality risk items to actual test activities could be don
 
 [TODO: Add image and elaborate]
 
-### Risk Radar
-
-A way of visualizing several quality risk areas within a domain or an entire solution.
-
-[TBW]
-
-## Open Source and Test Approach Elements
-
-This section is meant as inspiration for all contributors to Green Energy Hub. Whether you're working on a forked instance or delivering into the community - we would like to share the thoughts, and choices, we have made to ensure QA and testing activities throughout our work with Green Energy Hub. Some of the choices and activities are done to ensure an alignment towards our community and Green Energy Hub as a whole, and some activities are done in the Energinet setup.
+## Open Source work flows
 
 ### Green Energy Hub - Working with issue templates
 
@@ -78,11 +73,11 @@ In each Green Energy Hub repo you will find a Getting Started section and also a
 - Spell, links and lint checks
 - [...]
 
-### Green Energy Hub - Test Data
+## Green Energy Hub - Test Data
 
 Green Energy Hub would like for all contributors to share their knowledge and artefacts used during building and testing. So if you contribute, and you already have created test data sets that cover general happy/negative flows, core calculations or scripts for populating DB etc. Please don't hesitate to share these in the specific domain you are working. In that way we support each other in always having a useful test data basis available.
 
-### Green Energy Hub - Stubs and Mocks (Test Doubles)
+## Green Energy Hub - Stubs and Mocks (Test Doubles)
 
 We want to encourage the use of test doubles like stubs, drivers, mocks etc when working in a specific domain, where there are contracted integrations to other domains.
 
@@ -90,7 +85,7 @@ The Green Energy Hub is built on a domain structure and micro service setup - wh
 
 When creating such, please share the relevant information and make sure that your test double fits already agreed contracts, or remember to give notice to the community if new integration points arise, or changes to contracts are needed.
 
-### Test activities and types
+## Test activities and types
 
 There are a lot of frameworks and definitions of testing activities, and here we will outline the concepts used within Green Energy Hub. Some of these activities are only done on indivdual forks - but please see this as an inspiration to how you as an individual contributor or organisation can organize your testing activities. Depending on your contribution or task the coverage on different test activities might differ, and some might not be applicable. We do not want you to test for the sake of testing - but share the experiences and results of testing, so that the testing is a collaborative activity, where the community are open to share concerns, ideas and new ways of thinking.
 
@@ -124,38 +119,31 @@ Are you using TDD or BDD or other types of coding practices please be inspiratio
 
 ## Tools
 
-In Green Energy Hub we need to share and develop our ways of working together - here will be a list of tools used.
+In Green Energy Hub we need to share and develop our ways of working together - here will be a list of tools used for different test activities.
 
-### Code Coverage
+- CodeCov, see code coverage
 
-We are currently using Coverlet in our PR gate to ensure 80% unit test code coverage. This is not blocking for PR's - yet - but we would like all to consider how to increase the level of coverage where possible, and also be true to the expectation of challenging your own work and the work of others. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
+[TODO: Add remaining part of list]
 
-#### Types of Code Coverage
+## Code Coverage
+
+We are currently using CodeCov in our PR gate to measure code coverage with the ambition of reaching 80 %. If you don't reach the target, consider why, what could increase your coverage and have you used different coverage types when designing your unit test.
+
+### Types of Code Coverage
+
+CodeCov uses the following types of coverage:
 
 - Line Coverage
 100% line coverage are exercised when covering at least one element of each line.
 
-- Statement Coverage
-100% statement coverage is achieved when covering all statements in the code.
+- Branch Coverage
+100% Branch Coverage ensures that all possible outcomes of a decision are tested at least once
 
-- Decision Coverage
-100% Decision Coverage ensures that all possible outcomes of the decision are tested at least once
+NB! Always compare the result of unit test to expected result.
 
-- Path Coverage
-In contrast to decision coverage, which tests each decision once and only once, path coverage tests a decision multiple times depending on the viable paths.
+## Non-functional requirements
 
-- Method Coverage
-100% Method coverage is achieved when all methods have been called
-
-NB! Always compare the result of unit test to expected result
-
-## Metrics
-
-[TBD]
-
-## NFR
-
-A catalog of common NFR considerations and targets can be found [here](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/non-functional-requirements.md).
+A catalog of common non-functional requirements can be found [here](https://github.com/Energinet-DataHub/green-energy-hub/blob/main/docs/non-functional-requirements.md).
 
 ## Documentation - Standards/structures
 
@@ -164,21 +152,28 @@ The Green Energy Hub project and repos are build on structures and templates.
 Currently we have templates for:
 
 - Issues
+- Bug reports
 - Repo structure and standard documentation
+
+When writing documentation for how a process work these things are essential to include:
+
+- What is the purpose of this functionality? What problem does it solve?
+- How does it fit in the grand scheme of things
+- How does it work? What is the expected input, and what can we expect as output?
+- How is it architecturally structured? What technologies are used and why?
 
 When writing technical documentation for features/functionality following topics can be relevant:
 
 - Name/version/Service provided
 - Overall description and relation to the overall architectural landscape and functionality
 - Terms/Definitions used in document and solution
-- Acceptance criterias for the product
+- Acceptance criteria for the product
 - Preconditions/mandatory requirements of the product
-- Non functional requirements
+- Non-functional requirements
 - Security notices. General description of security observations and needs
 - Contract relations
 - Test doubles used
 - Test data used
-- Class definitions
 - Validation rules
 - Expected result
 - Examples
