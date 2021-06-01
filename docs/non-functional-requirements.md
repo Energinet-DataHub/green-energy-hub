@@ -2,7 +2,7 @@
 
 Non-functional requirements are “Expected Product Properties and User Expectations”
 
-This means that these are not requirements that can be implemented as a feature – but expectations that can be fulfilled when implementing features.
+This means that these are not functional requirements that can be implemented as a feature – but expectations that are to be fulfilled when implementing features.
 
 This is not a full list but can inspire to consider.
 
