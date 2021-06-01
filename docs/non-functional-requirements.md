@@ -66,7 +66,7 @@ This is not a full list but can inspire to consider.
 
 ## Suitability (of infrastructure)
 
-- Expectation on technical architecture in a general sense – relevance and how it interconnects)
+- Expectation on technical architecture in a general sense – relevance and how it interconnects
 
 ## Maintainability
 
@@ -110,7 +110,7 @@ This is not a full list but can inspire to consider.
 - The expectation on automated test (regression or in general)
 - Test tools – is the system possible for user testing?
 - Expectation on how the test results is made, used, published and assessed.
-- Possibility of the system can be manipulated for testing purposes.
+- Possibility of the system to be manipulated for testing purposes.
 
 ## User-friendliness
 

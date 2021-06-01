@@ -16,14 +16,6 @@ For general inquiries - please reach out by submitting an issue through [Green E
 
 Or contact our project management by [mail](mailto:greenenergyhub@energinet.dk)
 
-Or join us on Slack...
-
-### Joining the Slack Community
-
-The Green Energy Hub have a public Slack channel for any questions.
-
-Join us [HERE](https://join.slack.com/t/greenenergyhub/shared_invite/zt-oru9lk6v-lPZ5L_k1pX9TG4DiZmfI5A)
-
 ### The First Contribution
 
 Contributing to open source can be intimidating, but you can do it!
