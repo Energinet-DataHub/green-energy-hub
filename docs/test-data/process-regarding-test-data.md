@@ -13,7 +13,7 @@ The ENDK Datahub business will generate and own a generic dataset containing the
 
 The dataset's IDs will be unique to avoid problems when the test data migration from the ENDK Datahub 2 commence.
 
-As evident from the master data attributes listed above, this dataset will only contain a limited set of data. However, using the dataset as the foundation, teams will be able to create mocked data and associate these with a meaningful set of master data. Generation of mock data (and the ownership of these) will be the responsibility of the team that needs to run a test suite, e.g. infra domain integration tests.
+As evident from the master data attributes listed above, this dataset will only contain a limited set of data. However, using the dataset as the foundation, teams will be able to create mocked data and associate these with a meaningful set of master data. Generation of mock data (and the ownership of these) will be the responsibility of the team that needs to run a test suite, e.g. intra domain integration tests.
 
 ## Where to find and how to update
 
