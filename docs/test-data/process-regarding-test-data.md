@@ -2,7 +2,7 @@
 
 The ENDK Datahub business will generate and own a generic dataset containing the master data as listed below. This dataset is intented to be the foundation for testing activities of Green Energy Hub on the DEV and TEST environments.
 
-* Organisation name and IDs (GLN and EIC[^1]) for a number of:
+* Organisation name and IDs (GLN and EIC - see Footnote 1) for a number of:
     * Energy Suppliers
     * Balance Responsible parties
     * Grid operators
@@ -23,4 +23,4 @@ Thereby the generic dataset will be available to the GEH community. As Green Ene
 
 However, if additional generic attributes needs be added to the dataset, please send this request to team Mighty Ducks by raising an issue in the green-energy-hub repository and assign it to: ASQ-EN, djorgensendk, and Renetnielsen. For the community to be able to work with a consistent dataset, updates to it needs to be coordinated.
 
-[^1]: The EIC field will be available, but it value is not yet mandatory, as the format is yet to be determined.
+Footnote 1: The EIC field will be available, but it value is not yet mandatory, as the format is yet to be determined.
