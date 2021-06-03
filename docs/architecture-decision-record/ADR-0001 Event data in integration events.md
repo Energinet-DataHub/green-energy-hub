@@ -16,6 +16,7 @@ Green Energy Hub is platform composed of several domains that need to exchange d
 ## Decision Outcome
 
 Option 2 has been chosen because this option is the best fit to support a loosely coupled architecture, where the domains are flexible, extensible and resilient.
+A domain can only distribute data the domain is responsible for. And not collected data from other domains.
 
 ### Positive Consequences
 
