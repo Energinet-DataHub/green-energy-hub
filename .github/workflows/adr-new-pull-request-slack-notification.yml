@@ -29,7 +29,7 @@ jobs:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_CHANNEL: renes-test
+          SLACK_CHANNEL: architectural-decision-records
           SLACK_COLOR: '#f2fc35'
           SLACK_ICON: https://github.com/Energinet-DataHub/green-energy-hub/raw/main/images/geh_logo.jpg?size=48
           SLACK_MESSAGE: 'Someone either made a pull request containing a new Architectural Decision, or edits to a current one. We encourage you to go check it out. :shipit:'
