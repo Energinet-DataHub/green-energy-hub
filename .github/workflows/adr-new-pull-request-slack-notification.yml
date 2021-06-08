@@ -19,6 +19,7 @@ on:
       - main
     paths:
       - docs/architecture-decision-record/*
+    types: [ opened, reopened ]
   workflow_dispatch: {}
   
 jobs:
