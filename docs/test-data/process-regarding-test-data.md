@@ -19,7 +19,7 @@ As evident from the master data attributes listed above, this dataset will only 
 
 The generic dataset will be made accessible as an Excel spreadsheet in the green-energy-hub repository in the [dataset](./dataset/) folder.
 
-Thereby the generic dataset will be available to the GEH community. As Green Energy Hub grows and matures, this dataset as expected to do so as well. But as of now, June 2021, the dataset is scoped to the aforementioned master data.
+Thereby the generic dataset will be available to the GEH community. As Green Energy Hub grows and matures, this dataset is expected to do so as well. But as of now, June 2021, the dataset is scoped to the aforementioned master data.
 
 However, if additional generic attributes needs be added to the dataset, please send this request to team Mighty Ducks by raising an issue in the green-energy-hub repository and assign it to: ASQ-EN, djorgensendk, and Renetnielsen. For the community to be able to work with a consistent dataset, updates to it needs to be coordinated.
 
