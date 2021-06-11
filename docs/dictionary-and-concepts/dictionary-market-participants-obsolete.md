@@ -4,8 +4,6 @@ This dictionary will cover the general use of attributes naming in documentation
 
 The terms listed here, are all terms relating to the topics of defining Market Participants
 
-
-
 ## **Market Participants**
 
 | Role | Definition    |
