@@ -23,4 +23,4 @@ Thereby the generic dataset will be available to the GEH community. As Green Ene
 
 However, if additional generic attributes needs be added to the dataset, please send this request to team Mighty Ducks by raising an issue in the green-energy-hub repository and assign it to: ASQ-EN, djorgensendk, and Renetnielsen. For the community to be able to work with a consistent dataset, updates to it needs to be coordinated.
 
-Footnote 1: The EIC field will be available, but it value is not yet mandatory, as the format is yet to be determined.
+Footnote 1: The EIC field will be available, but its value is not yet mandatory, as the format is yet to be determined.
