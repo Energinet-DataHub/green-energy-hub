@@ -5,7 +5,7 @@ The ENDK Datahub business will generate and own a generic dataset containing the
 * Organisation name and IDs (GLN and EIC - see Footnote 1) for a number of:
     * Energy Suppliers
     * Balance Responsible parties
-    * Grid operators
+    * Grid Access Providers
     * eSett (the Nordic imbalance settlement)
     * System operators
 * 10 Grid areas
