@@ -5,7 +5,7 @@ This index references the general ADRs (those placed in this folder) as well as 
 * Database
     * [ADR-0006](ADR-0006%20-%20Use%20of%20Change%20Data%20Capture%20(SQL%20Server).md)
 * Data formats
-    * [ARD-0002](ADR-0002%20-%20Decision%20on%20how%20to%20convert%20from%20Ebix%20to%20CIM%20standards.md)
+    * [ARD-0002](ADR-0002%20-%20Decision%20on%20how%20to%20convert%20from%20Ebix%20to%20CIM%20standards.MD)
     * [ADR-0003](ADR-0003%20-%20Inter-service%20communication.md)
 * Domains and their communication
     * [ADR-0001](ADR-0001%20-%20Event%20data%20in%20integration%20events.md)
