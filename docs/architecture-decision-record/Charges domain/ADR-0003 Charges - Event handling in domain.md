@@ -1,4 +1,4 @@
-# Event handling in the Charges domain
+# ADR0003 Charges: Event handling in the Charges domain
 
 * Status: approved
 * Deciders: `@bemwen, @bjarkemeier, @Mech0z, @lasrinnil, @prtandrup, @HenrikSommer`

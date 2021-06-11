@@ -1,4 +1,4 @@
-# Use of Change Data Capture (SQL Server)
+# ADR0006 Use of Change Data Capture (SQL Server)
 
 * Status: [Deprecated]
 * Deciders: @xmspe @prtandrup @perthenriksen @MartinFHansen

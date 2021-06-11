@@ -1,4 +1,4 @@
-# Segregate the system into smaller chunks (domains)
+# ADR0004 Segregate the system into smaller chunks (domains)
 
 * Status: decided
 * Deciders: @renetnielsen, @MartinFHansen, @kft, @djorgensendk, @ftoft, @bemwen
