@@ -8,14 +8,15 @@
 
 Green Energy Hub is platform composed of several domains that need to exchange data through integration events to realize the intended business value. The inter-domain communication between the domains must be flexible, extensible, and resilient to break downs in other parts of the platform.
 
+## Decision Outcome
+
+Option 2 has been chosen because this option is the best fit to support a loosely coupled architecture, where the domains are flexible, extensible and resilient.
+A domain can only publish data the domain owns, and not data collected from other domains.
+
 ## Considered Options
 
 - Option 1: Events informing that an action has occured (e.g. a market evaluation point has been created) without any additional event data.
 - Option 2: Events informing that an action has occured (e.g. a market evaluation point has been created) with additional event data (e.g. ID and location of the new market evaluation point).
-
-## Decision Outcome
-
-Option 2 has been chosen because this option is the best fit to support a loosely coupled architecture, where the domains are flexible, extensible and resilient.
 
 ### Positive Consequences
 
@@ -43,7 +44,7 @@ Option 2 has been chosen because this option is the best fit to support a loosel
 - Good, because inter-domain communication in Green Energy Hub is done using one communication paradigm.
 - Good, because domains are not depended on the availability of applications in other domains.
 - Bad(ish), because the Protobuf contracts that describe the integration events will be extended over time with new properties being sent (results in a new version of a contract).
-    - If used correctly Protobuf contracts are backward and forward compatible, see links.
+- If used correctly Protobuf contracts are backward and forward compatible, see links.
 
 ## Links
 

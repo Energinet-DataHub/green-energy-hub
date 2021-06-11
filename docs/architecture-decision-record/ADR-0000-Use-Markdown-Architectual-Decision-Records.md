@@ -9,14 +9,6 @@
 We want to record architectural decisions made in this project.
 Which format and structure should these records follow?
 
-## Considered Options
-
-* [MADR](https://github.com/adr/madr) - The Markdown Architectural Decision Records.
-* [Michael Nygard's template](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions) – The first incarnation of the term "ADR"
-* [Sustainable Architectural Decisions](https://www.infoq.com/articles/sustainable-architectural-design-decisions) – The Y-Statements
-* Other templates listed at <https://github.com/joelparkerhenderson/architecture_decision_record>
-* Formless – No conventions for file format and structure
-
 ## Decision Outcome
 
 Chosen option: "MADR 2.1.2", because
@@ -28,3 +20,11 @@ Chosen option: "MADR 2.1.2", because
 * The MADR structure is comprehensible and facilitates usage & maintenance.
 * The MADR project is vivid.
 * Version 2.1.2 is the latest one available when starting to document ADRs.
+
+## Considered Options
+
+* [MADR](https://github.com/adr/madr) - The Markdown Architectural Decision Records.
+* [Michael Nygard's template](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions) – The first incarnation of the term "ADR"
+* [Sustainable Architectural Decisions](https://www.infoq.com/articles/sustainable-architectural-design-decisions) – The Y-Statements
+* Other templates listed at <https://github.com/joelparkerhenderson/architecture_decision_record>
+* Formless – No conventions for file format and structure
