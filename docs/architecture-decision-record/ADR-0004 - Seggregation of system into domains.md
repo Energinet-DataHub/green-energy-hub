@@ -29,10 +29,6 @@ The currently identified domains:
 As we progress further into these workshops with the business, we will identity more domains, especially in context of TimeSeries and MarketData.
 These will then be added as a new ADR.
 
-Based on this outcome, we would also need to create new ADR's.
-
-* [ADR explaining how domains should communicate](https://github.com/Energinet-DataHub/green-energy-hub/issues/715)
-
 ## Decision Drivers
 
 * We need better support for commit teams, because the current structure with mono repo and folders does not give us the possibility to use the github teams tools.
