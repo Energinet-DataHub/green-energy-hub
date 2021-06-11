@@ -4,7 +4,7 @@ This dictionary will cover the general use of attributes naming in documentation
 
 The terms listed here, are all terms relating to the topics of defining Market Participants
 
-All terms defined here are created as part the Harmonnised Electricity Market Role model created by entso-e. The list is in progress and not a total list for the time being.
+
 
 ## **Market Participants**
 
