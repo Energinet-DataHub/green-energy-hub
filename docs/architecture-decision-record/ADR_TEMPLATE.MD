@@ -6,6 +6,8 @@
 
 Technical Story: [description | ticket/issue URL] <!-- optional -->
 
+***DELETE THIS IN ADR: Remember to update the ADR index (found in [README.md](README.md)) with the new ARD. Depending on the topic of the new ARD either add it to the existing list of ADR topics OR add a new entry in the list of ADR topics.***
+
 ## Context and Problem Statement
 
 [Describe the context and problem statement, e.g., in free form using two to three sentences. You may want to articulate the problem in form of a question.]
