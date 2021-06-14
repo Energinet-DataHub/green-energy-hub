@@ -43,32 +43,36 @@ All domains is created using the same domain template, which means that the foll
 
 To begin setting up a domain, you will need to make sure you can check off the following:
 
-- [ ] A team that is experienced in the following technologies
+- A team that is experienced in the following technologies
     - Azure Cloud
-        - Azure DataBricks
-        - Azure Function App
-        - Azure Storage Account
-        - Azure Cosmos DB
-        - Azure Service Plan
-        - Azure App Service
-        - Azure Application Insights
-        - Azure KeyVault
-        - Azure Event Hub
-        - Azure Event Grid
-        - Azure Shared Dashboard
-        - Azure SQL Server
-        - Azure SQL Database
-        - Azure CDN
-    - Terraform + Terraform Azure Provider
-    - .NET 5+
-    - Github Actions (CI/CD)
-    - Git
-    - Github
-    - Github Markdown Language
-- [ ] Azure Cloud
-    - An active Azure Subscription [Azure Cloud Environment](https://azure.microsoft.com/en-gb/free/)
-    - An Azure Resource Group located inside the above subscription
-    - Azure Service Principal including a secret that has access to deploy to the above resource group
+        - `Azure DataBricks`
+        - `Azure Function App`
+        - `Azure Storage Account`
+        - `Azure Cosmos DB`
+        - `Azure Service Plan`
+        - `Azure App Service`
+        - `Azure Application Insights`
+        - `Azure KeyVault`
+        - `Azure Event Hub`
+        - `Azure Event Grid`
+        - `Azure Service Bus`
+        - `Azure Shared Dashboard`
+        - `Azure SQL Server`
+        - `Azure SQL Database`
+        - `Azure CDN`
+        - `Azure API Gateway`
+        - `Azure Active Directory`
+    - `Terraform` with the `Terraform Azure Provider`
+    - `.NET 5+`
+    - `Python`
+    - `Github Actions` (CI/CD)
+    - `Git`
+    - `Github`
+    - `Github Markdown Language`
+- Azure Cloud
+    - An active `Azure Subscription`, see [Azure Cloud Environment](https://azure.microsoft.com/en-gb/free/).
+    - An `Azure Resource Group` located inside the above subscription.
+    - An `Azure Service Principal` including a secret that has access to deploy to the above resource group.
 
 ### Forking a domain
 
