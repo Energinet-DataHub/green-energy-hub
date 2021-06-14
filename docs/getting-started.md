@@ -41,9 +41,14 @@ All domains is created using the same domain template, which means that the foll
 
 ### Prerequisites
 
-To begin setting up a domain, you will need to make sure you can check off the following:
+To begin setting up a domain, you will need to do the following:
 
-- A team that is experienced in the following technologies
+1. Create a Github Organisation
+2. Create an Azure Cloud Environment
+    1. Create an active `Azure Subscription`, see [Azure Cloud Environment](https://azure.microsoft.com/en-gb/free/).
+    2. Create an `Azure Resource Group` located inside the above subscription.
+    3. Create an `Azure Service Principal` including a secret that has access to deploy to the above resource group.
+3. Get a hold of a team that is experienced in the following technologies
     - Azure Cloud
         - `Azure DataBricks`
         - `Azure Function App`
@@ -69,10 +74,6 @@ To begin setting up a domain, you will need to make sure you can check off the f
     - `Git`
     - `Github`
     - `Github Markdown Language`
-- Azure Cloud
-    - An active `Azure Subscription`, see [Azure Cloud Environment](https://azure.microsoft.com/en-gb/free/).
-    - An `Azure Resource Group` located inside the above subscription.
-    - An `Azure Service Principal` including a secret that has access to deploy to the above resource group.
 
 ### Forking a domain
 
