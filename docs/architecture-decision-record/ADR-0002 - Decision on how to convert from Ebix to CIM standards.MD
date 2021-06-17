@@ -1,14 +1,18 @@
-# Decision on how to convert from Ebix to CIM standards
+# ADR0002 Decision on how to convert from Ebix to CIM standards
 
-* Status: [Accepted] <!-- optional -->
-* Deciders: Martin F. Hansen, René Thyge Nielsen, Daniel Bjerring Jørgensen, Søren Søndergaard <!-- optional -->
-* Date: 2021-03-18 (PI4 Planning event) <!-- optional -->
+* Status: [Accepted] - But needs to be re-written following decisions regarding use of Ebix vs. CIM
+* Deciders: Martin F. Hansen, René Thyge Nielsen, Daniel Bjerring Jørgensen, Søren Søndergaard
+* Date: 2021-03-18 (PI4 Planning event)
 
 Technical Story: <https://github.com/Energinet-DataHub/geh/issues/6>
 
 ## Context and Problem Statement
 
 The Danish electricty market are communicating with the Datahub using a Ebix formated message content for both incoming and outgoing messages. The decision for the Datahub 3.0 is that all internal communication are done in a CIM (ENTSO-e format) formatting. To be able to implement CIM conversion it has been decided that the system team will provide a 'CIM dictionary' for following RSM-messages (EbiX) 001, 004, 033, a conversion-engine and a guide for how all teams are able to implement the conversion engine and create CIM aligned data within their repective domains.
+
+## Decision Outcome
+
+Chosen option: Each domain have the freedom to do their own conversion to CIM or internal format by using a centralized aligned 'dictionary' and tool created for this. This option that supports all decision drivers, giving an aligned naming according to ENTSO-e standard, ensure team responsibility but on an aligned format for internal implementation within domains.
 
 ## Decision Drivers
 
@@ -22,10 +26,6 @@ The Danish electricty market are communicating with the Datahub using a Ebix for
 * 1. It was considered to deliver one conversion tool within message entry point of the system (API management)
 * 2. It was considered that each domain had the freedom to do their own conversion to CIM or internal format by using a centralized aligned 'dictionary' and tool created for this.
 * 3. It was considered that the system team would implement all conversion tools in domain across the platform
-
-## Decision Outcome
-
-Chosen option: "[option 2]", because it is the option that would support all decision drivers, giving an aligned naming according to ENTSO-e standard, ensure team responsibility but on an aligned format for internal implementation within domains.
 
 ### Positive Consequences
 
