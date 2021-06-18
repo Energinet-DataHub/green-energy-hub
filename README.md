@@ -116,9 +116,9 @@ To understand the journey of Green Energy Hub, is to understand the business obj
 | Market Roles | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-market-roles#domain-roadmap)
 | Data Requests | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-data-requests#domain-road-map) |
 | **System Domains** |  |  |  |
-| Shared Resources | ACTIVE | JUNE, 2021 | [Link](https://github.com/Energinet-DataHub/geh-shared-resources/blob/main/README.md) |
+| Shared Resources | ACTIVE | SEPTEMBER 2021 | [Link](https://github.com/Energinet-DataHub/geh-shared-resources/blob/main/README.md) |
 | Validation Reports | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-validation-reports/blob/main/README.md) |
-| Post Office | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-post-office/blob/main/README.md) |
+| Post Office | ACTIVE | SEPTEMBER 2021 | [Link](https://github.com/Energinet-DataHub/geh-post-office/blob/main/README.md) |
 | API Gateway | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-api-gateway/blob/main/README.md) |
 <br>
 
