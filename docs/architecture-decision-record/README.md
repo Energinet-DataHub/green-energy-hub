@@ -14,7 +14,7 @@ This index references the general ADRs (those placed in this folder) as well as 
     * [Charges ARD-0003](Charges%20domain/ADR-0003%20Charges%20-%20Event%20handling%20in%20domain.md)
 * Test strategy and techniques
     * [ADR-0005 Leverage Integration Testing using Test Containers](ADR-0005%20-%20Leverage%20integration%20testing%20using%20test%20containers.md)
-    * [ADR-0008 Choice of test framework for intradomain integration points when testing prior to dev] 
+    * ADR-0008 Choice of test framework for intradomain integration points when testing prior to dev
 * .NET decisions
     * [ADR-0007 .NET upgrade strategy](ADR-0007%20-%20.NET%20upgrade%20path.md)
 
