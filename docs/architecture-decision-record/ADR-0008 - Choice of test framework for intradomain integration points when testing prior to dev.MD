@@ -1,7 +1,7 @@
-# [short title of solved problem and solution]
+# How to test integration points within domains prior to deploying to DEV (U) environment
 
-* Status: [proposed | rejected | accepted | deprecated | … | superseded by [ADR-xxxx]] <!-- optional -->
-* Deciders: [list everyone involved in the decision] <!-- optional -->
+* Status: [Proposed]
+* Deciders: []
 * Date: [YYYY-MM-DD when the decision was last updated] <!-- optional -->
 
 Technical Story: [description | ticket/issue URL] <!-- optional -->
@@ -10,19 +10,33 @@ Technical Story: [description | ticket/issue URL] <!-- optional -->
 
 ## Context and Problem Statement
 
-[Describe the context and problem statement, e.g., in free form using two to three sentences. You may want to articulate the problem in form of a question.]
+How can we leverage integration testing, so that it
 
-## Decision Drivers <!-- optional -->
+* Increases our software confidence
+* Supports an efficient development process
+* Enables a fast and reliable feedback loop
+* Guards the DEV environment from becoming unstable and thereby increases DEV availability
+* Enables us to ensure connectivity and data correctness
 
-* [driver 1, e.g., a force, facing concern, …]
-* [driver 2, e.g., a force, facing concern, …]
+To be able to ensure that our integrations componenets are set up correctly and functional with expected behavior before deploying to DEV (U). We need to use a framework that allows us to create local instances for testing prior to deployment to DEV environment.
+
+## Decision Drivers
+
+* We need an integration test solution that fits a microservice architecture as well as the practices of DevOps
+* The solution must solve the problem with cloud components that cannot be emulated, specifically for local testing efforts
+* We emphasize failing fast, having quick and reliable feedback loops and DEV environment stability and availability
+* We want a solution that does not require a full domain setup in an environment
+* The solution must be easy to set up and tear down as part of PR gate or deployment gates
+* We want a solution that are not affected by infrastructure, so test results are not biased by infrastructure issues
+
 * … <!-- numbers of drivers can vary -->
 
 ## Considered Options
 
-* [option 1]
-* [option 2]
-* [option 3]
+* Option 1: Running integration tests in a Test Container
+* Option 2: Running integration tests in a PR environment
+* Option 3: Using a test framework like Squadron, that enables to test in a container setup with the ability to connect to services in Azure.
+
 * … <!-- numbers of options can vary -->
 
 ## Decision Outcome
