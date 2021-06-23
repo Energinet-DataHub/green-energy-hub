@@ -1,7 +1,7 @@
 # How to test integration points within domains prior to deploying to DEV (U) environment
 
 * Status: [Proposed]
-* Deciders: []
+* Deciders: [@Sondergaard, @Energinet-Datahub/mightyducks]
 * Date: [YYYY-MM-DD when the decision was last updated] <!-- optional -->
 
 Technical Story: [description | ticket/issue URL] <!-- optional -->
@@ -29,7 +29,29 @@ To be able to ensure that our integrations componenets are set up correctly and 
 * The solution must be easy to set up and tear down as part of PR gate or deployment gates
 * We want a solution that are not affected by infrastructure, so test results are not biased by infrastructure issues
 
-* … <!-- numbers of drivers can vary -->
+
+Following use cases were identified, that needs to be covered by this test framework:
+
+* ### Integration to Event Hub
+
+Verifying event is generated in event hub and that it contains expected data.
+
+* ### Integration to a ServiceBus
+
+Publishing a ChargeCommandReceived event from an azure function (MessageReceiver). Receiving this event from yet another az function (ChargeCommandReceiver). 
+The test will be initiated by a HTTP POST call with JSON content.
+(No seed data required)
+
+* ### Databricks integration to a DeltaLake
+
+Write access - storing a time series in the DeltaLake (from Databricks)
+It is assumed that the test will be initiated by placing valid test data on an EventHub from which Databricks will fetch the time series.
+(No seed data required)
+
+* ### Integration to an Sql database
+
+Read/Write access for reading and storing a charge from an azure functions.
+The database must include seed data (MarketParticipants table), Charge test data is not required.
 
 ## Considered Options
 
