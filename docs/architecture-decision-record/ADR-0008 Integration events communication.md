@@ -22,17 +22,12 @@ When designing `micro services` there are some design principles. One of these a
 
 ## Decision Outcome
 
-Chosen option: "[option 1]", because [justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].
+Both technologies support message pub/sub. The difference lies in the volume and the guarantees they give. `Azure Event Hub` is capable of handling massive amount of events, but it comes as the cost of ordering of messages and guarantees about delivering messages. `Azure Service Bus` does not support as high throughput but is capable of storing events for a defined time-limit, ordering of messages, sessions and can route messages based on topics and queues.
 
-### Positive Consequences <!-- optional -->
+With this in mind each technology should be used for specific tasks.
 
-* [e.g., improvement of quality attribute satisfaction, follow-up decisions required, …]
-* …
-
-### Negative Consequences <!-- optional -->
-
-* [e.g., compromising quality attribute, follow-up decisions required, …]
-* …
+* When publishing time series events we have to deal with high volume - this fit with the model of `Azure Event Hub`.
+* For other events the hypothesis is that the volume is very low compared to time series. The volume is expected to fit within the limitations of `Azure Service Bus`.
 
 ## Pros and Cons of the Options <!-- optional -->
 
