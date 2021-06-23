@@ -36,19 +36,19 @@ The terms listed here are all terms relating to the topics of defining metering.
 | Meter Reading Periodicity| The frequency for which a metered data will be submitted |
 | Meter Type |  |
 | Metering Grid Area |  A Metering Grid Area is a physical area where consumption, production and exchange can be measured. It is delimited by the placement of meters for continuous measurement for input to, and withdrawal from the area. **Additional information:** It can be used to establish volumes that cannot be measured such as network losses. |
-| Metering Point | An entity where energy products are measured or computed.|
+| Metering Point | An entity where energy products are measured or computed |
 | Metering Point ID | A unique metering point identifier |
 | Metering Point Type | Indicates the type of a metering point, e.g. Exchange |
 | MP Description | An option that can be used to describe how a physical meter can be located, e.g. basement |
 | Multiplier |  Meter conversion |
 | **N** |   |
 | **O** |   |
-| Observation Time | A calculated value that indicates a date and time for a position in a time series |
+| Observation Time | A calculated value that indicates a date and time for a position in a time series period |
 | Out Area |  Indicates which grid an exchange point transports energy out of |
 | **P** |   |
 | Parent Metering Point | A term used when a Metering Point, or Accounting Point becomes part of a Metering Point Parent-Child hierachy, where the Parent acts as the top-level Metering Point. |
 | Point | One point equals one measurement within in time series. If a metering point is hourly read, a time series for a single day contains 24 points (Except for days switching between daylight saving time and standard time) |
-| Position | Indicates the position of a measurement within a time series' period |
+| Position | Indicates the position of a measurement within a time series period |
 | Product | An energy product identification, e.g. active energy |
 | **Q** |   |
 | Quantity | Quantity of a specific type of energy |
@@ -57,7 +57,7 @@ The terms listed here are all terms relating to the topics of defining metering.
 | Rated Capacity | The maximum amount of power contracted for a metering point |
 | Rated Current |  The maximum amount of current contracted for a metering point |
 | Register | A physical or logical counter measuring energy products |
-| Registration Date Time | A time series property indicating the point in time the time series measurements were read of the metering point |
+| Registration Date Time | A time series property indicating the point in time where the time series measurements were read of the metering point |
 | Resolution | A resolution defines the precision a time series period is divided into. Expressed using ISO 8601, where e.g. 'PT1H' equals an hourly resolution |
 | **S** |   |
 | Settlement Method | A metering point's settlement method, e.g. flex settled |
