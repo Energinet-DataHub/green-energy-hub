@@ -101,7 +101,7 @@ Are you using TDD or BDD or other types of coding practices please be inspiratio
 
 - Infrastructure Test
 
-- Internal Domain Integration Test
+- Intra Domain Integration Test
 
 - Domain System Test
 
