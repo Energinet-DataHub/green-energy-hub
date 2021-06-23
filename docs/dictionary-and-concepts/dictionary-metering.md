@@ -14,7 +14,7 @@ The terms listed here are all terms relating to the topics of defining metering.
 | **B** |   |
 | Business Reason Code | Indicates the business context, e.g. E23 = 'Periodic metering' used with time series |
 | **C** |   |
-| Created Date Time | A date and time property used in all messages exchanged with Green Energy Hub. It indicates when a particular message was created |
+| Created Date Time | A date and time property used in all messages exchanged with Green Energy Hub. It indicates when a particular message was created, and it is provided by the sender of the message |
 | Child Metering Point | a sub category of metering points that are all in relation to an accounting point  |
 | **D** |   |
 | Disconnection Type |  How the metering point can be disconnected |
@@ -47,7 +47,7 @@ The terms listed here are all terms relating to the topics of defining metering.
 | Out Area |  Indicates which grid an exchange point transports energy out of |
 | **P** |   |
 | Parent Metering Point | A term used when a Metering Point, or Accounting Point becomes part of a Metering Point Parent-Child hierachy, where the Parent acts as the top-level Metering Point. |
-| Point | One point equals one measurement within in time series. If a metering point is hourly read, a time series for a single day contains 24 points (Except for days switching between daylight saving time and standard time) |
+| Point | One point equals one measurement within a time series. If a metering point is hourly read, a time series for a single day contains 24 points (Except for days switching between daylight saving time and standard time) |
 | Position | Indicates the position of a measurement within a time series period |
 | Product | An energy product identification, e.g. active energy |
 | **Q** |   |
