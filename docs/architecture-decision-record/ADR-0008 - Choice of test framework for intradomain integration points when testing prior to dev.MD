@@ -29,7 +29,6 @@ To be able to ensure that our integrations componenets are set up correctly and 
 * The solution must be easy to set up and tear down as part of PR gate or deployment gates
 * We want a solution that are not affected by infrastructure, so test results are not biased by infrastructure issues
 
-
 Following use cases were identified, that needs to be covered by this test framework:
 
 * ### Integration to Event Hub
