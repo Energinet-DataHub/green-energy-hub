@@ -1,4 +1,4 @@
-# Leverage Integration Testing using Test Containers
+# ADR0005 Leverage Integration Testing using Test Containers
 
 * Status: Decided
 * Deciders: @prtandrup, @renetnielsen, @erduna, @martinfhansen, @asq-en, @Mech0z
@@ -19,7 +19,14 @@ How can we leverage integration testing, so that it
 
 And how to overcome the problem with cloud components that cannot be emulated, like Event Hubs?
 
-## Decision Drivers <!-- optional -->
+## Decision Outcome
+
+Chosen option: Running integration tests in a Test Container.
+
+Please note that this is a strategical decision that entails doing a Proof-of-Concept to explore the technical capabilities of test containers in the DataHub context.
+Further explanation and justification why this option was chosen can be read below.
+
+## Decision Drivers
 
 The decision will be based on the following drivers:
 
@@ -34,13 +41,6 @@ In the long run, the current solution could potentially impose high maintenance 
 * Option 1: Running integration tests in a Test Container
 * Option 2: Running integration tests in a Sandbox environment
 * Option 3: Continue with our initial integration test solution (Booking and releasing resources in DEV)
-
-## Decision Outcome
-
-Chosen option: Option 1.
-
-Please note that this is a strategical decision that entails doing a Proof-of-Concept to explore the technical capabilities of test containers in the DataHub context.
-Further explanation and justification why this option was chosen can be read below.
 
 ### Test Containers
 

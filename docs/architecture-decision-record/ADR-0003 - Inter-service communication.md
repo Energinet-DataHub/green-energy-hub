@@ -11,6 +11,10 @@ Technical Story: [description | ticket/issue URL] <!-- optional -->
 We need alignment on contracts between services and verification on the receiving end.
 We also need to separate concerns of input validation, serialization, mapping and transport layer.
 
+## Decision Outcome
+
+We will expand on the GreenEnergyHub.Messaging framework with better separation of concerns, and in DataHub, we'll use Protobuf. This will give us clear contracts that'll work across tech stacks and give us an added performance bump with the downside of messages not being human-readable.
+
 ## Decision Drivers <!-- optional -->
 
 * We used an unhealthy amount of time debugging inter-services communication.
@@ -20,10 +24,6 @@ We also need to separate concerns of input validation, serialization, mapping an
 * Protobuf
 * Open API
 * nuget shared C# Dtos
-
-## Decision Outcome
-
-We will expand on the GreenEnergyHub.Messaging framework with better separation of concerns, and in DataHub, we'll use Protobuf. This will give us clear contracts that'll work across tech stacks and give us an added performance bump with the downside of messages not being human-readable.
 
 ### Positive Consequences <!-- optional -->
 

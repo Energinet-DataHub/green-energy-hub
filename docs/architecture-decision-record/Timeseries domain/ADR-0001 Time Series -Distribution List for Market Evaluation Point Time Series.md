@@ -1,4 +1,4 @@
-# Architecture for Distribution Lists for Market Evaluation Point Observations
+# ADR0001 Timeseries: Architecture for Distribution Lists for Market Evaluation Point Observations
 
 * Status: decided
 * Deciders: @BjarkeMeier, @prtandrup
@@ -11,6 +11,14 @@ Technical Story: ADO 108070: ODS Enabler: Design - Use of distribution list in D
 Architecture on how to handle distribution list of market evaluation point time series needs to be decided. Any correlation to aggregations must be taken into account.
 
 _MarketData DB in the context of this ADR simply represents "something" from where necessary data is fetched. This can be any kind of one or multiple microservices. The important thing, though, is that it should *not* be assumed to be a database with direct SQL access._
+
+## Decision Outcome
+
+Chosen option: option 1 "Handle distribution list as part of the master data", because it
+
+* supports co-located logic relating to determine receivers
+* simplifies the critical streaming job
+* simplifies the architecture (by not introducing another ODS as outlined by the current architecture diagram)
 
 ## Considered Options
 
@@ -25,14 +33,6 @@ Option 1 is shown with solid lines. Option 2 is shown with the dimmed "ODS Distr
 None of the solutions add any complexity regarding the _sync window problem_. See [ADR-0002](../Charges%20domain/ADR-0002%20Charges%20-%20Price%20Architecture.md) for more information about this problem.
 
 **It is worth noting that this solution does not address distribution lists for aggregations as suggested by the current state of the architectural diagram of the whole system. Those distribution lists are different and thus require their own design decisions - and probably also solution.**
-
-## Decision Outcome
-
-Chosen option: option 1 "Handle distribution list as part of the master data", because it
-
-* supports co-located logic relating to determine receivers
-* simplifies the critical streaming job
-* simplifies the architecture (by not introducing another ODS as outlined by the current architecture diagram)
 
 ## Pros and Cons of the Options <!-- optional -->
 
