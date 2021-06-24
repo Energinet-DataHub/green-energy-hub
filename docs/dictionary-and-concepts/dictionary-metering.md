@@ -12,7 +12,7 @@ The terms listed here are all terms relating to the topics of defining metering.
 | Accounting Point |  A domain under balance responsibility where Energy Supplier change can take place and for which commercial business processes are defined. **Additional information:** This is a type of Metering Point. |
 | Asset Type | The technology used on a specific metering point  |
 | **B** |   |
-| Business Reason Code | Indicates the business context, e.g. E23 = 'Periodic metering' used with time series |
+| Business Reason Code | Indicates the business context, e.g. 'Periodic metering' used with time series |
 | **C** |   |
 | Created Date Time | A date and time property used in all messages exchanged with Green Energy Hub. It indicates when a particular message was created, and it is provided by the sender of the message |
 | Child Metering Point | a sub category of metering points that are all in relation to an accounting point  |
@@ -26,8 +26,7 @@ The terms listed here are all terms relating to the topics of defining metering.
 | **G** |   |
 | **H** |   |
 | **I** |   |
-| Industry Classification | Indicates the industry context, e.g. E23 = Electricity |
-| In Area | Indicates which grid an exchange point transports energy into   |
+| In Area | Indicates which grid an exchange point transports energy into |
 | **J** |   |
 | **K** |   |
 | **L** |   |
@@ -43,7 +42,7 @@ The terms listed here are all terms relating to the topics of defining metering.
 | Multiplier |  Meter conversion |
 | **N** |   |
 | **O** |   |
-| Observation Time | A calculated value that indicates a date and time for a position in a time series period |
+| ObservationDateTime | A calculated value that indicates a date and time for a position in a time series period |
 | Out Area |  Indicates which grid an exchange point transports energy out of |
 | **P** |   |
 | Parent Metering Point | A term used when a Metering Point, or Accounting Point becomes part of a Metering Point Parent-Child hierachy, where the Parent acts as the top-level Metering Point. |
