@@ -1,4 +1,4 @@
-# Architecture for Tariff Price Time Series
+# ADR0002 Charges: Architecture for Tariff Price Time Series
 
 * Status: approved
 * Deciders: @bemwen, @bjarkemeier
@@ -11,6 +11,23 @@ Technical Story: Design architectural sketches for processing tariff price time 
 Tariff price time series are to be ingested and made available to aggregations in a suitable way. Investigate options and select solution.
 
 Please note that solution for tariff price time series handling should fit well with other price elements (daily tariffs, fees, subscriptions). All of the these must support create, update and delete.
+
+## Decision Outcome
+
+Chosen option: Option 1 "Store in Market Data DB", because it
+
+* ensures that all price values are stored in the same storage resource (not supported by option 2)
+* keeps the current streaming simple and focused (not supported by option 3 and 4)
+* keeps architecture simple by not introducing new elements (not supported by any other option)
+* does not have _the sync window problem_(*)
+
+(*) Explained below.
+
+The solution architecture
+
+![Solution architecture](ADR-0002%20Charges%20-Price%20Architecture.png "Solution architecture")
+
+The diagram can be opened and edited using drawio.
 
 ## Considered Options
 
@@ -35,23 +52,6 @@ The options above multiply as a number of combinations of which the following ha
 (\*) Here _enrichment_ has the meaning of using the price time series in the (current) streaming of market evaluation points to enrich the time series points stored in TimeSeries Data Storage.
 
 The options are listed in order of preference.
-
-## Decision Outcome
-
-Chosen option: Option 1 "Store in Market Data DB", because it
-
-* ensures that all price values are stored in the same storage resource (not supported by option 2)
-* keeps the current streaming simple and focused (not supported by option 3 and 4)
-* keeps architecture simple by not introducing new elements (not supported by any other option)
-* does not have _the sync window problem_(*)
-
-(*) Explained below.
-
-The solution architecture
-
-![Solution architecture](ADR-0002%20Charges%20-Price%20Architecture.png "Solution architecture")
-
-The diagram can be opened and edited using drawio.
 
 ### The sync window problem
 

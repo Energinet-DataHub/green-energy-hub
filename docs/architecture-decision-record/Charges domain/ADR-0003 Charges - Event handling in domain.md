@@ -1,4 +1,4 @@
-# Event handling in the Charges domain
+# ADR0003 Charges: Event handling in the Charges domain
 
 * Status: approved
 * Deciders: `@bemwen, @bjarkemeier, @Mech0z, @lasrinnil, @prtandrup, @HenrikSommer`
@@ -9,6 +9,18 @@ Technical Story: ADO-119260
 ## Context and Problem Statement
 
 This address how we want to handle events in the charge domain, which we have identified to be highly event-driven domain.
+
+## Decision Outcome
+
+Chosen option: "Option 4 - Event driven architecture, using the Service Bus".
+
+This options was chosen because it gives us the most freedom in how to design and implement the charges domain, keeping the design simpler and the cost lower.
+
+In comparison, option 1 does not live up to our requirements of multiple subscribers and does not really promote event driven architecture in the degree that we want to.
+
+Option 2 and 3 will require at least the same amount of work as option 4, but will most likely be more expensive to run later. In addition, event sourcing does not seem to benefit us enough in this domain to justify the added complexity and cost.
+
+As such, we will move forward with implementing an event driven architecture in the charges domain, without going fully into event sourcing.
 
 ## Decision Drivers
 
@@ -22,18 +34,6 @@ This address how we want to handle events in the charge domain, which we have id
 * Option 2 - Event sourcing, by use of Service Bus retention
 * Option 3 - Preparing for event sourcing, saving events in external storage (for example table storage)
 * __Option 4 - Event driven architecture, using the Service Bus__
-
-## Decision Outcome
-
-Chosen option: "Option 4 - Event driven architecture, using the Service Bus".
-
-This options was chosen because it gives us the most freedom in how to design and implement the charges domain, keeping the design simpler and the cost lower.
-
-In comparison, option 1 does not live up to our requirements of multiple subscribers and does not really promote event driven architecture in the degree that we want to.
-
-Option 2 and 3 will require at least the same amount of work as option 4, but will most likely be more expensive to run later. In addition, event sourcing does not seem to benefit us enough in this domain to justify the added complexity and cost.
-
-As such, we will move forward with implementing an event driven architecture in the charges domain, without going fully into event sourcing.
 
 ### Positive Consequences <!-- optional -->
 

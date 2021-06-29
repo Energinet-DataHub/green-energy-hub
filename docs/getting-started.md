@@ -1,6 +1,7 @@
 # Getting started
 
 - [Introduction](#introduction)
+    - [Bounded contexts](#bounded-contexts)
     - [Relevant links](#relevant-links)
 - [Setting up a domain](#setting-up-a-domain)
     - [Prerequisites](#prerequisites)
@@ -40,10 +41,39 @@ All domains is created using the same domain template, which means that the foll
 
 ### Prerequisites
 
-To begin setting up a domain, you will need the following:
+To begin setting up a domain, you will need to do the following:
 
-- Azure
-    - Azure cloud subscription [Azure Cloud Environment](https://azure.microsoft.com/en-gb/free/)
+1. Create a Github Organisation
+2. Create an Azure Cloud Environment
+    1. Create an active `Azure Subscription`, see [Azure Cloud Environment](https://azure.microsoft.com/en-gb/free/).
+    2. Create an `Azure Resource Group` located inside the above subscription.
+    3. Create an `Azure Service Principal` including a secret that has access to deploy to the above resource group.
+3. Get a hold of a team that is experienced in the following technologies
+    - Azure Cloud
+        - `Azure DataBricks`
+        - `Azure Function App`
+        - `Azure Storage Account`
+        - `Azure Cosmos DB`
+        - `Azure Service Plan`
+        - `Azure App Service`
+        - `Azure Application Insights`
+        - `Azure KeyVault`
+        - `Azure Event Hub`
+        - `Azure Event Grid`
+        - `Azure Service Bus`
+        - `Azure Shared Dashboard`
+        - `Azure SQL Server`
+        - `Azure SQL Database`
+        - `Azure CDN`
+        - `Azure API Gateway`
+        - `Azure Active Directory`
+    - `Terraform` with the `Terraform Azure Provider`
+    - `.NET 5+`
+    - `Python`
+    - `Github Actions` (CI/CD)
+    - `Git`
+    - `Github`
+    - `Github Markdown Language`
 
 ### Forking a domain
 
