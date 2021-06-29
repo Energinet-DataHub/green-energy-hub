@@ -38,7 +38,7 @@ Azure Event Hubs is designed for big data and streaming. It is capable of scalin
 It builds upon the concept of pub/sub and their by decoupling producer and consumer of events.
 
 * Can process huge amount of event with low latency
-* Guaranties delivery at least once
+* Guarantees delivery at least once
 * Supports ordering of events, if they are pinned to a specific partition. If high availability is important, then don't target a specific partition.
 
 ### Azure Service Bus
