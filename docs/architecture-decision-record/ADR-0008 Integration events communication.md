@@ -46,7 +46,7 @@ It builds upon the concept of pub/sub and their by decoupling producer and consu
 Azure Service Bus is an enterprise grade message broker with message queues and pub/sub topics. This can be utilized to decouple services.
 
 * Support for message sessions that supports message ordering
-* Topics and subscriptions that cater for 1:n relations ships for publishers and consumers
+* Topics and subscriptions that cater for 1:n relationships for publishers and consumers
 * Load balancing that ensures messages read from the same queue are delivered exclusively to one consumer.
 * It does not support the same level of throughput as Azure Event Hubs
 
