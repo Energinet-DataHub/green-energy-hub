@@ -1,6 +1,6 @@
 # Integration events communication
 
-* Status: proposed
+* Status: accepted
 * Deciders: @sondergaard
 * Date: 2021-06-15
 
