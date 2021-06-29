@@ -6,7 +6,7 @@
 
 ## Context and Problem Statement
 
-The system is designed as an `micro service architecture`. This promotes that the different components eg. `micro services`, publishes events and/or subscribe to events.
+The system is designed as a `micro service architecture`. This promotes that the different components eg. `micro services`, publishes events and/or subscribe to events.
 
 When designing `micro services` there are some design principles. One of these are that services are `Loose coupled`. What this means is that a service should know as little as possible about the surrounding services. This promotes event based integrations over request/response. With event based integrations, an event is published and an infrastructure component forwards the event to those services that are interested in the event.
 
