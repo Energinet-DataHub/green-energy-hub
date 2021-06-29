@@ -56,7 +56,7 @@ To empower the teams in being able to start creating integration events, the inf
 Team Mighty Duck will create and maintain the Azure Service Bus Namespace, and Azure Event Hub Namespace.
 They will also deliver documentation on how to use these shared ressources.
 
-Each individual team will then be responsible for creating and maintaining the Topics/Queues needed for their integration events to work.
+Each individual team will then be responsible for creating and maintaining the Topics/Queues on the Service Bus namespace and Event Hubs on the Event Hub namespaced needed for their integration events to work.
 They will have to put these inside the shared ressources created by Team Mighthy Ducks.
 
 To read more about how you can start using the shared ressources, follow this [link](https://github.com/Energinet-DataHub/geh-shared-resources#using-the-shared-resources).
