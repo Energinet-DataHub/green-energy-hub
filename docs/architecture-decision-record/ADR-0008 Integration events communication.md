@@ -13,7 +13,7 @@ When designing `micro services` there are some design principles. One of these a
 ## Decision Drivers
 
 * teams are starting to reach out and define integration event
-* integration events needs to be exchanged in a uniform way across domains
+* integration events need to be exchanged in a uniform way across domains
 
 ## Considered Options
 
