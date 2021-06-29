@@ -26,7 +26,7 @@ Both technologies support message pub/sub. The difference lies in the volume and
 
 With this in mind each technology should be used for specific tasks.
 
-* When publishing time series events we have to deal with high volume - this fit with the model of `Azure Event Hub`.
+* When publishing time series events we have to deal with high volume - this fits with the model of `Azure Event Hub`.
 * For other events the hypothesis is that the volume is very low compared to time series. The volume is expected to fit within the limitations of `Azure Service Bus`.
 
 ## Pros and Cons of the Options <!-- optional -->
@@ -35,9 +35,9 @@ With this in mind each technology should be used for specific tasks.
 
 Azure Event Hubs is designed for big data and streaming. It is capable of scaling from megebytes to gigabytes of data.
 
-It builds upon the concept of pub/sub and their by decoupling producer and consumer of events.
+It builds upon the concept of pub/sub and thereby decoupling producer and consumer of events.
 
-* Can process huge amount of event with low latency
+* Can process huge amounts of events with low latency
 * Guarantees delivery at least once
 * Supports ordering of events, if they are pinned to a specific partition. If high availability is important, then don't target a specific partition.
 
