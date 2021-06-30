@@ -29,6 +29,10 @@ To be able to ensure that our integrations componenets are set up correctly and 
 
 Following use cases were identified, that needs to be covered by this test framework:
 
+* ### Triggering job in Coordinator
+
+Being able to trigger, read status and verify output from the Azure Function Coordinator.
+
 * ### Integration to Event Hub
 
 Verifying event is generated in event hub and that it contains expected data.
