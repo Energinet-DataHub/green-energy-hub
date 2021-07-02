@@ -1,4 +1,4 @@
-# ADR0001 Charges: Sizing and retrospective changes of prices
+# ADR-0001 Charges: Sizing and retrospective changes of prices
 
 Prices consist of two separate pieces of data in the danish market for DataHub 2 today. These are price lists and price list links.
 

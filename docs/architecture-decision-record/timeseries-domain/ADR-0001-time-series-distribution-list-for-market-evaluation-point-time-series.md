@@ -1,4 +1,4 @@
-# ADR0001 Timeseries: Architecture for Distribution Lists for Market Evaluation Point Observations
+# ADR-0001 Timeseries: Architecture for Distribution Lists for Market Evaluation Point Observations
 
 * Status: decided
 * Deciders: @BjarkeMeier, @prtandrup

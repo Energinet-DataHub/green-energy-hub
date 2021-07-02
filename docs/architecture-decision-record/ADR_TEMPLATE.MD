@@ -1,4 +1,4 @@
-# [short title of solved problem and solution]
+# ADR-XXX [short title of solved problem and solution]
 
 * Status: [proposed | rejected | accepted | deprecated | … | superseded by [ADR-xxxx]] <!-- optional -->
 * Deciders: [list everyone involved in the decision] <!-- optional -->

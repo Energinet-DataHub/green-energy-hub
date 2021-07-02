@@ -1,6 +1,6 @@
-# ADR0002 Decision on how to convert from Ebix to CIM standards
+# ADR-0002 Decision on how to convert from Ebix to CIM standards
 
-* Status: [Accepted] - But needs to be re-written following decisions regarding use of Ebix vs. CIM
+* Status: accepted - But needs to be re-written following decisions regarding use of Ebix vs. CIM
 * Deciders: Martin F. Hansen, René Thyge Nielsen, Daniel Bjerring Jørgensen, Søren Søndergaard
 * Date: 2021-03-18 (PI4 Planning event)
 

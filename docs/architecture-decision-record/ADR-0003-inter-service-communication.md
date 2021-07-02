@@ -1,4 +1,4 @@
-# ADR0003 Inter-service communication
+# ADR-0003 Inter-service communication
 
 * Status: accepted
 * Deciders: @MartinFHansen, @renetnielsen, @MrDach, @kft, @sondergaard, @erduna, @Korgath, @Christian-Meyer, @cmgrd

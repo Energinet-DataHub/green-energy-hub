@@ -1,4 +1,4 @@
-# ADR0002 Charges: Architecture for Tariff Price Time Series
+# ADR-0002 Charges: Architecture for Tariff Price Time Series
 
 * Status: approved
 * Deciders: @bemwen, @bjarkemeier
@@ -25,7 +25,7 @@ Chosen option: Option 1 "Store in Market Data DB", because it
 
 The solution architecture
 
-![Solution architecture](ADR-0002%20Charges%20-Price%20Architecture.png "Solution architecture")
+![Solution architecture](ADR-0002_charges_price_architecture.png "Solution architecture")
 
 The diagram can be opened and edited using drawio.
 

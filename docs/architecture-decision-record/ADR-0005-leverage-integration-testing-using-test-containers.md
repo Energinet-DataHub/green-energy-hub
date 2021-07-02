@@ -1,6 +1,6 @@
-# ADR0005 Leverage Integration Testing using Test Containers
+# ADR-0005 Leverage Integration Testing using Test Containers
 
-* Status: Decided
+* Status: accepted
 * Deciders: @prtandrup, @renetnielsen, @erduna, @martinfhansen, @asq-en, @Mech0z
 * Date: 2021-02-22
 
