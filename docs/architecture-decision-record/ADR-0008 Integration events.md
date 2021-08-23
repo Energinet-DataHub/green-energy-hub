@@ -1,4 +1,4 @@
-# ADR-0008 Integration events
+# ADR-0008 Integration events with protocol buffers
 
 * Status: accepted
 * Deciders: @sondergaard, @MartinFHansen
