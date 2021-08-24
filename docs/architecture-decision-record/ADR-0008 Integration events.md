@@ -18,7 +18,7 @@ All integration events are defined as [protocol buffer contracts](https://develo
 
 ### Designing contracts
 
-When a contract is made public available it's considered final. This means that all modifications to the contract is backwards compatible. You are allowed to add new fields to a contract. Ordering of fields, data types, removal of fields etc. are considered breaking changes. If a breaking change is unavoidable then the contract should be duplicated and given a new name.
+When a contract is made public available it's considered final. This means that all future modifications to the contract must be backwards compatible. You are allowed to add new fields to a contract. Ordering of fields, data types, removal of fields etc. are considered breaking changes. If a breaking change is unavoidable then the contract must be duplicated and given a new name.
 
 A protocol buffer contract file should only contain one contract. If enums are used in the contract, then they are defined within the file as nested elements.
 
