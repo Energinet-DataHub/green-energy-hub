@@ -20,6 +20,15 @@ All integration events are defined as [protocol buffer contracts](https://develo
 
 When a contract is made public available it's considered final. This means that all future modifications to the contract must be backwards compatible. You are allowed to add new fields to a contract. Ordering of fields, data types, removal of fields etc. are considered breaking changes. If a breaking change is unavoidable then the contract must be duplicated and given a new name.
 
+When a contract is a new iteration of an existing it must be easy to identify. Our goal is to keep it simple, therefore the suggested naming is to postfix the contract with the version no. Also consider, if you have a breaking change to an existing contract, is it still the same concept that is being communicated with the contract.
+
+Eg.:
+
+``` proto
+message CreateMeteringPoint { } /// original
+message CreateMeteringPoint_v2 { } /// new version with breaking change
+```
+
 A protocol buffer contract file should only contain one contract. If enums are used in the contract, then they are defined within the file as nested elements.
 
 ``` proto
