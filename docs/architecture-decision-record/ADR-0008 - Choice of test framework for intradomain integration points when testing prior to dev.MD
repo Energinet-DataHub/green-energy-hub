@@ -16,7 +16,7 @@ How can we leverage integration testing, so that it
 * Guards the DEV environment from becoming unstable and thereby increases DEV availability
 * Enables us to ensure connectivity and data correctness
 
-To be able to ensure that our integrations componenets are set up correctly and functional with expected behavior before deploying to DEV (U). We need to use a framework that allows us to create local instances for testing prior to deployment to DEV environment.
+To ensure that integrations with external dependencies (storage, communication bus etc.) are set up correctly and the application logic works as expected prior to deploying to DEV (U), we need a framework that enables us to run integration tests both on localhost and in the continuous integration pipelines.
 
 ## Decision Drivers
 
