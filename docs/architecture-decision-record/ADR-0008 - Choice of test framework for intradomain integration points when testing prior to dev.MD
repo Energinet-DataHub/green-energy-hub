@@ -39,9 +39,7 @@ Verifying event is generated in event hub and that it contains expected data.
 
 * ### Integration to a ServiceBus
 
-Publishing a ChargeCommandReceived event from an azure function (MessageReceiver). Receiving this event from yet another az function (ChargeCommandReceiver).
-The test will be initiated by a HTTP POST call with JSON content.
-(No seed data required)
+Publishing an event from an application, and being able to verify that the event data contains the expected data.
 
 * ### Databricks integration to a DeltaLake
 
