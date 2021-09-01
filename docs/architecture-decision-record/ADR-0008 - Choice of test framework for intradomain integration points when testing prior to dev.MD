@@ -1,8 +1,8 @@
 # How to test integration points within domains prior to deploying to DEV (U) environment
 
-* Status: [Proposed]
+* Status: [Partly decided]
 * Deciders: [@Sondergaard, @Energinet-Datahub/mightyducks]
-* Date: [YYYY-MM-DD when the decision was last updated] <!-- optional -->
+* Date: [2021-09-01 when the decision was last updated] <!-- optional -->
 
 Technical Story: [description | ticket/issue URL] <!-- optional -->
 
@@ -29,9 +29,9 @@ To be able to ensure that our integrations componenets are set up correctly and 
 
 Following use cases were identified, that needs to be covered by this test framework:
 
-* ### Triggering job in Coordinator
+* ### Triggering job in Ccomponents
 
-Being able to trigger, read status and verify output from the Azure Function Coordinator.
+Being able to trigger, read status and verify output from the component.
 
 * ### Integration to Event Hub
 
@@ -39,7 +39,7 @@ Verifying event is generated in event hub and that it contains expected data.
 
 * ### Integration to a ServiceBus
 
-Publishing a ChargeCommandReceived event from an azure function (MessageReceiver). Receiving this event from yet another az function (ChargeCommandReceiver). 
+Publishing a ChargeCommandReceived event from an azure function (MessageReceiver). Receiving this event from yet another az function (ChargeCommandReceiver).
 The test will be initiated by a HTTP POST call with JSON content.
 (No seed data required)
 
@@ -64,48 +64,24 @@ The database must include seed data (MarketParticipants table), Charge test data
 
 ## Decision Outcome
 
-Chosen option: "[option 1]", because [justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].
+For use cases regarding components like eventhub, service bus and Sql database we have implemented a Sqaudron based solution, where it is possible both local-hosted and in CI pipeline to ensure application-to-service  connections.
+
+***Regarding the use case for DeltaLake - it has not yet been finalized on which solution is most valuable, and therefore the decision to cover this is still pending.***
 
 ### Positive Consequences <!-- optional -->
 
-* [e.g., improvement of quality attribute satisfaction, follow-up decisions required, …]
-* …
+* Besides testing component connections locally Squadron allows verification that components are connecting correctly to storage instances by creating a containerized setup where both application layer and service is connected in an infrastructure setup (excluding Terraform - further outline on this under negative consequences).
+
+* The solution is implemented to run both locally and in CI setup.
+
+* This adds to  even more risk elements to be covered prior to deployment, and mitigiates risks that essentially could cause instability and issues on environments and further out in the CD pipeline, which would enhance the complete lead time for functionality delivery.
 
 ### Negative Consequences <!-- optional -->
 
-* [e.g., compromising quality attribute, follow-up decisions required, …]
-* …
+One risk area that has been mentioned for this strategy for testing prior to dev is that the solution does not cover testing of compliance and quality of the solution deployed with correct Terraform modules. This risk is also be present in a test container setup - but could be mitigated by a PR environment solution. We are already using a PR environment solution to ensure test on Terraform and infrastructure - and it was also tested as a solution for intra-domain integration testing. This is can be done, but depending on the testing discipline a very expensive solution, and is therefore not the approach we have choosed.
 
-## Pros and Cons of the Options <!-- optional -->
+Given the isolated testing on components and infrastructure, we are mitigating the risk of this issue, by having the possibility of testing services in the PR environment - but given price plans etc the PR environment is triggered in PR gate and torn down immedialtely after given tests have been performed, and should not be used for debugging in the PR gate over a longer period of time.
 
-### [option 1]
+You can find an overview on the testing activities across environments [HERE](https://github.com/Energinet-DataHub/dh3-documentation/blob/fdbcae1774d7bd41d32108516ebfadfae74e15e8/DOCS/images/test-strategy-visual%202021-0830.png)
 
-[example | description | pointer to more information | …] <!-- optional -->
-
-* Good, because [argument a]
-* Good, because [argument b]
-* Bad, because [argument c]
-* … <!-- numbers of pros and cons can vary -->
-
-### [option 2]
-
-[example | description | pointer to more information | …] <!-- optional -->
-
-* Good, because [argument a]
-* Good, because [argument b]
-* Bad, because [argument c]
-* … <!-- numbers of pros and cons can vary -->
-
-### [option 3]
-
-[example | description | pointer to more information | …] <!-- optional -->
-
-* Good, because [argument a]
-* Good, because [argument b]
-* Bad, because [argument c]
-* … <!-- numbers of pros and cons can vary -->
-
-## Links <!-- optional -->
-
-* [Link type] [Link to ADR] <!-- example: Refined by [ADR-0005](0005-example.md) -->
-* … <!-- numbers of links can vary -->
+***Mitigation of DEV (U) instabilities due to this risk, should be handled - please create an issue if risk occurs***
