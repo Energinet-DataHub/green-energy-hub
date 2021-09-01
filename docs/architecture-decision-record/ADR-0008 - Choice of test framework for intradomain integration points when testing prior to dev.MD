@@ -23,7 +23,7 @@ To ensure that integrations with external dependencies (storage, communication b
 * We need an integration test solution that fits a microservice architecture as well as the practices of DevOps
 * The solution must solve the problem with cloud components that cannot be emulated, specifically for local testing efforts
 * We emphasize failing fast, having quick and reliable feedback loops and DEV environment stability and availability
-* We want a solution that does not require a full domain setup in an environment
+* We want a solution that does not require a full domain setup deployed as a cloud environment
 * The solution must be easy to set up and tear down as part of PR gate or deployment gates
 * We want a solution that are not affected by infrastructure, so test results are not biased by infrastructure issues
 
