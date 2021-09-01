@@ -51,8 +51,8 @@ It is assumed that the test will be initiated by placing valid test data on an E
 
 * ### Integration to an Sql database
 
-Read/Write access for reading and storing a charge from an azure functions.
-The database must include seed data (MarketParticipants table), Charge test data is not required.
+Read/Write access for reading and storing a record from an application.
+The database must be seeded with appropiate test data prior to running the application code.
 
 ## Considered Options
 
