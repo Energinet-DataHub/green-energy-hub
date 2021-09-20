@@ -4,7 +4,7 @@
 
 Date: 2021-09-20
 
-Decision: **Option A**
+Decision: **Option A** has been chosen as **option B** can be applied later on, if necessary  
 
 Responsible: SSG, MEA, XALEH, XDZUS
 
@@ -17,7 +17,7 @@ Pros
 - Single CI/CD pipeline
 - Better code visibility across teams
 - Mature tools to support the work
-- Single version of Angular across FEs and Design System
+- Single version of Angular and other third party libraries across FEs and Design System
 - Single version of DOT.NET across BFFs
 - Consistent code style across projects
 - No versioning necessary for Design System
