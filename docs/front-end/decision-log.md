@@ -6,7 +6,7 @@ Date: 2021-09-20
 
 Decision: **Option A** has been chosen as **option B** can be applied later on, if necessary  
 
-Responsible: SSG, MEA, XALEH, XDZUS
+Responsible: @Sondergaard, @MartinFHansen, @frontend-specialisten, @dzhavat
 
 ### Option A - Use the same repository (monorepo) to host all front-ends (FEs), backend-for-frontends (BFFs) and the Design System
 
