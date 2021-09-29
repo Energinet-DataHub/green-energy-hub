@@ -111,8 +111,8 @@ To understand the journey of Green Energy Hub, is to understand the business obj
 | ----------- | ----------- | ----------- | ----------- |
 | Metering Point | ACTIVE | SEPTEMBER, 2021 | [Link](https://github.com/Energinet-DataHub/geh-metering-point/blob/main/README.md#domain-roadmap) |
 | Aggregations | ACTIVE | SEPTEMBER, 2021 | [Link](https://github.com/Energinet-DataHub/geh-aggregations/blob/main/README.md#domain-road-map) |
-| Time Series | ACTIVE | SEPTEMBER, 2021 | [Link](https://github.com/Energinet-DataHub/geh-timeseries#domain-road-map) |
-| Charges | ACTIVE | SEPTEMBER, 2021 | [Link](https://github.com/Energinet-DataHub/geh-charges/blob/main/README.md#domain-road-map) |
+| Time Series | ACTIVE | NOVEMBER, 2021 | [Link](https://github.com/Energinet-DataHub/geh-timeseries#domain-road-map) |
+| Charges | ACTIVE | NOVEMBER, 2021 | [Link](https://github.com/Energinet-DataHub/geh-charges/blob/main/README.md#domain-road-map) |
 | Market Roles | ACTIVE | SEPTEMBER, 2021 | [Link](https://github.com/Energinet-DataHub/geh-market-roles#domain-roadmap)
 | Data Requests | INACTIVE | - | [Link](https://github.com/Energinet-DataHub/geh-data-requests#domain-road-map) |
 | **System Domains** |  |  |  |
