@@ -19,3 +19,5 @@ The **team** is **responsible** to use the **necessary** combination of test-typ
 -	Integration test: Test integration between multiple components (Azure Function, running process, database, etc.) within a single domain.
 -	Domain test:  Blackbox test of a single domain.
 -	System test: Automated test of the whole system (will not be done currently) 
+
+![common language - test principals](./test-principals-common-language.png)
