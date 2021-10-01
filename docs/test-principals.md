@@ -1,6 +1,6 @@
 # Test principals
 
-**“Main is always production grade”** this sentence is the essence of our principals. 
+**“Main is always production grade”** this sentence is the essence of our principals.
 The thought here is that any code merged into a main branch **must** be **thoroughly tested** so the team feel it’s **production ready** and have **confidence** in the code.
 
 **Automated test** is always preferred over manual tests, as they provide **fast feedback**, which helps more quickly isolate issues with the software.
