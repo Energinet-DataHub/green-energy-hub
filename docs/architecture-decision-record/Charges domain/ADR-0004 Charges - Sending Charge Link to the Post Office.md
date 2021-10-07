@@ -55,7 +55,7 @@ The event that triggers the transfer of the charge link is stored so that the or
 * Good, because it will be easy to make functionality that support sending all changes to a market participant
 * Good, because the functionality needed in notifying the post office is simple and easy to comprehend
 * Good, because it precisly send the information that is needed
-* Bad, because the easier bit, the notification is the one getting easier, while the complex functionality, bundling, gets more comlex.
+* Bad, because while the notification gets easier, the already complex bundling functionality gets additional layers of complexity
 * Bad, because support tools will require more event specific implementation
 * Bad, because the message will not be generated until the bundle request is received
 
@@ -72,14 +72,14 @@ A XML document is generated when the request is received.
 
 ### Store information about the charge and period affected
 
-When an event to send is received, it is mapped to which period of the metering point the charge will be affected.
+When an event to send is received, information about the metering point, the charge the link concerns and the period affected is stored.
 
 * Good, because for each new event that might trigger sending charge links to a market participant, we only need to make functionality to determine which period of the metering point the change will affect, for the specific charge
 * Good, because various use scenarios, like changes to the links, or triggering of transmission from other processes can be supported by the model
 * Good, because bundling functionality can be made once and for all, instead of having to continuously extend with for each new event
 * Good, because the model makes it easy to make a support tool to retransmit a period of a charge to a market participants if bugs or support request warrent it
-* Good, because the current discussion about whether market participants should receive all changes or only the sum of the changes since their last peek can be handled by the model if the revision time is included in the stored data
 * Good, because the design has auto-repairing abilities as it will always send the full charge link state for the specified period on the specific charge of the metering point
+* Good, because the current discussion about whether market participants should receive all changes or only the sum of the changes since their last peek can be handled by the model if the revision time is included in the stored data
 * Bad, because for each event that triggers the flow, functionality needs to be made to map the event to the period it affects
 * Bad, because the message will not be generated until the bundle request is received
 * Bad, because we will send out more data than might be needed, although less than if on metering point level

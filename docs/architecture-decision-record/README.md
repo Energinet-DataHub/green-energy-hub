@@ -27,4 +27,4 @@ This index references the general ADRs (those placed in this folder) as well as 
 
 ## Timeseries
 
-* [ADR-0001 Time Series - Distribution List for Market Evaluation Point Time Series](Timeseries%20domain/ADR-0001%20Time%20Series%20-Distribution%20List%20for%20Market%20Evaluation%20Point%20Time%20Series)
+* [ADR-0001 Time Series - Distribution List for Market Evaluation Point Time Series](Timeseries%20domain/ADR-0001%20Time%20Series%20-Distribution%20List%20for%20Market%20Evaluation%20Point%20Time%20Series.md)
