@@ -29,7 +29,7 @@ What information do we need to store about charge link notifications to the post
 
 Chosen option: "Store information about the metering point and period affected".
 
-The option was chosen because it is easy to comprehend, allows us to extend it with sending charge links as part of other processes later and can support both sending all changes and only latest changes to market participants pending the outcome of that discussion. 
+The option was chosen because it is easy to comprehend, allows us to extend it with sending charge links as part of other processes later and can support both sending all changes and only latest changes to market participants pending the outcome of that discussion.
 
 ### Positive Consequences <!-- optional -->
 
@@ -63,7 +63,7 @@ The event that triggers the transfer of the charge link is stored so that the or
 
 A XML document is generated when the request is received.
 
-* Good, alot of document generation can be done at the time of notification instead of waiting 
+* Good, alot of document generation can be done at the time of notification instead of waiting
 * Good, because it will be easy to make functionality that support sending all changes to the market participant
 * Good, because bunding can be made once and for all, based on generated XML documents which has to adhere to CIM/XML
 * Bad, because it will require us to merge XML documents at the time of bundling, which will neither be intuitive, or in the spirit of clean code.
