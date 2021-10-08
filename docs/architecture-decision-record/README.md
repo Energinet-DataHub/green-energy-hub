@@ -20,4 +20,11 @@ This index references the general ADRs (those placed in this folder) as well as 
 
 ## Charges Domain
 
+* [ADR-0001 Charges - Sizing and retrospective changes of prices](Charges%20domain/ADR-0001%20Charges%20-%20Sizing%20and%20retrospective%20changes%20of%20prices.md)
+* [ADR-0002 Charges - Price Architecture](Charges%20domain/ADR-0002%20Charges%20-%20Price%20Architecture.md)
+* [ADR-0003 Charges - Event handling in domain](Charges%20domain/ADR-0003%20Charges%20-%20Event%20handling%20in%20domain.md)
+* [ADR-0004 Charges - Sending Charge Link to the Post Office](Charges%20domain/ADR-0004%20Charges%20-%20Sending%20Charge%20Link%20to%20the%20Post%20Office.md)
+
 ## Timeseries
+
+* [ADR-0001 Time Series - Distribution List for Market Evaluation Point Time Series](Timeseries%20domain/ADR-0001%20Time%20Series%20-Distribution%20List%20for%20Market%20Evaluation%20Point%20Time%20Series.md)
