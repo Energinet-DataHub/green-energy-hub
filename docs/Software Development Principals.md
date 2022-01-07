@@ -10,7 +10,7 @@ The main branch is protected and prevents any changes being pushed directly. To 
 
 ## Continuously integration and deployment
 
-With the branching model selected we are able to do continuously integration and deployment (CI/CI). The integration pipeline builds, tests and verifies the codebase before it is deployed. Our integration pipeline is focused on **shift left**. This means that we **test and verify** the change before is it being integrated into the main branch.
+With the branching model selected we are able to do continuously integration and deployment (CI/CD). The integration pipeline builds, tests and verifies the codebase before it is deployed. Our integration pipeline is focused on **shift left**. This means that we **test and verify** the change before is it being integrated into the main branch.
 
 When a change is integrated into main a code review is mandatory. The smaller and focused the change is, the easier it is to perform a good code review. Everyone with access to the repository can create a pull-request for review, but only code-owners can approve/accept the change. The reason for this is that a group of developers are responsible for keeping the codebase consistent.
 <!--
