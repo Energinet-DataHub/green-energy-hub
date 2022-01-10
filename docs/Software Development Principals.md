@@ -10,9 +10,16 @@ The main branch is protected and prevents any changes being pushed directly. To 
 
 ## Continuously integration and deployment
 
-With the branching model selected we are able to do continuously integration and deployment (CI/CD). The integration pipeline builds, tests and verifies the codebase before it is deployed. Our integration pipeline is focused on **shift left**. This means that we **test and verify** the change before is it being integrated into the main branch.
+With the branching model selected we are able to do continuously integration and deployment (CI/CD). The integration pipeline builds, tests and verifies the codebase before it is deployed. Our integration pipeline is focused on identifying issues as early as possible. This means that we **test and verify** the change before is it being integrated into the main branch.
 
-When a change is integrated into main a code review is mandatory. The smaller and focused the change is, the easier it is to perform a good code review. Everyone with access to the repository can create a pull-request for review, but only code-owners can approve/accept the change. The reason for this is that a group of developers are responsible for keeping the codebase consistent.
+When a change is integrated into main a code review is mandatory. The smaller and focused the change is, the easier it is to perform a good code review. Everyone with access to the repository can create a pull-request for review, but only code-owners can approve/accept the change.
+
+Before a pull-request can be merged it needs to pass quality gates. This includes building the solution, exercise all associated tests and perform static code analysis, vulnability scanning, code quality scanning.
+
+When all quality gates are passed the artifact is deployed. The deployment starts with the development environment and gradualy deployes to test, pre-prod and production. After an environment is updated a health-check can be performed to ensure that everything is running as expected. If the health-check is OK, then deployment can advance to the next environment.
+
+## Password management
+
 <!--
 # Software Development Principals
 
