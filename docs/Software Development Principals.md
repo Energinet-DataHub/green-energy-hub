@@ -20,6 +20,7 @@ When all quality gates are passed the artifact is deployed. The deployment start
 
 ## Password management
 
+We do use passwords
 <!--
 # Software Development Principals
 
