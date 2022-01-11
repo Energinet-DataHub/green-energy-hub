@@ -20,59 +20,10 @@ When all quality gates are passed the artifact is deployed. The deployment start
 
 ## Password management
 
-We do use passwords
+We do use passwords _replace with real content_
 
 ## 3rd party libraries
 
-Don't reinvent the wheel
-<!--
-# Software Development Principals
+Before using a third party library an assemnt must be performed. In the assement it must be consider if the license is compatible with the product being developed. Is the compoenent still being developed and are feature/security patches released. In case of open-source, is it then a one-man-army maintaining the component or is maintained by many contributors.
 
-## Working with source code
-
-Developers collaborate on code in a single branch called **main**. Branches are **short-lived** and integrated into **main** with a **pull-request**. A pull-request **must be approved** by **another developer**.
-
-## Integrating changes
-
-Pull-requests are used to integrate changes to the existing code. When a pull-request is created it **must** fullfil some requirements.
-
-When creating a pull-request it is expected to include a title that contains the essence of the change. In the description you must provide all the details that can help doing the review of the change. That includes references to the original task/issue.
-
-Eg:
-
-> - Which testes were affected by the change?
-> - Is it change of behavior or new functionality?
-> - Would this change affect performance?
-
-Reference to issue
-Hvem kan approve kode rettelser
-
-2 faktor auth til github
-
-Håndtering af passwords
--->
-
-<!-- ## Continuously integration and deployment
-
-All changes **must** be **integrated and deployed** with 100% automation. As part of the **pull-request** the change **must** pass all checks.
-
-### Built-in quality
-
-Artifacts that are deployed automatically must have a high level of quality. This is achieved with testing, and tools that can inspect the solution and spot pitfalls.
-
-First and foremost the solution must be able to build on the CI server. If this is not possible the **pull-request is blocked**.
-
-
-
-- artifacts can be built from the repository
-- all tests pass
-
-Our practices of developing software **must** support the **deployment strategy**. Our strategy is to **continuously deploy small and incremental** changes to all environments. With this approach it is **not possible** to have any **manually gates** when deploying software changes. All changes **must** be verified, tested and deployed with automation.
-
-It is desirable to have **short-lived branches** that is merged into main. The changes that goes into a *pull request* should be **related and small**. This ensures that other developers are setup for success when performing a **code review** of the change. It should **not be possible** to get changes into the codebase **without a code/peer review**.
-
-- SonarCloud - code smells
-- WhiteSource Bolt - dependency vulnerability
-- Dependabot
-- dependency-check
- -->
+All dependencies must be checked if they are outdated in a reoccuring interval.
