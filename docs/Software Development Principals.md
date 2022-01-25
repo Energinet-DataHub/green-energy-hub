@@ -46,4 +46,8 @@ codecov.io is not full implemented and is not a blocking check yet. This is plan
 
 ### [GitGuardian](https://www.gitguardian.com)
 
-This tool scans our source code to detect API keys, password, certificates, encryption keys and other sensitive data.
+This tool scans our source code to detect API keys, password, certificates, encryption keys and other sensitive data. The tool is invoked when a pull request is created or changes are pushed. The code is then scanned for any secrets that should not be part of the change.
+
+If a secret is discovered admins get notified. The change then needs to get updated to remove the secret.
+
+Looking ahead we are planning to scan the code change for secrets before it leaves the developer machine.
