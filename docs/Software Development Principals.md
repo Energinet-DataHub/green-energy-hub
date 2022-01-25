@@ -20,7 +20,7 @@ When **all quality gates are passed** the artefact is deployed. The deployment s
 
 ## Secret management
 
-Secrets includes all data that is used to gain access to a resource. Examples are but, not limited to username/passwords, connection strings, tokens. When a secret is needed, it **must** be provided from the environment, and **not written** within the source code or any other artifacts. Most importanly, a secret must **not be commited to the repository**.
+Secrets includes all data that is used to gain access to a resource. Examples are but, not limited to username/passwords, connection strings, tokens. When a secret is needed, it **must** be provided from the infrasturcture. It is **not to be written** within the source code or any other artifacts. Most importanly, a secret is **never to be commited to the repository**.
 
 ## 3rd party libraries
 
