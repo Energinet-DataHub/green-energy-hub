@@ -27,3 +27,23 @@ Secrets includes all data that is used to gain access to a resource. Examples ar
 Before using a third party library an assessment must be performed. In the assessment it must be consider if the license is compatible with the product being developed. Is the component still being developed and are feature/security patches released. In case of open-source, is it then a one-man-army maintaining the component or is maintained by many contributors.
 
 All dependencies must be checked if they are outdated in a reoccurring interval.
+
+## Tools that we use
+
+This is a currated list of tools that we use to improve the quality of the software that we deliver.
+
+### [sonarcloud.io](http://sonarcloud.io)
+
+Sonarcloud is a static code analysis tool. It provides check for code smells, bugs, duplication and metrics for code maintability.
+
+This is a part of our CI pipeline. When a pull request is opened the code-change is analysed. The result is reported on the pull request as a comment. If the quality is not compliant the pull request is blocked until the quality is improved based on the feedback.
+
+### [codecov.io](https://codecov.io)
+
+Codecov measures the code coverage of a repository. It provides feedback when a pull request is opened. The code coverage is calculated for the pull request including the entire code base. The result is pushed to the pull request. It is possible from the pull request to see how the code change affect the overall code coverage.
+
+codecov.io is not full implemented and is not a blocking check yet. This is planned to be implemented in Q1 2022.
+
+### [GitGuardian](https://www.gitguardian.com)
+
+This tool scans our source code to detect API keys, password, certificates, encryption keys and other sensitive data.
