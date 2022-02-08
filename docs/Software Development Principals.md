@@ -20,7 +20,7 @@ When **all quality gates are passed** the artefact is deployed. The deployment s
 
 ## Secret management
 
-Secrets includes all data that is used to gain access to a resource. Examples are but, not limited to username/passwords, connection strings, tokens. When a secret is needed, it **must** be provided from the infrasturcture. It is **not to be written** within the source code or any other artifacts. Most importanly, a secret is **never to be commited to the repository**.
+Secrets includes all data that is used to gain access to a resource. Examples are but, not limited to username/passwords, connection strings, tokens. When a secret is needed, it **must** be provided from the infrastructure. It is **not to be written** within the source code or any other artefacts. Most importantly, a secret is **never to be committed to the repository**.
 
 ## 3rd party libraries
 
@@ -30,11 +30,11 @@ All dependencies must be checked if they are outdated in a reoccurring interval.
 
 ## Tools that we use
 
-This is a currated list of tools that we use to improve the quality of the software that we deliver.
+This is a curated list of tools that we use to improve the quality of the software that we deliver.
 
 ### [sonarcloud.io](http://sonarcloud.io)
 
-Sonarcloud is a static code analysis tool. It provides check for code smells, bugs, duplication and metrics for code maintability.
+Sonarcloud is a static code analysis tool. It provides check for code smells, bugs, duplication and metrics for code maintainability.
 
 This is a part of our CI pipeline. When a pull request is opened the code-change is analysed. The result is reported on the pull request as a comment. If the quality is not compliant the pull request is blocked until the quality is improved based on the feedback.
 
@@ -42,12 +42,16 @@ This is a part of our CI pipeline. When a pull request is opened the code-change
 
 Codecov measures the code coverage of a repository. It provides feedback when a pull request is opened. The code coverage is calculated for the pull request including the entire code base. The result is pushed to the pull request. It is possible from the pull request to see how the code change affect the overall code coverage.
 
-codecov.io is not full implemented and is not a blocking check yet. This is planned to be implemented in Q1 2022.
-
 ### [GitGuardian](https://www.gitguardian.com)
 
 This tool scans our source code to detect API keys, password, certificates, encryption keys and other sensitive data. The tool is invoked when a pull request is created or changes are pushed. The code is then scanned for any secrets that should not be part of the change.
 
 If a secret is discovered admins get notified. The change then needs to get updated to remove the secret.
 
-Looking ahead we are planning to scan the code change for secrets before it leaves the developer machine.
+### [Code security - GitHub](https://docs.github.com/en/code-security)
+
+ By hosting our sourcecode within GitHub we gain access to `Code security`. This is a collection of tools that can scan our codebase for secrets, code smells and `supply chain security`.
+
+ Dependabot is part of `supply chain security` that analyses third party dependencies. When a package is out-of-date, a pull-request is opened with a change to upgrade the package. A developer can then accept the change and update the package.
+
+ Besides identifying packages that are out-of-date, it also check for packages that have known vulnerabilities. This is aggregated on a dashboard that ranks the security vulnerabilities based on the severity. A team will get a banner on the repository, if a security vulnerability is identified, and they *must* take action to mitigate it.
