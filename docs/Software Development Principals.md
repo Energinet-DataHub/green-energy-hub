@@ -24,7 +24,11 @@ Secrets includes all data that is used to gain access to a resource. Examples ar
 
 ## 3rd party libraries
 
-Before using a third party library an assessment must be performed. In the assessment it must be consider if the license is compatible with the product being developed. Is the component still being developed and are feature/security patches released. In case of open-source, is it then a one-man-army maintaining the component or is maintained by many contributors.
+Before using a third party library an assessment must be performed with the following parameters:
+
+- Is license is compatible with the product being developed.
+- Is the component still being developed and are feature/security patches released.
+- In case of open-source, is the OS community have a steady flow of PR's from many contributors.
 
 All dependencies must be checked if they are outdated in a reoccurring interval.
 
