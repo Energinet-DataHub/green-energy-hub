@@ -24,7 +24,7 @@ limitations under the License.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaTime" Version="3.0.5" />
+    <PackageReference Include="NodaTime" Version="3.1.0" />
     <PackageReference Include="NodaTime.Serialization.SystemTextJson" Version="1.0.0" />
     <PackageReference Include="System.Text.Json" Version="5.0.2" />
   </ItemGroup>
