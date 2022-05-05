@@ -1,4 +1,4 @@
-# Software Development Principals
+# Software Development Principles
 
 After reading this document you will have insight in how we develop software with built-in quality. It will cover our branching model, secret management, use of 3rd party libraries.
 
