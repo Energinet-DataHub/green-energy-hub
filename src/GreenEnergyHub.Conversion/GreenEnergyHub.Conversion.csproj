@@ -26,7 +26,7 @@ limitations under the License.
   <ItemGroup>
     <PackageReference Include="NodaTime" Version="3.0.5" />
     <PackageReference Include="NodaTime.Serialization.SystemTextJson" Version="1.0.0" />
-    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    <PackageReference Include="System.Text.Json" Version="6.0.4" />
   </ItemGroup>
 
   <Import Project="../../build/Common.props" />
