@@ -4,8 +4,6 @@
 * Deciders: @sondergaard, @martinfhansen
 * Date: 2022-06-08
 
-***DELETE THIS IN ADR: Remember to update the ADR index (found in [README.md](README.md)) with the new ARD. Depending on the topic of the new ARD either add it to the existing list of ADR topics OR add a new entry in the list of ADR topics.***
-
 ## Context and Problem Statement
 
 As a system we must support different formats (CIM Xml & CIM json) and versions.
