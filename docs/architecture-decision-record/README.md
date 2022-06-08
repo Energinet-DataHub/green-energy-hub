@@ -13,6 +13,7 @@ This index references the general ADRs (those placed in this folder) as well as 
     * [ADR-0004 Segregate the system into smaller chunks (domains)](ADR-0004%20-%20Seggregation%20of%20system%20into%20domains.md)
     * [Charges ARD-0003](Charges%20domain/ADR-0003%20Charges%20-%20Event%20handling%20in%20domain.md)
     * [ADR-0008 Integration events with protocol buffers](ADR-0008%20Integration%20events.md)
+    * [ADR-0009 External domain interaction](ADR-0009-External-domain-interaction.md)
 * Test strategy and techniques
     * [ADR-0005 Leverage Integration Testing using Test Containers](ADR-0005%20-%20Leverage%20integration%20testing%20using%20test%20containers.md)
 * .NET decisions
