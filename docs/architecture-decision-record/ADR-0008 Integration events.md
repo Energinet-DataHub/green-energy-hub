@@ -137,7 +137,7 @@ If an event is retransmitted, all the values would match that of any previous co
 
 #### Timestamp
 
-The `OperationTimestamp` key contains a UTC timestamp. The value represents the point in time, when the sending application created the event.
+The `OperationTimestamp` key contains a UTC timestamp. The value must be in the format of: `yyyy-MM-ddThh:mm:ss.sssZ` eg.: `2022-06-20T08:12:56.632Z`. The value represents the point in time, when the sending application created the event.
 
 #### CorrelationId
 
