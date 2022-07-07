@@ -18,6 +18,13 @@ Before a pull-request can be merged it needs to pass quality gates. This include
 
 When **all quality gates are passed** the artefact is deployed. The deployment starts with the development environment and gradually deploy to test, pre-prod and production. After an environment is updated a health-check can be performed to ensure that everything is running as expected. If the health-check is OK, then deployment can advance to the next environment.
 
+## Built-in security
+
+When creating software solutions, we always need to have security in mind. What is considered a good practise today, might not be that of tomorrow. Therefor we need to constantly consider and take into account the trends in which vulnerabilities
+are discovered and used. As a guiding stone we use OWASP top 10 list. 
+
+The primary target for OWASP top 10 is for web applications. This does't mean that other applications should not follow the leasons learned. Many entries for the [OWASP TOP 10 - 2021](https://owasp.org/Top10/) is still applicable for B2B transactions.
+
 ## Secret management
 
 Secrets includes all data that is used to gain access to a resource. Examples are but, not limited to username/passwords, connection strings, tokens. When a secret is needed, it **must** be provided from the infrastructure. It is **not to be written** within the source code or any other artefacts. Most importantly, a secret is **never to be committed to the repository**.
