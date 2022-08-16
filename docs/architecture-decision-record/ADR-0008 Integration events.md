@@ -135,9 +135,9 @@ We want metadata to travel along the message when it is sent as an integration e
 
 If an event is retransmitted, all the values would match that of any previous copies that had been sent.
 
-#### Timestamp
+#### Operation timestamp
 
-The `OperationTimestamp` key contains a UTC timestamp. The value must be in the format of: `yyyy-MM-ddThh:mm:ss.sssZ` eg.: `2022-06-20T08:12:56.632Z`. The value represents the point in time, when the sending application created the event.
+The `OperationTimestamp` key contains a UTC timestamp. The value must be in the format of: `yyyy-MM-ddThh:mm:ss.sssZ` eg.: `2022-06-20T08:12:56.632Z`. The value represents the point in time, when the sending application created the event. The operation time can be used for event replay and must be considered in order to ensure correct state information as the distributed nature of the system implies that events will be received out of order.
 
 #### CorrelationId
 
