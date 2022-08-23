@@ -4,7 +4,7 @@ This dictionary will cover the general use of attribute naming in documentation 
 
 The terms listed here are all general terms that will be used across Green Energy Hub.
 
-All roles defined here are created as part the [Harmonnised Electricity Market Role model](https://www.entsoe.eu/digital/cim/role-models/) created by [ENTSO-E](https://www.entsoe.eu/). The dictionary is in progress and is not to be considered complete for the time being.
+All roles defined here are created as part the [Harmonnised Electricity Market Role model](https://www.entsoe.eu/data/cim/role-models/) created by [ENTSO-E](https://www.entsoe.eu/). The dictionary is in progress and is not to be considered complete for the time being.
 
 Please provide missing terms as you experience them, and don't hesitate to reach out if one or more is missing.
 
