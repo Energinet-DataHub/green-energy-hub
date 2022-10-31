@@ -165,16 +165,6 @@ Examples:
 * MeteringPointConnected
 * EnergyConsumptionMeasured
 
-### Naming infrastructure components
-
-When publishing an event to a topic, the topic should have the same name as the event. This means that a topic is only used for one event type. If an application needs to publish more events, then it should create multiple topics.
-
-Topic name would be `metering-point-created`.
-
-When a subscription is added to a topic it is easy to identify the consumer of the topic. The naming convention is to include the receiving applications name.
-
-Subscription name for `metering-point-created` and `time-series` would result in: `metering-point-created-sub-time-series`.
-
 ## Consuming integration events
 
 When an application is consuming events a few things that should be considered.
