@@ -125,9 +125,9 @@ Integration events are distributed so that services are coupled as loosely as po
 All the infrastructure for Azure Service Bus is defined in a [shared repository](https://github.com/Energinet-DataHub/geh-shared-resources "Shared Resources").
 
 * `System team` is providing a shared Azure Service Bus namespace for all integration events
-* The team that is defining an integration event is responsible for creating the corresponding topic in the shared namespace
-* If a team needs to subscribe to an integration event, then they are responsible for creating the subscription in the corresponding topic
-* Optionally, a subscription can forward all events to a queue. A service can then receive all events from a single endpoint
+* `System team` is providing a `shared topic` for all integration events
+* All teams **must** publish integration events to the `shared topic`
+* If a team needs to subscribe to an integration event, they are responsible for creating a subscription on the `shared topic` with a filter
 
 ### Message metadata
 
