@@ -127,7 +127,7 @@ All the infrastructure for Azure Service Bus is defined in a [shared repository]
 * `System team` is providing a shared Azure Service Bus namespace for all integration events
 * `System team` is providing a `shared topic` for all integration events
 * All teams **must** publish integration events to the `shared topic`
-* If a team needs to subscribe to an integration event, they are responsible for creating a subscription on the `shared topic` with a filter
+* If a team needs to subscribe to an integration event, they are responsible for creating a subscription on the `shared topic` with a CorrelationFilter filter (do try to avoid SQL Filter as it is easy to write an SQL-filter that will perform poorly under heavy load)
 
 ### Message metadata
 
