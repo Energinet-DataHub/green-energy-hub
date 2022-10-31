@@ -125,9 +125,9 @@ Integration events are distributed so that services are coupled as loosely as po
 All the infrastructure for Azure Service Bus is defined in a [shared repository](https://github.com/Energinet-DataHub/geh-shared-resources "Shared Resources").
 
 * `System team` is providing a shared Azure Service Bus namespace for all integration events
-* The team that is defining an integration event is responsible for creating the corresponding topic in the shared namespace
-* If a team needs to subscribe to an integration event, then they are responsible for creating the subscription in the corresponding topic
-* Optionally, a subscription can forward all events to a queue. A service can then receive all events from a single endpoint
+* `System team` is providing a `shared topic` for all integration events
+* All teams **must** publish integration events to the `shared topic`
+* If a team needs to subscribe to an integration event, they are responsible for creating a subscription on the `shared topic` with a CorrelationFilter filter (do try to avoid SQL Filter as it is easy to write an SQL-filter that will perform poorly under heavy load)
 
 ### Message metadata
 
@@ -164,16 +164,6 @@ Examples:
 * MeteringPointCreated
 * MeteringPointConnected
 * EnergyConsumptionMeasured
-
-### Naming infrastructure components
-
-When publishing an event to a topic, the topic should have the same name as the event. This means that a topic is only used for one event type. If an application needs to publish more events, then it should create multiple topics.
-
-Topic name would be `metering-point-created`.
-
-When a subscription is added to a topic it is easy to identify the consumer of the topic. The naming convention is to include the receiving applications name.
-
-Subscription name for `metering-point-created` and `time-series` would result in: `metering-point-created-sub-time-series`.
 
 ## Consuming integration events
 
