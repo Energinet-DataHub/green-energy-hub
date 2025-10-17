@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch: {}
 
+permissions:
+  contents: read
+
 jobs:
   check-license-lines:
     name: Check License Lines
